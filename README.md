@@ -2,7 +2,7 @@
 
 OscProb is a small set of classes aimed at computing exact neutrino oscillation probabilities with a few different models.
 
-OscProb contains a basic framework for computing neutrino oscillation probabilities. It is integrated into ROOT, so that each class can be used as you would any ROOT class.
+OscProb contains a basic framework for computing neutrino oscillation probabilities. It is integrated into [ROOT](https://root.cern.ch/), so that each class can be used as you would any ROOT class.
 
 Available classes are:
 - **PremModel:** Used for determining neutrino paths through the earth
