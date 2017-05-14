@@ -1,0 +1,7 @@
+# Ignore files after build
+
+*.so
+*.hpp
+
+tmp/
+
