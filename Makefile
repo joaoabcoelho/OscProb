@@ -33,6 +33,7 @@ $(TARGET_LIB): $(DICTIONARY) $(SOURCES) $(MATRIX)
 	@g++ -shared -O3 -o$@ $(LDFLAGS) $(CXXFLAGS) -I$(ROOTSYS)/include $^
 
 $(DICTIONARY): $(HEADERS) LinkDef.h
+	@echo "  Making dictionary for $(PACKAGE)..."
 	@mkdir -p tmp
 	@rootcint -f $@ -c $(GSL_INCS) -p $^
 
@@ -48,11 +49,12 @@ $(PREMINC): $(PREMDIR) $(PREMFILE)
 	@echo "const std::string PREM_DEFAULT = \"$(PREMFILE)\";" >> $@
 
 clean: $(CLEANDIRS)
+	@echo "  Cleaning $(PACKAGE)..."
 	@rm -f $(TARGET_LIB)
 	@rm -f $(PREMINC)
 	@rm -f $(DICTIONARY)
 	@rm -f $(DICTIONARY:%.cxx=%.h)
-	@rmdir tmp
+	@rm -rf tmp
 
 
 .PHONY: $(SUBDIRS) $(BUILDDIRS) $(CLEANDIRS) clean all

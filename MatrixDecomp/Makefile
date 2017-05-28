@@ -16,14 +16,16 @@ $(TARGET_LIB): $(DICTIONARY) $(SOURCES)
 	@g++ -shared -O3 -o$@ $(LDFLAGS) $(CXXFLAGS) -I$(ROOTSYS)/include $^
 
 $(DICTIONARY): $(HEADERS) LinkDef.h
+	@echo "  Making dictionary for $(PACKAGE)..."
 	@mkdir -p tmp
 	@rootcint -f $@ -c $^
 
 clean:
+	@echo "  Cleaning $(PACKAGE)..."
 	@rm -f $(TARGET_LIB)
 	@rm -f $(DICTIONARY)
 	@rm -f $(DICTIONARY:%.cxx=%.h)
-	@rmdir tmp
+	@rm -rf tmp
 
 
 .PHONY: clean all
