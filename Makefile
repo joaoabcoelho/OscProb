@@ -3,7 +3,7 @@ CXX = g++
 CXXFLAGS = $(shell root-config --cflags) -fPIC
 LDFLAGS = $(shell root-config --glibs)
 
-PACKAGE = $(shell basename $(CURDIR))
+PACKAGE = OscProb
 HEADERS = $(filter-out $(CURDIR)/LinkDef.h, $(wildcard $(CURDIR)/*.h))
 SOURCES = $(wildcard $(CURDIR)/*.cxx)
 TARGET_LIB = $(CURDIR)/lib$(PACKAGE).so
