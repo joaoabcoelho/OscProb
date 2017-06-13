@@ -1,7 +1,7 @@
 
 #include "SetNiceStyle.C"
 
-void DrawFixedCosT(bool isNuBar=false){
+void DrawFixedCosT(double cosT = -0.7, bool isNuBar = false){
 
   // Load some nice styles
   SetNiceStyle();
@@ -17,9 +17,6 @@ void DrawFixedCosT(bool isNuBar=false){
   
   // PREM Model
   OscProb::PremModel prem;
-  
-  // Choose a cos-zenith
-  double cosT = -0.7;
   
   // Fill path for cosT
   prem.FillPath(cosT);
