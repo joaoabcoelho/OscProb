@@ -22,6 +22,7 @@ addons:
       - doxygen-latex
       - doxygen-gui
       - graphviz
+      - root-system
 
 # Build your code e.g. by calling make
 script:
