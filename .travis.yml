@@ -1,6 +1,10 @@
 # This will run on Travis' 'new' container-based infrastructure
 sudo: false
 
+os: linux
+
+language: cpp
+
 # Blacklist
 branches:
   only:
@@ -16,6 +20,8 @@ env:
 # Install dependencies
 addons:
   apt:
+    sources:
+      - ubuntu-toolchain-r-test
     packages:
       - doxygen
       - doxygen-doc
