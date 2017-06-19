@@ -103,11 +103,11 @@ namespace OscProb {
     /// Compute the sample points for a bin of L/E with width dLoE
     virtual vector<double> GetSamplePoints(double LoE, double dLoE);
 
-  protected:
-    
     // A shorthand...
     typedef std::complex<double> complex;
 
+  protected:
+    
     // Some useful complex numbers
     static const complex zero; ///< zero in complex
     static const complex one;  ///< one in complex
