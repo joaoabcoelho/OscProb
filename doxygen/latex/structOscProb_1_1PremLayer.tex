@@ -1,0 +1,174 @@
+\hypertarget{structOscProb_1_1PremLayer}{}\section{Osc\+Prob\+:\+:Prem\+Layer Struct Reference}
+\label{structOscProb_1_1PremLayer}\index{Osc\+Prob\+::\+Prem\+Layer@{Osc\+Prob\+::\+Prem\+Layer}}
+
+
+A struct representing a spherical shell of matter for earth models.  
+
+
+
+
+{\ttfamily \#include $<$Nu\+Path.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structOscProb_1_1PremLayer_abb89fe4d38627dcd49a7861e699af14f}{Prem\+Layer} (double r=0, double d=0, double z=0.\+5, int ly=0)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \hyperlink{structOscProb_1_1PremLayer_a9d35d6d32ff3dab5cb1aa0c769c65c2b}{Set\+Layer} (double r=0, double d=0, double z=0.\+5, int ly=0)
+\begin{DoxyCompactList}\small\item\em Set the properties of the layer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{structOscProb_1_1PremLayer_a39b409c20fd96a7a0bd421567c00ffed}{radius}
+\begin{DoxyCompactList}\small\item\em The outer radius of the layer in km. \end{DoxyCompactList}\item 
+double \hyperlink{structOscProb_1_1PremLayer_aba2536cbdab87d0db33df47f95c4f2c3}{density}
+\begin{DoxyCompactList}\small\item\em The density of the layer in g/cm$^\wedge$3. \end{DoxyCompactList}\item 
+double \hyperlink{structOscProb_1_1PremLayer_a8687a8169d786fca79908292d11077f5}{zoa}
+\begin{DoxyCompactList}\small\item\em The effective Z/A value of the layer. \end{DoxyCompactList}\item 
+int \hyperlink{structOscProb_1_1PremLayer_aca8d7df68e6f982155b68b7e6a7ef389}{layer}
+\begin{DoxyCompactList}\small\item\em An index to identify the matter type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This struct stores the properties of a spherical shell to be used by the \hyperlink{classOscProb_1_1PremModel}{Prem\+Model} class in order to build an earth model. Only the outer radius of the shell is stored, so \hyperlink{structOscProb_1_1PremLayer}{Prem\+Layer}\textquotesingle{}s need to be assembled in order inside a vector.
+
+\begin{DoxyAuthor}{Author}
+jcoelho@apc.\+in2p3.\+fr 
+\end{DoxyAuthor}
+
+
+Definition at line 81 of file Nu\+Path.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Osc\+Prob\+::\+Prem\+Layer@{Osc\+Prob\+::\+Prem\+Layer}!Prem\+Layer@{Prem\+Layer}}
+\index{Prem\+Layer@{Prem\+Layer}!Osc\+Prob\+::\+Prem\+Layer@{Osc\+Prob\+::\+Prem\+Layer}}
+\subsubsection[{\texorpdfstring{Prem\+Layer(double r=0, double d=0, double z=0.\+5, int ly=0)}{PremLayer(double r=0, double d=0, double z=0.5, int ly=0)}}]{\setlength{\rightskip}{0pt plus 5cm}Osc\+Prob\+::\+Prem\+Layer\+::\+Prem\+Layer (
+\begin{DoxyParamCaption}
+\item[{double}]{r = {\ttfamily 0}, }
+\item[{double}]{d = {\ttfamily 0}, }
+\item[{double}]{z = {\ttfamily 0.5}, }
+\item[{int}]{ly = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structOscProb_1_1PremLayer_abb89fe4d38627dcd49a7861e699af14f}{}\label{structOscProb_1_1PremLayer_abb89fe4d38627dcd49a7861e699af14f}
+Constructor.
+
+By default it creates a layer of zero radius and zero density. The effective Z/A value is set to 0.\+5 by default.
+
+The properties of the layer can be given directly in the construction.
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & -\/ The outer radius of the layer in km \\
+\hline
+{\em d} & -\/ The density of the layer in g/cm$^\wedge$3 \\
+\hline
+{\em z} & -\/ The effective Z/A value of the layer \\
+\hline
+{\em ly} & -\/ An index to identify the matter type (e.\+g. earth inner core) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 99 of file Nu\+Path.\+h.
+
+
+\begin{DoxyCode}
+99                                                              \{
+100       \hyperlink{structOscProb_1_1PremLayer_a9d35d6d32ff3dab5cb1aa0c769c65c2b}{SetLayer}(r,d,z,ly);
+101     \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Osc\+Prob\+::\+Prem\+Layer@{Osc\+Prob\+::\+Prem\+Layer}!Set\+Layer@{Set\+Layer}}
+\index{Set\+Layer@{Set\+Layer}!Osc\+Prob\+::\+Prem\+Layer@{Osc\+Prob\+::\+Prem\+Layer}}
+\subsubsection[{\texorpdfstring{Set\+Layer(double r=0, double d=0, double z=0.\+5, int ly=0)}{SetLayer(double r=0, double d=0, double z=0.5, int ly=0)}}]{\setlength{\rightskip}{0pt plus 5cm}void Osc\+Prob\+::\+Prem\+Layer\+::\+Set\+Layer (
+\begin{DoxyParamCaption}
+\item[{double}]{r = {\ttfamily 0}, }
+\item[{double}]{d = {\ttfamily 0}, }
+\item[{double}]{z = {\ttfamily 0.5}, }
+\item[{int}]{ly = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structOscProb_1_1PremLayer_a9d35d6d32ff3dab5cb1aa0c769c65c2b}{}\label{structOscProb_1_1PremLayer_a9d35d6d32ff3dab5cb1aa0c769c65c2b}
+Set the properties of the layer.
+
+By default it sets the layer to zero radius and zero density. The effective Z/A value is set to 0.\+5 by default.
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & -\/ The outer radius of the layer in km \\
+\hline
+{\em d} & -\/ The density of the layer in g/cm$^\wedge$3 \\
+\hline
+{\em z} & -\/ The effective Z/A value of the layer \\
+\hline
+{\em ly} & -\/ An index to identify the matter type (e.\+g. earth inner core) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 116 of file Nu\+Path.\+h.
+
+
+
+References Osc\+Prob\+::\+Nu\+Path\+::density, Osc\+Prob\+::\+Nu\+Path\+::layer, and Osc\+Prob\+::\+Nu\+Path\+::zoa.
+
+
+\begin{DoxyCode}
+116                                                                  \{
+117       \hyperlink{structOscProb_1_1PremLayer_a39b409c20fd96a7a0bd421567c00ffed}{radius} = r;
+118       \hyperlink{structOscProb_1_1PremLayer_aba2536cbdab87d0db33df47f95c4f2c3}{density} = d;
+119       \hyperlink{structOscProb_1_1PremLayer_a8687a8169d786fca79908292d11077f5}{zoa} = z;
+120       \hyperlink{structOscProb_1_1PremLayer_aca8d7df68e6f982155b68b7e6a7ef389}{layer} = ly;
+121     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Osc\+Prob\+::\+Prem\+Layer@{Osc\+Prob\+::\+Prem\+Layer}!density@{density}}
+\index{density@{density}!Osc\+Prob\+::\+Prem\+Layer@{Osc\+Prob\+::\+Prem\+Layer}}
+\subsubsection[{\texorpdfstring{density}{density}}]{\setlength{\rightskip}{0pt plus 5cm}double Osc\+Prob\+::\+Prem\+Layer\+::density}\hypertarget{structOscProb_1_1PremLayer_aba2536cbdab87d0db33df47f95c4f2c3}{}\label{structOscProb_1_1PremLayer_aba2536cbdab87d0db33df47f95c4f2c3}
+
+
+Definition at line 124 of file Nu\+Path.\+h.
+
+
+
+Referenced by Osc\+Prob\+::\+Prem\+Model\+::\+Add\+Path().
+
+\index{Osc\+Prob\+::\+Prem\+Layer@{Osc\+Prob\+::\+Prem\+Layer}!layer@{layer}}
+\index{layer@{layer}!Osc\+Prob\+::\+Prem\+Layer@{Osc\+Prob\+::\+Prem\+Layer}}
+\subsubsection[{\texorpdfstring{layer}{layer}}]{\setlength{\rightskip}{0pt plus 5cm}int Osc\+Prob\+::\+Prem\+Layer\+::layer}\hypertarget{structOscProb_1_1PremLayer_aca8d7df68e6f982155b68b7e6a7ef389}{}\label{structOscProb_1_1PremLayer_aca8d7df68e6f982155b68b7e6a7ef389}
+
+
+Definition at line 126 of file Nu\+Path.\+h.
+
+
+
+Referenced by Osc\+Prob\+::\+Prem\+Model\+::\+Add\+Path().
+
+\index{Osc\+Prob\+::\+Prem\+Layer@{Osc\+Prob\+::\+Prem\+Layer}!radius@{radius}}
+\index{radius@{radius}!Osc\+Prob\+::\+Prem\+Layer@{Osc\+Prob\+::\+Prem\+Layer}}
+\subsubsection[{\texorpdfstring{radius}{radius}}]{\setlength{\rightskip}{0pt plus 5cm}double Osc\+Prob\+::\+Prem\+Layer\+::radius}\hypertarget{structOscProb_1_1PremLayer_a39b409c20fd96a7a0bd421567c00ffed}{}\label{structOscProb_1_1PremLayer_a39b409c20fd96a7a0bd421567c00ffed}
+
+
+Definition at line 123 of file Nu\+Path.\+h.
+
+\index{Osc\+Prob\+::\+Prem\+Layer@{Osc\+Prob\+::\+Prem\+Layer}!zoa@{zoa}}
+\index{zoa@{zoa}!Osc\+Prob\+::\+Prem\+Layer@{Osc\+Prob\+::\+Prem\+Layer}}
+\subsubsection[{\texorpdfstring{zoa}{zoa}}]{\setlength{\rightskip}{0pt plus 5cm}double Osc\+Prob\+::\+Prem\+Layer\+::zoa}\hypertarget{structOscProb_1_1PremLayer_a8687a8169d786fca79908292d11077f5}{}\label{structOscProb_1_1PremLayer_a8687a8169d786fca79908292d11077f5}
+
+
+Definition at line 125 of file Nu\+Path.\+h.
+
+
+
+Referenced by Osc\+Prob\+::\+Prem\+Model\+::\+Add\+Path().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/jcoelho/\+Osc\+Prob\+Git/\hyperlink{NuPath_8h}{Nu\+Path.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,984 @@
+\hypertarget{classOscProb_1_1PremModel}{}\section{Osc\+Prob\+:\+:Prem\+Model Class Reference}
+\label{classOscProb_1_1PremModel}\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+
+
+Implements an earth model with spherical shells.  
+
+
+
+
+{\ttfamily \#include $<$Prem\+Model.\+h$>$}
+
+Inheritance diagram for Osc\+Prob\+:\+:Prem\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classOscProb_1_1PremModel}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classOscProb_1_1PremModel_a822616917c4af8c6d3fc8d035b4d7a7d}{Prem\+Model} (string filename=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{classOscProb_1_1PremModel_aac484ca4e607f2b0fc6f599358cb95fb}{$\sim$\+Prem\+Model} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual int \hyperlink{classOscProb_1_1PremModel_ac69162cc5e3c8b7c1b8a85571ff2063b}{Fill\+Path} (double cosT)
+\begin{DoxyCompactList}\small\item\em Fill the path sequence in a vector. \end{DoxyCompactList}\item 
+virtual vector$<$ \hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path} $>$ \hyperlink{classOscProb_1_1PremModel_adbe7a5df260cba3923f5cbcb8ab2f03f}{Get\+Nu\+Path} ()
+\begin{DoxyCompactList}\small\item\em Get the current neutrino path sequence. \end{DoxyCompactList}\item 
+virtual vector$<$ \hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path} $>$ \hyperlink{classOscProb_1_1PremModel_a5b6f83f2e9b7087e8faad1f19f00ebd5}{Get\+Merged\+Paths} (double prec=0.\+25)
+\begin{DoxyCompactList}\small\item\em Get merged path sequence in a vector. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classOscProb_1_1PremModel_ae258b41cca80631e3041f0421b25afeb}{Get\+TotalL} (double cosT)
+\begin{DoxyCompactList}\small\item\em Get the total baseline for a given cos\+Theta. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classOscProb_1_1PremModel_a5328474bdbb703eb4c9d4df49999cda6}{Get\+CosT} (double L)
+\begin{DoxyCompactList}\small\item\em Get the cos\+Theta for a given total baseline. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classOscProb_1_1PremModel_ac9887d1af4b3c02925fe3228349f593d}{Set\+Layer\+ZoA} (int layer, double zoa)
+\begin{DoxyCompactList}\small\item\em Set Z/A of all layers of a given type. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classOscProb_1_1PremModel_a893b3ed65afabbdde5a4293339f14629}{Load\+Model} (string filename)
+\begin{DoxyCompactList}\small\item\em Load an earth model from a file. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classOscProb_1_1PremModel_a55b314e97ed9b92931e08ada0c0947eb}{Set\+Det\+Pos} (double pos)
+\begin{DoxyCompactList}\small\item\em Set the detector position in km. \end{DoxyCompactList}\item 
+virtual vector$<$ \hyperlink{structOscProb_1_1PremLayer}{Osc\+Prob\+::\+Prem\+Layer} $>$ \hyperlink{classOscProb_1_1PremModel_ae4feeccc7027253f5c2e2493098145ca}{Get\+Prem\+Layers} ()
+\begin{DoxyCompactList}\small\item\em Get the set of earth layers. \end{DoxyCompactList}\item 
+virtual \hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path} \hyperlink{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}{Avg\+Path} (\hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path} p1, \hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path} p2)
+\begin{DoxyCompactList}\small\item\em Get the average of two paths. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classOscProb_1_1PremModel_ac5496d6d5bafcf7740c60838d3eee7b3}{Set\+Remove\+Small\+Paths} (bool rp=true)
+\begin{DoxyCompactList}\small\item\em Set tag to remove small paths. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classOscProb_1_1PremModel_aaead53a9385bda9b0219fd051d0cdd11}{Clear\+Model} ()
+\begin{DoxyCompactList}\small\item\em Clear the earth model information. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classOscProb_1_1PremModel_a08c337b84138adc46ee4dd002e9262d2}{Add\+Layer} (double radius, double density, double zoa, double layer)
+\begin{DoxyCompactList}\small\item\em Add a layer to the model. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classOscProb_1_1PremModel_aca013f7ac5494282834048786a0e07a6}{Add\+Path} (double length, \hyperlink{structOscProb_1_1PremLayer}{Prem\+Layer} pl)
+\begin{DoxyCompactList}\small\item\em Add a path segment to the sequence. \end{DoxyCompactList}\item 
+virtual vector$<$ \hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path} $>$ \hyperlink{classOscProb_1_1PremModel_aa4b392f4d9a87296eadf1ddb34da7f4a}{Merge\+Paths} (vector$<$ \hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path} $>$ input\+Path, int j, int k)
+\begin{DoxyCompactList}\small\item\em Merge paths j and k in vector. \end{DoxyCompactList}\item 
+\hyperlink{classOscProb_1_1PremModel_a9a1d78e29217bb0dd00ae3bd96d22b69}{Class\+Def} (\hyperlink{classOscProb_1_1PremModel}{Prem\+Model}, 1)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \hyperlink{structOscProb_1_1PremLayer}{Osc\+Prob\+::\+Prem\+Layer} $>$ \hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{f\+Prem\+Layers}
+\begin{DoxyCompactList}\small\item\em The layers in the earth model. \end{DoxyCompactList}\item 
+vector$<$ \hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path} $>$ \hyperlink{classOscProb_1_1PremModel_afb5674b8b06add6b981e557d7b07016c}{f\+Nu\+Path}
+\begin{DoxyCompactList}\small\item\em The current neutrino path sequence. \end{DoxyCompactList}\item 
+int \hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{f\+Det\+Layer}
+\begin{DoxyCompactList}\small\item\em The layer index of the detector. \end{DoxyCompactList}\item 
+double \hyperlink{classOscProb_1_1PremModel_ab12ea0343cd11b9233ffd20ab5e620c7}{f\+Det\+Pos}
+\begin{DoxyCompactList}\small\item\em The radius where the detector lives. \end{DoxyCompactList}\item 
+bool \hyperlink{classOscProb_1_1PremModel_a3973df6f5f2ff219cd2f865b31aacfd2}{f\+Remove\+Small\+Paths}
+\begin{DoxyCompactList}\small\item\em Tag whether to merge small paths. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const double \hyperlink{classOscProb_1_1PremModel_a8ad1335ebe80ee1cd1cdf59d774ab34b}{D\+E\+T\+\_\+\+T\+OL} = 0.\+2
+\begin{DoxyCompactList}\small\item\em The detector position tolerance near boundaries. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class implements a spherically symmetric model of the earth using \hyperlink{structOscProb_1_1PremLayer}{Prem\+Layer}\textquotesingle{}s to store spherical shells with different properties.
+
+The class is then able to produce path sequences through the different earth layers as a function of the cosine of the zenith angle with respect to the detector.
+
+The detector can be positioned at any radius within the model and the path sequences will take into account the fact that some layers are above the detector.
+
+By default this implements the model stored in Prem\+Tables/prem\+\_\+default.\+txt with the detector at the bottom of the ocean layer (radius = 6368 km).
+
+This class inherits from T\+Object and can be saved in R\+O\+OT files.
+
+\begin{DoxyAuthor}{Author}
+jcoelho@apc.\+in2p3.\+fr 
+\end{DoxyAuthor}
+
+
+Definition at line 39 of file Prem\+Model.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Prem\+Model@{Prem\+Model}}
+\index{Prem\+Model@{Prem\+Model}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Prem\+Model(string filename="""")}{PremModel(string filename="")}}]{\setlength{\rightskip}{0pt plus 5cm}Prem\+Model\+::\+Prem\+Model (
+\begin{DoxyParamCaption}
+\item[{string}]{filename = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classOscProb_1_1PremModel_a822616917c4af8c6d3fc8d035b4d7a7d}{}\label{classOscProb_1_1PremModel_a822616917c4af8c6d3fc8d035b4d7a7d}
+Constructor.
+
+By default this implements the model stored in Prem\+Tables/prem\+\_\+default.\+txt with the detector at the bottom of the ocean layer (radius = 6368 km).
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & -\/ The txt file containing a table of earth layers \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 35 of file Prem\+Model.\+cxx.
+
+
+
+References Load\+Model(), and Set\+Det\+Pos().
+
+
+\begin{DoxyCode}
+35                                     :
+36 \hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{fDetLayer}(0), \hyperlink{classOscProb_1_1PremModel_a3973df6f5f2ff219cd2f865b31aacfd2}{fRemoveSmallPaths}(\textcolor{keyword}{false})
+37 \{
+38 
+39   \hyperlink{classOscProb_1_1PremModel_a55b314e97ed9b92931e08ada0c0947eb}{SetDetPos}(6368);
+40   \hyperlink{classOscProb_1_1PremModel_a893b3ed65afabbdde5a4293339f14629}{LoadModel}(filename);
+41 
+42 \}
+\end{DoxyCode}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!````~Prem\+Model@{$\sim$\+Prem\+Model}}
+\index{````~Prem\+Model@{$\sim$\+Prem\+Model}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{$\sim$\+Prem\+Model()}{~PremModel()}}]{\setlength{\rightskip}{0pt plus 5cm}Prem\+Model\+::$\sim$\+Prem\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_aac484ca4e607f2b0fc6f599358cb95fb}{}\label{classOscProb_1_1PremModel_aac484ca4e607f2b0fc6f599358cb95fb}
+Nothing to clean. 
+
+Definition at line 48 of file Prem\+Model.\+cxx.
+
+
+\begin{DoxyCode}
+48 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Add\+Layer@{Add\+Layer}}
+\index{Add\+Layer@{Add\+Layer}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Add\+Layer(double radius, double density, double zoa, double layer)}{AddLayer(double radius, double density, double zoa, double layer)}}]{\setlength{\rightskip}{0pt plus 5cm}void Prem\+Model\+::\+Add\+Layer (
+\begin{DoxyParamCaption}
+\item[{double}]{radius, }
+\item[{double}]{density, }
+\item[{double}]{zoa, }
+\item[{double}]{layer}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_a08c337b84138adc46ee4dd002e9262d2}{}\label{classOscProb_1_1PremModel_a08c337b84138adc46ee4dd002e9262d2}
+Add a layer to the earth model.
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & -\/ The outer radius of the layer in km \\
+\hline
+{\em density} & -\/ The density of the layer in g/cm$^\wedge$3 \\
+\hline
+{\em zoa} & -\/ The effective Z/A value of the layer \\
+\hline
+{\em layer} & -\/ An index to identify the matter type (e.\+g. earth inner core) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 105 of file Prem\+Model.\+cxx.
+
+
+
+References f\+Prem\+Layers.
+
+
+
+Referenced by Load\+Model().
+
+
+\begin{DoxyCode}
+107 \{
+108 
+109   \hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}.push\_back( \hyperlink{structOscProb_1_1PremLayer}{PremLayer}(radius, density, zoa, layer) );
+110   
+111 \}
+\end{DoxyCode}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Add\+Path@{Add\+Path}}
+\index{Add\+Path@{Add\+Path}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Add\+Path(double length, Prem\+Layer pl)}{AddPath(double length, PremLayer pl)}}]{\setlength{\rightskip}{0pt plus 5cm}void Prem\+Model\+::\+Add\+Path (
+\begin{DoxyParamCaption}
+\item[{double}]{length, }
+\item[{{\bf Prem\+Layer}}]{pl}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_aca013f7ac5494282834048786a0e07a6}{}\label{classOscProb_1_1PremModel_aca013f7ac5494282834048786a0e07a6}
+Add a path segment to the sequence.
+
+For a given \hyperlink{structOscProb_1_1PremLayer}{Prem\+Layer}, adds a path of a given length in that material
+
+
+\begin{DoxyParams}{Parameters}
+{\em length} & -\/ The length of the path segment in km \\
+\hline
+{\em pl} & -\/ The layer we are crossing \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 269 of file Prem\+Model.\+cxx.
+
+
+
+References Osc\+Prob\+::\+Prem\+Layer\+::density, f\+Nu\+Path, Osc\+Prob\+::\+Prem\+Layer\+::layer, and Osc\+Prob\+::\+Prem\+Layer\+::zoa.
+
+
+
+Referenced by Fill\+Path().
+
+
+\begin{DoxyCode}
+270 \{
+271 
+272   \hyperlink{classOscProb_1_1PremModel_afb5674b8b06add6b981e557d7b07016c}{fNuPath}.push\_back( \hyperlink{structOscProb_1_1NuPath}{NuPath}(length, pl.\hyperlink{structOscProb_1_1PremLayer_aba2536cbdab87d0db33df47f95c4f2c3}{density}, pl.\hyperlink{structOscProb_1_1PremLayer_a8687a8169d786fca79908292d11077f5}{zoa}, pl.
+      \hyperlink{structOscProb_1_1PremLayer_aca8d7df68e6f982155b68b7e6a7ef389}{layer}) );
+273   
+274 \}
+\end{DoxyCode}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Avg\+Path@{Avg\+Path}}
+\index{Avg\+Path@{Avg\+Path}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Avg\+Path(\+Osc\+Prob\+::\+Nu\+Path p1, Osc\+Prob\+::\+Nu\+Path p2)}{AvgPath(OscProb::NuPath p1, OscProb::NuPath p2)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Nu\+Path} Prem\+Model\+::\+Avg\+Path (
+\begin{DoxyParamCaption}
+\item[{{\bf Osc\+Prob\+::\+Nu\+Path}}]{p1, }
+\item[{{\bf Osc\+Prob\+::\+Nu\+Path}}]{p2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}{}\label{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}
+Get the merged average of two paths
+
+This method will merge two paths and take their average density weighted by Z/A and path length.
+
+The Z/A of the first path will be kept in the merged path
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & -\/ The first path to merge \\
+\hline
+{\em p2} & -\/ The second path to merge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The merged path 
+\end{DoxyReturn}
+
+
+Definition at line 463 of file Prem\+Model.\+cxx.
+
+
+
+References Osc\+Prob\+::\+Nu\+Path\+::density, Osc\+Prob\+::\+Nu\+Path\+::length, and Osc\+Prob\+::\+Nu\+Path\+::zoa.
+
+
+
+Referenced by Get\+Merged\+Paths(), and Merge\+Paths().
+
+
+\begin{DoxyCode}
+463                                              \{
+464 
+465   \textcolor{comment}{// Start with the first path}
+466   \hyperlink{structOscProb_1_1NuPath}{NuPath} mergedPath = p1;
+467 
+468   \textcolor{comment}{// Add the second length}
+469   mergedPath.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} += p2.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length};
+470 
+471   \textcolor{comment}{// Compute weighted average of density}
+472   mergedPath.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density} = (p1.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density}*p1.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}*p1.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} + p2.
+      \hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density}*p2.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}*p2.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}) / (p1.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}*p1.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} + p2.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}*p2.
+      \hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length});
+473 
+474   \textcolor{comment}{// return merged path}
+475   \textcolor{keywordflow}{return} mergedPath;
+476 
+477 \}
+\end{DoxyCode}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Class\+Def@{Class\+Def}}
+\index{Class\+Def@{Class\+Def}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Class\+Def(\+Prem\+Model, 1)}{ClassDef(PremModel, 1)}}]{\setlength{\rightskip}{0pt plus 5cm}Osc\+Prob\+::\+Prem\+Model\+::\+Class\+Def (
+\begin{DoxyParamCaption}
+\item[{{\bf Prem\+Model}}]{, }
+\item[{1}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classOscProb_1_1PremModel_a9a1d78e29217bb0dd00ae3bd96d22b69}{}\label{classOscProb_1_1PremModel_a9a1d78e29217bb0dd00ae3bd96d22b69}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Clear\+Model@{Clear\+Model}}
+\index{Clear\+Model@{Clear\+Model}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Clear\+Model()}{ClearModel()}}]{\setlength{\rightskip}{0pt plus 5cm}void Prem\+Model\+::\+Clear\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_aaead53a9385bda9b0219fd051d0cdd11}{}\label{classOscProb_1_1PremModel_aaead53a9385bda9b0219fd051d0cdd11}
+Clear the earth model information. 
+
+Definition at line 88 of file Prem\+Model.\+cxx.
+
+
+
+References f\+Det\+Layer, and f\+Prem\+Layers.
+
+
+
+Referenced by Load\+Model().
+
+
+\begin{DoxyCode}
+89 \{
+90 
+91   \hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{fDetLayer} = 0;
+92   \hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}.clear();
+93 
+94 \}
+\end{DoxyCode}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Fill\+Path@{Fill\+Path}}
+\index{Fill\+Path@{Fill\+Path}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Fill\+Path(double cos\+T)}{FillPath(double cosT)}}]{\setlength{\rightskip}{0pt plus 5cm}int Prem\+Model\+::\+Fill\+Path (
+\begin{DoxyParamCaption}
+\item[{double}]{cosT}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_ac69162cc5e3c8b7c1b8a85571ff2063b}{}\label{classOscProb_1_1PremModel_ac69162cc5e3c8b7c1b8a85571ff2063b}
+Fill the path sequence in a vector.
+
+This will start at the upper-\/most layer and find straight paths to the boundary of the next layer down. When reaching the inner-\/most layer in the given direction, the paths move back to outer layers until hitting the detector.
+
+The path sequence is stored as an attribute and can be retrieved with the function Get\+Nu\+Path.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cosT} & -\/ The cosine of the neutrino direction \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of path segments in the sequence 
+\end{DoxyReturn}
+
+
+Definition at line 291 of file Prem\+Model.\+cxx.
+
+
+
+References Add\+Path(), f\+Det\+Layer, f\+Nu\+Path, and f\+Prem\+Layers.
+
+
+\begin{DoxyCode}
+292 \{
+293 
+294   \textcolor{comment}{// Clear current path sequence}
+295   \hyperlink{classOscProb_1_1PremModel_afb5674b8b06add6b981e557d7b07016c}{fNuPath}.clear();
+296   
+297   \textcolor{comment}{// Do nothing if cosine is unphysical}
+298   \textcolor{keywordflow}{if}(fabs(cosT) > 1) \textcolor{keywordflow}{return} 0;
+299 
+300   \textcolor{comment}{// Define the minimum path radius}
+301   \textcolor{keywordtype}{double} minR = \hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}[\hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{fDetLayer}].radius * sqrt(1 - cosT*cosT);
+302 
+303   \textcolor{comment}{// Set the top layer index}
+304   \textcolor{keywordtype}{int} toplayer = \hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}.size() - 1;
+305   
+306   \textcolor{comment}{// Find the inner-most crossed layer}
+307   \textcolor{keywordtype}{int} minlayer = 0;
+308   \textcolor{keywordflow}{while}(\hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}[minlayer].radius < minR) minlayer++; 
+309 
+310   \textcolor{comment}{// Compute the number of path segments needed}
+311   \textcolor{keywordtype}{int} nsteps = toplayer - \hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{fDetLayer};
+312   \textcolor{keywordflow}{if}(cosT < 0) nsteps += 2*(fDetLayer - minlayer) + 1;
+313 
+314   \textcolor{comment}{// Start at the top layer and go down}
+315   \textcolor{keywordtype}{int} layer = toplayer;
+316   \textcolor{keywordtype}{int} dl = -1;
+317   
+318   \textcolor{comment}{// Loop over all path segments}
+319   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nsteps; i++)\{
+320   
+321     \textcolor{comment}{// Get square of the path length between this layer's }
+322     \textcolor{comment}{// outer radius and  inner-most radius}
+323     \textcolor{keywordtype}{double} L1 = pow(\hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}[layer].radius,2) - minR*minR;
+324 
+325     \textcolor{comment}{// If L1 is negative, outer radius is not crossed.}
+326     \textcolor{comment}{// This only happens if detector is at the top layer and the}
+327     \textcolor{comment}{// neutrino is coming from above.}
+328     \textcolor{keywordflow}{if}(L1 < 0) \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+329     
+330     \textcolor{comment}{// Get square of the path length between this layer's }
+331     \textcolor{comment}{// inner radius and  inner-most radius}
+332     \textcolor{keywordtype}{double} L2 = -minR*minR;
+333     \textcolor{keywordflow}{if}(layer>0) L2 += pow(\hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}[layer-1].radius,2);
+334     
+335     \textcolor{comment}{// If L2 is negative, inner radius is not crossed,}
+336     \textcolor{comment}{// so set this as the minimum layer.}
+337     \textcolor{keywordtype}{bool} ismin = (L2<=0 && cosT < 0);
+338 
+339     \textcolor{comment}{// Store the path segment length}
+340     \textcolor{keywordtype}{double} dL;
+341     
+342     \textcolor{comment}{// If it's the minimum layer, connect two outer radius }
+343     \textcolor{comment}{// crossing points. If not, compute difference between}
+344     \textcolor{comment}{// inner and outer radius crossings.}
+345     \textcolor{keywordflow}{if}(ismin)      dL = 2 * sqrt(L1);
+346     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(L2>=0) dL = sqrt(L1) - sqrt(L2);
+347     \textcolor{keywordflow}{else}           dL = sqrt(L1); \textcolor{comment}{// This should never actually happen,}
+348                                   \textcolor{comment}{// but protect in case L2 is slightly}
+349                                   \textcolor{comment}{// negative when it should be zero.}
+350                                   \textcolor{comment}{// e.g. arriving at the detector from above.}
+351     
+352     \textcolor{comment}{// Add this path segment to the sequence}
+353     \hyperlink{classOscProb_1_1PremModel_aca013f7ac5494282834048786a0e07a6}{AddPath}(dL, \hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}[layer]);
+354     
+355     \textcolor{comment}{// If we reached the inner-most layer,}
+356     \textcolor{comment}{// start moving up again.}
+357     \textcolor{keywordflow}{if}(ismin) dl = 1;
+358     
+359     \textcolor{comment}{// Move to next layer}
+360     layer += dl;
+361   
+362   \}
+363 
+364   \textcolor{comment}{// Return the number of path segments}
+365   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PremModel_afb5674b8b06add6b981e557d7b07016c}{fNuPath}.size();
+366 
+367 \}
+\end{DoxyCode}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Get\+CosT@{Get\+CosT}}
+\index{Get\+CosT@{Get\+CosT}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Cos\+T(double L)}{GetCosT(double L)}}]{\setlength{\rightskip}{0pt plus 5cm}double Prem\+Model\+::\+Get\+CosT (
+\begin{DoxyParamCaption}
+\item[{double}]{L}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_a5328474bdbb703eb4c9d4df49999cda6}{}\label{classOscProb_1_1PremModel_a5328474bdbb703eb4c9d4df49999cda6}
+Get the cos\+Theta for a given total baseline.
+
+Given a baseline, find the direction of the neutrino. This could be useful for experiments with fixed baselines for example.
+
+The baseline must be within the range of possible values in this earth model. Will return vertical neutrinos otherwise.
+
+
+\begin{DoxyParams}{Parameters}
+{\em L} & -\/ The total baseline of the neutrino \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 247 of file Prem\+Model.\+cxx.
+
+
+
+References f\+Det\+Layer, and f\+Prem\+Layers.
+
+
+\begin{DoxyCode}
+248 \{
+249 
+250   \textcolor{keywordtype}{double} rAbove = \hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}.back().radius;     \textcolor{comment}{// Radius above detector}
+251   \textcolor{keywordtype}{double} rBelow = \hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}[\hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{fDetLayer}].radius; \textcolor{comment}{// Radius below detector}
+252   
+253   \textcolor{keywordflow}{if}(L < rAbove - rBelow) \textcolor{keywordflow}{return}  1;
+254   \textcolor{keywordflow}{if}(L > rAbove + rBelow) \textcolor{keywordflow}{return} -1;
+255   
+256   \textcolor{keywordflow}{return} (rAbove*rAbove - rBelow*rBelow - L*L) / (2*rBelow*L);
+257   
+258 \}
+\end{DoxyCode}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Get\+Merged\+Paths@{Get\+Merged\+Paths}}
+\index{Get\+Merged\+Paths@{Get\+Merged\+Paths}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Merged\+Paths(double prec=0.\+25)}{GetMergedPaths(double prec=0.25)}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ {\bf Nu\+Path} $>$ Prem\+Model\+::\+Get\+Merged\+Paths (
+\begin{DoxyParamCaption}
+\item[{double}]{prec = {\ttfamily 0.25}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_a5b6f83f2e9b7087e8faad1f19f00ebd5}{}\label{classOscProb_1_1PremModel_a5b6f83f2e9b7087e8faad1f19f00ebd5}
+Merge similar paths to reduce number of steps
+
+This method will merge consecutive paths and take their averages until it finds a large enough gap to start a new merged path.
+
+The merged paths will be returned, and the original detailed path will not be changed and will stay stored as an attribute.
+
+
+\begin{DoxyParams}{Parameters}
+{\em prec} & -\/ The precision to merge paths in g/cm$^\wedge$3 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The vector of merged path segments 
+\end{DoxyReturn}
+
+
+Definition at line 382 of file Prem\+Model.\+cxx.
+
+
+
+References Avg\+Path(), Osc\+Prob\+::\+Nu\+Path\+::density, f\+Nu\+Path, f\+Remove\+Small\+Paths, Merge\+Paths(), and Osc\+Prob\+::\+Nu\+Path\+::zoa.
+
+
+\begin{DoxyCode}
+382                                                    \{
+383 
+384   \textcolor{comment}{// The output vector}
+385   vector<NuPath> mergedPath;
+386 
+387   \textcolor{comment}{// Start with the first path}
+388   \hyperlink{structOscProb_1_1NuPath}{OscProb::NuPath} path = \hyperlink{classOscProb_1_1PremModel_afb5674b8b06add6b981e557d7b07016c}{fNuPath}[0];
+389 
+390   \textcolor{comment}{// Track the total length}
+391   \textcolor{keywordtype}{double} totL = 0;
+392 
+393   \textcolor{comment}{// Loop over all paths starting from second}
+394   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=1; i<\hyperlink{classOscProb_1_1PremModel_afb5674b8b06add6b981e557d7b07016c}{fNuPath}.size(); i++)\{
+395 
+396     \textcolor{comment}{// If this path electron density is beyond the tolerance}
+397     \textcolor{keywordflow}{if}( fabs(path.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density}*path.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa} - \hyperlink{classOscProb_1_1PremModel_afb5674b8b06add6b981e557d7b07016c}{fNuPath}[i].density*\hyperlink{classOscProb_1_1PremModel_afb5674b8b06add6b981e557d7b07016c}{fNuPath}[i].zoa) > prec*path
+      .\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa} )\{
+398 
+399       \textcolor{comment}{// Add merged path to vector}
+400       mergedPath.push\_back(path);
+401       
+402       \textcolor{comment}{// Set this path as new merged path}
+403       path = \hyperlink{classOscProb_1_1PremModel_afb5674b8b06add6b981e557d7b07016c}{fNuPath}[i];
+404 
+405     \}
+406     \textcolor{comment}{// If path is within tolerance}
+407     \textcolor{keywordflow}{else}\{
+408       
+409       \textcolor{comment}{// Merge the path with current merged path}
+410       path = \hyperlink{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}{AvgPath}(path, \hyperlink{classOscProb_1_1PremModel_afb5674b8b06add6b981e557d7b07016c}{fNuPath}[i]);
+411 
+412     \}
+413 
+414     \textcolor{comment}{// Increment total length}
+415     totL += \hyperlink{classOscProb_1_1PremModel_afb5674b8b06add6b981e557d7b07016c}{fNuPath}[i].length;
+416 
+417   \}\textcolor{comment}{// End of loop over paths}
+418 
+419   \textcolor{comment}{// Add the final merged path to vector}
+420   mergedPath.push\_back(path);
+421 
+422   \textcolor{comment}{// If tag is true, remove small paths}
+423   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PremModel_a3973df6f5f2ff219cd2f865b31aacfd2}{fRemoveSmallPaths})\{
+424 
+425     \textcolor{comment}{// Start at first path}
+426     \textcolor{keywordtype}{int} k = 0;
+427 
+428     \textcolor{comment}{// While not at the end of vector}
+429     \textcolor{keywordflow}{while}(k + 1 < mergedPath.size())\{
+430 
+431       \textcolor{comment}{// If length is less than 1% of total}
+432       \textcolor{keywordflow}{if}(mergedPath[k].length < 0.01*totL)\{
+433 
+434         \textcolor{comment}{// Merge path with following path}
+435         mergedPath = \hyperlink{classOscProb_1_1PremModel_aa4b392f4d9a87296eadf1ddb34da7f4a}{MergePaths}(mergedPath, k, k+1);
+436 
+437       \}
+438       \textcolor{comment}{// If path is long enough skip it}
+439       \textcolor{keywordflow}{else} k++;
+440 
+441     \}\textcolor{comment}{// End of while loop}
+442 
+443   \}\textcolor{comment}{// End of if statement}
+444 
+445   \textcolor{comment}{// return the merged vector}
+446   \textcolor{keywordflow}{return} mergedPath;
+447 
+448 \}
+\end{DoxyCode}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Get\+Nu\+Path@{Get\+Nu\+Path}}
+\index{Get\+Nu\+Path@{Get\+Nu\+Path}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Nu\+Path()}{GetNuPath()}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ {\bf Nu\+Path} $>$ Prem\+Model\+::\+Get\+Nu\+Path (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_adbe7a5df260cba3923f5cbcb8ab2f03f}{}\label{classOscProb_1_1PremModel_adbe7a5df260cba3923f5cbcb8ab2f03f}
+Get the current neutrino path sequence
+
+The path needs to be filled for a given cos\+Theta before calling this function. 
+
+Definition at line 73 of file Prem\+Model.\+cxx.
+
+
+
+References f\+Nu\+Path.
+
+
+\begin{DoxyCode}
+73 \{ \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PremModel_afb5674b8b06add6b981e557d7b07016c}{fNuPath}; \}
+\end{DoxyCode}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Get\+Prem\+Layers@{Get\+Prem\+Layers}}
+\index{Get\+Prem\+Layers@{Get\+Prem\+Layers}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Prem\+Layers()}{GetPremLayers()}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ {\bf Prem\+Layer} $>$ Prem\+Model\+::\+Get\+Prem\+Layers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_ae4feeccc7027253f5c2e2493098145ca}{}\label{classOscProb_1_1PremModel_ae4feeccc7027253f5c2e2493098145ca}
+Get the set of earth layers
+
+This returns the set of \hyperlink{structOscProb_1_1PremLayer}{Prem\+Layer}\textquotesingle{}s for this earth model and detector position. 
+
+Definition at line 82 of file Prem\+Model.\+cxx.
+
+
+
+References f\+Prem\+Layers.
+
+
+\begin{DoxyCode}
+82 \{ \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}; \}
+\end{DoxyCode}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Get\+TotalL@{Get\+TotalL}}
+\index{Get\+TotalL@{Get\+TotalL}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Get\+Total\+L(double cos\+T)}{GetTotalL(double cosT)}}]{\setlength{\rightskip}{0pt plus 5cm}double Prem\+Model\+::\+Get\+TotalL (
+\begin{DoxyParamCaption}
+\item[{double}]{cosT}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_ae258b41cca80631e3041f0421b25afeb}{}\label{classOscProb_1_1PremModel_ae258b41cca80631e3041f0421b25afeb}
+Get the total baseline for a given cos\+Theta.
+
+The total baseline contains both from above and below the detector.
+
+
+\begin{DoxyParams}{Parameters}
+{\em cosT} & -\/ The cosine of the neutrino direction \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 221 of file Prem\+Model.\+cxx.
+
+
+
+References f\+Det\+Layer, and f\+Prem\+Layers.
+
+
+\begin{DoxyCode}
+222 \{
+223 
+224   \textcolor{keywordflow}{if}(fabs(cosT) > 1) \textcolor{keywordflow}{return} 0;
+225 
+226   \textcolor{keywordtype}{double} rAbove = \hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}.back().radius;     \textcolor{comment}{// Radius above detector}
+227   \textcolor{keywordtype}{double} rBelow = \hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}[\hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{fDetLayer}].radius; \textcolor{comment}{// Radius below detector}
+228 
+229   \textcolor{keywordtype}{double} sinsqrT = 1 - cosT*cosT;
+230 
+231   \textcolor{keywordflow}{return} -rBelow*cosT + sqrt(rAbove*rAbove - rBelow*rBelow*sinsqrT);
+232 
+233 \}
+\end{DoxyCode}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Load\+Model@{Load\+Model}}
+\index{Load\+Model@{Load\+Model}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Load\+Model(string filename)}{LoadModel(string filename)}}]{\setlength{\rightskip}{0pt plus 5cm}void Prem\+Model\+::\+Load\+Model (
+\begin{DoxyParamCaption}
+\item[{string}]{filename}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_a893b3ed65afabbdde5a4293339f14629}{}\label{classOscProb_1_1PremModel_a893b3ed65afabbdde5a4293339f14629}
+Load an earth model from a file.
+
+By default it loads the model stored in Prem\+Tables/prem\+\_\+default.\+txt
+
+The decision of whether to create a layer for the detector position is made in this function, so the detector position must be set before calling this function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & -\/ The txt file containing a table of earth layers \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 125 of file Prem\+Model.\+cxx.
+
+
+
+References Add\+Layer(), Clear\+Model(), D\+E\+T\+\_\+\+T\+OL, f\+Det\+Layer, f\+Det\+Pos, and f\+Prem\+Layers.
+
+
+
+Referenced by Prem\+Model().
+
+
+\begin{DoxyCode}
+126 \{
+127 
+128   \textcolor{comment}{// Clear the current model}
+129   \hyperlink{classOscProb_1_1PremModel_aaead53a9385bda9b0219fd051d0cdd11}{ClearModel}();
+130 
+131   \textcolor{comment}{// Use default if no file provided}
+132   \textcolor{keywordflow}{if}(filename == \textcolor{stringliteral}{""})\{
+133     filename = PREM\_DEFAULT;
+134   \}
+135 
+136   \textcolor{comment}{// Open the file}
+137   ifstream fin;
+138   fin.open(filename.c\_str());
+139   
+140   \textcolor{keywordflow}{if}(!fin)\{
+141     cout << \textcolor{stringliteral}{"ERROR: File "} << filename << \textcolor{stringliteral}{" not found!"} << endl;
+142     \textcolor{keywordflow}{return};
+143   \}
+144 
+145   \textcolor{comment}{// Variables for storing table rows}
+146   \textcolor{keywordtype}{float} radius, density, zoa, layer;
+147 
+148   \textcolor{comment}{// Flag to mark we've passed the detector}
+149   \textcolor{keywordtype}{bool} crossed\_det = \textcolor{keyword}{false};
+150   
+151   \textcolor{comment}{// Keep track of previous radius}
+152   \textcolor{keywordtype}{double} rprev = 0;
+153 
+154   \textcolor{comment}{// Loop over table rows}
+155   \textcolor{keywordflow}{while}(fin >> radius >> density >> zoa >> layer)\{
+156   
+157     \textcolor{comment}{// Radii must be ordered in model file}
+158     \textcolor{keywordflow}{if}(radius <= rprev)\{
+159       cout << \textcolor{stringliteral}{"ERROR: Radii are not sorted in increasing order in the model file"} << endl;
+160       \hyperlink{classOscProb_1_1PremModel_aaead53a9385bda9b0219fd051d0cdd11}{ClearModel}();
+161       \textcolor{keywordflow}{return};
+162     \}
+163   
+164     \textcolor{comment}{// See if we passed the detector and decide whether}
+165     \textcolor{comment}{// to create a special layer for it}
+166     \textcolor{keywordflow}{if}(radius > \hyperlink{classOscProb_1_1PremModel_ab12ea0343cd11b9233ffd20ab5e620c7}{fDetPos} - \hyperlink{classOscProb_1_1PremModel_a8ad1335ebe80ee1cd1cdf59d774ab34b}{DET\_TOL} && !crossed\_det)\{
+167 
+168       crossed\_det = \textcolor{keyword}{true};
+169 
+170       \hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{fDetLayer} = \hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}.size();
+171 
+172       \textcolor{comment}{// If detector is not near boundary, add a special layer}
+173       \textcolor{keywordflow}{if}(radius > \hyperlink{classOscProb_1_1PremModel_ab12ea0343cd11b9233ffd20ab5e620c7}{fDetPos} + \hyperlink{classOscProb_1_1PremModel_a8ad1335ebe80ee1cd1cdf59d774ab34b}{DET\_TOL})\{
+174         \hyperlink{classOscProb_1_1PremModel_a08c337b84138adc46ee4dd002e9262d2}{AddLayer}(\hyperlink{classOscProb_1_1PremModel_ab12ea0343cd11b9233ffd20ab5e620c7}{fDetPos}, density, zoa, layer);
+175       \}
+176 
+177     \}
+178 
+179     \textcolor{comment}{// Add this layer to the model}
+180     \hyperlink{classOscProb_1_1PremModel_a08c337b84138adc46ee4dd002e9262d2}{AddLayer}(radius, density, zoa, layer);
+181 
+182   \}
+183   
+184 \}
+\end{DoxyCode}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Merge\+Paths@{Merge\+Paths}}
+\index{Merge\+Paths@{Merge\+Paths}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Merge\+Paths(vector$<$ Osc\+Prob\+::\+Nu\+Path $>$ input\+Path, int j, int k)}{MergePaths(vector< OscProb::NuPath > inputPath, int j, int k)}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ {\bf Nu\+Path} $>$ Prem\+Model\+::\+Merge\+Paths (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf Osc\+Prob\+::\+Nu\+Path} $>$}]{input\+Path, }
+\item[{int}]{j, }
+\item[{int}]{k}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_aa4b392f4d9a87296eadf1ddb34da7f4a}{}\label{classOscProb_1_1PremModel_aa4b392f4d9a87296eadf1ddb34da7f4a}
+Merge two specific paths by their indices in a path vector
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+Path} & -\/ The original vecotr of paths to merge \\
+\hline
+{\em j,k} & -\/ The indices of the two paths to merge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The merged vector of paths 
+\end{DoxyReturn}
+
+
+Definition at line 487 of file Prem\+Model.\+cxx.
+
+
+
+References Avg\+Path().
+
+
+
+Referenced by Get\+Merged\+Paths().
+
+
+\begin{DoxyCode}
+487                                                                           \{
+488 
+489   \textcolor{comment}{// Output vector}
+490   vector<NuPath> mergedPath;
+491 
+492   \textcolor{comment}{// Loop over input paths}
+493   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<inputPath.size(); i++)\{
+494     
+495     \textcolor{comment}{// If first index, merge the paths j and k}
+496     \textcolor{keywordflow}{if}(i==j) mergedPath.push\_back(\hyperlink{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}{AvgPath}(inputPath[j], inputPath[k]));
+497     \textcolor{comment}{// If not second index add the path as is}
+498     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(i!=k) mergedPath.push\_back(inputPath[i]);
+499 
+500   \}\textcolor{comment}{// End of loop}
+501 
+502   \textcolor{comment}{// return merged vector}
+503   \textcolor{keywordflow}{return} mergedPath;
+504 
+505 \}
+\end{DoxyCode}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Set\+Det\+Pos@{Set\+Det\+Pos}}
+\index{Set\+Det\+Pos@{Set\+Det\+Pos}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Set\+Det\+Pos(double pos)}{SetDetPos(double pos)}}]{\setlength{\rightskip}{0pt plus 5cm}void Prem\+Model\+::\+Set\+Det\+Pos (
+\begin{DoxyParamCaption}
+\item[{double}]{pos}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_a55b314e97ed9b92931e08ada0c0947eb}{}\label{classOscProb_1_1PremModel_a55b314e97ed9b92931e08ada0c0947eb}
+Set the detector position in km.
+
+If the position is within 200m of a layer boundary, the detector is considered to be on the boundary. If not, an extra boundary is inserted in the detector position to distinguish what parts of the earth are above and below the detector.
+
+This must be done before loading the earth model file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & -\/ The radius where the detector is in km \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 64 of file Prem\+Model.\+cxx.
+
+
+
+References f\+Det\+Pos.
+
+
+
+Referenced by Prem\+Model().
+
+
+\begin{DoxyCode}
+64 \{ \hyperlink{classOscProb_1_1PremModel_ab12ea0343cd11b9233ffd20ab5e620c7}{fDetPos} = pos; \}
+\end{DoxyCode}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Set\+Layer\+ZoA@{Set\+Layer\+ZoA}}
+\index{Set\+Layer\+ZoA@{Set\+Layer\+ZoA}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Set\+Layer\+Zo\+A(int layer, double zoa)}{SetLayerZoA(int layer, double zoa)}}]{\setlength{\rightskip}{0pt plus 5cm}void Prem\+Model\+::\+Set\+Layer\+ZoA (
+\begin{DoxyParamCaption}
+\item[{int}]{layer, }
+\item[{double}]{zoa}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_ac9887d1af4b3c02925fe3228349f593d}{}\label{classOscProb_1_1PremModel_ac9887d1af4b3c02925fe3228349f593d}
+Set the effective Z/A value for all layers of a given type.
+
+Use this to change the Z/A of indexed layer, e.\+g. all outer-\/core layers
+
+
+\begin{DoxyParams}{Parameters}
+{\em layer} & -\/ The index of the layer type \\
+\hline
+{\em zoa} & -\/ The effective Z/A value to use \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 196 of file Prem\+Model.\+cxx.
+
+
+
+References f\+Prem\+Layers.
+
+
+\begin{DoxyCode}
+197 \{
+198 
+199   \textcolor{keywordtype}{int} nlayers = \hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}.size();
+200   
+201   \textcolor{comment}{// Loop over all layers and change the ones}
+202   \textcolor{comment}{// with the given index}
+203   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nlayers; i++)\{
+204   
+205     \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}[i].layer != layer) \textcolor{keywordflow}{continue};
+206     
+207     \hyperlink{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{fPremLayers}[i].zoa = zoa;
+208   
+209   \}
+210 
+211 \}
+\end{DoxyCode}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Set\+Remove\+Small\+Paths@{Set\+Remove\+Small\+Paths}}
+\index{Set\+Remove\+Small\+Paths@{Set\+Remove\+Small\+Paths}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{Set\+Remove\+Small\+Paths(bool rp=true)}{SetRemoveSmallPaths(bool rp=true)}}]{\setlength{\rightskip}{0pt plus 5cm}void Prem\+Model\+::\+Set\+Remove\+Small\+Paths (
+\begin{DoxyParamCaption}
+\item[{bool}]{rp = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOscProb_1_1PremModel_ac5496d6d5bafcf7740c60838d3eee7b3}{}\label{classOscProb_1_1PremModel_ac5496d6d5bafcf7740c60838d3eee7b3}
+Set the boolean to tag whether to remove small paths when merging
+
+
+\begin{DoxyParams}{Parameters}
+{\em rp} & -\/ Boolean value to set \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 513 of file Prem\+Model.\+cxx.
+
+
+
+References f\+Remove\+Small\+Paths.
+
+
+\begin{DoxyCode}
+513 \{ \hyperlink{classOscProb_1_1PremModel_a3973df6f5f2ff219cd2f865b31aacfd2}{fRemoveSmallPaths} = rp; \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!D\+E\+T\+\_\+\+T\+OL@{D\+E\+T\+\_\+\+T\+OL}}
+\index{D\+E\+T\+\_\+\+T\+OL@{D\+E\+T\+\_\+\+T\+OL}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{D\+E\+T\+\_\+\+T\+OL}{DET_TOL}}]{\setlength{\rightskip}{0pt plus 5cm}const double Prem\+Model\+::\+D\+E\+T\+\_\+\+T\+OL = 0.\+2\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}\hypertarget{classOscProb_1_1PremModel_a8ad1335ebe80ee1cd1cdf59d774ab34b}{}\label{classOscProb_1_1PremModel_a8ad1335ebe80ee1cd1cdf59d774ab34b}
+Define the tolerance of the detector around a boundary when considering whether to add a new layer for the detector position. 
+
+Definition at line 87 of file Prem\+Model.\+h.
+
+
+
+Referenced by Load\+Model().
+
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!f\+Det\+Layer@{f\+Det\+Layer}}
+\index{f\+Det\+Layer@{f\+Det\+Layer}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{f\+Det\+Layer}{fDetLayer}}]{\setlength{\rightskip}{0pt plus 5cm}int Osc\+Prob\+::\+Prem\+Model\+::f\+Det\+Layer\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{}\label{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}
+
+
+Definition at line 82 of file Prem\+Model.\+h.
+
+
+
+Referenced by Clear\+Model(), Fill\+Path(), Get\+Cos\+T(), Get\+Total\+L(), and Load\+Model().
+
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!f\+Det\+Pos@{f\+Det\+Pos}}
+\index{f\+Det\+Pos@{f\+Det\+Pos}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{f\+Det\+Pos}{fDetPos}}]{\setlength{\rightskip}{0pt plus 5cm}double Osc\+Prob\+::\+Prem\+Model\+::f\+Det\+Pos\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classOscProb_1_1PremModel_ab12ea0343cd11b9233ffd20ab5e620c7}{}\label{classOscProb_1_1PremModel_ab12ea0343cd11b9233ffd20ab5e620c7}
+
+
+Definition at line 83 of file Prem\+Model.\+h.
+
+
+
+Referenced by Load\+Model(), and Set\+Det\+Pos().
+
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!f\+Nu\+Path@{f\+Nu\+Path}}
+\index{f\+Nu\+Path@{f\+Nu\+Path}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{f\+Nu\+Path}{fNuPath}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Osc\+Prob\+::\+Nu\+Path}$>$ Osc\+Prob\+::\+Prem\+Model\+::f\+Nu\+Path\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classOscProb_1_1PremModel_afb5674b8b06add6b981e557d7b07016c}{}\label{classOscProb_1_1PremModel_afb5674b8b06add6b981e557d7b07016c}
+
+
+Definition at line 80 of file Prem\+Model.\+h.
+
+
+
+Referenced by Add\+Path(), Fill\+Path(), Get\+Merged\+Paths(), and Get\+Nu\+Path().
+
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!f\+Prem\+Layers@{f\+Prem\+Layers}}
+\index{f\+Prem\+Layers@{f\+Prem\+Layers}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{f\+Prem\+Layers}{fPremLayers}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Osc\+Prob\+::\+Prem\+Layer}$>$ Osc\+Prob\+::\+Prem\+Model\+::f\+Prem\+Layers\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}{}\label{classOscProb_1_1PremModel_ac33265ceae42c59a5e11ca416eff93b0}
+
+
+Definition at line 78 of file Prem\+Model.\+h.
+
+
+
+Referenced by Add\+Layer(), Clear\+Model(), Fill\+Path(), Get\+Cos\+T(), Get\+Prem\+Layers(), Get\+Total\+L(), Load\+Model(), and Set\+Layer\+Zo\+A().
+
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!f\+Remove\+Small\+Paths@{f\+Remove\+Small\+Paths}}
+\index{f\+Remove\+Small\+Paths@{f\+Remove\+Small\+Paths}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection[{\texorpdfstring{f\+Remove\+Small\+Paths}{fRemoveSmallPaths}}]{\setlength{\rightskip}{0pt plus 5cm}bool Osc\+Prob\+::\+Prem\+Model\+::f\+Remove\+Small\+Paths\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classOscProb_1_1PremModel_a3973df6f5f2ff219cd2f865b31aacfd2}{}\label{classOscProb_1_1PremModel_a3973df6f5f2ff219cd2f865b31aacfd2}
+
+
+Definition at line 85 of file Prem\+Model.\+h.
+
+
+
+Referenced by Get\+Merged\+Paths(), and Set\+Remove\+Small\+Paths().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/jcoelho/\+Osc\+Prob\+Git/\hyperlink{PremModel_8h}{Prem\+Model.\+h}\item 
+/home/jcoelho/\+Osc\+Prob\+Git/\hyperlink{PremModel_8cxx}{Prem\+Model.\+cxx}\end{DoxyCompactItemize}

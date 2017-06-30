@@ -1,0 +1,158 @@
+\hypertarget{zheevh3_8cxx}{}\section{/home/jcoelho/\+Osc\+Prob\+Git/\+Matrix\+Decomp/zheevh3.cxx File Reference}
+\label{zheevh3_8cxx}\index{/home/jcoelho/\+Osc\+Prob\+Git/\+Matrix\+Decomp/zheevh3.\+cxx@{/home/jcoelho/\+Osc\+Prob\+Git/\+Matrix\+Decomp/zheevh3.\+cxx}}
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+{\ttfamily \#include $<$complex$>$}\\*
+{\ttfamily \#include $<$float.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}zheevc3.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}zheevq3.\+h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{zheevh3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{S\+QR}(x)~((x)$\ast$(x))
+\item 
+\#define \hyperlink{zheevh3_8cxx_a3037777638f94ba01c4104dc03dfbf98}{S\+Q\+R\+\_\+\+A\+BS}(x)~(\hyperlink{zhetrd3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{S\+QR}(real(x)) + \hyperlink{zhetrd3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{S\+QR}(imag(x)))
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{zheevh3_8cxx_a96ac4b39a8406951c69eeabad77a3bc6}{zheevh3} (std\+::complex$<$ double $>$ A\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, std\+::complex$<$ double $>$ Q\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, double w\mbox{[}3\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{zheevh3.\+cxx@{zheevh3.\+cxx}!S\+QR@{S\+QR}}
+\index{S\+QR@{S\+QR}!zheevh3.\+cxx@{zheevh3.\+cxx}}
+\subsubsection[{\texorpdfstring{S\+QR}{SQR}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+QR(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~((x)$\ast$(x))}\hypertarget{zheevh3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{}\label{zheevh3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}
+
+
+Definition at line 27 of file zheevh3.\+cxx.
+
+
+
+Referenced by zheevh3().
+
+\index{zheevh3.\+cxx@{zheevh3.\+cxx}!S\+Q\+R\+\_\+\+A\+BS@{S\+Q\+R\+\_\+\+A\+BS}}
+\index{S\+Q\+R\+\_\+\+A\+BS@{S\+Q\+R\+\_\+\+A\+BS}!zheevh3.\+cxx@{zheevh3.\+cxx}}
+\subsubsection[{\texorpdfstring{S\+Q\+R\+\_\+\+A\+BS}{SQR_ABS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Q\+R\+\_\+\+A\+BS(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~({\bf S\+QR}(real(x)) + {\bf S\+QR}(imag(x)))}\hypertarget{zheevh3_8cxx_a3037777638f94ba01c4104dc03dfbf98}{}\label{zheevh3_8cxx_a3037777638f94ba01c4104dc03dfbf98}
+
+
+Definition at line 28 of file zheevh3.\+cxx.
+
+
+
+Referenced by zheevh3().
+
+
+
+\subsection{Function Documentation}
+\index{zheevh3.\+cxx@{zheevh3.\+cxx}!zheevh3@{zheevh3}}
+\index{zheevh3@{zheevh3}!zheevh3.\+cxx@{zheevh3.\+cxx}}
+\subsubsection[{\texorpdfstring{zheevh3(std\+::complex$<$ double $>$ A[3][3], std\+::complex$<$ double $>$ Q[3][3], double w[3])}{zheevh3(std::complex< double > A[3][3], std::complex< double > Q[3][3], double w[3])}}]{\setlength{\rightskip}{0pt plus 5cm}int zheevh3 (
+\begin{DoxyParamCaption}
+\item[{std\+::complex$<$ double $>$}]{A\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, }
+\item[{std\+::complex$<$ double $>$}]{Q\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, }
+\item[{double}]{w\mbox{[}3\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{zheevh3_8cxx_a96ac4b39a8406951c69eeabad77a3bc6}{}\label{zheevh3_8cxx_a96ac4b39a8406951c69eeabad77a3bc6}
+
+
+Definition at line 31 of file zheevh3.\+cxx.
+
+
+
+References S\+QR, S\+Q\+R\+\_\+\+A\+BS, zheevc3(), and zheevq3().
+
+
+
+Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Solve\+Ham().
+
+
+\begin{DoxyCode}
+57 \{
+58 \textcolor{preprocessor}{#ifndef EVALS\_ONLY}
+59   \textcolor{keywordtype}{double} norm;          \textcolor{comment}{// Squared norm or inverse norm of current eigenvector}
+60 \textcolor{comment}{//  double n0, n1;        // Norm of first and second columns of A}
+61   \textcolor{keywordtype}{double} error;         \textcolor{comment}{// Estimated maximum roundoff error}
+62   \textcolor{keywordtype}{double} t, u;          \textcolor{comment}{// Intermediate storage}
+63   \textcolor{keywordtype}{int} j;                \textcolor{comment}{// Loop counter}
+64 \textcolor{preprocessor}{#endif}
+65 
+66   \textcolor{comment}{// Calculate eigenvalues}
+67   \hyperlink{zheevc3_8cxx_a9ac76ac4ddaf7e2a513107356d1ed85e}{zheevc3}(A, w);
+68 
+69 \textcolor{preprocessor}{#ifndef EVALS\_ONLY}
+70 \textcolor{comment}{//  n0 = SQR(real(A[0][0])) + SQR\_ABS(A[0][1]) + SQR\_ABS(A[0][2]);}
+71 \textcolor{comment}{//  n1 = SQR\_ABS(A[0][1]) + SQR(real(A[1][1])) + SQR\_ABS(A[1][2]);}
+72   
+73   t = fabs(w[0]);
+74   \textcolor{keywordflow}{if} ((u=fabs(w[1])) > t)
+75     t = u;
+76   \textcolor{keywordflow}{if} ((u=fabs(w[2])) > t)
+77     t = u;
+78   \textcolor{keywordflow}{if} (t < 1.0)
+79     u = t;
+80   \textcolor{keywordflow}{else}
+81     u = \hyperlink{zheevh3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{SQR}(t);
+82   error = 256.0 * DBL\_EPSILON * \hyperlink{zheevh3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{SQR}(u);
+83 \textcolor{comment}{//  error = 256.0 * DBL\_EPSILON * (n0 + u) * (n1 + u);}
+84 
+85   Q[0][1] = A[0][1]*A[1][2] - A[0][2]*real(A[1][1]);
+86   Q[1][1] = A[0][2]*conj(A[0][1]) - A[1][2]*real(A[0][0]);
+87   Q[2][1] = \hyperlink{zheevh3_8cxx_a3037777638f94ba01c4104dc03dfbf98}{SQR\_ABS}(A[0][1]);
+88 
+89   \textcolor{comment}{// Calculate first eigenvector by the formula}
+90   \textcolor{comment}{//   v[0] = conj( (A - w[0]).e1 x (A - w[0]).e2 )}
+91   Q[0][0] = Q[0][1] + A[0][2]*w[0];
+92   Q[1][0] = Q[1][1] + A[1][2]*w[0];
+93   Q[2][0] = (real(A[0][0]) - w[0]) * (real(A[1][1]) - w[0]) - Q[2][1];
+94   norm    = \hyperlink{zheevh3_8cxx_a3037777638f94ba01c4104dc03dfbf98}{SQR\_ABS}(Q[0][0]) + \hyperlink{zheevh3_8cxx_a3037777638f94ba01c4104dc03dfbf98}{SQR\_ABS}(Q[1][0]) + \hyperlink{zheevh3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{SQR}(real(Q[2][0]));
+95 
+96   \textcolor{comment}{// If vectors are nearly linearly dependent, or if there might have}
+97   \textcolor{comment}{// been large cancellations in the calculation of A(I,I) - W(1), fall}
+98   \textcolor{comment}{// back to QL algorithm}
+99   \textcolor{comment}{// Note that this simultaneously ensures that multiple eigenvalues do}
+100   \textcolor{comment}{// not cause problems: If W(1) = W(2), then A - W(1) * I has rank 1,}
+101   \textcolor{comment}{// i.e. all columns of A - W(1) * I are linearly dependent.}
+102   \textcolor{keywordflow}{if} (norm <= error)
+103     \textcolor{keywordflow}{return} \hyperlink{zheevq3_8cxx_acd10038006d53d6d163625106c950e4e}{zheevq3}(A, Q, w);
+104   \textcolor{keywordflow}{else}                      \textcolor{comment}{// This is the standard branch}
+105   \{
+106     norm = sqrt(1.0 / norm);
+107     \textcolor{keywordflow}{for} (j=0; j < 3; j++)
+108       Q[j][0] = Q[j][0] * norm;
+109   \}
+110   
+111   \textcolor{comment}{// Calculate second eigenvector by the formula}
+112   \textcolor{comment}{//   v[1] = conj( (A - w[1]).e1 x (A - w[1]).e2 )}
+113   Q[0][1]  = Q[0][1] + A[0][2]*w[1];
+114   Q[1][1]  = Q[1][1] + A[1][2]*w[1];
+115   Q[2][1]  = (real(A[0][0]) - w[1]) * (real(A[1][1]) - w[1]) - real(Q[2][1]);
+116   norm     = \hyperlink{zheevh3_8cxx_a3037777638f94ba01c4104dc03dfbf98}{SQR\_ABS}(Q[0][1]) + \hyperlink{zheevh3_8cxx_a3037777638f94ba01c4104dc03dfbf98}{SQR\_ABS}(Q[1][1]) + \hyperlink{zheevh3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{SQR}(real(Q[2][1]));
+117   \textcolor{keywordflow}{if} (norm <= error)
+118     \textcolor{keywordflow}{return} \hyperlink{zheevq3_8cxx_acd10038006d53d6d163625106c950e4e}{zheevq3}(A, Q, w);
+119   \textcolor{keywordflow}{else}
+120   \{
+121     norm = sqrt(1.0 / norm);
+122     \textcolor{keywordflow}{for} (j=0; j < 3; j++)
+123       Q[j][1] = Q[j][1] * norm;
+124   \}
+125   
+126   \textcolor{comment}{// Calculate third eigenvector according to}
+127   \textcolor{comment}{//   v[2] = conj(v[0] x v[1])}
+128   Q[0][2] = conj(Q[1][0]*Q[2][1] - Q[2][0]*Q[1][1]);
+129   Q[1][2] = conj(Q[2][0]*Q[0][1] - Q[0][0]*Q[2][1]);
+130   Q[2][2] = conj(Q[0][0]*Q[1][1] - Q[1][0]*Q[0][1]);
+131 \textcolor{preprocessor}{#endif}
+132 
+133   \textcolor{keywordflow}{return} 0;
+134 \}
+\end{DoxyCode}

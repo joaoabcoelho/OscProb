@@ -1,0 +1,162 @@
+\hypertarget{zheevq3_8cxx}{}\section{/home/jcoelho/\+Osc\+Prob\+Git/\+Matrix\+Decomp/zheevq3.cxx File Reference}
+\label{zheevq3_8cxx}\index{/home/jcoelho/\+Osc\+Prob\+Git/\+Matrix\+Decomp/zheevq3.\+cxx@{/home/jcoelho/\+Osc\+Prob\+Git/\+Matrix\+Decomp/zheevq3.\+cxx}}
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+{\ttfamily \#include $<$complex$>$}\\*
+{\ttfamily \#include \char`\"{}zhetrd3.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}zheevq3.\+h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{zheevq3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{S\+QR}(x)~((x)$\ast$(x))
+\item 
+\#define \hyperlink{zheevq3_8cxx_a3037777638f94ba01c4104dc03dfbf98}{S\+Q\+R\+\_\+\+A\+BS}(x)~(\hyperlink{zhetrd3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{S\+QR}(real(x)) + \hyperlink{zhetrd3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{S\+QR}(imag(x)))
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{zheevq3_8cxx_acd10038006d53d6d163625106c950e4e}{zheevq3} (std\+::complex$<$ double $>$ A\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, std\+::complex$<$ double $>$ Q\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, double w\mbox{[}3\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{zheevq3.\+cxx@{zheevq3.\+cxx}!S\+QR@{S\+QR}}
+\index{S\+QR@{S\+QR}!zheevq3.\+cxx@{zheevq3.\+cxx}}
+\subsubsection[{\texorpdfstring{S\+QR}{SQR}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+QR(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~((x)$\ast$(x))}\hypertarget{zheevq3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{}\label{zheevq3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}
+
+
+Definition at line 26 of file zheevq3.\+cxx.
+
+
+
+Referenced by zheevq3().
+
+\index{zheevq3.\+cxx@{zheevq3.\+cxx}!S\+Q\+R\+\_\+\+A\+BS@{S\+Q\+R\+\_\+\+A\+BS}}
+\index{S\+Q\+R\+\_\+\+A\+BS@{S\+Q\+R\+\_\+\+A\+BS}!zheevq3.\+cxx@{zheevq3.\+cxx}}
+\subsubsection[{\texorpdfstring{S\+Q\+R\+\_\+\+A\+BS}{SQR_ABS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Q\+R\+\_\+\+A\+BS(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~({\bf S\+QR}(real(x)) + {\bf S\+QR}(imag(x)))}\hypertarget{zheevq3_8cxx_a3037777638f94ba01c4104dc03dfbf98}{}\label{zheevq3_8cxx_a3037777638f94ba01c4104dc03dfbf98}
+
+
+Definition at line 27 of file zheevq3.\+cxx.
+
+
+
+\subsection{Function Documentation}
+\index{zheevq3.\+cxx@{zheevq3.\+cxx}!zheevq3@{zheevq3}}
+\index{zheevq3@{zheevq3}!zheevq3.\+cxx@{zheevq3.\+cxx}}
+\subsubsection[{\texorpdfstring{zheevq3(std\+::complex$<$ double $>$ A[3][3], std\+::complex$<$ double $>$ Q[3][3], double w[3])}{zheevq3(std::complex< double > A[3][3], std::complex< double > Q[3][3], double w[3])}}]{\setlength{\rightskip}{0pt plus 5cm}int zheevq3 (
+\begin{DoxyParamCaption}
+\item[{std\+::complex$<$ double $>$}]{A\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, }
+\item[{std\+::complex$<$ double $>$}]{Q\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, }
+\item[{double}]{w\mbox{[}3\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{zheevq3_8cxx_acd10038006d53d6d163625106c950e4e}{}\label{zheevq3_8cxx_acd10038006d53d6d163625106c950e4e}
+
+
+Definition at line 31 of file zheevq3.\+cxx.
+
+
+
+References S\+QR, and zhetrd3().
+
+
+
+Referenced by zheevh3().
+
+
+\begin{DoxyCode}
+51 \{
+52   \textcolor{keyword}{const} \textcolor{keywordtype}{int} n = 3;
+53   \textcolor{keywordtype}{double} e[3];                 \textcolor{comment}{// The third element is used only as temporary workspace}
+54   \textcolor{keywordtype}{double} g, r, p, f, b, s, c;  \textcolor{comment}{// Intermediate storage}
+55   std::complex<double> t;
+56   \textcolor{keywordtype}{int} nIter;
+57   \textcolor{keywordtype}{int} m;
+58 
+59   \textcolor{comment}{// Transform A to real tridiagonal form by the Householder method}
+60   \hyperlink{zhetrd3_8cxx_a85715cc89e71719fe52cf16892aa1a1d}{zhetrd3}(A, Q, w, e);
+61   
+62   \textcolor{comment}{// Calculate eigensystem of the remaining real symmetric tridiagonal matrix}
+63   \textcolor{comment}{// with the QL method}
+64   \textcolor{comment}{//}
+65   \textcolor{comment}{// Loop over all off-diagonal elements}
+66   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} l=0; l < n-1; l++)
+67   \{
+68     nIter = 0;
+69     \textcolor{keywordflow}{while} (1)
+70     \{
+71       \textcolor{comment}{// Check for convergence and exit iteration loop if off-diagonal}
+72       \textcolor{comment}{// element e(l) is zero}
+73       \textcolor{keywordflow}{for} (m=l; m <= n-2; m++)
+74       \{
+75         g = fabs(w[m])+fabs(w[m+1]);
+76         \textcolor{keywordflow}{if} (fabs(e[m]) + g == g)
+77           \textcolor{keywordflow}{break};
+78       \}
+79       \textcolor{keywordflow}{if} (m == l)
+80         \textcolor{keywordflow}{break};
+81       
+82       \textcolor{keywordflow}{if} (nIter++ >= 30)
+83         \textcolor{keywordflow}{return} -1;
+84 
+85       \textcolor{comment}{// Calculate g = d\_m - k}
+86       g = (w[l+1] - w[l]) / (e[l] + e[l]);
+87       r = sqrt(\hyperlink{zheevq3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{SQR}(g) + 1.0);
+88       \textcolor{keywordflow}{if} (g > 0)
+89         g = w[m] - w[l] + e[l]/(g + r);
+90       \textcolor{keywordflow}{else}
+91         g = w[m] - w[l] + e[l]/(g - r);
+92 
+93       s = c = 1.0;
+94       p = 0.0;
+95       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=m-1; i >= l; i--)
+96       \{
+97         f = s * e[i];
+98         b = c * e[i];
+99         \textcolor{keywordflow}{if} (fabs(f) > fabs(g))
+100         \{
+101           c      = g / f;
+102           r      = sqrt(\hyperlink{zheevq3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{SQR}(c) + 1.0);
+103           e[i+1] = f * r;
+104           c     *= (s = 1.0/r);
+105         \}
+106         \textcolor{keywordflow}{else}
+107         \{
+108           s      = f / g;
+109           r      = sqrt(\hyperlink{zheevq3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{SQR}(s) + 1.0);
+110           e[i+1] = g * r;
+111           s     *= (c = 1.0/r);
+112         \}
+113         
+114         g = w[i+1] - p;
+115         r = (w[i] - g)*s + 2.0*c*b;
+116         p = s * r;
+117         w[i+1] = g + p;
+118         g = c*r - b;
+119 
+120         \textcolor{comment}{// Form eigenvectors}
+121 \textcolor{preprocessor}{#ifndef EVALS\_ONLY}
+122         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k=0; k < n; k++)
+123         \{
+124           t = Q[k][i+1];
+125           Q[k][i+1] = s*Q[k][i] + c*t;
+126           Q[k][i]   = c*Q[k][i] - s*t;
+127         \}
+128 \textcolor{preprocessor}{#endif }
+129       \}
+130       w[l] -= p;
+131       e[l]  = g;
+132       e[m]  = 0.0;
+133     \}
+134   \}
+135 
+136   \textcolor{keywordflow}{return} 0;
+137 \}
+\end{DoxyCode}
