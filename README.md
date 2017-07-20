@@ -42,3 +42,9 @@ Two macros are particularly useful:
 - ```MakeOscillogram.C``` : Runs a full example of how to plot an oscillogram with the PREM model.
 
 Additionally, the macro ```SetNiceStyle.C``` will provide simple tools to make your plots look nicer. Feel free to use it anytime you're making plots, even if you're not running OscProb. This is completely independent of OscProb.
+
+# Documentation
+
+More detailed documentation of the code can be found in a Doxygen page here:
+
+[Doxygen](https://joaoabcoelho.github.io/OscProb/doxygen/html/annotated.html "OscProb Doxygen page")
