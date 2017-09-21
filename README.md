@@ -33,6 +33,12 @@ Just load the shared library in your ROOT macros with:
 gSystem->Load("/full/path/to/libOscProb.so");
 ```
 
+In some cases you may need to explicitly load GSL libraries. Just add something like this to your rootlogon, replacing the path to the GSL libraries if needed:
+```cpp
+gSystem->Load("/usr/lib/x86_64-linux-gnu/libgsl.so");
+gSystem->Load("/usr/lib/x86_64-linux-gnu/libgslcblas.so");
+```
+
 # Tutorial
 
 In the directory OscProb/tutorial you will find a few macros with examples using OscProb.
