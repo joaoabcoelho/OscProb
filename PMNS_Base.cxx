@@ -232,7 +232,7 @@ void PMNS_Base::ClearPath(){
 /// Set vector of neutrino paths.
 /// @param paths - A sequence of neutrino paths
 ///
-void PMNS_Base::SetPath(vector<NuPath> paths){
+void PMNS_Base::SetPath(std::vector<NuPath> paths){
 
   fNuPaths=paths;
 
@@ -394,7 +394,7 @@ void PMNS_Base::SetZoA(double zoa){
 /// @param att - The values of the attribute
 /// @param idx - The index of the attribute (0,1,2,3) = (L, Rho, Z/A, Layer)
 ///
-void PMNS_Base::SetAtt(vector<double> att, int idx){
+void PMNS_Base::SetAtt(std::vector<double> att, int idx){
 
   // Get the sizes of the attribute and
   // path sequence vectors
@@ -462,7 +462,7 @@ void PMNS_Base::SetAtt(vector<double> att, int idx){
 ///
 /// @param L - The lengths of the path segments in km
 ///
-void PMNS_Base::SetLength(vector<double> L){
+void PMNS_Base::SetLength(std::vector<double> L){
 
   SetAtt(L, 0);
 
@@ -477,7 +477,7 @@ void PMNS_Base::SetLength(vector<double> L){
 ///
 /// @param rho - The densities of the path segments in g/cm^3
 ///
-void PMNS_Base::SetDensity(vector<double> rho){
+void PMNS_Base::SetDensity(std::vector<double> rho){
 
   SetAtt(rho, 1);
 
@@ -492,7 +492,7 @@ void PMNS_Base::SetDensity(vector<double> rho){
 ///
 /// @param zoa - The effective Z/A of the path segments
 ///
-void PMNS_Base::SetZoA(vector<double> zoa){
+void PMNS_Base::SetZoA(std::vector<double> zoa){
 
   SetAtt(zoa, 2);
 
@@ -507,7 +507,7 @@ void PMNS_Base::SetZoA(vector<double> zoa){
 ///
 /// @param lay - Indices to identify the layer types (e.g. earth inner core)
 ///
-void PMNS_Base::SetLayers(vector<int> lay){
+void PMNS_Base::SetLayers(std::vector<int> lay){
 
   vector<double> lay_double(lay.begin(), lay.end());
 
