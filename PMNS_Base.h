@@ -20,8 +20,6 @@
 
 #include "NuPath.h"
 
-using namespace std;
-
 namespace OscProb {
 
   class PMNS_Base {
@@ -75,7 +73,7 @@ namespace OscProb {
     virtual void SetPath(double length, double density,
                          double zoa=0.5,    int layer=0); ///< Set a single path
 
-    virtual void SetPath(vector<OscProb::NuPath> paths);  ///< Set a path sequence
+    virtual void SetPath(std::vector<OscProb::NuPath> paths);  ///< Set a path sequence
 
     virtual void AddPath(OscProb::NuPath p);              ///< Add a path to the sequence
     virtual void AddPath(double length, double density,
@@ -87,21 +85,21 @@ namespace OscProb {
     virtual void SetDensity(double rho); ///< Set single path density in g/cm^3
     virtual void SetZoA    (double zoa); ///< Set Z/A value for single path
 
-    virtual void SetLength (vector<double> L);   ///< Set multiple path lengths
-    virtual void SetDensity(vector<double> rho); ///< Set multiple path densities
-    virtual void SetZoA    (vector<double> zoa); ///< Set multiple path Z/A values
-    virtual void SetLayers (vector<int>    lay); ///< Set multiple path layer indices
+    virtual void SetLength (std::vector<double> L);   ///< Set multiple path lengths
+    virtual void SetDensity(std::vector<double> rho); ///< Set multiple path densities
+    virtual void SetZoA    (std::vector<double> zoa); ///< Set multiple path Z/A values
+    virtual void SetLayers (std::vector<int>    lay); ///< Set multiple path layer indices
 
 
     // Set a default neutrino path
     virtual void SetStdPath(); ///< Set standard neutrino path
     
     // Get the neutrino path
-    virtual vector<OscProb::NuPath> GetPath(); ///< Get the neutrino path sequence
+    virtual std::vector<OscProb::NuPath> GetPath(); ///< Get the neutrino path sequence
 
 
     /// Compute the sample points for a bin of L/E with width dLoE
-    virtual vector<double> GetSamplePoints(double LoE, double dLoE);
+    virtual std::vector<double> GetSamplePoints(double LoE, double dLoE);
 
     // A shorthand...
     typedef std::complex<double> complex;
@@ -126,7 +124,7 @@ namespace OscProb {
     virtual void SetCurPath(OscProb::NuPath p); ///< Set the path currently in use by the class
 
     virtual void SetAtt(double att, int idx);         ///< Set one of the path attributes
-    virtual void SetAtt(vector<double> att, int idx); ///< Set all values of a path attribute
+    virtual void SetAtt(std::vector<double> att, int idx); ///< Set all values of a path attribute
 
 
     // Building and solving
@@ -156,20 +154,20 @@ namespace OscProb {
     
     int fNumNus; ///< Number of neutrino flavours
     
-    vector<double>            fDm;      ///< m^2_i - m^2_1 in vacuum
-    vector< vector<double> >  fTheta;   ///< theta[i][j] mixing angle
-    vector< vector<double> >  fDelta;   ///< delta[i][j] CP violating phase
+    std::vector<double>            fDm;      ///< m^2_i - m^2_1 in vacuum
+    std::vector< std::vector<double> >  fTheta;   ///< theta[i][j] mixing angle
+    std::vector< std::vector<double> >  fDelta;   ///< delta[i][j] CP violating phase
 
-    vector<complex>           fNuState; ///< The neutrino current state
-    vector< vector<complex> > fHms;     ///< matrix H*2E in eV^2
+    std::vector<complex>           fNuState; ///< The neutrino current state
+    std::vector< std::vector<complex> > fHms;     ///< matrix H*2E in eV^2
 
-    vector<double>            fEval;    ///< Eigenvalues of the Hamiltonian
-    vector< vector<complex> > fEvec;    ///< Eigenvectors of the Hamiltonian
+    std::vector<double>            fEval;    ///< Eigenvalues of the Hamiltonian
+    std::vector< std::vector<complex> > fEvec;    ///< Eigenvectors of the Hamiltonian
 
     double fEnergy;  ///< Neutrino energy
     bool   fIsNuBar; ///< Anti-neutrino flag
     
-    vector<OscProb::NuPath> fNuPaths; ///< Vector of neutrino paths
+    std::vector<OscProb::NuPath> fNuPaths; ///< Vector of neutrino paths
     OscProb::NuPath fPath;            ///< Current neutrino path
 
     bool   fBuiltHms;      ///< Tag to avoid rebuilding Hms

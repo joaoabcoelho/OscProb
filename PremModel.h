@@ -32,33 +32,31 @@
 
 #include "NuPath.h"
 
-using namespace std;
-
 namespace OscProb {
 
   class PremModel : public TObject {
 
     public:
  
-      PremModel(string filename=""); ///< Constructor
+      PremModel(std::string filename=""); ///< Constructor
       virtual ~PremModel();          ///< Destructor
       
       virtual int FillPath(double cosT); ///< Fill the path sequence in a vector
 
-      virtual vector<OscProb::NuPath> GetNuPath(); ///< Get the current neutrino path sequence
+      virtual std::vector<OscProb::NuPath> GetNuPath(); ///< Get the current neutrino path sequence
 
-      virtual vector<OscProb::NuPath> GetMergedPaths(double prec = 0.25); ///< Get merged path sequence in a vector
+      virtual std::vector<OscProb::NuPath> GetMergedPaths(double prec = 0.25); ///< Get merged path sequence in a vector
 
       virtual double GetTotalL(double cosT); ///< Get the total baseline for a given cosTheta
       virtual double GetCosT(double L); ///< Get the cosTheta for a given total baseline
       
       virtual void SetLayerZoA(int layer, double zoa); ///< Set Z/A of all layers of a given type
 
-      virtual void LoadModel(string filename); ///< Load an earth model from a file
+      virtual void LoadModel(std::string filename); ///< Load an earth model from a file
 
       virtual void SetDetPos(double pos); ///< Set the detector position in km
       
-      virtual vector<OscProb::PremLayer> GetPremLayers(); ///< Get the set of earth layers
+      virtual std::vector<OscProb::PremLayer> GetPremLayers(); ///< Get the set of earth layers
 
       virtual OscProb::NuPath AvgPath(OscProb::NuPath p1, OscProb::NuPath p2); ///< Get the average of two paths
       
@@ -73,11 +71,11 @@ namespace OscProb {
 
       virtual void AddPath(double length, PremLayer pl);  ///< Add a path segment to the sequence
       
-      virtual vector<OscProb::NuPath> MergePaths(vector<OscProb::NuPath> inputPath, int j, int k); ///< Merge paths j and k in vector
+      virtual std::vector<OscProb::NuPath> MergePaths(std::vector<OscProb::NuPath> inputPath, int j, int k); ///< Merge paths j and k in vector
 
-      vector<OscProb::PremLayer> fPremLayers; ///< The layers in the earth model
+      std::vector<OscProb::PremLayer> fPremLayers; ///< The layers in the earth model
 
-      vector<OscProb::NuPath> fNuPath; ///< The current neutrino path sequence
+      std::vector<OscProb::NuPath> fNuPath; ///< The current neutrino path sequence
 
       int fDetLayer;  ///< The layer index of the detector
       double fDetPos; ///< The radius where the detector lives
