@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mergepaths',['MergePaths',['../classOscProb_1_1PremModel.html#aa4b392f4d9a87296eadf1ddb34da7f4a',1,'OscProb::PremModel']]]
+  ['mergepaths',['MergePaths',['../classOscProb_1_1PremModel.html#a87cb8043b58fde2c8a8779e6ae1b5135',1,'OscProb::PremModel']]]
 ];
