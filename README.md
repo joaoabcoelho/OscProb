@@ -9,6 +9,7 @@ Available classes are:
 - **PMNS_Fast:** Standard 3-flavour oscillations
 - **PMNS_Sterile:** Oscillations with any number of neutrinos
 - **PMNS_NSI:** Oscillations with 3 flavours including Non-Standard Interactions
+- **PMNS_Deco:** Oscillations with 3 flavours including a simple decoherence model
 
 A few example macros on how to use OscProb are available in a tutorial directory.
 
