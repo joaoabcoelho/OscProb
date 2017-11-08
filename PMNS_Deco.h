@@ -7,6 +7,9 @@
 /// This class expands the PMNS_Fast class including a effects from
 /// decoherence in an increasing entropy and energy conserving model.
 ///
+/// The model currently assumes no energy dependence of the decoherence 
+/// parameters and that decoherence occurs in the effective mass basis.
+///
 /// \sa PMNS_Fast
 ///
 /// \author jcoelho\@apc.in2p3.fr

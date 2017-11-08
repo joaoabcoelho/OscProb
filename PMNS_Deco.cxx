@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////
 //
 // Implementation of oscillations of neutrinos in matter in a
-// three-neutrino framework with NSI.
+// three-neutrino framework with decoherence.
 //
 // This  class inherits from the PMNS_Fast class
 //
