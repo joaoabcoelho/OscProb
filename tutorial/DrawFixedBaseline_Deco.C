@@ -117,4 +117,6 @@ void DrawFixedBaseline_Deco(double L = 1300, bool isNuBar = false){
   
   gPad->SetLogx();
   
+  hMuMu_Std->GetXaxis()->SetMoreLogLabels();
+  
 }
