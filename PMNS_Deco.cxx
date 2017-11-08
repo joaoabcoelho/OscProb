@@ -193,6 +193,7 @@ PMNS_Deco::matrix PMNS_Deco::CTransp(matrix A)
 //.....................................................................
 ///
 /// Propagate the current neutrino state through a given path
+///
 /// @param p - A neutrino path segment
 ///
 void PMNS_Deco::PropagatePath(NuPath p)
@@ -204,6 +205,10 @@ void PMNS_Deco::PropagatePath(NuPath p)
   // Solve for eigensystem
   SolveHam();
   
+  // The code below is not pretty or optimised at all. Lots of matrix
+  // multiplications are going on which could be otpimised due to 
+  // symmetry. The index sorting is also terrible. Needs improving.
+
   // Store rotation matrices
   matrix U = fEvec;
   matrix Ut = CTransp(fEvec);
@@ -250,10 +255,6 @@ void PMNS_Deco::PropagatePath(NuPath p)
     evolve[i][j] = exp(-arg);
     evolve[j][i] = exp(-conj(arg));
   }}
-  
-  //cout << "  " << evolve[0][0] << "  " << evolve[0][1] << "  " << evolve[0][2] << endl;
-  //cout << "  " << evolve[1][0] << "  " << evolve[1][1] << "  " << evolve[1][2] << endl;
-  //cout << "  " << evolve[2][0] << "  " << evolve[2][1] << "  " << evolve[2][2] << endl;
   
   // Evolve density matrix
   fRho = Mult(fRho, evolve);
