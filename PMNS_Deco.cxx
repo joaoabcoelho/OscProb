@@ -68,7 +68,11 @@ void PMNS_Deco::SetGamma(int j, double val){
 
 //......................................................................
 ///
-/// Set the decoherence hierarchy.
+/// Set the decoherence hierarchy. This will define the relationship:
+///
+///   \Gamma_{32} = (\sqrt{\Gamma_{31}} \pm \sqrt{\Gamma_{21}})^{2} 
+///
+/// The + (-) sign will be refered to as IH (NH)
 ///
 /// @param isNH - Is the hierarchy normal?
 ///
