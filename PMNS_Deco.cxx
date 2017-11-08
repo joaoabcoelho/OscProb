@@ -70,7 +70,7 @@ void PMNS_Deco::SetGamma(int j, double val){
 ///
 /// Set the decoherence hierarchy. This will define the relationship:
 ///
-///   \Gamma_{32} = (\sqrt{\Gamma_{31}} \pm \sqrt{\Gamma_{21}})^{2} 
+///   \f$\Gamma_{32} = (\sqrt{\Gamma_{31}} \pm \sqrt{\Gamma_{21}})^{2}\f$
 ///
 /// The + (-) sign will be refered to as IH (NH)
 ///
@@ -172,7 +172,7 @@ PMNS_Deco::matrix PMNS_Deco::Mult(matrix A, matrix B)
 ///
 /// @param A - input matrix A
 ///
-/// @return - A^{\dagger}
+/// @return - \f$A^{\dagger}\f$
 ///
 PMNS_Deco::matrix PMNS_Deco::CTransp(matrix A)
 {
