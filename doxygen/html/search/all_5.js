@@ -6,6 +6,7 @@ var searchData=
   ['getdm',['GetDm',['../classOscProb_1_1PMNS__Base.html#ad26815ac5f4805d1259817e4936e5f8f',1,'OscProb::PMNS_Base']]],
   ['getenergy',['GetEnergy',['../classOscProb_1_1PMNS__Base.html#acc0d46cc4b8f911b40b807225003bbed',1,'OscProb::PMNS_Base']]],
   ['geteps',['GetEps',['../classOscProb_1_1PMNS__NSI.html#aac8925ae248f737fe7c3afb12f511534',1,'OscProb::PMNS_NSI']]],
+  ['getgamma',['GetGamma',['../classOscProb_1_1PMNS__Deco.html#a73461e806063588a8e3a9d5d0dd201cb',1,'OscProb::PMNS_Deco']]],
   ['getisnubar',['GetIsNuBar',['../classOscProb_1_1PMNS__Base.html#a2f7f2a028dfe7a90fff6b4f757972c2c',1,'OscProb::PMNS_Base']]],
   ['getmergedpaths',['GetMergedPaths',['../classOscProb_1_1PremModel.html#a5b6f83f2e9b7087e8faad1f19f00ebd5',1,'OscProb::PremModel']]],
   ['getnupath',['GetNuPath',['../classOscProb_1_1PremModel.html#adbe7a5df260cba3923f5cbcb8ab2f03f',1,'OscProb::PremModel']]],

@@ -108,9 +108,10 @@ Inheritance diagram for OscProb::PMNS_Base:</div>
  <div class="center">
   <img src="classOscProb_1_1PMNS__Base.png" usemap="#OscProb::PMNS_5FBase_map" alt=""/>
   <map id="OscProb::PMNS_5FBase_map" name="OscProb::PMNS_Base_map">
-<area href="classOscProb_1_1PMNS__Fast.html" title="Implementation of oscillations of neutrinos in matter in a three-neutrino framework. " alt="OscProb::PMNS_Fast" shape="rect" coords="0,56,147,80"/>
-<area href="classOscProb_1_1PMNS__Sterile.html" title="Implementation of oscillations of neutrinos in matter in a N-neutrino framework. " alt="OscProb::PMNS_Sterile" shape="rect" coords="157,56,304,80"/>
-<area href="classOscProb_1_1PMNS__NSI.html" title="Implementation of oscillations of neutrinos in matter in a three-neutrino framework with NSI..." alt="OscProb::PMNS_NSI" shape="rect" coords="0,112,147,136"/>
+<area href="classOscProb_1_1PMNS__Fast.html" title="Implementation of oscillations of neutrinos in matter in a three-neutrino framework. " alt="OscProb::PMNS_Fast" shape="rect" coords="78,56,225,80"/>
+<area href="classOscProb_1_1PMNS__Sterile.html" title="Implementation of oscillations of neutrinos in matter in a N-neutrino framework. " alt="OscProb::PMNS_Sterile" shape="rect" coords="235,56,382,80"/>
+<area href="classOscProb_1_1PMNS__Deco.html" title="Implementation of oscillations of neutrinos in matter in a three-neutrino framework with decoherence..." alt="OscProb::PMNS_Deco" shape="rect" coords="0,112,147,136"/>
+<area href="classOscProb_1_1PMNS__NSI.html" title="Implementation of oscillations of neutrinos in matter in a three-neutrino framework with NSI..." alt="OscProb::PMNS_NSI" shape="rect" coords="157,112,304,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -1078,6 +1079,8 @@ Static Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Neutrino oscillation probability </dd></dl>
 
+<p>Reimplemented in <a class="el" href="classOscProb_1_1PMNS__Deco.html#aa81f47ea36207b90a5feb9849060032d">OscProb::PMNS_Deco</a>.</p>
+
 <p>Definition at line <a class="el" href="PMNS__Base_8cxx_source.html#l00960">960</a> of file <a class="el" href="PMNS__Base_8cxx_source.html">PMNS_Base.cxx</a>.</p>
 
 <p>References <a class="el" href="PMNS__Base_8h_source.html#l00155">fNumNus</a>, and <a class="el" href="PMNS__Base_8h_source.html#l00161">fNuState</a>.</p>
@@ -1332,6 +1335,8 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
+<p>Reimplemented in <a class="el" href="classOscProb_1_1PMNS__Deco.html#aa75341a3608bb12d7792a14e67ef2d5e">OscProb::PMNS_Deco</a>.</p>
+
 <p>Definition at line <a class="el" href="PMNS__Base_8cxx_source.html#l00883">883</a> of file <a class="el" href="PMNS__Base_8cxx_source.html">PMNS_Base.cxx</a>.</p>
 
 <p>References <a class="el" href="PMNS__Base_8h_source.html#l00164">fEval</a>, <a class="el" href="PMNS__Base_8h_source.html#l00165">fEvec</a>, <a class="el" href="PMNS__Base_8h_source.html#l00155">fNumNus</a>, <a class="el" href="PMNS__Base_8h_source.html#l00161">fNuState</a>, <a class="el" href="PMNS__Base_8h_source.html#l00114">kKm2eV</a>, <a class="el" href="NuPath_8h_source.html#l00074">OscProb::NuPath::length</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00209">SetCurPath()</a>, <a class="el" href="classOscProb_1_1PMNS__Base.html#a91f065cb9e910e0095e41462b4420b01">SolveHam()</a>, and <a class="el" href="PMNS__Base_8h_source.html#l00110">zero</a>.</p>
@@ -1381,6 +1386,8 @@ Static Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>Reimplemented in <a class="el" href="classOscProb_1_1PMNS__Deco.html#a393940f176614e3ffebeea40cfe78a62">OscProb::PMNS_Deco</a>.</p>
 
 <p>Definition at line <a class="el" href="PMNS__Base_8cxx_source.html#l00938">938</a> of file <a class="el" href="PMNS__Base_8cxx_source.html">PMNS_Base.cxx</a>.</p>
 
@@ -1649,7 +1656,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>References <a class="el" href="NuPath_8h_source.html#l00075">OscProb::NuPath::density</a>, <a class="el" href="PMNS__Base_8h_source.html#l00174">fGotES</a>, <a class="el" href="PMNS__Base_8h_source.html#l00171">fPath</a>, and <a class="el" href="NuPath_8h_source.html#l00076">OscProb::NuPath::zoa</a>.</p>
 
-<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l01076">AvgProb()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01144">AvgProbLoE()</a>, and <a class="el" href="PMNS__Base_8cxx_source.html#l00883">PropagatePath()</a>.</p>
+<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l01076">AvgProb()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01144">AvgProbLoE()</a>, <a class="el" href="PMNS__Deco_8cxx_source.html#l00198">OscProb::PMNS_Deco::PropagatePath()</a>, and <a class="el" href="PMNS__Base_8cxx_source.html#l00883">PropagatePath()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;{</div><div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div><div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;  <span class="comment">// Check if relevant value are actually changing</span></div><div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  <a class="code" href="classOscProb_1_1PMNS__Base.html#a6dc5cd010d2d70b2324745b4e53e9839">fGotES</a> *= (<a class="code" href="classOscProb_1_1PMNS__Base.html#a849437aa8891fe042e86886ce8f81c6e">fPath</a>.<a class="code" href="structOscProb_1_1NuPath.html#a54ddd451db69bc54434de3cf18a117ca">density</a> == p.<a class="code" href="structOscProb_1_1NuPath.html#a54ddd451db69bc54434de3cf18a117ca">density</a>);</div><div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  <a class="code" href="classOscProb_1_1PMNS__Base.html#a6dc5cd010d2d70b2324745b4e53e9839">fGotES</a> *= (<a class="code" href="classOscProb_1_1PMNS__Base.html#a849437aa8891fe042e86886ce8f81c6e">fPath</a>.<a class="code" href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">zoa</a> == p.<a class="code" href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">zoa</a>);</div><div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;</div><div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  <a class="code" href="classOscProb_1_1PMNS__Base.html#a849437aa8891fe042e86886ce8f81c6e">fPath</a> = p;</div><div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;</div><div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;}</div><div class="ttc" id="classOscProb_1_1PMNS__Base_html_a6dc5cd010d2d70b2324745b4e53e9839"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a6dc5cd010d2d70b2324745b4e53e9839">OscProb::PMNS_Base::fGotES</a></div><div class="ttdeci">bool fGotES</div><div class="ttdoc">Tag to avoid recalculating eigensystem. </div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00174">PMNS_Base.h:174</a></div></div>
 <div class="ttc" id="classOscProb_1_1PMNS__Base_html_a849437aa8891fe042e86886ce8f81c6e"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a849437aa8891fe042e86886ce8f81c6e">OscProb::PMNS_Base::fPath</a></div><div class="ttdeci">OscProb::NuPath fPath</div><div class="ttdoc">Current neutrino path. </div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00171">PMNS_Base.h:171</a></div></div>
 <div class="ttc" id="structOscProb_1_1NuPath_html_af3213f3691ba83c6bc05f4a3490f6b31"><div class="ttname"><a href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">OscProb::NuPath::zoa</a></div><div class="ttdeci">double zoa</div><div class="ttdoc">The effective Z/A value of the path segment. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00076">NuPath.h:76</a></div></div>
@@ -2236,7 +2243,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>References <a class="el" href="NuPath_8h_source.html#l00075">OscProb::NuPath::density</a>, <a class="el" href="NuPath_8h_source.html#l00077">OscProb::NuPath::layer</a>, <a class="el" href="NuPath_8h_source.html#l00074">OscProb::NuPath::length</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00284">SetPath()</a>, and <a class="el" href="NuPath_8h_source.html#l00076">OscProb::NuPath::zoa</a>.</p>
 
-<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l00047">PMNS_Base()</a>, <a class="el" href="PMNS__NSI_8cxx_source.html#l00029">OscProb::PMNS_NSI::PMNS_NSI()</a>, and <a class="el" href="PMNS__Base_8cxx_source.html#l00320">SetAtt()</a>.</p>
+<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l00047">PMNS_Base()</a>, <a class="el" href="PMNS__Deco_8cxx_source.html#l00028">OscProb::PMNS_Deco::PMNS_Deco()</a>, <a class="el" href="PMNS__NSI_8cxx_source.html#l00029">OscProb::PMNS_NSI::PMNS_NSI()</a>, and <a class="el" href="PMNS__Base_8cxx_source.html#l00320">SetAtt()</a>.</p>
 <div class="fragment"><div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                          {</div><div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div><div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <a class="code" href="structOscProb_1_1NuPath.html">NuPath</a> p;</div><div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div><div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;  p.<a class="code" href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">length</a>  = 1000; <span class="comment">// 1000 km default</span></div><div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;  p.<a class="code" href="structOscProb_1_1NuPath.html#a54ddd451db69bc54434de3cf18a117ca">density</a> = 2.8;  <span class="comment">// Crust density</span></div><div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  p.<a class="code" href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">zoa</a>     = 0.5;  <span class="comment">// Crust Z/A</span></div><div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  p.<a class="code" href="structOscProb_1_1NuPath.html#a442b160899e554ad1d800989510d5309">layer</a>   = 0;    <span class="comment">// Single layer</span></div><div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div><div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;  <a class="code" href="classOscProb_1_1PMNS__Base.html#ac3b644fd0a56347d304ceca4ae9d8875">SetPath</a>(p);</div><div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div><div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;}</div><div class="ttc" id="classOscProb_1_1PMNS__Base_html_ac3b644fd0a56347d304ceca4ae9d8875"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#ac3b644fd0a56347d304ceca4ae9d8875">OscProb::PMNS_Base::SetPath</a></div><div class="ttdeci">virtual void SetPath(OscProb::NuPath p)</div><div class="ttdoc">Set a single path. </div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8cxx_source.html#l00284">PMNS_Base.cxx:284</a></div></div>
 <div class="ttc" id="structOscProb_1_1NuPath_html_af22660894b6e25cf835500381b155557"><div class="ttname"><a href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">OscProb::NuPath::length</a></div><div class="ttdeci">double length</div><div class="ttdoc">The length of the path segment in km. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00074">NuPath.h:74</a></div></div>
 <div class="ttc" id="structOscProb_1_1NuPath_html_a442b160899e554ad1d800989510d5309"><div class="ttname"><a href="structOscProb_1_1NuPath.html#a442b160899e554ad1d800989510d5309">OscProb::NuPath::layer</a></div><div class="ttdeci">int layer</div><div class="ttdoc">An index to identify the matter type. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00077">NuPath.h:77</a></div></div>
@@ -2418,7 +2425,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="PMNS__Base_8h_source.html#l00157">157</a> of file <a class="el" href="PMNS__Base_8h_source.html">PMNS_Base.h</a>.</p>
 
-<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l00851">BuildHms()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00693">GetDm()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00075">InitializeVectors()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00669">SetDm()</a>, and <a class="el" href="PMNS__Fast_8cxx_source.html#l00146">OscProb::PMNS_Fast::SetVacuumEigensystem()</a>.</p>
+<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l00851">BuildHms()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00693">GetDm()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00075">InitializeVectors()</a>, <a class="el" href="PMNS__Deco_8cxx_source.html#l00198">OscProb::PMNS_Deco::PropagatePath()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00669">SetDm()</a>, and <a class="el" href="PMNS__Fast_8cxx_source.html#l00146">OscProb::PMNS_Fast::SetVacuumEigensystem()</a>.</p>
 
 </div>
 </div>
@@ -2466,7 +2473,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="PMNS__Base_8h_source.html#l00164">164</a> of file <a class="el" href="PMNS__Base_8h_source.html">PMNS_Base.h</a>.</p>
 
-<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l01215">GetSamplePoints()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00075">InitializeVectors()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00883">PropagatePath()</a>, <a class="el" href="PMNS__Fast_8cxx_source.html#l00146">OscProb::PMNS_Fast::SetVacuumEigensystem()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">OscProb::PMNS_Sterile::SolveHam()</a>, and <a class="el" href="PMNS__Fast_8cxx_source.html#l00105">OscProb::PMNS_Fast::SolveHam()</a>.</p>
+<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l01215">GetSamplePoints()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00075">InitializeVectors()</a>, <a class="el" href="PMNS__Deco_8cxx_source.html#l00198">OscProb::PMNS_Deco::PropagatePath()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00883">PropagatePath()</a>, <a class="el" href="PMNS__Fast_8cxx_source.html#l00146">OscProb::PMNS_Fast::SetVacuumEigensystem()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">OscProb::PMNS_Sterile::SolveHam()</a>, and <a class="el" href="PMNS__Fast_8cxx_source.html#l00105">OscProb::PMNS_Fast::SolveHam()</a>.</p>
 
 </div>
 </div>
@@ -2490,7 +2497,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="PMNS__Base_8h_source.html#l00165">165</a> of file <a class="el" href="PMNS__Base_8h_source.html">PMNS_Base.h</a>.</p>
 
-<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l00075">InitializeVectors()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00883">PropagatePath()</a>, <a class="el" href="PMNS__Fast_8cxx_source.html#l00146">OscProb::PMNS_Fast::SetVacuumEigensystem()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">OscProb::PMNS_Sterile::SolveHam()</a>, and <a class="el" href="PMNS__Fast_8cxx_source.html#l00105">OscProb::PMNS_Fast::SolveHam()</a>.</p>
+<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l00075">InitializeVectors()</a>, <a class="el" href="PMNS__Deco_8cxx_source.html#l00198">OscProb::PMNS_Deco::PropagatePath()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00883">PropagatePath()</a>, <a class="el" href="PMNS__Fast_8cxx_source.html#l00146">OscProb::PMNS_Fast::SetVacuumEigensystem()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">OscProb::PMNS_Sterile::SolveHam()</a>, and <a class="el" href="PMNS__Fast_8cxx_source.html#l00105">OscProb::PMNS_Fast::SolveHam()</a>.</p>
 
 </div>
 </div>
@@ -2514,7 +2521,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="PMNS__Base_8h_source.html#l00174">174</a> of file <a class="el" href="PMNS__Base_8h_source.html">PMNS_Base.h</a>.</p>
 
-<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l00851">BuildHms()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00209">SetCurPath()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00149">SetEnergy()</a>, <a class="el" href="PMNS__NSI_8cxx_source.html#l00091">OscProb::PMNS_NSI::SetEps()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00168">SetIsNuBar()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">OscProb::PMNS_Sterile::SolveHam()</a>, and <a class="el" href="PMNS__Fast_8cxx_source.html#l00105">OscProb::PMNS_Fast::SolveHam()</a>.</p>
+<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l00851">BuildHms()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00209">SetCurPath()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00149">SetEnergy()</a>, <a class="el" href="PMNS__NSI_8cxx_source.html#l00091">OscProb::PMNS_NSI::SetEps()</a>, <a class="el" href="PMNS__Deco_8cxx_source.html#l00055">OscProb::PMNS_Deco::SetGamma()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00168">SetIsNuBar()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">OscProb::PMNS_Sterile::SolveHam()</a>, and <a class="el" href="PMNS__Fast_8cxx_source.html#l00105">OscProb::PMNS_Fast::SolveHam()</a>.</p>
 
 </div>
 </div>
@@ -2586,7 +2593,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="PMNS__Base_8h_source.html#l00155">155</a> of file <a class="el" href="PMNS__Base_8h_source.html">PMNS_Base.h</a>.</p>
 
-<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l00851">BuildHms()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00563">GetAngle()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00633">GetDelta()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00693">GetDm()</a>, <a class="el" href="PMNS__NSI_8cxx_source.html#l00131">OscProb::PMNS_NSI::GetEps()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01215">GetSamplePoints()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00075">InitializeVectors()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00960">P()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00047">PMNS_Base()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00038">OscProb::PMNS_Sterile::PMNS_Sterile()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00980">Prob()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00883">PropagatePath()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00938">ResetToFlavour()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00531">SetAngle()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00597">SetDelta()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00669">SetDm()</a>, <a class="el" href="PMNS__NSI_8cxx_source.html#l00091">OscProb::PMNS_NSI::SetEps()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00097">SetStdPars()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">OscProb::PMNS_Sterile::SolveHam()</a>, <a class="el" href="PMNS__Fast_8cxx_source.html#l00105">OscProb::PMNS_Fast::SolveHam()</a>, <a class="el" href="PMNS__Fast_8cxx_source.html#l00076">OscProb::PMNS_Fast::UpdateHam()</a>, and <a class="el" href="PMNS__NSI_8cxx_source.html#l00227">OscProb::PMNS_NSI::UpdateHam()</a>.</p>
+<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l00851">BuildHms()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00563">GetAngle()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00633">GetDelta()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00693">GetDm()</a>, <a class="el" href="PMNS__NSI_8cxx_source.html#l00131">OscProb::PMNS_NSI::GetEps()</a>, <a class="el" href="PMNS__Deco_8cxx_source.html#l00096">OscProb::PMNS_Deco::GetGamma()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01215">GetSamplePoints()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00075">InitializeVectors()</a>, <a class="el" href="PMNS__Deco_8cxx_source.html#l00300">OscProb::PMNS_Deco::P()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00960">P()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00047">PMNS_Base()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00038">OscProb::PMNS_Sterile::PMNS_Sterile()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00980">Prob()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00883">PropagatePath()</a>, <a class="el" href="PMNS__Deco_8cxx_source.html#l00277">OscProb::PMNS_Deco::ResetToFlavour()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00938">ResetToFlavour()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00531">SetAngle()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00597">SetDelta()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00669">SetDm()</a>, <a class="el" href="PMNS__NSI_8cxx_source.html#l00091">OscProb::PMNS_NSI::SetEps()</a>, <a class="el" href="PMNS__Deco_8cxx_source.html#l00055">OscProb::PMNS_Deco::SetGamma()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00097">SetStdPars()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">OscProb::PMNS_Sterile::SolveHam()</a>, <a class="el" href="PMNS__Fast_8cxx_source.html#l00105">OscProb::PMNS_Fast::SolveHam()</a>, <a class="el" href="PMNS__Fast_8cxx_source.html#l00076">OscProb::PMNS_Fast::UpdateHam()</a>, and <a class="el" href="PMNS__NSI_8cxx_source.html#l00227">OscProb::PMNS_NSI::UpdateHam()</a>.</p>
 
 </div>
 </div>
@@ -2706,7 +2713,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="PMNS__Base_8h_source.html#l00116">116</a> of file <a class="el" href="PMNS__Base_8h_source.html">PMNS_Base.h</a>.</p>
 
-<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l01215">GetSamplePoints()</a>, <a class="el" href="PMNS__Fast_8cxx_source.html#l00146">OscProb::PMNS_Fast::SetVacuumEigensystem()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">OscProb::PMNS_Sterile::SolveHam()</a>, <a class="el" href="PMNS__Fast_8cxx_source.html#l00076">OscProb::PMNS_Fast::UpdateHam()</a>, and <a class="el" href="PMNS__NSI_8cxx_source.html#l00227">OscProb::PMNS_NSI::UpdateHam()</a>.</p>
+<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l01215">GetSamplePoints()</a>, <a class="el" href="PMNS__Deco_8cxx_source.html#l00198">OscProb::PMNS_Deco::PropagatePath()</a>, <a class="el" href="PMNS__Fast_8cxx_source.html#l00146">OscProb::PMNS_Fast::SetVacuumEigensystem()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">OscProb::PMNS_Sterile::SolveHam()</a>, <a class="el" href="PMNS__Fast_8cxx_source.html#l00076">OscProb::PMNS_Fast::UpdateHam()</a>, and <a class="el" href="PMNS__NSI_8cxx_source.html#l00227">OscProb::PMNS_NSI::UpdateHam()</a>.</p>
 
 </div>
 </div>
@@ -2778,7 +2785,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="PMNS__Base_8h_source.html#l00114">114</a> of file <a class="el" href="PMNS__Base_8h_source.html">PMNS_Base.h</a>.</p>
 
-<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l01215">GetSamplePoints()</a>, and <a class="el" href="PMNS__Base_8cxx_source.html#l00883">PropagatePath()</a>.</p>
+<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l01215">GetSamplePoints()</a>, <a class="el" href="PMNS__Deco_8cxx_source.html#l00198">OscProb::PMNS_Deco::PropagatePath()</a>, and <a class="el" href="PMNS__Base_8cxx_source.html#l00883">PropagatePath()</a>.</p>
 
 </div>
 </div>
@@ -2802,7 +2809,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="PMNS__Base_8h_source.html#l00111">111</a> of file <a class="el" href="PMNS__Base_8h_source.html">PMNS_Base.h</a>.</p>
 
-<p>Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l00938">ResetToFlavour()</a>.</p>
+<p>Referenced by <a class="el" href="PMNS__Deco_8cxx_source.html#l00277">OscProb::PMNS_Deco::ResetToFlavour()</a>, and <a class="el" href="PMNS__Base_8cxx_source.html#l00938">ResetToFlavour()</a>.</p>
 
 </div>
 </div>
@@ -2826,7 +2833,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Definition at line <a class="el" href="PMNS__Base_8h_source.html#l00110">110</a> of file <a class="el" href="PMNS__Base_8h_source.html">PMNS_Base.h</a>.</p>
 
-<p>Referenced by <a class="el" href="PMNS__NSI_8cxx_source.html#l00131">OscProb::PMNS_NSI::GetEps()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00075">InitializeVectors()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00883">PropagatePath()</a>, and <a class="el" href="PMNS__Base_8cxx_source.html#l00938">ResetToFlavour()</a>.</p>
+<p>Referenced by <a class="el" href="PMNS__NSI_8cxx_source.html#l00131">OscProb::PMNS_NSI::GetEps()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00075">InitializeVectors()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00883">PropagatePath()</a>, <a class="el" href="PMNS__Deco_8cxx_source.html#l00277">OscProb::PMNS_Deco::ResetToFlavour()</a>, and <a class="el" href="PMNS__Base_8cxx_source.html#l00938">ResetToFlavour()</a>.</p>
 
 </div>
 </div>

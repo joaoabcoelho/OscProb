@@ -2,6 +2,8 @@ var searchData=
 [
   ['pmns_5fbase_2ecxx',['PMNS_Base.cxx',['../PMNS__Base_8cxx.html',1,'']]],
   ['pmns_5fbase_2eh',['PMNS_Base.h',['../PMNS__Base_8h.html',1,'']]],
+  ['pmns_5fdeco_2ecxx',['PMNS_Deco.cxx',['../PMNS__Deco_8cxx.html',1,'']]],
+  ['pmns_5fdeco_2eh',['PMNS_Deco.h',['../PMNS__Deco_8h.html',1,'']]],
   ['pmns_5ffast_2ecxx',['PMNS_Fast.cxx',['../PMNS__Fast_8cxx.html',1,'']]],
   ['pmns_5ffast_2eh',['PMNS_Fast.h',['../PMNS__Fast_8h.html',1,'']]],
   ['pmns_5fnsi_2ecxx',['PMNS_NSI.cxx',['../PMNS__NSI_8cxx.html',1,'']]],
