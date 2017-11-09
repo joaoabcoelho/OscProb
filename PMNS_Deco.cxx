@@ -31,7 +31,7 @@ fRho(3, row(3,0))
   SetStdPath();
   SetGamma(2,0);
   SetGamma(3,0);
-  SetGH(true);
+  SetDecoAngle(0);
 }
 
 //......................................................................
@@ -68,18 +68,20 @@ void PMNS_Deco::SetGamma(int j, double val){
 
 //......................................................................
 ///
-/// Set the decoherence hierarchy. This will define the relationship:
+/// Set the decoherence angle. This will define the relationship:
 ///
-///   \f$\Gamma_{32} = (\sqrt{\Gamma_{31}} \pm \sqrt{\Gamma_{21}})^{2}\f$
+///   \f$ 
+///   \Gamma_{32} = \Gamma_{31} + \Gamma_{21} \cos^2\theta - 
+///   \cos\theta \sqrt{\Gamma_{21} (4\Gamma_{31} - \Gamma_{21} (1 - \cos^2\theta))} 
+///   \f$
 ///
-/// The + (-) sign will be refered to as IH (NH)
 ///
-/// @param isNH - Is the hierarchy normal?
+/// @param th - decoherence angle
 ///
-void PMNS_Deco::SetGH(bool isNH)
+void PMNS_Deco::SetDecoAngle(double th)
 {
 
-  fGamma[0] = isNH ? 1 : -1;
+  fGamma[0] = cos(th);
   
 }
 
@@ -113,7 +115,11 @@ double PMNS_Deco::GetGamma(int i, int j)
     return fGamma[i-1];
   }
   else {
-    return pow( sqrt(fGamma[2]) - fGamma[0]*sqrt(fGamma[1]), 2);
+    // Combine Gamma31, Gamma21 and an angle (fGamma[0] = cos(th)) to make Gamma32
+    double arg = fGamma[1] * ( 4*fGamma[2] - fGamma[1]*(1 - pow(fGamma[0],2)) );
+
+    return fGamma[2] + fGamma[1]*pow(fGamma[0],2) - fGamma[0] * sqrt(arg);
+
   }
 
 }

@@ -31,8 +31,8 @@ namespace OscProb {
     /// Set any given decoherence parameter
     virtual void SetGamma(int j, double val);
     
-    /// Set the decoherence hierarchy
-    virtual void SetGH(bool isNH = true);
+    /// Set the decoherence angle
+    virtual void SetDecoAngle(double th);
 
     /// Get any given decoherence parameter
     virtual double GetGamma(int i, int j);
