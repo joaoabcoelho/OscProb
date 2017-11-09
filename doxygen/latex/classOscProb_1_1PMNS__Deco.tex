@@ -1227,7 +1227,7 @@ References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Num\+Nus, and f\+Rho.
 \begin{DoxyCode}
 314 \{
 315   assert(flv>=0 && flv<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
-316   \textcolor{keywordflow}{return} sqrt(norm(\hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho}[flv][flv]));
+316   \textcolor{keywordflow}{return} std::abs(\hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho}[flv][flv]);
 317 \}
 \end{DoxyCode}
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco}!Prob@{Prob}}
