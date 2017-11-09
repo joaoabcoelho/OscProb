@@ -313,7 +313,7 @@ void PMNS_Deco::ResetToFlavour(int flv)
 double PMNS_Deco::P(int flv)
 {
   assert(flv>=0 && flv<fNumNus);
-  return sqrt(norm(fRho[flv][flv]));
+  return std::abs(fRho[flv][flv]);
 }
 
 ////////////////////////////////////////////////////////////////////////
