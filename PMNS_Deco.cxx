@@ -42,14 +42,14 @@ PMNS_Deco::~PMNS_Deco(){}
 
 //......................................................................
 ///
-/// Set any given decoherence parameter.
+/// Set the decoherence parameter \f$\Gamma_{j1}\f$.
 ///
 /// This will check if value is changing to keep track of whether
 /// the eigensystem needs to be recomputed.
 ///
-/// Requires that j > 0. Will notify you if input is wrong.
+/// Requires that j = 2 or 3. Will notify you if input is wrong.
 ///
-/// @param j   - The second mass index
+/// @param j   - The first mass index
 /// @param val - The absolute value of the parameter
 ///
 void PMNS_Deco::SetGamma(int j, double val){
@@ -75,13 +75,19 @@ void PMNS_Deco::SetGamma(int j, double val){
 ///   \cos\theta \sqrt{\Gamma_{21} (4\Gamma_{31} - \Gamma_{21} (1 - \cos^2\theta))} 
 ///   \f$
 ///
+/// This will check if value is changing to keep track of whether
+/// the eigensystem needs to be recomputed.
 ///
 /// @param th - decoherence angle
 ///
 void PMNS_Deco::SetDecoAngle(double th)
 {
 
-  fGamma[0] = cos(th);
+  double cosTh = cos(th);
+
+  fGotES *= (fGamma[0] == cosTh);
+
+  fGamma[0] = cosTh;
   
 }
 
