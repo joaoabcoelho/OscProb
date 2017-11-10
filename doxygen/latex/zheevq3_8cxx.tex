@@ -1,10 +1,10 @@
 \hypertarget{zheevq3_8cxx}{}\section{/home/jcoelho/\+Osc\+Prob\+Git/\+Matrix\+Decomp/zheevq3.cxx File Reference}
 \label{zheevq3_8cxx}\index{/home/jcoelho/\+Osc\+Prob\+Git/\+Matrix\+Decomp/zheevq3.\+cxx@{/home/jcoelho/\+Osc\+Prob\+Git/\+Matrix\+Decomp/zheevq3.\+cxx}}
-{\ttfamily \#include $<$stdio.\+h$>$}\\*
-{\ttfamily \#include $<$math.\+h$>$}\\*
-{\ttfamily \#include $<$complex$>$}\\*
-{\ttfamily \#include \char`\"{}zhetrd3.\+h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}zheevq3.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$complex$>$}\newline
+{\ttfamily \#include \char`\"{}zhetrd3.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}zheevq3.\+h\char`\"{}}\newline
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -20,13 +20,12 @@ int \hyperlink{zheevq3_8cxx_acd10038006d53d6d163625106c950e4e}{zheevq3} (std\+::
 
 
 \subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{zheevq3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}\label{zheevq3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}} 
 \index{zheevq3.\+cxx@{zheevq3.\+cxx}!S\+QR@{S\+QR}}
 \index{S\+QR@{S\+QR}!zheevq3.\+cxx@{zheevq3.\+cxx}}
-\subsubsection[{\texorpdfstring{S\+QR}{SQR}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+QR(
-\begin{DoxyParamCaption}
-\item[{}]{x}
-\end{DoxyParamCaption}
-)~((x)$\ast$(x))}\hypertarget{zheevq3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{}\label{zheevq3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}
+\subsubsection{\texorpdfstring{S\+QR}{SQR}}
+{\footnotesize\ttfamily \#define S\+QR(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~((x)$\ast$(x))}
+
 
 
 Definition at line 26 of file zheevq3.\+cxx.
@@ -35,13 +34,12 @@ Definition at line 26 of file zheevq3.\+cxx.
 
 Referenced by zheevq3().
 
+\mbox{\Hypertarget{zheevq3_8cxx_a3037777638f94ba01c4104dc03dfbf98}\label{zheevq3_8cxx_a3037777638f94ba01c4104dc03dfbf98}} 
 \index{zheevq3.\+cxx@{zheevq3.\+cxx}!S\+Q\+R\+\_\+\+A\+BS@{S\+Q\+R\+\_\+\+A\+BS}}
 \index{S\+Q\+R\+\_\+\+A\+BS@{S\+Q\+R\+\_\+\+A\+BS}!zheevq3.\+cxx@{zheevq3.\+cxx}}
-\subsubsection[{\texorpdfstring{S\+Q\+R\+\_\+\+A\+BS}{SQR_ABS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Q\+R\+\_\+\+A\+BS(
-\begin{DoxyParamCaption}
-\item[{}]{x}
-\end{DoxyParamCaption}
-)~({\bf S\+QR}(real(x)) + {\bf S\+QR}(imag(x)))}\hypertarget{zheevq3_8cxx_a3037777638f94ba01c4104dc03dfbf98}{}\label{zheevq3_8cxx_a3037777638f94ba01c4104dc03dfbf98}
+\subsubsection{\texorpdfstring{S\+Q\+R\+\_\+\+A\+BS}{SQR\_ABS}}
+{\footnotesize\ttfamily \#define S\+Q\+R\+\_\+\+A\+BS(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(\hyperlink{zhetrd3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{S\+QR}(real(x)) + \hyperlink{zhetrd3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{S\+QR}(imag(x)))}
+
 
 
 Definition at line 27 of file zheevq3.\+cxx.
@@ -49,15 +47,12 @@ Definition at line 27 of file zheevq3.\+cxx.
 
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{zheevq3_8cxx_acd10038006d53d6d163625106c950e4e}\label{zheevq3_8cxx_acd10038006d53d6d163625106c950e4e}} 
 \index{zheevq3.\+cxx@{zheevq3.\+cxx}!zheevq3@{zheevq3}}
 \index{zheevq3@{zheevq3}!zheevq3.\+cxx@{zheevq3.\+cxx}}
-\subsubsection[{\texorpdfstring{zheevq3(std\+::complex$<$ double $>$ A[3][3], std\+::complex$<$ double $>$ Q[3][3], double w[3])}{zheevq3(std::complex< double > A[3][3], std::complex< double > Q[3][3], double w[3])}}]{\setlength{\rightskip}{0pt plus 5cm}int zheevq3 (
-\begin{DoxyParamCaption}
-\item[{std\+::complex$<$ double $>$}]{A\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, }
-\item[{std\+::complex$<$ double $>$}]{Q\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, }
-\item[{double}]{w\mbox{[}3\mbox{]}}
-\end{DoxyParamCaption}
-)}\hypertarget{zheevq3_8cxx_acd10038006d53d6d163625106c950e4e}{}\label{zheevq3_8cxx_acd10038006d53d6d163625106c950e4e}
+\subsubsection{\texorpdfstring{zheevq3()}{zheevq3()}}
+{\footnotesize\ttfamily int zheevq3 (\begin{DoxyParamCaption}\item[{std\+::complex$<$ double $>$}]{A\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{std\+::complex$<$ double $>$}]{Q\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{double}]{w\mbox{[}3\mbox{]} }\end{DoxyParamCaption})}
+
 
 
 Definition at line 31 of file zheevq3.\+cxx.

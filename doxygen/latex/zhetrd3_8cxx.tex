@@ -1,9 +1,9 @@
 \hypertarget{zhetrd3_8cxx}{}\section{/home/jcoelho/\+Osc\+Prob\+Git/\+Matrix\+Decomp/zhetrd3.cxx File Reference}
 \label{zhetrd3_8cxx}\index{/home/jcoelho/\+Osc\+Prob\+Git/\+Matrix\+Decomp/zhetrd3.\+cxx@{/home/jcoelho/\+Osc\+Prob\+Git/\+Matrix\+Decomp/zhetrd3.\+cxx}}
-{\ttfamily \#include $<$stdio.\+h$>$}\\*
-{\ttfamily \#include $<$math.\+h$>$}\\*
-{\ttfamily \#include $<$complex$>$}\\*
-{\ttfamily \#include \char`\"{}zhetrd3.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$complex$>$}\newline
+{\ttfamily \#include \char`\"{}zhetrd3.\+h\char`\"{}}\newline
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -19,24 +19,22 @@ void \hyperlink{zhetrd3_8cxx_a85715cc89e71719fe52cf16892aa1a1d}{zhetrd3} (std\+:
 
 
 \subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{zhetrd3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}\label{zhetrd3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}} 
 \index{zhetrd3.\+cxx@{zhetrd3.\+cxx}!S\+QR@{S\+QR}}
 \index{S\+QR@{S\+QR}!zhetrd3.\+cxx@{zhetrd3.\+cxx}}
-\subsubsection[{\texorpdfstring{S\+QR}{SQR}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+QR(
-\begin{DoxyParamCaption}
-\item[{}]{x}
-\end{DoxyParamCaption}
-)~((x)$\ast$(x))}\hypertarget{zhetrd3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{}\label{zhetrd3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}
+\subsubsection{\texorpdfstring{S\+QR}{SQR}}
+{\footnotesize\ttfamily \#define S\+QR(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~((x)$\ast$(x))}
+
 
 
 Definition at line 25 of file zhetrd3.\+cxx.
 
+\mbox{\Hypertarget{zhetrd3_8cxx_a3037777638f94ba01c4104dc03dfbf98}\label{zhetrd3_8cxx_a3037777638f94ba01c4104dc03dfbf98}} 
 \index{zhetrd3.\+cxx@{zhetrd3.\+cxx}!S\+Q\+R\+\_\+\+A\+BS@{S\+Q\+R\+\_\+\+A\+BS}}
 \index{S\+Q\+R\+\_\+\+A\+BS@{S\+Q\+R\+\_\+\+A\+BS}!zhetrd3.\+cxx@{zhetrd3.\+cxx}}
-\subsubsection[{\texorpdfstring{S\+Q\+R\+\_\+\+A\+BS}{SQR_ABS}}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\+Q\+R\+\_\+\+A\+BS(
-\begin{DoxyParamCaption}
-\item[{}]{x}
-\end{DoxyParamCaption}
-)~({\bf S\+QR}(real(x)) + {\bf S\+QR}(imag(x)))}\hypertarget{zhetrd3_8cxx_a3037777638f94ba01c4104dc03dfbf98}{}\label{zhetrd3_8cxx_a3037777638f94ba01c4104dc03dfbf98}
+\subsubsection{\texorpdfstring{S\+Q\+R\+\_\+\+A\+BS}{SQR\_ABS}}
+{\footnotesize\ttfamily \#define S\+Q\+R\+\_\+\+A\+BS(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(\hyperlink{zhetrd3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{S\+QR}(real(x)) + \hyperlink{zhetrd3_8cxx_aa7866fa5e4e0ee9b034e9dab6599a9cc}{S\+QR}(imag(x)))}
+
 
 
 Definition at line 26 of file zhetrd3.\+cxx.
@@ -48,16 +46,12 @@ Referenced by zhetrd3().
 
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{zhetrd3_8cxx_a85715cc89e71719fe52cf16892aa1a1d}\label{zhetrd3_8cxx_a85715cc89e71719fe52cf16892aa1a1d}} 
 \index{zhetrd3.\+cxx@{zhetrd3.\+cxx}!zhetrd3@{zhetrd3}}
 \index{zhetrd3@{zhetrd3}!zhetrd3.\+cxx@{zhetrd3.\+cxx}}
-\subsubsection[{\texorpdfstring{zhetrd3(std\+::complex$<$ double $>$ A[3][3], std\+::complex$<$ double $>$ Q[3][3], double d[3], double e[2])}{zhetrd3(std::complex< double > A[3][3], std::complex< double > Q[3][3], double d[3], double e[2])}}]{\setlength{\rightskip}{0pt plus 5cm}void zhetrd3 (
-\begin{DoxyParamCaption}
-\item[{std\+::complex$<$ double $>$}]{A\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, }
-\item[{std\+::complex$<$ double $>$}]{Q\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}, }
-\item[{double}]{d\mbox{[}3\mbox{]}, }
-\item[{double}]{e\mbox{[}2\mbox{]}}
-\end{DoxyParamCaption}
-)}\hypertarget{zhetrd3_8cxx_a85715cc89e71719fe52cf16892aa1a1d}{}\label{zhetrd3_8cxx_a85715cc89e71719fe52cf16892aa1a1d}
+\subsubsection{\texorpdfstring{zhetrd3()}{zhetrd3()}}
+{\footnotesize\ttfamily void zhetrd3 (\begin{DoxyParamCaption}\item[{std\+::complex$<$ double $>$}]{A\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{std\+::complex$<$ double $>$}]{Q\mbox{[}3\mbox{]}\mbox{[}3\mbox{]},  }\item[{double}]{d\mbox{[}3\mbox{]},  }\item[{double}]{e\mbox{[}2\mbox{]} }\end{DoxyParamCaption})}
+
 
 
 Definition at line 30 of file zhetrd3.\+cxx.
