@@ -390,8 +390,8 @@ void GetPoissonError(int n,double &eh,double &el){
     el = n-jimed[n];
   }
   else{
-    eh = sqrt(n+0.25)+0.5;
-    el = sqrt(n+0.25)+0.5;
+    eh = sqrt(n + 0.25) + 0.5;
+    el = sqrt(n + 0.25) - 0.5;
   }
 
   return;
