@@ -154,12 +154,14 @@ static const \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b42267
 \begin{DoxyCompactList}\small\item\em zero in complex \end{DoxyCompactList}\item 
 static const \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex} \hyperlink{classOscProb_1_1PMNS__Base_ab64aab27448a5aca27565c991a9d173e}{one}
 \begin{DoxyCompactList}\small\item\em one in complex \end{DoxyCompactList}\item 
-static const double \hyperlink{classOscProb_1_1PMNS__Base_a382ddd7b76ca89b43f22614a2ea7327b}{k\+Km2eV} = 1.\+0 / 1.\+973269718e-\/10
+static const double \hyperlink{classOscProb_1_1PMNS__Base_a382ddd7b76ca89b43f22614a2ea7327b}{k\+Km2eV} = 1.\+0 / 1.\+973269788e-\/10
 \begin{DoxyCompactList}\small\item\em km to e\+V$^\wedge$-\/1 \end{DoxyCompactList}\item 
-static const double \hyperlink{classOscProb_1_1PMNS__Base_a326fc5016d7dd7ce05682c06cdcb6d94}{k\+K2} = 4.\+62711501e-\/09
+static const double \hyperlink{classOscProb_1_1PMNS__Base_a326fc5016d7dd7ce05682c06cdcb6d94}{k\+K2} = 1e-\/3 $\ast$ k\+N\+A / pow(k\+Km2e\+V,3)
 \begin{DoxyCompactList}\small\item\em mol/\+Ge\+V$^\wedge$2/cm$^\wedge$3 to eV \end{DoxyCompactList}\item 
 static const double \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{k\+Ge\+V2eV} = 1.\+0e+09
 \begin{DoxyCompactList}\small\item\em GeV to eV. \end{DoxyCompactList}\item 
+static const double \hyperlink{classOscProb_1_1PMNS__Base_a69355e770b89e99437c2b8a66e48eeb9}{k\+NA} = 6.\+022140857e23
+\begin{DoxyCompactList}\small\item\em Avogadro constant. \end{DoxyCompactList}\item 
 static const double \hyperlink{classOscProb_1_1PMNS__Base_a7f26a3456128234b2ae6cc9141a6532f}{k\+Gf} = 1.\+1663787e-\/05
 \begin{DoxyCompactList}\small\item\em G\+\_\+F in units of Ge\+V$^\wedge$-\/2. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -216,7 +218,7 @@ Oscillation parameters are from P\+DG for NH by default.
 \end{DoxyParams}
 
 
-Definition at line 47 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 48 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -224,23 +226,23 @@ References f\+Num\+Nus, Initialize\+Vectors(), Reset\+To\+Flavour(), Set\+Energy
 
 
 \begin{DoxyCode}
-47                                :
-48 \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES}(\textcolor{keyword}{false}), \hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms}(\textcolor{keyword}{false})
-49 \{
-50 
-51   \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus} = numNus;    \textcolor{comment}{// Set the number of neutrinos}
-52 
-53   \hyperlink{classOscProb_1_1PMNS__Base_add6533a9fc9acdfc7ae258b62570d78d}{SetStdPath}();        \textcolor{comment}{// Set some default path}
-54   \hyperlink{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}{SetEnergy}(2);        \textcolor{comment}{// Set default energy to 2 GeV}
-55   \hyperlink{classOscProb_1_1PMNS__Base_a717e0348cf762f3961854e332a9b52e0}{SetIsNuBar}(\textcolor{keyword}{false});   \textcolor{comment}{// Neutrino by default}
-56 
-57   \hyperlink{classOscProb_1_1PMNS__Base_adf23b569112f9f9e0e592f01d79a5f3d}{InitializeVectors}(); \textcolor{comment}{// Initialize all vectors}
-58 
-59   \hyperlink{classOscProb_1_1PMNS__Base_a4de96ac9b6d1e9b029ab877e57d211ad}{SetStdPars}();        \textcolor{comment}{// Set PDG parameters}
-60 
-61   \hyperlink{classOscProb_1_1PMNS__Base_ac0d4bf8ff1318ef96d3dafa62e0cec25}{ResetToFlavour}(1);   \textcolor{comment}{// Numu by default}
-62 
-63 \}
+48                                :
+49 \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES}(\textcolor{keyword}{false}), \hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms}(\textcolor{keyword}{false})
+50 \{
+51 
+52   \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus} = numNus;    \textcolor{comment}{// Set the number of neutrinos}
+53 
+54   \hyperlink{classOscProb_1_1PMNS__Base_add6533a9fc9acdfc7ae258b62570d78d}{SetStdPath}();        \textcolor{comment}{// Set some default path}
+55   \hyperlink{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}{SetEnergy}(2);        \textcolor{comment}{// Set default energy to 2 GeV}
+56   \hyperlink{classOscProb_1_1PMNS__Base_a717e0348cf762f3961854e332a9b52e0}{SetIsNuBar}(\textcolor{keyword}{false});   \textcolor{comment}{// Neutrino by default}
+57 
+58   \hyperlink{classOscProb_1_1PMNS__Base_adf23b569112f9f9e0e592f01d79a5f3d}{InitializeVectors}(); \textcolor{comment}{// Initialize all vectors}
+59 
+60   \hyperlink{classOscProb_1_1PMNS__Base_a4de96ac9b6d1e9b029ab877e57d211ad}{SetStdPars}();        \textcolor{comment}{// Set PDG parameters}
+61 
+62   \hyperlink{classOscProb_1_1PMNS__Base_ac0d4bf8ff1318ef96d3dafa62e0cec25}{ResetToFlavour}(1);   \textcolor{comment}{// Numu by default}
+63 
+64 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a91223a852214dd90da9b4403f779dbbf}\label{classOscProb_1_1PMNS__Base_a91223a852214dd90da9b4403f779dbbf}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!````~P\+M\+N\+S\+\_\+\+Base@{$\sim$\+P\+M\+N\+S\+\_\+\+Base}}
@@ -250,11 +252,11 @@ References f\+Num\+Nus, Initialize\+Vectors(), Reset\+To\+Flavour(), Set\+Energy
 
 Nothing to clean. 
 
-Definition at line 69 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 70 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 \begin{DoxyCode}
-69 \{\}
+70 \{\}
 \end{DoxyCode}
 
 
@@ -272,7 +274,7 @@ Add a path to the sequence.
 \end{DoxyParams}
 
 
-Definition at line 256 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 257 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -284,11 +286,11 @@ Referenced by Add\+Path(), Set\+Att(), and Set\+Path().
 
 
 \begin{DoxyCode}
-256                                \{
-257 
-258   \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.push\_back(p);
-259 
-260 \}
+257                                \{
+258 
+259   \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.push\_back(p);
+260 
+261 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ab7f89ad9e7e1224adaa59d3c41594cd9}\label{classOscProb_1_1PMNS__Base_ab7f89ad9e7e1224adaa59d3c41594cd9}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Add\+Path@{Add\+Path}}
@@ -309,7 +311,7 @@ Add a path to the sequence defining attributes directly.
 \end{DoxyParams}
 
 
-Definition at line 270 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 271 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -317,11 +319,11 @@ References Add\+Path().
 
 
 \begin{DoxyCode}
-270                                                                            \{
-271 
-272   \hyperlink{classOscProb_1_1PMNS__Base_a887dc9d4dc569ec0cdef3933b4c60efc}{AddPath}(\hyperlink{structOscProb_1_1NuPath}{NuPath}(length, density, zoa, layer));
-273 
-274 \}
+271                                                                            \{
+272 
+273   \hyperlink{classOscProb_1_1PMNS__Base_a887dc9d4dc569ec0cdef3933b4c60efc}{AddPath}(\hyperlink{structOscProb_1_1NuPath}{NuPath}(length, density, zoa, layer));
+274 
+275 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ac03f754160422e6600da8dbae0f803ed}\label{classOscProb_1_1PMNS__Base_ac03f754160422e6600da8dbae0f803ed}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Avg\+Prob@{Avg\+Prob}}
@@ -356,7 +358,7 @@ Average neutrino oscillation probability
 \end{DoxyReturn}
 
 
-Definition at line 1076 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 1077 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -364,48 +366,48 @@ References Avg\+Prob\+Lo\+E(), f\+Nu\+Paths, f\+Path, Osc\+Prob\+::\+Nu\+Path\+:
 
 
 \begin{DoxyCode}
-1077 \{
-1078 
-1079   \textcolor{comment}{// Do nothing if energy is not positive}
-1080   \textcolor{keywordflow}{if}(E<=0) \textcolor{keywordflow}{return} 0;
-1081 
-1082   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.empty()) \textcolor{keywordflow}{return} 0;
-1083 
-1084   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size() != 1)\{
-1085     cout << \textcolor{stringliteral}{"ERROR: AvgProb not implemented for multiple paths."} << endl;
-1086     cout << \textcolor{stringliteral}{"       Returning probability at bin center."} << endl;
-1087     \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf, E);
-1088   \}
-1089 
-1090   \textcolor{comment}{// Don't average zero width}
-1091   \textcolor{keywordflow}{if}(dE<=0) \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf, E);
-1092 
-1093   \textcolor{comment}{// Make sure fPath is set}
-1094   \hyperlink{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}{SetCurPath}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0]);
-1095 
-1096   \textcolor{comment}{// Define L/E variables}
-1097   \textcolor{keywordtype}{double} LoE = 0;
-1098   \textcolor{keywordtype}{double} dLoE = 0;
-1099 
-1100   \textcolor{comment}{// Set a minimum energy}
-1101   \textcolor{keywordtype}{double} minE = 0.1 * E;
-1102 
-1103   \textcolor{comment}{// Transform range to L/E}
-1104   \textcolor{comment}{// Full range if low edge > minE}
-1105   \textcolor{keywordflow}{if}(E-dE/2 > minE)\{
-1106     LoE = 0.5 * (\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E-dE/2) + \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2));
-1107     dLoE = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E-dE/2) - \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2);
-1108   \}
-1109   \textcolor{comment}{// Else start at minE}
-1110   \textcolor{keywordflow}{else}\{
-1111     LoE = 0.5 * (\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/minE + \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2));
-1112     dLoE = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/minE - \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2);
-1113   \}
-1114 
-1115   \textcolor{comment}{// Compute average in LoE}
-1116   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_ac19a92f4ef428a7333ca8eed76fca637}{AvgProbLoE}(flvi, flvf, LoE, dLoE);
-1117 
-1118 \}
+1078 \{
+1079 
+1080   \textcolor{comment}{// Do nothing if energy is not positive}
+1081   \textcolor{keywordflow}{if}(E<=0) \textcolor{keywordflow}{return} 0;
+1082 
+1083   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.empty()) \textcolor{keywordflow}{return} 0;
+1084 
+1085   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size() != 1)\{
+1086     cout << \textcolor{stringliteral}{"ERROR: AvgProb not implemented for multiple paths."} << endl;
+1087     cout << \textcolor{stringliteral}{"       Returning probability at bin center."} << endl;
+1088     \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf, E);
+1089   \}
+1090 
+1091   \textcolor{comment}{// Don't average zero width}
+1092   \textcolor{keywordflow}{if}(dE<=0) \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf, E);
+1093 
+1094   \textcolor{comment}{// Make sure fPath is set}
+1095   \hyperlink{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}{SetCurPath}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0]);
+1096 
+1097   \textcolor{comment}{// Define L/E variables}
+1098   \textcolor{keywordtype}{double} LoE = 0;
+1099   \textcolor{keywordtype}{double} dLoE = 0;
+1100 
+1101   \textcolor{comment}{// Set a minimum energy}
+1102   \textcolor{keywordtype}{double} minE = 0.1 * E;
+1103 
+1104   \textcolor{comment}{// Transform range to L/E}
+1105   \textcolor{comment}{// Full range if low edge > minE}
+1106   \textcolor{keywordflow}{if}(E-dE/2 > minE)\{
+1107     LoE = 0.5 * (\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E-dE/2) + \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2));
+1108     dLoE = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E-dE/2) - \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2);
+1109   \}
+1110   \textcolor{comment}{// Else start at minE}
+1111   \textcolor{keywordflow}{else}\{
+1112     LoE = 0.5 * (\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/minE + \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2));
+1113     dLoE = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/minE - \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2);
+1114   \}
+1115 
+1116   \textcolor{comment}{// Compute average in LoE}
+1117   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_ac19a92f4ef428a7333ca8eed76fca637}{AvgProbLoE}(flvi, flvf, LoE, dLoE);
+1118 
+1119 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ac19a92f4ef428a7333ca8eed76fca637}\label{classOscProb_1_1PMNS__Base_ac19a92f4ef428a7333ca8eed76fca637}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Avg\+Prob\+LoE@{Avg\+Prob\+LoE}}
@@ -440,7 +442,7 @@ Average neutrino oscillation probability
 \end{DoxyReturn}
 
 
-Definition at line 1144 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 1145 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -452,62 +454,62 @@ Referenced by Avg\+Prob().
 
 
 \begin{DoxyCode}
-1145 \{
-1146 
-1147   \textcolor{comment}{// Do nothing if L/E is not positive}
-1148   \textcolor{keywordflow}{if}(LoE<=0) \textcolor{keywordflow}{return} 0;
-1149 
-1150   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.empty()) \textcolor{keywordflow}{return} 0;
-1151 
-1152   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size() > 1)\{
-1153 
-1154     cout << \textcolor{stringliteral}{"ERROR: AvgProb not implemented for multiple paths."} << endl;
-1155     cout << \textcolor{stringliteral}{"       Returning probability at bin center."} << endl;
-1156 
-1157     \textcolor{keywordtype}{double} L = 0;
-1158     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<int(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size()); i++)\{
-1159       L += \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[i].length;
-1160     \}
-1161 
-1162     \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf, L/LoE);
-1163 
-1164   \}
-1165 
-1166   \textcolor{comment}{// Make sure fPath is set}
-1167   \hyperlink{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}{SetCurPath}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0]);
-1168 
-1169   \textcolor{comment}{// Set the energy at bin center}
-1170   \hyperlink{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}{SetEnergy}(\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/LoE);
-1171 
-1172   \textcolor{comment}{// Don't average zero width}
-1173   \textcolor{keywordflow}{if}(dLoE<=0) \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf);
-1174 
-1175   \textcolor{comment}{// Get sample points for this bin}
-1176   vector<double> samples = \hyperlink{classOscProb_1_1PMNS__Base_a9eac8d768c1424755ee41f7e783af179}{GetSamplePoints}(LoE, dLoE);
-1177 
-1178   \textcolor{comment}{// Variables to fill sample}
-1179   \textcolor{comment}{// probabilities and weights}
-1180   \textcolor{keywordtype}{double} sumw = 0;
-1181   \textcolor{keywordtype}{double} prob = 0;
-1182 
-1183   \textcolor{comment}{// Loop over all sample points}
-1184   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<int(samples.size()); j++)\{
-1185 
-1186     \textcolor{comment}{// Set (L/E)^-2 weights}
-1187     \textcolor{keywordtype}{double} w = 1./pow(samples[j],2);
-1188 
-1189     \textcolor{comment}{// Add weighted probability}
-1190     prob += w * \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf, \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} / samples[j]);
-1191 
-1192     \textcolor{comment}{// Increment sum of weights}
-1193     sumw += w;
-1194 
-1195   \}
-1196 
-1197   \textcolor{comment}{// Return weighted average of probabilities}
-1198   \textcolor{keywordflow}{return} prob / sumw;
-1199 
-1200 \}
+1146 \{
+1147 
+1148   \textcolor{comment}{// Do nothing if L/E is not positive}
+1149   \textcolor{keywordflow}{if}(LoE<=0) \textcolor{keywordflow}{return} 0;
+1150 
+1151   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.empty()) \textcolor{keywordflow}{return} 0;
+1152 
+1153   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size() > 1)\{
+1154 
+1155     cout << \textcolor{stringliteral}{"ERROR: AvgProb not implemented for multiple paths."} << endl;
+1156     cout << \textcolor{stringliteral}{"       Returning probability at bin center."} << endl;
+1157 
+1158     \textcolor{keywordtype}{double} L = 0;
+1159     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<int(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size()); i++)\{
+1160       L += \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[i].length;
+1161     \}
+1162 
+1163     \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf, L/LoE);
+1164 
+1165   \}
+1166 
+1167   \textcolor{comment}{// Make sure fPath is set}
+1168   \hyperlink{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}{SetCurPath}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0]);
+1169 
+1170   \textcolor{comment}{// Set the energy at bin center}
+1171   \hyperlink{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}{SetEnergy}(\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/LoE);
+1172 
+1173   \textcolor{comment}{// Don't average zero width}
+1174   \textcolor{keywordflow}{if}(dLoE<=0) \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf);
+1175 
+1176   \textcolor{comment}{// Get sample points for this bin}
+1177   vector<double> samples = \hyperlink{classOscProb_1_1PMNS__Base_a9eac8d768c1424755ee41f7e783af179}{GetSamplePoints}(LoE, dLoE);
+1178 
+1179   \textcolor{comment}{// Variables to fill sample}
+1180   \textcolor{comment}{// probabilities and weights}
+1181   \textcolor{keywordtype}{double} sumw = 0;
+1182   \textcolor{keywordtype}{double} prob = 0;
+1183 
+1184   \textcolor{comment}{// Loop over all sample points}
+1185   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<int(samples.size()); j++)\{
+1186 
+1187     \textcolor{comment}{// Set (L/E)^-2 weights}
+1188     \textcolor{keywordtype}{double} w = 1./pow(samples[j],2);
+1189 
+1190     \textcolor{comment}{// Add weighted probability}
+1191     prob += w * \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf, \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} / samples[j]);
+1192 
+1193     \textcolor{comment}{// Increment sum of weights}
+1194     sumw += w;
+1195 
+1196   \}
+1197 
+1198   \textcolor{comment}{// Return weighted average of probabilities}
+1199   \textcolor{keywordflow}{return} prob / sumw;
+1200 
+1201 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ad0faf5eae755afb1baa1fcd5ffebad41}\label{classOscProb_1_1PMNS__Base_ad0faf5eae755afb1baa1fcd5ffebad41}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Build\+Hms@{Build\+Hms}}
@@ -521,7 +523,7 @@ This is a hermitian matrix, so only the upper triangular part needs to be filled
 
 The construction of the Hamiltonian avoids computing terms that are simply zero. This has a big impact in the computation time. 
 
-Definition at line 851 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 852 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -533,31 +535,31 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+Solve\+Ham(), and Os
 
 
 \begin{DoxyCode}
-852 \{
-853 
-854   \textcolor{comment}{// Check if anything changed}
-855   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms}) \textcolor{keywordflow}{return};
-856 
-857   \textcolor{comment}{// Tag to recompute eigensystem}
-858   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} = \textcolor{keyword}{false};
-859 
-860   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}; j++)\{
-861     \textcolor{comment}{// Set mass splitting}
-862     \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] = \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[j];
-863     \textcolor{comment}{// Reset off-diagonal elements}
-864     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<j; i++)\{
-865       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] = 0;
-866     \}
-867     \textcolor{comment}{// Rotate j neutrinos}
-868     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<j; i++)\{
-869       \hyperlink{classOscProb_1_1PMNS__Base_aae18afd69074211335f49ec40e6011b9}{RotateH}(i,j);
-870     \}
-871   \}
-872 
-873   \textcolor{comment}{// Tag as built}
-874   \hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms} = \textcolor{keyword}{true};
-875 
-876 \}
+853 \{
+854 
+855   \textcolor{comment}{// Check if anything changed}
+856   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms}) \textcolor{keywordflow}{return};
+857 
+858   \textcolor{comment}{// Tag to recompute eigensystem}
+859   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} = \textcolor{keyword}{false};
+860 
+861   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}; j++)\{
+862     \textcolor{comment}{// Set mass splitting}
+863     \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] = \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[j];
+864     \textcolor{comment}{// Reset off-diagonal elements}
+865     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<j; i++)\{
+866       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] = 0;
+867     \}
+868     \textcolor{comment}{// Rotate j neutrinos}
+869     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<j; i++)\{
+870       \hyperlink{classOscProb_1_1PMNS__Base_aae18afd69074211335f49ec40e6011b9}{RotateH}(i,j);
+871     \}
+872   \}
+873 
+874   \textcolor{comment}{// Tag as built}
+875   \hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms} = \textcolor{keyword}{true};
+876 
+877 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_aefe521239031c418cfaaaa550a6e13bb}\label{classOscProb_1_1PMNS__Base_aefe521239031c418cfaaaa550a6e13bb}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Clear\+Path@{Clear\+Path}}
@@ -567,7 +569,7 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+Solve\+Ham(), and Os
 
 Clear the path vector. 
 
-Definition at line 224 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 225 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -579,11 +581,11 @@ Referenced by Set\+Att(), and Set\+Path().
 
 
 \begin{DoxyCode}
-224                          \{
-225 
-226   \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.clear();
-227 
-228 \}
+225                          \{
+226 
+227   \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.clear();
+228 
+229 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_acee137091304c919642293ddf015bbc8}\label{classOscProb_1_1PMNS__Base_acee137091304c919642293ddf015bbc8}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Get\+Angle@{Get\+Angle}}
@@ -602,7 +604,7 @@ Requires that i$<$j. Will notify you if input is wrong. If i$>$j, will assume re
 \end{DoxyParams}
 
 
-Definition at line 563 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 564 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -610,24 +612,24 @@ References f\+Num\+Nus, and f\+Theta.
 
 
 \begin{DoxyCode}
-564 \{
-565 
-566   \textcolor{keywordflow}{if}(i>j)\{
-567     cout << \textcolor{stringliteral}{"Warning: First argument should be smaller than second argument"} << endl;
-568     cout << \textcolor{stringliteral}{"         Setting reverse order (Theta"} << j << i << \textcolor{stringliteral}{"). "} << endl;
-569     \textcolor{keywordtype}{int} temp = i;
-570     i = j;
-571     j = temp;
-572   \}
-573   \textcolor{keywordflow}{if}(i<1 || i>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1 || j<2 || j>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
-574     cout << \textcolor{stringliteral}{"ERROR: Theta"} << i << j << \textcolor{stringliteral}{" not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
-575     cout << \textcolor{stringliteral}{" neutrinos. Returning zero."} << endl;
-576     \textcolor{keywordflow}{return} 0;
-577   \}
-578 
-579   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[i-1][j-1];
-580 
-581 \}
+565 \{
+566 
+567   \textcolor{keywordflow}{if}(i>j)\{
+568     cout << \textcolor{stringliteral}{"Warning: First argument should be smaller than second argument"} << endl;
+569     cout << \textcolor{stringliteral}{"         Setting reverse order (Theta"} << j << i << \textcolor{stringliteral}{"). "} << endl;
+570     \textcolor{keywordtype}{int} temp = i;
+571     i = j;
+572     j = temp;
+573   \}
+574   \textcolor{keywordflow}{if}(i<1 || i>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1 || j<2 || j>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
+575     cout << \textcolor{stringliteral}{"ERROR: Theta"} << i << j << \textcolor{stringliteral}{" not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
+576     cout << \textcolor{stringliteral}{" neutrinos. Returning zero."} << endl;
+577     \textcolor{keywordflow}{return} 0;
+578   \}
+579 
+580   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[i-1][j-1];
+581 
+582 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_adb8dbc91d4286d2e7c8f768c59476241}\label{classOscProb_1_1PMNS__Base_adb8dbc91d4286d2e7c8f768c59476241}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Get\+Delta@{Get\+Delta}}
@@ -646,7 +648,7 @@ Requires that i+1$<$j. Will notify you if input is wrong. If i$>$j, will assume 
 \end{DoxyParams}
 
 
-Definition at line 633 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 634 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -654,28 +656,28 @@ References f\+Delta, and f\+Num\+Nus.
 
 
 \begin{DoxyCode}
-634 \{
-635 
-636   \textcolor{keywordflow}{if}(i>j)\{
-637     cout << \textcolor{stringliteral}{"Warning: First argument should be smaller than second argument"} << endl;
-638     cout << \textcolor{stringliteral}{"         Setting reverse order (Delta"} << j << i << \textcolor{stringliteral}{"). "} << endl;
-639     \textcolor{keywordtype}{int} temp = i;
-640     i = j;
-641     j = temp;
-642   \}
-643   \textcolor{keywordflow}{if}(i<1 || i>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1 || j<2 || j>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
-644     cout << \textcolor{stringliteral}{"ERROR: Delta"} << i << j << \textcolor{stringliteral}{" not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
-645     cout << \textcolor{stringliteral}{" neutrinos. Returning zero."} << endl;
-646     \textcolor{keywordflow}{return} 0;
-647   \}
-648   \textcolor{keywordflow}{if}(i+1==j)\{
-649     cout << \textcolor{stringliteral}{"Warning: Rotation "} << i << j << \textcolor{stringliteral}{" is real. Returning zero."} << endl;
-650     \textcolor{keywordflow}{return} 0;
-651   \}
-652 
-653   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_ab2a5fa40e689b221c8a7d2c17213810d}{fDelta}[i-1][j-1];
-654 
-655 \}
+635 \{
+636 
+637   \textcolor{keywordflow}{if}(i>j)\{
+638     cout << \textcolor{stringliteral}{"Warning: First argument should be smaller than second argument"} << endl;
+639     cout << \textcolor{stringliteral}{"         Setting reverse order (Delta"} << j << i << \textcolor{stringliteral}{"). "} << endl;
+640     \textcolor{keywordtype}{int} temp = i;
+641     i = j;
+642     j = temp;
+643   \}
+644   \textcolor{keywordflow}{if}(i<1 || i>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1 || j<2 || j>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
+645     cout << \textcolor{stringliteral}{"ERROR: Delta"} << i << j << \textcolor{stringliteral}{" not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
+646     cout << \textcolor{stringliteral}{" neutrinos. Returning zero."} << endl;
+647     \textcolor{keywordflow}{return} 0;
+648   \}
+649   \textcolor{keywordflow}{if}(i+1==j)\{
+650     cout << \textcolor{stringliteral}{"Warning: Rotation "} << i << j << \textcolor{stringliteral}{" is real. Returning zero."} << endl;
+651     \textcolor{keywordflow}{return} 0;
+652   \}
+653 
+654   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_ab2a5fa40e689b221c8a7d2c17213810d}{fDelta}[i-1][j-1];
+655 
+656 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ad26815ac5f4805d1259817e4936e5f8f}\label{classOscProb_1_1PMNS__Base_ad26815ac5f4805d1259817e4936e5f8f}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Get\+Dm@{Get\+Dm}}
@@ -694,7 +696,7 @@ Requires that j$>$1. Will notify you if input is wrong.
 \end{DoxyParams}
 
 
-Definition at line 693 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 694 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -702,17 +704,17 @@ References f\+Dm, and f\+Num\+Nus.
 
 
 \begin{DoxyCode}
-694 \{
-695 
-696   \textcolor{keywordflow}{if}(j<2 || j>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
-697     cout << \textcolor{stringliteral}{"ERROR: Dm"} << j << \textcolor{stringliteral}{"1 not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
-698     cout << \textcolor{stringliteral}{" neutrinos. Returning zero."} << endl;
-699     \textcolor{keywordflow}{return} 0;
-700   \}
-701 
-702   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[j-1];
-703 
-704 \}
+695 \{
+696 
+697   \textcolor{keywordflow}{if}(j<2 || j>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
+698     cout << \textcolor{stringliteral}{"ERROR: Dm"} << j << \textcolor{stringliteral}{"1 not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
+699     cout << \textcolor{stringliteral}{" neutrinos. Returning zero."} << endl;
+700     \textcolor{keywordflow}{return} 0;
+701   \}
+702 
+703   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[j-1];
+704 
+705 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_acc0d46cc4b8f911b40b807225003bbed}\label{classOscProb_1_1PMNS__Base_acc0d46cc4b8f911b40b807225003bbed}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Get\+Energy@{Get\+Energy}}
@@ -722,7 +724,7 @@ References f\+Dm, and f\+Num\+Nus.
 
 Get the neutrino energy in GeV. 
 
-Definition at line 182 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 183 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -730,11 +732,11 @@ References f\+Energy.
 
 
 \begin{DoxyCode}
-182                             \{
-183 
-184   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy};
-185 
-186 \}
+183                             \{
+184 
+185   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy};
+186 
+187 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a2f7f2a028dfe7a90fff6b4f757972c2c}\label{classOscProb_1_1PMNS__Base_a2f7f2a028dfe7a90fff6b4f757972c2c}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Get\+Is\+Nu\+Bar@{Get\+Is\+Nu\+Bar}}
@@ -744,7 +746,7 @@ References f\+Energy.
 
 Get the anti-\/neutrino flag. 
 
-Definition at line 192 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 193 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -752,11 +754,11 @@ References f\+Is\+Nu\+Bar.
 
 
 \begin{DoxyCode}
-192                            \{
-193 
-194   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar};
-195 
-196 \}
+193                            \{
+194 
+195   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar};
+196 
+197 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ac8e196f2e85a2b1caaf705073ee95a5c}\label{classOscProb_1_1PMNS__Base_ac8e196f2e85a2b1caaf705073ee95a5c}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Get\+Path@{Get\+Path}}
@@ -766,7 +768,7 @@ References f\+Is\+Nu\+Bar.
 
 Get the vector of neutrino paths. 
 
-Definition at line 245 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 246 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -774,11 +776,11 @@ References f\+Nu\+Paths.
 
 
 \begin{DoxyCode}
-245                                  \{
-246 
-247   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths};
-248 
-249 \}
+246                                  \{
+247 
+248   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths};
+249 
+250 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a9eac8d768c1424755ee41f7e783af179}\label{classOscProb_1_1PMNS__Base_a9eac8d768c1424755ee41f7e783af179}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Get\+Sample\+Points@{Get\+Sample\+Points}}
@@ -799,7 +801,7 @@ This is used for averaging the probability over a bin of L/E. It should be a pri
 \end{DoxyParams}
 
 
-Definition at line 1215 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 1216 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -811,102 +813,102 @@ Referenced by Avg\+Prob\+Lo\+E().
 
 
 \begin{DoxyCode}
-1216 \{
-1217 
-1218   \textcolor{comment}{// Solve Hamiltonian to get eigenvalues}
-1219   \hyperlink{classOscProb_1_1PMNS__Base_a91f065cb9e910e0095e41462b4420b01}{SolveHam}();
-1220 
-1221   \textcolor{comment}{// Define conversion factor [km/GeV -> 1/(4 eV^2)]}
-1222   \textcolor{keyword}{const} \textcolor{keywordtype}{double} k1267 = \hyperlink{classOscProb_1_1PMNS__Base_a382ddd7b76ca89b43f22614a2ea7327b}{kKm2eV} / (4 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV});
-1223 
-1224   \textcolor{comment}{// Get list of all effective Dm^2}
-1225   vector<double> effDm;
-1226 
-1227   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1; i++)\{
-1228     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=i+1; j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}; j++)\{
-1229       effDm.push\_back( 2 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV} * \hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy} * fabs(\hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[j] - 
+1217 \{
+1218 
+1219   \textcolor{comment}{// Solve Hamiltonian to get eigenvalues}
+1220   \hyperlink{classOscProb_1_1PMNS__Base_a91f065cb9e910e0095e41462b4420b01}{SolveHam}();
+1221 
+1222   \textcolor{comment}{// Define conversion factor [km/GeV -> 1/(4 eV^2)]}
+1223   \textcolor{keyword}{const} \textcolor{keywordtype}{double} k1267 = \hyperlink{classOscProb_1_1PMNS__Base_a382ddd7b76ca89b43f22614a2ea7327b}{kKm2eV} / (4 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV});
+1224 
+1225   \textcolor{comment}{// Get list of all effective Dm^2}
+1226   vector<double> effDm;
+1227 
+1228   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1; i++)\{
+1229     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=i+1; j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}; j++)\{
+1230       effDm.push\_back( 2 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV} * \hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy} * fabs(\hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[j] - 
       \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[i]) );
-1230     \}
-1231   \}
-1232 
-1233   \textcolor{keywordtype}{int} numDm = effDm.size();
-1234 
-1235   \textcolor{comment}{// Set a number of sub-divisions to achieve "good" accuracy}
-1236   \textcolor{comment}{// This needs to be studied better}
-1237   \textcolor{keywordtype}{int} n\_div = ceil( 20 * pow(dLoE/LoE,0.8) );
-1238   \textcolor{comment}{//int n\_div = 1;}
-1239 
-1240   \textcolor{comment}{// A vector to store sample points}
-1241   vector<double> allSamples;
-1242 
-1243   \textcolor{comment}{// Loop over sub-divisions}
-1244   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} k=0; k<n\_div; k++)\{
-1245 
-1246     \textcolor{comment}{// Define sub-division center and width}
-1247     \textcolor{keywordtype}{double} bctr = LoE - dLoE/2 + (k+0.5)*dLoE/n\_div;
-1248     \textcolor{keywordtype}{double} bwdt = dLoE/n\_div;
-1249 
-1250     \textcolor{comment}{// Make a list of indices sorted by Dm^2 value}
-1251     vector<int> Idx(numDm, 0);
-1252     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<numDm; i++) Idx[i] = i;
-1253     sort(Idx.begin(), Idx.end(), \hyperlink{structOscProb_1_1IdxCompare}{IdxCompare}(effDm));
-1254 
-1255     \textcolor{comment}{// Make a vector of L/E sample values}
-1256     \textcolor{comment}{// Initialized in the sub-division center}
-1257     vector<double> samples;
-1258     samples.push\_back(bctr);
-1259 
-1260     \textcolor{comment}{// Loop over all Dm^2 to average each frequency}
-1261     \textcolor{comment}{// This will recursively sample points in smaller}
-1262     \textcolor{comment}{// bins so that all relevant frequencies are used}
-1263     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<numDm; i++)\{
-1264 
-1265       \textcolor{comment}{// Copy the list of sample L/E values}
-1266       vector<double> prev = samples;
-1267 
-1268       \textcolor{comment}{// Redefine bin width to lie within full sub-division}
-1269       \textcolor{keywordtype}{double} Width = 2*min(prev[0] - (bctr - bwdt/2), (bctr + bwdt/2) - prev[0]);
-1270 
-1271       \textcolor{comment}{// Compute oscillation argument sorted from lowest  to highest}
-1272       \textcolor{keyword}{const} \textcolor{keywordtype}{double} arg = k1267 * effDm[Idx[i]] * Width;
-1273 
-1274       \textcolor{comment}{// Skip small oscillation values.}
-1275       \textcolor{comment}{// If it's the last one, lower the tolerance}
-1276       \textcolor{keywordflow}{if}(i < numDm-1)\{
-1277         \textcolor{keywordflow}{if}(arg<0.9) \textcolor{keywordflow}{continue};
-1278       \}
-1279       \textcolor{keywordflow}{else}\{
-1280         \textcolor{keywordflow}{if}(arg<0.1) \textcolor{keywordflow}{continue};
-1281       \}
-1282 
-1283       \textcolor{comment}{// Reset samples to redefine them}
-1284       samples.clear();
-1285 
-1286       \textcolor{comment}{// Loop over previous samples}
-1287       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<int(prev.size()); j++)\{
-1288 
-1289         \textcolor{comment}{// Compute new sample points around old samples}
-1290         \textcolor{comment}{// This is based on a oscillatory quadrature rule}
-1291         \textcolor{keywordtype}{double} sample = (1/sqrt(3)) * (Width/2);
-1292         \textcolor{keywordflow}{if}(arg!=0) sample = acos(sin(arg)/arg)/arg * (Width/2);
-1293 
-1294         \textcolor{comment}{// Add samples above and below center}
-1295         samples.push\_back(prev[j]-sample);
-1296         samples.push\_back(prev[j]+sample);
-1297 
-1298       \}
-1299 
-1300     \}\textcolor{comment}{// End of loop over Dm^2}
-1301 
-1302     \textcolor{comment}{// Add sub-division samples to the end of allSamples vector}
-1303     allSamples.insert(allSamples.end(), samples.begin(), samples.end());
-1304 
-1305   \}\textcolor{comment}{// End of loop over sub-divisions}
-1306 
-1307   \textcolor{comment}{// Return all sample points}
-1308   \textcolor{keywordflow}{return} allSamples;
-1309 
-1310 \}
+1231     \}
+1232   \}
+1233 
+1234   \textcolor{keywordtype}{int} numDm = effDm.size();
+1235 
+1236   \textcolor{comment}{// Set a number of sub-divisions to achieve "good" accuracy}
+1237   \textcolor{comment}{// This needs to be studied better}
+1238   \textcolor{keywordtype}{int} n\_div = ceil( 20 * pow(dLoE/LoE,0.8) );
+1239   \textcolor{comment}{//int n\_div = 1;}
+1240 
+1241   \textcolor{comment}{// A vector to store sample points}
+1242   vector<double> allSamples;
+1243 
+1244   \textcolor{comment}{// Loop over sub-divisions}
+1245   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} k=0; k<n\_div; k++)\{
+1246 
+1247     \textcolor{comment}{// Define sub-division center and width}
+1248     \textcolor{keywordtype}{double} bctr = LoE - dLoE/2 + (k+0.5)*dLoE/n\_div;
+1249     \textcolor{keywordtype}{double} bwdt = dLoE/n\_div;
+1250 
+1251     \textcolor{comment}{// Make a list of indices sorted by Dm^2 value}
+1252     vector<int> Idx(numDm, 0);
+1253     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<numDm; i++) Idx[i] = i;
+1254     sort(Idx.begin(), Idx.end(), \hyperlink{structOscProb_1_1IdxCompare}{IdxCompare}(effDm));
+1255 
+1256     \textcolor{comment}{// Make a vector of L/E sample values}
+1257     \textcolor{comment}{// Initialized in the sub-division center}
+1258     vector<double> samples;
+1259     samples.push\_back(bctr);
+1260 
+1261     \textcolor{comment}{// Loop over all Dm^2 to average each frequency}
+1262     \textcolor{comment}{// This will recursively sample points in smaller}
+1263     \textcolor{comment}{// bins so that all relevant frequencies are used}
+1264     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<numDm; i++)\{
+1265 
+1266       \textcolor{comment}{// Copy the list of sample L/E values}
+1267       vector<double> prev = samples;
+1268 
+1269       \textcolor{comment}{// Redefine bin width to lie within full sub-division}
+1270       \textcolor{keywordtype}{double} Width = 2*min(prev[0] - (bctr - bwdt/2), (bctr + bwdt/2) - prev[0]);
+1271 
+1272       \textcolor{comment}{// Compute oscillation argument sorted from lowest  to highest}
+1273       \textcolor{keyword}{const} \textcolor{keywordtype}{double} arg = k1267 * effDm[Idx[i]] * Width;
+1274 
+1275       \textcolor{comment}{// Skip small oscillation values.}
+1276       \textcolor{comment}{// If it's the last one, lower the tolerance}
+1277       \textcolor{keywordflow}{if}(i < numDm-1)\{
+1278         \textcolor{keywordflow}{if}(arg<0.9) \textcolor{keywordflow}{continue};
+1279       \}
+1280       \textcolor{keywordflow}{else}\{
+1281         \textcolor{keywordflow}{if}(arg<0.1) \textcolor{keywordflow}{continue};
+1282       \}
+1283 
+1284       \textcolor{comment}{// Reset samples to redefine them}
+1285       samples.clear();
+1286 
+1287       \textcolor{comment}{// Loop over previous samples}
+1288       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<int(prev.size()); j++)\{
+1289 
+1290         \textcolor{comment}{// Compute new sample points around old samples}
+1291         \textcolor{comment}{// This is based on a oscillatory quadrature rule}
+1292         \textcolor{keywordtype}{double} sample = (1/sqrt(3)) * (Width/2);
+1293         \textcolor{keywordflow}{if}(arg!=0) sample = acos(sin(arg)/arg)/arg * (Width/2);
+1294 
+1295         \textcolor{comment}{// Add samples above and below center}
+1296         samples.push\_back(prev[j]-sample);
+1297         samples.push\_back(prev[j]+sample);
+1298 
+1299       \}
+1300 
+1301     \}\textcolor{comment}{// End of loop over Dm^2}
+1302 
+1303     \textcolor{comment}{// Add sub-division samples to the end of allSamples vector}
+1304     allSamples.insert(allSamples.end(), samples.begin(), samples.end());
+1305 
+1306   \}\textcolor{comment}{// End of loop over sub-divisions}
+1307 
+1308   \textcolor{comment}{// Return all sample points}
+1309   \textcolor{keywordflow}{return} allSamples;
+1310 
+1311 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_adf23b569112f9f9e0e592f01d79a5f3d}\label{classOscProb_1_1PMNS__Base_adf23b569112f9f9e0e592f01d79a5f3d}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Initialize\+Vectors@{Initialize\+Vectors}}
@@ -916,7 +918,7 @@ Referenced by Avg\+Prob\+Lo\+E().
 
 Set vector sizes and initialize elements to zero. 
 
-Definition at line 75 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 76 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -928,21 +930,21 @@ Referenced by P\+M\+N\+S\+\_\+\+Base().
 
 
 \begin{DoxyCode}
-76 \{
-77 
-78   \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}    = vector<double>(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, 0);
-79   \hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta} = vector< vector<double> >(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, vector<double>(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus},0));
-80   \hyperlink{classOscProb_1_1PMNS__Base_ab2a5fa40e689b221c8a7d2c17213810d}{fDelta} = vector< vector<double> >(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, vector<double>(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus},0));
-81 
-82   \hyperlink{classOscProb_1_1PMNS__Base_ad38a7107c3ab393591fd5ba21658300b}{fNuState} = vector<complex>(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, \hyperlink{classOscProb_1_1PMNS__Base_a5c31ed4593cf95feb36fb80c1850d25e}{zero});
-83   \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}     = vector< vector<complex> >(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, vector<complex>(
+77 \{
+78 
+79   \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}    = vector<double>(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, 0);
+80   \hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta} = vector< vector<double> >(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, vector<double>(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus},0));
+81   \hyperlink{classOscProb_1_1PMNS__Base_ab2a5fa40e689b221c8a7d2c17213810d}{fDelta} = vector< vector<double> >(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, vector<double>(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus},0));
+82 
+83   \hyperlink{classOscProb_1_1PMNS__Base_ad38a7107c3ab393591fd5ba21658300b}{fNuState} = vector<complex>(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, \hyperlink{classOscProb_1_1PMNS__Base_a5c31ed4593cf95feb36fb80c1850d25e}{zero});
+84   \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}     = vector< vector<complex> >(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, vector<complex>(
       \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus},\hyperlink{classOscProb_1_1PMNS__Base_a5c31ed4593cf95feb36fb80c1850d25e}{zero}));
-84 
-85   \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval} = vector<double>(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, 0);
-86   \hyperlink{classOscProb_1_1PMNS__Base_a093e7bd31d4ef52ed52df414e12c1d17}{fEvec} = vector< vector<complex> >(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, vector<complex>(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus},
+85 
+86   \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval} = vector<double>(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, 0);
+87   \hyperlink{classOscProb_1_1PMNS__Base_a093e7bd31d4ef52ed52df414e12c1d17}{fEvec} = vector< vector<complex> >(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, vector<complex>(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus},
       \hyperlink{classOscProb_1_1PMNS__Base_a5c31ed4593cf95feb36fb80c1850d25e}{zero}));
-87 
-88 \}
+88 
+89 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a0dc4d45bc3d7e03b9abbf5b4e100cc22}\label{classOscProb_1_1PMNS__Base_a0dc4d45bc3d7e03b9abbf5b4e100cc22}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!P@{P}}
@@ -971,7 +973,7 @@ Reimplemented in \hyperlink{classOscProb_1_1PMNS__Deco_aa81f47ea36207b90a5feb984
 
 
 
-Definition at line 960 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 961 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -983,10 +985,10 @@ Referenced by Prob().
 
 
 \begin{DoxyCode}
-961 \{
-962   assert(flv>=0 && flv<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
-963   \textcolor{keywordflow}{return} norm(\hyperlink{classOscProb_1_1PMNS__Base_ad38a7107c3ab393591fd5ba21658300b}{fNuState}[flv]);
-964 \}
+962 \{
+963   assert(flv>=0 && flv<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
+964   \textcolor{keywordflow}{return} norm(\hyperlink{classOscProb_1_1PMNS__Base_ad38a7107c3ab393591fd5ba21658300b}{fNuState}[flv]);
+965 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}\label{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Prob@{Prob}}
@@ -1013,7 +1015,7 @@ Neutrino oscillation probability
 \end{DoxyReturn}
 
 
-Definition at line 980 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 981 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1025,22 +1027,22 @@ Referenced by Avg\+Prob(), Avg\+Prob\+Lo\+E(), and Prob().
 
 
 \begin{DoxyCode}
-981 \{
-982 
-983   \textcolor{keywordflow}{if}(flvi < 0 || flvi >= \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
-984     cout << \textcolor{stringliteral}{"ERROR: Initial flavour not in range: 0 - "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1 << endl;
-985   \}
-986   \textcolor{keywordflow}{if}(flvf < 0 || flvf >= \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
-987     cout << \textcolor{stringliteral}{"ERROR: Final flavour not in range: 0 - "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1 << endl;
-988   \}
-989 
-990   \hyperlink{classOscProb_1_1PMNS__Base_ac0d4bf8ff1318ef96d3dafa62e0cec25}{ResetToFlavour}(flvi);
-991 
-992   \hyperlink{classOscProb_1_1PMNS__Base_a054e3a8b05b9a958b6fa416e4a835e3e}{Propagate}();
-993 
-994   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a0dc4d45bc3d7e03b9abbf5b4e100cc22}{P}(flvf);
-995 
-996 \}
+982 \{
+983 
+984   \textcolor{keywordflow}{if}(flvi < 0 || flvi >= \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
+985     cout << \textcolor{stringliteral}{"ERROR: Initial flavour not in range: 0 - "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1 << endl;
+986   \}
+987   \textcolor{keywordflow}{if}(flvf < 0 || flvf >= \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
+988     cout << \textcolor{stringliteral}{"ERROR: Final flavour not in range: 0 - "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1 << endl;
+989   \}
+990 
+991   \hyperlink{classOscProb_1_1PMNS__Base_ac0d4bf8ff1318ef96d3dafa62e0cec25}{ResetToFlavour}(flvi);
+992 
+993   \hyperlink{classOscProb_1_1PMNS__Base_a054e3a8b05b9a958b6fa416e4a835e3e}{Propagate}();
+994 
+995   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a0dc4d45bc3d7e03b9abbf5b4e100cc22}{P}(flvf);
+996 
+997 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_aa3cee10639d5c0879ccb9e78d62128d3}\label{classOscProb_1_1PMNS__Base_aa3cee10639d5c0879ccb9e78d62128d3}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Prob@{Prob}}
@@ -1069,7 +1071,7 @@ Neutrino oscillation probability
 \end{DoxyReturn}
 
 
-Definition at line 1013 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 1014 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1077,13 +1079,13 @@ References Prob(), and Set\+Energy().
 
 
 \begin{DoxyCode}
-1014 \{
-1015 
-1016   \hyperlink{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}{SetEnergy}(E);
-1017 
-1018   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf);
-1019 
-1020 \}
+1015 \{
+1016 
+1017   \hyperlink{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}{SetEnergy}(E);
+1018 
+1019   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf);
+1020 
+1021 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a6e0a74508d9d6db7be02e242b8467563}\label{classOscProb_1_1PMNS__Base_a6e0a74508d9d6db7be02e242b8467563}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Prob@{Prob}}
@@ -1118,7 +1120,7 @@ Neutrino oscillation probability
 \end{DoxyReturn}
 
 
-Definition at line 1044 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 1045 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1126,14 +1128,14 @@ References Prob(), Set\+Energy(), and Set\+Length().
 
 
 \begin{DoxyCode}
-1045 \{
-1046 
-1047   \hyperlink{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}{SetEnergy}(E);
-1048   \hyperlink{classOscProb_1_1PMNS__Base_a6241325b1bd28cafa556daaecbe4ed62}{SetLength}(L);
-1049 
-1050   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf);
-1051 
-1052 \}
+1046 \{
+1047 
+1048   \hyperlink{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}{SetEnergy}(E);
+1049   \hyperlink{classOscProb_1_1PMNS__Base_a6241325b1bd28cafa556daaecbe4ed62}{SetLength}(L);
+1050 
+1051   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf);
+1052 
+1053 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a054e3a8b05b9a958b6fa416e4a835e3e}\label{classOscProb_1_1PMNS__Base_a054e3a8b05b9a958b6fa416e4a835e3e}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Propagate@{Propagate}}
@@ -1143,7 +1145,7 @@ References Prob(), Set\+Energy(), and Set\+Length().
 
 Propagate neutrino state through full path 
 
-Definition at line 916 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 917 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1155,15 +1157,15 @@ Referenced by Prob().
 
 
 \begin{DoxyCode}
-917 \{
-918 
-919   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<int(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size()); i++)\{
-920 
-921     \hyperlink{classOscProb_1_1PMNS__Base_accb08503acc162188041d7a96a280462}{PropagatePath}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[i]);
-922 
-923   \}
-924 
-925 \}
+918 \{
+919 
+920   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<int(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size()); i++)\{
+921 
+922     \hyperlink{classOscProb_1_1PMNS__Base_accb08503acc162188041d7a96a280462}{PropagatePath}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[i]);
+923 
+924   \}
+925 
+926 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_accb08503acc162188041d7a96a280462}\label{classOscProb_1_1PMNS__Base_accb08503acc162188041d7a96a280462}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Propagate\+Path@{Propagate\+Path}}
@@ -1182,7 +1184,7 @@ Reimplemented in \hyperlink{classOscProb_1_1PMNS__Deco_aa75341a3608bb12d7792a14e
 
 
 
-Definition at line 883 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 884 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1194,34 +1196,34 @@ Referenced by Propagate().
 
 
 \begin{DoxyCode}
-884 \{
-885 
-886   \textcolor{comment}{// Set the neutrino path}
-887   \hyperlink{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}{SetCurPath}(p);
-888 
-889   \textcolor{comment}{// Solve for eigensystem}
-890   \hyperlink{classOscProb_1_1PMNS__Base_a91f065cb9e910e0095e41462b4420b01}{SolveHam}();
-891 
-892   \textcolor{comment}{// Store coefficients of propagation eigenstates}
-893   vector<complex> nuComp(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, \hyperlink{classOscProb_1_1PMNS__Base_a5c31ed4593cf95feb36fb80c1850d25e}{zero});
-894   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};i++)\{
-895     nuComp[i] = 0;
-896     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};j++)\{
-897       nuComp[i] += \hyperlink{classOscProb_1_1PMNS__Base_ad38a7107c3ab393591fd5ba21658300b}{fNuState}[j] * conj(\hyperlink{classOscProb_1_1PMNS__Base_a093e7bd31d4ef52ed52df414e12c1d17}{fEvec}[j][i]);
-898     \}
-899   \}
-900 
-901   \textcolor{comment}{// Propagate neutrino state}
-902   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};i++)\{
-903     \hyperlink{classOscProb_1_1PMNS__Base_ad38a7107c3ab393591fd5ba21658300b}{fNuState}[i] = 0;
-904     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};j++)\{
-905       \textcolor{keywordtype}{double} arg = \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[j] * \hyperlink{classOscProb_1_1PMNS__Base_a382ddd7b76ca89b43f22614a2ea7327b}{kKm2eV} * p.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length};
-906       \hyperlink{classOscProb_1_1PMNS__Base_ad38a7107c3ab393591fd5ba21658300b}{fNuState}[i] +=  \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex}(cos(arg), -sin(arg)) * nuComp[j] * 
+885 \{
+886 
+887   \textcolor{comment}{// Set the neutrino path}
+888   \hyperlink{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}{SetCurPath}(p);
+889 
+890   \textcolor{comment}{// Solve for eigensystem}
+891   \hyperlink{classOscProb_1_1PMNS__Base_a91f065cb9e910e0095e41462b4420b01}{SolveHam}();
+892 
+893   \textcolor{comment}{// Store coefficients of propagation eigenstates}
+894   vector<complex> nuComp(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, \hyperlink{classOscProb_1_1PMNS__Base_a5c31ed4593cf95feb36fb80c1850d25e}{zero});
+895   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};i++)\{
+896     nuComp[i] = 0;
+897     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};j++)\{
+898       nuComp[i] += \hyperlink{classOscProb_1_1PMNS__Base_ad38a7107c3ab393591fd5ba21658300b}{fNuState}[j] * conj(\hyperlink{classOscProb_1_1PMNS__Base_a093e7bd31d4ef52ed52df414e12c1d17}{fEvec}[j][i]);
+899     \}
+900   \}
+901 
+902   \textcolor{comment}{// Propagate neutrino state}
+903   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};i++)\{
+904     \hyperlink{classOscProb_1_1PMNS__Base_ad38a7107c3ab393591fd5ba21658300b}{fNuState}[i] = 0;
+905     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};j++)\{
+906       \textcolor{keywordtype}{double} arg = \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[j] * \hyperlink{classOscProb_1_1PMNS__Base_a382ddd7b76ca89b43f22614a2ea7327b}{kKm2eV} * p.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length};
+907       \hyperlink{classOscProb_1_1PMNS__Base_ad38a7107c3ab393591fd5ba21658300b}{fNuState}[i] +=  \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex}(cos(arg), -sin(arg)) * nuComp[j] * 
       \hyperlink{classOscProb_1_1PMNS__Base_a093e7bd31d4ef52ed52df414e12c1d17}{fEvec}[i][j];
-907     \}
-908   \}
-909 
-910 \}
+908     \}
+909   \}
+910 
+911 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ac0d4bf8ff1318ef96d3dafa62e0cec25}\label{classOscProb_1_1PMNS__Base_ac0d4bf8ff1318ef96d3dafa62e0cec25}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Reset\+To\+Flavour@{Reset\+To\+Flavour}}
@@ -1247,7 +1249,7 @@ Reimplemented in \hyperlink{classOscProb_1_1PMNS__Deco_a393940f176614e3ffebeea40
 
 
 
-Definition at line 938 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 939 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1259,13 +1261,13 @@ Referenced by P\+M\+N\+S\+\_\+\+Base(), and Prob().
 
 
 \begin{DoxyCode}
-939 \{
-940   assert(flv>=0 && flv<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
-941   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}; ++i)\{
-942     \textcolor{keywordflow}{if} (i==flv) \hyperlink{classOscProb_1_1PMNS__Base_ad38a7107c3ab393591fd5ba21658300b}{fNuState}[i] = \hyperlink{classOscProb_1_1PMNS__Base_ab64aab27448a5aca27565c991a9d173e}{one};
-943     \textcolor{keywordflow}{else}        \hyperlink{classOscProb_1_1PMNS__Base_ad38a7107c3ab393591fd5ba21658300b}{fNuState}[i] = \hyperlink{classOscProb_1_1PMNS__Base_a5c31ed4593cf95feb36fb80c1850d25e}{zero};
-944   \}
-945 \}
+940 \{
+941   assert(flv>=0 && flv<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
+942   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}; ++i)\{
+943     \textcolor{keywordflow}{if} (i==flv) \hyperlink{classOscProb_1_1PMNS__Base_ad38a7107c3ab393591fd5ba21658300b}{fNuState}[i] = \hyperlink{classOscProb_1_1PMNS__Base_ab64aab27448a5aca27565c991a9d173e}{one};
+944     \textcolor{keywordflow}{else}        \hyperlink{classOscProb_1_1PMNS__Base_ad38a7107c3ab393591fd5ba21658300b}{fNuState}[i] = \hyperlink{classOscProb_1_1PMNS__Base_a5c31ed4593cf95feb36fb80c1850d25e}{zero};
+945   \}
+946 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_aae18afd69074211335f49ec40e6011b9}\label{classOscProb_1_1PMNS__Base_aae18afd69074211335f49ec40e6011b9}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!RotateH@{RotateH}}
@@ -1284,7 +1286,7 @@ The rotations assume all off-\/diagonal elements with i $>$ j are zero. This is 
 \end{DoxyParams}
 
 
-Definition at line 717 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 718 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1296,128 +1298,128 @@ Referenced by Build\+Hms().
 
 
 \begin{DoxyCode}
-717                                   \{
-718 
-719   \textcolor{comment}{// Do nothing if angle is zero}
-720   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[i][j]==0) \textcolor{keywordflow}{return};
-721 
-722   \textcolor{keywordtype}{double} fSinBuffer = sin(\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[i][j]);
-723   \textcolor{keywordtype}{double} fCosBuffer = cos(\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[i][j]);
-724 
-725   \textcolor{keywordtype}{double}  fHmsBufferD;
-726   \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex} fHmsBufferC;
-727 
-728   \textcolor{comment}{// With Delta}
-729   \textcolor{keywordflow}{if}(i+1<j)\{
-730     \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex} fExpBuffer = \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex}(cos(\hyperlink{classOscProb_1_1PMNS__Base_ab2a5fa40e689b221c8a7d2c17213810d}{fDelta}[i][j]), -sin(
+718                                   \{
+719 
+720   \textcolor{comment}{// Do nothing if angle is zero}
+721   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[i][j]==0) \textcolor{keywordflow}{return};
+722 
+723   \textcolor{keywordtype}{double} fSinBuffer = sin(\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[i][j]);
+724   \textcolor{keywordtype}{double} fCosBuffer = cos(\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[i][j]);
+725 
+726   \textcolor{keywordtype}{double}  fHmsBufferD;
+727   \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex} fHmsBufferC;
+728 
+729   \textcolor{comment}{// With Delta}
+730   \textcolor{keywordflow}{if}(i+1<j)\{
+731     \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex} fExpBuffer = \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex}(cos(\hyperlink{classOscProb_1_1PMNS__Base_ab2a5fa40e689b221c8a7d2c17213810d}{fDelta}[i][j]), -sin(
       \hyperlink{classOscProb_1_1PMNS__Base_ab2a5fa40e689b221c8a7d2c17213810d}{fDelta}[i][j]));
-731 
-732     \textcolor{comment}{// General case}
-733     \textcolor{keywordflow}{if}(i>0)\{
-734       \textcolor{comment}{// Top columns}
-735       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} k=0; k<i; k++)\{
-736         fHmsBufferC = \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][i];
-737 
-738         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][i] *= fCosBuffer;
-739         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][i] += \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] * fSinBuffer * conj(fExpBuffer);
-740 
-741         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] *= fCosBuffer;
-742         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] -= fHmsBufferC * fSinBuffer * fExpBuffer;
-743       \}
-744 
-745       \textcolor{comment}{// Middle row and column}
-746       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} k=i+1; k<j; k++)\{
-747         fHmsBufferC = \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j];
-748 
-749         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] *= fCosBuffer;
-750         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] -= conj(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][k]) * fSinBuffer * fExpBuffer;
-751 
-752         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][k] *= fCosBuffer;
-753         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][k] += fSinBuffer * fExpBuffer * conj(fHmsBufferC);
-754       \}
-755 
-756       \textcolor{comment}{// Nodes ij}
-757       fHmsBufferC = \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i];
-758       fHmsBufferD = real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j]);
-759 
-760       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i] *= fCosBuffer * fCosBuffer;
-761       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i] += 2 * fSinBuffer * fCosBuffer * real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] * conj(fExpBuffer));
-762       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i] += fSinBuffer * \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] * fSinBuffer;
-763 
-764       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] *= fCosBuffer * fCosBuffer;
-765       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] += fSinBuffer * fHmsBufferC * fSinBuffer;
-766       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] -= 2 * fSinBuffer * fCosBuffer * real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] * conj(fExpBuffer));
-767 
-768       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] -= 2 * fSinBuffer * real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] * conj(fExpBuffer)) * fSinBuffer * fExpBuffer;
-769       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] += fSinBuffer * fCosBuffer * (fHmsBufferD - fHmsBufferC) * fExpBuffer;
-770 
-771     \}
-772     \textcolor{comment}{// First rotation on j (No top columns)}
-773     \textcolor{keywordflow}{else}\{
-774       \textcolor{comment}{// Middle rows and columns}
-775       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} k=i+1; k<j; k++)\{
-776         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] = -conj(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][k]) * fSinBuffer * fExpBuffer;
-777 
-778         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][k] *= fCosBuffer;
-779       \}
-780 
-781       \textcolor{comment}{// Nodes ij}
-782       fHmsBufferD = real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i]);
-783 
-784       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] = fSinBuffer * fCosBuffer * (\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] - fHmsBufferD) * fExpBuffer;
-785 
-786       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i] *= fCosBuffer * fCosBuffer;
-787       fHms[i][i] += fSinBuffer * fHms[j][j] * fSinBuffer;
-788 
-789       fHms[j][j] *= fCosBuffer * fCosBuffer;
-790       fHms[j][j] += fSinBuffer * fHmsBufferD * fSinBuffer;
-791     \}
-792 
-793   \}
-794   \textcolor{comment}{// Without Delta (No middle rows or columns: j = i+1)}
-795   \textcolor{keywordflow}{else}\{
-796     \textcolor{comment}{// General case}
-797     \textcolor{keywordflow}{if}(i>0)\{
-798       \textcolor{comment}{// Top columns}
-799       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} k=0; k<i; k++)\{
-800         fHmsBufferC = \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][i];
-801 
-802         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][i] *= fCosBuffer;
-803         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][i] += \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] * fSinBuffer;
-804 
-805         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] *= fCosBuffer;
-806         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] -= fHmsBufferC * fSinBuffer;
-807       \}
-808 
-809       \textcolor{comment}{// Nodes ij}
-810       fHmsBufferC = \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i];
-811       fHmsBufferD = real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j]);
-812 
-813       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i] *= fCosBuffer * fCosBuffer;
-814       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i] += 2 * fSinBuffer * fCosBuffer * real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j]);
-815       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i] += fSinBuffer * \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] * fSinBuffer;
-816 
-817       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] *= fCosBuffer * fCosBuffer;
-818       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] += fSinBuffer * fHmsBufferC * fSinBuffer;
-819       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] -= 2 * fSinBuffer * fCosBuffer * real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j]);
-820 
-821       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] -= 2 * fSinBuffer * real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j]) * fSinBuffer;
-822       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] += fSinBuffer * fCosBuffer * (fHmsBufferD - fHmsBufferC);
-823 
-824     \}
-825     \textcolor{comment}{// First rotation (theta12)}
-826     \textcolor{keywordflow}{else}\{
-827 
-828       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] = fSinBuffer * fCosBuffer * \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j];
-829 
-830       fHms[i][i] = fSinBuffer * fHms[j][j] * fSinBuffer;
-831 
-832       fHms[j][j] *= fCosBuffer * fCosBuffer;
-833 
-834     \}
-835   \}
-836 
-837 \}
+732 
+733     \textcolor{comment}{// General case}
+734     \textcolor{keywordflow}{if}(i>0)\{
+735       \textcolor{comment}{// Top columns}
+736       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} k=0; k<i; k++)\{
+737         fHmsBufferC = \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][i];
+738 
+739         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][i] *= fCosBuffer;
+740         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][i] += \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] * fSinBuffer * conj(fExpBuffer);
+741 
+742         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] *= fCosBuffer;
+743         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] -= fHmsBufferC * fSinBuffer * fExpBuffer;
+744       \}
+745 
+746       \textcolor{comment}{// Middle row and column}
+747       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} k=i+1; k<j; k++)\{
+748         fHmsBufferC = \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j];
+749 
+750         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] *= fCosBuffer;
+751         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] -= conj(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][k]) * fSinBuffer * fExpBuffer;
+752 
+753         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][k] *= fCosBuffer;
+754         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][k] += fSinBuffer * fExpBuffer * conj(fHmsBufferC);
+755       \}
+756 
+757       \textcolor{comment}{// Nodes ij}
+758       fHmsBufferC = \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i];
+759       fHmsBufferD = real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j]);
+760 
+761       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i] *= fCosBuffer * fCosBuffer;
+762       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i] += 2 * fSinBuffer * fCosBuffer * real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] * conj(fExpBuffer));
+763       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i] += fSinBuffer * \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] * fSinBuffer;
+764 
+765       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] *= fCosBuffer * fCosBuffer;
+766       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] += fSinBuffer * fHmsBufferC * fSinBuffer;
+767       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] -= 2 * fSinBuffer * fCosBuffer * real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] * conj(fExpBuffer));
+768 
+769       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] -= 2 * fSinBuffer * real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] * conj(fExpBuffer)) * fSinBuffer * fExpBuffer;
+770       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] += fSinBuffer * fCosBuffer * (fHmsBufferD - fHmsBufferC) * fExpBuffer;
+771 
+772     \}
+773     \textcolor{comment}{// First rotation on j (No top columns)}
+774     \textcolor{keywordflow}{else}\{
+775       \textcolor{comment}{// Middle rows and columns}
+776       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} k=i+1; k<j; k++)\{
+777         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] = -conj(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][k]) * fSinBuffer * fExpBuffer;
+778 
+779         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][k] *= fCosBuffer;
+780       \}
+781 
+782       \textcolor{comment}{// Nodes ij}
+783       fHmsBufferD = real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i]);
+784 
+785       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] = fSinBuffer * fCosBuffer * (\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] - fHmsBufferD) * fExpBuffer;
+786 
+787       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i] *= fCosBuffer * fCosBuffer;
+788       fHms[i][i] += fSinBuffer * fHms[j][j] * fSinBuffer;
+789 
+790       fHms[j][j] *= fCosBuffer * fCosBuffer;
+791       fHms[j][j] += fSinBuffer * fHmsBufferD * fSinBuffer;
+792     \}
+793 
+794   \}
+795   \textcolor{comment}{// Without Delta (No middle rows or columns: j = i+1)}
+796   \textcolor{keywordflow}{else}\{
+797     \textcolor{comment}{// General case}
+798     \textcolor{keywordflow}{if}(i>0)\{
+799       \textcolor{comment}{// Top columns}
+800       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} k=0; k<i; k++)\{
+801         fHmsBufferC = \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][i];
+802 
+803         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][i] *= fCosBuffer;
+804         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][i] += \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] * fSinBuffer;
+805 
+806         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] *= fCosBuffer;
+807         \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[k][j] -= fHmsBufferC * fSinBuffer;
+808       \}
+809 
+810       \textcolor{comment}{// Nodes ij}
+811       fHmsBufferC = \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i];
+812       fHmsBufferD = real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j]);
+813 
+814       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i] *= fCosBuffer * fCosBuffer;
+815       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i] += 2 * fSinBuffer * fCosBuffer * real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j]);
+816       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][i] += fSinBuffer * \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] * fSinBuffer;
+817 
+818       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] *= fCosBuffer * fCosBuffer;
+819       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] += fSinBuffer * fHmsBufferC * fSinBuffer;
+820       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j] -= 2 * fSinBuffer * fCosBuffer * real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j]);
+821 
+822       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] -= 2 * fSinBuffer * real(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j]) * fSinBuffer;
+823       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] += fSinBuffer * fCosBuffer * (fHmsBufferD - fHmsBufferC);
+824 
+825     \}
+826     \textcolor{comment}{// First rotation (theta12)}
+827     \textcolor{keywordflow}{else}\{
+828 
+829       \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j] = fSinBuffer * fCosBuffer * \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[j][j];
+830 
+831       fHms[i][i] = fSinBuffer * fHms[j][j] * fSinBuffer;
+832 
+833       fHms[j][j] *= fCosBuffer * fCosBuffer;
+834 
+835     \}
+836   \}
+837 
+838 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ace7875cf6d3bec161a2b7ed2690aec34}\label{classOscProb_1_1PMNS__Base_ace7875cf6d3bec161a2b7ed2690aec34}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Angle@{Set\+Angle}}
@@ -1440,7 +1442,7 @@ This will check if value is changing to keep track of whether the hamiltonian ne
 \end{DoxyParams}
 
 
-Definition at line 531 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 532 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1452,27 +1454,27 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Set\+Mix(), and Set\+St
 
 
 \begin{DoxyCode}
-532 \{
-533 
-534   \textcolor{keywordflow}{if}(i>j)\{
-535     cout << \textcolor{stringliteral}{"Warning: First argument should be smaller than second argument"} << endl;
-536     cout << \textcolor{stringliteral}{"         Setting reverse order (Theta"} << j << i << \textcolor{stringliteral}{"). "} << endl;
-537     \textcolor{keywordtype}{int} temp = i;
-538     i = j;
-539     j = temp;
-540   \}
-541   \textcolor{keywordflow}{if}(i<1 || i>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1 || j<2 || j>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
-542     cout << \textcolor{stringliteral}{"ERROR: Theta"} << i << j << \textcolor{stringliteral}{" not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
-543     cout << \textcolor{stringliteral}{" neutrinos. Doing nothing."} << endl;
-544     \textcolor{keywordflow}{return};
-545   \}
-546 
-547   \textcolor{comment}{// Check if value is actually changing}
-548   \hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms} *= (\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[i-1][j-1] == th);
-549 
-550   \hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[i-1][j-1] = th;
-551 
-552 \}
+533 \{
+534 
+535   \textcolor{keywordflow}{if}(i>j)\{
+536     cout << \textcolor{stringliteral}{"Warning: First argument should be smaller than second argument"} << endl;
+537     cout << \textcolor{stringliteral}{"         Setting reverse order (Theta"} << j << i << \textcolor{stringliteral}{"). "} << endl;
+538     \textcolor{keywordtype}{int} temp = i;
+539     i = j;
+540     j = temp;
+541   \}
+542   \textcolor{keywordflow}{if}(i<1 || i>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1 || j<2 || j>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
+543     cout << \textcolor{stringliteral}{"ERROR: Theta"} << i << j << \textcolor{stringliteral}{" not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
+544     cout << \textcolor{stringliteral}{" neutrinos. Doing nothing."} << endl;
+545     \textcolor{keywordflow}{return};
+546   \}
+547 
+548   \textcolor{comment}{// Check if value is actually changing}
+549   \hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms} *= (\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[i-1][j-1] == th);
+550 
+551   \hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[i-1][j-1] = th;
+552 
+553 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}\label{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Att@{Set\+Att}}
@@ -1495,7 +1497,7 @@ If the path sequence is not a single path, a new single path will be created and
 \end{DoxyParams}
 
 
-Definition at line 320 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 321 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1507,25 +1509,25 @@ Referenced by Set\+Density(), Set\+Layers(), Set\+Length(), and Set\+Zo\+A().
 
 
 \begin{DoxyCode}
-320                                          \{
-321 
-322   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size() != 1)\{
-323 
-324     cout << \textcolor{stringliteral}{"Warning: Clearing path vector and starting new single path."} << endl;
-325     cout << \textcolor{stringliteral}{"To avoid possible issues, use the SetPath function."} << endl;
-326 
-327     \hyperlink{classOscProb_1_1PMNS__Base_add6533a9fc9acdfc7ae258b62570d78d}{SetStdPath}();
-328 
-329   \}
-330 
-331   \textcolor{keywordflow}{switch}(idx)\{
-332     \textcolor{keywordflow}{case} 0: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0].length  = att; \textcolor{keywordflow}{break};
-333     \textcolor{keywordflow}{case} 1: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0].density = att; \textcolor{keywordflow}{break};
-334     \textcolor{keywordflow}{case} 2: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0].zoa     = att; \textcolor{keywordflow}{break};
-335     \textcolor{keywordflow}{case} 3: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0].layer   = att; \textcolor{keywordflow}{break};
-336   \}
-337 
-338 \}
+321                                          \{
+322 
+323   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size() != 1)\{
+324 
+325     cout << \textcolor{stringliteral}{"Warning: Clearing path vector and starting new single path."} << endl;
+326     cout << \textcolor{stringliteral}{"To avoid possible issues, use the SetPath function."} << endl;
+327 
+328     \hyperlink{classOscProb_1_1PMNS__Base_add6533a9fc9acdfc7ae258b62570d78d}{SetStdPath}();
+329 
+330   \}
+331 
+332   \textcolor{keywordflow}{switch}(idx)\{
+333     \textcolor{keywordflow}{case} 0: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0].length  = att; \textcolor{keywordflow}{break};
+334     \textcolor{keywordflow}{case} 1: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0].density = att; \textcolor{keywordflow}{break};
+335     \textcolor{keywordflow}{case} 2: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0].zoa     = att; \textcolor{keywordflow}{break};
+336     \textcolor{keywordflow}{case} 3: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0].layer   = att; \textcolor{keywordflow}{break};
+337   \}
+338 
+339 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_aa001479b5f5828c3d16ed087f96ecbcc}\label{classOscProb_1_1PMNS__Base_aa001479b5f5828c3d16ed087f96ecbcc}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Att@{Set\+Att}}
@@ -1548,7 +1550,7 @@ If the path sequence is of a different size, a new path sequence will be created
 \end{DoxyParams}
 
 
-Definition at line 397 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 398 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1556,64 +1558,64 @@ References Add\+Path(), Clear\+Path(), Osc\+Prob\+::\+Nu\+Path\+::density, f\+Nu
 
 
 \begin{DoxyCode}
-397                                                     \{
-398 
-399   \textcolor{comment}{// Get the sizes of the attribute and}
-400   \textcolor{comment}{// path sequence vectors}
-401   \textcolor{keywordtype}{int} nA = att.size();
-402   \textcolor{keywordtype}{int} nP = \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size();
-403 
-404   \textcolor{comment}{// If the vector sizes are equal, update this attribute}
-405   \textcolor{keywordflow}{if}(nA == nP)\{
-406 
-407     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nP; i++)\{
-408 
-409       \textcolor{keywordflow}{switch}(idx)\{
-410         \textcolor{keywordflow}{case} 0: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[i].length  = att[i]; \textcolor{keywordflow}{break};
-411         \textcolor{keywordflow}{case} 1: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[i].density = att[i]; \textcolor{keywordflow}{break};
-412         \textcolor{keywordflow}{case} 2: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[i].zoa     = att[i]; \textcolor{keywordflow}{break};
-413         \textcolor{keywordflow}{case} 3: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[i].layer   = att[i]; \textcolor{keywordflow}{break};
-414       \}
-415 
-416     \}
-417 
-418   \}
-419   \textcolor{comment}{// If the vector sizes differ, create a new path sequence}
-420   \textcolor{comment}{// and set value for this attribute. Other attributes will}
-421   \textcolor{comment}{// be taken from default single path.}
-422   \textcolor{keywordflow}{else}\{
-423 
-424     cout << \textcolor{stringliteral}{"Warning: New vector size. Starting new path vector."} << endl;
-425     cout << \textcolor{stringliteral}{"To avoid possible issues, use the SetPath function."} << endl;
-426 
-427     \textcolor{comment}{// Start a new standard path just}
-428     \textcolor{comment}{// to set default values}
-429     \hyperlink{classOscProb_1_1PMNS__Base_add6533a9fc9acdfc7ae258b62570d78d}{SetStdPath}();
-430 
-431     \textcolor{comment}{// Create a path segment with default values}
-432     \hyperlink{structOscProb_1_1NuPath}{NuPath} p = \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0];
-433 
-434     \textcolor{comment}{// Clear the path sequence}
-435     \hyperlink{classOscProb_1_1PMNS__Base_aefe521239031c418cfaaaa550a6e13bb}{ClearPath}();
-436 
-437     \textcolor{comment}{// Set this particular attribute's value}
-438     \textcolor{comment}{// and add the path segment to the sequence}
-439     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nA; i++)\{
-440 
-441       \textcolor{keywordflow}{switch}(idx)\{
-442         \textcolor{keywordflow}{case} 0: p.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}  = att[i]; \textcolor{keywordflow}{break};
-443         \textcolor{keywordflow}{case} 1: p.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density} = att[i]; \textcolor{keywordflow}{break};
-444         \textcolor{keywordflow}{case} 2: p.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}     = att[i]; \textcolor{keywordflow}{break};
-445         \textcolor{keywordflow}{case} 3: p.\hyperlink{structOscProb_1_1NuPath_a442b160899e554ad1d800989510d5309}{layer}   = att[i]; \textcolor{keywordflow}{break};
-446       \}
-447 
-448       \hyperlink{classOscProb_1_1PMNS__Base_a887dc9d4dc569ec0cdef3933b4c60efc}{AddPath}(p);
-449 
-450     \}
-451 
-452   \}
-453 
-454 \}
+398                                                     \{
+399 
+400   \textcolor{comment}{// Get the sizes of the attribute and}
+401   \textcolor{comment}{// path sequence vectors}
+402   \textcolor{keywordtype}{int} nA = att.size();
+403   \textcolor{keywordtype}{int} nP = \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size();
+404 
+405   \textcolor{comment}{// If the vector sizes are equal, update this attribute}
+406   \textcolor{keywordflow}{if}(nA == nP)\{
+407 
+408     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nP; i++)\{
+409 
+410       \textcolor{keywordflow}{switch}(idx)\{
+411         \textcolor{keywordflow}{case} 0: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[i].length  = att[i]; \textcolor{keywordflow}{break};
+412         \textcolor{keywordflow}{case} 1: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[i].density = att[i]; \textcolor{keywordflow}{break};
+413         \textcolor{keywordflow}{case} 2: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[i].zoa     = att[i]; \textcolor{keywordflow}{break};
+414         \textcolor{keywordflow}{case} 3: \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[i].layer   = att[i]; \textcolor{keywordflow}{break};
+415       \}
+416 
+417     \}
+418 
+419   \}
+420   \textcolor{comment}{// If the vector sizes differ, create a new path sequence}
+421   \textcolor{comment}{// and set value for this attribute. Other attributes will}
+422   \textcolor{comment}{// be taken from default single path.}
+423   \textcolor{keywordflow}{else}\{
+424 
+425     cout << \textcolor{stringliteral}{"Warning: New vector size. Starting new path vector."} << endl;
+426     cout << \textcolor{stringliteral}{"To avoid possible issues, use the SetPath function."} << endl;
+427 
+428     \textcolor{comment}{// Start a new standard path just}
+429     \textcolor{comment}{// to set default values}
+430     \hyperlink{classOscProb_1_1PMNS__Base_add6533a9fc9acdfc7ae258b62570d78d}{SetStdPath}();
+431 
+432     \textcolor{comment}{// Create a path segment with default values}
+433     \hyperlink{structOscProb_1_1NuPath}{NuPath} p = \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0];
+434 
+435     \textcolor{comment}{// Clear the path sequence}
+436     \hyperlink{classOscProb_1_1PMNS__Base_aefe521239031c418cfaaaa550a6e13bb}{ClearPath}();
+437 
+438     \textcolor{comment}{// Set this particular attribute's value}
+439     \textcolor{comment}{// and add the path segment to the sequence}
+440     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nA; i++)\{
+441 
+442       \textcolor{keywordflow}{switch}(idx)\{
+443         \textcolor{keywordflow}{case} 0: p.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}  = att[i]; \textcolor{keywordflow}{break};
+444         \textcolor{keywordflow}{case} 1: p.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density} = att[i]; \textcolor{keywordflow}{break};
+445         \textcolor{keywordflow}{case} 2: p.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}     = att[i]; \textcolor{keywordflow}{break};
+446         \textcolor{keywordflow}{case} 3: p.\hyperlink{structOscProb_1_1NuPath_a442b160899e554ad1d800989510d5309}{layer}   = att[i]; \textcolor{keywordflow}{break};
+447       \}
+448 
+449       \hyperlink{classOscProb_1_1PMNS__Base_a887dc9d4dc569ec0cdef3933b4c60efc}{AddPath}(p);
+450 
+451     \}
+452 
+453   \}
+454 
+455 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}\label{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Cur\+Path@{Set\+Cur\+Path}}
@@ -1634,7 +1636,7 @@ It will also check if values are changing to keep track of whether the eigensyst
 \end{DoxyParams}
 
 
-Definition at line 209 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 210 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1646,15 +1648,15 @@ Referenced by Avg\+Prob(), Avg\+Prob\+Lo\+E(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+
 
 
 \begin{DoxyCode}
-210 \{
-211 
-212   \textcolor{comment}{// Check if relevant value are actually changing}
-213   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} *= (\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density} == p.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density});
-214   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} *= (\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa} == p.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa});
-215 
-216   \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath} = p;
-217 
-218 \}
+211 \{
+212 
+213   \textcolor{comment}{// Check if relevant value are actually changing}
+214   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} *= (\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density} == p.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density});
+215   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} *= (\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa} == p.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa});
+216 
+217   \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath} = p;
+218 
+219 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a4bef78cfcfc4e70b4ce79cdb8862c0a3}\label{classOscProb_1_1PMNS__Base_a4bef78cfcfc4e70b4ce79cdb8862c0a3}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Delta@{Set\+Delta}}
@@ -1677,7 +1679,7 @@ This will check if value is changing to keep track of whether the hamiltonian ne
 \end{DoxyParams}
 
 
-Definition at line 597 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 598 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1689,31 +1691,31 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Set\+Mix().
 
 
 \begin{DoxyCode}
-598 \{
-599 
-600   \textcolor{keywordflow}{if}(i>j)\{
-601     cout << \textcolor{stringliteral}{"Warning: First argument should be smaller than second argument"} << endl;
-602     cout << \textcolor{stringliteral}{"         Setting reverse order (Delta"} << j << i << \textcolor{stringliteral}{"). "} << endl;
-603     \textcolor{keywordtype}{int} temp = i;
-604     i = j;
-605     j = temp;
-606   \}
-607   \textcolor{keywordflow}{if}(i<1 || i>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1 || j<2 || j>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
-608     cout << \textcolor{stringliteral}{"ERROR: Delta"} << i << j << \textcolor{stringliteral}{" not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
-609     cout << \textcolor{stringliteral}{" neutrinos. Doing nothing."} << endl;
-610     \textcolor{keywordflow}{return};
-611   \}
-612   \textcolor{keywordflow}{if}(i+1==j)\{
-613     cout << \textcolor{stringliteral}{"Warning: Rotation "} << i << j << \textcolor{stringliteral}{" is real. Doing nothing."} << endl;
-614     \textcolor{keywordflow}{return};
-615   \}
-616 
-617   \textcolor{comment}{// Check if value is actually changing}
-618   \hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms} *= (\hyperlink{classOscProb_1_1PMNS__Base_ab2a5fa40e689b221c8a7d2c17213810d}{fDelta}[i-1][j-1] == delta);
-619 
-620   \hyperlink{classOscProb_1_1PMNS__Base_ab2a5fa40e689b221c8a7d2c17213810d}{fDelta}[i-1][j-1] = delta;
-621 
-622 \}
+599 \{
+600 
+601   \textcolor{keywordflow}{if}(i>j)\{
+602     cout << \textcolor{stringliteral}{"Warning: First argument should be smaller than second argument"} << endl;
+603     cout << \textcolor{stringliteral}{"         Setting reverse order (Delta"} << j << i << \textcolor{stringliteral}{"). "} << endl;
+604     \textcolor{keywordtype}{int} temp = i;
+605     i = j;
+606     j = temp;
+607   \}
+608   \textcolor{keywordflow}{if}(i<1 || i>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1 || j<2 || j>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
+609     cout << \textcolor{stringliteral}{"ERROR: Delta"} << i << j << \textcolor{stringliteral}{" not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
+610     cout << \textcolor{stringliteral}{" neutrinos. Doing nothing."} << endl;
+611     \textcolor{keywordflow}{return};
+612   \}
+613   \textcolor{keywordflow}{if}(i+1==j)\{
+614     cout << \textcolor{stringliteral}{"Warning: Rotation "} << i << j << \textcolor{stringliteral}{" is real. Doing nothing."} << endl;
+615     \textcolor{keywordflow}{return};
+616   \}
+617 
+618   \textcolor{comment}{// Check if value is actually changing}
+619   \hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms} *= (\hyperlink{classOscProb_1_1PMNS__Base_ab2a5fa40e689b221c8a7d2c17213810d}{fDelta}[i-1][j-1] == delta);
+620 
+621   \hyperlink{classOscProb_1_1PMNS__Base_ab2a5fa40e689b221c8a7d2c17213810d}{fDelta}[i-1][j-1] = delta;
+622 
+623 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ac74206f349687da141392c81e2ba6b0d}\label{classOscProb_1_1PMNS__Base_ac74206f349687da141392c81e2ba6b0d}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Density@{Set\+Density}}
@@ -1732,7 +1734,7 @@ If the path sequence is not a single path, a new single path will be created and
 \end{DoxyParams}
 
 
-Definition at line 364 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 365 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1740,11 +1742,11 @@ References Set\+Att().
 
 
 \begin{DoxyCode}
-364                                     \{
-365 
-366   \hyperlink{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}{SetAtt}(rho, 1);
-367 
-368 \}
+365                                     \{
+366 
+367   \hyperlink{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}{SetAtt}(rho, 1);
+368 
+369 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a858221d5510fe732dc6a101fd305cda0}\label{classOscProb_1_1PMNS__Base_a858221d5510fe732dc6a101fd305cda0}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Density@{Set\+Density}}
@@ -1763,7 +1765,7 @@ If the path sequence is of a different size, a new path sequence will be created
 \end{DoxyParams}
 
 
-Definition at line 480 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 481 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1771,11 +1773,11 @@ References Set\+Att().
 
 
 \begin{DoxyCode}
-480                                                \{
-481 
-482   \hyperlink{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}{SetAtt}(rho, 1);
-483 
-484 \}
+481                                                \{
+482 
+483   \hyperlink{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}{SetAtt}(rho, 1);
+484 
+485 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a492243b22fb1b783cd2943f507cff970}\label{classOscProb_1_1PMNS__Base_a492243b22fb1b783cd2943f507cff970}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Dm@{Set\+Dm}}
@@ -1798,7 +1800,7 @@ This will check if value is changing to keep track of whether the hamiltonian ne
 \end{DoxyParams}
 
 
-Definition at line 669 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 670 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1810,20 +1812,20 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Set\+Delta\+Msqrs(), an
 
 
 \begin{DoxyCode}
-670 \{
-671 
-672   \textcolor{keywordflow}{if}(j<2 || j>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
-673     cout << \textcolor{stringliteral}{"ERROR: Dm"} << j << \textcolor{stringliteral}{"1 not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
-674     cout << \textcolor{stringliteral}{" neutrinos. Doing nothing."} << endl;
-675     \textcolor{keywordflow}{return};
-676   \}
-677 
-678   \textcolor{comment}{// Check if value is actually changing}
-679   \hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms} *= (\hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[j-1] == dm);
-680 
-681   \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[j-1] = dm;
-682 
-683 \}
+671 \{
+672 
+673   \textcolor{keywordflow}{if}(j<2 || j>\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus})\{
+674     cout << \textcolor{stringliteral}{"ERROR: Dm"} << j << \textcolor{stringliteral}{"1 not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
+675     cout << \textcolor{stringliteral}{" neutrinos. Doing nothing."} << endl;
+676     \textcolor{keywordflow}{return};
+677   \}
+678 
+679   \textcolor{comment}{// Check if value is actually changing}
+680   \hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms} *= (\hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[j-1] == dm);
+681 
+682   \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[j-1] = dm;
+683 
+684 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}\label{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Energy@{Set\+Energy}}
@@ -1842,7 +1844,7 @@ This will check if value is changing to keep track of whether the eigensystem ne
 \end{DoxyParams}
 
 
-Definition at line 149 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 150 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1854,14 +1856,14 @@ Referenced by Avg\+Prob\+Lo\+E(), P\+M\+N\+S\+\_\+\+Base(), and Prob().
 
 
 \begin{DoxyCode}
-150 \{
-151 
-152   \textcolor{comment}{// Check if value is actually changing}
-153   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} *= (\hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy} == E);
-154 
-155   \hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy} = E;
-156 
-157 \}
+151 \{
+152 
+153   \textcolor{comment}{// Check if value is actually changing}
+154   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} *= (\hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy} == E);
+155 
+156   \hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy} = E;
+157 
+158 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a717e0348cf762f3961854e332a9b52e0}\label{classOscProb_1_1PMNS__Base_a717e0348cf762f3961854e332a9b52e0}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Is\+Nu\+Bar@{Set\+Is\+Nu\+Bar}}
@@ -1880,7 +1882,7 @@ This will check if value is changing to keep track of whether the eigensystem ne
 \end{DoxyParams}
 
 
-Definition at line 168 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 169 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1892,14 +1894,14 @@ Referenced by P\+M\+N\+S\+\_\+\+Base().
 
 
 \begin{DoxyCode}
-169 \{
-170 
-171   \textcolor{comment}{// Check if value is actually changing}
-172   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} *= (\hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar} == isNuBar);
-173 
-174   \hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar} = isNuBar;
-175 
-176 \}
+170 \{
+171 
+172   \textcolor{comment}{// Check if value is actually changing}
+173   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} *= (\hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar} == isNuBar);
+174 
+175   \hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar} = isNuBar;
+176 
+177 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a904e580edf89fb98bf9a6397739b4ebe}\label{classOscProb_1_1PMNS__Base_a904e580edf89fb98bf9a6397739b4ebe}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Layers@{Set\+Layers}}
@@ -1918,7 +1920,7 @@ If the path sequence is of a different size, a new path sequence will be created
 \end{DoxyParams}
 
 
-Definition at line 510 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 511 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1926,13 +1928,13 @@ References Set\+Att().
 
 
 \begin{DoxyCode}
-510                                            \{
-511 
-512   vector<double> lay\_double(lay.begin(), lay.end());
-513 
-514   \hyperlink{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}{SetAtt}(lay\_double, 3);
-515 
-516 \}
+511                                            \{
+512 
+513   vector<double> lay\_double(lay.begin(), lay.end());
+514 
+515   \hyperlink{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}{SetAtt}(lay\_double, 3);
+516 
+517 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a6241325b1bd28cafa556daaecbe4ed62}\label{classOscProb_1_1PMNS__Base_a6241325b1bd28cafa556daaecbe4ed62}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Length@{Set\+Length}}
@@ -1951,7 +1953,7 @@ If the path sequence is not a single path, a new single path will be created and
 \end{DoxyParams}
 
 
-Definition at line 349 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 350 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1963,11 +1965,11 @@ Referenced by Prob().
 
 
 \begin{DoxyCode}
-349                                  \{
-350 
-351   \hyperlink{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}{SetAtt}(L, 0);
-352 
-353 \}
+350                                  \{
+351 
+352   \hyperlink{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}{SetAtt}(L, 0);
+353 
+354 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_aa34a40a3b5abda0f252982d9ead3b520}\label{classOscProb_1_1PMNS__Base_aa34a40a3b5abda0f252982d9ead3b520}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Length@{Set\+Length}}
@@ -1986,7 +1988,7 @@ If the path sequence is of a different size, a new path sequence will be created
 \end{DoxyParams}
 
 
-Definition at line 465 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 466 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1994,11 +1996,11 @@ References Set\+Att().
 
 
 \begin{DoxyCode}
-465                                             \{
-466 
-467   \hyperlink{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}{SetAtt}(L, 0);
-468 
-469 \}
+466                                             \{
+467 
+468   \hyperlink{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}{SetAtt}(L, 0);
+469 
+470 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ac3b644fd0a56347d304ceca4ae9d8875}\label{classOscProb_1_1PMNS__Base_ac3b644fd0a56347d304ceca4ae9d8875}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Path@{Set\+Path}}
@@ -2017,7 +2019,7 @@ This destroys the current path sequence and creates a new first path.
 \end{DoxyParams}
 
 
-Definition at line 284 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 285 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -2029,12 +2031,12 @@ Referenced by Set\+Path(), and Set\+Std\+Path().
 
 
 \begin{DoxyCode}
-284                                \{
-285 
-286   \hyperlink{classOscProb_1_1PMNS__Base_aefe521239031c418cfaaaa550a6e13bb}{ClearPath}();
-287   \hyperlink{classOscProb_1_1PMNS__Base_a887dc9d4dc569ec0cdef3933b4c60efc}{AddPath}(p);
-288 
-289 \}
+285                                \{
+286 
+287   \hyperlink{classOscProb_1_1PMNS__Base_aefe521239031c418cfaaaa550a6e13bb}{ClearPath}();
+288   \hyperlink{classOscProb_1_1PMNS__Base_a887dc9d4dc569ec0cdef3933b4c60efc}{AddPath}(p);
+289 
+290 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a35b983270613072a3df58b574d80dbfd}\label{classOscProb_1_1PMNS__Base_a35b983270613072a3df58b574d80dbfd}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Path@{Set\+Path}}
@@ -2059,7 +2061,7 @@ This destroys the current path sequence and creates a new first path.
 \end{DoxyParams}
 
 
-Definition at line 302 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 303 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -2067,11 +2069,11 @@ References Set\+Path().
 
 
 \begin{DoxyCode}
-302                                                                            \{
-303 
-304   \hyperlink{classOscProb_1_1PMNS__Base_ac3b644fd0a56347d304ceca4ae9d8875}{SetPath}(\hyperlink{structOscProb_1_1NuPath}{NuPath}(length, density, zoa, layer));
-305 
-306 \}
+303                                                                            \{
+304 
+305   \hyperlink{classOscProb_1_1PMNS__Base_ac3b644fd0a56347d304ceca4ae9d8875}{SetPath}(\hyperlink{structOscProb_1_1NuPath}{NuPath}(length, density, zoa, layer));
+306 
+307 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a637d19dd850b4246507796526622643c}\label{classOscProb_1_1PMNS__Base_a637d19dd850b4246507796526622643c}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Path@{Set\+Path}}
@@ -2086,7 +2088,7 @@ Set vector of neutrino paths.
 \end{DoxyParams}
 
 
-Definition at line 235 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 236 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -2094,11 +2096,11 @@ References f\+Nu\+Paths.
 
 
 \begin{DoxyCode}
-235                                               \{
-236 
-237   \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}=paths;
-238 
-239 \}
+236                                               \{
+237 
+238   \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}=paths;
+239 
+240 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a4de96ac9b6d1e9b029ab877e57d211ad}\label{classOscProb_1_1PMNS__Base_a4de96ac9b6d1e9b029ab877e57d211ad}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Std\+Pars@{Set\+Std\+Pars}}
@@ -2110,7 +2112,7 @@ Set standard oscillation parameters from P\+DG 2015.
 
 For two neutrinos, Dm is set to the muon disappearance effective mass-\/splitting and mixing angle. 
 
-Definition at line 97 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 98 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -2122,25 +2124,25 @@ Referenced by P\+M\+N\+S\+\_\+\+Base().
 
 
 \begin{DoxyCode}
-98 \{
-99 
-100   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}>2)\{
-101     \textcolor{comment}{// PDG values for 3 neutrinos}
-102     \textcolor{comment}{// Also applicable for 3+N neutrinos}
-103     \hyperlink{classOscProb_1_1PMNS__Base_ace7875cf6d3bec161a2b7ed2690aec34}{SetAngle}(1,2, asin(sqrt(0.304)));
-104     \hyperlink{classOscProb_1_1PMNS__Base_ace7875cf6d3bec161a2b7ed2690aec34}{SetAngle}(1,3, asin(sqrt(0.0219)));
-105     \hyperlink{classOscProb_1_1PMNS__Base_ace7875cf6d3bec161a2b7ed2690aec34}{SetAngle}(2,3, asin(sqrt(0.514)));
-106     \hyperlink{classOscProb_1_1PMNS__Base_a492243b22fb1b783cd2943f507cff970}{SetDm}(2, 7.53e-5);
-107     \hyperlink{classOscProb_1_1PMNS__Base_a492243b22fb1b783cd2943f507cff970}{SetDm}(3, 2.52e-3);
-108   \}
-109   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}==2)\{
-110     \textcolor{comment}{// Effective muon disappearance values}
-111     \textcolor{comment}{// for two-flavour approximation}
-112     \hyperlink{classOscProb_1_1PMNS__Base_ace7875cf6d3bec161a2b7ed2690aec34}{SetAngle}(1,2, 0.788);
-113     \hyperlink{classOscProb_1_1PMNS__Base_a492243b22fb1b783cd2943f507cff970}{SetDm}(2, 2.47e-3);
-114   \}
-115 
-116 \}
+99 \{
+100 
+101   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}>2)\{
+102     \textcolor{comment}{// PDG values for 3 neutrinos}
+103     \textcolor{comment}{// Also applicable for 3+N neutrinos}
+104     \hyperlink{classOscProb_1_1PMNS__Base_ace7875cf6d3bec161a2b7ed2690aec34}{SetAngle}(1,2, asin(sqrt(0.304)));
+105     \hyperlink{classOscProb_1_1PMNS__Base_ace7875cf6d3bec161a2b7ed2690aec34}{SetAngle}(1,3, asin(sqrt(0.0219)));
+106     \hyperlink{classOscProb_1_1PMNS__Base_ace7875cf6d3bec161a2b7ed2690aec34}{SetAngle}(2,3, asin(sqrt(0.514)));
+107     \hyperlink{classOscProb_1_1PMNS__Base_a492243b22fb1b783cd2943f507cff970}{SetDm}(2, 7.53e-5);
+108     \hyperlink{classOscProb_1_1PMNS__Base_a492243b22fb1b783cd2943f507cff970}{SetDm}(3, 2.52e-3);
+109   \}
+110   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}==2)\{
+111     \textcolor{comment}{// Effective muon disappearance values}
+112     \textcolor{comment}{// for two-flavour approximation}
+113     \hyperlink{classOscProb_1_1PMNS__Base_ace7875cf6d3bec161a2b7ed2690aec34}{SetAngle}(1,2, 0.788);
+114     \hyperlink{classOscProb_1_1PMNS__Base_a492243b22fb1b783cd2943f507cff970}{SetDm}(2, 2.47e-3);
+115   \}
+116 
+117 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_add6533a9fc9acdfc7ae258b62570d78d}\label{classOscProb_1_1PMNS__Base_add6533a9fc9acdfc7ae258b62570d78d}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+Std\+Path@{Set\+Std\+Path}}
@@ -2154,7 +2156,7 @@ Length is 1000 km, so $\sim$2 GeV peak energy.
 
 Density is approximate from C\+R\+U\+S\+T2.\+0 ($\sim$2.8 g/cm$^\wedge$3). Z/A is set to a round 0.\+5. 
 
-Definition at line 127 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 128 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -2166,18 +2168,18 @@ Referenced by P\+M\+N\+S\+\_\+\+Base(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco\+:
 
 
 \begin{DoxyCode}
-127                           \{
-128 
-129   \hyperlink{structOscProb_1_1NuPath}{NuPath} p;
-130 
-131   p.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}  = 1000; \textcolor{comment}{// 1000 km default}
-132   p.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density} = 2.8;  \textcolor{comment}{// Crust density}
-133   p.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}     = 0.5;  \textcolor{comment}{// Crust Z/A}
-134   p.\hyperlink{structOscProb_1_1NuPath_a442b160899e554ad1d800989510d5309}{layer}   = 0;    \textcolor{comment}{// Single layer}
-135 
-136   \hyperlink{classOscProb_1_1PMNS__Base_ac3b644fd0a56347d304ceca4ae9d8875}{SetPath}(p);
-137 
-138 \}
+128                           \{
+129 
+130   \hyperlink{structOscProb_1_1NuPath}{NuPath} p;
+131 
+132   p.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}  = 1000; \textcolor{comment}{// 1000 km default}
+133   p.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density} = 2.8;  \textcolor{comment}{// Crust density}
+134   p.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}     = 0.5;  \textcolor{comment}{// Crust Z/A}
+135   p.\hyperlink{structOscProb_1_1NuPath_a442b160899e554ad1d800989510d5309}{layer}   = 0;    \textcolor{comment}{// Single layer}
+136 
+137   \hyperlink{classOscProb_1_1PMNS__Base_ac3b644fd0a56347d304ceca4ae9d8875}{SetPath}(p);
+138 
+139 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a1bf3ea8fd2507fd2fd82d7410ff8f578}\label{classOscProb_1_1PMNS__Base_a1bf3ea8fd2507fd2fd82d7410ff8f578}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+ZoA@{Set\+ZoA}}
@@ -2196,7 +2198,7 @@ If the path sequence is not a single path, a new single path will be created and
 \end{DoxyParams}
 
 
-Definition at line 379 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 380 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -2204,11 +2206,11 @@ References Set\+Att().
 
 
 \begin{DoxyCode}
-379                                 \{
-380 
-381   \hyperlink{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}{SetAtt}(zoa, 2);
-382 
-383 \}
+380                                 \{
+381 
+382   \hyperlink{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}{SetAtt}(zoa, 2);
+383 
+384 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a8495f8a320e1a21965e6a64aec92ad2a}\label{classOscProb_1_1PMNS__Base_a8495f8a320e1a21965e6a64aec92ad2a}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Set\+ZoA@{Set\+ZoA}}
@@ -2227,7 +2229,7 @@ If the path sequence is of a different size, a new path sequence will be created
 \end{DoxyParams}
 
 
-Definition at line 495 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 496 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -2235,11 +2237,11 @@ References Set\+Att().
 
 
 \begin{DoxyCode}
-495                                            \{
-496 
-497   \hyperlink{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}{SetAtt}(zoa, 2);
-498 
-499 \}
+496                                            \{
+497 
+498   \hyperlink{classOscProb_1_1PMNS__Base_aba565962a440d14bee7a2a96d2eca2c5}{SetAtt}(zoa, 2);
+499 
+500 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a91f065cb9e910e0095e41462b4420b01}\label{classOscProb_1_1PMNS__Base_a91f065cb9e910e0095e41462b4420b01}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Solve\+Ham@{Solve\+Ham}}
@@ -2268,7 +2270,7 @@ Referenced by Get\+Sample\+Points(), and Propagate\+Path().
 
 
 
-Definition at line 173 of file P\+M\+N\+S\+\_\+\+Base.\+h.
+Definition at line 174 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
@@ -2282,7 +2284,7 @@ Referenced by Build\+Hms(), Set\+Angle(), Set\+Delta(), and Set\+Dm().
 
 
 
-Definition at line 159 of file P\+M\+N\+S\+\_\+\+Base.\+h.
+Definition at line 160 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
@@ -2296,7 +2298,7 @@ Referenced by Get\+Delta(), Initialize\+Vectors(), Rotate\+H(), Set\+Delta(), an
 
 
 
-Definition at line 157 of file P\+M\+N\+S\+\_\+\+Base.\+h.
+Definition at line 158 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
@@ -2310,7 +2312,7 @@ Referenced by Build\+Hms(), Get\+Dm(), Initialize\+Vectors(), Osc\+Prob\+::\+P\+
 
 
 
-Definition at line 167 of file P\+M\+N\+S\+\_\+\+Base.\+h.
+Definition at line 168 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
@@ -2324,7 +2326,7 @@ Referenced by Get\+Energy(), Get\+Sample\+Points(), Set\+Energy(), Osc\+Prob\+::
 
 
 
-Definition at line 164 of file P\+M\+N\+S\+\_\+\+Base.\+h.
+Definition at line 165 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
@@ -2338,7 +2340,7 @@ Referenced by Get\+Sample\+Points(), Initialize\+Vectors(), Osc\+Prob\+::\+P\+M\
 
 
 
-Definition at line 165 of file P\+M\+N\+S\+\_\+\+Base.\+h.
+Definition at line 166 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
@@ -2352,7 +2354,7 @@ Referenced by Initialize\+Vectors(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco\+::\+
 
 
 
-Definition at line 174 of file P\+M\+N\+S\+\_\+\+Base.\+h.
+Definition at line 175 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
@@ -2366,7 +2368,7 @@ Referenced by Build\+Hms(), Set\+Cur\+Path(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+D
 
 
 
-Definition at line 162 of file P\+M\+N\+S\+\_\+\+Base.\+h.
+Definition at line 163 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
@@ -2380,7 +2382,7 @@ Referenced by Build\+Hms(), Initialize\+Vectors(), Rotate\+H(), Osc\+Prob\+::\+P
 
 
 
-Definition at line 168 of file P\+M\+N\+S\+\_\+\+Base.\+h.
+Definition at line 169 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
@@ -2394,7 +2396,7 @@ Referenced by Get\+Is\+Nu\+Bar(), Set\+Is\+Nu\+Bar(), Osc\+Prob\+::\+P\+M\+N\+S\
 
 
 
-Definition at line 155 of file P\+M\+N\+S\+\_\+\+Base.\+h.
+Definition at line 156 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
@@ -2408,7 +2410,7 @@ Referenced by Build\+Hms(), Get\+Angle(), Get\+Delta(), Get\+Dm(), Osc\+Prob\+::
 
 
 
-Definition at line 170 of file P\+M\+N\+S\+\_\+\+Base.\+h.
+Definition at line 171 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
@@ -2422,7 +2424,7 @@ Referenced by Add\+Path(), Avg\+Prob(), Avg\+Prob\+Lo\+E(), Clear\+Path(), Get\+
 
 
 
-Definition at line 161 of file P\+M\+N\+S\+\_\+\+Base.\+h.
+Definition at line 162 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
@@ -2436,7 +2438,7 @@ Referenced by Initialize\+Vectors(), P(), Propagate\+Path(), and Reset\+To\+Flav
 
 
 
-Definition at line 171 of file P\+M\+N\+S\+\_\+\+Base.\+h.
+Definition at line 172 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
@@ -2450,7 +2452,7 @@ Referenced by Avg\+Prob(), Avg\+Prob\+Lo\+E(), Set\+Cur\+Path(), Osc\+Prob\+::\+
 
 
 
-Definition at line 158 of file P\+M\+N\+S\+\_\+\+Base.\+h.
+Definition at line 159 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
@@ -2478,7 +2480,7 @@ Referenced by Get\+Sample\+Points(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco\+::\+
 
 
 
-Definition at line 118 of file P\+M\+N\+S\+\_\+\+Base.\+h.
+Definition at line 119 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
@@ -2488,7 +2490,7 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+Solve\+Ham(), Osc\+P
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!k\+K2@{k\+K2}}
 \index{k\+K2@{k\+K2}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}}
 \subsubsection{\texorpdfstring{k\+K2}{kK2}}
-{\footnotesize\ttfamily const double P\+M\+N\+S\+\_\+\+Base\+::k\+K2 = 4.\+62711501e-\/09\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily const double P\+M\+N\+S\+\_\+\+Base\+::k\+K2 = 1e-\/3 $\ast$ k\+N\+A / pow(k\+Km2e\+V,3)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -2502,7 +2504,7 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+Solve\+Ham(), Osc\+P
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!k\+Km2eV@{k\+Km2eV}}
 \index{k\+Km2eV@{k\+Km2eV}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}}
 \subsubsection{\texorpdfstring{k\+Km2eV}{kKm2eV}}
-{\footnotesize\ttfamily const double P\+M\+N\+S\+\_\+\+Base\+::k\+Km2eV = 1.\+0 / 1.\+973269718e-\/10\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+{\footnotesize\ttfamily const double P\+M\+N\+S\+\_\+\+Base\+::k\+Km2eV = 1.\+0 / 1.\+973269788e-\/10\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
 
 
 
@@ -2511,6 +2513,16 @@ Definition at line 114 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 Referenced by Get\+Sample\+Points(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco\+::\+Propagate\+Path(), and Propagate\+Path().
+
+\mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a69355e770b89e99437c2b8a66e48eeb9}\label{classOscProb_1_1PMNS__Base_a69355e770b89e99437c2b8a66e48eeb9}} 
+\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!k\+NA@{k\+NA}}
+\index{k\+NA@{k\+NA}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}}
+\subsubsection{\texorpdfstring{k\+NA}{kNA}}
+{\footnotesize\ttfamily const double P\+M\+N\+S\+\_\+\+Base\+::k\+NA = 6.\+022140857e23\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 117 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ab64aab27448a5aca27565c991a9d173e}\label{classOscProb_1_1PMNS__Base_ab64aab27448a5aca27565c991a9d173e}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!one@{one}}
