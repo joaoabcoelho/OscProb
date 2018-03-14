@@ -24,10 +24,11 @@ const complex<double> PMNS_Base::zero(0,0);
 const complex<double> PMNS_Base::one(1,0);
 
 // Define some constants from PDG 2015
-const double PMNS_Base::kGeV2eV = 1.0e+09;               // GeV to eV conversion
-const double PMNS_Base::kKm2eV  = 1.0 / 1.973269718e-10; // (hbar.c [eV.km])^-1
-const double PMNS_Base::kK2     = 4.62711501e-09;        // N_A * (hbar*c [GeV.cm])^3 * kGeV2eV
-const double PMNS_Base::kGf     = 1.1663787e-05;         // G_F/(hbar*c)^3 [GeV^-2]
+const double PMNS_Base::kGeV2eV = 1.0e+09;                    // GeV to eV conversion
+const double PMNS_Base::kKm2eV  = 1.0 / 1.973269788e-10;      // (hbar.c [eV.km])^-1
+const double PMNS_Base::kNA     = 6.022140857e23;             // Avogadro constant (N_A)
+const double PMNS_Base::kK2     = 1e-3 * kNA / pow(kKm2eV,3); // N_A * (hbar*c [GeV.cm])^3 * kGeV2eV
+const double PMNS_Base::kGf     = 1.1663787e-05;              // G_F/(hbar*c)^3 [GeV^-2]
 
 
 //......................................................................

@@ -114,6 +114,7 @@ namespace OscProb {
     static const double kKm2eV;  ///< km to eV^-1
     static const double kK2;     ///< mol/GeV^2/cm^3 to eV
     static const double kGeV2eV; ///< GeV to eV
+    static const double kNA;     ///< Avogadro constant
 
     static const double kGf;     ///< G_F in units of GeV^-2
 
