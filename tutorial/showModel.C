@@ -5,6 +5,9 @@
 // Define the PREM tables path
 #include "../prem_default.hpp"
 
+// Function to draw all layers from upgoing path
+void DrawModel(TString opt = "alp", int col = kBlue, int model = 0);
+
 // Plot the PREM model
 void showModel(){
 
@@ -26,7 +29,7 @@ void showModel(){
 }
 
 // Function to draw all layers from upgoing path
-void DrawModel(TString opt = "alp", int col = kBlue, int model = 0){
+void DrawModel(TString opt, int col, int model){
 
   // Set as up-going
   double cosT = -1;

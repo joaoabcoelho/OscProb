@@ -6,6 +6,12 @@
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
 
+// Make oscillogram for given final flavour and MH
+TH2D* GetOscHist(int flvf = 1, int mh = 1);
+
+// Draw energy lines
+void DrawEnergyLines(TH2* hNH);
+
 // Make an oscillogram for NH 
 // nue (0), numu (1) or nutau (2)
 void MakeOscillogram(int flvf = 1){
@@ -31,7 +37,7 @@ void MakeOscillogram(int flvf = 1){
 }
 
 // Make oscillogram for given final flavour and MH
-TH2D* GetOscHist(int flvf = 1, int mh = 1){
+TH2D* GetOscHist(int flvf, int mh){
 
   // Use 200 x bins and 100 y bins
   int nbinsx = 200;

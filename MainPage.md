@@ -17,7 +17,7 @@ A few example macros on how to use OscProb are available in a tutorial directory
 
 OscProb is very easy to install. The only requirements is to have ROOT installed with the GSL libraries.
 
-**IMPORTANT: OscProb currently does NOT build with ROOT 6**
+**NEW: Thanks to Jacek Holeczek, OscProb now also builds with ROOT 6!!**
 
 Once you have ROOT setup, simply do:
 ```sh

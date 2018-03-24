@@ -5,6 +5,9 @@
 // Define the PREM tables path
 #include "../prem_default.hpp"
 
+// Function to draw paths fractions as a function of cosT
+void DrawPath(double cosT, TString opt = "alp", int col = kBlue, int model = 0);
+
 // Plot a series of paths as a
 // function of cosTheta.
 void showPaths(){
@@ -61,7 +64,7 @@ void showPaths(){
 
 
 // Function to draw paths fractions as a function of cosT
-void DrawPath(double cosT, TString opt = "alp", int col = kBlue, int model = 0){
+void DrawPath(double cosT, TString opt, int col, int model){
 
   // Get the model table paths
   string filename;

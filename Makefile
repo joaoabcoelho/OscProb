@@ -1,13 +1,14 @@
 
-CXX = g++
+CXX = $(shell root-config --cxx)
 CXXFLAGS = $(shell root-config --cflags) -fPIC
 LDFLAGS = $(shell root-config --glibs)
 
 PACKAGE = OscProb
 HEADERS = $(filter-out $(CURDIR)/LinkDef.h, $(wildcard $(CURDIR)/*.h))
 SOURCES = $(wildcard $(CURDIR)/*.cxx)
-TARGET_LIB = $(CURDIR)/lib$(PACKAGE).so
-DICTIONARY = $(CURDIR)/tmp/dic$(PACKAGE).cxx
+TARGET = lib$(PACKAGE)
+TARGET_LIB = $(CURDIR)/$(TARGET).so
+DICTIONARY = $(CURDIR)/tmp/$(TARGET).cxx
 
 # GSL library
 GSL_INCS = $(shell gsl-config --cflags)
@@ -30,12 +31,13 @@ all: $(BUILDDIRS) $(PREMINC) $(TARGET_LIB)
 
 $(TARGET_LIB): $(DICTIONARY) $(SOURCES) $(MATRIX)
 	@echo "  Building $(PACKAGE)..."
-	@g++ -shared -O3 -o$@ $(LDFLAGS) $(CXXFLAGS) -I$(ROOTSYS)/include $^
+	@$(CXX) $(CXXFLAGS) -O3 -shared -o$@ $^ $(LDFLAGS)
 
 $(DICTIONARY): $(HEADERS) LinkDef.h
 	@echo "  Making dictionary for $(PACKAGE)..."
 	@mkdir -p tmp
-	@rootcint -f $@ -c $(GSL_INCS) -p $^
+	@rootcint -f $@ -c -p $(GSL_INCS) $^
+	@if [ -e $(DICTIONARY:%.cxx=%_rdict.pcm) ] ; then mv -f $(DICTIONARY:%.cxx=%_rdict.pcm) $(CURDIR)/ ; fi # ROOT 6
 
 $(BUILDDIRS):
 	@exec $(MAKE) -s -C $(@:build-%=%)
@@ -51,11 +53,10 @@ $(PREMINC): $(PREMDIR) $(PREMFILE)
 clean: $(CLEANDIRS)
 	@echo "  Cleaning $(PACKAGE)..."
 	@rm -f $(TARGET_LIB)
+	@rm -f $(TARGET_LIB:%.so=%_rdict.pcm) # ROOT 6
 	@rm -f $(PREMINC)
 	@rm -f $(DICTIONARY)
-	@rm -f $(DICTIONARY:%.cxx=%.h)
+	@rm -f $(DICTIONARY:%.cxx=%.h) # ROOT 5
 	@rm -rf tmp
 
-
 .PHONY: $(SUBDIRS) $(BUILDDIRS) $(CLEANDIRS) clean all
-

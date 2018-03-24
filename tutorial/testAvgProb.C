@@ -105,7 +105,7 @@ void testAvgProb(){
   h3->DrawCopy("hist same ][");
 
   // Make a new canvas
-  c1->DrawClone();
+  gPad->DrawClone();
   
   // Set a nice histogram
   SetHist(h5, kBlue);
@@ -119,11 +119,11 @@ void testAvgProb(){
   h1->Scale(smax);
 
   // Draw the number of sample points
-  h5->DrawCopy("hist");
+  h5->DrawCopy("hist ][");
 
   // Draw the scaled oscillation
   // probability behind it
-  h1->DrawCopy("curv same");
-  h5->DrawCopy("hist same");
+  h1->DrawCopy("hist ][ same");
+  h5->DrawCopy("hist ][ same");
   
 }
