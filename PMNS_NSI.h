@@ -13,7 +13,7 @@
 ///
 /// \sa PMNS_Fast
 ///
-/// \author jcoelho\@apc.in2p3.fr
+/// \author coelho\@lal.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef PMNS_NSI_H

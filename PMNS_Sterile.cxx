@@ -12,7 +12,7 @@
 //   - Rho to be the matter density in g/cm^3
 //   - theta_ij and delta_ij to be in radians
 //
-// jcoelho@apc.in2p3.fr
+// coelho@lal.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #include "PMNS_Sterile.h"

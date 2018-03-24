@@ -7,7 +7,7 @@
 /// so that the neutrino propagation through a path is done
 /// consistently in the PMNS classes.
 ///
-/// \author jcoelho\@apc.in2p3.fr
+/// \author coelho\@lal.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////
@@ -21,7 +21,7 @@
 /// earth model. Only the outer radius of the shell is stored,
 /// so PremLayer's need to be assembled in order inside a vector.
 ///
-/// \author jcoelho\@apc.in2p3.fr
+/// \author coelho\@lal.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef NUPATH_H

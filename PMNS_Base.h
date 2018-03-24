@@ -10,7 +10,7 @@
 ///
 /// \sa PMNS_Fast PMNS_NSI PMNS_Sterile
 ///
-/// \author Joao Coelho - jcoelho\@apc.in2p3.fr
+/// \author Joao Coelho - coelho\@lal.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef PMNS_BASE_H

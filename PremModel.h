@@ -19,7 +19,7 @@
 ///
 /// This class inherits from TObject and can be saved in ROOT files.
 ///
-/// \author jcoelho\@apc.in2p3.fr
+/// \author coelho\@lal.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef PREMMODEL_H

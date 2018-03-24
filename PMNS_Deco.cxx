@@ -5,7 +5,7 @@
 //
 // This  class inherits from the PMNS_Fast class
 //
-// jcoelho@apc.in2p3.fr
+// coelho@lal.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
