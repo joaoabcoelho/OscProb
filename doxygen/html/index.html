@@ -74,7 +74,7 @@ $(function() {
 <p>A few example macros on how to use <a class="el" href="namespaceOscProb.html">OscProb</a> are available in a tutorial directory.</p>
 <h1>Installing <a class="el" href="namespaceOscProb.html">OscProb</a></h1>
 <p><a class="el" href="namespaceOscProb.html">OscProb</a> is very easy to install. The only requirements is to have ROOT installed with the GSL libraries.</p>
-<p><b>IMPORTANT: <a class="el" href="namespaceOscProb.html">OscProb</a> currently does NOT build with ROOT 6</b></p>
+<p><b>NEW: Thanks to Jacek Holeczek, <a class="el" href="namespaceOscProb.html">OscProb</a> now also builds with ROOT 6!!</b></p>
 <p>Once you have ROOT setup, simply do: </p><div class="fragment"><div class="line">cd OscProb</div><div class="line">make</div></div><!-- fragment --><p>A shared library will be produced: <code>libOscProb.so</code></p>
 <p>This should take a few seconds and you are all set.</p>
 <p>Just load the shared library in your ROOT macros with: </p><div class="fragment"><div class="line">gSystem-&gt;Load(<span class="stringliteral">&quot;/full/path/to/libOscProb.so&quot;</span>);</div></div><!-- fragment --><p>In some cases you may need to explicitly load GSL libraries. Just add something like this to your rootlogon, replacing the path to the GSL libraries if needed: </p><div class="fragment"><div class="line">gSystem-&gt;Load(<span class="stringliteral">&quot;/usr/lib/x86_64-linux-gnu/libgsl.so&quot;</span>);</div><div class="line">gSystem-&gt;Load(<span class="stringliteral">&quot;/usr/lib/x86_64-linux-gnu/libgslcblas.so&quot;</span>);</div></div><!-- fragment --><h1>Tutorial</h1>
