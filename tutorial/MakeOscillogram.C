@@ -6,6 +6,9 @@
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
 
+// Macro to load OscProb library
+#include "LoadOscProb.C"
+
 // Make oscillogram for given final flavour and MH
 TH2D* GetOscHist(int flvf = 1, int mh = 1);
 
@@ -17,7 +20,7 @@ void DrawEnergyLines(TH2* hNH);
 void MakeOscillogram(int flvf = 1){
  
   // Load OscProb library
-  gSystem->Load("../libOscProb.so");
+  LoadOscProb();
   
   // Set a nice overall style
   SetNiceStyle();

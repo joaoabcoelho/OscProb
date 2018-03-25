@@ -2,6 +2,9 @@
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
 
+// Macro to load OscProb library
+#include "LoadOscProb.C"
+
 // Check the accuracy of the
 // oscillation averaging function
 void testAvgProb(){
@@ -10,7 +13,7 @@ void testAvgProb(){
   SetNiceStyle();
 
   // Load OscProb
-  gSystem->Load("../libOscProb.so");
+  LoadOscProb();
   
   // Get a PMNS object
   OscProb::PMNS_Fast p;

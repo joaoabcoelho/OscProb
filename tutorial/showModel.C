@@ -2,6 +2,9 @@
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
 
+// Macro to load OscProb library
+#include "LoadOscProb.C"
+
 // Define the PREM tables path
 #include "../prem_default.hpp"
 
@@ -14,8 +17,7 @@ void showModel(){
   // Load the library.
   // You can also include this in your rootrc file
   // The library must be in your path
-  // Or you can specify full path
-  gSystem->Load("../libOscProb.so");
+  LoadOscProb();
 
   // Set a nice overall style
   SetNiceStyle();

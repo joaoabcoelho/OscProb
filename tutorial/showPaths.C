@@ -2,6 +2,9 @@
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
 
+// Macro to load OscProb library
+#include "LoadOscProb.C"
+
 // Define the PREM tables path
 #include "../prem_default.hpp"
 
@@ -13,7 +16,7 @@ void DrawPath(double cosT, TString opt = "alp", int col = kBlue, int model = 0);
 void showPaths(){
 
   // Load the OscProb library.
-  gSystem->Load("../libOscProb.so");
+  LoadOscProb();
 
   // Set a nice overall style
   SetNiceStyle();

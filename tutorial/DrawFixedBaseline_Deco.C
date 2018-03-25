@@ -1,5 +1,6 @@
 
 #include "SetNiceStyle.C"
+#include "LoadOscProb.C"
 #include "../prem_default.hpp"
 
 void DrawFixedBaseline_Deco(double L = 1300, bool isNuBar = false){
@@ -8,7 +9,7 @@ void DrawFixedBaseline_Deco(double L = 1300, bool isNuBar = false){
   SetNiceStyle();
 
   // Load OscProb library
-  gSystem->Load("../libOscProb.so");
+  LoadOscProb();
 
   // Probability Calculator
   OscProb::PMNS_Deco p;

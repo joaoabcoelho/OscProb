@@ -1,5 +1,6 @@
 
 #include "SetNiceStyle.C"
+#include "LoadOscProb.C"
 
 void DrawFixedCosT(double cosT = -0.7, bool isNuBar = false){
 
@@ -7,7 +8,7 @@ void DrawFixedCosT(double cosT = -0.7, bool isNuBar = false){
   SetNiceStyle();
 
   // Load OscProb library
-  gSystem->Load("../libOscProb.so");
+  LoadOscProb();
 
   // Probability Calculator
   OscProb::PMNS_Fast p;

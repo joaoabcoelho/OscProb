@@ -1,11 +1,13 @@
 
+// Macro to load OscProb library
+#include "LoadOscProb.C"
+
 void simpleExamples(){
  
   // Load the library.
   // You can also include this in your rootrc file
   // The library must be in your path
-  // Or you can specify full path
-  gSystem->Load("../libOscProb.so");	
+  LoadOscProb();
 
 
 
