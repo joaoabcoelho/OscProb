@@ -90,7 +90,6 @@ namespace OscProb {
     virtual void SetZoA    (std::vector<double> zoa); ///< Set multiple path Z/A values
     virtual void SetLayers (std::vector<int>    lay); ///< Set multiple path layer indices
 
-
     // Set a default neutrino path
     virtual void SetStdPath(); ///< Set standard neutrino path
     
@@ -100,6 +99,9 @@ namespace OscProb {
 
     /// Compute the sample points for a bin of L/E with width dLoE
     virtual std::vector<double> GetSamplePoints(double LoE, double dLoE);
+
+    virtual void SetOldProp(bool oldProp = true); ///< Set the old prop method
+    virtual bool GetOldProp();                    ///< Get the old prop flag
 
     // A shorthand...
     typedef std::complex<double> complex;
@@ -155,14 +157,17 @@ namespace OscProb {
     
     int fNumNus; ///< Number of neutrino flavours
     
-    std::vector<double>            fDm;      ///< m^2_i - m^2_1 in vacuum
+    std::vector<double>                 fDm;      ///< m^2_i - m^2_1 in vacuum
     std::vector< std::vector<double> >  fTheta;   ///< theta[i][j] mixing angle
     std::vector< std::vector<double> >  fDelta;   ///< delta[i][j] CP violating phase
 
-    std::vector<complex>           fNuState; ///< The neutrino current state
+    std::vector<complex>                fNuState; ///< The neutrino current state
     std::vector< std::vector<complex> > fHms;     ///< matrix H*2E in eV^2
 
-    std::vector<double>            fEval;    ///< Eigenvalues of the Hamiltonian
+    std::vector<complex>                fPhases; ///< Buffer for oscillation phases
+    std::vector<complex>                fBuffer; ///< Buffer for neutrino state tranformations
+
+    std::vector<double>                 fEval;    ///< Eigenvalues of the Hamiltonian
     std::vector< std::vector<complex> > fEvec;    ///< Eigenvectors of the Hamiltonian
 
     double fEnergy;  ///< Neutrino energy
@@ -173,6 +178,7 @@ namespace OscProb {
 
     bool   fBuiltHms;      ///< Tag to avoid rebuilding Hms
     bool   fGotES;         ///< Tag to avoid recalculating eigensystem
+    bool   fOldProp;       ///< Switch bewteen propagation methods
 
   };
 

@@ -46,7 +46,7 @@ const double PMNS_Base::kGf     = 1.1663787e-05;              // G_F/(hbar*c)^3 
 /// @param numNus - the number of neutrino flavours
 ///
 PMNS_Base::PMNS_Base(int numNus) :
-fGotES(false), fBuiltHms(false)
+fGotES(false), fBuiltHms(false), fOldProp(true)
 {
 
   fNumNus = numNus;    // Set the number of neutrinos
@@ -82,6 +82,9 @@ void PMNS_Base::InitializeVectors()
 
   fNuState = vector<complex>(fNumNus, zero);
   fHms     = vector< vector<complex> >(fNumNus, vector<complex>(fNumNus,zero));
+
+  fPhases = vector<complex>(fNumNus, zero);
+  fBuffer = vector<complex>(fNumNus, zero);
 
   fEval = vector<double>(fNumNus, 0);
   fEvec = vector< vector<complex> >(fNumNus, vector<complex>(fNumNus,zero));
@@ -174,6 +177,18 @@ void PMNS_Base::SetIsNuBar(bool isNuBar)
 
   fIsNuBar = isNuBar;
 
+}
+
+//......................................................................
+void PMNS_Base::SetOldProp(bool oldProp)
+{
+  fOldProp = oldProp;
+}
+
+//......................................................................
+bool PMNS_Base::GetOldProp()
+{
+  return fOldProp;
 }
 
 //......................................................................
@@ -890,22 +905,51 @@ void PMNS_Base::PropagatePath(NuPath p)
   // Solve for eigensystem
   SolveHam();
 
-  // Store coefficients of propagation eigenstates
-  vector<complex> nuComp(fNumNus, zero);
-  for(int i=0;i<fNumNus;i++){
-    nuComp[i] = 0;
-    for(int j=0;j<fNumNus;j++){
-      nuComp[i] += fNuState[j] * conj(fEvec[j][i]);
-    }
-  }
+  if(fOldProp){
 
-  // Propagate neutrino state
-  for(int i=0;i<fNumNus;i++){
-    fNuState[i] = 0;
-    for(int j=0;j<fNumNus;j++){
-      double arg = fEval[j] * kKm2eV * p.length;
-      fNuState[i] +=  complex(cos(arg), -sin(arg)) * nuComp[j] * fEvec[i][j];
+    // Store coefficients of propagation eigenstates
+    vector<complex> nuComp(fNumNus, zero);
+    for(int i=0;i<fNumNus;i++){
+      nuComp[i] = 0;
+      for(int j=0;j<fNumNus;j++){
+        nuComp[i] += fNuState[j] * conj(fEvec[j][i]);
+      }
     }
+  
+    // Propagate neutrino state
+    for(int i=0;i<fNumNus;i++){
+      fNuState[i] = 0;
+      for(int j=0;j<fNumNus;j++){
+        double arg = fEval[j] * kKm2eV * p.length;
+        fNuState[i] +=  complex(cos(arg), -sin(arg)) * nuComp[j] * fEvec[i][j];
+      }
+    }  
+
+  }
+  else {
+
+    double LengthIneV = kKm2eV * p.length;
+    for(int i=0; i<fNumNus; i++){
+      double arg = fEval[i] * LengthIneV;
+      fPhases[i] = complex(cos(arg), -sin(arg));
+    }
+  
+    for(int i=0;i<fNumNus;i++){
+      fBuffer[i] = 0;
+      for(int j=0;j<fNumNus;j++){
+        fBuffer[i] += conj(fEvec[j][i]) * fNuState[j];
+      }
+      fBuffer[i] *= fPhases[i];
+    }
+
+    // Propagate neutrino state
+    for(int i=0;i<fNumNus;i++){
+      fNuState[i] = 0;
+      for(int j=0;j<fNumNus;j++){
+        fNuState[i] +=  fEvec[i][j] * fBuffer[j];
+      }
+    }  
+    
   }
 
 }
