@@ -34,7 +34,7 @@ Just load the shared library in your ROOT macros with:
 gSystem->Load("/full/path/to/libOscProb.so");
 ```
 
-Or use the LoadOscProb.C macro (see below).
+Or use the ```LoadOscProb.C``` macro (see below).
 
 # Tutorial
 
