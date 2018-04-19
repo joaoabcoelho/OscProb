@@ -36,12 +36,7 @@ gSystem->Load(\textcolor{stringliteral}{"/full/path/to/libOscProb.so"});
 \end{DoxyCode}
 
 
-In some cases you may need to explicitly load G\+SL libraries. Just add something like this to your rootlogon, replacing the path to the G\+SL libraries if needed\+: 
-\begin{DoxyCode}
-gSystem->Load(\textcolor{stringliteral}{"/usr/lib/x86\_64-linux-gnu/libgsl.so"});
-gSystem->Load(\textcolor{stringliteral}{"/usr/lib/x86\_64-linux-gnu/libgslcblas.so"});
-\end{DoxyCode}
-
+Or use the {\ttfamily Load\+Osc\+Prob.\+C} macro (see below).
 
 \section*{Tutorial}
 
@@ -56,5 +51,13 @@ Two macros are particularly useful\+:
 Additionally, these macros contain useful tools\+:
 \begin{DoxyItemize}
 \item {\ttfamily Load\+Osc\+Prob.\+C}\+: Searches for the \hyperlink{namespaceOscProb}{Osc\+Prob} library in your current directory, parent directory, or library path, and then loads it. It is called within the tutorial macros as a possible usage example.
-\item {\ttfamily Set\+Nice\+Style.\+C}\+: Provides simple tools to make your plots look nicer. Feel free to use it anytime you\textquotesingle{}re making plots, even if you\textquotesingle{}re not running \hyperlink{namespaceOscProb}{Osc\+Prob}. This is completely independent of \hyperlink{namespaceOscProb}{Osc\+Prob}. 
+\item {\ttfamily Set\+Nice\+Style.\+C}\+: Provides simple tools to make your plots look nicer. Feel free to use it anytime you\textquotesingle{}re making plots, even if you\textquotesingle{}re not running \hyperlink{namespaceOscProb}{Osc\+Prob}. This is completely independent of \hyperlink{namespaceOscProb}{Osc\+Prob}.
 \end{DoxyItemize}
+
+To run macros in compiled mode you will need to preload the \hyperlink{namespaceOscProb}{Osc\+Prob} library, e.\+g\+:
+
+
+\begin{DoxyCode}
+root -l LoadOscProb.C MakeOscillogram.C+
+\end{DoxyCode}
+ 
