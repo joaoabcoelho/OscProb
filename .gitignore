@@ -3,6 +3,8 @@
 *.so
 *.hpp
 *.pcm
+*_C.d
+*_C.so
 
 tmp/
 

@@ -1,4 +1,11 @@
 
+#ifndef __CINT__
+#include "PremModel.h"
+bool isCINT = false;
+#else
+bool isCINT = true;
+#endif
+
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
 
@@ -16,7 +23,7 @@ void DrawPath(double cosT, TString opt = "alp", int col = kBlue, int model = 0);
 void showPaths(){
 
   // Load the OscProb library.
-  LoadOscProb();
+  if(isCINT) LoadOscProb();
 
   // Set a nice overall style
   SetNiceStyle();

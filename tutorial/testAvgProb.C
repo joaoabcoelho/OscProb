@@ -1,3 +1,9 @@
+#ifndef __CINT__
+#include "PMNS_Fast.h"
+bool isCINT = false;
+#else
+bool isCINT = true;
+#endif
 
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
@@ -13,7 +19,7 @@ void testAvgProb(){
   SetNiceStyle();
 
   // Load OscProb
-  LoadOscProb();
+  if(isCINT) LoadOscProb();
   
   // Get a PMNS object
   OscProb::PMNS_Fast p;
