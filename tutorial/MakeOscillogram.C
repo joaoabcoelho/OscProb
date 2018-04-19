@@ -1,13 +1,24 @@
 #include <iostream>
 
+#include "TF1.h"
+#include "TMath.h"
 #include "TGraph.h"
 #include "TSystem.h"
+
+#ifndef __CINT__
+#include "PremModel.h"
+#include "PMNS_Fast.h"
+bool isCINT = false;
+#else
+bool isCINT = true;
+#endif
+
+// Macro to load OscProb library
+#include "LoadOscProb.C"
 
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
 
-// Macro to load OscProb library
-#include "LoadOscProb.C"
 
 // Make oscillogram for given final flavour and MH
 TH2D* GetOscHist(int flvf = 1, int mh = 1);
@@ -18,9 +29,9 @@ void DrawEnergyLines(TH2* hNH);
 // Make an oscillogram for NH 
 // nue (0), numu (1) or nutau (2)
 void MakeOscillogram(int flvf = 1){
- 
+
   // Load OscProb library
-  LoadOscProb();
+  if(isCINT) LoadOscProb();
   
   // Set a nice overall style
   SetNiceStyle();

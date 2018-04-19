@@ -34,11 +34,7 @@ Just load the shared library in your ROOT macros with:
 gSystem->Load("/full/path/to/libOscProb.so");
 ```
 
-In some cases you may need to explicitly load GSL libraries. Just add something like this to your rootlogon, replacing the path to the GSL libraries if needed:
-```cpp
-gSystem->Load("/usr/lib/x86_64-linux-gnu/libgsl.so");
-gSystem->Load("/usr/lib/x86_64-linux-gnu/libgslcblas.so");
-```
+Or use the ```LoadOscProb.C``` macro (see below).
 
 # Tutorial
 
@@ -51,3 +47,9 @@ Two macros are particularly useful:
 Additionally, these macros contain useful tools:
 - ```LoadOscProb.C```: Searches for the OscProb library in your current directory, parent directory, or library path, and then loads it. It is called within the tutorial macros as a possible usage example.
 - ```SetNiceStyle.C```: Provides simple tools to make your plots look nicer. Feel free to use it anytime you're making plots, even if you're not running OscProb. This is completely independent of OscProb.
+
+To run macros in compiled mode you will need to preload the OscProb library, e.g:
+
+```sh
+root -l LoadOscProb.C MakeOscillogram.C+
+```

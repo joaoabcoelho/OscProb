@@ -1,4 +1,11 @@
 
+#ifndef __CINT__
+#include "PremModel.h"
+bool isCINT = false;
+#else
+bool isCINT = true;
+#endif
+
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
 
@@ -17,7 +24,7 @@ void showModel(){
   // Load the library.
   // You can also include this in your rootrc file
   // The library must be in your path
-  LoadOscProb();
+  if(isCINT) LoadOscProb();
 
   // Set a nice overall style
   SetNiceStyle();

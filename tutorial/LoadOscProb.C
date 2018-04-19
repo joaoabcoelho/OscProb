@@ -1,3 +1,7 @@
+#include <iostream>
+#include "TString.h"
+#include "TSystem.h"
+#include "TInterpreter.h"
 
 void LoadOscProb(TString logLevel = "info") { 
 
@@ -9,9 +13,6 @@ void LoadOscProb(TString logLevel = "info") {
   bool verbose = logLevel.Contains("v");
   bool quiet   = logLevel.Contains("q") && !verbose;
   
-  // ... may be needed for ROOT 5, if "undefined reference to gsl_*" ...
-  gSystem->Load("libMathMore"); // automatically loads "gsl" and "cblas"
-
   // The library name
   TString s("libOscProb.so");
 
@@ -32,7 +33,7 @@ void LoadOscProb(TString logLevel = "info") {
 
     switch(errCode){
 
-      case 1: // Library already loaded
+      case 1: { // Library already loaded
         std::cout << "libOscProb already loaded at: ";
         TObjArray* libs = TString(gSystem->GetLibraries()).Tokenize(" ");
   
@@ -40,11 +41,14 @@ void LoadOscProb(TString logLevel = "info") {
   
           TString lib = libs->At(i)->GetName();
     
-          if(lib.Contains("libOscProb.so")) std::cout << lib << std::endl;
+          if(lib.Contains("libOscProb.so")){
+            std::cout << lib << std::endl;
+            s = lib;
+          }
   
         }
         break;
-        
+      }  
       default: std::cout << "libOscProb could not be loaded. Error Code: " << errCode << std::endl;
       
     }
@@ -55,5 +59,8 @@ void LoadOscProb(TString logLevel = "info") {
     std::cout << "Loaded library " << s << std::endl;
 
   }
-    
+  
+  if(verbose) std::cout << "Adding " << gSystem->DirName(s) << " to include path" << std::endl;
+  gInterpreter->AddIncludePath(gSystem->DirName(s));
+
 }
