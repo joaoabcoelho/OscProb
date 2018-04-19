@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['fbuffer',['fBuffer',['../classOscProb_1_1PMNS__Base.html#a53f912c6e4a17035a6c0c11fd63b5f14',1,'OscProb::PMNS_Base']]],
   ['fbuilthms',['fBuiltHms',['../classOscProb_1_1PMNS__Base.html#a9ac3cadeac8db1b90f3152f476244780',1,'OscProb::PMNS_Base']]],
   ['fdelta',['fDelta',['../classOscProb_1_1PMNS__Base.html#ab2a5fa40e689b221c8a7d2c17213810d',1,'OscProb::PMNS_Base']]],
   ['fdetlayer',['fDetLayer',['../classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185',1,'OscProb::PremModel']]],
@@ -22,6 +23,7 @@ var searchData=
   ['fnupaths',['fNuPaths',['../classOscProb_1_1PMNS__Base.html#a69db9d57e12fc7cbe0431bc6c18fac93',1,'OscProb::PMNS_Base']]],
   ['fnustate',['fNuState',['../classOscProb_1_1PMNS__Base.html#ad38a7107c3ab393591fd5ba21658300b',1,'OscProb::PMNS_Base']]],
   ['fpath',['fPath',['../classOscProb_1_1PMNS__Base.html#a849437aa8891fe042e86886ce8f81c6e',1,'OscProb::PMNS_Base']]],
+  ['fphases',['fPhases',['../classOscProb_1_1PMNS__Base.html#a2fcb59d7c533e4cd963b1890e504d3dc',1,'OscProb::PMNS_Base']]],
   ['fpremlayers',['fPremLayers',['../classOscProb_1_1PremModel.html#a19a9a3b23ec154ad7a29f92b74aa5bc6',1,'OscProb::PremModel']]],
   ['fremovesmallpaths',['fRemoveSmallPaths',['../classOscProb_1_1PremModel.html#a3973df6f5f2ff219cd2f865b31aacfd2',1,'OscProb::PremModel']]],
   ['frho',['fRho',['../classOscProb_1_1PMNS__Deco.html#a0488d62b4ef4cf5b43425769f5fcdbdf',1,'OscProb::PMNS_Deco']]],
