@@ -100,9 +100,6 @@ namespace OscProb {
     /// Compute the sample points for a bin of L/E with width dLoE
     virtual std::vector<double> GetSamplePoints(double LoE, double dLoE);
 
-    virtual void SetOldProp(bool oldProp = true); ///< Set the old prop method
-    virtual bool GetOldProp();                    ///< Get the old prop flag
-
     // A shorthand...
     typedef std::complex<double> complex;
 
@@ -126,14 +123,14 @@ namespace OscProb {
     // Auxiliary path functions
     virtual void SetCurPath(OscProb::NuPath p); ///< Set the path currently in use by the class
 
-    virtual void SetAtt(double att, int idx);         ///< Set one of the path attributes
+    virtual void SetAtt(double att, int idx);              ///< Set one of the path attributes
     virtual void SetAtt(std::vector<double> att, int idx); ///< Set all values of a path attribute
 
 
     // Building and solving
     virtual void RotateH(int i,int j); ///< Rotate the Hamiltonian by theta_ij and delta_ij
 
-    virtual void BuildHms();     ///< Build the matrix of masses squared.
+    virtual void BuildHms();           ///< Build the matrix of masses squared.
 
 
     ///
@@ -148,7 +145,7 @@ namespace OscProb {
     virtual void ResetToFlavour(int flv); ///< Reset neutrino state to pure flavour flv
 
     virtual void PropagatePath(OscProb::NuPath p);    ///< Propagate neutrino through a single path
-    virtual void Propagate();    ///< Propagate neutrino through full path
+    virtual void Propagate();                         ///< Propagate neutrino through full path
 
     virtual double P(int flv);    ///< Return the probability of final state in flavour flv
 
@@ -164,8 +161,8 @@ namespace OscProb {
     std::vector<complex>                fNuState; ///< The neutrino current state
     std::vector< std::vector<complex> > fHms;     ///< matrix H*2E in eV^2
 
-    std::vector<complex>                fPhases; ///< Buffer for oscillation phases
-    std::vector<complex>                fBuffer; ///< Buffer for neutrino state tranformations
+    std::vector<complex>                fPhases;  ///< Buffer for oscillation phases
+    std::vector<complex>                fBuffer;  ///< Buffer for neutrino state tranformations
 
     std::vector<double>                 fEval;    ///< Eigenvalues of the Hamiltonian
     std::vector< std::vector<complex> > fEvec;    ///< Eigenvectors of the Hamiltonian
@@ -174,11 +171,10 @@ namespace OscProb {
     bool   fIsNuBar; ///< Anti-neutrino flag
     
     std::vector<OscProb::NuPath> fNuPaths; ///< Vector of neutrino paths
-    OscProb::NuPath fPath;            ///< Current neutrino path
+    OscProb::NuPath fPath;                 ///< Current neutrino path
 
     bool   fBuiltHms;      ///< Tag to avoid rebuilding Hms
     bool   fGotES;         ///< Tag to avoid recalculating eigensystem
-    bool   fOldProp;       ///< Switch bewteen propagation methods
 
   };
 
