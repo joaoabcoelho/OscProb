@@ -51,6 +51,7 @@ namespace OscProb {
       virtual double GetCosT(double L); ///< Get the cosTheta for a given total baseline
       
       virtual void SetLayerZoA(int layer, double zoa); ///< Set Z/A of all layers of a given type
+      virtual void SetTopLayerSize(double thick);      ///< Set the outermost layer thickness in km
 
       virtual void LoadModel(std::string filename); ///< Load an earth model from a file
 

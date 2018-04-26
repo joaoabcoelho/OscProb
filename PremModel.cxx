@@ -212,6 +212,40 @@ void PremModel::SetLayerZoA(int layer, double zoa)
 
 //......................................................................
 ///
+/// Set the radius of the outermost layer of the model.
+///
+/// This usually corresponds to the atmosphere and is useful for
+/// computing oscillations with variable neutrino production height.
+///
+/// @param thick - The thickness of the outer layer in km
+///
+void PremModel::SetTopLayerSize(double thick)
+{
+
+  if(thick <= 0){
+    cout << "Layer thickness should be positive. Do nothing." << endl;
+    return;
+  }
+
+  int nlayers = fPremLayers.size();
+  
+  if(nlayers < 1){
+    cout << "PremModel has no layers. Do nothing." << endl;
+    return;
+  }
+  
+  double bottomRadius;
+  if(nlayers>1) bottomRadius = fPremLayers[nlayers-2].radius;
+  else          bottomRadius = 0;
+
+  double topRadius = bottomRadius + thick;
+  
+  fPremLayers[nlayers-1].radius = topRadius;
+  
+}
+
+//......................................................................
+///
 /// Get the total baseline for a given cosTheta.
 ///
 /// The total baseline contains both from above and below the detector.
