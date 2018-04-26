@@ -34,6 +34,8 @@ virtual double \hyperlink{classOscProb_1_1PremModel_a5328474bdbb703eb4c9d4df4999
 \begin{DoxyCompactList}\small\item\em Get the cos\+Theta for a given total baseline. \end{DoxyCompactList}\item 
 virtual void \hyperlink{classOscProb_1_1PremModel_ac9887d1af4b3c02925fe3228349f593d}{Set\+Layer\+ZoA} (int layer, double zoa)
 \begin{DoxyCompactList}\small\item\em Set Z/A of all layers of a given type. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classOscProb_1_1PremModel_a095bd601f6cd91926de9928e96ea7751}{Set\+Top\+Layer\+Size} (double thick)
+\begin{DoxyCompactList}\small\item\em Set the outermost layer thickness in km. \end{DoxyCompactList}\item 
 virtual void \hyperlink{classOscProb_1_1PremModel_a6363a5e711dd8b0d2e684677e585b293}{Load\+Model} (std\+::string filename)
 \begin{DoxyCompactList}\small\item\em Load an earth model from a file. \end{DoxyCompactList}\item 
 virtual void \hyperlink{classOscProb_1_1PremModel_a55b314e97ed9b92931e08ada0c0947eb}{Set\+Det\+Pos} (double pos)
@@ -207,7 +209,7 @@ For a given \hyperlink{structOscProb_1_1PremLayer}{Prem\+Layer}, adds a path of 
 \end{DoxyParams}
 
 
-Definition at line 269 of file Prem\+Model.\+cxx.
+Definition at line 303 of file Prem\+Model.\+cxx.
 
 
 
@@ -219,12 +221,12 @@ Referenced by Fill\+Path().
 
 
 \begin{DoxyCode}
-270 \{
-271 
-272   \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}.push\_back( \hyperlink{structOscProb_1_1NuPath}{NuPath}(length, pl.\hyperlink{structOscProb_1_1PremLayer_aba2536cbdab87d0db33df47f95c4f2c3}{density}, pl.\hyperlink{structOscProb_1_1PremLayer_a8687a8169d786fca79908292d11077f5}{zoa}, pl.
+304 \{
+305 
+306   \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}.push\_back( \hyperlink{structOscProb_1_1NuPath}{NuPath}(length, pl.\hyperlink{structOscProb_1_1PremLayer_aba2536cbdab87d0db33df47f95c4f2c3}{density}, pl.\hyperlink{structOscProb_1_1PremLayer_a8687a8169d786fca79908292d11077f5}{zoa}, pl.
       \hyperlink{structOscProb_1_1PremLayer_aca8d7df68e6f982155b68b7e6a7ef389}{layer}) );
-273   
-274 \}
+307   
+308 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}\label{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}} 
 \index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Avg\+Path@{Avg\+Path}}
@@ -250,7 +252,7 @@ The merged path
 \end{DoxyReturn}
 
 
-Definition at line 463 of file Prem\+Model.\+cxx.
+Definition at line 497 of file Prem\+Model.\+cxx.
 
 
 
@@ -262,23 +264,23 @@ Referenced by Get\+Merged\+Paths(), and Merge\+Paths().
 
 
 \begin{DoxyCode}
-463                                              \{
-464 
-465   \textcolor{comment}{// Start with the first path}
-466   \hyperlink{structOscProb_1_1NuPath}{NuPath} mergedPath = p1;
-467 
-468   \textcolor{comment}{// Add the second length}
-469   mergedPath.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} += p2.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length};
-470 
-471   \textcolor{comment}{// Compute weighted average of density}
-472   mergedPath.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density} = (p1.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density}*p1.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}*p1.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} + p2.
+497                                              \{
+498 
+499   \textcolor{comment}{// Start with the first path}
+500   \hyperlink{structOscProb_1_1NuPath}{NuPath} mergedPath = p1;
+501 
+502   \textcolor{comment}{// Add the second length}
+503   mergedPath.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} += p2.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length};
+504 
+505   \textcolor{comment}{// Compute weighted average of density}
+506   mergedPath.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density} = (p1.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density}*p1.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}*p1.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} + p2.
       \hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density}*p2.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}*p2.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}) / (p1.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}*p1.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} + p2.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}*p2.
       \hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length});
-473 
-474   \textcolor{comment}{// return merged path}
-475   \textcolor{keywordflow}{return} mergedPath;
-476 
-477 \}
+507 
+508   \textcolor{comment}{// return merged path}
+509   \textcolor{keywordflow}{return} mergedPath;
+510 
+511 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PremModel_a9a1d78e29217bb0dd00ae3bd96d22b69}\label{classOscProb_1_1PremModel_a9a1d78e29217bb0dd00ae3bd96d22b69}} 
 \index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Class\+Def@{Class\+Def}}
@@ -335,7 +337,7 @@ The number of path segments in the sequence
 \end{DoxyReturn}
 
 
-Definition at line 291 of file Prem\+Model.\+cxx.
+Definition at line 325 of file Prem\+Model.\+cxx.
 
 
 
@@ -343,82 +345,82 @@ References Add\+Path(), f\+Det\+Layer, f\+Nu\+Path, and f\+Prem\+Layers.
 
 
 \begin{DoxyCode}
-292 \{
-293 
-294   \textcolor{comment}{// Clear current path sequence}
-295   \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}.clear();
-296   
-297   \textcolor{comment}{// Do nothing if cosine is unphysical}
-298   \textcolor{keywordflow}{if}(fabs(cosT) > 1) \textcolor{keywordflow}{return} 0;
-299 
-300   \textcolor{comment}{// Define the minimum path radius}
-301   \textcolor{keywordtype}{double} minR = \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[\hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{fDetLayer}].radius * sqrt(1 - cosT*cosT);
-302 
-303   \textcolor{comment}{// Set the top layer index}
-304   \textcolor{keywordtype}{int} toplayer = \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}.size() - 1;
-305   
-306   \textcolor{comment}{// Find the inner-most crossed layer}
-307   \textcolor{keywordtype}{int} minlayer = 0;
-308   \textcolor{keywordflow}{while}(\hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[minlayer].radius < minR) minlayer++; 
-309 
-310   \textcolor{comment}{// Compute the number of path segments needed}
-311   \textcolor{keywordtype}{int} nsteps = toplayer - \hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{fDetLayer};
-312   \textcolor{keywordflow}{if}(cosT < 0) nsteps += 2*(fDetLayer - minlayer) + 1;
-313 
-314   \textcolor{comment}{// Start at the top layer and go down}
-315   \textcolor{keywordtype}{int} layer = toplayer;
-316   \textcolor{keywordtype}{int} dl = -1;
-317   
-318   \textcolor{comment}{// Loop over all path segments}
-319   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nsteps; i++)\{
-320   
-321     \textcolor{comment}{// Get square of the path length between this layer's }
-322     \textcolor{comment}{// outer radius and  inner-most radius}
-323     \textcolor{keywordtype}{double} L1 = pow(\hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[layer].radius,2) - minR*minR;
-324 
-325     \textcolor{comment}{// If L1 is negative, outer radius is not crossed.}
-326     \textcolor{comment}{// This only happens if detector is at the top layer and the}
-327     \textcolor{comment}{// neutrino is coming from above.}
-328     \textcolor{keywordflow}{if}(L1 < 0) \textcolor{keywordflow}{return} \textcolor{keyword}{true};
-329     
-330     \textcolor{comment}{// Get square of the path length between this layer's }
-331     \textcolor{comment}{// inner radius and  inner-most radius}
-332     \textcolor{keywordtype}{double} L2 = -minR*minR;
-333     \textcolor{keywordflow}{if}(layer>0) L2 += pow(\hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[layer-1].radius,2);
-334     
-335     \textcolor{comment}{// If L2 is negative, inner radius is not crossed,}
-336     \textcolor{comment}{// so set this as the minimum layer.}
-337     \textcolor{keywordtype}{bool} ismin = (L2<=0 && cosT < 0);
-338 
-339     \textcolor{comment}{// Store the path segment length}
-340     \textcolor{keywordtype}{double} dL;
-341     
-342     \textcolor{comment}{// If it's the minimum layer, connect two outer radius }
-343     \textcolor{comment}{// crossing points. If not, compute difference between}
-344     \textcolor{comment}{// inner and outer radius crossings.}
-345     \textcolor{keywordflow}{if}(ismin)      dL = 2 * sqrt(L1);
-346     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(L2>=0) dL = sqrt(L1) - sqrt(L2);
-347     \textcolor{keywordflow}{else}           dL = sqrt(L1); \textcolor{comment}{// This should never actually happen,}
-348                                   \textcolor{comment}{// but protect in case L2 is slightly}
-349                                   \textcolor{comment}{// negative when it should be zero.}
-350                                   \textcolor{comment}{// e.g. arriving at the detector from above.}
-351     
-352     \textcolor{comment}{// Add this path segment to the sequence}
-353     \hyperlink{classOscProb_1_1PremModel_aca013f7ac5494282834048786a0e07a6}{AddPath}(dL, \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[layer]);
-354     
-355     \textcolor{comment}{// If we reached the inner-most layer,}
-356     \textcolor{comment}{// start moving up again.}
-357     \textcolor{keywordflow}{if}(ismin) dl = 1;
-358     
-359     \textcolor{comment}{// Move to next layer}
-360     layer += dl;
-361   
-362   \}
-363 
-364   \textcolor{comment}{// Return the number of path segments}
-365   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}.size();
-366 
-367 \}
+326 \{
+327 
+328   \textcolor{comment}{// Clear current path sequence}
+329   \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}.clear();
+330   
+331   \textcolor{comment}{// Do nothing if cosine is unphysical}
+332   \textcolor{keywordflow}{if}(fabs(cosT) > 1) \textcolor{keywordflow}{return} 0;
+333 
+334   \textcolor{comment}{// Define the minimum path radius}
+335   \textcolor{keywordtype}{double} minR = \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[\hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{fDetLayer}].radius * sqrt(1 - cosT*cosT);
+336 
+337   \textcolor{comment}{// Set the top layer index}
+338   \textcolor{keywordtype}{int} toplayer = \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}.size() - 1;
+339   
+340   \textcolor{comment}{// Find the inner-most crossed layer}
+341   \textcolor{keywordtype}{int} minlayer = 0;
+342   \textcolor{keywordflow}{while}(\hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[minlayer].radius < minR) minlayer++; 
+343 
+344   \textcolor{comment}{// Compute the number of path segments needed}
+345   \textcolor{keywordtype}{int} nsteps = toplayer - \hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{fDetLayer};
+346   \textcolor{keywordflow}{if}(cosT < 0) nsteps += 2*(fDetLayer - minlayer) + 1;
+347 
+348   \textcolor{comment}{// Start at the top layer and go down}
+349   \textcolor{keywordtype}{int} layer = toplayer;
+350   \textcolor{keywordtype}{int} dl = -1;
+351   
+352   \textcolor{comment}{// Loop over all path segments}
+353   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nsteps; i++)\{
+354   
+355     \textcolor{comment}{// Get square of the path length between this layer's }
+356     \textcolor{comment}{// outer radius and  inner-most radius}
+357     \textcolor{keywordtype}{double} L1 = pow(\hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[layer].radius,2) - minR*minR;
+358 
+359     \textcolor{comment}{// If L1 is negative, outer radius is not crossed.}
+360     \textcolor{comment}{// This only happens if detector is at the top layer and the}
+361     \textcolor{comment}{// neutrino is coming from above.}
+362     \textcolor{keywordflow}{if}(L1 < 0) \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+363     
+364     \textcolor{comment}{// Get square of the path length between this layer's }
+365     \textcolor{comment}{// inner radius and  inner-most radius}
+366     \textcolor{keywordtype}{double} L2 = -minR*minR;
+367     \textcolor{keywordflow}{if}(layer>0) L2 += pow(\hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[layer-1].radius,2);
+368     
+369     \textcolor{comment}{// If L2 is negative, inner radius is not crossed,}
+370     \textcolor{comment}{// so set this as the minimum layer.}
+371     \textcolor{keywordtype}{bool} ismin = (L2<=0 && cosT < 0);
+372 
+373     \textcolor{comment}{// Store the path segment length}
+374     \textcolor{keywordtype}{double} dL;
+375     
+376     \textcolor{comment}{// If it's the minimum layer, connect two outer radius }
+377     \textcolor{comment}{// crossing points. If not, compute difference between}
+378     \textcolor{comment}{// inner and outer radius crossings.}
+379     \textcolor{keywordflow}{if}(ismin)      dL = 2 * sqrt(L1);
+380     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(L2>=0) dL = sqrt(L1) - sqrt(L2);
+381     \textcolor{keywordflow}{else}           dL = sqrt(L1); \textcolor{comment}{// This should never actually happen,}
+382                                   \textcolor{comment}{// but protect in case L2 is slightly}
+383                                   \textcolor{comment}{// negative when it should be zero.}
+384                                   \textcolor{comment}{// e.g. arriving at the detector from above.}
+385     
+386     \textcolor{comment}{// Add this path segment to the sequence}
+387     \hyperlink{classOscProb_1_1PremModel_aca013f7ac5494282834048786a0e07a6}{AddPath}(dL, \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[layer]);
+388     
+389     \textcolor{comment}{// If we reached the inner-most layer,}
+390     \textcolor{comment}{// start moving up again.}
+391     \textcolor{keywordflow}{if}(ismin) dl = 1;
+392     
+393     \textcolor{comment}{// Move to next layer}
+394     layer += dl;
+395   
+396   \}
+397 
+398   \textcolor{comment}{// Return the number of path segments}
+399   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}.size();
+400 
+401 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PremModel_a5328474bdbb703eb4c9d4df49999cda6}\label{classOscProb_1_1PremModel_a5328474bdbb703eb4c9d4df49999cda6}} 
 \index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Get\+CosT@{Get\+CosT}}
@@ -439,7 +441,7 @@ The baseline must be within the range of possible values in this earth model. Wi
 \end{DoxyParams}
 
 
-Definition at line 247 of file Prem\+Model.\+cxx.
+Definition at line 281 of file Prem\+Model.\+cxx.
 
 
 
@@ -447,17 +449,17 @@ References f\+Det\+Layer, and f\+Prem\+Layers.
 
 
 \begin{DoxyCode}
-248 \{
-249 
-250   \textcolor{keywordtype}{double} rAbove = \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}.back().radius;     \textcolor{comment}{// Radius above detector}
-251   \textcolor{keywordtype}{double} rBelow = \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[\hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{fDetLayer}].radius; \textcolor{comment}{// Radius below detector}
-252   
-253   \textcolor{keywordflow}{if}(L < rAbove - rBelow) \textcolor{keywordflow}{return}  1;
-254   \textcolor{keywordflow}{if}(L > rAbove + rBelow) \textcolor{keywordflow}{return} -1;
-255   
-256   \textcolor{keywordflow}{return} (rAbove*rAbove - rBelow*rBelow - L*L) / (2*rBelow*L);
-257   
-258 \}
+282 \{
+283 
+284   \textcolor{keywordtype}{double} rAbove = \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}.back().radius;     \textcolor{comment}{// Radius above detector}
+285   \textcolor{keywordtype}{double} rBelow = \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[\hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{fDetLayer}].radius; \textcolor{comment}{// Radius below detector}
+286   
+287   \textcolor{keywordflow}{if}(L < rAbove - rBelow) \textcolor{keywordflow}{return}  1;
+288   \textcolor{keywordflow}{if}(L > rAbove + rBelow) \textcolor{keywordflow}{return} -1;
+289   
+290   \textcolor{keywordflow}{return} (rAbove*rAbove - rBelow*rBelow - L*L) / (2*rBelow*L);
+291   
+292 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PremModel_a5b6f83f2e9b7087e8faad1f19f00ebd5}\label{classOscProb_1_1PremModel_a5b6f83f2e9b7087e8faad1f19f00ebd5}} 
 \index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Get\+Merged\+Paths@{Get\+Merged\+Paths}}
@@ -481,7 +483,7 @@ The vector of merged path segments
 \end{DoxyReturn}
 
 
-Definition at line 382 of file Prem\+Model.\+cxx.
+Definition at line 416 of file Prem\+Model.\+cxx.
 
 
 
@@ -489,74 +491,74 @@ References Avg\+Path(), Osc\+Prob\+::\+Nu\+Path\+::density, f\+Nu\+Path, f\+Remo
 
 
 \begin{DoxyCode}
-382                                                    \{
-383 
-384   \textcolor{comment}{// The output vector}
-385   vector<NuPath> mergedPath;
-386 
-387   \textcolor{comment}{// Start with the first path}
-388   \hyperlink{structOscProb_1_1NuPath}{OscProb::NuPath} path = \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}[0];
-389 
-390   \textcolor{comment}{// Track the total length}
-391   \textcolor{keywordtype}{double} totL = 0;
-392 
-393   \textcolor{comment}{// Loop over all paths starting from second}
-394   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=1; i<\hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}.size(); i++)\{
-395 
-396     \textcolor{comment}{// If this path electron density is beyond the tolerance}
-397     \textcolor{keywordflow}{if}( fabs(path.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density}*path.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa} - \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}[i].density*\hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}[i].zoa) > prec*path
+416                                                    \{
+417 
+418   \textcolor{comment}{// The output vector}
+419   vector<NuPath> mergedPath;
+420 
+421   \textcolor{comment}{// Start with the first path}
+422   \hyperlink{structOscProb_1_1NuPath}{OscProb::NuPath} path = \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}[0];
+423 
+424   \textcolor{comment}{// Track the total length}
+425   \textcolor{keywordtype}{double} totL = 0;
+426 
+427   \textcolor{comment}{// Loop over all paths starting from second}
+428   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=1; i<\hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}.size(); i++)\{
+429 
+430     \textcolor{comment}{// If this path electron density is beyond the tolerance}
+431     \textcolor{keywordflow}{if}( fabs(path.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density}*path.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa} - \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}[i].density*\hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}[i].zoa) > prec*path
       .\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa} )\{
-398 
-399       \textcolor{comment}{// Add merged path to vector}
-400       mergedPath.push\_back(path);
-401       
-402       \textcolor{comment}{// Set this path as new merged path}
-403       path = \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}[i];
-404 
-405     \}
-406     \textcolor{comment}{// If path is within tolerance}
-407     \textcolor{keywordflow}{else}\{
-408       
-409       \textcolor{comment}{// Merge the path with current merged path}
-410       path = \hyperlink{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}{AvgPath}(path, \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}[i]);
-411 
-412     \}
-413 
-414     \textcolor{comment}{// Increment total length}
-415     totL += \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}[i].length;
-416 
-417   \}\textcolor{comment}{// End of loop over paths}
-418 
-419   \textcolor{comment}{// Add the final merged path to vector}
-420   mergedPath.push\_back(path);
-421 
-422   \textcolor{comment}{// If tag is true, remove small paths}
-423   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PremModel_a3973df6f5f2ff219cd2f865b31aacfd2}{fRemoveSmallPaths})\{
-424 
-425     \textcolor{comment}{// Start at first path}
-426     \textcolor{keywordtype}{int} k = 0;
-427 
-428     \textcolor{comment}{// While not at the end of vector}
-429     \textcolor{keywordflow}{while}(k + 1 < mergedPath.size())\{
-430 
-431       \textcolor{comment}{// If length is less than 1% of total}
-432       \textcolor{keywordflow}{if}(mergedPath[k].length < 0.01*totL)\{
-433 
-434         \textcolor{comment}{// Merge path with following path}
-435         mergedPath = \hyperlink{classOscProb_1_1PremModel_a87cb8043b58fde2c8a8779e6ae1b5135}{MergePaths}(mergedPath, k, k+1);
-436 
-437       \}
-438       \textcolor{comment}{// If path is long enough skip it}
-439       \textcolor{keywordflow}{else} k++;
-440 
-441     \}\textcolor{comment}{// End of while loop}
-442 
-443   \}\textcolor{comment}{// End of if statement}
-444 
-445   \textcolor{comment}{// return the merged vector}
-446   \textcolor{keywordflow}{return} mergedPath;
+432 
+433       \textcolor{comment}{// Add merged path to vector}
+434       mergedPath.push\_back(path);
+435       
+436       \textcolor{comment}{// Set this path as new merged path}
+437       path = \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}[i];
+438 
+439     \}
+440     \textcolor{comment}{// If path is within tolerance}
+441     \textcolor{keywordflow}{else}\{
+442       
+443       \textcolor{comment}{// Merge the path with current merged path}
+444       path = \hyperlink{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}{AvgPath}(path, \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}[i]);
+445 
+446     \}
 447 
-448 \}
+448     \textcolor{comment}{// Increment total length}
+449     totL += \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}[i].length;
+450 
+451   \}\textcolor{comment}{// End of loop over paths}
+452 
+453   \textcolor{comment}{// Add the final merged path to vector}
+454   mergedPath.push\_back(path);
+455 
+456   \textcolor{comment}{// If tag is true, remove small paths}
+457   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PremModel_a3973df6f5f2ff219cd2f865b31aacfd2}{fRemoveSmallPaths})\{
+458 
+459     \textcolor{comment}{// Start at first path}
+460     \textcolor{keywordtype}{int} k = 0;
+461 
+462     \textcolor{comment}{// While not at the end of vector}
+463     \textcolor{keywordflow}{while}(k + 1 < mergedPath.size())\{
+464 
+465       \textcolor{comment}{// If length is less than 1% of total}
+466       \textcolor{keywordflow}{if}(mergedPath[k].length < 0.01*totL)\{
+467 
+468         \textcolor{comment}{// Merge path with following path}
+469         mergedPath = \hyperlink{classOscProb_1_1PremModel_a87cb8043b58fde2c8a8779e6ae1b5135}{MergePaths}(mergedPath, k, k+1);
+470 
+471       \}
+472       \textcolor{comment}{// If path is long enough skip it}
+473       \textcolor{keywordflow}{else} k++;
+474 
+475     \}\textcolor{comment}{// End of while loop}
+476 
+477   \}\textcolor{comment}{// End of if statement}
+478 
+479   \textcolor{comment}{// return the merged vector}
+480   \textcolor{keywordflow}{return} mergedPath;
+481 
+482 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PremModel_adbe7a5df260cba3923f5cbcb8ab2f03f}\label{classOscProb_1_1PremModel_adbe7a5df260cba3923f5cbcb8ab2f03f}} 
 \index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Get\+Nu\+Path@{Get\+Nu\+Path}}
@@ -615,7 +617,7 @@ The total baseline contains both from above and below the detector.
 \end{DoxyParams}
 
 
-Definition at line 221 of file Prem\+Model.\+cxx.
+Definition at line 255 of file Prem\+Model.\+cxx.
 
 
 
@@ -623,18 +625,18 @@ References f\+Det\+Layer, and f\+Prem\+Layers.
 
 
 \begin{DoxyCode}
-222 \{
-223 
-224   \textcolor{keywordflow}{if}(fabs(cosT) > 1) \textcolor{keywordflow}{return} 0;
-225 
-226   \textcolor{keywordtype}{double} rAbove = \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}.back().radius;     \textcolor{comment}{// Radius above detector}
-227   \textcolor{keywordtype}{double} rBelow = \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[\hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{fDetLayer}].radius; \textcolor{comment}{// Radius below detector}
-228 
-229   \textcolor{keywordtype}{double} sinsqrT = 1 - cosT*cosT;
-230 
-231   \textcolor{keywordflow}{return} -rBelow*cosT + sqrt(rAbove*rAbove - rBelow*rBelow*sinsqrT);
-232 
-233 \}
+256 \{
+257 
+258   \textcolor{keywordflow}{if}(fabs(cosT) > 1) \textcolor{keywordflow}{return} 0;
+259 
+260   \textcolor{keywordtype}{double} rAbove = \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}.back().radius;     \textcolor{comment}{// Radius above detector}
+261   \textcolor{keywordtype}{double} rBelow = \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[\hyperlink{classOscProb_1_1PremModel_a4fb68506493666349f418b893a996185}{fDetLayer}].radius; \textcolor{comment}{// Radius below detector}
+262 
+263   \textcolor{keywordtype}{double} sinsqrT = 1 - cosT*cosT;
+264 
+265   \textcolor{keywordflow}{return} -rBelow*cosT + sqrt(rAbove*rAbove - rBelow*rBelow*sinsqrT);
+266 
+267 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PremModel_a6363a5e711dd8b0d2e684677e585b293}\label{classOscProb_1_1PremModel_a6363a5e711dd8b0d2e684677e585b293}} 
 \index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Load\+Model@{Load\+Model}}
@@ -747,7 +749,7 @@ The merged vector of paths
 \end{DoxyReturn}
 
 
-Definition at line 487 of file Prem\+Model.\+cxx.
+Definition at line 521 of file Prem\+Model.\+cxx.
 
 
 
@@ -759,25 +761,25 @@ Referenced by Get\+Merged\+Paths().
 
 
 \begin{DoxyCode}
-487                                                                           \{
-488 
-489   \textcolor{comment}{// Output vector}
-490   vector<NuPath> mergedPath;
-491 
-492   \textcolor{comment}{// Loop over input paths}
-493   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<inputPath.size(); i++)\{
-494     
-495     \textcolor{comment}{// If first index, merge the paths j and k}
-496     \textcolor{keywordflow}{if}(i==j) mergedPath.push\_back(\hyperlink{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}{AvgPath}(inputPath[j], inputPath[k]));
-497     \textcolor{comment}{// If not second index add the path as is}
-498     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(i!=k) mergedPath.push\_back(inputPath[i]);
-499 
-500   \}\textcolor{comment}{// End of loop}
-501 
-502   \textcolor{comment}{// return merged vector}
-503   \textcolor{keywordflow}{return} mergedPath;
-504 
-505 \}
+521                                                                           \{
+522 
+523   \textcolor{comment}{// Output vector}
+524   vector<NuPath> mergedPath;
+525 
+526   \textcolor{comment}{// Loop over input paths}
+527   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<inputPath.size(); i++)\{
+528     
+529     \textcolor{comment}{// If first index, merge the paths j and k}
+530     \textcolor{keywordflow}{if}(i==j) mergedPath.push\_back(\hyperlink{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}{AvgPath}(inputPath[j], inputPath[k]));
+531     \textcolor{comment}{// If not second index add the path as is}
+532     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(i!=k) mergedPath.push\_back(inputPath[i]);
+533 
+534   \}\textcolor{comment}{// End of loop}
+535 
+536   \textcolor{comment}{// return merged vector}
+537   \textcolor{keywordflow}{return} mergedPath;
+538 
+539 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PremModel_a55b314e97ed9b92931e08ada0c0947eb}\label{classOscProb_1_1PremModel_a55b314e97ed9b92931e08ada0c0947eb}} 
 \index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Set\+Det\+Pos@{Set\+Det\+Pos}}
@@ -870,7 +872,7 @@ Set the boolean to tag whether to remove small paths when merging
 \end{DoxyParams}
 
 
-Definition at line 513 of file Prem\+Model.\+cxx.
+Definition at line 547 of file Prem\+Model.\+cxx.
 
 
 
@@ -878,7 +880,56 @@ References f\+Remove\+Small\+Paths.
 
 
 \begin{DoxyCode}
-513 \{ \hyperlink{classOscProb_1_1PremModel_a3973df6f5f2ff219cd2f865b31aacfd2}{fRemoveSmallPaths} = rp; \}
+547 \{ \hyperlink{classOscProb_1_1PremModel_a3973df6f5f2ff219cd2f865b31aacfd2}{fRemoveSmallPaths} = rp; \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classOscProb_1_1PremModel_a095bd601f6cd91926de9928e96ea7751}\label{classOscProb_1_1PremModel_a095bd601f6cd91926de9928e96ea7751}} 
+\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Set\+Top\+Layer\+Size@{Set\+Top\+Layer\+Size}}
+\index{Set\+Top\+Layer\+Size@{Set\+Top\+Layer\+Size}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
+\subsubsection{\texorpdfstring{Set\+Top\+Layer\+Size()}{SetTopLayerSize()}}
+{\footnotesize\ttfamily void Prem\+Model\+::\+Set\+Top\+Layer\+Size (\begin{DoxyParamCaption}\item[{double}]{thick }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Set the radius of the outermost layer of the model.
+
+This usually corresponds to the atmosphere and is useful for computing oscillations with variable neutrino production height.
+
+
+\begin{DoxyParams}{Parameters}
+{\em thick} & -\/ The thickness of the outer layer in km \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 222 of file Prem\+Model.\+cxx.
+
+
+
+References f\+Prem\+Layers.
+
+
+\begin{DoxyCode}
+223 \{
+224 
+225   \textcolor{keywordflow}{if}(thick <= 0)\{
+226     cout << \textcolor{stringliteral}{"Layer thickness should be positive. Do nothing."} << endl;
+227     \textcolor{keywordflow}{return};
+228   \}
+229 
+230   \textcolor{keywordtype}{int} nlayers = \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}.size();
+231   
+232   \textcolor{keywordflow}{if}(nlayers < 1)\{
+233     cout << \textcolor{stringliteral}{"PremModel has no layers. Do nothing."} << endl;
+234     \textcolor{keywordflow}{return};
+235   \}
+236   
+237   \textcolor{keywordtype}{double} bottomRadius;
+238   \textcolor{keywordflow}{if}(nlayers>1) bottomRadius = \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[nlayers-2].radius;
+239   \textcolor{keywordflow}{else}          bottomRadius = 0;
+240 
+241   \textcolor{keywordtype}{double} topRadius = bottomRadius + thick;
+242   
+243   \hyperlink{classOscProb_1_1PremModel_a19a9a3b23ec154ad7a29f92b74aa5bc6}{fPremLayers}[nlayers-1].radius = topRadius;
+244   
+245 \}
 \end{DoxyCode}
 
 
@@ -891,7 +942,7 @@ References f\+Remove\+Small\+Paths.
 
 Define the tolerance of the detector around a boundary when considering whether to add a new layer for the detector position. 
 
-Definition at line 85 of file Prem\+Model.\+h.
+Definition at line 86 of file Prem\+Model.\+h.
 
 
 
@@ -905,7 +956,7 @@ Referenced by Load\+Model().
 
 
 
-Definition at line 80 of file Prem\+Model.\+h.
+Definition at line 81 of file Prem\+Model.\+h.
 
 
 
@@ -919,7 +970,7 @@ Referenced by Clear\+Model(), Fill\+Path(), Get\+Cos\+T(), Get\+Total\+L(), and 
 
 
 
-Definition at line 81 of file Prem\+Model.\+h.
+Definition at line 82 of file Prem\+Model.\+h.
 
 
 
@@ -933,7 +984,7 @@ Referenced by Load\+Model(), and Set\+Det\+Pos().
 
 
 
-Definition at line 78 of file Prem\+Model.\+h.
+Definition at line 79 of file Prem\+Model.\+h.
 
 
 
@@ -947,11 +998,11 @@ Referenced by Add\+Path(), Fill\+Path(), Get\+Merged\+Paths(), and Get\+Nu\+Path
 
 
 
-Definition at line 76 of file Prem\+Model.\+h.
+Definition at line 77 of file Prem\+Model.\+h.
 
 
 
-Referenced by Add\+Layer(), Clear\+Model(), Fill\+Path(), Get\+Cos\+T(), Get\+Prem\+Layers(), Get\+Total\+L(), Load\+Model(), and Set\+Layer\+Zo\+A().
+Referenced by Add\+Layer(), Clear\+Model(), Fill\+Path(), Get\+Cos\+T(), Get\+Prem\+Layers(), Get\+Total\+L(), Load\+Model(), Set\+Layer\+Zo\+A(), and Set\+Top\+Layer\+Size().
 
 \mbox{\Hypertarget{classOscProb_1_1PremModel_a3973df6f5f2ff219cd2f865b31aacfd2}\label{classOscProb_1_1PremModel_a3973df6f5f2ff219cd2f865b31aacfd2}} 
 \index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!f\+Remove\+Small\+Paths@{f\+Remove\+Small\+Paths}}
@@ -961,7 +1012,7 @@ Referenced by Add\+Layer(), Clear\+Model(), Fill\+Path(), Get\+Cos\+T(), Get\+Pr
 
 
 
-Definition at line 83 of file Prem\+Model.\+h.
+Definition at line 84 of file Prem\+Model.\+h.
 
 
 

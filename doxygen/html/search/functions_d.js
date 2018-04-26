@@ -29,6 +29,7 @@ var searchData=
   ['setremovesmallpaths',['SetRemoveSmallPaths',['../classOscProb_1_1PremModel.html#ac5496d6d5bafcf7740c60838d3eee7b3',1,'OscProb::PremModel']]],
   ['setstdpars',['SetStdPars',['../classOscProb_1_1PMNS__Base.html#a4de96ac9b6d1e9b029ab877e57d211ad',1,'OscProb::PMNS_Base']]],
   ['setstdpath',['SetStdPath',['../classOscProb_1_1PMNS__Base.html#add6533a9fc9acdfc7ae258b62570d78d',1,'OscProb::PMNS_Base']]],
+  ['settoplayersize',['SetTopLayerSize',['../classOscProb_1_1PremModel.html#a095bd601f6cd91926de9928e96ea7751',1,'OscProb::PremModel']]],
   ['setvacuumeigensystem',['SetVacuumEigensystem',['../classOscProb_1_1PMNS__Fast.html#a76dd5a761df8689c502b28ad0391f9e2',1,'OscProb::PMNS_Fast']]],
   ['setzoa',['SetZoA',['../classOscProb_1_1PMNS__Base.html#a1bf3ea8fd2507fd2fd82d7410ff8f578',1,'OscProb::PMNS_Base::SetZoA(double zoa)'],['../classOscProb_1_1PMNS__Base.html#a8495f8a320e1a21965e6a64aec92ad2a',1,'OscProb::PMNS_Base::SetZoA(std::vector&lt; double &gt; zoa)']]],
   ['solveham',['SolveHam',['../classOscProb_1_1PMNS__Base.html#a91f065cb9e910e0095e41462b4420b01',1,'OscProb::PMNS_Base::SolveHam()'],['../classOscProb_1_1PMNS__Fast.html#a8a0828401591e88c60e0051fbfe02d5e',1,'OscProb::PMNS_Fast::SolveHam()'],['../classOscProb_1_1PMNS__Sterile.html#af60f89862d0fe333c62d6f87ecfd89f8',1,'OscProb::PMNS_Sterile::SolveHam()']]]
