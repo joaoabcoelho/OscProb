@@ -67,7 +67,7 @@ void PremModel::SetDetPos(double pos){ fDetPos = pos; }
 ///
 /// Get the current neutrino path sequence
 ///
-/// The path needs to be filled for a given cosTheta before 
+/// The path needs to be filled for a given cosTheta before
 /// calling this function.
 ///
 vector<NuPath> PremModel::GetNuPath(){ return fNuPath; }
@@ -102,12 +102,12 @@ void PremModel::ClearModel()
 /// @param zoa     - The effective Z/A value of the layer
 /// @param layer   - An index to identify the matter type (e.g. earth inner core)
 ///
-void PremModel::AddLayer(double radius, double density, 
+void PremModel::AddLayer(double radius, double density,
                          double zoa,    double layer)
 {
 
   fPremLayers.push_back( PremLayer(radius, density, zoa, layer) );
-  
+
 }
 
 //......................................................................
@@ -136,7 +136,7 @@ void PremModel::LoadModel(string filename)
   // Open the file
   ifstream fin;
   fin.open(filename.c_str());
-  
+
   if(!fin){
     cout << "ERROR: File " << filename << " not found!" << endl;
     return;
@@ -147,20 +147,20 @@ void PremModel::LoadModel(string filename)
 
   // Flag to mark we've passed the detector
   bool crossed_det = false;
-  
+
   // Keep track of previous radius
   double rprev = 0;
 
   // Loop over table rows
   while(fin >> radius >> density >> zoa >> layer){
-  
+
     // Radii must be ordered in model file
     if(radius <= rprev){
       cout << "ERROR: Radii are not sorted in increasing order in the model file" << endl;
       ClearModel();
       return;
     }
-  
+
     // See if we passed the detector and decide whether
     // to create a special layer for it
     if(radius > fDetPos - DET_TOL && !crossed_det){
@@ -180,14 +180,14 @@ void PremModel::LoadModel(string filename)
     AddLayer(radius, density, zoa, layer);
 
   }
-  
+
 }
 
 //......................................................................
 ///
 /// Set the effective Z/A value for all layers of a given type.
 ///
-/// Use this to change the Z/A of indexed layer, 
+/// Use this to change the Z/A of indexed layer,
 /// e.g. all outer-core layers
 ///
 /// @param layer - The index of the layer type
@@ -197,17 +197,50 @@ void PremModel::SetLayerZoA(int layer, double zoa)
 {
 
   int nlayers = fPremLayers.size();
-  
+
   // Loop over all layers and change the ones
   // with the given index
   for(int i=0; i<nlayers; i++){
-  
+
     if(fPremLayers[i].layer != layer) continue;
-    
+
     fPremLayers[i].zoa = zoa;
-  
+
   }
 
+}
+
+//......................................................................
+///
+/// Get the effective Z/A value for all layers of a given type, e.g. all
+/// outer-core layers.
+///
+/// @param layer - The index of the layer type
+///
+double PremModel::GetLayerZoA(int layer)
+{
+
+  int nlayers = fPremLayers.size();
+
+  // This check assumes the layer types are in increasing order
+  if(layer > fPremLayers.back().layer){
+    cout << "ERROR: Not that many layer types" << endl;
+    cout << "Returning 0" << endl;
+    return 0;
+  }
+
+  for(int i=0; i<nlayers; i++){
+
+    if(fPremLayers[i].layer != layer) continue;
+
+    else return fPremLayers[i].zoa;
+
+  }
+
+  // End of vector reached without finding input type
+  cout << "ERROR: layer type not found" << endl;
+  cout << "Returning 0" << endl;
+  return 0;
 }
 
 //......................................................................
@@ -228,20 +261,20 @@ void PremModel::SetTopLayerSize(double thick)
   }
 
   int nlayers = fPremLayers.size();
-  
+
   if(nlayers < 1){
     cout << "PremModel has no layers. Do nothing." << endl;
     return;
   }
-  
+
   double bottomRadius;
   if(nlayers>1) bottomRadius = fPremLayers[nlayers-2].radius;
   else          bottomRadius = 0;
 
   double topRadius = bottomRadius + thick;
-  
+
   fPremLayers[nlayers-1].radius = topRadius;
-  
+
 }
 
 //......................................................................
@@ -270,7 +303,7 @@ double PremModel::GetTotalL(double cosT)
 ///
 /// Get the cosTheta for a given total baseline.
 ///
-/// Given a baseline, find the direction of the neutrino. 
+/// Given a baseline, find the direction of the neutrino.
 /// This could be useful for experiments with fixed baselines for example.
 ///
 /// The baseline must be within the range of possible values in this
@@ -283,12 +316,12 @@ double PremModel::GetCosT(double L)
 
   double rAbove = fPremLayers.back().radius;     // Radius above detector
   double rBelow = fPremLayers[fDetLayer].radius; // Radius below detector
-  
+
   if(L < rAbove - rBelow) return  1;
   if(L > rAbove + rBelow) return -1;
-  
+
   return (rAbove*rAbove - rBelow*rBelow - L*L) / (2*rBelow*L);
-  
+
 }
 
 //......................................................................
@@ -300,11 +333,11 @@ double PremModel::GetCosT(double L)
 /// @param length  - The length of the path segment in km
 /// @param pl      - The layer we are crossing
 ///
-void PremModel::AddPath(double length, PremLayer pl) 
+void PremModel::AddPath(double length, PremLayer pl)
 {
 
   fNuPath.push_back( NuPath(length, pl.density, pl.zoa, pl.layer) );
-  
+
 }
 
 //......................................................................
@@ -327,7 +360,7 @@ int PremModel::FillPath(double cosT)
 
   // Clear current path sequence
   fNuPath.clear();
-  
+
   // Do nothing if cosine is unphysical
   if(fabs(cosT) > 1) return 0;
 
@@ -336,10 +369,10 @@ int PremModel::FillPath(double cosT)
 
   // Set the top layer index
   int toplayer = fPremLayers.size() - 1;
-  
+
   // Find the inner-most crossed layer
   int minlayer = 0;
-  while(fPremLayers[minlayer].radius < minR) minlayer++; 
+  while(fPremLayers[minlayer].radius < minR) minlayer++;
 
   // Compute the number of path segments needed
   int nsteps = toplayer - fDetLayer;
@@ -348,11 +381,11 @@ int PremModel::FillPath(double cosT)
   // Start at the top layer and go down
   int layer = toplayer;
   int dl = -1;
-  
+
   // Loop over all path segments
   for(int i=0; i<nsteps; i++){
-  
-    // Get square of the path length between this layer's 
+
+    // Get square of the path length between this layer's
     // outer radius and  inner-most radius
     double L1 = pow(fPremLayers[layer].radius,2) - minR*minR;
 
@@ -360,20 +393,20 @@ int PremModel::FillPath(double cosT)
     // This only happens if detector is at the top layer and the
     // neutrino is coming from above.
     if(L1 < 0) return true;
-    
-    // Get square of the path length between this layer's 
+
+    // Get square of the path length between this layer's
     // inner radius and  inner-most radius
     double L2 = -minR*minR;
     if(layer>0) L2 += pow(fPremLayers[layer-1].radius,2);
-    
+
     // If L2 is negative, inner radius is not crossed,
     // so set this as the minimum layer.
     bool ismin = (L2<=0 && cosT < 0);
 
     // Store the path segment length
     double dL;
-    
-    // If it's the minimum layer, connect two outer radius 
+
+    // If it's the minimum layer, connect two outer radius
     // crossing points. If not, compute difference between
     // inner and outer radius crossings.
     if(ismin)      dL = 2 * sqrt(L1);
@@ -382,17 +415,17 @@ int PremModel::FillPath(double cosT)
                                   // but protect in case L2 is slightly
                                   // negative when it should be zero.
                                   // e.g. arriving at the detector from above.
-    
+
     // Add this path segment to the sequence
     AddPath(dL, fPremLayers[layer]);
-    
+
     // If we reached the inner-most layer,
     // start moving up again.
     if(ismin) dl = 1;
-    
+
     // Move to next layer
     layer += dl;
-  
+
   }
 
   // Return the number of path segments
@@ -408,7 +441,7 @@ int PremModel::FillPath(double cosT)
 /// until it finds a large enough gap to start a new merged path.
 ///
 /// The merged paths will be returned, and the original detailed path
-/// will not be changed and will stay stored as an attribute. 
+/// will not be changed and will stay stored as an attribute.
 ///
 /// @param prec - The precision to merge paths in g/cm^3
 /// @return The vector of merged path segments
@@ -432,14 +465,14 @@ vector<NuPath> PremModel::GetMergedPaths(double prec){
 
       // Add merged path to vector
       mergedPath.push_back(path);
-      
+
       // Set this path as new merged path
       path = fNuPath[i];
 
     }
     // If path is within tolerance
     else{
-      
+
       // Merge the path with current merged path
       path = AvgPath(path, fNuPath[i]);
 
@@ -525,7 +558,7 @@ vector<NuPath> PremModel::MergePaths(vector<NuPath> inputPath, int j, int k){
 
   // Loop over input paths
   for(int i=0; i<inputPath.size(); i++){
-    
+
     // If first index, merge the paths j and k
     if(i==j) mergedPath.push_back(AvgPath(inputPath[j], inputPath[k]));
     // If not second index add the path as is
