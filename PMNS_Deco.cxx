@@ -122,15 +122,11 @@ double PMNS_Deco::GetGamma(int i, int j)
   }
   else {
     // Combine Gamma31, Gamma21 and an angle (fGamma[0] = cos(th)) to make Gamma32
-    double cosTh = fGamma[0];
-    double arg = fGamma[1] * ( 4*fGamma[2] - fGamma[1]*(1 - pow(cosTh,2)) );
+    double arg = fGamma[1] * ( 4*fGamma[2] - fGamma[1]*(1 - pow(fGamma[0],2)) );
     
-    if(arg < 0){
-      arg = 0;
-      cosTh = sqrt(1 - 4*fGamma[2] / fGamma[1]);
-    }
+    if(arg < 0) return fGamma[1] - 3*fGamma[2];
 
-    return fGamma[2] + fGamma[1]*pow(cosTh,2) - cosTh * sqrt(arg);
+    return fGamma[2] + fGamma[1]*pow(fGamma[0],2) - fGamma[0] * sqrt(arg);
 
   }
 
