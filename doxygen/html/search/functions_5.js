@@ -2,6 +2,7 @@ var searchData=
 [
   ['getangle',['GetAngle',['../classOscProb_1_1PMNS__Base.html#acee137091304c919642293ddf015bbc8',1,'OscProb::PMNS_Base']]],
   ['getcost',['GetCosT',['../classOscProb_1_1PremModel.html#a5328474bdbb703eb4c9d4df49999cda6',1,'OscProb::PremModel']]],
+  ['getdecoangle',['GetDecoAngle',['../classOscProb_1_1PMNS__Deco.html#a5dadf6a39dec4a229babeff6a650179c',1,'OscProb::PMNS_Deco']]],
   ['getdelta',['GetDelta',['../classOscProb_1_1PMNS__Base.html#adb8dbc91d4286d2e7c8f768c59476241',1,'OscProb::PMNS_Base']]],
   ['getdm',['GetDm',['../classOscProb_1_1PMNS__Base.html#ad26815ac5f4805d1259817e4936e5f8f',1,'OscProb::PMNS_Base']]],
   ['getenergy',['GetEnergy',['../classOscProb_1_1PMNS__Base.html#acc0d46cc4b8f911b40b807225003bbed',1,'OscProb::PMNS_Base']]],
