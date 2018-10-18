@@ -159,6 +159,17 @@ void PMNS_Deco::SetDecoAngle(double th)
 
 //......................................................................
 ///
+/// Get the decoherence angle value.
+///
+double PMNS_Deco::GetDecoAngle()
+{
+
+  return acos(fGamma[0]);
+  
+}
+
+//......................................................................
+///
 /// Get any given decoherence parameter.
 ///
 /// Requires that i > j. Will notify you if input is wrong.

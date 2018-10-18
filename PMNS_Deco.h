@@ -40,6 +40,9 @@ namespace OscProb {
     /// Get any given decoherence parameter
     virtual double GetGamma(int i, int j);
 
+    /// Get the decoherence angle
+    virtual double GetDecoAngle();
+
     typedef std::vector<complex> row;
     typedef std::vector<row> matrix;
 
