@@ -68,6 +68,72 @@ void PMNS_Deco::SetGamma(int j, double val){
 
 //......................................................................
 ///
+/// Set the decoherence parameter \f$\Gamma_{32}\f$.
+///
+/// In practice, this sets \f$\Gamma_{31}\f$ internally via the formula:
+///
+///   \f$
+///   \Gamma_{31} = \Gamma_{32} + \Gamma_{21} \cos^2\theta +
+///   \cos\theta \sqrt{\Gamma_{21} (4\Gamma_{32} - \Gamma_{21} (1 - \cos^2\theta))}
+///   \f$
+///
+/// IMPORTANT: Note this needs to be used AFTER defining \f$\Gamma_{21}\f$ and \f$\theta\f$.
+///
+/// @param val - The absolute value of the parameter
+///
+void PMNS_Deco::SetGamma32(double val){
+
+  double min32 = 0.25*fGamma[1];
+
+  if(fGamma[0] >= 0) min32 *= 1 - pow(fGamma[0],2);
+  else               min32 *= 1 + 3*pow(fGamma[0],2);
+  
+  if(val < min32){
+    
+    if(fGamma[0]>=0 || 4*val/fGamma[1] < 1){
+      fGamma[0] = sqrt(1 - 4*val/fGamma[1]);
+      fGamma[2] = 0.25*fGamma[1]*(1 + 3*pow(fGamma[0],2));
+    }
+    else{
+      fGamma[0] = -sqrt((4*val/fGamma[1] - 1)/3);
+      fGamma[2] = 0.25*fGamma[1]*(1 - pow(fGamma[0],2));
+    }
+    
+    cout << "WARNING: Impossible to have Gamma32 = "        << val
+         << " with current Gamma21 and theta parameters."   << endl
+         << "         Changing the value of cos(theta) to " << fGamma[0] 
+         << endl;
+         
+    fGotES = false;
+
+    return;
+         
+  }
+
+  double arg = fGamma[1] * ( 4*val - fGamma[1]*(1 - pow(fGamma[0],2)) );
+
+  if(arg < 0){
+    arg = 0;
+    fGamma[0] = sqrt(1 - 4*val/fGamma[1]);
+    cout << "WARNING: Imaginary Gamma31 found. Changing the value of cos(theta) to " 
+         << fGamma[0] << endl;
+  }
+  
+  double gamma31 = val + fGamma[1]*pow(fGamma[0],2) + fGamma[0] * sqrt(arg);
+  
+  fGotES *= (fGamma[2] == gamma31);
+  
+  fGamma[2] = gamma31;
+  
+  if(fabs(val - GetGamma(3,2)) > 1e-6){
+    cout << "ERROR: Failed sanity check: GetGamma(3,2) = "
+         << GetGamma(3,2) << " != " << val << endl;
+  }
+  
+}
+
+//......................................................................
+///
 /// Set the decoherence angle. This will define the relationship:
 ///
 ///   \f$ 

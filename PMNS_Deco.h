@@ -30,6 +30,9 @@ namespace OscProb {
 
     /// Set any given decoherence parameter
     virtual void SetGamma(int j, double val);
+
+    /// Set the \f$\Gamma_{32}\f$ parameter
+    virtual void SetGamma32(double val);
     
     /// Set the decoherence angle
     virtual void SetDecoAngle(double th);
