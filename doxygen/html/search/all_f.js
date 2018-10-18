@@ -18,6 +18,7 @@ var searchData=
   ['seteps_5fmutau',['SetEps_mutau',['../classOscProb_1_1PMNS__NSI.html#acfb9893697e04fcc25915ffaf8ed137f',1,'OscProb::PMNS_NSI']]],
   ['seteps_5ftautau',['SetEps_tautau',['../classOscProb_1_1PMNS__NSI.html#a5736f3cd792a621dfa844c3fa314cd17',1,'OscProb::PMNS_NSI']]],
   ['setgamma',['SetGamma',['../classOscProb_1_1PMNS__Deco.html#ac06a9c503d1c5b4a43c4eb797881898d',1,'OscProb::PMNS_Deco']]],
+  ['setgamma32',['SetGamma32',['../classOscProb_1_1PMNS__Deco.html#a1bc2d1fb1bab9841baa37eecc0135fe9',1,'OscProb::PMNS_Deco']]],
   ['setisnubar',['SetIsNuBar',['../classOscProb_1_1PMNS__Base.html#a717e0348cf762f3961854e332a9b52e0',1,'OscProb::PMNS_Base']]],
   ['setlayer',['SetLayer',['../structOscProb_1_1PremLayer.html#a9d35d6d32ff3dab5cb1aa0c769c65c2b',1,'OscProb::PremLayer']]],
   ['setlayers',['SetLayers',['../classOscProb_1_1PMNS__Base.html#a904e580edf89fb98bf9a6397739b4ebe',1,'OscProb::PMNS_Base']]],
