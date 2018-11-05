@@ -13,6 +13,7 @@ var searchData=
   ['getmergedpaths',['GetMergedPaths',['../classOscProb_1_1PremModel.html#a5b6f83f2e9b7087e8faad1f19f00ebd5',1,'OscProb::PremModel']]],
   ['getnupath',['GetNuPath',['../classOscProb_1_1PremModel.html#adbe7a5df260cba3923f5cbcb8ab2f03f',1,'OscProb::PremModel']]],
   ['getpath',['GetPath',['../classOscProb_1_1PMNS__Base.html#ac8e196f2e85a2b1caaf705073ee95a5c',1,'OscProb::PMNS_Base']]],
+  ['getpower',['GetPower',['../classOscProb_1_1PMNS__Deco.html#aa40b92e0f204f499a24b18ba399b8b0e',1,'OscProb::PMNS_Deco']]],
   ['getpremlayers',['GetPremLayers',['../classOscProb_1_1PremModel.html#ae4feeccc7027253f5c2e2493098145ca',1,'OscProb::PremModel']]],
   ['getsamplepoints',['GetSamplePoints',['../classOscProb_1_1PMNS__Base.html#a9eac8d768c1424755ee41f7e783af179',1,'OscProb::PMNS_Base']]],
   ['gettotall',['GetTotalL',['../classOscProb_1_1PremModel.html#ae258b41cca80631e3041f0421b25afeb',1,'OscProb::PremModel']]]

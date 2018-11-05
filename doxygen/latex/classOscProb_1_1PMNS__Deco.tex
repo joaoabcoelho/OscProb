@@ -43,6 +43,8 @@ virtual double \hyperlink{classOscProb_1_1PMNS__Deco_a73461e806063588a8e3a9d5d0d
 \begin{DoxyCompactList}\small\item\em Get any given decoherence parameter. \end{DoxyCompactList}\item 
 virtual double \hyperlink{classOscProb_1_1PMNS__Deco_a5dadf6a39dec4a229babeff6a650179c}{Get\+Deco\+Angle} ()
 \begin{DoxyCompactList}\small\item\em Get the decoherence angle. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classOscProb_1_1PMNS__Deco_aa40b92e0f204f499a24b18ba399b8b0e}{Get\+Power} ()
+\begin{DoxyCompactList}\small\item\em Get the power index. \end{DoxyCompactList}\item 
 virtual void \hyperlink{classOscProb_1_1PMNS__Fast_ad849b2231d99c5d66fb3ade8efb896e1}{Set\+Mix} (double th12, double th23, double th13, double deltacp)
 \begin{DoxyCompactList}\small\item\em Set the all mixing parameters at once. \end{DoxyCompactList}\item 
 virtual void \hyperlink{classOscProb_1_1PMNS__Fast_a63733b246e6d2e609ce3de7a65ba5b9f}{Set\+Delta\+Msqrs} (double dm21, double dm32)
@@ -244,7 +246,7 @@ Definition at line 104 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
-Definition at line 50 of file P\+M\+N\+S\+\_\+\+Deco.\+h.
+Definition at line 53 of file P\+M\+N\+S\+\_\+\+Deco.\+h.
 
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Deco_a34634741bc68bc1c524cf47f44e7f5b6}\label{classOscProb_1_1PMNS__Deco_a34634741bc68bc1c524cf47f44e7f5b6}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco}!row@{row}}
@@ -254,7 +256,7 @@ Definition at line 50 of file P\+M\+N\+S\+\_\+\+Deco.\+h.
 
 
 
-Definition at line 49 of file P\+M\+N\+S\+\_\+\+Deco.\+h.
+Definition at line 52 of file P\+M\+N\+S\+\_\+\+Deco.\+h.
 
 
 
@@ -649,7 +651,7 @@ Conjugate transpose matrix.
 \end{DoxyReturn}
 
 
-Definition at line 271 of file P\+M\+N\+S\+\_\+\+Deco.\+cxx.
+Definition at line 282 of file P\+M\+N\+S\+\_\+\+Deco.\+cxx.
 
 
 
@@ -657,20 +659,20 @@ Referenced by Propagate\+Path().
 
 
 \begin{DoxyCode}
-272 \{
-273 
-274   \hyperlink{classOscProb_1_1PMNS__Deco_a77b4e0c041b6268910a270be0f5387c9}{matrix} out(3, \hyperlink{classOscProb_1_1PMNS__Deco_a34634741bc68bc1c524cf47f44e7f5b6}{row}(3,0));
-275   
-276   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<3; i++)\{
-277   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<3; j++)\{
-278   
-279     out[i][j] += conj(A[j][i]);
-280 
-281   \}\}
-282   
-283   \textcolor{keywordflow}{return} out;
+283 \{
 284 
-285 \}
+285   \hyperlink{classOscProb_1_1PMNS__Deco_a77b4e0c041b6268910a270be0f5387c9}{matrix} out(3, \hyperlink{classOscProb_1_1PMNS__Deco_a34634741bc68bc1c524cf47f44e7f5b6}{row}(3,0));
+286   
+287   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<3; i++)\{
+288   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<3; j++)\{
+289   
+290     out[i][j] += conj(A[j][i]);
+291 
+292   \}\}
+293   
+294   \textcolor{keywordflow}{return} out;
+295 
+296 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Deco_a8d6b547de294c0d52d4208bde44fe171}\label{classOscProb_1_1PMNS__Deco_a8d6b547de294c0d52d4208bde44fe171}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco}!Dot@{Dot}}
@@ -692,7 +694,7 @@ Dot product of two matrices.
 \end{DoxyReturn}
 
 
-Definition at line 223 of file P\+M\+N\+S\+\_\+\+Deco.\+cxx.
+Definition at line 234 of file P\+M\+N\+S\+\_\+\+Deco.\+cxx.
 
 
 
@@ -700,21 +702,21 @@ Referenced by Propagate\+Path().
 
 
 \begin{DoxyCode}
-224 \{
-225 
-226   \hyperlink{classOscProb_1_1PMNS__Deco_a77b4e0c041b6268910a270be0f5387c9}{matrix} out(3, \hyperlink{classOscProb_1_1PMNS__Deco_a34634741bc68bc1c524cf47f44e7f5b6}{row}(3,0));
-227   
-228   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<3; i++)\{
-229   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<3; j++)\{
-230   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} k=0; k<3; k++)\{
-231 
-232     out[i][j] += A[i][k] * B[k][j];
-233 
-234   \}\}\}
-235   
-236   \textcolor{keywordflow}{return} out;
-237 
-238 \}
+235 \{
+236 
+237   \hyperlink{classOscProb_1_1PMNS__Deco_a77b4e0c041b6268910a270be0f5387c9}{matrix} out(3, \hyperlink{classOscProb_1_1PMNS__Deco_a34634741bc68bc1c524cf47f44e7f5b6}{row}(3,0));
+238   
+239   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<3; i++)\{
+240   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<3; j++)\{
+241   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} k=0; k<3; k++)\{
+242 
+243     out[i][j] += A[i][k] * B[k][j];
+244 
+245   \}\}\}
+246   
+247   \textcolor{keywordflow}{return} out;
+248 
+249 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_acee137091304c919642293ddf015bbc8}\label{classOscProb_1_1PMNS__Base_acee137091304c919642293ddf015bbc8}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco}!Get\+Angle@{Get\+Angle}}
@@ -908,7 +910,7 @@ Requires that i $>$ j. Will notify you if input is wrong. If i $<$ j, will assum
 \end{DoxyParams}
 
 
-Definition at line 184 of file P\+M\+N\+S\+\_\+\+Deco.\+cxx.
+Definition at line 195 of file P\+M\+N\+S\+\_\+\+Deco.\+cxx.
 
 
 
@@ -920,36 +922,36 @@ Referenced by Propagate\+Path(), and Set\+Gamma32().
 
 
 \begin{DoxyCode}
-185 \{
-186 
-187   \textcolor{keywordflow}{if}(i < j)\{
-188     cout << \textcolor{stringliteral}{"First argument should be larger than second argument"} << endl;
-189     cout << \textcolor{stringliteral}{"Setting reverse order (Gamma\_"} << j << i << \textcolor{stringliteral}{"). "} << endl;
-190     \textcolor{keywordtype}{int} temp = i;
-191     i = j;
-192     j = temp;
-193   \}
-194   \textcolor{keywordflow}{if}(i<1 || i>3 || i <= j || j < 1)\{
-195     cout << \textcolor{stringliteral}{"Gamma\_"} << i << j << \textcolor{stringliteral}{" not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
-196     cout << \textcolor{stringliteral}{" neutrinos. Returning 0."} << endl;
-197     \textcolor{keywordflow}{return} 0;
-198   \}
-199 
-200   \textcolor{keywordflow}{if}(j == 1)\{ 
-201     \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Deco_ae2f30ac9f8b25344959f1698616d337a}{fGamma}[i-1];
-202   \}
-203   \textcolor{keywordflow}{else} \{
-204     \textcolor{comment}{// Combine Gamma31, Gamma21 and an angle (fGamma[0] = cos(th)) to make Gamma32}
-205     \textcolor{keywordtype}{double} arg = \hyperlink{classOscProb_1_1PMNS__Deco_ae2f30ac9f8b25344959f1698616d337a}{fGamma}[1] * ( 4*\hyperlink{classOscProb_1_1PMNS__Deco_ae2f30ac9f8b25344959f1698616d337a}{fGamma}[2] - \hyperlink{classOscProb_1_1PMNS__Deco_ae2f30ac9f8b25344959f1698616d337a}{fGamma}[1]*(1 - pow(
-      \hyperlink{classOscProb_1_1PMNS__Deco_ae2f30ac9f8b25344959f1698616d337a}{fGamma}[0],2)) );
-206     
-207     \textcolor{keywordflow}{if}(arg < 0) \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Deco_ae2f30ac9f8b25344959f1698616d337a}{fGamma}[1] - 3*\hyperlink{classOscProb_1_1PMNS__Deco_ae2f30ac9f8b25344959f1698616d337a}{fGamma}[2];
-208 
-209     \textcolor{keywordflow}{return} fGamma[2] + fGamma[1]*pow(fGamma[0],2) - fGamma[0] * sqrt(arg);
+196 \{
+197 
+198   \textcolor{keywordflow}{if}(i < j)\{
+199     cout << \textcolor{stringliteral}{"First argument should be larger than second argument"} << endl;
+200     cout << \textcolor{stringliteral}{"Setting reverse order (Gamma\_"} << j << i << \textcolor{stringliteral}{"). "} << endl;
+201     \textcolor{keywordtype}{int} temp = i;
+202     i = j;
+203     j = temp;
+204   \}
+205   \textcolor{keywordflow}{if}(i<1 || i>3 || i <= j || j < 1)\{
+206     cout << \textcolor{stringliteral}{"Gamma\_"} << i << j << \textcolor{stringliteral}{" not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
+207     cout << \textcolor{stringliteral}{" neutrinos. Returning 0."} << endl;
+208     \textcolor{keywordflow}{return} 0;
+209   \}
 210 
-211   \}
-212 
-213 \}
+211   \textcolor{keywordflow}{if}(j == 1)\{ 
+212     \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Deco_ae2f30ac9f8b25344959f1698616d337a}{fGamma}[i-1];
+213   \}
+214   \textcolor{keywordflow}{else} \{
+215     \textcolor{comment}{// Combine Gamma31, Gamma21 and an angle (fGamma[0] = cos(th)) to make Gamma32}
+216     \textcolor{keywordtype}{double} arg = \hyperlink{classOscProb_1_1PMNS__Deco_ae2f30ac9f8b25344959f1698616d337a}{fGamma}[1] * ( 4*\hyperlink{classOscProb_1_1PMNS__Deco_ae2f30ac9f8b25344959f1698616d337a}{fGamma}[2] - \hyperlink{classOscProb_1_1PMNS__Deco_ae2f30ac9f8b25344959f1698616d337a}{fGamma}[1]*(1 - pow(
+      \hyperlink{classOscProb_1_1PMNS__Deco_ae2f30ac9f8b25344959f1698616d337a}{fGamma}[0],2)) );
+217     
+218     \textcolor{keywordflow}{if}(arg < 0) \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Deco_ae2f30ac9f8b25344959f1698616d337a}{fGamma}[1] - 3*\hyperlink{classOscProb_1_1PMNS__Deco_ae2f30ac9f8b25344959f1698616d337a}{fGamma}[2];
+219 
+220     \textcolor{keywordflow}{return} fGamma[2] + fGamma[1]*pow(fGamma[0],2) - fGamma[0] * sqrt(arg);
+221 
+222   \}
+223 
+224 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a2f7f2a028dfe7a90fff6b4f757972c2c}\label{classOscProb_1_1PMNS__Base_a2f7f2a028dfe7a90fff6b4f757972c2c}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco}!Get\+Is\+Nu\+Bar@{Get\+Is\+Nu\+Bar}}
@@ -994,6 +996,28 @@ References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Nu\+Paths.
 251   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths};
 252 
 253 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classOscProb_1_1PMNS__Deco_aa40b92e0f204f499a24b18ba399b8b0e}\label{classOscProb_1_1PMNS__Deco_aa40b92e0f204f499a24b18ba399b8b0e}} 
+\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco}!Get\+Power@{Get\+Power}}
+\index{Get\+Power@{Get\+Power}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco}}
+\subsubsection{\texorpdfstring{Get\+Power()}{GetPower()}}
+{\footnotesize\ttfamily double P\+M\+N\+S\+\_\+\+Deco\+::\+Get\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Get the power index for energy dependence. 
+
+Definition at line 178 of file P\+M\+N\+S\+\_\+\+Deco.\+cxx.
+
+
+
+References f\+Power.
+
+
+\begin{DoxyCode}
+179 \{
+180 
+181   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Deco_a19fdcdf9a8b2bd9677f72ca1fd77dc3e}{fPower};
+182   
+183 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a9eac8d768c1424755ee41f7e783af179}\label{classOscProb_1_1PMNS__Base_a9eac8d768c1424755ee41f7e783af179}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco}!Get\+Sample\+Points@{Get\+Sample\+Points}}
@@ -1182,7 +1206,7 @@ Product of elements of two matrices.
 \end{DoxyReturn}
 
 
-Definition at line 248 of file P\+M\+N\+S\+\_\+\+Deco.\+cxx.
+Definition at line 259 of file P\+M\+N\+S\+\_\+\+Deco.\+cxx.
 
 
 
@@ -1190,20 +1214,20 @@ Referenced by Propagate\+Path().
 
 
 \begin{DoxyCode}
-249 \{
-250 
-251   \hyperlink{classOscProb_1_1PMNS__Deco_a77b4e0c041b6268910a270be0f5387c9}{matrix} out(3, \hyperlink{classOscProb_1_1PMNS__Deco_a34634741bc68bc1c524cf47f44e7f5b6}{row}(3,0));
-252   
-253   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<3; i++)\{
-254   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<3; j++)\{
-255   
-256     out[i][j] += A[i][j] * B[i][j];
-257 
-258   \}\}
-259   
-260   \textcolor{keywordflow}{return} out;
+260 \{
 261 
-262 \}
+262   \hyperlink{classOscProb_1_1PMNS__Deco_a77b4e0c041b6268910a270be0f5387c9}{matrix} out(3, \hyperlink{classOscProb_1_1PMNS__Deco_a34634741bc68bc1c524cf47f44e7f5b6}{row}(3,0));
+263   
+264   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<3; i++)\{
+265   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<3; j++)\{
+266   
+267     out[i][j] += A[i][j] * B[i][j];
+268 
+269   \}\}
+270   
+271   \textcolor{keywordflow}{return} out;
+272 
+273 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Deco_aa81f47ea36207b90a5feb9849060032d}\label{classOscProb_1_1PMNS__Deco_aa81f47ea36207b90a5feb9849060032d}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco}!P@{P}}
@@ -1232,7 +1256,7 @@ Reimplemented from \hyperlink{classOscProb_1_1PMNS__Base_a0dc4d45bc3d7e03b9abbf5
 
 
 
-Definition at line 398 of file P\+M\+N\+S\+\_\+\+Deco.\+cxx.
+Definition at line 409 of file P\+M\+N\+S\+\_\+\+Deco.\+cxx.
 
 
 
@@ -1240,10 +1264,10 @@ References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Num\+Nus, and f\+Rho.
 
 
 \begin{DoxyCode}
-399 \{
-400   assert(flv>=0 && flv<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
-401   \textcolor{keywordflow}{return} std::abs(\hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho}[flv][flv]);
-402 \}
+410 \{
+411   assert(flv>=0 && flv<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
+412   \textcolor{keywordflow}{return} std::abs(\hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho}[flv][flv]);
+413 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}\label{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco}!Prob@{Prob}}
@@ -1441,7 +1465,7 @@ Reimplemented from \hyperlink{classOscProb_1_1PMNS__Base_accb08503acc162188041d7
 
 
 
-Definition at line 293 of file P\+M\+N\+S\+\_\+\+Deco.\+cxx.
+Definition at line 304 of file P\+M\+N\+S\+\_\+\+Deco.\+cxx.
 
 
 
@@ -1449,76 +1473,76 @@ References C\+Transp(), Dot(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Dm, O
 
 
 \begin{DoxyCode}
-294 \{
-295 
-296   \textcolor{comment}{// Set the neutrino path}
-297   \hyperlink{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}{SetCurPath}(p);
-298 
-299   \textcolor{comment}{// Solve for eigensystem}
-300   \hyperlink{classOscProb_1_1PMNS__Fast_a8a0828401591e88c60e0051fbfe02d5e}{SolveHam}();
-301   
-302   \textcolor{comment}{// The code below is not pretty or optimised at all. Lots of matrix}
-303   \textcolor{comment}{// multiplications are going on which could be otpimised due to }
-304   \textcolor{comment}{// symmetry. The index sorting is also terrible. Needs improving.}
-305 
-306   \textcolor{comment}{// Store rotation matrices}
-307   \hyperlink{classOscProb_1_1PMNS__Deco_a77b4e0c041b6268910a270be0f5387c9}{matrix} U = \hyperlink{classOscProb_1_1PMNS__Base_a093e7bd31d4ef52ed52df414e12c1d17}{fEvec};
-308   \hyperlink{classOscProb_1_1PMNS__Deco_a77b4e0c041b6268910a270be0f5387c9}{matrix} Ut = \hyperlink{classOscProb_1_1PMNS__Deco_aca391ff02be7abc2fd3dba40e9ce2665}{CTransp}(\hyperlink{classOscProb_1_1PMNS__Base_a093e7bd31d4ef52ed52df414e12c1d17}{fEvec});
+305 \{
+306 
+307   \textcolor{comment}{// Set the neutrino path}
+308   \hyperlink{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}{SetCurPath}(p);
 309 
-310   \textcolor{comment}{// Rotate to effective mass basis}
-311   \hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho} = \hyperlink{classOscProb_1_1PMNS__Deco_a8d6b547de294c0d52d4208bde44fe171}{Dot}(Ut, \hyperlink{classOscProb_1_1PMNS__Deco_a8d6b547de294c0d52d4208bde44fe171}{Dot}(\hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho}, U));
+310   \textcolor{comment}{// Solve for eigensystem}
+311   \hyperlink{classOscProb_1_1PMNS__Fast_a8a0828401591e88c60e0051fbfe02d5e}{SolveHam}();
 312   
-313   \textcolor{comment}{// Compute evolution matrix}
-314   \hyperlink{classOscProb_1_1PMNS__Deco_a77b4e0c041b6268910a270be0f5387c9}{matrix} evolve(3, \hyperlink{classOscProb_1_1PMNS__Deco_a34634741bc68bc1c524cf47f44e7f5b6}{row}(3,1));
-315   
-316   \textcolor{comment}{// Some ugly way of matching gamma and dmsqr indices}
-317   \textcolor{keywordtype}{int} maxdm = 0; 
-318   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[1] > \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[maxdm]) maxdm = 1;
-319   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[2] > \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[maxdm]) maxdm = 2;
+313   \textcolor{comment}{// The code below is not pretty or optimised at all. Lots of matrix}
+314   \textcolor{comment}{// multiplications are going on which could be otpimised due to }
+315   \textcolor{comment}{// symmetry. The index sorting is also terrible. Needs improving.}
+316 
+317   \textcolor{comment}{// Store rotation matrices}
+318   \hyperlink{classOscProb_1_1PMNS__Deco_a77b4e0c041b6268910a270be0f5387c9}{matrix} U = \hyperlink{classOscProb_1_1PMNS__Base_a093e7bd31d4ef52ed52df414e12c1d17}{fEvec};
+319   \hyperlink{classOscProb_1_1PMNS__Deco_a77b4e0c041b6268910a270be0f5387c9}{matrix} Ut = \hyperlink{classOscProb_1_1PMNS__Deco_aca391ff02be7abc2fd3dba40e9ce2665}{CTransp}(\hyperlink{classOscProb_1_1PMNS__Base_a093e7bd31d4ef52ed52df414e12c1d17}{fEvec});
 320 
-321   \textcolor{keywordtype}{int} mindm = 0; 
-322   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[1] < \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[mindm]) mindm = 1;
-323   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[2] < \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[mindm]) mindm = 2;
-324 
-325   \textcolor{keywordtype}{int} middm = 0;
-326   \textcolor{keywordflow}{if}(middm == maxdm || middm == mindm) middm = 1; 
-327   \textcolor{keywordflow}{if}(middm == maxdm || middm == mindm) middm = 2; 
-328 
-329   \textcolor{keywordtype}{int} maxev = 0; 
-330   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[1] > \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[maxev]) maxev = 1;
-331   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[2] > \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[maxev]) maxev = 2;
-332 
-333   \textcolor{keywordtype}{int} minev = 0; 
-334   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[1] < \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[minev]) minev = 1;
-335   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[2] < \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[minev]) minev = 2;
-336 
-337   \textcolor{keywordtype}{int} midev = 0;
-338   \textcolor{keywordflow}{if}(midev == maxev || midev == minev) midev = 1; 
-339   \textcolor{keywordflow}{if}(midev == maxev || midev == minev) midev = 2; 
-340   
-341   \textcolor{keywordtype}{int} idx[3];
-342   idx[minev] = mindm;
-343   idx[midev] = middm;
-344   idx[maxev] = maxdm;
-345   
-346   \textcolor{keywordtype}{double} energyCorr = pow(\hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy}, \hyperlink{classOscProb_1_1PMNS__Deco_a19fdcdf9a8b2bd9677f72ca1fd77dc3e}{fPower});
+321   \textcolor{comment}{// Rotate to effective mass basis}
+322   \hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho} = \hyperlink{classOscProb_1_1PMNS__Deco_a8d6b547de294c0d52d4208bde44fe171}{Dot}(Ut, \hyperlink{classOscProb_1_1PMNS__Deco_a8d6b547de294c0d52d4208bde44fe171}{Dot}(\hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho}, U));
+323   
+324   \textcolor{comment}{// Compute evolution matrix}
+325   \hyperlink{classOscProb_1_1PMNS__Deco_a77b4e0c041b6268910a270be0f5387c9}{matrix} evolve(3, \hyperlink{classOscProb_1_1PMNS__Deco_a34634741bc68bc1c524cf47f44e7f5b6}{row}(3,1));
+326   
+327   \textcolor{comment}{// Some ugly way of matching gamma and dmsqr indices}
+328   \textcolor{keywordtype}{int} maxdm = 0; 
+329   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[1] > \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[maxdm]) maxdm = 1;
+330   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[2] > \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[maxdm]) maxdm = 2;
+331 
+332   \textcolor{keywordtype}{int} mindm = 0; 
+333   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[1] < \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[mindm]) mindm = 1;
+334   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[2] < \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[mindm]) mindm = 2;
+335 
+336   \textcolor{keywordtype}{int} middm = 0;
+337   \textcolor{keywordflow}{if}(middm == maxdm || middm == mindm) middm = 1; 
+338   \textcolor{keywordflow}{if}(middm == maxdm || middm == mindm) middm = 2; 
+339 
+340   \textcolor{keywordtype}{int} maxev = 0; 
+341   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[1] > \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[maxev]) maxev = 1;
+342   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[2] > \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[maxev]) maxev = 2;
+343 
+344   \textcolor{keywordtype}{int} minev = 0; 
+345   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[1] < \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[minev]) minev = 1;
+346   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[2] < \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[minev]) minev = 2;
 347 
-348   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<3; j++)\{ 
-349   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<j; i++)\{
-350     \textcolor{keywordtype}{double} gamma\_ij = \hyperlink{classOscProb_1_1PMNS__Deco_a73461e806063588a8e3a9d5d0dd201cb}{GetGamma}(max(idx[i],idx[j])+1, min(idx[i],idx[j])+1) * energyCorr;
-351     \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex} arg = \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex}(gamma\_ij * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV}, \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[i] - 
+348   \textcolor{keywordtype}{int} midev = 0;
+349   \textcolor{keywordflow}{if}(midev == maxev || midev == minev) midev = 1; 
+350   \textcolor{keywordflow}{if}(midev == maxev || midev == minev) midev = 2; 
+351   
+352   \textcolor{keywordtype}{int} idx[3];
+353   idx[minev] = mindm;
+354   idx[midev] = middm;
+355   idx[maxev] = maxdm;
+356   
+357   \textcolor{keywordtype}{double} energyCorr = pow(\hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy}, \hyperlink{classOscProb_1_1PMNS__Deco_a19fdcdf9a8b2bd9677f72ca1fd77dc3e}{fPower});
+358 
+359   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<3; j++)\{ 
+360   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<j; i++)\{
+361     \textcolor{keywordtype}{double} gamma\_ij = \hyperlink{classOscProb_1_1PMNS__Deco_a73461e806063588a8e3a9d5d0dd201cb}{GetGamma}(max(idx[i],idx[j])+1, min(idx[i],idx[j])+1) * energyCorr;
+362     \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex} arg = \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex}(gamma\_ij * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV}, \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[i] - 
       \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[j]) * \hyperlink{classOscProb_1_1PMNS__Base_a382ddd7b76ca89b43f22614a2ea7327b}{kKm2eV} * p.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length};
-352     evolve[i][j] = exp(-arg);
-353     evolve[j][i] = exp(-conj(arg));
-354   \}\}
-355   
-356   \textcolor{comment}{// Evolve density matrix}
-357   \hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho} = \hyperlink{classOscProb_1_1PMNS__Deco_aacc9909556ca22aca30620893e12b0db}{Mult}(\hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho}, evolve);
-358   
-359   \textcolor{comment}{// Rotate back to flavour basis}
-360   \hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho} = \hyperlink{classOscProb_1_1PMNS__Deco_a8d6b547de294c0d52d4208bde44fe171}{Dot}(U, \hyperlink{classOscProb_1_1PMNS__Deco_a8d6b547de294c0d52d4208bde44fe171}{Dot}(\hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho}, Ut));
-361 
-362 \}
+363     evolve[i][j] = exp(-arg);
+364     evolve[j][i] = exp(-conj(arg));
+365   \}\}
+366   
+367   \textcolor{comment}{// Evolve density matrix}
+368   \hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho} = \hyperlink{classOscProb_1_1PMNS__Deco_aacc9909556ca22aca30620893e12b0db}{Mult}(\hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho}, evolve);
+369   
+370   \textcolor{comment}{// Rotate back to flavour basis}
+371   \hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho} = \hyperlink{classOscProb_1_1PMNS__Deco_a8d6b547de294c0d52d4208bde44fe171}{Dot}(U, \hyperlink{classOscProb_1_1PMNS__Deco_a8d6b547de294c0d52d4208bde44fe171}{Dot}(\hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho}, Ut));
+372 
+373 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Deco_a393940f176614e3ffebeea40cfe78a62}\label{classOscProb_1_1PMNS__Deco_a393940f176614e3ffebeea40cfe78a62}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco}!Reset\+To\+Flavour@{Reset\+To\+Flavour}}
@@ -1544,7 +1568,7 @@ Reimplemented from \hyperlink{classOscProb_1_1PMNS__Base_ac0d4bf8ff1318ef96d3daf
 
 
 
-Definition at line 375 of file P\+M\+N\+S\+\_\+\+Deco.\+cxx.
+Definition at line 386 of file P\+M\+N\+S\+\_\+\+Deco.\+cxx.
 
 
 
@@ -1552,14 +1576,14 @@ References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Num\+Nus, f\+Rho, Osc\+Pr
 
 
 \begin{DoxyCode}
-376 \{
-377   assert(flv>=0 && flv<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
-378   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}; ++i)\{
-379   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0; j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}; ++j)\{
-380     \textcolor{keywordflow}{if} (i==flv && i==j) \hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho}[i][j] = \hyperlink{classOscProb_1_1PMNS__Base_ab64aab27448a5aca27565c991a9d173e}{one};
-381     \textcolor{keywordflow}{else}                \hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho}[i][j] = \hyperlink{classOscProb_1_1PMNS__Base_a5c31ed4593cf95feb36fb80c1850d25e}{zero};
-382   \}\}
-383 \}
+387 \{
+388   assert(flv>=0 && flv<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
+389   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}; ++i)\{
+390   \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0; j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}; ++j)\{
+391     \textcolor{keywordflow}{if} (i==flv && i==j) \hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho}[i][j] = \hyperlink{classOscProb_1_1PMNS__Base_ab64aab27448a5aca27565c991a9d173e}{one};
+392     \textcolor{keywordflow}{else}                \hyperlink{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}{fRho}[i][j] = \hyperlink{classOscProb_1_1PMNS__Base_a5c31ed4593cf95feb36fb80c1850d25e}{zero};
+393   \}\}
+394 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_aae18afd69074211335f49ec40e6011b9}\label{classOscProb_1_1PMNS__Base_aae18afd69074211335f49ec40e6011b9}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco}!RotateH@{RotateH}}
@@ -3062,7 +3086,7 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Initialize\+Vectors(), 
 
 
 
-Definition at line 66 of file P\+M\+N\+S\+\_\+\+Deco.\+h.
+Definition at line 69 of file P\+M\+N\+S\+\_\+\+Deco.\+h.
 
 
 
@@ -3202,11 +3226,11 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Initialize\+Vectors(), 
 
 
 
-Definition at line 67 of file P\+M\+N\+S\+\_\+\+Deco.\+h.
+Definition at line 70 of file P\+M\+N\+S\+\_\+\+Deco.\+h.
 
 
 
-Referenced by Propagate\+Path(), and Set\+Power().
+Referenced by Get\+Power(), Propagate\+Path(), and Set\+Power().
 
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}\label{classOscProb_1_1PMNS__Deco_a0488d62b4ef4cf5b43425769f5fcdbdf}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco}!f\+Rho@{f\+Rho}}
@@ -3216,7 +3240,7 @@ Referenced by Propagate\+Path(), and Set\+Power().
 
 
 
-Definition at line 69 of file P\+M\+N\+S\+\_\+\+Deco.\+h.
+Definition at line 72 of file P\+M\+N\+S\+\_\+\+Deco.\+h.
 
 
 
