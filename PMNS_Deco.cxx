@@ -173,6 +173,17 @@ double PMNS_Deco::GetDecoAngle()
 
 //......................................................................
 ///
+/// Get the power index for energy dependence.
+///
+double PMNS_Deco::GetPower()
+{
+
+  return fPower;
+  
+}
+
+//......................................................................
+///
 /// Get any given decoherence parameter.
 ///
 /// Requires that i > j. Will notify you if input is wrong.

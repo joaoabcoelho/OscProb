@@ -46,6 +46,9 @@ namespace OscProb {
     /// Get the decoherence angle
     virtual double GetDecoAngle();
 
+    /// Get the power index
+    virtual double GetPower();
+
     typedef std::vector<complex> row;
     typedef std::vector<row> matrix;
 
