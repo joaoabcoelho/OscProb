@@ -32,6 +32,7 @@ fRho(3, row(3,0))
   SetGamma(2,0);
   SetGamma(3,0);
   SetDecoAngle(0);
+  SetPower(0);
 }
 
 //......................................................................
@@ -43,9 +44,6 @@ PMNS_Deco::~PMNS_Deco(){}
 //......................................................................
 ///
 /// Set the decoherence parameter \f$\Gamma_{j1}\f$.
-///
-/// This will check if value is changing to keep track of whether
-/// the eigensystem needs to be recomputed.
 ///
 /// Requires that j = 2 or 3. Will notify you if input is wrong.
 ///
@@ -60,8 +58,6 @@ void PMNS_Deco::SetGamma(int j, double val){
     return;
   }
 
-  fGotES *= (fGamma[j-1] == val);
-  
   fGamma[j-1] = val;
   
 }
@@ -104,8 +100,6 @@ void PMNS_Deco::SetGamma32(double val){
          << "         Changing the value of cos(theta) to " << fGamma[0] 
          << endl;
          
-    fGotES = false;
-
     return;
          
   }
@@ -120,8 +114,6 @@ void PMNS_Deco::SetGamma32(double val){
   }
   
   double gamma31 = val + fGamma[1]*pow(fGamma[0],2) + fGamma[0] * sqrt(arg);
-  
-  fGotES *= (fGamma[2] == gamma31);
   
   fGamma[2] = gamma31;
   
@@ -141,19 +133,30 @@ void PMNS_Deco::SetGamma32(double val){
 ///   \cos\theta \sqrt{\Gamma_{21} (4\Gamma_{31} - \Gamma_{21} (1 - \cos^2\theta))} 
 ///   \f$
 ///
-/// This will check if value is changing to keep track of whether
-/// the eigensystem needs to be recomputed.
-///
 /// @param th - decoherence angle
 ///
 void PMNS_Deco::SetDecoAngle(double th)
 {
 
-  double cosTh = cos(th);
+  fGamma[0] = cos(th);
+  
+}
 
-  fGotES *= (fGamma[0] == cosTh);
+//......................................................................
+///
+/// Set the power index of the decoherence energy dependence. 
+/// This will multiply the Gammas such that the final parameters are:
+///
+///   \f$ 
+///   \Gamma_{ij} \rightarrow \Gamma_{ij} \times \left(\frac{E}{[1 \mbox{GeV}]}\right)^n
+///   \f$
+///
+/// @param n - power index
+///
+void PMNS_Deco::SetPower(double n)
+{
 
-  fGamma[0] = cosTh;
+  fPower = n;
   
 }
 
@@ -340,9 +343,12 @@ void PMNS_Deco::PropagatePath(NuPath p)
   idx[midev] = middm;
   idx[maxev] = maxdm;
   
+  double energyCorr = pow(fEnergy, fPower);
+
   for(int j=0; j<3; j++){ 
   for(int i=0; i<j; i++){
-    complex arg = complex(GetGamma(max(idx[i],idx[j])+1,min(idx[i],idx[j])+1) * kGeV2eV, fEval[i] - fEval[j]) * kKm2eV * p.length;
+    double gamma_ij = GetGamma(max(idx[i],idx[j])+1, min(idx[i],idx[j])+1) * energyCorr;
+    complex arg = complex(gamma_ij * kGeV2eV, fEval[i] - fEval[j]) * kKm2eV * p.length;
     evolve[i][j] = exp(-arg);
     evolve[j][i] = exp(-conj(arg));
   }}

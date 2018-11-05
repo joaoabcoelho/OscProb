@@ -7,7 +7,7 @@
 /// This class expands the PMNS_Fast class including a effects from
 /// decoherence in an increasing entropy and energy conserving model.
 ///
-/// The model currently assumes no energy dependence of the decoherence 
+/// The model assumes a power law energy dependence of the decoherence 
 /// parameters and that decoherence occurs in the effective mass basis.
 ///
 /// \sa PMNS_Fast
@@ -37,6 +37,9 @@ namespace OscProb {
     /// Set the decoherence angle
     virtual void SetDecoAngle(double th);
 
+    /// Set the power index
+    virtual void SetPower(double n);
+
     /// Get any given decoherence parameter
     virtual double GetGamma(int i, int j);
 
@@ -61,6 +64,7 @@ namespace OscProb {
     virtual matrix CTransp(matrix A);
     
     double fGamma[3]; ///< Stores each decoherence parameter
+    double fPower;    ///< Stores the power index parameter
     
     matrix fRho; ///< The neutrino density matrix state
 
