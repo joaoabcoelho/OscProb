@@ -24,6 +24,7 @@ var searchData=
   ['fnustate',['fNuState',['../classOscProb_1_1PMNS__Base.html#ad38a7107c3ab393591fd5ba21658300b',1,'OscProb::PMNS_Base']]],
   ['fpath',['fPath',['../classOscProb_1_1PMNS__Base.html#a849437aa8891fe042e86886ce8f81c6e',1,'OscProb::PMNS_Base']]],
   ['fphases',['fPhases',['../classOscProb_1_1PMNS__Base.html#a2fcb59d7c533e4cd963b1890e504d3dc',1,'OscProb::PMNS_Base']]],
+  ['fpower',['fPower',['../classOscProb_1_1PMNS__Deco.html#a19fdcdf9a8b2bd9677f72ca1fd77dc3e',1,'OscProb::PMNS_Deco']]],
   ['fpremlayers',['fPremLayers',['../classOscProb_1_1PremModel.html#a19a9a3b23ec154ad7a29f92b74aa5bc6',1,'OscProb::PremModel']]],
   ['fremovesmallpaths',['fRemoveSmallPaths',['../classOscProb_1_1PremModel.html#a3973df6f5f2ff219cd2f865b31aacfd2',1,'OscProb::PremModel']]],
   ['frho',['fRho',['../classOscProb_1_1PMNS__Deco.html#a0488d62b4ef4cf5b43425769f5fcdbdf',1,'OscProb::PMNS_Deco']]],

@@ -27,6 +27,7 @@ var searchData=
   ['setmix',['SetMix',['../classOscProb_1_1PMNS__Fast.html#ad849b2231d99c5d66fb3ade8efb896e1',1,'OscProb::PMNS_Fast']]],
   ['setnsi',['SetNSI',['../classOscProb_1_1PMNS__NSI.html#ae8829af10bc4051e8c74c8b1bc81c88c',1,'OscProb::PMNS_NSI']]],
   ['setpath',['SetPath',['../structOscProb_1_1NuPath.html#afdaab5e2e2c5f1f2c5a2604db80bedf7',1,'OscProb::NuPath::SetPath()'],['../classOscProb_1_1PMNS__Base.html#ac3b644fd0a56347d304ceca4ae9d8875',1,'OscProb::PMNS_Base::SetPath(OscProb::NuPath p)'],['../classOscProb_1_1PMNS__Base.html#a35b983270613072a3df58b574d80dbfd',1,'OscProb::PMNS_Base::SetPath(double length, double density, double zoa=0.5, int layer=0)'],['../classOscProb_1_1PMNS__Base.html#a637d19dd850b4246507796526622643c',1,'OscProb::PMNS_Base::SetPath(std::vector&lt; OscProb::NuPath &gt; paths)']]],
+  ['setpower',['SetPower',['../classOscProb_1_1PMNS__Deco.html#afe7b8b9ae438d8b207bf75c2cfbb9fb8',1,'OscProb::PMNS_Deco']]],
   ['setremovesmallpaths',['SetRemoveSmallPaths',['../classOscProb_1_1PremModel.html#ac5496d6d5bafcf7740c60838d3eee7b3',1,'OscProb::PremModel']]],
   ['setstdpars',['SetStdPars',['../classOscProb_1_1PMNS__Base.html#a4de96ac9b6d1e9b029ab877e57d211ad',1,'OscProb::PMNS_Base']]],
   ['setstdpath',['SetStdPath',['../classOscProb_1_1PMNS__Base.html#add6533a9fc9acdfc7ae258b62570d78d',1,'OscProb::PMNS_Base']]],

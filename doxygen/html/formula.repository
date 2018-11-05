@@ -5,4 +5,5 @@
 \form#4:$\Gamma_{21}$
 \form#5:$\theta$
 \form#6:$ \Gamma_{32} = \Gamma_{31} + \Gamma_{21} \cos^2\theta - \cos\theta \sqrt{\Gamma_{21} (4\Gamma_{31} - \Gamma_{21} (1 - \cos^2\theta))} $
-\form#7:$A^{\dagger}$
+\form#7:$ \Gamma_{ij} \rightarrow \Gamma_{ij} \times \left(\frac{E}{[1 \mbox{GeV}]}\right)^n $
+\form#8:$A^{\dagger}$
