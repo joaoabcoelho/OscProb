@@ -253,6 +253,8 @@ void PMNS_NSI::UpdateHam()
 /// This factor represents what fraction of the electrons are seen
 /// by the interaction.
 ///
+/// @param e - electron coupling strength
+///
 void PMNS_NSI::SetElecCoup(double e){
 
   fGotES *= (fNSIcoup[0] == e);
@@ -266,6 +268,8 @@ void PMNS_NSI::SetElecCoup(double e){
 /// Set the NSI relative coupling to u-quarks. 
 /// This factor represents what fraction of the u-quarks are seen
 /// by the interaction.
+///
+/// @param u - u-quark coupling strength
 ///
 void PMNS_NSI::SetUpCoup(double u){
 
@@ -281,6 +285,8 @@ void PMNS_NSI::SetUpCoup(double u){
 /// This factor represents what fraction of the d-quarks are seen
 /// by the interaction.
 ///
+/// @param d - d-quark coupling strength
+///
 void PMNS_NSI::SetDownCoup(double d){
 
   fGotES *= (fNSIcoup[2] == d);
@@ -294,6 +300,10 @@ void PMNS_NSI::SetDownCoup(double d){
 /// Set the NSI relative couplings to each fermion.
 /// These factors represent what fraction of each fermion are seen
 /// by the interaction.
+///
+/// @param e - electron coupling strength
+/// @param u - u-quark coupling strength
+/// @param d - d-quark coupling strength
 ///
 void PMNS_NSI::SetFermCoup(double e, double u, double d)
 {
