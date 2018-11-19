@@ -18,6 +18,7 @@ var searchData=
   ['fhms',['fHms',['../classOscProb_1_1PMNS__Base.html#adf5901166216e8c7a5cff2092952f473',1,'OscProb::PMNS_Base']]],
   ['fillpath',['FillPath',['../classOscProb_1_1PremModel.html#ac69162cc5e3c8b7c1b8a85571ff2063b',1,'OscProb::PremModel']]],
   ['fisnubar',['fIsNuBar',['../classOscProb_1_1PMNS__Base.html#a0ebaeaefab36a3ff381c6293faedfdd6',1,'OscProb::PMNS_Base']]],
+  ['fnsicoup',['fNSIcoup',['../classOscProb_1_1PMNS__NSI.html#a1ac51957bbc4cec9fcfd8f816491cc95',1,'OscProb::PMNS_NSI']]],
   ['fnumnus',['fNumNus',['../classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e',1,'OscProb::PMNS_Base']]],
   ['fnupath',['fNuPath',['../classOscProb_1_1PremModel.html#aaf3c77e35798d664853157013c90ad2b',1,'OscProb::PremModel']]],
   ['fnupaths',['fNuPaths',['../classOscProb_1_1PMNS__Base.html#a69db9d57e12fc7cbe0431bc6c18fac93',1,'OscProb::PMNS_Base']]],

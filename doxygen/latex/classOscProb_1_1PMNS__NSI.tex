@@ -45,6 +45,22 @@ virtual void \hyperlink{classOscProb_1_1PMNS__NSI_a73d43e6d267975d1545af922f8e81
 \begin{DoxyCompactList}\small\item\em Set eps\+\_\+etau parameter. \end{DoxyCompactList}\item 
 virtual void \hyperlink{classOscProb_1_1PMNS__NSI_acfb9893697e04fcc25915ffaf8ed137f}{Set\+Eps\+\_\+mutau} (double a, double phi)
 \begin{DoxyCompactList}\small\item\em Set eps\+\_\+mutau parameter. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classOscProb_1_1PMNS__NSI_a8e07f5fe44e9ed471efa8e683584e2c7}{Set\+Elec\+Coup} (double e)
+\begin{DoxyCompactList}\small\item\em Set electron coupling. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classOscProb_1_1PMNS__NSI_a27ecfa2a97c67e6bfb399eeba956f74f}{Set\+Up\+Coup} (double u)
+\begin{DoxyCompactList}\small\item\em Set u-\/quark couling. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classOscProb_1_1PMNS__NSI_abcc85b0662bd6d08fc5a0bc713657129}{Set\+Down\+Coup} (double d)
+\begin{DoxyCompactList}\small\item\em Set d-\/quark couling. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classOscProb_1_1PMNS__NSI_a78983619968493630c48080bea9af05e}{Set\+Ferm\+Coup} (double e, double u, double d)
+\begin{DoxyCompactList}\small\item\em Set all fermion couplings. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classOscProb_1_1PMNS__NSI_adbee38997ab80f8d1a9750d3eae0afea}{Get\+Elec\+Coup} ()
+\begin{DoxyCompactList}\small\item\em Get electron coupling. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classOscProb_1_1PMNS__NSI_a5fbeeb25bd00fbda7c484dbdb6748a58}{Get\+Up\+Coup} ()
+\begin{DoxyCompactList}\small\item\em Get u-\/quark couling. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classOscProb_1_1PMNS__NSI_a4f5306674397d6183214d53bf2f110f7}{Get\+Down\+Coup} ()
+\begin{DoxyCompactList}\small\item\em Get d-\/quark couling. \end{DoxyCompactList}\item 
+virtual double \hyperlink{classOscProb_1_1PMNS__NSI_a42b2db6f2f42dbca7545a10d101a7950}{Get\+Zo\+A\+Coup} ()
+\begin{DoxyCompactList}\small\item\em Get effective Z/A coupling. \end{DoxyCompactList}\item 
 virtual void \hyperlink{classOscProb_1_1PMNS__Fast_ad849b2231d99c5d66fb3ade8efb896e1}{Set\+Mix} (double th12, double th23, double th13, double deltacp)
 \begin{DoxyCompactList}\small\item\em Set the all mixing parameters at once. \end{DoxyCompactList}\item 
 virtual void \hyperlink{classOscProb_1_1PMNS__Fast_a63733b246e6d2e609ce3de7a65ba5b9f}{Set\+Delta\+Msqrs} (double dm21, double dm32)
@@ -147,6 +163,8 @@ virtual double \hyperlink{classOscProb_1_1PMNS__Base_a0dc4d45bc3d7e03b9abbf5b4e1
 \item 
 \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex} \hyperlink{classOscProb_1_1PMNS__NSI_a7e2f0a3fdc633f68523c9de0ce76e67d}{f\+Eps} \mbox{[}3\mbox{]}\mbox{[}3\mbox{]}
 \begin{DoxyCompactList}\small\item\em Stores each N\+SI parameter. \end{DoxyCompactList}\item 
+double \hyperlink{classOscProb_1_1PMNS__NSI_a1ac51957bbc4cec9fcfd8f816491cc95}{f\+N\+S\+Icoup} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Relative N\+SI couplings. \end{DoxyCompactList}\item 
 \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex} \hyperlink{classOscProb_1_1PMNS__Fast_aab37f2a7f59ab7026a8a21a561115dd0}{f\+Ham} \mbox{[}3\mbox{]}\mbox{[}3\mbox{]}
 \begin{DoxyCompactList}\small\item\em The full hamiltonian. \end{DoxyCompactList}\item 
 int \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{f\+Num\+Nus}
@@ -246,7 +264,7 @@ Definition at line 29 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
 
 
 
-References Set\+N\+S\+I(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Std\+Path().
+References Set\+Ferm\+Coup(), Set\+N\+S\+I(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Std\+Path().
 
 
 \begin{DoxyCode}
@@ -254,7 +272,8 @@ References Set\+N\+S\+I(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+S
 30 \{
 31   \hyperlink{classOscProb_1_1PMNS__Base_add6533a9fc9acdfc7ae258b62570d78d}{SetStdPath}();
 32   \hyperlink{classOscProb_1_1PMNS__NSI_ae8829af10bc4051e8c74c8b1bc81c88c}{SetNSI}(0.,0.,0.,0.,0.,0.,0.,0.,0.);
-33 \}
+33   \hyperlink{classOscProb_1_1PMNS__NSI_a78983619968493630c48080bea9af05e}{SetFermCoup}(1,0,0);
+34 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_aad1035cb0fb26994029c25b475ec3bde}\label{classOscProb_1_1PMNS__NSI_aad1035cb0fb26994029c25b475ec3bde}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!````~P\+M\+N\+S\+\_\+\+N\+SI@{$\sim$\+P\+M\+N\+S\+\_\+\+N\+SI}}
@@ -264,11 +283,11 @@ References Set\+N\+S\+I(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+S
 
 Nothing to clean. 
 
-Definition at line 39 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+Definition at line 40 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
 
 
 \begin{DoxyCode}
-39 \{\}
+40 \{\}
 \end{DoxyCode}
 
 
@@ -728,6 +747,42 @@ References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Dm, and Osc\+Prob\+::\+P\
 707 
 708 \}
 \end{DoxyCode}
+\mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_a4f5306674397d6183214d53bf2f110f7}\label{classOscProb_1_1PMNS__NSI_a4f5306674397d6183214d53bf2f110f7}} 
+\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Get\+Down\+Coup@{Get\+Down\+Coup}}
+\index{Get\+Down\+Coup@{Get\+Down\+Coup}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}}
+\subsubsection{\texorpdfstring{Get\+Down\+Coup()}{GetDownCoup()}}
+{\footnotesize\ttfamily double P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Get\+Down\+Coup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Get the N\+SI relative coupling to d-\/quarks. 
+
+Definition at line 323 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+
+
+
+References f\+N\+S\+Icoup.
+
+
+\begin{DoxyCode}
+323 \{ \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__NSI_a1ac51957bbc4cec9fcfd8f816491cc95}{fNSIcoup}[2]; \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_adbee38997ab80f8d1a9750d3eae0afea}\label{classOscProb_1_1PMNS__NSI_adbee38997ab80f8d1a9750d3eae0afea}} 
+\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Get\+Elec\+Coup@{Get\+Elec\+Coup}}
+\index{Get\+Elec\+Coup@{Get\+Elec\+Coup}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}}
+\subsubsection{\texorpdfstring{Get\+Elec\+Coup()}{GetElecCoup()}}
+{\footnotesize\ttfamily double P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Get\+Elec\+Coup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Get the N\+SI relative coupling to electrons. 
+
+Definition at line 311 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+
+
+
+References f\+N\+S\+Icoup.
+
+
+\begin{DoxyCode}
+311 \{ \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__NSI_a1ac51957bbc4cec9fcfd8f816491cc95}{fNSIcoup}[0]; \}
+\end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_acc0d46cc4b8f911b40b807225003bbed}\label{classOscProb_1_1PMNS__Base_acc0d46cc4b8f911b40b807225003bbed}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Get\+Energy@{Get\+Energy}}
 \index{Get\+Energy@{Get\+Energy}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}}
@@ -775,7 +830,7 @@ Requires that flvi $<$ flvj. Will notify you if input is wrong. If flvi $>$ flvj
 \end{DoxyParams}
 
 
-Definition at line 131 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+Definition at line 130 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
 
 
 
@@ -783,24 +838,24 @@ References f\+Eps, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Num\+Nus, and Osc
 
 
 \begin{DoxyCode}
-131                                                   \{
-132 
-133   \textcolor{keywordflow}{if}(flvi > flvj)\{
-134     cout << \textcolor{stringliteral}{"First argument should be smaller or equal to second argument"} << endl;
-135     cout << \textcolor{stringliteral}{"Setting reverse order (Eps\_"} << flvj << flvi << \textcolor{stringliteral}{"). "} << endl;
-136     \textcolor{keywordtype}{int} temp = flvi;
-137     flvi = flvj;
-138     flvj = temp;
-139   \}
-140   \textcolor{keywordflow}{if}(flvi<0 || flvi>2 || flvj < flvi || flvj > 2)\{
-141     cout << \textcolor{stringliteral}{"Eps\_"} << flvi << flvj << \textcolor{stringliteral}{" not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
-142     cout << \textcolor{stringliteral}{" neutrinos. Returning 0."} << endl;
-143     \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a5c31ed4593cf95feb36fb80c1850d25e}{zero};
-144   \}
-145 
-146   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__NSI_a7e2f0a3fdc633f68523c9de0ce76e67d}{fEps}[flvi][flvj];
-147 
-148 \}
+130                                                   \{
+131 
+132   \textcolor{keywordflow}{if}(flvi > flvj)\{
+133     cout << \textcolor{stringliteral}{"First argument should be smaller or equal to second argument"} << endl;
+134     cout << \textcolor{stringliteral}{"Setting reverse order (Eps\_"} << flvj << flvi << \textcolor{stringliteral}{"). "} << endl;
+135     \textcolor{keywordtype}{int} temp = flvi;
+136     flvi = flvj;
+137     flvj = temp;
+138   \}
+139   \textcolor{keywordflow}{if}(flvi<0 || flvi>2 || flvj < flvi || flvj > 2)\{
+140     cout << \textcolor{stringliteral}{"Eps\_"} << flvi << flvj << \textcolor{stringliteral}{" not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
+141     cout << \textcolor{stringliteral}{" neutrinos. Returning 0."} << endl;
+142     \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a5c31ed4593cf95feb36fb80c1850d25e}{zero};
+143   \}
+144 
+145   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__NSI_a7e2f0a3fdc633f68523c9de0ce76e67d}{fEps}[flvi][flvj];
+146 
+147 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a2f7f2a028dfe7a90fff6b4f757972c2c}\label{classOscProb_1_1PMNS__Base_a2f7f2a028dfe7a90fff6b4f757972c2c}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Get\+Is\+Nu\+Bar@{Get\+Is\+Nu\+Bar}}
@@ -973,6 +1028,52 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Avg\+Prob\+Lo\+E().
 1316   \textcolor{keywordflow}{return} allSamples;
 1317 
 1318 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_a5fbeeb25bd00fbda7c484dbdb6748a58}\label{classOscProb_1_1PMNS__NSI_a5fbeeb25bd00fbda7c484dbdb6748a58}} 
+\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Get\+Up\+Coup@{Get\+Up\+Coup}}
+\index{Get\+Up\+Coup@{Get\+Up\+Coup}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}}
+\subsubsection{\texorpdfstring{Get\+Up\+Coup()}{GetUpCoup()}}
+{\footnotesize\ttfamily double P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Get\+Up\+Coup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Get the N\+SI relative coupling to u-\/quarks. 
+
+Definition at line 317 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+
+
+
+References f\+N\+S\+Icoup.
+
+
+\begin{DoxyCode}
+317 \{ \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__NSI_a1ac51957bbc4cec9fcfd8f816491cc95}{fNSIcoup}[1]; \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_a42b2db6f2f42dbca7545a10d101a7950}\label{classOscProb_1_1PMNS__NSI_a42b2db6f2f42dbca7545a10d101a7950}} 
+\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Get\+Zo\+A\+Coup@{Get\+Zo\+A\+Coup}}
+\index{Get\+Zo\+A\+Coup@{Get\+Zo\+A\+Coup}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}}
+\subsubsection{\texorpdfstring{Get\+Zo\+A\+Coup()}{GetZoACoup()}}
+{\footnotesize\ttfamily double P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Get\+Zo\+A\+Coup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Get the effective N\+SI Z/A dependence. 
+
+Definition at line 329 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+
+
+
+References f\+N\+S\+Icoup, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Path, and Osc\+Prob\+::\+Nu\+Path\+::zoa.
+
+
+
+Referenced by Update\+Ham().
+
+
+\begin{DoxyCode}
+330 \{
+331 
+332   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__NSI_a1ac51957bbc4cec9fcfd8f816491cc95}{fNSIcoup}[0] * \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}        \textcolor{comment}{// electrons: Z}
+333        + \hyperlink{classOscProb_1_1PMNS__NSI_a1ac51957bbc4cec9fcfd8f816491cc95}{fNSIcoup}[1] * (1 + \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa})  \textcolor{comment}{// u-quarks:  A + Z}
+334        + \hyperlink{classOscProb_1_1PMNS__NSI_a1ac51957bbc4cec9fcfd8f816491cc95}{fNSIcoup}[2] * (2 - \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}); \textcolor{comment}{// d-quarks: 2A - Z }
+335 
+336 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_adf23b569112f9f9e0e592f01d79a5f3d}\label{classOscProb_1_1PMNS__Base_adf23b569112f9f9e0e592f01d79a5f3d}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Initialize\+Vectors@{Initialize\+Vectors}}
@@ -1932,6 +2033,62 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Set\+Delta\+Msqrs(), an
 686 
 687 \}
 \end{DoxyCode}
+\mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_abcc85b0662bd6d08fc5a0bc713657129}\label{classOscProb_1_1PMNS__NSI_abcc85b0662bd6d08fc5a0bc713657129}} 
+\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Set\+Down\+Coup@{Set\+Down\+Coup}}
+\index{Set\+Down\+Coup@{Set\+Down\+Coup}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}}
+\subsubsection{\texorpdfstring{Set\+Down\+Coup()}{SetDownCoup()}}
+{\footnotesize\ttfamily void P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Set\+Down\+Coup (\begin{DoxyParamCaption}\item[{double}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Set the N\+SI relative coupling to d-\/quarks. This factor represents what fraction of the d-\/quarks are seen by the interaction. 
+
+Definition at line 284 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+
+
+
+References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Got\+ES, and f\+N\+S\+Icoup.
+
+
+
+Referenced by Set\+Ferm\+Coup().
+
+
+\begin{DoxyCode}
+284                                   \{
+285 
+286   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} *= (\hyperlink{classOscProb_1_1PMNS__NSI_a1ac51957bbc4cec9fcfd8f816491cc95}{fNSIcoup}[2] == d);
+287 
+288   \hyperlink{classOscProb_1_1PMNS__NSI_a1ac51957bbc4cec9fcfd8f816491cc95}{fNSIcoup}[2] = d;
+289 
+290 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_a8e07f5fe44e9ed471efa8e683584e2c7}\label{classOscProb_1_1PMNS__NSI_a8e07f5fe44e9ed471efa8e683584e2c7}} 
+\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Set\+Elec\+Coup@{Set\+Elec\+Coup}}
+\index{Set\+Elec\+Coup@{Set\+Elec\+Coup}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}}
+\subsubsection{\texorpdfstring{Set\+Elec\+Coup()}{SetElecCoup()}}
+{\footnotesize\ttfamily void P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Set\+Elec\+Coup (\begin{DoxyParamCaption}\item[{double}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Set the N\+SI relative coupling to electrons. This factor represents what fraction of the electrons are seen by the interaction. 
+
+Definition at line 256 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+
+
+
+References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Got\+ES, and f\+N\+S\+Icoup.
+
+
+
+Referenced by Set\+Ferm\+Coup().
+
+
+\begin{DoxyCode}
+256                                   \{
+257 
+258   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} *= (\hyperlink{classOscProb_1_1PMNS__NSI_a1ac51957bbc4cec9fcfd8f816491cc95}{fNSIcoup}[0] == e);
+259 
+260   \hyperlink{classOscProb_1_1PMNS__NSI_a1ac51957bbc4cec9fcfd8f816491cc95}{fNSIcoup}[0] = e;
+261 
+262 \}
+\end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}\label{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Set\+Energy@{Set\+Energy}}
 \index{Set\+Energy@{Set\+Energy}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}}
@@ -2001,7 +2158,7 @@ Requires that flvi $<$ flvj. Will notify you if input is wrong. If flvi $>$ flvj
 \end{DoxyParams}
 
 
-Definition at line 91 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+Definition at line 92 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
 
 
 
@@ -2013,32 +2170,30 @@ Referenced by Set\+Eps\+\_\+ee(), Set\+Eps\+\_\+emu(), Set\+Eps\+\_\+etau(), Set
 
 
 \begin{DoxyCode}
-91                                                                  \{
-92 
-93   \textcolor{keywordflow}{if}(flvi > flvj)\{
-94     cout << \textcolor{stringliteral}{"First argument should be smaller or equal to second argument"} << endl;
-95     cout << \textcolor{stringliteral}{"Setting reverse order (Eps\_"} << flvj << flvi << \textcolor{stringliteral}{"). "} << endl;
-96     \textcolor{keywordtype}{int} temp = flvi;
-97     flvi = flvj;
-98     flvj = temp;
-99   \}
-100   \textcolor{keywordflow}{if}(flvi<0 || flvi>2 || flvj < flvi || flvj > 2)\{
-101     cout << \textcolor{stringliteral}{"Eps\_"} << flvi << flvj << \textcolor{stringliteral}{" not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
-102     cout << \textcolor{stringliteral}{" neutrinos. Doing nothing."} << endl;
-103     \textcolor{keywordflow}{return};
-104   \}
-105 
-106   \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex} h = val;  
-107 
-108   \textcolor{keywordflow}{if}(flvi != flvj) h *= \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex}(cos(phase), sin(phase)); 
-109 
-110   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(flvi == 0) h += 1;
-111 
-112   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} *= (\hyperlink{classOscProb_1_1PMNS__NSI_a7e2f0a3fdc633f68523c9de0ce76e67d}{fEps}[flvi][flvj] == h);
-113   
-114   \hyperlink{classOscProb_1_1PMNS__NSI_a7e2f0a3fdc633f68523c9de0ce76e67d}{fEps}[flvi][flvj] = h;
-115   
-116 \}
+92                                                                  \{
+93 
+94   \textcolor{keywordflow}{if}(flvi > flvj)\{
+95     cout << \textcolor{stringliteral}{"First argument should be smaller or equal to second argument"} << endl;
+96     cout << \textcolor{stringliteral}{"Setting reverse order (Eps\_"} << flvj << flvi << \textcolor{stringliteral}{"). "} << endl;
+97     \textcolor{keywordtype}{int} temp = flvi;
+98     flvi = flvj;
+99     flvj = temp;
+100   \}
+101   \textcolor{keywordflow}{if}(flvi<0 || flvi>2 || flvj < flvi || flvj > 2)\{
+102     cout << \textcolor{stringliteral}{"Eps\_"} << flvi << flvj << \textcolor{stringliteral}{" not valid for "} << \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};
+103     cout << \textcolor{stringliteral}{" neutrinos. Doing nothing."} << endl;
+104     \textcolor{keywordflow}{return};
+105   \}
+106 
+107   \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex} h = val;  
+108 
+109   \textcolor{keywordflow}{if}(flvi != flvj) h *= \hyperlink{classOscProb_1_1PMNS__Base_ae86ec4718808ce9d02e5f5b4226714ab}{complex}(cos(phase), sin(phase)); 
+110 
+111   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} *= (\hyperlink{classOscProb_1_1PMNS__NSI_a7e2f0a3fdc633f68523c9de0ce76e67d}{fEps}[flvi][flvj] == h);
+112   
+113   \hyperlink{classOscProb_1_1PMNS__NSI_a7e2f0a3fdc633f68523c9de0ce76e67d}{fEps}[flvi][flvj] = h;
+114   
+115 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_a13ecb89c4d43924d23833a9e930f50e0}\label{classOscProb_1_1PMNS__NSI_a13ecb89c4d43924d23833a9e930f50e0}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Set\+Eps\+\_\+ee@{Set\+Eps\+\_\+ee}}
@@ -2057,7 +2212,7 @@ This will check if value is changing to keep track of whether the eigensystem ne
 \end{DoxyParams}
 
 
-Definition at line 159 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+Definition at line 158 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
 
 
 
@@ -2065,7 +2220,7 @@ References Set\+Eps().
 
 
 \begin{DoxyCode}
-159 \{ \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(0,0, a, 0); \}
+158 \{ \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(0,0, a, 0); \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_ad5fccd151aea7c673c516b8686f8253c}\label{classOscProb_1_1PMNS__NSI_ad5fccd151aea7c673c516b8686f8253c}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Set\+Eps\+\_\+emu@{Set\+Eps\+\_\+emu}}
@@ -2086,7 +2241,7 @@ This will check if value is changing to keep track of whether the eigensystem ne
 \end{DoxyParams}
 
 
-Definition at line 193 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+Definition at line 192 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
 
 
 
@@ -2094,7 +2249,7 @@ References Set\+Eps().
 
 
 \begin{DoxyCode}
-193 \{ \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(0,1, a, phi); \}
+192 \{ \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(0,1, a, phi); \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_a73d43e6d267975d1545af922f8e81bb3}\label{classOscProb_1_1PMNS__NSI_a73d43e6d267975d1545af922f8e81bb3}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Set\+Eps\+\_\+etau@{Set\+Eps\+\_\+etau}}
@@ -2115,7 +2270,7 @@ This will check if value is changing to keep track of whether the eigensystem ne
 \end{DoxyParams}
 
 
-Definition at line 205 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+Definition at line 204 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
 
 
 
@@ -2123,7 +2278,7 @@ References Set\+Eps().
 
 
 \begin{DoxyCode}
-205 \{ \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(0,2, a, phi); \}
+204 \{ \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(0,2, a, phi); \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_abf049db9904c745f04346d0d1dedf998}\label{classOscProb_1_1PMNS__NSI_abf049db9904c745f04346d0d1dedf998}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Set\+Eps\+\_\+mumu@{Set\+Eps\+\_\+mumu}}
@@ -2142,7 +2297,7 @@ This will check if value is changing to keep track of whether the eigensystem ne
 \end{DoxyParams}
 
 
-Definition at line 170 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+Definition at line 169 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
 
 
 
@@ -2150,7 +2305,7 @@ References Set\+Eps().
 
 
 \begin{DoxyCode}
-170 \{ \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(1,1, a, 0); \}
+169 \{ \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(1,1, a, 0); \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_acfb9893697e04fcc25915ffaf8ed137f}\label{classOscProb_1_1PMNS__NSI_acfb9893697e04fcc25915ffaf8ed137f}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Set\+Eps\+\_\+mutau@{Set\+Eps\+\_\+mutau}}
@@ -2171,7 +2326,7 @@ This will check if value is changing to keep track of whether the eigensystem ne
 \end{DoxyParams}
 
 
-Definition at line 217 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+Definition at line 216 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
 
 
 
@@ -2179,7 +2334,7 @@ References Set\+Eps().
 
 
 \begin{DoxyCode}
-217 \{ \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(1,2, a, phi); \}
+216 \{ \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(1,2, a, phi); \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_a5736f3cd792a621dfa844c3fa314cd17}\label{classOscProb_1_1PMNS__NSI_a5736f3cd792a621dfa844c3fa314cd17}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Set\+Eps\+\_\+tautau@{Set\+Eps\+\_\+tautau}}
@@ -2198,7 +2353,7 @@ This will check if value is changing to keep track of whether the eigensystem ne
 \end{DoxyParams}
 
 
-Definition at line 181 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+Definition at line 180 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
 
 
 
@@ -2206,7 +2361,35 @@ References Set\+Eps().
 
 
 \begin{DoxyCode}
-181 \{ \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(2,2, a, 0); \}
+180 \{ \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(2,2, a, 0); \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_a78983619968493630c48080bea9af05e}\label{classOscProb_1_1PMNS__NSI_a78983619968493630c48080bea9af05e}} 
+\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Set\+Ferm\+Coup@{Set\+Ferm\+Coup}}
+\index{Set\+Ferm\+Coup@{Set\+Ferm\+Coup}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}}
+\subsubsection{\texorpdfstring{Set\+Ferm\+Coup()}{SetFermCoup()}}
+{\footnotesize\ttfamily void P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Set\+Ferm\+Coup (\begin{DoxyParamCaption}\item[{double}]{e,  }\item[{double}]{u,  }\item[{double}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Set the N\+SI relative couplings to each fermion. These factors represent what fraction of each fermion are seen by the interaction. 
+
+Definition at line 298 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+
+
+
+References Set\+Down\+Coup(), Set\+Elec\+Coup(), and Set\+Up\+Coup().
+
+
+
+Referenced by P\+M\+N\+S\+\_\+\+N\+S\+I().
+
+
+\begin{DoxyCode}
+299 \{
+300 
+301   \hyperlink{classOscProb_1_1PMNS__NSI_a8e07f5fe44e9ed471efa8e683584e2c7}{SetElecCoup}(e); \textcolor{comment}{// electron coupling}
+302   \hyperlink{classOscProb_1_1PMNS__NSI_a27ecfa2a97c67e6bfb399eeba956f74f}{SetUpCoup}(u);   \textcolor{comment}{// u-quark coupling}
+303   \hyperlink{classOscProb_1_1PMNS__NSI_abcc85b0662bd6d08fc5a0bc713657129}{SetDownCoup}(d); \textcolor{comment}{// d-quark coupling}
+304   
+305 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a717e0348cf762f3961854e332a9b52e0}\label{classOscProb_1_1PMNS__Base_a717e0348cf762f3961854e332a9b52e0}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Set\+Is\+Nu\+Bar@{Set\+Is\+Nu\+Bar}}
@@ -2414,7 +2597,7 @@ This will check if value is changing to keep track of whether the eigensystem ne
 \end{DoxyParams}
 
 
-Definition at line 58 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+Definition at line 59 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
 
 
 
@@ -2426,17 +2609,17 @@ Referenced by P\+M\+N\+S\+\_\+\+N\+S\+I().
 
 
 \begin{DoxyCode}
-61 \{
-62 
-63   \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(0,0, eps\_ee,     0);
-64   \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(1,1, eps\_mumu,   0);
-65   \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(2,2, eps\_tautau, 0);
-66 
-67   \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(0,1, eps\_emu,   delta\_emu);
-68   \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(0,2, eps\_etau,  delta\_etau);
-69   \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(1,2, eps\_mutau, delta\_mutau);
-70 
-71 \}
+62 \{
+63 
+64   \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(0,0, eps\_ee,     0);
+65   \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(1,1, eps\_mumu,   0);
+66   \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(2,2, eps\_tautau, 0);
+67 
+68   \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(0,1, eps\_emu,   delta\_emu);
+69   \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(0,2, eps\_etau,  delta\_etau);
+70   \hyperlink{classOscProb_1_1PMNS__NSI_a87c508149ea36b6de493a6817247a0ea}{SetEps}(1,2, eps\_mutau, delta\_mutau);
+71 
+72 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ac3b644fd0a56347d304ceca4ae9d8875}\label{classOscProb_1_1PMNS__Base_ac3b644fd0a56347d304ceca4ae9d8875}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Set\+Path@{Set\+Path}}
@@ -2616,6 +2799,34 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+P\+M\+N\+S\+\_\+\+Base(
 140   \hyperlink{classOscProb_1_1PMNS__Base_ac3b644fd0a56347d304ceca4ae9d8875}{SetPath}(p);
 141 
 142 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_a27ecfa2a97c67e6bfb399eeba956f74f}\label{classOscProb_1_1PMNS__NSI_a27ecfa2a97c67e6bfb399eeba956f74f}} 
+\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Set\+Up\+Coup@{Set\+Up\+Coup}}
+\index{Set\+Up\+Coup@{Set\+Up\+Coup}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}}
+\subsubsection{\texorpdfstring{Set\+Up\+Coup()}{SetUpCoup()}}
+{\footnotesize\ttfamily void P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Set\+Up\+Coup (\begin{DoxyParamCaption}\item[{double}]{u }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Set the N\+SI relative coupling to u-\/quarks. This factor represents what fraction of the u-\/quarks are seen by the interaction. 
+
+Definition at line 270 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+
+
+
+References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Got\+ES, and f\+N\+S\+Icoup.
+
+
+
+Referenced by Set\+Ferm\+Coup().
+
+
+\begin{DoxyCode}
+270                                 \{
+271 
+272   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} *= (\hyperlink{classOscProb_1_1PMNS__NSI_a1ac51957bbc4cec9fcfd8f816491cc95}{fNSIcoup}[1] == u);
+273 
+274   \hyperlink{classOscProb_1_1PMNS__NSI_a1ac51957bbc4cec9fcfd8f816491cc95}{fNSIcoup}[1] = u;
+275 
+276 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Fast_a76dd5a761df8689c502b28ad0391f9e2}\label{classOscProb_1_1PMNS__Fast_a76dd5a761df8689c502b28ad0391f9e2}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Set\+Vacuum\+Eigensystem@{Set\+Vacuum\+Eigensystem}}
@@ -2805,31 +3016,36 @@ Reimplemented from \hyperlink{classOscProb_1_1PMNS__Fast_a16248082308f9d2c332ebf
 
 
 
-Definition at line 227 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
+Definition at line 226 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+cxx.
 
 
 
-References Osc\+Prob\+::\+Nu\+Path\+::density, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Energy, f\+Eps, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::f\+Ham, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Hms, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Is\+Nu\+Bar, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Num\+Nus, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Path, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+Ge\+V2eV, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+Gf, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+K2, and Osc\+Prob\+::\+Nu\+Path\+::zoa.
+References Osc\+Prob\+::\+Nu\+Path\+::density, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Energy, f\+Eps, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::f\+Ham, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Hms, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Is\+Nu\+Bar, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Num\+Nus, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Path, Get\+Zo\+A\+Coup(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+Ge\+V2eV, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+Gf, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+K2, and Osc\+Prob\+::\+Nu\+Path\+::zoa.
 
 
 \begin{DoxyCode}
-228 \{
-229 
-230   \textcolor{keywordtype}{double} lv = 2 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV}*\hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy};           \textcolor{comment}{// 2*E in eV }
-231 
-232   \textcolor{keywordtype}{double} kr2GNe = \hyperlink{classOscProb_1_1PMNS__Base_a326fc5016d7dd7ce05682c06cdcb6d94}{kK2}*M\_SQRT2*\hyperlink{classOscProb_1_1PMNS__Base_a7f26a3456128234b2ae6cc9141a6532f}{kGf};
-233   kr2GNe *= \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density} * \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}; \textcolor{comment}{// Matter potential in eV}
-234 
-235 
-236   \textcolor{comment}{// Finish build Hamiltonian in matter with dimension of eV}
-237   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};i++)\{
-238     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=i;j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};j++)\{
-239       \textcolor{keywordflow}{if}(!\hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar}) \hyperlink{classOscProb_1_1PMNS__Fast_aab37f2a7f59ab7026a8a21a561115dd0}{fHam}[i][j] = \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j]/lv + kr2GNe*\hyperlink{classOscProb_1_1PMNS__NSI_a7e2f0a3fdc633f68523c9de0ce76e67d}{fEps}[i][j];
-240       \textcolor{keywordflow}{else}          \hyperlink{classOscProb_1_1PMNS__Fast_aab37f2a7f59ab7026a8a21a561115dd0}{fHam}[i][j] = conj(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j]/lv - kr2GNe*fEps[i][j]);
-241     \}
-242   \}
-243 
-244 \}
+227 \{
+228 
+229   \textcolor{keywordtype}{double} lv = 2 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV}*\hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy};           \textcolor{comment}{// 2*E in eV }
+230 
+231   \textcolor{keywordtype}{double} kr2GNe   = \hyperlink{classOscProb_1_1PMNS__Base_a326fc5016d7dd7ce05682c06cdcb6d94}{kK2}*M\_SQRT2*\hyperlink{classOscProb_1_1PMNS__Base_a7f26a3456128234b2ae6cc9141a6532f}{kGf} * \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density};
+232   \textcolor{keywordtype}{double} kr2GNnsi = kr2GNe;
+233 
+234   kr2GNe   *= \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa};    \textcolor{comment}{// Std matter potential in eV}
+235   kr2GNnsi *= \hyperlink{classOscProb_1_1PMNS__NSI_a42b2db6f2f42dbca7545a10d101a7950}{GetZoACoup}(); \textcolor{comment}{// NSI matter potential in eV}
+236 
+237   \textcolor{comment}{// Finish build Hamiltonian in matter with dimension of eV}
+238   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};i++)\{
+239     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=i;j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};j++)\{
+240       \textcolor{keywordflow}{if}(!\hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar}) \hyperlink{classOscProb_1_1PMNS__Fast_aab37f2a7f59ab7026a8a21a561115dd0}{fHam}[i][j] = \hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j]/lv + kr2GNnsi*\hyperlink{classOscProb_1_1PMNS__NSI_a7e2f0a3fdc633f68523c9de0ce76e67d}{fEps}[i][j];
+241       \textcolor{keywordflow}{else}          \hyperlink{classOscProb_1_1PMNS__Fast_aab37f2a7f59ab7026a8a21a561115dd0}{fHam}[i][j] = conj(\hyperlink{classOscProb_1_1PMNS__Base_adf5901166216e8c7a5cff2092952f473}{fHms}[i][j]/lv - kr2GNnsi*fEps[i][j]);
+242     \}
+243   \}
+244   
+245   \textcolor{keywordflow}{if}(!\hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar}) \hyperlink{classOscProb_1_1PMNS__Fast_aab37f2a7f59ab7026a8a21a561115dd0}{fHam}[0][0] += kr2GNe;
+246   \textcolor{keywordflow}{else}          \hyperlink{classOscProb_1_1PMNS__Fast_aab37f2a7f59ab7026a8a21a561115dd0}{fHam}[0][0] -= kr2GNe;
+247 
+248 \}
 \end{DoxyCode}
 
 
@@ -2912,7 +3128,7 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Energy(), Osc\+Pro
 
 
 
-Definition at line 58 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+h.
+Definition at line 70 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+h.
 
 
 
@@ -2958,7 +3174,7 @@ Definition at line 177 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
-Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Build\+Hms(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Cur\+Path(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Energy(), Set\+Eps(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Is\+Nu\+Bar(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+Solve\+Ham(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Solve\+Ham().
+Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Build\+Hms(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Cur\+Path(), Set\+Down\+Coup(), Set\+Elec\+Coup(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Energy(), Set\+Eps(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Is\+Nu\+Bar(), Set\+Up\+Coup(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+Solve\+Ham(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Solve\+Ham().
 
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Fast_aab37f2a7f59ab7026a8a21a561115dd0}\label{classOscProb_1_1PMNS__Fast_aab37f2a7f59ab7026a8a21a561115dd0}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!f\+Ham@{f\+Ham}}
@@ -3001,6 +3217,20 @@ Definition at line 171 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Is\+Nu\+Bar(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Is\+Nu\+Bar(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Set\+Vacuum\+Eigensystem(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+Solve\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Update\+Ham(), and Update\+Ham().
+
+\mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_a1ac51957bbc4cec9fcfd8f816491cc95}\label{classOscProb_1_1PMNS__NSI_a1ac51957bbc4cec9fcfd8f816491cc95}} 
+\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!f\+N\+S\+Icoup@{f\+N\+S\+Icoup}}
+\index{f\+N\+S\+Icoup@{f\+N\+S\+Icoup}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}}
+\subsubsection{\texorpdfstring{f\+N\+S\+Icoup}{fNSIcoup}}
+{\footnotesize\ttfamily double Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+S\+I\+::f\+N\+S\+Icoup\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 72 of file P\+M\+N\+S\+\_\+\+N\+S\+I.\+h.
+
+
+
+Referenced by Get\+Down\+Coup(), Get\+Elec\+Coup(), Get\+Up\+Coup(), Get\+Zo\+A\+Coup(), Set\+Down\+Coup(), Set\+Elec\+Coup(), and Set\+Up\+Coup().
 
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}\label{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!f\+Num\+Nus@{f\+Num\+Nus}}
@@ -3056,7 +3286,7 @@ Definition at line 174 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
-Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Avg\+Prob(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Avg\+Prob\+Lo\+E(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Cur\+Path(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+Solve\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Solve\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Update\+Ham(), and Update\+Ham().
+Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Avg\+Prob(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Avg\+Prob\+Lo\+E(), Get\+Zo\+A\+Coup(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Cur\+Path(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+Solve\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Solve\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Update\+Ham(), and Update\+Ham().
 
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a2fcb59d7c533e4cd963b1890e504d3dc}\label{classOscProb_1_1PMNS__Base_a2fcb59d7c533e4cd963b1890e504d3dc}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!f\+Phases@{f\+Phases}}
