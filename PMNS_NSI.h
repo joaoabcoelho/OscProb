@@ -50,12 +50,26 @@ namespace OscProb {
     virtual void SetEps_etau (double a, double phi); ///< Set eps_etau parameter
     virtual void SetEps_mutau(double a, double phi); ///< Set eps_mutau parameter
 
+    // Set relative NSI couplings
+    virtual void SetElecCoup(double e); ///< Set electron coupling
+    virtual void SetUpCoup(double u);   ///< Set u-quark couling
+    virtual void SetDownCoup(double d); ///< Set d-quark couling
+    virtual void SetFermCoup(double e, double u, double d); ///< Set all fermion couplings
+
+    // Get relative NSI couplings
+    virtual double GetElecCoup(); ///< Get electron coupling
+    virtual double GetUpCoup();   ///< Get u-quark couling
+    virtual double GetDownCoup(); ///< Get d-quark couling
+    virtual double GetZoACoup();  ///< Get effective Z/A coupling
+
   protected:
 
     /// Build the full Hamiltonian
     virtual void UpdateHam();
     
     complex fEps[3][3]; ///< Stores each NSI parameter
+    
+    double fNSIcoup[3]; ///< Relative NSI couplings
 
   };
 

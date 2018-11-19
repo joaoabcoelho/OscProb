@@ -30,6 +30,7 @@ PMNS_NSI::PMNS_NSI() : PMNS_Fast(), fEps()
 {
   SetStdPath();
   SetNSI(0.,0.,0.,0.,0.,0.,0.,0.,0.);
+  SetFermCoup(1,0,0);
 }
 
 //......................................................................
@@ -106,8 +107,6 @@ void PMNS_NSI::SetEps(int flvi, int flvj, double val, double phase){
   complex h = val;  
 
   if(flvi != flvj) h *= complex(cos(phase), sin(phase)); 
-
-  else if(flvi == 0) h += 1;
 
   fGotES *= (fEps[flvi][flvj] == h);
   
@@ -229,17 +228,110 @@ void PMNS_NSI::UpdateHam()
 
   double lv = 2 * kGeV2eV*fEnergy;           // 2*E in eV 
 
-  double kr2GNe = kK2*M_SQRT2*kGf;
-  kr2GNe *= fPath.density * fPath.zoa; // Matter potential in eV
+  double kr2GNe   = kK2*M_SQRT2*kGf * fPath.density;
+  double kr2GNnsi = kr2GNe;
 
+  kr2GNe   *= fPath.zoa;    // Std matter potential in eV
+  kr2GNnsi *= GetZoACoup(); // NSI matter potential in eV
 
   // Finish build Hamiltonian in matter with dimension of eV
   for(int i=0;i<fNumNus;i++){
     for(int j=i;j<fNumNus;j++){
-      if(!fIsNuBar) fHam[i][j] = fHms[i][j]/lv + kr2GNe*fEps[i][j];
-      else          fHam[i][j] = conj(fHms[i][j]/lv - kr2GNe*fEps[i][j]);
+      if(!fIsNuBar) fHam[i][j] = fHms[i][j]/lv + kr2GNnsi*fEps[i][j];
+      else          fHam[i][j] = conj(fHms[i][j]/lv - kr2GNnsi*fEps[i][j]);
     }
   }
+  
+  if(!fIsNuBar) fHam[0][0] += kr2GNe;
+  else          fHam[0][0] -= kr2GNe;
+
+}
+
+//......................................................................
+///
+/// Set the NSI relative coupling to electrons. 
+/// This factor represents what fraction of the electrons are seen
+/// by the interaction.
+///
+void PMNS_NSI::SetElecCoup(double e){
+
+  fGotES *= (fNSIcoup[0] == e);
+
+  fNSIcoup[0] = e;
+
+}
+
+//......................................................................
+///
+/// Set the NSI relative coupling to u-quarks. 
+/// This factor represents what fraction of the u-quarks are seen
+/// by the interaction.
+///
+void PMNS_NSI::SetUpCoup(double u){
+
+  fGotES *= (fNSIcoup[1] == u);
+
+  fNSIcoup[1] = u;
+
+}
+
+//......................................................................
+///
+/// Set the NSI relative coupling to d-quarks. 
+/// This factor represents what fraction of the d-quarks are seen
+/// by the interaction.
+///
+void PMNS_NSI::SetDownCoup(double d){
+
+  fGotES *= (fNSIcoup[2] == d);
+
+  fNSIcoup[2] = d;
+
+}
+
+//......................................................................
+///
+/// Set the NSI relative couplings to each fermion.
+/// These factors represent what fraction of each fermion are seen
+/// by the interaction.
+///
+void PMNS_NSI::SetFermCoup(double e, double u, double d)
+{
+
+  SetElecCoup(e); // electron coupling
+  SetUpCoup(u);   // u-quark coupling
+  SetDownCoup(d); // d-quark coupling
+  
+}
+
+//......................................................................
+///
+/// Get the NSI relative coupling to electrons. 
+///
+double PMNS_NSI::GetElecCoup(){ return fNSIcoup[0]; }
+
+//......................................................................
+///
+/// Get the NSI relative coupling to u-quarks. 
+///
+double PMNS_NSI::GetUpCoup(){ return fNSIcoup[1]; }
+
+//......................................................................
+///
+/// Get the NSI relative coupling to d-quarks. 
+///
+double PMNS_NSI::GetDownCoup(){ return fNSIcoup[2]; }
+
+//......................................................................
+///
+/// Get the effective NSI Z/A dependence.
+///
+double PMNS_NSI::GetZoACoup()
+{
+
+  return fNSIcoup[0] * fPath.zoa        // electrons: Z
+       + fNSIcoup[1] * (1 + fPath.zoa)  // u-quarks:  A + Z
+       + fNSIcoup[2] * (2 - fPath.zoa); // d-quarks: 2A - Z 
 
 }
 
