@@ -49,7 +49,7 @@ namespace OscProb {
     /// Get the power index
     virtual double GetPower();
 
-    typedef std::vector<complex> row;
+    typedef std::vector<complexD> row;
     typedef std::vector<row> matrix;
 
   protected:

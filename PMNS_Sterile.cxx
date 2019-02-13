@@ -83,6 +83,9 @@ void PMNS_Sterile::SolveHam()
 
   // Check if anything changed
   if(fGotES) return;
+  
+  // Try caching if activated  
+  if(TryCache()) return;
 
   double rho = fPath.density;
   double zoa = fPath.zoa;
@@ -93,7 +96,7 @@ void PMNS_Sterile::SolveHam()
 
   // Finish building Hamiltonian in matter with dimension of eV
   for(size_t i=0;i<size_t(fNumNus);i++){
-    complex buf = fHms[i][i]/lv;
+    complexD buf = fHms[i][i]/lv;
     *gsl_matrix_complex_ptr(H_GSL, i, i) = gsl_complex_rect(real(buf),0);
     for(size_t j=i+1;j<size_t(fNumNus);j++){
       buf = fHms[i][j]/lv;
@@ -118,11 +121,14 @@ void PMNS_Sterile::SolveHam()
     fEval[i] = gsl_vector_get(fEvalGSL,i);
     for(int j=0;j<fNumNus;j++){
       gsl_complex buf = gsl_matrix_complex_get(fEvecGSL,i,j);
-      fEvec[i][j] = complex( GSL_REAL(buf), GSL_IMAG(buf) );
+      fEvec[i][j] = complexD( GSL_REAL(buf), GSL_IMAG(buf) );
     }
   }
   
   fGotES = true;
+  
+  // Fill cache if activated  
+  FillCache();
   
 }
 

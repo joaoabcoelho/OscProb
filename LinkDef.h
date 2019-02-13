@@ -8,8 +8,10 @@
 
 #pragma link C++ struct OscProb::NuPath+;
 #pragma link C++ struct OscProb::PremLayer+;
+#pragma link C++ struct OscProb::EigenPoint+;
 #pragma link C++ class vector<OscProb::NuPath>;
 #pragma link C++ class vector<OscProb::PremLayer>;
+#pragma link C++ class set<OscProb::EigenPoint>;
 
 #pragma link C++ class OscProb::PMNS_Base+;
 #pragma link C++ class OscProb::PMNS_Fast+;

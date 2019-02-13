@@ -59,8 +59,8 @@ namespace OscProb {
     /// Set the eigensystem to the analytic solution of the vacuum Hamiltonian
     virtual void SetVacuumEigensystem();
     
-    complex fHam[3][3]; ///< The full hamiltonian
-
+    complexD fHam[3][3]; ///< The full hamiltonian
+    
   };
 
 }

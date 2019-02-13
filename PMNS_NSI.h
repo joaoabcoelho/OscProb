@@ -33,7 +33,7 @@ namespace OscProb {
     virtual void SetEps(int flvi, int flvj, double val, double phase);
 
     /// Get any given NSI parameter
-    virtual complex GetEps(int flvi, int flvj);
+    virtual complexD GetEps(int flvi, int flvj);
 
     /// Set the NSI parameters all at once    
     void SetNSI(double eps_ee,      double eps_emu,      double eps_etau,
@@ -55,6 +55,7 @@ namespace OscProb {
     virtual void SetUpCoup(double u);   ///< Set u-quark couling
     virtual void SetDownCoup(double d); ///< Set d-quark couling
     virtual void SetFermCoup(double e, double u, double d); ///< Set all fermion couplings
+    virtual void SetCoupByIndex(double c, int i); ///< Set a given fermion coupling
 
     // Get relative NSI couplings
     virtual double GetElecCoup(); ///< Get electron coupling
@@ -67,7 +68,7 @@ namespace OscProb {
     /// Build the full Hamiltonian
     virtual void UpdateHam();
     
-    complex fEps[3][3]; ///< Stores each NSI parameter
+    complexD fEps[3][3]; ///< Stores each NSI parameter
     
     double fNSIcoup[3]; ///< Relative NSI couplings
 

@@ -117,10 +117,13 @@ void PMNS_Fast::SolveHam()
   // Check if anything changed  
   if(fGotES) return;
 
+  // Try caching if activated
+  if(TryCache()) return;
+
   UpdateHam();
 
   double fEvalGLoBES[3];
-  complex fEvecGLoBES[3][3];
+  complexD fEvecGLoBES[3][3];
 
   // Solve Hamiltonian for eigensystem using the GLoBES method
   zheevh3(fHam,fEvecGLoBES,fEvalGLoBES);
@@ -135,6 +138,9 @@ void PMNS_Fast::SolveHam()
   
   fGotES = true;
 
+  // Fill cache if activated
+  FillCache();
+
 }
 
 //.....................................................................
@@ -147,7 +153,7 @@ void PMNS_Fast::SetVacuumEigensystem()
 {
 
   double  s12, s23, s13, c12, c23, c13;
-  complex idelta(0.0, fDelta[0][2]);
+  complexD idelta(0.0, fDelta[0][2]);
   if(fIsNuBar) idelta = conj(idelta);
 
   s12 = sin(fTheta[0][1]);  s23 = sin(fTheta[1][2]);  s13 = sin(fTheta[0][2]);

@@ -17,8 +17,10 @@
 #define PMNS_BASE_H
 #include <complex>
 #include <vector>
+#include <set>
 
 #include "NuPath.h"
+#include "EigenPoint.h"
 
 namespace OscProb {
 
@@ -53,6 +55,9 @@ namespace OscProb {
     virtual double GetAngle(int i, int j); ///< Get the mixing angle theta_ij
     virtual double GetDelta(int i, int j); ///< Get the CP phase delta_ij
     virtual double GetDm(int j);           ///< Get the mass-splitting dm_j1 in eV^2
+    
+    // Get the effective oscillation parameters
+    virtual double GetDmEff(int j);        ///< Get the effective mass-splitting dm_j1 in eV^2
 
 
     // Set default oscillation parameters
@@ -96,18 +101,19 @@ namespace OscProb {
     // Get the neutrino path
     virtual std::vector<OscProb::NuPath> GetPath(); ///< Get the neutrino path sequence
 
-
     /// Compute the sample points for a bin of L/E with width dLoE
     virtual std::vector<double> GetSamplePoints(double LoE, double dLoE);
 
-    // A shorthand...
-    typedef std::complex<double> complex;
+    // Setup the caching system
+    virtual void SetUseCache(bool u=true); ///< Set caching on/off
+    virtual void ClearCache();             ///< Clear the cache
+    virtual void SetMaxCache(int mc=1e6);  ///< Set max cache size
 
   protected:
     
     // Some useful complex numbers
-    static const complex zero; ///< zero in complex
-    static const complex one;  ///< one in complex
+    static const complexD zero; ///< zero in complex
+    static const complexD one;  ///< one in complex
 
     // Unit conversion constants
     static const double kKm2eV;  ///< km to eV^-1
@@ -118,6 +124,10 @@ namespace OscProb {
     static const double kGf;     ///< G_F in units of GeV^-2
 
     virtual void InitializeVectors(); ///< Initialize all member vectors with zeros
+
+    // Internal caching functions
+    virtual bool TryCache();  ///< Try to find a cached eigensystem
+    virtual void FillCache(); ///< Cache the current eigensystem
 
 
     // Auxiliary path functions
@@ -151,21 +161,21 @@ namespace OscProb {
 
 
     // Attributes
-    
+
     int fNumNus; ///< Number of neutrino flavours
-    
-    std::vector<double>                 fDm;      ///< m^2_i - m^2_1 in vacuum
-    std::vector< std::vector<double> >  fTheta;   ///< theta[i][j] mixing angle
-    std::vector< std::vector<double> >  fDelta;   ///< delta[i][j] CP violating phase
 
-    std::vector<complex>                fNuState; ///< The neutrino current state
-    std::vector< std::vector<complex> > fHms;     ///< matrix H*2E in eV^2
+    std::vector<double>                  fDm;      ///< m^2_i - m^2_1 in vacuum
+    std::vector< std::vector<double> >   fTheta;   ///< theta[i][j] mixing angle
+    std::vector< std::vector<double> >   fDelta;   ///< delta[i][j] CP violating phase
 
-    std::vector<complex>                fPhases;  ///< Buffer for oscillation phases
-    std::vector<complex>                fBuffer;  ///< Buffer for neutrino state tranformations
+    std::vector<complexD>                fNuState; ///< The neutrino current state
+    std::vector< std::vector<complexD> > fHms;     ///< matrix H*2E in eV^2
 
-    std::vector<double>                 fEval;    ///< Eigenvalues of the Hamiltonian
-    std::vector< std::vector<complex> > fEvec;    ///< Eigenvectors of the Hamiltonian
+    std::vector<complexD>                fPhases;  ///< Buffer for oscillation phases
+    std::vector<complexD>                fBuffer;  ///< Buffer for neutrino state tranformations
+
+    std::vector<double>                  fEval;    ///< Eigenvalues of the Hamiltonian
+    std::vector< std::vector<complexD> > fEvec;    ///< Eigenvectors of the Hamiltonian
 
     double fEnergy;  ///< Neutrino energy
     bool   fIsNuBar; ///< Anti-neutrino flag
@@ -176,6 +186,13 @@ namespace OscProb {
     bool   fBuiltHms;      ///< Tag to avoid rebuilding Hms
     bool   fGotES;         ///< Tag to avoid recalculating eigensystem
 
+    bool   fUseCache;  ///< Flag for whether to use caching
+    double fCachePrec; ///< Precision of cache matching
+    int    fMaxCache;  ///< Maximum cache size
+
+    std::set<OscProb::EigenPoint> fMixCache; ///< Caching set of eigensystems
+    EigenPoint fProbe;                       ///< EigenpPoint to try
+    
   };
 
   /// An index sorting comparator

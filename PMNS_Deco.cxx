@@ -359,7 +359,7 @@ void PMNS_Deco::PropagatePath(NuPath p)
   for(int j=0; j<3; j++){ 
   for(int i=0; i<j; i++){
     double gamma_ij = GetGamma(max(idx[i],idx[j])+1, min(idx[i],idx[j])+1) * energyCorr;
-    complex arg = complex(gamma_ij * kGeV2eV, fEval[i] - fEval[j]) * kKm2eV * p.length;
+    complexD arg = complexD(gamma_ij * kGeV2eV, fEval[i] - fEval[j]) * kKm2eV * p.length;
     evolve[i][j] = exp(-arg);
     evolve[j][i] = exp(-conj(arg));
   }}

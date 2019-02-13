@@ -20,8 +20,8 @@ using namespace std;
 using namespace OscProb;
 
 // Some usefule complex numbers
-const complex<double> PMNS_Base::zero(0,0);
-const complex<double> PMNS_Base::one(1,0);
+const complexD PMNS_Base::zero(0,0);
+const complexD PMNS_Base::one(1,0);
 
 // Define some constants from PDG 2015
 const double PMNS_Base::kGeV2eV = 1.0e+09;                    // GeV to eV conversion
@@ -46,8 +46,10 @@ const double PMNS_Base::kGf     = 1.1663787e-05;              // G_F/(hbar*c)^3 
 /// @param numNus - the number of neutrino flavours
 ///
 PMNS_Base::PMNS_Base(int numNus) :
-fGotES(false), fBuiltHms(false)
+fGotES(false), fBuiltHms(false), fMaxCache(1e6), fProbe(numNus)
 {
+
+  SetUseCache(false);  // Don't cache eigensystems
 
   fNumNus = numNus;    // Set the number of neutrinos
 
@@ -60,7 +62,7 @@ fGotES(false), fBuiltHms(false)
   SetStdPars();        // Set PDG parameters
 
   ResetToFlavour(1);   // Numu by default
-
+  
 }
 
 //......................................................................
@@ -80,14 +82,103 @@ void PMNS_Base::InitializeVectors()
   fTheta = vector< vector<double> >(fNumNus, vector<double>(fNumNus,0));
   fDelta = vector< vector<double> >(fNumNus, vector<double>(fNumNus,0));
 
-  fNuState = vector<complex>(fNumNus, zero);
-  fHms     = vector< vector<complex> >(fNumNus, vector<complex>(fNumNus,zero));
+  fNuState = vector<complexD>(fNumNus, zero);
+  fHms     = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
 
-  fPhases = vector<complex>(fNumNus, zero);
-  fBuffer = vector<complex>(fNumNus, zero);
+  fPhases = vector<complexD>(fNumNus, zero);
+  fBuffer = vector<complexD>(fNumNus, zero);
 
   fEval = vector<double>(fNumNus, 0);
-  fEvec = vector< vector<complex> >(fNumNus, vector<complex>(fNumNus,zero));
+  fEvec = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
+
+}
+
+//......................................................................
+///
+/// Turn on/off caching of eigensystems.
+/// This can save a lot of CPU time by avoiding recomputing eigensystems
+/// if we've already seen them recently.
+/// Especially useful when running over multiple earth layers and even more
+/// if multiple baselines will be computed, e.g. for atmospheric neutrinos.
+///
+/// @param u - flag to set caching on (default: true)
+///
+void PMNS_Base::SetUseCache(bool u)
+{
+  fUseCache = u; 
+}
+
+//......................................................................
+///
+/// Clear the cache
+///
+void PMNS_Base::ClearCache()
+{
+  fMixCache.clear();
+}
+        
+//......................................................................
+///
+/// Set maximum number of cached eigensystems.
+/// Finding eigensystems can become slow and take up memory.
+/// This protects the cache from becoming too large.
+///
+/// @param mc - Max cache size (default: 1e6)
+///
+void PMNS_Base::SetMaxCache(int mc)
+{
+  fMaxCache = mc;
+}
+
+//......................................................................
+///
+/// Try to find a cached version of this eigensystem.
+///
+bool PMNS_Base::TryCache()
+{
+
+  if(fUseCache && !fMixCache.empty()){
+
+    fProbe.SetVars(fEnergy, fPath, fIsNuBar);
+    
+    std::set<EigenPoint>::iterator it = fMixCache.find(fProbe);
+
+    if(it != fMixCache.end()){
+      for(int i=0; i<fNumNus; i++){
+        fEval[i] = (*it).fEval[i] * (*it).fEnergy / fEnergy;
+        for(int j=0; j<fNumNus; j++){
+          fEvec[i][j] = (*it).fEvec[i][j];
+        }
+      }
+      return true;
+    }
+
+  }
+  
+  return false;
+
+}
+
+//......................................................................
+///
+/// If using caching, save the eigensystem in memory
+///
+void PMNS_Base::FillCache()
+{
+
+  if(fUseCache){
+    if(fMixCache.size()>fMaxCache){
+      fMixCache.erase(fMixCache.begin());
+      fMixCache.erase(--fMixCache.end());
+    }
+    for(int i=0; i<fNumNus; i++){
+      fProbe.fEval[i] = fEval[i];
+      for(int j=0; j<fNumNus; j++){
+        fProbe.fEvec[i][j] = fEvec[i][j];
+      }
+    }
+    fMixCache.insert(fProbe);
+  }
 
 }
 
@@ -707,6 +798,44 @@ double PMNS_Base::GetDm(int j)
 
 }
 
+//......................................................................
+///
+/// Get the effective mass-splitting dm_j1 in matter in eV^2
+///
+/// Requires that j>1. Will notify you if input is wrong.
+///
+/// @param j    - the index of dm_j1
+///
+double PMNS_Base::GetDmEff(int j)
+{
+
+  if(j<2 || j>fNumNus){
+    cout << "ERROR: Dm" << j << "1 not valid for " << fNumNus;
+    cout << " neutrinos. Returning zero." << endl;
+    return 0;
+  }
+
+  // Solve the Hamiltonian to update eigenvalues
+  SolveHam();
+  
+  // Sort eigenvalues in same order as vacuum Dm^2
+  vector<int> TrueIdx(fNumNus, 0);
+  vector<double> TrueVals(fNumNus, 0);
+  vector<int> EffIdx(fNumNus, 0);
+  for(int i=0; i<fNumNus; i++){
+    TrueIdx[i] = i;
+    EffIdx[i] = i;
+  }
+  sort(TrueIdx.begin(), TrueIdx.end(), IdxCompare(fDm));
+  for(int i=0; i<fNumNus; i++) TrueVals[i] = TrueIdx[i];
+  sort(TrueIdx.begin(), TrueIdx.end(), IdxCompare(TrueVals));
+  sort(EffIdx.begin(), EffIdx.end(), IdxCompare(fEval));
+
+  // Return eigenvalues * 2E
+  return (fEval[EffIdx[TrueIdx[j-1]]] - fEval[EffIdx[TrueIdx[0]]]) * fEnergy * 2e9;
+
+}
+
 
 //......................................................................
 ///
@@ -727,11 +856,11 @@ void PMNS_Base::RotateH(int i,int j){
   double fCosBuffer = cos(fTheta[i][j]);
 
   double  fHmsBufferD;
-  complex fHmsBufferC;
+  complexD fHmsBufferC;
 
   // With Delta
   if(i+1<j){
-    complex fExpBuffer = complex(cos(fDelta[i][j]), -sin(fDelta[i][j]));
+    complexD fExpBuffer = complexD(cos(fDelta[i][j]), -sin(fDelta[i][j]));
 
     // General case
     if(i>0){
@@ -857,7 +986,7 @@ void PMNS_Base::BuildHms()
 
   // Check if anything changed
   if(fBuiltHms) return;
-
+  
   // Tag to recompute eigensystem
   fGotES = false;
 
@@ -873,6 +1002,8 @@ void PMNS_Base::BuildHms()
       RotateH(i,j);
     }
   }
+
+  ClearCache();
 
   // Tag as built
   fBuiltHms = true;
@@ -896,7 +1027,7 @@ void PMNS_Base::PropagatePath(NuPath p)
   double LengthIneV = kKm2eV * p.length;
   for(int i=0; i<fNumNus; i++){
     double arg = fEval[i] * LengthIneV;
-    fPhases[i] = complex(cos(arg), -sin(arg));
+    fPhases[i] = complexD(cos(arg), -sin(arg));
   }
   
   for(int i=0;i<fNumNus;i++){

@@ -104,11 +104,15 @@ void PMNS_NSI::SetEps(int flvi, int flvj, double val, double phase){
     return;
   }
 
-  complex h = val;  
+  complexD h = val;  
 
-  if(flvi != flvj) h *= complex(cos(phase), sin(phase)); 
+  if(flvi != flvj) h *= complexD(cos(phase), sin(phase)); 
 
-  fGotES *= (fEps[flvi][flvj] == h);
+  bool isSame = (fEps[flvi][flvj] == h);
+  
+  if(!isSame) ClearCache();
+
+  fGotES *= isSame;
   
   fEps[flvi][flvj] = h;
   
@@ -127,7 +131,7 @@ void PMNS_NSI::SetEps(int flvi, int flvj, double val, double phase){
 /// @param flvi  - The first flavour index
 /// @param flvj  - The second flavour index
 ///
-complex<double> PMNS_NSI::GetEps(int flvi, int flvj){
+complexD PMNS_NSI::GetEps(int flvi, int flvj){
 
   if(flvi > flvj){
     cout << "First argument should be smaller or equal to second argument" << endl;
@@ -249,19 +253,34 @@ void PMNS_NSI::UpdateHam()
 
 //......................................................................
 ///
+/// Set the NSI relative coupling to a given fermion. 
+/// This factor represents what fraction of the fermion are seen
+/// by the interaction.
+///
+/// @param c - fermion coupling strength
+/// @param i - fermion index (0,1,2) -> (e,u,d)
+///
+void PMNS_NSI::SetCoupByIndex(double c, int i){
+
+  bool isSame = (fNSIcoup[i] == c);
+
+  if(!isSame) ClearCache();
+
+  fGotES *= isSame;
+
+  fNSIcoup[i] = c;
+  
+}
+
+//......................................................................
+///
 /// Set the NSI relative coupling to electrons. 
 /// This factor represents what fraction of the electrons are seen
 /// by the interaction.
 ///
 /// @param e - electron coupling strength
 ///
-void PMNS_NSI::SetElecCoup(double e){
-
-  fGotES *= (fNSIcoup[0] == e);
-
-  fNSIcoup[0] = e;
-
-}
+void PMNS_NSI::SetElecCoup(double e){ SetCoupByIndex(e, 0); }
 
 //......................................................................
 ///
@@ -271,13 +290,7 @@ void PMNS_NSI::SetElecCoup(double e){
 ///
 /// @param u - u-quark coupling strength
 ///
-void PMNS_NSI::SetUpCoup(double u){
-
-  fGotES *= (fNSIcoup[1] == u);
-
-  fNSIcoup[1] = u;
-
-}
+void PMNS_NSI::SetUpCoup(double u){ SetCoupByIndex(u, 1); }
 
 //......................................................................
 ///
@@ -287,13 +300,7 @@ void PMNS_NSI::SetUpCoup(double u){
 ///
 /// @param d - d-quark coupling strength
 ///
-void PMNS_NSI::SetDownCoup(double d){
-
-  fGotES *= (fNSIcoup[2] == d);
-
-  fNSIcoup[2] = d;
-
-}
+void PMNS_NSI::SetDownCoup(double d){ SetCoupByIndex(d, 2); }
 
 //......................................................................
 ///
