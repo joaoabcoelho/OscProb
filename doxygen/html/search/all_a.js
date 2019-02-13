@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['m_5fsqrt3',['M_SQRT3',['../zheevc3_8cxx.html#a104a20eff010ec8c4f3af770e698860b',1,'zheevc3.cxx']]],
-  ['mainpage_2emd',['MainPage.md',['../MainPage_8md.html',1,'']]],
-  ['matrix',['matrix',['../classOscProb_1_1PMNS__Deco.html#a77b4e0c041b6268910a270be0f5387c9',1,'OscProb::PMNS_Deco']]],
-  ['mergepaths',['MergePaths',['../classOscProb_1_1PremModel.html#a87cb8043b58fde2c8a8779e6ae1b5135',1,'OscProb::PremModel']]],
-  ['mult',['Mult',['../classOscProb_1_1PMNS__Deco.html#aacc9909556ca22aca30620893e12b0db',1,'OscProb::PMNS_Deco']]]
+  ['layer',['layer',['../structOscProb_1_1NuPath.html#a442b160899e554ad1d800989510d5309',1,'OscProb::NuPath::layer()'],['../structOscProb_1_1PremLayer.html#aca8d7df68e6f982155b68b7e6a7ef389',1,'OscProb::PremLayer::layer()']]],
+  ['length',['length',['../structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557',1,'OscProb::NuPath']]],
+  ['loadmodel',['LoadModel',['../classOscProb_1_1PremModel.html#a6363a5e711dd8b0d2e684677e585b293',1,'OscProb::PremModel']]]
 ];

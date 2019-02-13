@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['updateham',['UpdateHam',['../classOscProb_1_1PMNS__Fast.html#a16248082308f9d2c332ebf1be0aa90c3',1,'OscProb::PMNS_Fast::UpdateHam()'],['../classOscProb_1_1PMNS__NSI.html#ab5c4f4644fbedb8835f6336c553805ce',1,'OscProb::PMNS_NSI::UpdateHam()']]]
+  ['target',['target',['../structOscProb_1_1IdxCompare.html#ab3258085f0afeb64bf472413bfed43ac',1,'OscProb::IdxCompare']]],
+  ['trycache',['TryCache',['../classOscProb_1_1PMNS__Base.html#abe533da5f64bec1f4724ab7b58606b77',1,'OscProb::PMNS_Base']]]
 ];

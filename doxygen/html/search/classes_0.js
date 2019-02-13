@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['idxcompare',['IdxCompare',['../structOscProb_1_1IdxCompare.html',1,'OscProb']]]
+  ['eigenpoint',['EigenPoint',['../structOscProb_1_1EigenPoint.html',1,'OscProb']]]
 ];
