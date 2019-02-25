@@ -372,7 +372,7 @@ Compute the average probability of flvi going to flvf over a bin of energy E wit
 
 This gets transformed into L/E, since the oscillation terms have arguments linear in L/E and not E.
 
-This function currently only works for single paths.
+This function works best for single paths. In multiple paths the accuracy may be somewhat worse. If needed, average over smaller energy ranges.
 
 Flavours are\+: 
 \begin{DoxyPre}
@@ -395,56 +395,51 @@ Average neutrino oscillation probability
 \end{DoxyReturn}
 
 
-Definition at line 1215 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 1217 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
-References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Avg\+Prob\+Lo\+E(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Nu\+Paths, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Path, Osc\+Prob\+::\+Nu\+Path\+::length, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Prob(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Cur\+Path().
+References Osc\+Prob\+::\+Avg\+Path(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Avg\+Prob\+Lo\+E(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Nu\+Paths, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Path, Osc\+Prob\+::\+Nu\+Path\+::length, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Prob(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Cur\+Path().
 
 
 \begin{DoxyCode}
-1216 \{
-1217 
-1218   \textcolor{comment}{// Do nothing if energy is not positive}
-1219   \textcolor{keywordflow}{if}(E<=0) \textcolor{keywordflow}{return} 0;
-1220 
-1221   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.empty()) \textcolor{keywordflow}{return} 0;
+1218 \{
+1219 
+1220   \textcolor{comment}{// Do nothing if energy is not positive}
+1221   \textcolor{keywordflow}{if}(E<=0) \textcolor{keywordflow}{return} 0;
 1222 
-1223   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size() != 1)\{
-1224     cout << \textcolor{stringliteral}{"ERROR: AvgProb not implemented for multiple paths."} << endl;
-1225     cout << \textcolor{stringliteral}{"       Returning probability at bin center."} << endl;
-1226     \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf, E);
-1227   \}
-1228 
-1229   \textcolor{comment}{// Don't average zero width}
-1230   \textcolor{keywordflow}{if}(dE<=0) \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf, E);
+1223   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.empty()) \textcolor{keywordflow}{return} 0;
+1224 
+1225   \textcolor{comment}{// Don't average zero width}
+1226   \textcolor{keywordflow}{if}(dE<=0) \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf, E);
+1227 
+1228   \textcolor{comment}{// Make sure fPath is set}
+1229   \textcolor{comment}{// Use average if multiple paths}
+1230   \hyperlink{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}{SetCurPath}(\hyperlink{namespaceOscProb_a999a7944bad8bc72d7ee9f56f81a210e}{AvgPath}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}));
 1231 
-1232   \textcolor{comment}{// Make sure fPath is set}
-1233   \hyperlink{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}{SetCurPath}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0]);
-1234 
-1235   \textcolor{comment}{// Define L/E variables}
-1236   \textcolor{keywordtype}{double} LoE = 0;
-1237   \textcolor{keywordtype}{double} dLoE = 0;
+1232   \textcolor{comment}{// Define L/E variables}
+1233   \textcolor{keywordtype}{double} LoE = 0;
+1234   \textcolor{keywordtype}{double} dLoE = 0;
+1235 
+1236   \textcolor{comment}{// Set a minimum energy}
+1237   \textcolor{keywordtype}{double} minE = 0.1 * E;
 1238 
-1239   \textcolor{comment}{// Set a minimum energy}
-1240   \textcolor{keywordtype}{double} minE = 0.1 * E;
-1241 
-1242   \textcolor{comment}{// Transform range to L/E}
-1243   \textcolor{comment}{// Full range if low edge > minE}
-1244   \textcolor{keywordflow}{if}(E-dE/2 > minE)\{
-1245     LoE = 0.5 * (\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E-dE/2) + \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2));
-1246     dLoE = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E-dE/2) - \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2);
-1247   \}
-1248   \textcolor{comment}{// Else start at minE}
-1249   \textcolor{keywordflow}{else}\{
-1250     LoE = 0.5 * (\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/minE + \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2));
-1251     dLoE = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/minE - \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2);
-1252   \}
+1239   \textcolor{comment}{// Transform range to L/E}
+1240   \textcolor{comment}{// Full range if low edge > minE}
+1241   \textcolor{keywordflow}{if}(E-dE/2 > minE)\{
+1242     LoE = 0.5 * (\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E-dE/2) + \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2));
+1243     dLoE = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E-dE/2) - \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2);
+1244   \}
+1245   \textcolor{comment}{// Else start at minE}
+1246   \textcolor{keywordflow}{else}\{
+1247     LoE = 0.5 * (\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/minE + \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2));
+1248     dLoE = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/minE - \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2);
+1249   \}
+1250 
+1251   \textcolor{comment}{// Compute average in LoE}
+1252   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_ac19a92f4ef428a7333ca8eed76fca637}{AvgProbLoE}(flvi, flvf, LoE, dLoE);
 1253 
-1254   \textcolor{comment}{// Compute average in LoE}
-1255   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_ac19a92f4ef428a7333ca8eed76fca637}{AvgProbLoE}(flvi, flvf, LoE, dLoE);
-1256 
-1257 \}
+1254 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ac19a92f4ef428a7333ca8eed76fca637}\label{classOscProb_1_1PMNS__Base_ac19a92f4ef428a7333ca8eed76fca637}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Avg\+Prob\+LoE@{Avg\+Prob\+LoE}}
@@ -456,7 +451,7 @@ Compute the average probability of flvi going to flvf over a bin of L/E with wid
 
 The probabilities are weighted by (L/E)$^\wedge$-\/2 so that event density is flat in energy. This avoids giving too much weight to low energies. Better approximations would be achieved if we used an interpolated event density.
 
-This function currently only works for single paths.
+This function works best for single paths. In multiple paths the accuracy may be somewhat worse. If needed, average over smaller L/E ranges.
 
 Flavours are\+: 
 \begin{DoxyPre}
@@ -479,11 +474,11 @@ Average neutrino oscillation probability
 \end{DoxyReturn}
 
 
-Definition at line 1283 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 1282 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
-References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Nu\+Paths, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Path, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Sample\+Points(), Osc\+Prob\+::\+Nu\+Path\+::length, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Prob(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Cur\+Path(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Energy().
+References Osc\+Prob\+::\+Avg\+Path(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Nu\+Paths, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Path, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Sample\+Points(), Osc\+Prob\+::\+Nu\+Path\+::length, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Prob(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Cur\+Path(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Energy().
 
 
 
@@ -491,62 +486,50 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Avg\+Prob().
 
 
 \begin{DoxyCode}
-1284 \{
-1285 
-1286   \textcolor{comment}{// Do nothing if L/E is not positive}
-1287   \textcolor{keywordflow}{if}(LoE<=0) \textcolor{keywordflow}{return} 0;
-1288 
-1289   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.empty()) \textcolor{keywordflow}{return} 0;
-1290 
-1291   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size() > 1)\{
-1292 
-1293     cout << \textcolor{stringliteral}{"ERROR: AvgProb not implemented for multiple paths."} << endl;
-1294     cout << \textcolor{stringliteral}{"       Returning probability at bin center."} << endl;
-1295 
-1296     \textcolor{keywordtype}{double} L = 0;
-1297     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<int(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size()); i++)\{
-1298       L += \hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[i].length;
-1299     \}
-1300 
-1301     \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf, L/LoE);
+1283 \{
+1284 
+1285   \textcolor{comment}{// Do nothing if L/E is not positive}
+1286   \textcolor{keywordflow}{if}(LoE<=0) \textcolor{keywordflow}{return} 0;
+1287 
+1288   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.empty()) \textcolor{keywordflow}{return} 0;
+1289 
+1290   \textcolor{comment}{// Make sure fPath is set}
+1291   \textcolor{comment}{// Use average if multiple paths}
+1292   \hyperlink{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}{SetCurPath}(\hyperlink{namespaceOscProb_a999a7944bad8bc72d7ee9f56f81a210e}{AvgPath}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}));
+1293 
+1294   \textcolor{comment}{// Set the energy at bin center}
+1295   \hyperlink{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}{SetEnergy}(\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/LoE);
+1296 
+1297   \textcolor{comment}{// Don't average zero width}
+1298   \textcolor{keywordflow}{if}(dLoE<=0) \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf);
+1299 
+1300   \textcolor{comment}{// Get sample points for this bin}
+1301   vector<double> samples = \hyperlink{classOscProb_1_1PMNS__Base_a9eac8d768c1424755ee41f7e783af179}{GetSamplePoints}(LoE, dLoE);
 1302 
-1303   \}
-1304 
-1305   \textcolor{comment}{// Make sure fPath is set}
-1306   \hyperlink{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}{SetCurPath}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[0]);
-1307 
-1308   \textcolor{comment}{// Set the energy at bin center}
-1309   \hyperlink{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}{SetEnergy}(\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/LoE);
-1310 
-1311   \textcolor{comment}{// Don't average zero width}
-1312   \textcolor{keywordflow}{if}(dLoE<=0) \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf);
-1313 
-1314   \textcolor{comment}{// Get sample points for this bin}
-1315   vector<double> samples = \hyperlink{classOscProb_1_1PMNS__Base_a9eac8d768c1424755ee41f7e783af179}{GetSamplePoints}(LoE, dLoE);
-1316 
-1317   \textcolor{comment}{// Variables to fill sample}
-1318   \textcolor{comment}{// probabilities and weights}
-1319   \textcolor{keywordtype}{double} sumw = 0;
-1320   \textcolor{keywordtype}{double} prob = 0;
-1321 
-1322   \textcolor{comment}{// Loop over all sample points}
-1323   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<int(samples.size()); j++)\{
-1324 
-1325     \textcolor{comment}{// Set (L/E)^-2 weights}
-1326     \textcolor{keywordtype}{double} w = 1./pow(samples[j],2);
-1327 
-1328     \textcolor{comment}{// Add weighted probability}
-1329     prob += w * \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf, \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} / samples[j]);
-1330 
-1331     \textcolor{comment}{// Increment sum of weights}
-1332     sumw += w;
-1333 
-1334   \}
-1335 
-1336   \textcolor{comment}{// Return weighted average of probabilities}
-1337   \textcolor{keywordflow}{return} prob / sumw;
-1338 
-1339 \}
+1303   \textcolor{comment}{// Variables to fill sample}
+1304   \textcolor{comment}{// probabilities and weights}
+1305   \textcolor{keywordtype}{double} sumw = 0;
+1306   \textcolor{keywordtype}{double} prob = 0;
+1307   \textcolor{keywordtype}{double} length = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length};
+1308 
+1309   \textcolor{comment}{// Loop over all sample points}
+1310   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<int(samples.size()); j++)\{
+1311 
+1312     \textcolor{comment}{// Set (L/E)^-2 weights}
+1313     \textcolor{keywordtype}{double} w = 1./pow(samples[j],2);
+1314 
+1315     \textcolor{comment}{// Add weighted probability}
+1316     prob += w * \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob}(flvi, flvf, length / samples[j]);
+1317 
+1318     \textcolor{comment}{// Increment sum of weights}
+1319     sumw += w;
+1320 
+1321   \}
+1322 
+1323   \textcolor{comment}{// Return weighted average of probabilities}
+1324   \textcolor{keywordflow}{return} prob / sumw;
+1325 
+1326 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ad0faf5eae755afb1baa1fcd5ffebad41}\label{classOscProb_1_1PMNS__Base_ad0faf5eae755afb1baa1fcd5ffebad41}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Build\+Hms@{Build\+Hms}}
@@ -1045,7 +1028,7 @@ This is used for averaging the probability over a bin of L/E. It should be a pri
 \end{DoxyParams}
 
 
-Definition at line 1354 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+Definition at line 1341 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
@@ -1057,102 +1040,100 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Avg\+Prob\+Lo\+E().
 
 
 \begin{DoxyCode}
-1355 \{
-1356 
-1357   \textcolor{comment}{// Solve Hamiltonian to get eigenvalues}
-1358   \hyperlink{classOscProb_1_1PMNS__Base_a91f065cb9e910e0095e41462b4420b01}{SolveHam}();
-1359 
-1360   \textcolor{comment}{// Define conversion factor [km/GeV -> 1/(4 eV^2)]}
-1361   \textcolor{keyword}{const} \textcolor{keywordtype}{double} k1267 = \hyperlink{classOscProb_1_1PMNS__Base_a382ddd7b76ca89b43f22614a2ea7327b}{kKm2eV} / (4 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV});
-1362 
-1363   \textcolor{comment}{// Get list of all effective Dm^2}
-1364   vector<double> effDm;
-1365 
-1366   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1; i++)\{
-1367     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=i+1; j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}; j++)\{
-1368       effDm.push\_back( 2 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV} * \hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy} * fabs(\hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[j] - 
+1342 \{
+1343 
+1344   \textcolor{comment}{// Solve Hamiltonian to get eigenvalues}
+1345   \hyperlink{classOscProb_1_1PMNS__Base_a91f065cb9e910e0095e41462b4420b01}{SolveHam}();
+1346 
+1347   \textcolor{comment}{// Define conversion factor [km/GeV -> 1/(4 eV^2)]}
+1348   \textcolor{keyword}{const} \textcolor{keywordtype}{double} k1267 = \hyperlink{classOscProb_1_1PMNS__Base_a382ddd7b76ca89b43f22614a2ea7327b}{kKm2eV} / (4 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV});
+1349 
+1350   \textcolor{comment}{// Get list of all effective Dm^2}
+1351   vector<double> effDm;
+1352 
+1353   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}-1; i++)\{
+1354     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=i+1; j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}; j++)\{
+1355       effDm.push\_back( 2 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV} * \hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy} * fabs(\hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[j] - 
       \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[i]) );
-1369     \}
-1370   \}
+1356     \}
+1357   \}
+1358 
+1359   \textcolor{keywordtype}{int} numDm = effDm.size();
+1360 
+1361   \textcolor{comment}{// Sort the effective Dm^2 list}
+1362   sort(effDm.begin(), effDm.end());
+1363 
+1364   \textcolor{comment}{// Set a number of sub-divisions to achieve "good" accuracy}
+1365   \textcolor{comment}{// This needs to be studied better}
+1366   \textcolor{keywordtype}{int} n\_div = ceil( 20 * pow(dLoE/LoE,0.8) );
+1367   \textcolor{comment}{//int n\_div = 1;}
+1368 
+1369   \textcolor{comment}{// A vector to store sample points}
+1370   vector<double> allSamples;
 1371 
-1372   \textcolor{keywordtype}{int} numDm = effDm.size();
-1373 
-1374   \textcolor{comment}{// Set a number of sub-divisions to achieve "good" accuracy}
-1375   \textcolor{comment}{// This needs to be studied better}
-1376   \textcolor{keywordtype}{int} n\_div = ceil( 20 * pow(dLoE/LoE,0.8) );
-1377   \textcolor{comment}{//int n\_div = 1;}
+1372   \textcolor{comment}{// Loop over sub-divisions}
+1373   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} k=0; k<n\_div; k++)\{
+1374 
+1375     \textcolor{comment}{// Define sub-division center and width}
+1376     \textcolor{keywordtype}{double} bctr = LoE - dLoE/2 + (k+0.5)*dLoE/n\_div;
+1377     \textcolor{keywordtype}{double} bwdt = dLoE/n\_div;
 1378 
-1379   \textcolor{comment}{// A vector to store sample points}
-1380   vector<double> allSamples;
-1381 
-1382   \textcolor{comment}{// Loop over sub-divisions}
-1383   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} k=0; k<n\_div; k++)\{
-1384 
-1385     \textcolor{comment}{// Define sub-division center and width}
-1386     \textcolor{keywordtype}{double} bctr = LoE - dLoE/2 + (k+0.5)*dLoE/n\_div;
-1387     \textcolor{keywordtype}{double} bwdt = dLoE/n\_div;
+1379     \textcolor{comment}{// Make a vector of L/E sample values}
+1380     \textcolor{comment}{// Initialized in the sub-division center}
+1381     vector<double> samples;
+1382     samples.push\_back(bctr);
+1383 
+1384     \textcolor{comment}{// Loop over all Dm^2 to average each frequency}
+1385     \textcolor{comment}{// This will recursively sample points in smaller}
+1386     \textcolor{comment}{// bins so that all relevant frequencies are used}
+1387     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<numDm; i++)\{
 1388 
-1389     \textcolor{comment}{// Make a list of indices sorted by Dm^2 value}
-1390     vector<int> Idx(numDm, 0);
-1391     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<numDm; i++) Idx[i] = i;
-1392     sort(Idx.begin(), Idx.end(), \hyperlink{structOscProb_1_1IdxCompare}{IdxCompare}(effDm));
-1393 
-1394     \textcolor{comment}{// Make a vector of L/E sample values}
-1395     \textcolor{comment}{// Initialized in the sub-division center}
-1396     vector<double> samples;
-1397     samples.push\_back(bctr);
-1398 
-1399     \textcolor{comment}{// Loop over all Dm^2 to average each frequency}
-1400     \textcolor{comment}{// This will recursively sample points in smaller}
-1401     \textcolor{comment}{// bins so that all relevant frequencies are used}
-1402     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<numDm; i++)\{
-1403 
-1404       \textcolor{comment}{// Copy the list of sample L/E values}
-1405       vector<double> prev = samples;
+1389       \textcolor{comment}{// Copy the list of sample L/E values}
+1390       vector<double> prev = samples;
+1391 
+1392       \textcolor{comment}{// Redefine bin width to lie within full sub-division}
+1393       \textcolor{keywordtype}{double} Width = 2*min(prev[0] - (bctr - bwdt/2), (bctr + bwdt/2) - prev[0]);
+1394 
+1395       \textcolor{comment}{// Compute oscillation argument sorted from lowest  to highest}
+1396       \textcolor{keyword}{const} \textcolor{keywordtype}{double} arg = k1267 * effDm[i] * Width;
+1397 
+1398       \textcolor{comment}{// Skip small oscillation values.}
+1399       \textcolor{comment}{// If it's the last one, lower the tolerance}
+1400       \textcolor{keywordflow}{if}(i < numDm-1)\{
+1401         \textcolor{keywordflow}{if}(arg<0.9) \textcolor{keywordflow}{continue};
+1402       \}
+1403       \textcolor{keywordflow}{else}\{
+1404         \textcolor{keywordflow}{if}(arg<0.1) \textcolor{keywordflow}{continue};
+1405       \}
 1406 
-1407       \textcolor{comment}{// Redefine bin width to lie within full sub-division}
-1408       \textcolor{keywordtype}{double} Width = 2*min(prev[0] - (bctr - bwdt/2), (bctr + bwdt/2) - prev[0]);
+1407       \textcolor{comment}{// Reset samples to redefine them}
+1408       samples.clear();
 1409 
-1410       \textcolor{comment}{// Compute oscillation argument sorted from lowest  to highest}
-1411       \textcolor{keyword}{const} \textcolor{keywordtype}{double} arg = k1267 * effDm[Idx[i]] * Width;
+1410       \textcolor{comment}{// Loop over previous samples}
+1411       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<int(prev.size()); j++)\{
 1412 
-1413       \textcolor{comment}{// Skip small oscillation values.}
-1414       \textcolor{comment}{// If it's the last one, lower the tolerance}
-1415       \textcolor{keywordflow}{if}(i < numDm-1)\{
-1416         \textcolor{keywordflow}{if}(arg<0.9) \textcolor{keywordflow}{continue};
-1417       \}
-1418       \textcolor{keywordflow}{else}\{
-1419         \textcolor{keywordflow}{if}(arg<0.1) \textcolor{keywordflow}{continue};
-1420       \}
+1413         \textcolor{comment}{// Compute new sample points around old samples}
+1414         \textcolor{comment}{// This is based on a oscillatory quadrature rule}
+1415         \textcolor{keywordtype}{double} sample = (1/sqrt(3)) * (Width/2);
+1416         \textcolor{keywordflow}{if}(arg!=0) sample = acos(sin(arg)/arg)/arg * (Width/2);
+1417 
+1418         \textcolor{comment}{// Add samples above and below center}
+1419         samples.push\_back(prev[j]-sample);
+1420         samples.push\_back(prev[j]+sample);
 1421 
-1422       \textcolor{comment}{// Reset samples to redefine them}
-1423       samples.clear();
-1424 
-1425       \textcolor{comment}{// Loop over previous samples}
-1426       \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<int(prev.size()); j++)\{
-1427 
-1428         \textcolor{comment}{// Compute new sample points around old samples}
-1429         \textcolor{comment}{// This is based on a oscillatory quadrature rule}
-1430         \textcolor{keywordtype}{double} sample = (1/sqrt(3)) * (Width/2);
-1431         \textcolor{keywordflow}{if}(arg!=0) sample = acos(sin(arg)/arg)/arg * (Width/2);
-1432 
-1433         \textcolor{comment}{// Add samples above and below center}
-1434         samples.push\_back(prev[j]-sample);
-1435         samples.push\_back(prev[j]+sample);
-1436 
-1437       \}
-1438 
-1439     \}\textcolor{comment}{// End of loop over Dm^2}
-1440 
-1441     \textcolor{comment}{// Add sub-division samples to the end of allSamples vector}
-1442     allSamples.insert(allSamples.end(), samples.begin(), samples.end());
-1443 
-1444   \}\textcolor{comment}{// End of loop over sub-divisions}
-1445 
-1446   \textcolor{comment}{// Return all sample points}
-1447   \textcolor{keywordflow}{return} allSamples;
-1448 
-1449 \}
+1422       \}
+1423 
+1424     \}\textcolor{comment}{// End of loop over Dm^2}
+1425 
+1426     \textcolor{comment}{// Add sub-division samples to the end of allSamples vector}
+1427     allSamples.insert(allSamples.end(), samples.begin(), samples.end());
+1428 
+1429   \}\textcolor{comment}{// End of loop over sub-divisions}
+1430 
+1431   \textcolor{comment}{// Return all sample points}
+1432   \textcolor{keywordflow}{return} allSamples;
+1433 
+1434 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__NSI_a5fbeeb25bd00fbda7c484dbdb6748a58}\label{classOscProb_1_1PMNS__NSI_a5fbeeb25bd00fbda7c484dbdb6748a58}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+SI}!Get\+Up\+Coup@{Get\+Up\+Coup}}

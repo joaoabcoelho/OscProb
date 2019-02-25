@@ -59,7 +59,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">OscProb Namespace Reference</div>  </div>
 </div><!--header-->
@@ -97,7 +98,153 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html">PremModel</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements an earth model with spherical shells.  <a href="classOscProb_1_1PremModel.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a999a7944bad8bc72d7ee9f56f81a210e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceOscProb.html#a999a7944bad8bc72d7ee9f56f81a210e">AvgPath</a> (<a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> &amp;p1, <a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> &amp;p2)</td></tr>
+<tr class="memdesc:a999a7944bad8bc72d7ee9f56f81a210e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the average of two paths.  <a href="#a999a7944bad8bc72d7ee9f56f81a210e">More...</a><br /></td></tr>
+<tr class="separator:a999a7944bad8bc72d7ee9f56f81a210e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68e2c991fb8e0e76833482be455a55ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceOscProb.html#a68e2c991fb8e0e76833482be455a55ee">AvgPath</a> (std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> &gt; &amp;pv)</td></tr>
+<tr class="memdesc:a68e2c991fb8e0e76833482be455a55ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the average of a vector of paths.  <a href="#a68e2c991fb8e0e76833482be455a55ee">More...</a><br /></td></tr>
+<tr class="separator:a68e2c991fb8e0e76833482be455a55ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c203d8583a34acf2ae90185ba45f866"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceOscProb.html#a7c203d8583a34acf2ae90185ba45f866">MergePaths</a> (std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> &gt; &amp;inputPath, int j, int k)</td></tr>
+<tr class="memdesc:a7c203d8583a34acf2ae90185ba45f866"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge paths j and k in vector.  <a href="#a7c203d8583a34acf2ae90185ba45f866">More...</a><br /></td></tr>
+<tr class="separator:a7c203d8583a34acf2ae90185ba45f866"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a999a7944bad8bc72d7ee9f56f81a210e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a999a7944bad8bc72d7ee9f56f81a210e">&#9670;&nbsp;</a></span>AvgPath() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structOscProb_1_1NuPath.html">NuPath</a> OscProb::AvgPath </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> &amp;&#160;</td>
+          <td class="paramname"><em>p1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> &amp;&#160;</td>
+          <td class="paramname"><em>p2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the merged average of two paths</p>
+<p>This method will merge two paths and take their average density weighted by Z/A and path length.</p>
+<p>The Z/A will be the average weighted by path length</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p1</td><td>- The first path to merge </td></tr>
+    <tr><td class="paramname">p2</td><td>- The second path to merge </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The merged path </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="NuPath_8cxx_source.html#l00027">27</a> of file <a class="el" href="NuPath_8cxx_source.html">NuPath.cxx</a>.</p>
+
+<p class="reference">References <a class="el" href="NuPath_8h_source.html#l00077">OscProb::NuPath::density</a>, <a class="el" href="NuPath_8h_source.html#l00076">OscProb::NuPath::length</a>, and <a class="el" href="NuPath_8h_source.html#l00078">OscProb::NuPath::zoa</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="NuPath_8cxx_source.html#l00058">AvgPath()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01217">OscProb::PMNS_Base::AvgProb()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01282">OscProb::PMNS_Base::AvgProbLoE()</a>, <a class="el" href="PremModel_8cxx_source.html#l00449">OscProb::PremModel::GetMergedPaths()</a>, and <a class="el" href="NuPath_8cxx_source.html#l00088">MergePaths()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                                             {</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="comment">// Start with the first path</span></div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;  <a class="code" href="structOscProb_1_1NuPath.html">NuPath</a> mergedPath = p1;</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="comment">// Add the second length</span></div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  mergedPath.<a class="code" href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">length</a> += p2.<a class="code" href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">length</a>;</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="comment">// Compute weighted average of Z/A</span></div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  mergedPath.<a class="code" href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">zoa</a> = (p1.<a class="code" href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">zoa</a>*p1.<a class="code" href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">length</a> + p2.<a class="code" href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">zoa</a>*p2.<a class="code" href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">length</a>) / (p1.<a class="code" href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">length</a> + p2.<a class="code" href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">length</a>);</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  <span class="comment">// Compute weighted average of density</span></div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  mergedPath.<a class="code" href="structOscProb_1_1NuPath.html#a54ddd451db69bc54434de3cf18a117ca">density</a> = (p1.<a class="code" href="structOscProb_1_1NuPath.html#a54ddd451db69bc54434de3cf18a117ca">density</a>*p1.<a class="code" href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">zoa</a>*p1.<a class="code" href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">length</a> + p2.<a class="code" href="structOscProb_1_1NuPath.html#a54ddd451db69bc54434de3cf18a117ca">density</a>*p2.<a class="code" href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">zoa</a>*p2.<a class="code" href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">length</a>) / (p1.<a class="code" href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">zoa</a>*p1.<a class="code" href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">length</a> + p2.<a class="code" href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">zoa</a>*p2.<a class="code" href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">length</a>);</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  <span class="comment">// return merged path</span></div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  <span class="keywordflow">return</span> mergedPath;</div><div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div><div class="ttc" id="structOscProb_1_1NuPath_html_af22660894b6e25cf835500381b155557"><div class="ttname"><a href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">OscProb::NuPath::length</a></div><div class="ttdeci">double length</div><div class="ttdoc">The length of the path segment in km. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00076">NuPath.h:76</a></div></div>
+<div class="ttc" id="structOscProb_1_1NuPath_html"><div class="ttname"><a href="structOscProb_1_1NuPath.html">OscProb::NuPath</a></div><div class="ttdoc">A struct representing a neutrino path segment. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00034">NuPath.h:34</a></div></div>
+<div class="ttc" id="structOscProb_1_1NuPath_html_af3213f3691ba83c6bc05f4a3490f6b31"><div class="ttname"><a href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">OscProb::NuPath::zoa</a></div><div class="ttdeci">double zoa</div><div class="ttdoc">The effective Z/A value of the path segment. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00078">NuPath.h:78</a></div></div>
+<div class="ttc" id="structOscProb_1_1NuPath_html_a54ddd451db69bc54434de3cf18a117ca"><div class="ttname"><a href="structOscProb_1_1NuPath.html#a54ddd451db69bc54434de3cf18a117ca">OscProb::NuPath::density</a></div><div class="ttdeci">double density</div><div class="ttdoc">The density of the path segment in g/cm^3. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00077">NuPath.h:77</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a68e2c991fb8e0e76833482be455a55ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68e2c991fb8e0e76833482be455a55ee">&#9670;&nbsp;</a></span>AvgPath() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> OscProb::AvgPath </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the merged average of a vector of paths</p>
+<p>This method will merge a set of paths and take their average density weighted by Z/A and path length.</p>
+<p>The Z/A will be the average weighted by path length</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pv</td><td>- vector of paths to merge </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The merged path </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="NuPath_8cxx_source.html#l00058">58</a> of file <a class="el" href="NuPath_8cxx_source.html">NuPath.cxx</a>.</p>
+
+<p class="reference">References <a class="el" href="NuPath_8cxx_source.html#l00027">AvgPath()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                                                          {</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="comment">// Get size of vector</span></div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;  <span class="keywordtype">int</span> np = pv.size();</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  </div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  <span class="comment">// Start with the first path</span></div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <a class="code" href="structOscProb_1_1NuPath.html">NuPath</a> mergedPath;</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  </div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  <span class="comment">// If vector is not empty, start on first path</span></div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordflow">if</span>(np&gt;0) mergedPath = pv[0];</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  <span class="keywordflow">else</span> <span class="keywordflow">return</span> mergedPath;</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="comment">// Merge each of the following paths</span></div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=1; i&lt;np; i++){</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    mergedPath = <a class="code" href="namespaceOscProb.html#a999a7944bad8bc72d7ee9f56f81a210e">AvgPath</a>(mergedPath, pv[i]);</div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  }</div><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  <span class="comment">// return merged path</span></div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  <span class="keywordflow">return</span> mergedPath;</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div><div class="ttc" id="structOscProb_1_1NuPath_html"><div class="ttname"><a href="structOscProb_1_1NuPath.html">OscProb::NuPath</a></div><div class="ttdoc">A struct representing a neutrino path segment. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00034">NuPath.h:34</a></div></div>
+<div class="ttc" id="namespaceOscProb_html_a999a7944bad8bc72d7ee9f56f81a210e"><div class="ttname"><a href="namespaceOscProb.html#a999a7944bad8bc72d7ee9f56f81a210e">OscProb::AvgPath</a></div><div class="ttdeci">OscProb::NuPath AvgPath(OscProb::NuPath &amp;p1, OscProb::NuPath &amp;p2)</div><div class="ttdoc">Get the average of two paths. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8cxx_source.html#l00027">NuPath.cxx:27</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7c203d8583a34acf2ae90185ba45f866"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c203d8583a34acf2ae90185ba45f866">&#9670;&nbsp;</a></span>MergePaths()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> &gt; OscProb::MergePaths </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>inputPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>k</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Merge two specific paths by their indices in a path vector</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">inputPath</td><td>- The original vector of paths to merge </td></tr>
+    <tr><td class="paramname">j,k</td><td>- The indices of the two paths to merge </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The merged vector of paths </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="NuPath_8cxx_source.html#l00088">88</a> of file <a class="el" href="NuPath_8cxx_source.html">NuPath.cxx</a>.</p>
+
+<p class="reference">References <a class="el" href="NuPath_8cxx_source.html#l00027">AvgPath()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00449">OscProb::PremModel::GetMergedPaths()</a>.</p>
+<div class="fragment"><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                                                                                             {</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  <span class="comment">// Output vector</span></div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  vector&lt;NuPath&gt; mergedPath;</div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="comment">// Loop over input paths</span></div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;inputPath.size(); i++){</div><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div><div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="comment">// If first index, merge the paths j and k</span></div><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">if</span>(i==j) mergedPath.push_back(<a class="code" href="namespaceOscProb.html#a999a7944bad8bc72d7ee9f56f81a210e">AvgPath</a>(inputPath[j], inputPath[k]));</div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="comment">// If not second index add the path as is</span></div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(i!=k) mergedPath.push_back(inputPath[i]);</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  }<span class="comment">// End of loop</span></div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="comment">// return merged vector</span></div><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  <span class="keywordflow">return</span> mergedPath;</div><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}</div><div class="ttc" id="namespaceOscProb_html_a999a7944bad8bc72d7ee9f56f81a210e"><div class="ttname"><a href="namespaceOscProb.html#a999a7944bad8bc72d7ee9f56f81a210e">OscProb::AvgPath</a></div><div class="ttdeci">OscProb::NuPath AvgPath(OscProb::NuPath &amp;p1, OscProb::NuPath &amp;p2)</div><div class="ttdoc">Get the average of two paths. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8cxx_source.html#l00027">NuPath.cxx:27</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

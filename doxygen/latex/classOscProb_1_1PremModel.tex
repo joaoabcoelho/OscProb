@@ -44,8 +44,6 @@ virtual void \hyperlink{classOscProb_1_1PremModel_a55b314e97ed9b92931e08ada0c094
 \begin{DoxyCompactList}\small\item\em Set the detector position in km. \end{DoxyCompactList}\item 
 virtual std\+::vector$<$ \hyperlink{structOscProb_1_1PremLayer}{Osc\+Prob\+::\+Prem\+Layer} $>$ \hyperlink{classOscProb_1_1PremModel_ae4feeccc7027253f5c2e2493098145ca}{Get\+Prem\+Layers} ()
 \begin{DoxyCompactList}\small\item\em Get the set of earth layers. \end{DoxyCompactList}\item 
-virtual \hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path} \hyperlink{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}{Avg\+Path} (\hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path} p1, \hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path} p2)
-\begin{DoxyCompactList}\small\item\em Get the average of two paths. \end{DoxyCompactList}\item 
 virtual void \hyperlink{classOscProb_1_1PremModel_ac5496d6d5bafcf7740c60838d3eee7b3}{Set\+Remove\+Small\+Paths} (bool rp=true)
 \begin{DoxyCompactList}\small\item\em Set tag to remove small paths. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
@@ -57,8 +55,6 @@ virtual void \hyperlink{classOscProb_1_1PremModel_a08c337b84138adc46ee4dd002e926
 \begin{DoxyCompactList}\small\item\em Add a layer to the model. \end{DoxyCompactList}\item 
 virtual void \hyperlink{classOscProb_1_1PremModel_aca013f7ac5494282834048786a0e07a6}{Add\+Path} (double length, \hyperlink{structOscProb_1_1PremLayer}{Prem\+Layer} pl)
 \begin{DoxyCompactList}\small\item\em Add a path segment to the sequence. \end{DoxyCompactList}\item 
-virtual std\+::vector$<$ \hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path} $>$ \hyperlink{classOscProb_1_1PremModel_a87cb8043b58fde2c8a8779e6ae1b5135}{Merge\+Paths} (std\+::vector$<$ \hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path} $>$ input\+Path, int j, int k)
-\begin{DoxyCompactList}\small\item\em Merge paths j and k in vector. \end{DoxyCompactList}\item 
 \hyperlink{classOscProb_1_1PremModel_a9a1d78e29217bb0dd00ae3bd96d22b69}{Class\+Def} (\hyperlink{classOscProb_1_1PremModel}{Prem\+Model}, 1)
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
@@ -229,60 +225,6 @@ Referenced by Fill\+Path().
       \hyperlink{structOscProb_1_1PremLayer_aca8d7df68e6f982155b68b7e6a7ef389}{layer}) );
 340 
 341 \}
-\end{DoxyCode}
-\mbox{\Hypertarget{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}\label{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}} 
-\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Avg\+Path@{Avg\+Path}}
-\index{Avg\+Path@{Avg\+Path}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
-\subsubsection{\texorpdfstring{Avg\+Path()}{AvgPath()}}
-{\footnotesize\ttfamily \hyperlink{structOscProb_1_1NuPath}{Nu\+Path} Prem\+Model\+::\+Avg\+Path (\begin{DoxyParamCaption}\item[{\hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path}}]{p1,  }\item[{\hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path}}]{p2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
-Get the merged average of two paths
-
-This method will merge two paths and take their average density weighted by Z/A and path length.
-
-The Z/A of the first path will be kept in the merged path
-
-
-\begin{DoxyParams}{Parameters}
-{\em p1} & -\/ The first path to merge \\
-\hline
-{\em p2} & -\/ The second path to merge \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-The merged path 
-\end{DoxyReturn}
-
-
-Definition at line 530 of file Prem\+Model.\+cxx.
-
-
-
-References Osc\+Prob\+::\+Nu\+Path\+::density, Osc\+Prob\+::\+Nu\+Path\+::length, and Osc\+Prob\+::\+Nu\+Path\+::zoa.
-
-
-
-Referenced by Get\+Merged\+Paths(), and Merge\+Paths().
-
-
-\begin{DoxyCode}
-530                                              \{
-531 
-532   \textcolor{comment}{// Start with the first path}
-533   \hyperlink{structOscProb_1_1NuPath}{NuPath} mergedPath = p1;
-534 
-535   \textcolor{comment}{// Add the second length}
-536   mergedPath.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} += p2.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length};
-537 
-538   \textcolor{comment}{// Compute weighted average of density}
-539   mergedPath.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density} = (p1.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density}*p1.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}*p1.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} + p2.
-      \hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density}*p2.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}*p2.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}) / (p1.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}*p1.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} + p2.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa}*p2.
-      \hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length});
-540 
-541   \textcolor{comment}{// return merged path}
-542   \textcolor{keywordflow}{return} mergedPath;
-543 
-544 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PremModel_a9a1d78e29217bb0dd00ae3bd96d22b69}\label{classOscProb_1_1PremModel_a9a1d78e29217bb0dd00ae3bd96d22b69}} 
 \index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Class\+Def@{Class\+Def}}
@@ -537,7 +479,7 @@ Definition at line 449 of file Prem\+Model.\+cxx.
 
 
 
-References Avg\+Path(), Osc\+Prob\+::\+Nu\+Path\+::density, f\+Nu\+Path, f\+Remove\+Small\+Paths, Merge\+Paths(), and Osc\+Prob\+::\+Nu\+Path\+::zoa.
+References Osc\+Prob\+::\+Avg\+Path(), Osc\+Prob\+::\+Nu\+Path\+::density, f\+Nu\+Path, f\+Remove\+Small\+Paths, Osc\+Prob\+::\+Merge\+Paths(), and Osc\+Prob\+::\+Nu\+Path\+::zoa.
 
 
 \begin{DoxyCode}
@@ -570,7 +512,7 @@ References Avg\+Path(), Osc\+Prob\+::\+Nu\+Path\+::density, f\+Nu\+Path, f\+Remo
 474     \textcolor{keywordflow}{else}\{
 475 
 476       \textcolor{comment}{// Merge the path with current merged path}
-477       path = \hyperlink{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}{AvgPath}(path, \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}[i]);
+477       path = \hyperlink{namespaceOscProb_a999a7944bad8bc72d7ee9f56f81a210e}{OscProb::AvgPath}(path, \hyperlink{classOscProb_1_1PremModel_aaf3c77e35798d664853157013c90ad2b}{fNuPath}[i]);
 478 
 479     \}
 480 
@@ -595,7 +537,7 @@ References Avg\+Path(), Osc\+Prob\+::\+Nu\+Path\+::density, f\+Nu\+Path, f\+Remo
 499       \textcolor{keywordflow}{if}(mergedPath[k].length < 0.01*totL)\{
 500 
 501         \textcolor{comment}{// Merge path with following path}
-502         mergedPath = \hyperlink{classOscProb_1_1PremModel_a87cb8043b58fde2c8a8779e6ae1b5135}{MergePaths}(mergedPath, k, k+1);
+502         mergedPath = \hyperlink{namespaceOscProb_a7c203d8583a34acf2ae90185ba45f866}{MergePaths}(mergedPath, k, k+1);
 503 
 504       \}
 505       \textcolor{comment}{// If path is long enough skip it}
@@ -779,58 +721,6 @@ Referenced by Prem\+Model().
 183 
 184 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{classOscProb_1_1PremModel_a87cb8043b58fde2c8a8779e6ae1b5135}\label{classOscProb_1_1PremModel_a87cb8043b58fde2c8a8779e6ae1b5135}} 
-\index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Merge\+Paths@{Merge\+Paths}}
-\index{Merge\+Paths@{Merge\+Paths}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
-\subsubsection{\texorpdfstring{Merge\+Paths()}{MergePaths()}}
-{\footnotesize\ttfamily vector$<$ \hyperlink{structOscProb_1_1NuPath}{Nu\+Path} $>$ Prem\+Model\+::\+Merge\+Paths (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{structOscProb_1_1NuPath}{Osc\+Prob\+::\+Nu\+Path} $>$}]{input\+Path,  }\item[{int}]{j,  }\item[{int}]{k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
-
-Merge two specific paths by their indices in a path vector
-
-
-\begin{DoxyParams}{Parameters}
-{\em input\+Path} & -\/ The original vecotr of paths to merge \\
-\hline
-{\em j,k} & -\/ The indices of the two paths to merge \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-The merged vector of paths 
-\end{DoxyReturn}
-
-
-Definition at line 554 of file Prem\+Model.\+cxx.
-
-
-
-References Avg\+Path().
-
-
-
-Referenced by Get\+Merged\+Paths().
-
-
-\begin{DoxyCode}
-554                                                                           \{
-555 
-556   \textcolor{comment}{// Output vector}
-557   vector<NuPath> mergedPath;
-558 
-559   \textcolor{comment}{// Loop over input paths}
-560   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<inputPath.size(); i++)\{
-561 
-562     \textcolor{comment}{// If first index, merge the paths j and k}
-563     \textcolor{keywordflow}{if}(i==j) mergedPath.push\_back(\hyperlink{classOscProb_1_1PremModel_a646977424cdca178a77694397146c2f8}{AvgPath}(inputPath[j], inputPath[k]));
-564     \textcolor{comment}{// If not second index add the path as is}
-565     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(i!=k) mergedPath.push\_back(inputPath[i]);
-566 
-567   \}\textcolor{comment}{// End of loop}
-568 
-569   \textcolor{comment}{// return merged vector}
-570   \textcolor{keywordflow}{return} mergedPath;
-571 
-572 \}
-\end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PremModel_a55b314e97ed9b92931e08ada0c0947eb}\label{classOscProb_1_1PremModel_a55b314e97ed9b92931e08ada0c0947eb}} 
 \index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Set\+Det\+Pos@{Set\+Det\+Pos}}
 \index{Set\+Det\+Pos@{Set\+Det\+Pos}!Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}}
@@ -922,7 +812,7 @@ Set the boolean to tag whether to remove small paths when merging
 \end{DoxyParams}
 
 
-Definition at line 580 of file Prem\+Model.\+cxx.
+Definition at line 523 of file Prem\+Model.\+cxx.
 
 
 
@@ -930,7 +820,7 @@ References f\+Remove\+Small\+Paths.
 
 
 \begin{DoxyCode}
-580 \{ \hyperlink{classOscProb_1_1PremModel_a3973df6f5f2ff219cd2f865b31aacfd2}{fRemoveSmallPaths} = rp; \}
+523 \{ \hyperlink{classOscProb_1_1PremModel_a3973df6f5f2ff219cd2f865b31aacfd2}{fRemoveSmallPaths} = rp; \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PremModel_a095bd601f6cd91926de9928e96ea7751}\label{classOscProb_1_1PremModel_a095bd601f6cd91926de9928e96ea7751}} 
 \index{Osc\+Prob\+::\+Prem\+Model@{Osc\+Prob\+::\+Prem\+Model}!Set\+Top\+Layer\+Size@{Set\+Top\+Layer\+Size}}
@@ -992,7 +882,7 @@ References f\+Prem\+Layers.
 
 Define the tolerance of the detector around a boundary when considering whether to add a new layer for the detector position. 
 
-Definition at line 88 of file Prem\+Model.\+h.
+Definition at line 84 of file Prem\+Model.\+h.
 
 
 
@@ -1006,7 +896,7 @@ Referenced by Load\+Model().
 
 
 
-Definition at line 83 of file Prem\+Model.\+h.
+Definition at line 79 of file Prem\+Model.\+h.
 
 
 
@@ -1020,7 +910,7 @@ Referenced by Clear\+Model(), Fill\+Path(), Get\+Cos\+T(), Get\+Total\+L(), and 
 
 
 
-Definition at line 84 of file Prem\+Model.\+h.
+Definition at line 80 of file Prem\+Model.\+h.
 
 
 
@@ -1034,7 +924,7 @@ Referenced by Load\+Model(), and Set\+Det\+Pos().
 
 
 
-Definition at line 81 of file Prem\+Model.\+h.
+Definition at line 77 of file Prem\+Model.\+h.
 
 
 
@@ -1048,7 +938,7 @@ Referenced by Add\+Path(), Fill\+Path(), Get\+Merged\+Paths(), and Get\+Nu\+Path
 
 
 
-Definition at line 79 of file Prem\+Model.\+h.
+Definition at line 75 of file Prem\+Model.\+h.
 
 
 
@@ -1062,7 +952,7 @@ Referenced by Add\+Layer(), Clear\+Model(), Fill\+Path(), Get\+Cos\+T(), Get\+La
 
 
 
-Definition at line 86 of file Prem\+Model.\+h.
+Definition at line 82 of file Prem\+Model.\+h.
 
 
 

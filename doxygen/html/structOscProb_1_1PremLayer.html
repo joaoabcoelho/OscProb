@@ -104,7 +104,7 @@ Public Attributes</h2></td></tr>
 <div class="textblock"><p>This struct stores the properties of a spherical shell to be used by the <a class="el" href="classOscProb_1_1PremModel.html" title="Implements an earth model with spherical shells. ">PremModel</a> class in order to build an earth model. Only the outer radius of the shell is stored, so <a class="el" href="structOscProb_1_1PremLayer.html" title="A struct representing a spherical shell of matter for earth models. ">PremLayer</a>'s need to be assembled in order inside a vector.</p>
 <dl class="section author"><dt>Author</dt><dd>coelho@lal.in2p3.fr </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="NuPath_8h_source.html#l00081">81</a> of file <a class="el" href="NuPath_8h_source.html">NuPath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="NuPath_8h_source.html#l00083">83</a> of file <a class="el" href="NuPath_8h_source.html">NuPath.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abb89fe4d38627dcd49a7861e699af14f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abb89fe4d38627dcd49a7861e699af14f">&#9670;&nbsp;</a></span>PremLayer()</h2>
@@ -164,8 +164,8 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="NuPath_8h_source.html#l00099">99</a> of file <a class="el" href="NuPath_8h_source.html">NuPath.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                                                             {</div><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      <a class="code" href="structOscProb_1_1PremLayer.html#a9d35d6d32ff3dab5cb1aa0c769c65c2b">SetLayer</a>(r,d,z,ly);</div><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div><div class="ttc" id="structOscProb_1_1PremLayer_html_a9d35d6d32ff3dab5cb1aa0c769c65c2b"><div class="ttname"><a href="structOscProb_1_1PremLayer.html#a9d35d6d32ff3dab5cb1aa0c769c65c2b">OscProb::PremLayer::SetLayer</a></div><div class="ttdeci">void SetLayer(double r=0, double d=0, double z=0.5, int ly=0)</div><div class="ttdoc">Set the properties of the layer. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00116">NuPath.h:116</a></div></div>
+<p class="definition">Definition at line <a class="el" href="NuPath_8h_source.html#l00101">101</a> of file <a class="el" href="NuPath_8h_source.html">NuPath.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                                                             {</div><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      <a class="code" href="structOscProb_1_1PremLayer.html#a9d35d6d32ff3dab5cb1aa0c769c65c2b">SetLayer</a>(r,d,z,ly);</div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div><div class="ttc" id="structOscProb_1_1PremLayer_html_a9d35d6d32ff3dab5cb1aa0c769c65c2b"><div class="ttname"><a href="structOscProb_1_1PremLayer.html#a9d35d6d32ff3dab5cb1aa0c769c65c2b">OscProb::PremLayer::SetLayer</a></div><div class="ttdeci">void SetLayer(double r=0, double d=0, double z=0.5, int ly=0)</div><div class="ttdoc">Set the properties of the layer. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00118">NuPath.h:118</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -227,13 +227,13 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="NuPath_8h_source.html#l00116">116</a> of file <a class="el" href="NuPath_8h_source.html">NuPath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="NuPath_8h_source.html#l00118">118</a> of file <a class="el" href="NuPath_8h_source.html">NuPath.h</a>.</p>
 
-<p class="reference">References <a class="el" href="NuPath_8h_source.html#l00075">OscProb::NuPath::density</a>, <a class="el" href="NuPath_8h_source.html#l00077">OscProb::NuPath::layer</a>, and <a class="el" href="NuPath_8h_source.html#l00076">OscProb::NuPath::zoa</a>.</p>
-<div class="fragment"><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                                                                 {</div><div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      <a class="code" href="structOscProb_1_1PremLayer.html#a39b409c20fd96a7a0bd421567c00ffed">radius</a> = r;</div><div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;      <a class="code" href="structOscProb_1_1PremLayer.html#aba2536cbdab87d0db33df47f95c4f2c3">density</a> = d;</div><div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;      <a class="code" href="structOscProb_1_1PremLayer.html#a8687a8169d786fca79908292d11077f5">zoa</a> = z;</div><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;      <a class="code" href="structOscProb_1_1PremLayer.html#aca8d7df68e6f982155b68b7e6a7ef389">layer</a> = ly;</div><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    }</div><div class="ttc" id="structOscProb_1_1PremLayer_html_a39b409c20fd96a7a0bd421567c00ffed"><div class="ttname"><a href="structOscProb_1_1PremLayer.html#a39b409c20fd96a7a0bd421567c00ffed">OscProb::PremLayer::radius</a></div><div class="ttdeci">double radius</div><div class="ttdoc">The outer radius of the layer in km. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00123">NuPath.h:123</a></div></div>
-<div class="ttc" id="structOscProb_1_1PremLayer_html_a8687a8169d786fca79908292d11077f5"><div class="ttname"><a href="structOscProb_1_1PremLayer.html#a8687a8169d786fca79908292d11077f5">OscProb::PremLayer::zoa</a></div><div class="ttdeci">double zoa</div><div class="ttdoc">The effective Z/A value of the layer. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00125">NuPath.h:125</a></div></div>
-<div class="ttc" id="structOscProb_1_1PremLayer_html_aca8d7df68e6f982155b68b7e6a7ef389"><div class="ttname"><a href="structOscProb_1_1PremLayer.html#aca8d7df68e6f982155b68b7e6a7ef389">OscProb::PremLayer::layer</a></div><div class="ttdeci">int layer</div><div class="ttdoc">An index to identify the matter type. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00126">NuPath.h:126</a></div></div>
-<div class="ttc" id="structOscProb_1_1PremLayer_html_aba2536cbdab87d0db33df47f95c4f2c3"><div class="ttname"><a href="structOscProb_1_1PremLayer.html#aba2536cbdab87d0db33df47f95c4f2c3">OscProb::PremLayer::density</a></div><div class="ttdeci">double density</div><div class="ttdoc">The density of the layer in g/cm^3. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00124">NuPath.h:124</a></div></div>
+<p class="reference">References <a class="el" href="NuPath_8h_source.html#l00077">OscProb::NuPath::density</a>, <a class="el" href="NuPath_8h_source.html#l00079">OscProb::NuPath::layer</a>, and <a class="el" href="NuPath_8h_source.html#l00078">OscProb::NuPath::zoa</a>.</p>
+<div class="fragment"><div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                                                                 {</div><div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;      <a class="code" href="structOscProb_1_1PremLayer.html#a39b409c20fd96a7a0bd421567c00ffed">radius</a> = r;</div><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;      <a class="code" href="structOscProb_1_1PremLayer.html#aba2536cbdab87d0db33df47f95c4f2c3">density</a> = d;</div><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;      <a class="code" href="structOscProb_1_1PremLayer.html#a8687a8169d786fca79908292d11077f5">zoa</a> = z;</div><div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;      <a class="code" href="structOscProb_1_1PremLayer.html#aca8d7df68e6f982155b68b7e6a7ef389">layer</a> = ly;</div><div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div><div class="ttc" id="structOscProb_1_1PremLayer_html_a39b409c20fd96a7a0bd421567c00ffed"><div class="ttname"><a href="structOscProb_1_1PremLayer.html#a39b409c20fd96a7a0bd421567c00ffed">OscProb::PremLayer::radius</a></div><div class="ttdeci">double radius</div><div class="ttdoc">The outer radius of the layer in km. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00125">NuPath.h:125</a></div></div>
+<div class="ttc" id="structOscProb_1_1PremLayer_html_a8687a8169d786fca79908292d11077f5"><div class="ttname"><a href="structOscProb_1_1PremLayer.html#a8687a8169d786fca79908292d11077f5">OscProb::PremLayer::zoa</a></div><div class="ttdeci">double zoa</div><div class="ttdoc">The effective Z/A value of the layer. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00127">NuPath.h:127</a></div></div>
+<div class="ttc" id="structOscProb_1_1PremLayer_html_aca8d7df68e6f982155b68b7e6a7ef389"><div class="ttname"><a href="structOscProb_1_1PremLayer.html#aca8d7df68e6f982155b68b7e6a7ef389">OscProb::PremLayer::layer</a></div><div class="ttdeci">int layer</div><div class="ttdoc">An index to identify the matter type. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00128">NuPath.h:128</a></div></div>
+<div class="ttc" id="structOscProb_1_1PremLayer_html_aba2536cbdab87d0db33df47f95c4f2c3"><div class="ttname"><a href="structOscProb_1_1PremLayer.html#aba2536cbdab87d0db33df47f95c4f2c3">OscProb::PremLayer::density</a></div><div class="ttdeci">double density</div><div class="ttdoc">The density of the layer in g/cm^3. </div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00126">NuPath.h:126</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -250,7 +250,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="NuPath_8h_source.html#l00124">124</a> of file <a class="el" href="NuPath_8h_source.html">NuPath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="NuPath_8h_source.html#l00126">126</a> of file <a class="el" href="NuPath_8h_source.html">NuPath.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00336">OscProb::PremModel::AddPath()</a>.</p>
 
@@ -268,7 +268,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="NuPath_8h_source.html#l00126">126</a> of file <a class="el" href="NuPath_8h_source.html">NuPath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="NuPath_8h_source.html#l00128">128</a> of file <a class="el" href="NuPath_8h_source.html">NuPath.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00336">OscProb::PremModel::AddPath()</a>.</p>
 
@@ -286,7 +286,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="NuPath_8h_source.html#l00123">123</a> of file <a class="el" href="NuPath_8h_source.html">NuPath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="NuPath_8h_source.html#l00125">125</a> of file <a class="el" href="NuPath_8h_source.html">NuPath.h</a>.</p>
 
 </div>
 </div>
@@ -302,7 +302,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="NuPath_8h_source.html#l00125">125</a> of file <a class="el" href="NuPath_8h_source.html">NuPath.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="NuPath_8h_source.html#l00127">127</a> of file <a class="el" href="NuPath_8h_source.html">NuPath.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00336">OscProb::PremModel::AddPath()</a>.</p>
 
