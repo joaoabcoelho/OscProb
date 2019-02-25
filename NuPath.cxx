@@ -9,6 +9,8 @@
 
 using namespace std;
 
+using namespace OscProb;
+
 //......................................................................
 ///
 /// Get the merged average of two paths
@@ -22,10 +24,10 @@ using namespace std;
 /// @param p2 - The second path to merge
 /// @return The merged path
 ///
-OscProb::NuPath OscProb::AvgPath(OscProb::NuPath& p1, OscProb::NuPath& p2){
+NuPath OscProb::AvgPath(NuPath& p1, NuPath& p2){
 
   // Start with the first path
-  OscProb::NuPath mergedPath = p1;
+  NuPath mergedPath = p1;
 
   // Add the second length
   mergedPath.length += p2.length;
@@ -53,13 +55,13 @@ OscProb::NuPath OscProb::AvgPath(OscProb::NuPath& p1, OscProb::NuPath& p2){
 /// @param pv - vector of paths to merge
 /// @return The merged path
 ///
-OscProb::NuPath OscProb::AvgPath(vector<OscProb::NuPath>& pv){
+OscProb::NuPath OscProb::AvgPath(std::vector<OscProb::NuPath>& pv){
 
   // Get size of vector
   int np = pv.size();
   
   // Start with the first path
-  OscProb::NuPath mergedPath;
+  NuPath mergedPath;
   
   // If vector is not empty, start on first path
   if(np>0) mergedPath = pv[0];
@@ -67,7 +69,7 @@ OscProb::NuPath OscProb::AvgPath(vector<OscProb::NuPath>& pv){
 
   // Merge each of the following paths
   for(int i=1; i<np; i++){
-    mergedPath = OscProb::AvgPath(mergedPath, pv[i]);
+    mergedPath = AvgPath(mergedPath, pv[i]);
   }
 
   // return merged path
@@ -86,13 +88,13 @@ OscProb::NuPath OscProb::AvgPath(vector<OscProb::NuPath>& pv){
 std::vector<OscProb::NuPath> OscProb::MergePaths(std::vector<OscProb::NuPath>& inputPath, int j, int k){
 
   // Output vector
-  vector<OscProb::NuPath> mergedPath;
+  vector<NuPath> mergedPath;
 
   // Loop over input paths
   for(int i=0; i<inputPath.size(); i++){
 
     // If first index, merge the paths j and k
-    if(i==j) mergedPath.push_back(OscProb::AvgPath(inputPath[j], inputPath[k]));
+    if(i==j) mergedPath.push_back(AvgPath(inputPath[j], inputPath[k]));
     // If not second index add the path as is
     else if(i!=k) mergedPath.push_back(inputPath[i]);
 
