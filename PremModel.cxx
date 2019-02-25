@@ -474,7 +474,7 @@ vector<NuPath> PremModel::GetMergedPaths(double prec){
     else{
 
       // Merge the path with current merged path
-      path = AvgPath(path, fNuPath[i]);
+      path = OscProb::AvgPath(path, fNuPath[i]);
 
     }
 
@@ -510,63 +510,6 @@ vector<NuPath> PremModel::GetMergedPaths(double prec){
   }// End of if statement
 
   // return the merged vector
-  return mergedPath;
-
-}
-
-//......................................................................
-///
-/// Get the merged average of two paths
-///
-/// This method will merge two paths and take their average density
-/// weighted by Z/A and path length.
-///
-/// The Z/A of the first path will be kept in the merged path
-///
-/// @param p1 - The first path to merge
-/// @param p2 - The second path to merge
-/// @return The merged path
-///
-NuPath PremModel::AvgPath(NuPath p1, NuPath p2){
-
-  // Start with the first path
-  NuPath mergedPath = p1;
-
-  // Add the second length
-  mergedPath.length += p2.length;
-
-  // Compute weighted average of density
-  mergedPath.density = (p1.density*p1.zoa*p1.length + p2.density*p2.zoa*p2.length) / (p1.zoa*p1.length + p2.zoa*p2.length);
-
-  // return merged path
-  return mergedPath;
-
-}
-
-//......................................................................
-///
-/// Merge two specific paths by their indices in a path vector
-///
-/// @param inputPath - The original vecotr of paths to merge
-/// @param j,k - The indices of the two paths to merge
-/// @return The merged vector of paths
-///
-vector<NuPath> PremModel::MergePaths(vector<NuPath> inputPath, int j, int k){
-
-  // Output vector
-  vector<NuPath> mergedPath;
-
-  // Loop over input paths
-  for(int i=0; i<inputPath.size(); i++){
-
-    // If first index, merge the paths j and k
-    if(i==j) mergedPath.push_back(AvgPath(inputPath[j], inputPath[k]));
-    // If not second index add the path as is
-    else if(i!=k) mergedPath.push_back(inputPath[i]);
-
-  }// End of loop
-
-  // return merged vector
   return mergedPath;
 
 }

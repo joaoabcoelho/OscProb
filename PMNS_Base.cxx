@@ -1198,7 +1198,9 @@ double PMNS_Base::Prob(int flvi, int flvf, double E, double L)
 /// This gets transformed into L/E, since the oscillation terms
 /// have arguments linear in L/E and not E.
 ///
-/// This function currently only works for single paths.
+/// This function works best for single paths.
+/// In multiple paths the accuracy may be somewhat worse.
+/// If needed, average over smaller energy ranges.
 ///
 /// Flavours are:
 /// <pre>
@@ -1220,17 +1222,12 @@ double PMNS_Base::AvgProb(int flvi, int flvf, double E, double dE)
 
   if(fNuPaths.empty()) return 0;
 
-  if(fNuPaths.size() != 1){
-    cout << "ERROR: AvgProb not implemented for multiple paths." << endl;
-    cout << "       Returning probability at bin center." << endl;
-    return Prob(flvi, flvf, E);
-  }
-
   // Don't average zero width
   if(dE<=0) return Prob(flvi, flvf, E);
 
   // Make sure fPath is set
-  SetCurPath(fNuPaths[0]);
+  // Use average if multiple paths
+  SetCurPath(AvgPath(fNuPaths));
 
   // Define L/E variables
   double LoE = 0;
@@ -1266,7 +1263,9 @@ double PMNS_Base::AvgProb(int flvi, int flvf, double E, double dE)
 /// weight to low energies. Better approximations would be
 /// achieved if we used an interpolated event density.
 ///
-/// This function currently only works for single paths.
+/// This function works best for single paths.
+/// In multiple paths the accuracy may be somewhat worse.
+/// If needed, average over smaller L/E ranges.
 ///
 /// Flavours are:
 /// <pre>
@@ -1288,22 +1287,9 @@ double PMNS_Base::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
 
   if(fNuPaths.empty()) return 0;
 
-  if(fNuPaths.size() > 1){
-
-    cout << "ERROR: AvgProb not implemented for multiple paths." << endl;
-    cout << "       Returning probability at bin center." << endl;
-
-    double L = 0;
-    for(int i=0; i<int(fNuPaths.size()); i++){
-      L += fNuPaths[i].length;
-    }
-
-    return Prob(flvi, flvf, L/LoE);
-
-  }
-
   // Make sure fPath is set
-  SetCurPath(fNuPaths[0]);
+  // Use average if multiple paths
+  SetCurPath(AvgPath(fNuPaths));
 
   // Set the energy at bin center
   SetEnergy(fPath.length/LoE);
@@ -1318,6 +1304,7 @@ double PMNS_Base::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
   // probabilities and weights
   double sumw = 0;
   double prob = 0;
+  double length = fPath.length;
 
   // Loop over all sample points
   for(int j=0; j<int(samples.size()); j++){
@@ -1326,7 +1313,7 @@ double PMNS_Base::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
     double w = 1./pow(samples[j],2);
 
     // Add weighted probability
-    prob += w * Prob(flvi, flvf, fPath.length / samples[j]);
+    prob += w * Prob(flvi, flvf, length / samples[j]);
 
     // Increment sum of weights
     sumw += w;
@@ -1371,6 +1358,9 @@ vector<double> PMNS_Base::GetSamplePoints(double LoE, double dLoE)
 
   int numDm = effDm.size();
 
+  // Sort the effective Dm^2 list
+  sort(effDm.begin(), effDm.end());
+
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
   int n_div = ceil( 20 * pow(dLoE/LoE,0.8) );
@@ -1385,11 +1375,6 @@ vector<double> PMNS_Base::GetSamplePoints(double LoE, double dLoE)
     // Define sub-division center and width
     double bctr = LoE - dLoE/2 + (k+0.5)*dLoE/n_div;
     double bwdt = dLoE/n_div;
-
-    // Make a list of indices sorted by Dm^2 value
-    vector<int> Idx(numDm, 0);
-    for(int i=0; i<numDm; i++) Idx[i] = i;
-    sort(Idx.begin(), Idx.end(), IdxCompare(effDm));
 
     // Make a vector of L/E sample values
     // Initialized in the sub-division center
@@ -1408,7 +1393,7 @@ vector<double> PMNS_Base::GetSamplePoints(double LoE, double dLoE)
       double Width = 2*min(prev[0] - (bctr - bwdt/2), (bctr + bwdt/2) - prev[0]);
 
       // Compute oscillation argument sorted from lowest  to highest
-      const double arg = k1267 * effDm[Idx[i]] * Width;
+      const double arg = k1267 * effDm[i] * Width;
 
       // Skip small oscillation values.
       // If it's the last one, lower the tolerance

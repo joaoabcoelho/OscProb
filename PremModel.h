@@ -61,8 +61,6 @@ namespace OscProb {
 
       virtual std::vector<OscProb::PremLayer> GetPremLayers(); ///< Get the set of earth layers
 
-      virtual OscProb::NuPath AvgPath(OscProb::NuPath p1, OscProb::NuPath p2); ///< Get the average of two paths
-
       virtual void SetRemoveSmallPaths(bool rp = true); ///< Set tag to remove small paths
 
     protected:
@@ -73,8 +71,6 @@ namespace OscProb {
                             double zoa,    double layer); ///< Add a layer to the model
 
       virtual void AddPath(double length, PremLayer pl);  ///< Add a path segment to the sequence
-
-      virtual std::vector<OscProb::NuPath> MergePaths(std::vector<OscProb::NuPath> inputPath, int j, int k); ///< Merge paths j and k in vector
 
       std::vector<OscProb::PremLayer> fPremLayers; ///< The layers in the earth model
 

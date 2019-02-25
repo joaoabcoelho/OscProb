@@ -27,6 +27,8 @@
 #ifndef NUPATH_H
 #define NUPATH_H
 
+#include <vector>
+
 namespace OscProb {
 
   struct NuPath
@@ -126,6 +128,10 @@ namespace OscProb {
     int layer;      ///< An index to identify the matter type
 
   };
+  
+  OscProb::NuPath AvgPath(OscProb::NuPath &p1, OscProb::NuPath &p2); ///< Get the average of two paths
+  OscProb::NuPath AvgPath(std::vector<OscProb::NuPath> &pv); ///< Get the average of a vector of paths
+  std::vector<OscProb::NuPath> MergePaths(std::vector<OscProb::NuPath> &inputPath, int j, int k); ///< Merge paths j and k in vector
 
 }
 
