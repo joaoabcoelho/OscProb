@@ -27,6 +27,7 @@ namespace OscProb {
     public:
 
     PMNS_Sterile(int NumNus); ///< Constructor
+    PMNS_Sterile(const PMNS_Sterile &other); ///< Copy-constructor
     virtual ~PMNS_Sterile();  ///< Destructor
     
   protected:

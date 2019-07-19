@@ -49,6 +49,31 @@ fEvalGSL(0), fEvecGSL(0), H_GSL(0), W_GSL(0)
 
 //......................................................................
 ///
+/// Copy-constructor. \sa PMNS_Base::PMNS_Base
+///
+/// Allocate new memory for GSL objects when copying.
+///
+/// @param other - PMNS_Sterile object to copy
+///
+PMNS_Sterile::PMNS_Sterile(const PMNS_Sterile &other) :
+PMNS_Base(other.fNumNus),
+fEvalGSL(0), fEvecGSL(0), H_GSL(0), W_GSL(0)
+{
+
+  // Allocate memory for the GSL objects
+  fEvalGSL = gsl_vector_alloc(fNumNus);
+  fEvecGSL = gsl_matrix_complex_alloc(fNumNus, fNumNus);
+  H_GSL = gsl_matrix_complex_alloc(fNumNus, fNumNus);
+  W_GSL = gsl_eigen_hermv_alloc(fNumNus);
+
+  gsl_vector_memcpy(fEvalGSL, other.fEvalGSL);
+  gsl_matrix_complex_memcpy(fEvecGSL, other.fEvecGSL);
+  gsl_matrix_complex_memcpy(H_GSL, other.H_GSL);
+
+}
+
+//......................................................................
+///
 /// Destructor.
 ///
 /// Clear GSL objects.
