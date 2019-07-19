@@ -20,10 +20,6 @@ Inheritance diagram for Osc\+Prob\+:\+:P\+M\+N\+S\+\_\+\+Sterile\+:\begin{figure
 \item 
 \hyperlink{classOscProb_1_1PMNS__Sterile_a774766ab4278d9369a295ffa8e2d272c}{P\+M\+N\+S\+\_\+\+Sterile} (int Num\+Nus)
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\hyperlink{classOscProb_1_1PMNS__Sterile_a240d7c1f975d3329003b9f7dd0ba8495}{P\+M\+N\+S\+\_\+\+Sterile} (const \hyperlink{classOscProb_1_1PMNS__Sterile}{P\+M\+N\+S\+\_\+\+Sterile} \&other)
-\begin{DoxyCompactList}\small\item\em Copy-\/constructor. \end{DoxyCompactList}\item 
-virtual \hyperlink{classOscProb_1_1PMNS__Sterile_a992eaf747da2c16f680060d48284c2b9}{$\sim$\+P\+M\+N\+S\+\_\+\+Sterile} ()
-\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
 virtual double \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob} (int flvi, int flvf)
 \begin{DoxyCompactList}\small\item\em Compute the probability of flvi going to flvf. \end{DoxyCompactList}\item 
 virtual double \hyperlink{classOscProb_1_1PMNS__Base_aa3cee10639d5c0879ccb9e78d62128d3}{Prob} (int flvi, int flvf, double E)
@@ -128,14 +124,8 @@ virtual double \hyperlink{classOscProb_1_1PMNS__Base_a0dc4d45bc3d7e03b9abbf5b4e1
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-gsl\+\_\+vector $\ast$ \hyperlink{classOscProb_1_1PMNS__Sterile_abdcb0a144aadef0239dfb36ed4ed0297}{f\+Eval\+G\+SL}
-\begin{DoxyCompactList}\small\item\em Stores the G\+SL eigenvalues. \end{DoxyCompactList}\item 
-gsl\+\_\+matrix\+\_\+complex $\ast$ \hyperlink{classOscProb_1_1PMNS__Sterile_a8ab71bc7de328eb6ba855904f365fb1d}{f\+Evec\+G\+SL}
-\begin{DoxyCompactList}\small\item\em Stores the G\+SL eigenvectors. \end{DoxyCompactList}\item 
-gsl\+\_\+matrix\+\_\+complex $\ast$ \hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\+\_\+\+G\+SL}
-\begin{DoxyCompactList}\small\item\em The Hamiltonian to be solved by G\+SL. \end{DoxyCompactList}\item 
-gsl\+\_\+eigen\+\_\+hermv\+\_\+workspace $\ast$ \hyperlink{classOscProb_1_1PMNS__Sterile_a4e8aed8fd29297e4833488572c9a4eb1}{W\+\_\+\+G\+SL}
-\begin{DoxyCompactList}\small\item\em Allocates memory for G\+SL solution. \end{DoxyCompactList}\item 
+\hyperlink{structOscProb_1_1GSL__EinSys}{G\+S\+L\+\_\+\+Ein\+Sys} \hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{f\+G\+SL}
+\item 
 int \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{f\+Num\+Nus}
 \begin{DoxyCompactList}\small\item\em Number of neutrino flavours. \end{DoxyCompactList}\item 
 std\+::vector$<$ double $>$ \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{f\+Dm}
@@ -207,7 +197,7 @@ coelho@lal.\+in2p3.\+fr
 \end{DoxyAuthor}
 
 
-Definition at line 26 of file P\+M\+N\+S\+\_\+\+Sterile.\+h.
+Definition at line 43 of file P\+M\+N\+S\+\_\+\+Sterile.\+h.
 
 
 
@@ -215,7 +205,7 @@ Definition at line 26 of file P\+M\+N\+S\+\_\+\+Sterile.\+h.
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Sterile_a774766ab4278d9369a295ffa8e2d272c}\label{classOscProb_1_1PMNS__Sterile_a774766ab4278d9369a295ffa8e2d272c}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}!P\+M\+N\+S\+\_\+\+Sterile@{P\+M\+N\+S\+\_\+\+Sterile}}
 \index{P\+M\+N\+S\+\_\+\+Sterile@{P\+M\+N\+S\+\_\+\+Sterile}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}}
-\subsubsection{\texorpdfstring{P\+M\+N\+S\+\_\+\+Sterile()}{PMNS\_Sterile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\subsubsection{\texorpdfstring{P\+M\+N\+S\+\_\+\+Sterile()}{PMNS\_Sterile()}}
 {\footnotesize\ttfamily P\+M\+N\+S\+\_\+\+Sterile\+::\+P\+M\+N\+S\+\_\+\+Sterile (\begin{DoxyParamCaption}\item[{int}]{num\+Nus }\end{DoxyParamCaption})}
 
 Constructor. \begin{DoxySeeAlso}{See also}
@@ -230,96 +220,12 @@ This class can implement any number of neutrino flavours.
 \end{DoxyParams}
 
 
-Definition at line 38 of file P\+M\+N\+S\+\_\+\+Sterile.\+cxx.
-
-
-
-References f\+Eval\+G\+SL, f\+Evec\+G\+SL, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Num\+Nus, H\+\_\+\+G\+SL, and W\+\_\+\+G\+SL.
+Definition at line 135 of file P\+M\+N\+S\+\_\+\+Sterile.\+cxx.
 
 
 \begin{DoxyCode}
-38                                      : \hyperlink{classOscProb_1_1PMNS__Base_aa53e83b03a9cf4bdfa0a07136bd17a79}{PMNS\_Base}(numNus),
-39 \hyperlink{classOscProb_1_1PMNS__Sterile_abdcb0a144aadef0239dfb36ed4ed0297}{fEvalGSL}(0), \hyperlink{classOscProb_1_1PMNS__Sterile_a8ab71bc7de328eb6ba855904f365fb1d}{fEvecGSL}(0), \hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL}(0), \hyperlink{classOscProb_1_1PMNS__Sterile_a4e8aed8fd29297e4833488572c9a4eb1}{W\_GSL}(0)
-40 \{
-41 
-42   \textcolor{comment}{// Allocate memory for the GSL objects}
-43   \hyperlink{classOscProb_1_1PMNS__Sterile_abdcb0a144aadef0239dfb36ed4ed0297}{fEvalGSL} = gsl\_vector\_alloc(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
-44   \hyperlink{classOscProb_1_1PMNS__Sterile_a8ab71bc7de328eb6ba855904f365fb1d}{fEvecGSL} = gsl\_matrix\_complex\_alloc(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
-45   \hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL} = gsl\_matrix\_complex\_alloc(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
-46   \hyperlink{classOscProb_1_1PMNS__Sterile_a4e8aed8fd29297e4833488572c9a4eb1}{W\_GSL} = gsl\_eigen\_hermv\_alloc(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
-47 
-48 \}
-\end{DoxyCode}
-\mbox{\Hypertarget{classOscProb_1_1PMNS__Sterile_a240d7c1f975d3329003b9f7dd0ba8495}\label{classOscProb_1_1PMNS__Sterile_a240d7c1f975d3329003b9f7dd0ba8495}} 
-\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}!P\+M\+N\+S\+\_\+\+Sterile@{P\+M\+N\+S\+\_\+\+Sterile}}
-\index{P\+M\+N\+S\+\_\+\+Sterile@{P\+M\+N\+S\+\_\+\+Sterile}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}}
-\subsubsection{\texorpdfstring{P\+M\+N\+S\+\_\+\+Sterile()}{PMNS\_Sterile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily P\+M\+N\+S\+\_\+\+Sterile\+::\+P\+M\+N\+S\+\_\+\+Sterile (\begin{DoxyParamCaption}\item[{const \hyperlink{classOscProb_1_1PMNS__Sterile}{P\+M\+N\+S\+\_\+\+Sterile} \&}]{other }\end{DoxyParamCaption})}
-
-Copy-\/constructor. \begin{DoxySeeAlso}{See also}
-\hyperlink{classOscProb_1_1PMNS__Base_aa53e83b03a9cf4bdfa0a07136bd17a79}{P\+M\+N\+S\+\_\+\+Base\+::\+P\+M\+N\+S\+\_\+\+Base}
-\end{DoxySeeAlso}
-Allocate new memory for G\+SL objects when copying.
-
-
-\begin{DoxyParams}{Parameters}
-{\em other} & -\/ \hyperlink{classOscProb_1_1PMNS__Sterile}{P\+M\+N\+S\+\_\+\+Sterile} object to copy \\
-\hline
-\end{DoxyParams}
-
-
-Definition at line 58 of file P\+M\+N\+S\+\_\+\+Sterile.\+cxx.
-
-
-
-References f\+Eval\+G\+SL, f\+Evec\+G\+SL, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Num\+Nus, H\+\_\+\+G\+SL, and W\+\_\+\+G\+SL.
-
-
-\begin{DoxyCode}
-58                                                     :
-59 \hyperlink{classOscProb_1_1PMNS__Base_aa53e83b03a9cf4bdfa0a07136bd17a79}{PMNS\_Base}(other.\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}),
-60 \hyperlink{classOscProb_1_1PMNS__Sterile_abdcb0a144aadef0239dfb36ed4ed0297}{fEvalGSL}(0), \hyperlink{classOscProb_1_1PMNS__Sterile_a8ab71bc7de328eb6ba855904f365fb1d}{fEvecGSL}(0), \hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL}(0), \hyperlink{classOscProb_1_1PMNS__Sterile_a4e8aed8fd29297e4833488572c9a4eb1}{W\_GSL}(0)
-61 \{
-62 
-63   \textcolor{comment}{// Allocate memory for the GSL objects}
-64   \hyperlink{classOscProb_1_1PMNS__Sterile_abdcb0a144aadef0239dfb36ed4ed0297}{fEvalGSL} = gsl\_vector\_alloc(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
-65   \hyperlink{classOscProb_1_1PMNS__Sterile_a8ab71bc7de328eb6ba855904f365fb1d}{fEvecGSL} = gsl\_matrix\_complex\_alloc(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
-66   \hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL} = gsl\_matrix\_complex\_alloc(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}, \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
-67   \hyperlink{classOscProb_1_1PMNS__Sterile_a4e8aed8fd29297e4833488572c9a4eb1}{W\_GSL} = gsl\_eigen\_hermv\_alloc(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
-68 
-69   gsl\_vector\_memcpy(\hyperlink{classOscProb_1_1PMNS__Sterile_abdcb0a144aadef0239dfb36ed4ed0297}{fEvalGSL}, other.\hyperlink{classOscProb_1_1PMNS__Sterile_abdcb0a144aadef0239dfb36ed4ed0297}{fEvalGSL});
-70   gsl\_matrix\_complex\_memcpy(\hyperlink{classOscProb_1_1PMNS__Sterile_a8ab71bc7de328eb6ba855904f365fb1d}{fEvecGSL}, other.\hyperlink{classOscProb_1_1PMNS__Sterile_a8ab71bc7de328eb6ba855904f365fb1d}{fEvecGSL});
-71   gsl\_matrix\_complex\_memcpy(\hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL}, other.\hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL});
-72 
-73 \}
-\end{DoxyCode}
-\mbox{\Hypertarget{classOscProb_1_1PMNS__Sterile_a992eaf747da2c16f680060d48284c2b9}\label{classOscProb_1_1PMNS__Sterile_a992eaf747da2c16f680060d48284c2b9}} 
-\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}!````~P\+M\+N\+S\+\_\+\+Sterile@{$\sim$\+P\+M\+N\+S\+\_\+\+Sterile}}
-\index{````~P\+M\+N\+S\+\_\+\+Sterile@{$\sim$\+P\+M\+N\+S\+\_\+\+Sterile}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}}
-\subsubsection{\texorpdfstring{$\sim$\+P\+M\+N\+S\+\_\+\+Sterile()}{~PMNS\_Sterile()}}
-{\footnotesize\ttfamily P\+M\+N\+S\+\_\+\+Sterile\+::$\sim$\+P\+M\+N\+S\+\_\+\+Sterile (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
-Destructor.
-
-Clear G\+SL objects. 
-
-Definition at line 81 of file P\+M\+N\+S\+\_\+\+Sterile.\+cxx.
-
-
-
-References f\+Eval\+G\+SL, f\+Evec\+G\+SL, H\+\_\+\+G\+SL, and W\+\_\+\+G\+SL.
-
-
-\begin{DoxyCode}
-81                            \{
-82 
-83   \textcolor{comment}{// Free memory from GSL objects}
-84   gsl\_matrix\_complex\_free(\hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL}); \hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL} = 0;
-85   gsl\_eigen\_hermv\_free(\hyperlink{classOscProb_1_1PMNS__Sterile_a4e8aed8fd29297e4833488572c9a4eb1}{W\_GSL}); \hyperlink{classOscProb_1_1PMNS__Sterile_a4e8aed8fd29297e4833488572c9a4eb1}{W\_GSL} = 0;
-86   gsl\_matrix\_complex\_free(\hyperlink{classOscProb_1_1PMNS__Sterile_a8ab71bc7de328eb6ba855904f365fb1d}{fEvecGSL}); \hyperlink{classOscProb_1_1PMNS__Sterile_a8ab71bc7de328eb6ba855904f365fb1d}{fEvecGSL} = 0;
-87   gsl\_vector\_free(\hyperlink{classOscProb_1_1PMNS__Sterile_abdcb0a144aadef0239dfb36ed4ed0297}{fEvalGSL}); \hyperlink{classOscProb_1_1PMNS__Sterile_abdcb0a144aadef0239dfb36ed4ed0297}{fEvalGSL} = 0;
-88 
-89 \}
+135                                      :
+136 \hyperlink{classOscProb_1_1PMNS__Base_aa53e83b03a9cf4bdfa0a07136bd17a79}{PMNS\_Base}(numNus), \hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}(numNus) \{\}
 \end{DoxyCode}
 
 
@@ -2488,75 +2394,77 @@ Implements \hyperlink{classOscProb_1_1PMNS__Base_a91f065cb9e910e0095e41462b4420b
 
 
 
-Definition at line 103 of file P\+M\+N\+S\+\_\+\+Sterile.\+cxx.
+Definition at line 150 of file P\+M\+N\+S\+\_\+\+Sterile.\+cxx.
 
 
 
-References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Build\+Hms(), Osc\+Prob\+::\+Nu\+Path\+::density, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Energy, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Eval, f\+Eval\+G\+SL, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Evec, f\+Evec\+G\+SL, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Got\+ES, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Hms, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Fill\+Cache(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Is\+Nu\+Bar, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Num\+Nus, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Path, H\+\_\+\+G\+SL, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+Ge\+V2eV, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+Gf, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+K2, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Try\+Cache(), W\+\_\+\+G\+SL, and Osc\+Prob\+::\+Nu\+Path\+::zoa.
+References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Build\+Hms(), Osc\+Prob\+::\+Nu\+Path\+::density, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Energy, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Eval, Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys\+::f\+Eval\+G\+SL, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Evec, Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys\+::f\+Evec\+G\+SL, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Got\+ES, f\+G\+SL, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Hms, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Fill\+Cache(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Is\+Nu\+Bar, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Num\+Nus, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Path, Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys\+::\+H\+\_\+\+G\+SL, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+Ge\+V2eV, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+Gf, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+K2, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Try\+Cache(), Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys\+::\+W\+\_\+\+G\+SL, and Osc\+Prob\+::\+Nu\+Path\+::zoa.
 
 
 \begin{DoxyCode}
-104 \{
-105 
-106   \textcolor{comment}{// Build Hamiltonian}
-107   \hyperlink{classOscProb_1_1PMNS__Base_ad0faf5eae755afb1baa1fcd5ffebad41}{BuildHms}();
-108 
-109   \textcolor{comment}{// Check if anything changed}
-110   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES}) \textcolor{keywordflow}{return};
-111   
-112   \textcolor{comment}{// Try caching if activated  }
-113   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_abe533da5f64bec1f4724ab7b58606b77}{TryCache}()) \textcolor{keywordflow}{return};
-114 
-115   \textcolor{keywordtype}{double} rho = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density};
-116   \textcolor{keywordtype}{double} zoa = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa};
-117 
-118   \textcolor{keywordtype}{double} lv = 2 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV}*\hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy};                 \textcolor{comment}{// 2E in eV }
-119   \textcolor{keywordtype}{double} kr2GNe = \hyperlink{classOscProb_1_1PMNS__Base_a326fc5016d7dd7ce05682c06cdcb6d94}{kK2}*M\_SQRT2*\hyperlink{classOscProb_1_1PMNS__Base_a7f26a3456128234b2ae6cc9141a6532f}{kGf} * rho*zoa;       \textcolor{comment}{// Electron matter potential in eV}
-120   \textcolor{keywordtype}{double} kr2GNn = \hyperlink{classOscProb_1_1PMNS__Base_a326fc5016d7dd7ce05682c06cdcb6d94}{kK2}*M\_SQRT2*\hyperlink{classOscProb_1_1PMNS__Base_a7f26a3456128234b2ae6cc9141a6532f}{kGf} * rho*(1-zoa)/2; \textcolor{comment}{// Neutron matter potential in eV}
-121 
-122   \textcolor{comment}{// Finish building Hamiltonian in matter with dimension of eV}
-123   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} i=0;i<size\_t(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});i++)\{
-124     \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} buf = \hyperlink{classOscProb_1_1PMNS__Base_acd3c8783e7603081eab316ea4c86c766}{fHms}[i][i]/lv;
-125     *gsl\_matrix\_complex\_ptr(\hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL}, i, i) = gsl\_complex\_rect(real(buf),0);
-126     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} j=i+1;j<size\_t(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});j++)\{
-127       buf = \hyperlink{classOscProb_1_1PMNS__Base_acd3c8783e7603081eab316ea4c86c766}{fHms}[i][j]/lv;
-128       \textcolor{keywordflow}{if}(!\hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar}) *gsl\_matrix\_complex\_ptr(\hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL}, j, i) = gsl\_complex\_rect(real(buf),-imag(
+151 \{
+152 
+153   \textcolor{comment}{// Build Hamiltonian}
+154   \hyperlink{classOscProb_1_1PMNS__Base_ad0faf5eae755afb1baa1fcd5ffebad41}{BuildHms}();
+155 
+156   \textcolor{comment}{// Check if anything changed}
+157   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES}) \textcolor{keywordflow}{return};
+158   
+159   \textcolor{comment}{// Try caching if activated  }
+160   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_abe533da5f64bec1f4724ab7b58606b77}{TryCache}()) \textcolor{keywordflow}{return};
+161 
+162   \textcolor{keywordtype}{double} rho = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_a54ddd451db69bc54434de3cf18a117ca}{density};
+163   \textcolor{keywordtype}{double} zoa = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af3213f3691ba83c6bc05f4a3490f6b31}{zoa};
+164 
+165   \textcolor{keywordtype}{double} lv = 2 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV}*\hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy};                 \textcolor{comment}{// 2E in eV }
+166   \textcolor{keywordtype}{double} kr2GNe = \hyperlink{classOscProb_1_1PMNS__Base_a326fc5016d7dd7ce05682c06cdcb6d94}{kK2}*M\_SQRT2*\hyperlink{classOscProb_1_1PMNS__Base_a7f26a3456128234b2ae6cc9141a6532f}{kGf} * rho*zoa;       \textcolor{comment}{// Electron matter potential in eV}
+167   \textcolor{keywordtype}{double} kr2GNn = \hyperlink{classOscProb_1_1PMNS__Base_a326fc5016d7dd7ce05682c06cdcb6d94}{kK2}*M\_SQRT2*\hyperlink{classOscProb_1_1PMNS__Base_a7f26a3456128234b2ae6cc9141a6532f}{kGf} * rho*(1-zoa)/2; \textcolor{comment}{// Neutron matter potential in eV}
+168 
+169   \textcolor{comment}{// Finish building Hamiltonian in matter with dimension of eV}
+170   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} i=0;i<size\_t(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});i++)\{
+171     \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} buf = \hyperlink{classOscProb_1_1PMNS__Base_acd3c8783e7603081eab316ea4c86c766}{fHms}[i][i]/lv;
+172     *gsl\_matrix\_complex\_ptr(\hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL}, i, i) = gsl\_complex\_rect(real(buf),0);
+173     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} j=i+1;j<size\_t(\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});j++)\{
+174       buf = \hyperlink{classOscProb_1_1PMNS__Base_acd3c8783e7603081eab316ea4c86c766}{fHms}[i][j]/lv;
+175       \textcolor{keywordflow}{if}(!\hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar}) *gsl\_matrix\_complex\_ptr(\hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL}, j, i) = gsl\_complex\_rect(real(buf)
+      ,-imag(buf));
+176       \textcolor{keywordflow}{else}          *gsl\_matrix\_complex\_ptr(\hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL}, j, i) = gsl\_complex\_rect(real(buf), imag(
       buf));
-129       \textcolor{keywordflow}{else}          *gsl\_matrix\_complex\_ptr(\hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL}, j, i) = gsl\_complex\_rect(real(buf), imag(buf));
-130     \}
-131     \textcolor{keywordflow}{if}(i>2)\{
-132       \textcolor{comment}{// Subtract NC coherent forward scattering from sterile neutrinos. See arXiv:hep-ph/0606054v3, eq.
+177     \}
+178     \textcolor{keywordflow}{if}(i>2)\{
+179       \textcolor{comment}{// Subtract NC coherent forward scattering from sterile neutrinos. See arXiv:hep-ph/0606054v3, eq.
        3.15, for example. }
-133       \textcolor{keywordflow}{if}(!\hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar}) *gsl\_matrix\_complex\_ptr(\hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL}, i, i) = gsl\_complex\_add\_real(
-      gsl\_matrix\_complex\_get(\hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL},i,i) ,  kr2GNn);
-134       \textcolor{keywordflow}{else}          *gsl\_matrix\_complex\_ptr(\hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL}, i, i) = gsl\_complex\_add\_real(gsl\_matrix\_complex\_get
-      (\hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL},i,i) , -kr2GNn);;
-135     \}
-136   \}
-137   \textcolor{comment}{// Add nue CC coherent forward scattering from sterile neutrinos. }
-138   \textcolor{keywordflow}{if}(!\hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar}) *gsl\_matrix\_complex\_ptr(\hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL}, 0, 0) = gsl\_complex\_add\_real(
-      gsl\_matrix\_complex\_get(\hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL},0,0) ,  kr2GNe);
-139   \textcolor{keywordflow}{else}          *gsl\_matrix\_complex\_ptr(\hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL}, 0, 0) = gsl\_complex\_add\_real(gsl\_matrix\_complex\_get(
-      \hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL},0,0) , -kr2GNe);
-140 
-141   \textcolor{comment}{// Solve Hamiltonian for eigensystem}
-142   gsl\_eigen\_hermv(\hyperlink{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}{H\_GSL}, \hyperlink{classOscProb_1_1PMNS__Sterile_abdcb0a144aadef0239dfb36ed4ed0297}{fEvalGSL}, \hyperlink{classOscProb_1_1PMNS__Sterile_a8ab71bc7de328eb6ba855904f365fb1d}{fEvecGSL}, \hyperlink{classOscProb_1_1PMNS__Sterile_a4e8aed8fd29297e4833488572c9a4eb1}{W\_GSL});
-143 
-144   \textcolor{comment}{// Fill fEval and fEvec vectors from GSL objects}
-145   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};i++)\{
-146     \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[i] = gsl\_vector\_get(\hyperlink{classOscProb_1_1PMNS__Sterile_abdcb0a144aadef0239dfb36ed4ed0297}{fEvalGSL},i);
-147     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};j++)\{
-148       gsl\_complex buf = gsl\_matrix\_complex\_get(\hyperlink{classOscProb_1_1PMNS__Sterile_a8ab71bc7de328eb6ba855904f365fb1d}{fEvecGSL},i,j);
-149       \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[i][j] = \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD}( GSL\_REAL(buf), GSL\_IMAG(buf) );
-150     \}
-151   \}
-152   
-153   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} = \textcolor{keyword}{true};
-154   
-155   \textcolor{comment}{// Fill cache if activated  }
-156   \hyperlink{classOscProb_1_1PMNS__Base_a785c37fcea974628623c8881bb0fbbf9}{FillCache}();
-157   
-158 \}
+180       \textcolor{keywordflow}{if}(!\hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar}) *gsl\_matrix\_complex\_ptr(\hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL}, i, i) = gsl\_complex\_add\_real(
+      gsl\_matrix\_complex\_get(\hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL},i,i) ,  kr2GNn);
+181       \textcolor{keywordflow}{else}          *gsl\_matrix\_complex\_ptr(\hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL}, i, i) = gsl\_complex\_add\_real(
+      gsl\_matrix\_complex\_get(\hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL},i,i) , -kr2GNn);;
+182     \}
+183   \}
+184   \textcolor{comment}{// Add nue CC coherent forward scattering from sterile neutrinos. }
+185   \textcolor{keywordflow}{if}(!\hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar}) *gsl\_matrix\_complex\_ptr(\hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL}, 0, 0) = gsl\_complex\_add\_real(
+      gsl\_matrix\_complex\_get(\hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL},0,0) ,  kr2GNe);
+186   \textcolor{keywordflow}{else}          *gsl\_matrix\_complex\_ptr(\hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL}, 0, 0) = gsl\_complex\_add\_real(
+      gsl\_matrix\_complex\_get(\hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL},0,0) , -kr2GNe);
+187 
+188   \textcolor{comment}{// Solve Hamiltonian for eigensystem}
+189   gsl\_eigen\_hermv(\hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL}, \hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{fEvalGSL}, \hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.
+      \hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{fEvecGSL}, \hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_a366b813a541dcfbaad2ac3d096f31aa1}{W\_GSL});
+190 
+191   \textcolor{comment}{// Fill fEval and fEvec vectors from GSL objects}
+192   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0;i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};i++)\{
+193     \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[i] = gsl\_vector\_get(\hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{fEvalGSL},i);
+194     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0;j<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus};j++)\{
+195       gsl\_complex buf = gsl\_matrix\_complex\_get(\hyperlink{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}{fGSL}.\hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{fEvecGSL},i,j);
+196       \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[i][j] = \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD}( GSL\_REAL(buf), GSL\_IMAG(buf) );
+197     \}
+198   \}
+199   
+200   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} = \textcolor{keyword}{true};
+201   
+202   \textcolor{comment}{// Fill cache if activated  }
+203   \hyperlink{classOscProb_1_1PMNS__Base_a785c37fcea974628623c8881bb0fbbf9}{FillCache}();
+204   
+205 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_abe533da5f64bec1f4724ab7b58606b77}\label{classOscProb_1_1PMNS__Base_abe533da5f64bec1f4724ab7b58606b77}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}!Try\+Cache@{Try\+Cache}}
@@ -2699,20 +2607,6 @@ Definition at line 177 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Fill\+Cache(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Dm\+Eff(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Sample\+Points(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Initialize\+Vectors(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco\+::\+Propagate\+Path(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Propagate\+Path(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Set\+Vacuum\+Eigensystem(), Solve\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Solve\+Ham(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Try\+Cache().
 
-\mbox{\Hypertarget{classOscProb_1_1PMNS__Sterile_abdcb0a144aadef0239dfb36ed4ed0297}\label{classOscProb_1_1PMNS__Sterile_abdcb0a144aadef0239dfb36ed4ed0297}} 
-\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}!f\+Eval\+G\+SL@{f\+Eval\+G\+SL}}
-\index{f\+Eval\+G\+SL@{f\+Eval\+G\+SL}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}}
-\subsubsection{\texorpdfstring{f\+Eval\+G\+SL}{fEvalGSL}}
-{\footnotesize\ttfamily gsl\+\_\+vector$\ast$ Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::f\+Eval\+G\+SL\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Definition at line 38 of file P\+M\+N\+S\+\_\+\+Sterile.\+h.
-
-
-
-Referenced by P\+M\+N\+S\+\_\+\+Sterile(), Solve\+Ham(), and $\sim$\+P\+M\+N\+S\+\_\+\+Sterile().
-
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}\label{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}!f\+Evec@{f\+Evec}}
 \index{f\+Evec@{f\+Evec}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}}
@@ -2727,20 +2621,6 @@ Definition at line 178 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Fill\+Cache(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Initialize\+Vectors(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco\+::\+Propagate\+Path(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Propagate\+Path(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Set\+Vacuum\+Eigensystem(), Solve\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Solve\+Ham(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Try\+Cache().
 
-\mbox{\Hypertarget{classOscProb_1_1PMNS__Sterile_a8ab71bc7de328eb6ba855904f365fb1d}\label{classOscProb_1_1PMNS__Sterile_a8ab71bc7de328eb6ba855904f365fb1d}} 
-\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}!f\+Evec\+G\+SL@{f\+Evec\+G\+SL}}
-\index{f\+Evec\+G\+SL@{f\+Evec\+G\+SL}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}}
-\subsubsection{\texorpdfstring{f\+Evec\+G\+SL}{fEvecGSL}}
-{\footnotesize\ttfamily gsl\+\_\+matrix\+\_\+complex$\ast$ Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::f\+Evec\+G\+SL\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Definition at line 39 of file P\+M\+N\+S\+\_\+\+Sterile.\+h.
-
-
-
-Referenced by P\+M\+N\+S\+\_\+\+Sterile(), Solve\+Ham(), and $\sim$\+P\+M\+N\+S\+\_\+\+Sterile().
-
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}\label{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}!f\+Got\+ES@{f\+Got\+ES}}
 \index{f\+Got\+ES@{f\+Got\+ES}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}}
@@ -2754,6 +2634,20 @@ Definition at line 187 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Build\+Hms(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Set\+Coup\+By\+Index(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Cur\+Path(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Energy(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Set\+Eps(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Is\+Nu\+Bar(), Solve\+Ham(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Solve\+Ham().
+
+\mbox{\Hypertarget{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}\label{classOscProb_1_1PMNS__Sterile_a92e9493bcec35167cef6cc472d178449}} 
+\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}!f\+G\+SL@{f\+G\+SL}}
+\index{f\+G\+SL@{f\+G\+SL}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}}
+\subsubsection{\texorpdfstring{f\+G\+SL}{fGSL}}
+{\footnotesize\ttfamily \hyperlink{structOscProb_1_1GSL__EinSys}{G\+S\+L\+\_\+\+Ein\+Sys} Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::f\+G\+SL\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 53 of file P\+M\+N\+S\+\_\+\+Sterile.\+h.
+
+
+
+Referenced by Solve\+Ham().
 
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_acd3c8783e7603081eab316ea4c86c766}\label{classOscProb_1_1PMNS__Base_acd3c8783e7603081eab316ea4c86c766}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}!f\+Hms@{f\+Hms}}
@@ -2823,7 +2717,7 @@ Definition at line 165 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
-Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Build\+Hms(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Fill\+Cache(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Angle(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Delta(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Dm(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Dm\+Eff(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Get\+Eps(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco\+::\+Get\+Gamma(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Sample\+Points(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Initialize\+Vectors(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco\+::\+P(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+P(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+P\+M\+N\+S\+\_\+\+Base(), P\+M\+N\+S\+\_\+\+Sterile(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Prob(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Propagate\+Path(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco\+::\+Reset\+To\+Flavour(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Reset\+To\+Flavour(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Angle(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Delta(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Dm(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Set\+Eps(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco\+::\+Set\+Gamma(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Std\+Pars(), Solve\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Solve\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Try\+Cache(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Update\+Ham(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Update\+Ham().
+Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Build\+Hms(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Fill\+Cache(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Angle(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Delta(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Dm(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Dm\+Eff(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Get\+Eps(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco\+::\+Get\+Gamma(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Sample\+Points(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Initialize\+Vectors(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco\+::\+P(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+P(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+P\+M\+N\+S\+\_\+\+Base(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Prob(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Propagate\+Path(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco\+::\+Reset\+To\+Flavour(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Reset\+To\+Flavour(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Angle(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Delta(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Dm(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Set\+Eps(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco\+::\+Set\+Gamma(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Std\+Pars(), Solve\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Solve\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Try\+Cache(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Update\+Ham(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Update\+Ham().
 
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}\label{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}!f\+Nu\+Paths@{f\+Nu\+Paths}}
@@ -2923,20 +2817,6 @@ Definition at line 189 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Fill\+Cache(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Use\+Cache(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Try\+Cache().
 
-\mbox{\Hypertarget{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}\label{classOscProb_1_1PMNS__Sterile_aeff790051925a3135b7529ced67e81ab}} 
-\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}!H\+\_\+\+G\+SL@{H\+\_\+\+G\+SL}}
-\index{H\+\_\+\+G\+SL@{H\+\_\+\+G\+SL}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}}
-\subsubsection{\texorpdfstring{H\+\_\+\+G\+SL}{H\_GSL}}
-{\footnotesize\ttfamily gsl\+\_\+matrix\+\_\+complex$\ast$ Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+H\+\_\+\+G\+SL\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Definition at line 40 of file P\+M\+N\+S\+\_\+\+Sterile.\+h.
-
-
-
-Referenced by P\+M\+N\+S\+\_\+\+Sterile(), Solve\+Ham(), and $\sim$\+P\+M\+N\+S\+\_\+\+Sterile().
-
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}\label{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}!k\+Ge\+V2eV@{k\+Ge\+V2eV}}
 \index{k\+Ge\+V2eV@{k\+Ge\+V2eV}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}}
@@ -3016,20 +2896,6 @@ Definition at line 116 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Deco\+::\+Reset\+To\+Flavour(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Reset\+To\+Flavour().
-
-\mbox{\Hypertarget{classOscProb_1_1PMNS__Sterile_a4e8aed8fd29297e4833488572c9a4eb1}\label{classOscProb_1_1PMNS__Sterile_a4e8aed8fd29297e4833488572c9a4eb1}} 
-\index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}!W\+\_\+\+G\+SL@{W\+\_\+\+G\+SL}}
-\index{W\+\_\+\+G\+SL@{W\+\_\+\+G\+SL}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}}
-\subsubsection{\texorpdfstring{W\+\_\+\+G\+SL}{W\_GSL}}
-{\footnotesize\ttfamily gsl\+\_\+eigen\+\_\+hermv\+\_\+workspace$\ast$ Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+W\+\_\+\+G\+SL\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Definition at line 41 of file P\+M\+N\+S\+\_\+\+Sterile.\+h.
-
-
-
-Referenced by P\+M\+N\+S\+\_\+\+Sterile(), Solve\+Ham(), and $\sim$\+P\+M\+N\+S\+\_\+\+Sterile().
 
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a05e595848c2521dc795efa7645728b94}\label{classOscProb_1_1PMNS__Base_a05e595848c2521dc795efa7645728b94}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile}!zero@{zero}}

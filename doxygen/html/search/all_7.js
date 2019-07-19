@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['h_5fgsl',['H_GSL',['../classOscProb_1_1PMNS__Sterile.html#aeff790051925a3135b7529ced67e81ab',1,'OscProb::PMNS_Sterile']]]
+  ['h_5fgsl',['H_GSL',['../structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513',1,'OscProb::GSL_EinSys']]]
 ];

@@ -21,5 +21,6 @@ var searchData=
   ['getsamplepoints',['GetSamplePoints',['../classOscProb_1_1PMNS__Base.html#a9eac8d768c1424755ee41f7e783af179',1,'OscProb::PMNS_Base']]],
   ['gettotall',['GetTotalL',['../classOscProb_1_1PremModel.html#ae258b41cca80631e3041f0421b25afeb',1,'OscProb::PremModel']]],
   ['getupcoup',['GetUpCoup',['../classOscProb_1_1PMNS__NSI.html#a5fbeeb25bd00fbda7c484dbdb6748a58',1,'OscProb::PMNS_NSI']]],
-  ['getzoacoup',['GetZoACoup',['../classOscProb_1_1PMNS__NSI.html#a42b2db6f2f42dbca7545a10d101a7950',1,'OscProb::PMNS_NSI']]]
+  ['getzoacoup',['GetZoACoup',['../classOscProb_1_1PMNS__NSI.html#a42b2db6f2f42dbca7545a10d101a7950',1,'OscProb::PMNS_NSI']]],
+  ['gsl_5feinsys',['GSL_EinSys',['../structOscProb_1_1GSL__EinSys.html',1,'OscProb::GSL_EinSys'],['../structOscProb_1_1GSL__EinSys.html#af6a40b1ed40d5d9b36a7a7bdf8aedc99',1,'OscProb::GSL_EinSys::GSL_EinSys(int numNus)'],['../structOscProb_1_1GSL__EinSys.html#adec9051a3cee7956d84d230f371fa898',1,'OscProb::GSL_EinSys::GSL_EinSys(const GSL_EinSys &amp;other)']]]
 ];

@@ -1,0 +1,281 @@
+\hypertarget{structOscProb_1_1GSL__EinSys}{}\section{Osc\+Prob\+:\+:G\+S\+L\+\_\+\+Ein\+Sys Struct Reference}
+\label{structOscProb_1_1GSL__EinSys}\index{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}}
+
+
+{\ttfamily \#include $<$P\+M\+N\+S\+\_\+\+Sterile.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structOscProb_1_1GSL__EinSys_af6a40b1ed40d5d9b36a7a7bdf8aedc99}{G\+S\+L\+\_\+\+Ein\+Sys} (int num\+Nus)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\hyperlink{structOscProb_1_1GSL__EinSys_adec9051a3cee7956d84d230f371fa898}{G\+S\+L\+\_\+\+Ein\+Sys} (const \hyperlink{structOscProb_1_1GSL__EinSys}{G\+S\+L\+\_\+\+Ein\+Sys} \&other)
+\begin{DoxyCompactList}\small\item\em Copy-\/constructor. \end{DoxyCompactList}\item 
+\hyperlink{structOscProb_1_1GSL__EinSys}{G\+S\+L\+\_\+\+Ein\+Sys} \& \hyperlink{structOscProb_1_1GSL__EinSys_a17c804d4400c2cc4d32ff0438ed0284e}{operator=} (const \hyperlink{structOscProb_1_1GSL__EinSys}{G\+S\+L\+\_\+\+Ein\+Sys} \&other)
+\begin{DoxyCompactList}\small\item\em Copy assignment. \end{DoxyCompactList}\item 
+virtual \hyperlink{structOscProb_1_1GSL__EinSys_a62c08d2a6318e6b0abdd2ca6fd47622e}{$\sim$\+G\+S\+L\+\_\+\+Ein\+Sys} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{f\+Num\+Nus}
+\begin{DoxyCompactList}\small\item\em Number of neutrino flavors. \end{DoxyCompactList}\item 
+gsl\+\_\+vector $\ast$ \hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{f\+Eval\+G\+SL}
+\begin{DoxyCompactList}\small\item\em Stores the G\+SL eigenvalues. \end{DoxyCompactList}\item 
+gsl\+\_\+matrix\+\_\+complex $\ast$ \hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{f\+Evec\+G\+SL}
+\begin{DoxyCompactList}\small\item\em Stores the G\+SL eigenvectors. \end{DoxyCompactList}\item 
+gsl\+\_\+matrix\+\_\+complex $\ast$ \hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\+\_\+\+G\+SL}
+\begin{DoxyCompactList}\small\item\em The Hamiltonian to be solved by G\+SL. \end{DoxyCompactList}\item 
+gsl\+\_\+eigen\+\_\+hermv\+\_\+workspace $\ast$ \hyperlink{structOscProb_1_1GSL__EinSys_a366b813a541dcfbaad2ac3d096f31aa1}{W\+\_\+\+G\+SL}
+\begin{DoxyCompactList}\small\item\em Allocates memory for G\+SL solution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 27 of file P\+M\+N\+S\+\_\+\+Sterile.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structOscProb_1_1GSL__EinSys_af6a40b1ed40d5d9b36a7a7bdf8aedc99}\label{structOscProb_1_1GSL__EinSys_af6a40b1ed40d5d9b36a7a7bdf8aedc99}} 
+\index{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}!G\+S\+L\+\_\+\+Ein\+Sys@{G\+S\+L\+\_\+\+Ein\+Sys}}
+\index{G\+S\+L\+\_\+\+Ein\+Sys@{G\+S\+L\+\_\+\+Ein\+Sys}!Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}}
+\subsubsection{\texorpdfstring{G\+S\+L\+\_\+\+Ein\+Sys()}{GSL\_EinSys()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily G\+S\+L\+\_\+\+Ein\+Sys\+::\+G\+S\+L\+\_\+\+Ein\+Sys (\begin{DoxyParamCaption}\item[{int}]{num\+Nus }\end{DoxyParamCaption})}
+
+G\+SL Eigensystem Constructor.
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+Nus} & -\/ the number of neutrino flavours \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 36 of file P\+M\+N\+S\+\_\+\+Sterile.\+cxx.
+
+
+
+References f\+Eval\+G\+SL, f\+Evec\+G\+SL, f\+Num\+Nus, H\+\_\+\+G\+SL, and W\+\_\+\+G\+SL.
+
+
+\begin{DoxyCode}
+36                                  : 
+37 \hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus}(numNus), 
+38 \hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{fEvalGSL}(0), \hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{fEvecGSL}(0), \hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL}(0), \hyperlink{structOscProb_1_1GSL__EinSys_a366b813a541dcfbaad2ac3d096f31aa1}{W\_GSL}(0)
+39 \{
+40 
+41   \textcolor{comment}{// Allocate memory for the GSL objects}
+42   \hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{fEvalGSL} = gsl\_vector\_alloc(\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus});
+43   \hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{fEvecGSL} = gsl\_matrix\_complex\_alloc(\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus}, \hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus});
+44   \hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL} = gsl\_matrix\_complex\_alloc(\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus}, \hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus});
+45   \hyperlink{structOscProb_1_1GSL__EinSys_a366b813a541dcfbaad2ac3d096f31aa1}{W\_GSL} = gsl\_eigen\_hermv\_alloc(\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus});
+46 
+47 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{structOscProb_1_1GSL__EinSys_adec9051a3cee7956d84d230f371fa898}\label{structOscProb_1_1GSL__EinSys_adec9051a3cee7956d84d230f371fa898}} 
+\index{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}!G\+S\+L\+\_\+\+Ein\+Sys@{G\+S\+L\+\_\+\+Ein\+Sys}}
+\index{G\+S\+L\+\_\+\+Ein\+Sys@{G\+S\+L\+\_\+\+Ein\+Sys}!Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}}
+\subsubsection{\texorpdfstring{G\+S\+L\+\_\+\+Ein\+Sys()}{GSL\_EinSys()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily G\+S\+L\+\_\+\+Ein\+Sys\+::\+G\+S\+L\+\_\+\+Ein\+Sys (\begin{DoxyParamCaption}\item[{const \hyperlink{structOscProb_1_1GSL__EinSys}{G\+S\+L\+\_\+\+Ein\+Sys} \&}]{other }\end{DoxyParamCaption})}
+
+G\+SL Copy-\/constructor.
+
+Allocate new memory for G\+SL objects when copying.
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & -\/ G\+SL object to copy \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 57 of file P\+M\+N\+S\+\_\+\+Sterile.\+cxx.
+
+
+
+References f\+Eval\+G\+SL, f\+Evec\+G\+SL, f\+Num\+Nus, H\+\_\+\+G\+SL, and W\+\_\+\+G\+SL.
+
+
+\begin{DoxyCode}
+57                                               :
+58 \hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus}(other.\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus}), 
+59 \hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{fEvalGSL}(0), \hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{fEvecGSL}(0), \hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL}(0), \hyperlink{structOscProb_1_1GSL__EinSys_a366b813a541dcfbaad2ac3d096f31aa1}{W\_GSL}(0)
+60 \{
+61 
+62   \textcolor{comment}{// Allocate memory for the GSL objects}
+63   \hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{fEvalGSL} = gsl\_vector\_alloc(\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus});
+64   \hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{fEvecGSL} = gsl\_matrix\_complex\_alloc(\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus}, \hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus});
+65   \hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL} = gsl\_matrix\_complex\_alloc(\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus}, \hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus});
+66   \hyperlink{structOscProb_1_1GSL__EinSys_a366b813a541dcfbaad2ac3d096f31aa1}{W\_GSL} = gsl\_eigen\_hermv\_alloc(\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus});
+67 
+68   gsl\_vector\_memcpy(\hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{fEvalGSL}, other.\hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{fEvalGSL});
+69   gsl\_matrix\_complex\_memcpy(\hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{fEvecGSL}, other.\hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{fEvecGSL});
+70   gsl\_matrix\_complex\_memcpy(\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL}, other.\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL});
+71 
+72 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{structOscProb_1_1GSL__EinSys_a62c08d2a6318e6b0abdd2ca6fd47622e}\label{structOscProb_1_1GSL__EinSys_a62c08d2a6318e6b0abdd2ca6fd47622e}} 
+\index{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}!````~G\+S\+L\+\_\+\+Ein\+Sys@{$\sim$\+G\+S\+L\+\_\+\+Ein\+Sys}}
+\index{````~G\+S\+L\+\_\+\+Ein\+Sys@{$\sim$\+G\+S\+L\+\_\+\+Ein\+Sys}!Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}}
+\subsubsection{\texorpdfstring{$\sim$\+G\+S\+L\+\_\+\+Ein\+Sys()}{~GSL\_EinSys()}}
+{\footnotesize\ttfamily G\+S\+L\+\_\+\+Ein\+Sys\+::$\sim$\+G\+S\+L\+\_\+\+Ein\+Sys (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Destructor.
+
+Clear G\+SL objects. 
+
+Definition at line 117 of file P\+M\+N\+S\+\_\+\+Sterile.\+cxx.
+
+
+
+References f\+Eval\+G\+SL, f\+Evec\+G\+SL, H\+\_\+\+G\+SL, and W\+\_\+\+G\+SL.
+
+
+\begin{DoxyCode}
+117                        \{
+118 
+119   \textcolor{comment}{// Free memory from GSL objects}
+120   gsl\_matrix\_complex\_free(\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL}); \hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL} = 0;
+121   gsl\_eigen\_hermv\_free(\hyperlink{structOscProb_1_1GSL__EinSys_a366b813a541dcfbaad2ac3d096f31aa1}{W\_GSL}); \hyperlink{structOscProb_1_1GSL__EinSys_a366b813a541dcfbaad2ac3d096f31aa1}{W\_GSL} = 0;
+122   gsl\_matrix\_complex\_free(\hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{fEvecGSL}); \hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{fEvecGSL} = 0;
+123   gsl\_vector\_free(\hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{fEvalGSL}); \hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{fEvalGSL} = 0;
+124 
+125 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structOscProb_1_1GSL__EinSys_a17c804d4400c2cc4d32ff0438ed0284e}\label{structOscProb_1_1GSL__EinSys_a17c804d4400c2cc4d32ff0438ed0284e}} 
+\index{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}!operator=@{operator=}}
+\index{operator=@{operator=}!Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \hyperlink{structOscProb_1_1GSL__EinSys}{G\+S\+L\+\_\+\+Ein\+Sys} \& G\+S\+L\+\_\+\+Ein\+Sys\+::operator= (\begin{DoxyParamCaption}\item[{const \hyperlink{structOscProb_1_1GSL__EinSys}{G\+S\+L\+\_\+\+Ein\+Sys} \&}]{other }\end{DoxyParamCaption})}
+
+Copy assignment operator.
+
+Creates a new deep copy of object..
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & -\/ G\+SL object to assign \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 82 of file P\+M\+N\+S\+\_\+\+Sterile.\+cxx.
+
+
+
+References f\+Eval\+G\+SL, f\+Evec\+G\+SL, f\+Num\+Nus, H\+\_\+\+G\+SL, and W\+\_\+\+G\+SL.
+
+
+\begin{DoxyCode}
+83 \{
+84 
+85   \textcolor{keywordflow}{if}(\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus} != other.\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus})\{
+86  
+87     \textcolor{comment}{// Free memory from GSL objects}
+88     gsl\_matrix\_complex\_free(\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL}); \hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL} = 0;
+89     gsl\_eigen\_hermv\_free(\hyperlink{structOscProb_1_1GSL__EinSys_a366b813a541dcfbaad2ac3d096f31aa1}{W\_GSL}); \hyperlink{structOscProb_1_1GSL__EinSys_a366b813a541dcfbaad2ac3d096f31aa1}{W\_GSL} = 0;
+90     gsl\_matrix\_complex\_free(\hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{fEvecGSL}); \hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{fEvecGSL} = 0;
+91     gsl\_vector\_free(\hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{fEvalGSL}); \hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{fEvalGSL} = 0;
+92 
+93     \hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus} = other.\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus};
+94 
+95     \textcolor{comment}{// Allocate memory for the GSL objects}
+96     \hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{fEvalGSL} = gsl\_vector\_alloc(\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus});
+97     \hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{fEvecGSL} = gsl\_matrix\_complex\_alloc(\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus}, \hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus});
+98     \hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL} = gsl\_matrix\_complex\_alloc(\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus}, \hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus});
+99     \hyperlink{structOscProb_1_1GSL__EinSys_a366b813a541dcfbaad2ac3d096f31aa1}{W\_GSL} = gsl\_eigen\_hermv\_alloc(\hyperlink{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}{fNumNus});
+100  
+101   \}
+102 
+103   gsl\_vector\_memcpy(\hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{fEvalGSL}, other.\hyperlink{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}{fEvalGSL});
+104   gsl\_matrix\_complex\_memcpy(\hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{fEvecGSL}, other.\hyperlink{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}{fEvecGSL});
+105   gsl\_matrix\_complex\_memcpy(\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL}, other.\hyperlink{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}{H\_GSL});
+106   
+107   \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+108 
+109 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}\label{structOscProb_1_1GSL__EinSys_af69688ebfa983199ae54513628658b4d}} 
+\index{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}!f\+Eval\+G\+SL@{f\+Eval\+G\+SL}}
+\index{f\+Eval\+G\+SL@{f\+Eval\+G\+SL}!Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}}
+\subsubsection{\texorpdfstring{f\+Eval\+G\+SL}{fEvalGSL}}
+{\footnotesize\ttfamily gsl\+\_\+vector$\ast$ Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys\+::f\+Eval\+G\+SL}
+
+
+
+Definition at line 36 of file P\+M\+N\+S\+\_\+\+Sterile.\+h.
+
+
+
+Referenced by G\+S\+L\+\_\+\+Ein\+Sys(), operator=(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+Solve\+Ham(), and $\sim$\+G\+S\+L\+\_\+\+Ein\+Sys().
+
+\mbox{\Hypertarget{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}\label{structOscProb_1_1GSL__EinSys_a91ee7084c424d7a92b5001931e036fd6}} 
+\index{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}!f\+Evec\+G\+SL@{f\+Evec\+G\+SL}}
+\index{f\+Evec\+G\+SL@{f\+Evec\+G\+SL}!Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}}
+\subsubsection{\texorpdfstring{f\+Evec\+G\+SL}{fEvecGSL}}
+{\footnotesize\ttfamily gsl\+\_\+matrix\+\_\+complex$\ast$ Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys\+::f\+Evec\+G\+SL}
+
+
+
+Definition at line 37 of file P\+M\+N\+S\+\_\+\+Sterile.\+h.
+
+
+
+Referenced by G\+S\+L\+\_\+\+Ein\+Sys(), operator=(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+Solve\+Ham(), and $\sim$\+G\+S\+L\+\_\+\+Ein\+Sys().
+
+\mbox{\Hypertarget{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}\label{structOscProb_1_1GSL__EinSys_abb8928986203b5904d078f4f4e337a99}} 
+\index{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}!f\+Num\+Nus@{f\+Num\+Nus}}
+\index{f\+Num\+Nus@{f\+Num\+Nus}!Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}}
+\subsubsection{\texorpdfstring{f\+Num\+Nus}{fNumNus}}
+{\footnotesize\ttfamily int Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys\+::f\+Num\+Nus}
+
+
+
+Definition at line 34 of file P\+M\+N\+S\+\_\+\+Sterile.\+h.
+
+
+
+Referenced by G\+S\+L\+\_\+\+Ein\+Sys(), and operator=().
+
+\mbox{\Hypertarget{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}\label{structOscProb_1_1GSL__EinSys_a853e4eae015326445776f9ad7e17e513}} 
+\index{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}!H\+\_\+\+G\+SL@{H\+\_\+\+G\+SL}}
+\index{H\+\_\+\+G\+SL@{H\+\_\+\+G\+SL}!Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}}
+\subsubsection{\texorpdfstring{H\+\_\+\+G\+SL}{H\_GSL}}
+{\footnotesize\ttfamily gsl\+\_\+matrix\+\_\+complex$\ast$ Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys\+::\+H\+\_\+\+G\+SL}
+
+
+
+Definition at line 38 of file P\+M\+N\+S\+\_\+\+Sterile.\+h.
+
+
+
+Referenced by G\+S\+L\+\_\+\+Ein\+Sys(), operator=(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+Solve\+Ham(), and $\sim$\+G\+S\+L\+\_\+\+Ein\+Sys().
+
+\mbox{\Hypertarget{structOscProb_1_1GSL__EinSys_a366b813a541dcfbaad2ac3d096f31aa1}\label{structOscProb_1_1GSL__EinSys_a366b813a541dcfbaad2ac3d096f31aa1}} 
+\index{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}!W\+\_\+\+G\+SL@{W\+\_\+\+G\+SL}}
+\index{W\+\_\+\+G\+SL@{W\+\_\+\+G\+SL}!Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys@{Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys}}
+\subsubsection{\texorpdfstring{W\+\_\+\+G\+SL}{W\_GSL}}
+{\footnotesize\ttfamily gsl\+\_\+eigen\+\_\+hermv\+\_\+workspace$\ast$ Osc\+Prob\+::\+G\+S\+L\+\_\+\+Ein\+Sys\+::\+W\+\_\+\+G\+SL}
+
+
+
+Definition at line 39 of file P\+M\+N\+S\+\_\+\+Sterile.\+h.
+
+
+
+Referenced by G\+S\+L\+\_\+\+Ein\+Sys(), operator=(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+Solve\+Ham(), and $\sim$\+G\+S\+L\+\_\+\+Ein\+Sys().
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/jcoelho/\+Osc\+Prob\+Git/\hyperlink{PMNS__Sterile_8h}{P\+M\+N\+S\+\_\+\+Sterile.\+h}\item 
+/home/jcoelho/\+Osc\+Prob\+Git/\hyperlink{PMNS__Sterile_8cxx}{P\+M\+N\+S\+\_\+\+Sterile.\+cxx}\end{DoxyCompactItemize}
