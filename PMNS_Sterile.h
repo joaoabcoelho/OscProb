@@ -23,22 +23,34 @@
 #include <gsl/gsl_eigen.h>
 
 namespace OscProb {
-  class PMNS_Sterile : public PMNS_Base {
-    public:
 
-    PMNS_Sterile(int NumNus); ///< Constructor
-    PMNS_Sterile(const PMNS_Sterile &other); ///< Copy-constructor
-    virtual ~PMNS_Sterile();  ///< Destructor
+  struct GSL_EinSys {
+  
+    GSL_EinSys(int numNus); ///< Constructor
+    GSL_EinSys(const GSL_EinSys &other); ///< Copy-constructor
+    GSL_EinSys& operator=(const GSL_EinSys &other); ///< Copy assignment
+    virtual ~GSL_EinSys();  ///< Destructor
     
-  protected:
-    
-    /// Solve the full Hamiltonian for eigenvectors and eigenvalues
-    virtual void SolveHam();
+    int fNumNus;  ///< Number of neutrino flavors
 
     gsl_vector* fEvalGSL;             ///< Stores the GSL eigenvalues
     gsl_matrix_complex* fEvecGSL;     ///< Stores the GSL eigenvectors
     gsl_matrix_complex* H_GSL;        ///< The Hamiltonian to be solved by GSL
     gsl_eigen_hermv_workspace* W_GSL; ///< Allocates memory for GSL solution
+
+  };
+
+  class PMNS_Sterile : public PMNS_Base {
+    public:
+
+    PMNS_Sterile(int NumNus); ///< Constructor
+    
+  protected:
+    
+    /// Solve the full Hamiltonian for eigenvectors and eigenvalues
+    virtual void SolveHam();
+    
+    GSL_EinSys fGSL;
 
   };
 }
