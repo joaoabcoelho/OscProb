@@ -13,7 +13,7 @@ var searchData=
   ['pmns_5fnsi',['PMNS_NSI',['../classOscProb_1_1PMNS__NSI.html',1,'OscProb::PMNS_NSI'],['../classOscProb_1_1PMNS__NSI.html#ab41e79fb427c7a5662443acad31ce7e9',1,'OscProb::PMNS_NSI::PMNS_NSI()']]],
   ['pmns_5fnsi_2ecxx',['PMNS_NSI.cxx',['../PMNS__NSI_8cxx.html',1,'']]],
   ['pmns_5fnsi_2eh',['PMNS_NSI.h',['../PMNS__NSI_8h.html',1,'']]],
-  ['pmns_5fsterile',['PMNS_Sterile',['../classOscProb_1_1PMNS__Sterile.html',1,'OscProb::PMNS_Sterile'],['../classOscProb_1_1PMNS__Sterile.html#a774766ab4278d9369a295ffa8e2d272c',1,'OscProb::PMNS_Sterile::PMNS_Sterile()']]],
+  ['pmns_5fsterile',['PMNS_Sterile',['../classOscProb_1_1PMNS__Sterile.html',1,'OscProb::PMNS_Sterile'],['../classOscProb_1_1PMNS__Sterile.html#a774766ab4278d9369a295ffa8e2d272c',1,'OscProb::PMNS_Sterile::PMNS_Sterile(int NumNus)'],['../classOscProb_1_1PMNS__Sterile.html#a240d7c1f975d3329003b9f7dd0ba8495',1,'OscProb::PMNS_Sterile::PMNS_Sterile(const PMNS_Sterile &amp;other)']]],
   ['pmns_5fsterile_2ecxx',['PMNS_Sterile.cxx',['../PMNS__Sterile_8cxx.html',1,'']]],
   ['pmns_5fsterile_2eh',['PMNS_Sterile.h',['../PMNS__Sterile_8h.html',1,'']]],
   ['premlayer',['PremLayer',['../structOscProb_1_1PremLayer.html',1,'OscProb::PremLayer'],['../structOscProb_1_1PremLayer.html#abb89fe4d38627dcd49a7861e699af14f',1,'OscProb::PremLayer::PremLayer()']]],
