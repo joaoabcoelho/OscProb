@@ -839,6 +839,66 @@ double PMNS_Base::GetDmEff(int j)
 
 //......................................................................
 ///
+/// Rotate the neutrino state by the angle theta_ij and phase delta_ij.
+///
+/// @param i,j - the indices of the rotation ij
+///
+void PMNS_Base::RotateState(int i, int j){
+
+  // Do nothing if angle is zero
+  if(fTheta[i][j]==0) return;
+  
+  double sij = sin(fTheta[i][j]);
+  double cij = cos(fTheta[i][j]);
+  
+  complexD buffer;
+  
+  if(i+1==j || fDelta[i][j]==0){
+    buffer      = cij*fNuState[i] + sij*fNuState[j];
+    fNuState[j] = cij*fNuState[j] - sij*fNuState[i];
+  }
+  else {
+    complexD eij = complexD(cos(fDelta[i][j]), -sin(fDelta[i][j]));
+    buffer      = cij*fNuState[i] + sij*eij*fNuState[j];
+    fNuState[j] = cij*fNuState[j] - sij*conj(eij)*fNuState[i];
+  }
+
+  fNuState[i] = buffer;
+  
+}
+
+//......................................................................
+///
+/// Get the neutrino mass eigenstate in vacuum
+///
+/// States are:
+/// <pre>
+///   0 = m_1, 1 = m_2, 2 = m_3, etc.
+/// </pre>
+/// @param mi - the mass eigenstate index
+///
+/// @return The mass eigenstate
+///
+std::vector<complexD> PMNS_Base::GetMassEigenstate(int mi){
+
+  vector<complexD> oldState = fNuState;
+
+  ResetToFlavour(mi);
+  
+  for(int j=0; j<fNumNus; j++){
+  for(int i=0; i<j; i++){
+    RotateState(i,j);
+  }}
+
+  vector<complexD> newState = fNuState;
+  fNuState = oldState;
+  
+  return newState;
+  
+}
+
+//......................................................................
+///
 /// Rotate the Hamiltonian by the angle theta_ij and phase delta_ij.
 ///
 /// The rotations assume all off-diagonal elements with i > j are zero.

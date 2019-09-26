@@ -61,6 +61,8 @@ namespace OscProb {
                               double LoE, double dLoE=0); ///< Compute the average probability over a bin of L/E
 
 
+    virtual std::vector<complexD> GetMassEigenstate(int mi); ///< Get a neutrino mass eigenstate
+
     // Set the oscillation parameters
     virtual void SetAngle(int i, int j, double th);    ///< Set the mixing angle theta_ij
     virtual void SetDelta(int i, int j, double delta); ///< Set the CP phase delta_ij
@@ -154,6 +156,7 @@ namespace OscProb {
 
     // Building and solving
     virtual void RotateH(int i,int j); ///< Rotate the Hamiltonian by theta_ij and delta_ij
+    virtual void RotateState(int i,int j); ///< Rotate the neutrino state by theta_ij and delta_ij
 
     virtual void BuildHms();           ///< Build the matrix of masses squared.
 
