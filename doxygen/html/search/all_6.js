@@ -13,6 +13,7 @@ var searchData=
   ['getgamma',['GetGamma',['../classOscProb_1_1PMNS__Deco.html#a73461e806063588a8e3a9d5d0dd201cb',1,'OscProb::PMNS_Deco']]],
   ['getisnubar',['GetIsNuBar',['../classOscProb_1_1PMNS__Base.html#a2f7f2a028dfe7a90fff6b4f757972c2c',1,'OscProb::PMNS_Base']]],
   ['getlayerzoa',['GetLayerZoA',['../classOscProb_1_1PremModel.html#af1b8392d1b00560c6322bf8707c304f6',1,'OscProb::PremModel']]],
+  ['getmasseigenstate',['GetMassEigenstate',['../classOscProb_1_1PMNS__Base.html#a5092561dd8579d390c649eb60803ea98',1,'OscProb::PMNS_Base']]],
   ['getmergedpaths',['GetMergedPaths',['../classOscProb_1_1PremModel.html#a5b6f83f2e9b7087e8faad1f19f00ebd5',1,'OscProb::PremModel']]],
   ['getnupath',['GetNuPath',['../classOscProb_1_1PremModel.html#adbe7a5df260cba3923f5cbcb8ab2f03f',1,'OscProb::PremModel']]],
   ['getpath',['GetPath',['../classOscProb_1_1PMNS__Base.html#ac8e196f2e85a2b1caaf705073ee95a5c',1,'OscProb::PMNS_Base']]],
