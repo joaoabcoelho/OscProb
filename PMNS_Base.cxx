@@ -1119,18 +1119,61 @@ double PMNS_Base::P(int flv)
 double PMNS_Base::Prob(int flvi, int flvf)
 {
 
-  if(flvi < 0 || flvi >= fNumNus){
-    cout << "ERROR: Initial flavour not in range: 0 - " << fNumNus-1 << endl;
-  }
-  if(flvf < 0 || flvf >= fNumNus){
-    cout << "ERROR: Final flavour not in range: 0 - " << fNumNus-1 << endl;
-  }
-
   ResetToFlavour(flvi);
+
+  return Prob(fNuState, flvf);
+
+}
+
+//.....................................................................
+///
+/// Compute the probability of nu_in going to flvf.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+/// @param nu_in - The neutrino initial state in flavour basis.
+/// @param flvf  - The neutrino final flavour.
+///
+/// @return Neutrino oscillation probability
+///
+double PMNS_Base::Prob(vector<complexD> nu_in, int flvf)
+{
+
+  assert(nu_in.size() == fNumNus);
+  assert(flvf >= 0 && flvf < fNumNus);
+
+  fNuState = nu_in;
 
   Propagate();
 
   return P(flvf);
+
+}
+
+//.....................................................................
+///
+/// Compute the probability of nu_in going to flvf for a given energy in GeV.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+/// @param nu_in - The neutrino initial state in flavour basis.
+/// @param flvf  - The neutrino final flavour.
+/// @param E     - The neutrino energy in GeV
+///
+/// @return Neutrino oscillation probability
+///
+double PMNS_Base::Prob(vector<complexD> nu_in, int flvf, double E)
+{
+
+  SetEnergy(E);
+
+  return Prob(nu_in, flvf);
 
 }
 
@@ -1155,6 +1198,38 @@ double PMNS_Base::Prob(int flvi, int flvf, double E)
   SetEnergy(E);
 
   return Prob(flvi, flvf);
+
+}
+
+//.....................................................................
+///
+/// Compute the probability of nu_in going to flvf for a given
+/// energy in GeV and distance in km in a single path.
+///
+/// If the path sequence is not a single path, a new single path will
+/// be created and the previous sequence will be lost.
+///
+/// Don't use this if you want to propagate over multiple path segments.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+/// @param nu_in - The neutrino initial state in flavour basis.
+/// @param flvf  - The neutrino final flavour.
+/// @param E     - The neutrino energy in GeV
+/// @param L     - The neutrino path length in km
+///
+/// @return Neutrino oscillation probability
+///
+double PMNS_Base::Prob(vector<complexD> nu_in, int flvf, double E, double L)
+{
+
+  SetEnergy(E);
+  SetLength(L);
+
+  return Prob(nu_in, flvf);
 
 }
 
@@ -1217,13 +1292,46 @@ double PMNS_Base::Prob(int flvi, int flvf, double E, double L)
 double PMNS_Base::AvgProb(int flvi, int flvf, double E, double dE)
 {
 
+  ResetToFlavour(flvi);
+
+  return AvgProb(fNuState, flvf, E, dE);
+
+}
+
+//.....................................................................
+///
+/// Compute the average probability of nu_in going to flvf
+/// over a bin of energy E with width dE.
+///
+/// This gets transformed into L/E, since the oscillation terms
+/// have arguments linear in L/E and not E.
+///
+/// This function works best for single paths.
+/// In multiple paths the accuracy may be somewhat worse.
+/// If needed, average over smaller energy ranges.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+/// @param nu_in - The neutrino initial state in flavour.
+/// @param flvf  - The neutrino final flavour.
+/// @param E     - The neutrino energy in the bin center in GeV
+/// @param dE    - The energy bin width in GeV
+///
+/// @return Average neutrino oscillation probability
+///
+double PMNS_Base::AvgProb(vector<complexD> nu_in, int flvf, double E, double dE)
+{
+
   // Do nothing if energy is not positive
   if(E<=0) return 0;
 
   if(fNuPaths.empty()) return 0;
 
   // Don't average zero width
-  if(dE<=0) return Prob(flvi, flvf, E);
+  if(dE<=0) return Prob(nu_in, flvf, E);
 
   // Make sure fPath is set
   // Use average if multiple paths
@@ -1249,7 +1357,7 @@ double PMNS_Base::AvgProb(int flvi, int flvf, double E, double dE)
   }
 
   // Compute average in LoE
-  return AvgProbLoE(flvi, flvf, LoE, dLoE);
+  return AvgProbLoE(nu_in, flvf, LoE, dLoE);
 
 }
 
@@ -1282,6 +1390,41 @@ double PMNS_Base::AvgProb(int flvi, int flvf, double E, double dE)
 double PMNS_Base::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
 {
 
+  ResetToFlavour(flvi);
+
+  return AvgProbLoE(fNuState, flvf, LoE, dLoE);
+
+}
+
+//.....................................................................
+///
+/// Compute the average probability of nu_in going to flvf
+/// over a bin of L/E with width dLoE.
+///
+/// The probabilities are weighted by (L/E)^-2 so that event
+/// density is flat in energy. This avoids giving too much
+/// weight to low energies. Better approximations would be
+/// achieved if we used an interpolated event density.
+///
+/// This function works best for single paths.
+/// In multiple paths the accuracy may be somewhat worse.
+/// If needed, average over smaller L/E ranges.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+/// @param nu_in - The neutrino intial state in flavour basis.
+/// @param flvf  - The neutrino final flavour.
+/// @param LoE   - The neutrino  L/E value in the bin center in km/GeV
+/// @param dLoE  - The L/E bin width in km/GeV
+///
+/// @return Average neutrino oscillation probability
+///
+double PMNS_Base::AvgProbLoE(vector<complexD> nu_in, int flvf, double LoE, double dLoE)
+{
+
   // Do nothing if L/E is not positive
   if(LoE<=0) return 0;
 
@@ -1295,7 +1438,7 @@ double PMNS_Base::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
   SetEnergy(fPath.length/LoE);
 
   // Don't average zero width
-  if(dLoE<=0) return Prob(flvi, flvf);
+  if(dLoE<=0) return Prob(nu_in, flvf);
 
   // Get sample points for this bin
   vector<double> samples = GetSamplePoints(LoE, dLoE);
@@ -1313,7 +1456,7 @@ double PMNS_Base::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
     double w = 1./pow(samples[j],2);
 
     // Add weighted probability
-    prob += w * Prob(flvi, flvf, length / samples[j]);
+    prob += w * Prob(nu_in, flvf, length / samples[j]);
 
     // Increment sum of weights
     sumw += w;

@@ -32,12 +32,27 @@ namespace OscProb {
     
 
     // Get the oscillation probability
+    virtual double Prob(std::vector<complexD> nu_in, 
+                        int flvf);           ///< Compute the probability of nu_in going to flvf
+    virtual double Prob(std::vector<complexD> nu_in,
+                        int flvf, double E); ///< Compute the probability of nu_in going to flvf for energy E
+    virtual double Prob(std::vector<complexD> nu_in,
+                        int flvf, double E,
+                        double L);           ///< Compute the probability of nu_in going to flvf for energy E and distance L
+
+    // Get the oscillation probability
     virtual double Prob(int flvi, int flvf); ///< Compute the probability of flvi going to flvf
     virtual double Prob(int flvi, int flvf,
                         double E);           ///< Compute the probability of flvi going to flvf for energy E
     virtual double Prob(int flvi, int flvf,
                         double E, double L); ///< Compute the probability of flvi going to flvf for energy E and distance L
 
+
+    // Get probability averaged over a bin
+    virtual double AvgProb(std::vector<complexD> nu_in, 
+                           int flvf, double E, double dE=0);        ///< Compute the average probability over a bin of energy
+    virtual double AvgProbLoE(std::vector<complexD> nu_in, 
+                              int flvf, double LoE, double dLoE=0); ///< Compute the average probability over a bin of L/E
 
     // Get probability averaged over a bin
     virtual double AvgProb(int flvi, int flvf,
