@@ -1139,7 +1139,7 @@ double PMNS_Base::Prob(int flvi, int flvf)
 ///
 /// @return Neutrino oscillation probability
 ///
-double PMNS_Base::Prob(vector<complexD> nu_in, int flvf)
+double PMNS_Base::Prob(std::vector<complexD> nu_in, int flvf)
 {
 
   assert(nu_in.size() == fNumNus);
@@ -1168,7 +1168,7 @@ double PMNS_Base::Prob(vector<complexD> nu_in, int flvf)
 ///
 /// @return Neutrino oscillation probability
 ///
-double PMNS_Base::Prob(vector<complexD> nu_in, int flvf, double E)
+double PMNS_Base::Prob(std::vector<complexD> nu_in, int flvf, double E)
 {
 
   SetEnergy(E);
@@ -1223,7 +1223,7 @@ double PMNS_Base::Prob(int flvi, int flvf, double E)
 ///
 /// @return Neutrino oscillation probability
 ///
-double PMNS_Base::Prob(vector<complexD> nu_in, int flvf, double E, double L)
+double PMNS_Base::Prob(std::vector<complexD> nu_in, int flvf, double E, double L)
 {
 
   SetEnergy(E);
@@ -1322,7 +1322,7 @@ double PMNS_Base::AvgProb(int flvi, int flvf, double E, double dE)
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_Base::AvgProb(vector<complexD> nu_in, int flvf, double E, double dE)
+double PMNS_Base::AvgProb(std::vector<complexD> nu_in, int flvf, double E, double dE)
 {
 
   // Do nothing if energy is not positive
@@ -1422,7 +1422,7 @@ double PMNS_Base::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_Base::AvgProbLoE(vector<complexD> nu_in, int flvf, double LoE, double dLoE)
+double PMNS_Base::AvgProbLoE(std::vector<complexD> nu_in, int flvf, double LoE, double dLoE)
 {
 
   // Do nothing if L/E is not positive
