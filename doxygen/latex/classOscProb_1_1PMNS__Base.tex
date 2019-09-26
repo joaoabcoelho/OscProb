@@ -22,11 +22,11 @@ Inheritance diagram for Osc\+Prob\+:\+:P\+M\+N\+S\+\_\+\+Base\+:\begin{figure}[H
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 virtual \hyperlink{classOscProb_1_1PMNS__Base_a91223a852214dd90da9b4403f779dbbf}{$\sim$\+P\+M\+N\+S\+\_\+\+Base} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
-virtual double \hyperlink{classOscProb_1_1PMNS__Base_a63f6450914b2ef712fbdc45787d9a27f}{Prob} (std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ nu\+\_\+in, int flvf)
+virtual double \hyperlink{classOscProb_1_1PMNS__Base_aa2e10704d2d205a1ec8988de14b1a66f}{Prob} (std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ nu\+\_\+in, int flvf)
 \begin{DoxyCompactList}\small\item\em Compute the probability of nu\+\_\+in going to flvf. \end{DoxyCompactList}\item 
-virtual double \hyperlink{classOscProb_1_1PMNS__Base_ad850329a991146c82857fb31c00658f7}{Prob} (std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ nu\+\_\+in, int flvf, double E)
+virtual double \hyperlink{classOscProb_1_1PMNS__Base_a0190a79284289aacf682c78d7cef9a81}{Prob} (std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ nu\+\_\+in, int flvf, double E)
 \begin{DoxyCompactList}\small\item\em Compute the probability of nu\+\_\+in going to flvf for energy E. \end{DoxyCompactList}\item 
-virtual double \hyperlink{classOscProb_1_1PMNS__Base_a596c89c681142e72e70844268a9a765b}{Prob} (std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ nu\+\_\+in, int flvf, double E, double L)
+virtual double \hyperlink{classOscProb_1_1PMNS__Base_a01fba31729345376705e02408e835f67}{Prob} (std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ nu\+\_\+in, int flvf, double E, double L)
 \begin{DoxyCompactList}\small\item\em Compute the probability of nu\+\_\+in going to flvf for energy E and distance L. \end{DoxyCompactList}\item 
 virtual double \hyperlink{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}{Prob} (int flvi, int flvf)
 \begin{DoxyCompactList}\small\item\em Compute the probability of flvi going to flvf. \end{DoxyCompactList}\item 
@@ -34,9 +34,9 @@ virtual double \hyperlink{classOscProb_1_1PMNS__Base_aa3cee10639d5c0879ccb9e78d6
 \begin{DoxyCompactList}\small\item\em Compute the probability of flvi going to flvf for energy E. \end{DoxyCompactList}\item 
 virtual double \hyperlink{classOscProb_1_1PMNS__Base_a6e0a74508d9d6db7be02e242b8467563}{Prob} (int flvi, int flvf, double E, double L)
 \begin{DoxyCompactList}\small\item\em Compute the probability of flvi going to flvf for energy E and distance L. \end{DoxyCompactList}\item 
-virtual double \hyperlink{classOscProb_1_1PMNS__Base_a32ccdf67b4f31da952a7e254f8629509}{Avg\+Prob} (std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ nu\+\_\+in, int flvf, double E, double dE=0)
+virtual double \hyperlink{classOscProb_1_1PMNS__Base_a89e54c80ae8a31effbab7b2b970606bb}{Avg\+Prob} (std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ nu\+\_\+in, int flvf, double E, double dE=0)
 \begin{DoxyCompactList}\small\item\em Compute the average probability over a bin of energy. \end{DoxyCompactList}\item 
-virtual double \hyperlink{classOscProb_1_1PMNS__Base_a30d0b056f592acba53cf9ed07430800c}{Avg\+Prob\+LoE} (std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ nu\+\_\+in, int flvf, double LoE, double d\+LoE=0)
+virtual double \hyperlink{classOscProb_1_1PMNS__Base_a19f160c045a01e5083506e925fb37d44}{Avg\+Prob\+LoE} (std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ nu\+\_\+in, int flvf, double LoE, double d\+LoE=0)
 \begin{DoxyCompactList}\small\item\em Compute the average probability over a bin of L/E. \end{DoxyCompactList}\item 
 virtual double \hyperlink{classOscProb_1_1PMNS__Base_ac03f754160422e6600da8dbae0f803ed}{Avg\+Prob} (int flvi, int flvf, double E, double dE=0)
 \begin{DoxyCompactList}\small\item\em Compute the average probability over a bin of energy. \end{DoxyCompactList}\item 
@@ -345,16 +345,89 @@ References Add\+Path().
 368 
 369 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a32ccdf67b4f31da952a7e254f8629509}\label{classOscProb_1_1PMNS__Base_a32ccdf67b4f31da952a7e254f8629509}} 
+\mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a89e54c80ae8a31effbab7b2b970606bb}\label{classOscProb_1_1PMNS__Base_a89e54c80ae8a31effbab7b2b970606bb}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Avg\+Prob@{Avg\+Prob}}
 \index{Avg\+Prob@{Avg\+Prob}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}}
 \subsubsection{\texorpdfstring{Avg\+Prob()}{AvgProb()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily virtual double Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Avg\+Prob (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$}]{nu\+\_\+in,  }\item[{int}]{flvf,  }\item[{double}]{E,  }\item[{double}]{dE = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily double P\+M\+N\+S\+\_\+\+Base\+::\+Avg\+Prob (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$}]{nu\+\_\+in,  }\item[{int}]{flvf,  }\item[{double}]{E,  }\item[{double}]{dE = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Compute the average probability of nu\+\_\+in going to flvf over a bin of energy E with width dE.
+
+This gets transformed into L/E, since the oscillation terms have arguments linear in L/E and not E.
+
+This function works best for single paths. In multiple paths the accuracy may be somewhat worse. If needed, average over smaller energy ranges.
+
+Flavours are\+: 
+\begin{DoxyPre}
+  0 = nue, 1 = numu, 2 = nutau
+  3 = sterile\_1, 4 = sterile\_2, etc.
+\end{DoxyPre}
+ 
+\begin{DoxyParams}{Parameters}
+{\em nu\+\_\+in} & -\/ The neutrino initial state in flavour. \\
+\hline
+{\em flvf} & -\/ The neutrino final flavour. \\
+\hline
+{\em E} & -\/ The neutrino energy in the bin center in GeV \\
+\hline
+{\em dE} & -\/ The energy bin width in GeV\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Average neutrino oscillation probability 
+\end{DoxyReturn}
+
+
+Definition at line 1325 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+
+
+
+References Osc\+Prob\+::\+Avg\+Path(), Avg\+Prob\+Lo\+E(), f\+Nu\+Paths, f\+Path, Osc\+Prob\+::\+Nu\+Path\+::length, Prob(), and Set\+Cur\+Path().
 
 
 
 Referenced by Avg\+Prob().
 
+
+\begin{DoxyCode}
+1326 \{
+1327 
+1328   \textcolor{comment}{// Do nothing if energy is not positive}
+1329   \textcolor{keywordflow}{if}(E<=0) \textcolor{keywordflow}{return} 0;
+1330 
+1331   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.empty()) \textcolor{keywordflow}{return} 0;
+1332 
+1333   \textcolor{comment}{// Don't average zero width}
+1334   \textcolor{keywordflow}{if}(dE<=0) \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aa2e10704d2d205a1ec8988de14b1a66f}{Prob}(nu\_in, flvf, E);
+1335 
+1336   \textcolor{comment}{// Make sure fPath is set}
+1337   \textcolor{comment}{// Use average if multiple paths}
+1338   \hyperlink{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}{SetCurPath}(\hyperlink{namespaceOscProb_a999a7944bad8bc72d7ee9f56f81a210e}{AvgPath}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}));
+1339 
+1340   \textcolor{comment}{// Define L/E variables}
+1341   \textcolor{keywordtype}{double} LoE = 0;
+1342   \textcolor{keywordtype}{double} dLoE = 0;
+1343 
+1344   \textcolor{comment}{// Set a minimum energy}
+1345   \textcolor{keywordtype}{double} minE = 0.1 * E;
+1346 
+1347   \textcolor{comment}{// Transform range to L/E}
+1348   \textcolor{comment}{// Full range if low edge > minE}
+1349   \textcolor{keywordflow}{if}(E-dE/2 > minE)\{
+1350     LoE = 0.5 * (\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E-dE/2) + \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2));
+1351     dLoE = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E-dE/2) - \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2);
+1352   \}
+1353   \textcolor{comment}{// Else start at minE}
+1354   \textcolor{keywordflow}{else}\{
+1355     LoE = 0.5 * (\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/minE + \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2));
+1356     dLoE = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/minE - \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/(E+dE/2);
+1357   \}
+1358 
+1359   \textcolor{comment}{// Compute average in LoE}
+1360   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a19f160c045a01e5083506e925fb37d44}{AvgProbLoE}(nu\_in, flvf, LoE, dLoE);
+1361 
+1362 \}
+\end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ac03f754160422e6600da8dbae0f803ed}\label{classOscProb_1_1PMNS__Base_ac03f754160422e6600da8dbae0f803ed}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Avg\+Prob@{Avg\+Prob}}
 \index{Avg\+Prob@{Avg\+Prob}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}}
@@ -392,7 +465,7 @@ Definition at line 1292 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
-References Osc\+Prob\+::\+Avg\+Path(), Avg\+Prob(), Avg\+Prob\+Lo\+E(), f\+Nu\+Paths, f\+Nu\+State, f\+Path, Osc\+Prob\+::\+Nu\+Path\+::length, Prob(), Reset\+To\+Flavour(), and Set\+Cur\+Path().
+References Avg\+Prob(), f\+Nu\+State, and Reset\+To\+Flavour().
 
 
 \begin{DoxyCode}
@@ -400,20 +473,100 @@ References Osc\+Prob\+::\+Avg\+Path(), Avg\+Prob(), Avg\+Prob\+Lo\+E(), f\+Nu\+P
 1294 
 1295   \hyperlink{classOscProb_1_1PMNS__Base_ac0d4bf8ff1318ef96d3dafa62e0cec25}{ResetToFlavour}(flvi);
 1296 
-1297   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a32ccdf67b4f31da952a7e254f8629509}{AvgProb}(\hyperlink{classOscProb_1_1PMNS__Base_abf99f2339e3ee989600740b5d88063e8}{fNuState}, flvf, E, dE);
+1297   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a89e54c80ae8a31effbab7b2b970606bb}{AvgProb}(\hyperlink{classOscProb_1_1PMNS__Base_abf99f2339e3ee989600740b5d88063e8}{fNuState}, flvf, E, dE);
 1298 
 1299 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a30d0b056f592acba53cf9ed07430800c}\label{classOscProb_1_1PMNS__Base_a30d0b056f592acba53cf9ed07430800c}} 
+\mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a19f160c045a01e5083506e925fb37d44}\label{classOscProb_1_1PMNS__Base_a19f160c045a01e5083506e925fb37d44}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Avg\+Prob\+LoE@{Avg\+Prob\+LoE}}
 \index{Avg\+Prob\+LoE@{Avg\+Prob\+LoE}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}}
 \subsubsection{\texorpdfstring{Avg\+Prob\+Lo\+E()}{AvgProbLoE()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily virtual double Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Avg\+Prob\+LoE (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$}]{nu\+\_\+in,  }\item[{int}]{flvf,  }\item[{double}]{LoE,  }\item[{double}]{d\+LoE = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily double P\+M\+N\+S\+\_\+\+Base\+::\+Avg\+Prob\+LoE (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$}]{nu\+\_\+in,  }\item[{int}]{flvf,  }\item[{double}]{LoE,  }\item[{double}]{d\+LoE = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Compute the average probability of nu\+\_\+in going to flvf over a bin of L/E with width d\+LoE.
+
+The probabilities are weighted by (L/E)$^\wedge$-\/2 so that event density is flat in energy. This avoids giving too much weight to low energies. Better approximations would be achieved if we used an interpolated event density.
+
+This function works best for single paths. In multiple paths the accuracy may be somewhat worse. If needed, average over smaller L/E ranges.
+
+Flavours are\+: 
+\begin{DoxyPre}
+  0 = nue, 1 = numu, 2 = nutau
+  3 = sterile\_1, 4 = sterile\_2, etc.
+\end{DoxyPre}
+ 
+\begin{DoxyParams}{Parameters}
+{\em nu\+\_\+in} & -\/ The neutrino intial state in flavour basis. \\
+\hline
+{\em flvf} & -\/ The neutrino final flavour. \\
+\hline
+{\em LoE} & -\/ The neutrino L/E value in the bin center in km/\+GeV \\
+\hline
+{\em d\+LoE} & -\/ The L/E bin width in km/\+GeV\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Average neutrino oscillation probability 
+\end{DoxyReturn}
+
+
+Definition at line 1425 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+
+
+
+References Osc\+Prob\+::\+Avg\+Path(), f\+Nu\+Paths, f\+Path, Get\+Sample\+Points(), Osc\+Prob\+::\+Nu\+Path\+::length, Prob(), Set\+Cur\+Path(), and Set\+Energy().
 
 
 
 Referenced by Avg\+Prob(), and Avg\+Prob\+Lo\+E().
 
+
+\begin{DoxyCode}
+1426 \{
+1427 
+1428   \textcolor{comment}{// Do nothing if L/E is not positive}
+1429   \textcolor{keywordflow}{if}(LoE<=0) \textcolor{keywordflow}{return} 0;
+1430 
+1431   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.empty()) \textcolor{keywordflow}{return} 0;
+1432 
+1433   \textcolor{comment}{// Make sure fPath is set}
+1434   \textcolor{comment}{// Use average if multiple paths}
+1435   \hyperlink{classOscProb_1_1PMNS__Base_a986e6ebef09a7e2eb7fee16a4c2c834d}{SetCurPath}(\hyperlink{namespaceOscProb_a999a7944bad8bc72d7ee9f56f81a210e}{AvgPath}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}));
+1436 
+1437   \textcolor{comment}{// Set the energy at bin center}
+1438   \hyperlink{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}{SetEnergy}(\hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length}/LoE);
+1439 
+1440   \textcolor{comment}{// Don't average zero width}
+1441   \textcolor{keywordflow}{if}(dLoE<=0) \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aa2e10704d2d205a1ec8988de14b1a66f}{Prob}(nu\_in, flvf);
+1442 
+1443   \textcolor{comment}{// Get sample points for this bin}
+1444   vector<double> samples = \hyperlink{classOscProb_1_1PMNS__Base_a9eac8d768c1424755ee41f7e783af179}{GetSamplePoints}(LoE, dLoE);
+1445 
+1446   \textcolor{comment}{// Variables to fill sample}
+1447   \textcolor{comment}{// probabilities and weights}
+1448   \textcolor{keywordtype}{double} sumw = 0;
+1449   \textcolor{keywordtype}{double} prob = 0;
+1450   \textcolor{keywordtype}{double} length = \hyperlink{classOscProb_1_1PMNS__Base_a849437aa8891fe042e86886ce8f81c6e}{fPath}.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length};
+1451 
+1452   \textcolor{comment}{// Loop over all sample points}
+1453   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<int(samples.size()); j++)\{
+1454 
+1455     \textcolor{comment}{// Set (L/E)^-2 weights}
+1456     \textcolor{keywordtype}{double} w = 1./pow(samples[j],2);
+1457 
+1458     \textcolor{comment}{// Add weighted probability}
+1459     prob += w * \hyperlink{classOscProb_1_1PMNS__Base_aa2e10704d2d205a1ec8988de14b1a66f}{Prob}(nu\_in, flvf, length / samples[j]);
+1460 
+1461     \textcolor{comment}{// Increment sum of weights}
+1462     sumw += w;
+1463 
+1464   \}
+1465 
+1466   \textcolor{comment}{// Return weighted average of probabilities}
+1467   \textcolor{keywordflow}{return} prob / sumw;
+1468 
+1469 \}
+\end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ac19a92f4ef428a7333ca8eed76fca637}\label{classOscProb_1_1PMNS__Base_ac19a92f4ef428a7333ca8eed76fca637}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Avg\+Prob\+LoE@{Avg\+Prob\+LoE}}
 \index{Avg\+Prob\+LoE@{Avg\+Prob\+LoE}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}}
@@ -451,7 +604,7 @@ Definition at line 1390 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
-References Osc\+Prob\+::\+Avg\+Path(), Avg\+Prob\+Lo\+E(), f\+Nu\+Paths, f\+Nu\+State, f\+Path, Get\+Sample\+Points(), Osc\+Prob\+::\+Nu\+Path\+::length, Prob(), Reset\+To\+Flavour(), Set\+Cur\+Path(), and Set\+Energy().
+References Avg\+Prob\+Lo\+E(), f\+Nu\+State, and Reset\+To\+Flavour().
 
 
 \begin{DoxyCode}
@@ -459,7 +612,7 @@ References Osc\+Prob\+::\+Avg\+Path(), Avg\+Prob\+Lo\+E(), f\+Nu\+Paths, f\+Nu\+
 1392 
 1393   \hyperlink{classOscProb_1_1PMNS__Base_ac0d4bf8ff1318ef96d3dafa62e0cec25}{ResetToFlavour}(flvi);
 1394 
-1395   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a30d0b056f592acba53cf9ed07430800c}{AvgProbLoE}(\hyperlink{classOscProb_1_1PMNS__Base_abf99f2339e3ee989600740b5d88063e8}{fNuState}, flvf, LoE, dLoE);
+1395   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a19f160c045a01e5083506e925fb37d44}{AvgProbLoE}(\hyperlink{classOscProb_1_1PMNS__Base_abf99f2339e3ee989600740b5d88063e8}{fNuState}, flvf, LoE, dLoE);
 1396 
 1397 \}
 \end{DoxyCode}
@@ -1062,28 +1215,149 @@ Referenced by Prob().
 1102   \textcolor{keywordflow}{return} norm(\hyperlink{classOscProb_1_1PMNS__Base_abf99f2339e3ee989600740b5d88063e8}{fNuState}[flv]);
 1103 \}
 \end{DoxyCode}
-\mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a63f6450914b2ef712fbdc45787d9a27f}\label{classOscProb_1_1PMNS__Base_a63f6450914b2ef712fbdc45787d9a27f}} 
+\mbox{\Hypertarget{classOscProb_1_1PMNS__Base_aa2e10704d2d205a1ec8988de14b1a66f}\label{classOscProb_1_1PMNS__Base_aa2e10704d2d205a1ec8988de14b1a66f}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Prob@{Prob}}
 \index{Prob@{Prob}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}}
 \subsubsection{\texorpdfstring{Prob()}{Prob()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
-{\footnotesize\ttfamily virtual double Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Prob (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$}]{nu\+\_\+in,  }\item[{int}]{flvf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily double P\+M\+N\+S\+\_\+\+Base\+::\+Prob (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$}]{nu\+\_\+in,  }\item[{int}]{flvf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Compute the probability of nu\+\_\+in going to flvf.
+
+Flavours are\+: 
+\begin{DoxyPre}
+  0 = nue, 1 = numu, 2 = nutau
+  3 = sterile\_1, 4 = sterile\_2, etc.
+\end{DoxyPre}
+ 
+\begin{DoxyParams}{Parameters}
+{\em nu\+\_\+in} & -\/ The neutrino initial state in flavour basis. \\
+\hline
+{\em flvf} & -\/ The neutrino final flavour.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Neutrino oscillation probability 
+\end{DoxyReturn}
+
+
+Definition at line 1142 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+
+
+
+References f\+Num\+Nus, f\+Nu\+State, P(), and Propagate().
 
 
 
 Referenced by Avg\+Prob(), Avg\+Prob\+Lo\+E(), and Prob().
 
-\mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ad850329a991146c82857fb31c00658f7}\label{classOscProb_1_1PMNS__Base_ad850329a991146c82857fb31c00658f7}} 
+
+\begin{DoxyCode}
+1143 \{
+1144 
+1145   assert(nu\_in.size() == \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
+1146   assert(flvf >= 0 && flvf < \hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus});
+1147 
+1148   \hyperlink{classOscProb_1_1PMNS__Base_abf99f2339e3ee989600740b5d88063e8}{fNuState} = nu\_in;
+1149 
+1150   \hyperlink{classOscProb_1_1PMNS__Base_a054e3a8b05b9a958b6fa416e4a835e3e}{Propagate}();
+1151 
+1152   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a0dc4d45bc3d7e03b9abbf5b4e100cc22}{P}(flvf);
+1153 
+1154 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a0190a79284289aacf682c78d7cef9a81}\label{classOscProb_1_1PMNS__Base_a0190a79284289aacf682c78d7cef9a81}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Prob@{Prob}}
 \index{Prob@{Prob}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}}
 \subsubsection{\texorpdfstring{Prob()}{Prob()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
-{\footnotesize\ttfamily virtual double Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Prob (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$}]{nu\+\_\+in,  }\item[{int}]{flvf,  }\item[{double}]{E }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily double P\+M\+N\+S\+\_\+\+Base\+::\+Prob (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$}]{nu\+\_\+in,  }\item[{int}]{flvf,  }\item[{double}]{E }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
-\mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a596c89c681142e72e70844268a9a765b}\label{classOscProb_1_1PMNS__Base_a596c89c681142e72e70844268a9a765b}} 
+Compute the probability of nu\+\_\+in going to flvf for a given energy in GeV.
+
+Flavours are\+: 
+\begin{DoxyPre}
+  0 = nue, 1 = numu, 2 = nutau
+  3 = sterile\_1, 4 = sterile\_2, etc.
+\end{DoxyPre}
+ 
+\begin{DoxyParams}{Parameters}
+{\em nu\+\_\+in} & -\/ The neutrino initial state in flavour basis. \\
+\hline
+{\em flvf} & -\/ The neutrino final flavour. \\
+\hline
+{\em E} & -\/ The neutrino energy in GeV\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Neutrino oscillation probability 
+\end{DoxyReturn}
+
+
+Definition at line 1171 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+
+
+
+References Prob(), and Set\+Energy().
+
+
+\begin{DoxyCode}
+1172 \{
+1173 
+1174   \hyperlink{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}{SetEnergy}(E);
+1175 
+1176   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aa2e10704d2d205a1ec8988de14b1a66f}{Prob}(nu\_in, flvf);
+1177 
+1178 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a01fba31729345376705e02408e835f67}\label{classOscProb_1_1PMNS__Base_a01fba31729345376705e02408e835f67}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Prob@{Prob}}
 \index{Prob@{Prob}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}}
 \subsubsection{\texorpdfstring{Prob()}{Prob()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
-{\footnotesize\ttfamily virtual double Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Prob (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$}]{nu\+\_\+in,  }\item[{int}]{flvf,  }\item[{double}]{E,  }\item[{double}]{L }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily double P\+M\+N\+S\+\_\+\+Base\+::\+Prob (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$}]{nu\+\_\+in,  }\item[{int}]{flvf,  }\item[{double}]{E,  }\item[{double}]{L }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
+Compute the probability of nu\+\_\+in going to flvf for a given energy in GeV and distance in km in a single path.
+
+If the path sequence is not a single path, a new single path will be created and the previous sequence will be lost.
+
+Don\textquotesingle{}t use this if you want to propagate over multiple path segments.
+
+Flavours are\+: 
+\begin{DoxyPre}
+  0 = nue, 1 = numu, 2 = nutau
+  3 = sterile\_1, 4 = sterile\_2, etc.
+\end{DoxyPre}
+ 
+\begin{DoxyParams}{Parameters}
+{\em nu\+\_\+in} & -\/ The neutrino initial state in flavour basis. \\
+\hline
+{\em flvf} & -\/ The neutrino final flavour. \\
+\hline
+{\em E} & -\/ The neutrino energy in GeV \\
+\hline
+{\em L} & -\/ The neutrino path length in km\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Neutrino oscillation probability 
+\end{DoxyReturn}
+
+
+Definition at line 1226 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
+
+
+
+References Prob(), Set\+Energy(), and Set\+Length().
+
+
+\begin{DoxyCode}
+1227 \{
+1228 
+1229   \hyperlink{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}{SetEnergy}(E);
+1230   \hyperlink{classOscProb_1_1PMNS__Base_a6241325b1bd28cafa556daaecbe4ed62}{SetLength}(L);
+1231 
+1232   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aa2e10704d2d205a1ec8988de14b1a66f}{Prob}(nu\_in, flvf);
+1233 
+1234 \}
+\end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}\label{classOscProb_1_1PMNS__Base_aec5c399b93261f1962a4b7dbbb44b973}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}!Prob@{Prob}}
 \index{Prob@{Prob}!Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base}}
@@ -1113,7 +1387,7 @@ Definition at line 1119 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
-References f\+Num\+Nus, f\+Nu\+State, P(), Prob(), Propagate(), Reset\+To\+Flavour(), and Set\+Energy().
+References f\+Nu\+State, Prob(), and Reset\+To\+Flavour().
 
 
 \begin{DoxyCode}
@@ -1121,7 +1395,7 @@ References f\+Num\+Nus, f\+Nu\+State, P(), Prob(), Propagate(), Reset\+To\+Flavo
 1121 
 1122   \hyperlink{classOscProb_1_1PMNS__Base_ac0d4bf8ff1318ef96d3dafa62e0cec25}{ResetToFlavour}(flvi);
 1123 
-1124   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a63f6450914b2ef712fbdc45787d9a27f}{Prob}(\hyperlink{classOscProb_1_1PMNS__Base_abf99f2339e3ee989600740b5d88063e8}{fNuState}, flvf);
+1124   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aa2e10704d2d205a1ec8988de14b1a66f}{Prob}(\hyperlink{classOscProb_1_1PMNS__Base_abf99f2339e3ee989600740b5d88063e8}{fNuState}, flvf);
 1125 
 1126 \}
 \end{DoxyCode}
@@ -1156,7 +1430,7 @@ Definition at line 1195 of file P\+M\+N\+S\+\_\+\+Base.\+cxx.
 
 
 
-References Prob(), Set\+Energy(), and Set\+Length().
+References Prob(), and Set\+Energy().
 
 
 \begin{DoxyCode}
@@ -1164,7 +1438,7 @@ References Prob(), Set\+Energy(), and Set\+Length().
 1197 
 1198   \hyperlink{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}{SetEnergy}(E);
 1199 
-1200   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a63f6450914b2ef712fbdc45787d9a27f}{Prob}(flvi, flvf);
+1200   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aa2e10704d2d205a1ec8988de14b1a66f}{Prob}(flvi, flvf);
 1201 
 1202 \}
 \end{DoxyCode}
@@ -1214,7 +1488,7 @@ References Prob(), Set\+Energy(), and Set\+Length().
 1261   \hyperlink{classOscProb_1_1PMNS__Base_a95b3b0d0cab5e6a54b5ef99587f837c0}{SetEnergy}(E);
 1262   \hyperlink{classOscProb_1_1PMNS__Base_a6241325b1bd28cafa556daaecbe4ed62}{SetLength}(L);
 1263 
-1264   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_a63f6450914b2ef712fbdc45787d9a27f}{Prob}(flvi, flvf);
+1264   \textcolor{keywordflow}{return} \hyperlink{classOscProb_1_1PMNS__Base_aa2e10704d2d205a1ec8988de14b1a66f}{Prob}(flvi, flvf);
 1265 
 1266 \}
 \end{DoxyCode}
