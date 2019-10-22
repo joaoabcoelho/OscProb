@@ -225,7 +225,7 @@ void SetHist(TH1 *hist,int col=1,bool fill=false){
   hist->SetDirectory(0);
 
   hist->SetLineColor(col);  
-  hist->SetLineWidth(2);  
+  hist->SetLineWidth(4);  
   hist->SetFillColor(fill*col);  
   hist->SetMarkerColor(col);  
   hist->SetMarkerSize(0);  
@@ -308,6 +308,24 @@ void SetDensity(TH1 *hist){
     hist->SetBinContent(i,hist->GetBinContent(i)/hist->GetBinWidth(i));
     hist->SetBinError(i,hist->GetBinError(i)/hist->GetBinWidth(i));
   }
+
+  return;
+
+}
+
+// Make bins proportional to area
+void SetDensity(TH2 *hist){
+
+  int nbinsx = hist->GetNbinsX();
+  int nbinsy = hist->GetNbinsY();
+
+  for(int i=1;i<=nbinsx;i++){
+  for(int j=1;j<=nbinsy;j++){
+    double wx = hist->GetXaxis()->GetBinWidth(i);
+    double wy = hist->GetYaxis()->GetBinWidth(j);
+    hist->SetBinContent(i, j, hist->GetBinContent(i, j)/wx/wy);
+    hist->SetBinError(i,hist->GetBinError(i,j)/wx/wy);
+  }}
 
   return;
 
@@ -420,6 +438,36 @@ void SetGraphErrors(TGraphAsymmErrors *gr){
 
 }
 
+int SetNicePalette(char* filename){
+
+  ifstream ifs(filename);
+  
+  double r, g, b;
+  
+  vector<double> stops;
+  vector<double> red;
+  vector<double> green;
+  vector<double> blue;
+  
+  while(ifs >> r >> g >> b){
+     red.push_back(double(r)/255);
+     green.push_back(double(g)/255);
+     blue.push_back(double(b)/255);
+  }
+  
+  int ncols = red.size();
+  for(int i=0; i<ncols; i++){
+    stops.push_back(double(i)/ncols);
+  }
+
+  int NCont = 255;
+  int p = TColor::CreateGradientColorTable(ncols, &stops[0], &red[0], &green[0], &blue[0], NCont);
+  gStyle->SetNumberContours(NCont);
+
+  return p;
+
+}
+
 int SetNicePalette(int ncols, int* cols){
 
   if(ncols<2) return 0;
@@ -494,6 +542,22 @@ int SetTemperatureMap(){
 
 }
 
+// Set ROOT6 kBird palette
+int SetBirdPalette(){
+
+  const Int_t NRGBs = 9;
+  const Int_t NCont = 255;
+  Double_t stops[NRGBs] = { 0.0000, 0.1250, 0.2500, 0.3750, 0.5000, 0.6250, 0.7500, 0.8750, 1.0000};
+  Double_t red[NRGBs]   = { 0.2082, 0.0592, 0.0780, 0.0232, 0.1802, 0.5301, 0.8186, 0.9956, 0.9764};
+  Double_t green[NRGBs] = { 0.1664, 0.3599, 0.5041, 0.6419, 0.7178, 0.7492, 0.7328, 0.7862, 0.9832};
+  Double_t blue[NRGBs]  = { 0.5293, 0.8684, 0.8385, 0.7914, 0.6425, 0.4662, 0.3499, 0.1968, 0.0539};
+  int p = TColor::CreateGradientColorTable(NRGBs, stops, red, green, blue, NCont);
+  gStyle->SetNumberContours(NCont);
+
+  return p;
+
+}
+
 
 // A nice blue white red color palette
 int SetBlueRedPalette(){
@@ -520,9 +584,9 @@ int SetBlueRedPalette(){
 // A nice temperature palette
 int SetNiceTempPalette(){
 
-  int cols[] = {kBlue, kAzure-4, kWhite, kOrange, kRed};
+  int cols[] = {kBlue+3, kBlue, kAzure-4, kWhite, kOrange, kRed, kRed+3};
 
-  return SetNicePalette(5, cols);
+  return SetNicePalette(7, cols);
 
 }
 
