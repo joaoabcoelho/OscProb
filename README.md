@@ -20,11 +20,7 @@ OscProb is very easy to install. The only requirements is to have ROOT installed
 
 **NEW: Thanks to Jacek Holeczek, OscProb now also builds with ROOT 6!!**
 
-In order to compile the PMNS_Decay class, it is necessary to donwload the external Eigen library from: git clone https://gitlab.com/libeigen/eigen.git
-An eigen folder will be created, with a folder named Eigen which contains the necessary templates.
-Export the enviroment variable as follows:
-
-export Eigen_INCS=your_eigen_folder_path/Eigen
+In order to compile the PMNS_Decay class, it is necessary to donwload the external Eigen library. This library is added as a submodule, you can either use git clone --recurse-submodules when clonning the OscProb repository or after clonning the repository use git submodule update --init.
 
 Once you have ROOT setup, simply do:
 ```sh
