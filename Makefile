@@ -21,7 +21,8 @@ DICTIONARY = $(CURDIR)/tmp/$(TARGET).cxx
 GSL_INCS = $(shell gsl-config --cflags)
 GSL_LIBS = $(shell gsl-config --libs)
 
-
+#Eigen library
+Eigen_INCS = ${PWD}/eigen/Eigen
 
 override CXXFLAGS += $(GSL_INCS) -I$(Eigen_INCS) -I$(CURDIR)/utils
 override GSL_INCS += -I$(Eigen_INCS) -I${CURDIR}/utils
