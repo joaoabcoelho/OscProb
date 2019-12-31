@@ -10,6 +10,7 @@ Available classes are:
 - **PMNS_Sterile:** Oscillations with any number of neutrinos
 - **PMNS_NSI:** Oscillations with 3 flavours including Non-Standard Interactions
 - **PMNS_Deco:** Oscillations with 3 flavours including a simple decoherence model
+- **PMNS_Decay:** Oscillations with 3 flavours including neutrino decay of the neutrino mass state \nu_3. [Requires external library Eigen3, see the instructions below.]
 
 A few example macros on how to use OscProb are available in a tutorial directory.
 
@@ -18,6 +19,8 @@ A few example macros on how to use OscProb are available in a tutorial directory
 OscProb is very easy to install. The only requirements is to have ROOT installed with the GSL libraries.
 
 **NEW: Thanks to Jacek Holeczek, OscProb now also builds with ROOT 6!!**
+
+In order to compile the PMNS_Decay class, it is necessary to donwload the external Eigen library. This library is added as a submodule, you can either use git clone --recurse-submodules when clonning the OscProb repository or after clonning the repository use git submodule update --init.
 
 Once you have ROOT setup, simply do:
 ```sh

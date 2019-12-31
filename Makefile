@@ -21,8 +21,12 @@ DICTIONARY = $(CURDIR)/tmp/$(TARGET).cxx
 GSL_INCS = $(shell gsl-config --cflags)
 GSL_LIBS = $(shell gsl-config --libs)
 
-override CXXFLAGS += $(GSL_INCS)
-override LDFLAGS  += $(GSL_LIBS)
+#Eigen library
+Eigen_INCS = ${PWD}/eigen/Eigen
+
+override CXXFLAGS += $(GSL_INCS) -I$(Eigen_INCS) -I$(CURDIR)/utils
+override GSL_INCS += -I$(Eigen_INCS) -I${CURDIR}/utils
+override LDFLAGS  += $(GSL_LIBS) 
 
 # the sets of directories to do various things in
 MATRIX=$(CURDIR)/MatrixDecomp/libMatrixDecomp.so
