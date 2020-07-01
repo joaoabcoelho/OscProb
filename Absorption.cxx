@@ -6,24 +6,39 @@
 #include <vector>
 #include <numeric>
 #include <math.h>
+#include <iostream>
+//extern ostream cout;
 
+using std::cout;
+using std::endl;
+using std::accumulate;
+using std::multiplies;
+//using namespace std;
 using namespace OscProb;
 
-//Absorption::Absorption();
+Absorption::Absorption(){}
 
-const double Absorption::kNA     = 6.022140857e23;             // Avogadro constant (N_A)
+Absorption::~Absorption(){}
 
-double Absorption::Trans(double xsec, double E){
-  return 1;
+const double Absorption::kNA     = 6.022140857e+23;             // Avogadro constant (N_A)
+
+double Absorption::Trans(double xsec){
+  //cout << "test" << std::endl;
+  //return 0.1;
   std::vector<double> p_trans_vec;
+  //cout << "test" << std::endl;
   for(int i=0; i<int(fNuPaths.size()); i++){
+    //cout << "test" << std::endl;
     double u = 55.845; // atomic weight of Iron [g/mol] 
-    double n = fNuPaths[i].density/(u*kNA);
-    double l = fNuPaths[i].length;
+    double n = kNA * fNuPaths[i].density/(u);
+    //double n = fNuPaths[i].density/(u*kNA);
+    double l = fNuPaths[i].length * 100000; //l in km -> cm
     double p_trans = exp( - l* (n*xsec) ); 
-    p_trans_vec.push_back(1 - p_trans); //probability of NO absorption!
+    //cout << 'l' << '\t' << 'n' << '\t' << "xsec" << '\t' << "p_trans" << endl;
+    //cout << l << '\t' << n << '\t' << xsec << '\t' << p_trans << endl;
+    p_trans_vec.push_back(p_trans); //probability of NO absorption!
   }
-  return 1 - std::accumulate(p_trans_vec.begin(),p_trans_vec.end(),1,std::multiplies<double>()); //returns probability of absorption
+  return 1.-accumulate(p_trans_vec.begin(),p_trans_vec.end(),1.,multiplies<double>()); //returns probability of absorption
 }
 
 void Absorption::SetPath(std::vector<OscProb::NuPath> paths){
