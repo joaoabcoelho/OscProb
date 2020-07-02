@@ -21,6 +21,7 @@ Absorption::Absorption(){}
 Absorption::~Absorption(){}
 
 const double Absorption::kNA     = 6.022140857e+23;             // Avogadro constant (N_A)
+const double Absorption::kU      = 1.660539066e-24;             // atomic mass unit [g] 
 
 double Absorption::Trans(double xsec){
   //cout << "test" << std::endl;
@@ -28,10 +29,7 @@ double Absorption::Trans(double xsec){
   std::vector<double> p_trans_vec;
   //cout << "test" << std::endl;
   for(int i=0; i<int(fNuPaths.size()); i++){
-    //cout << "test" << std::endl;
-    double u = 55.845; // atomic weight of Iron [g/mol] 
-    double n = kNA * fNuPaths[i].density/(u);
-    //double n = fNuPaths[i].density/(u*kNA);
+    double n = fNuPaths[i].density/(kU);
     double l = fNuPaths[i].length * 100000; //l in km -> cm
     double p_trans = exp( - l* (n*xsec) ); 
     //cout << 'l' << '\t' << 'n' << '\t' << "xsec" << '\t' << "p_trans" << endl;

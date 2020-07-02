@@ -28,6 +28,7 @@ namespace OscProb {
     //virtual void SetPath(std::vector<OscProb::NuPath> paths);  ///< Set a path sequence
 
     static const double kNA; //Avogardo constant
+    static const double kU;  //atomich mass unit
   };
 
 }
