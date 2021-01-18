@@ -81,7 +81,6 @@ void PMNS_Decay::SetIsNuBar(bool isNuBar)
   fGotES *= (fIsNuBar == isNuBar);
   fBuiltHms *= (fIsNuBar == isNuBar);
   fIsNuBar = isNuBar;
-
 }
 //......................................................................
 ///
@@ -108,6 +107,134 @@ double PMNS_Decay::GetAlpha3()
 return falpha[2];
 }
 ///Build the Hamiltonian and rotate it
+void PMNS_Decay::RotateH(int i,int j){
+
+  // Do nothing if angle is zero
+  if(fTheta[i][j]==0) return;
+
+  double fSinBuffer = sin(fTheta[i][j]);
+  double fCosBuffer = cos(fTheta[i][j]);
+
+  double  fHmsBufferD;
+  complexD fHmsBufferC;
+
+  // With Delta
+  if(i+1<j){
+    complexD fExpBuffer;
+    if(fIsNuBar==true){
+      fExpBuffer = complexD(cos(-fDelta[i][j]), -sin(-fDelta[i][j]));
+    }
+    else{
+      fExpBuffer = complexD(cos(fDelta[i][j]), -sin(fDelta[i][j]));
+    }
+
+    // General case
+    if(i>0){
+      // Top columns
+      for(int k=0; k<i; k++){
+        fHmsBufferC = fHms[k][i];
+
+        fHms[k][i] *= fCosBuffer;
+        fHms[k][i] += fHms[k][j] * fSinBuffer * conj(fExpBuffer);
+
+        fHms[k][j] *= fCosBuffer;
+        fHms[k][j] -= fHmsBufferC * fSinBuffer * fExpBuffer;
+      }
+
+      // Middle row and column
+      for(int k=i+1; k<j; k++){
+        fHmsBufferC = fHms[k][j];
+
+        fHms[k][j] *= fCosBuffer;
+        fHms[k][j] -= conj(fHms[i][k]) * fSinBuffer * fExpBuffer;
+
+        fHms[i][k] *= fCosBuffer;
+        fHms[i][k] += fSinBuffer * fExpBuffer * conj(fHmsBufferC);
+      }
+
+      // Nodes ij
+      fHmsBufferC = fHms[i][i];
+      fHmsBufferD = real(fHms[j][j]);
+
+      fHms[i][i] *= fCosBuffer * fCosBuffer;
+      fHms[i][i] += 2 * fSinBuffer * fCosBuffer * real(fHms[i][j] * conj(fExpBuffer));
+      fHms[i][i] += fSinBuffer * fHms[j][j] * fSinBuffer;
+
+      fHms[j][j] *= fCosBuffer * fCosBuffer;
+      fHms[j][j] += fSinBuffer * fHmsBufferC * fSinBuffer;
+      fHms[j][j] -= 2 * fSinBuffer * fCosBuffer * real(fHms[i][j] * conj(fExpBuffer));
+
+      fHms[i][j] -= 2 * fSinBuffer * real(fHms[i][j] * conj(fExpBuffer)) * fSinBuffer * fExpBuffer;
+      fHms[i][j] += fSinBuffer * fCosBuffer * (fHmsBufferD - fHmsBufferC) * fExpBuffer;
+
+    }
+    // First rotation on j (No top columns)
+    else{
+      // Middle rows and columns
+      for(int k=i+1; k<j; k++){
+        fHms[k][j] = -conj(fHms[i][k]) * fSinBuffer * fExpBuffer;
+
+        fHms[i][k] *= fCosBuffer;
+      }
+
+      // Nodes ij
+      fHmsBufferD = real(fHms[i][i]);
+
+      fHms[i][j] = fSinBuffer * fCosBuffer * (fHms[j][j] - fHmsBufferD) * fExpBuffer;
+
+      fHms[i][i] *= fCosBuffer * fCosBuffer;
+      fHms[i][i] += fSinBuffer * fHms[j][j] * fSinBuffer;
+
+      fHms[j][j] *= fCosBuffer * fCosBuffer;
+      fHms[j][j] += fSinBuffer * fHmsBufferD * fSinBuffer;
+    }
+
+  }
+  // Without Delta (No middle rows or columns: j = i+1)
+  else{
+    // General case
+    if(i>0){
+      // Top columns
+      for(int k=0; k<i; k++){
+        fHmsBufferC = fHms[k][i];
+
+        fHms[k][i] *= fCosBuffer;
+        fHms[k][i] += fHms[k][j] * fSinBuffer;
+
+        fHms[k][j] *= fCosBuffer;
+        fHms[k][j] -= fHmsBufferC * fSinBuffer;
+      }
+
+      // Nodes ij
+      fHmsBufferC = fHms[i][i];
+      fHmsBufferD = real(fHms[j][j]);
+
+      fHms[i][i] *= fCosBuffer * fCosBuffer;
+      fHms[i][i] += 2 * fSinBuffer * fCosBuffer * real(fHms[i][j]);
+      fHms[i][i] += fSinBuffer * fHms[j][j] * fSinBuffer;
+
+      fHms[j][j] *= fCosBuffer * fCosBuffer;
+      fHms[j][j] += fSinBuffer * fHmsBufferC * fSinBuffer;
+      fHms[j][j] -= 2 * fSinBuffer * fCosBuffer * real(fHms[i][j]);
+
+      fHms[i][j] -= 2 * fSinBuffer * real(fHms[i][j]) * fSinBuffer;
+      fHms[i][j] += fSinBuffer * fCosBuffer * (fHmsBufferD - fHmsBufferC);
+
+    }
+    // First rotation (theta12)
+    else{
+
+      fHms[i][j] = fSinBuffer * fCosBuffer * fHms[j][j];
+
+      fHms[i][i] = fSinBuffer * fHms[j][j] * fSinBuffer;
+
+      fHms[j][j] *= fCosBuffer * fCosBuffer;
+
+    }
+  }
+
+}
+
 
 void PMNS_Decay::RotateHd(int i,int j){
 
@@ -122,7 +249,14 @@ void PMNS_Decay::RotateHd(int i,int j){
 
   // With Delta
   if(i+1<j){
-    complexD fExpBuffer = complexD(cos(fDelta[i][j]), -sin(fDelta[i][j]));
+    complexD fExpBuffer;
+    if(fIsNuBar==true){
+      fExpBuffer = complexD(cos(-fDelta[i][j]), -sin(-fDelta[i][j]));
+}
+    else{
+      fExpBuffer = complexD(cos(fDelta[i][j]), -sin(fDelta[i][j]));
+    
+}
 
     // General case
     if(i>0){
@@ -238,20 +372,16 @@ void PMNS_Decay::BuildHam()
 
   // Check if anything changed
   if(fBuiltHms) return;
-  
+   
   // Tag to recompute eigensystem
   fGotES = false;
-  if(fIsNuBar==true){
-	  double delta=GetDelta(1,3);
-	  SetDelta(1,3,-delta);
-	  }
+  
   ///Reset everything
    for(int i=0; i<fNumNus; i++){
    for(int j=0; j<fNumNus; j++){
 	   fHms[i][j]= 0;
 	   }
    }
-  
   for(int j=0; j<fNumNus; j++){
     // Set mass splitting
     fHms[j][j] = fDm[j];
@@ -314,14 +444,16 @@ void PMNS_Decay::BuildHam()
  
  
  
-  ClearCache();
+  //ClearCache();
 
   // Tag as built
   fBuiltHms = true;
+  
 
  
 
 }
+
 
 //......................................................................
 ///
@@ -353,7 +485,7 @@ void PMNS_Decay::UpdateHam()
 
   if(!fIsNuBar) fHam[0][0] += kr2GNe;
   else          fHam[0][0] -= kr2GNe;
-
+  
 }
 //......................................................................
 ///
@@ -372,7 +504,7 @@ void PMNS_Decay::SolveHam()
   if(fGotES) return;
 
   // Try caching if activated
-  if(TryCache()) return;
+  //if(TryCache()) return;
 
   UpdateHam();
 
@@ -398,7 +530,7 @@ void PMNS_Decay::SolveHam()
   fGotES = true;
 
   // Fill cache if activated
-  FillCache();
+  //FillCache();
 
 }
 

@@ -43,6 +43,7 @@ namespace OscProb {
     virtual void BuildHam();
    
  //   virtual void BuildHt();
+    virtual void RotateH(int i, int j);
     virtual void RotateHd(int i, int j);
     /// Build the full Hamiltonian
     virtual void UpdateHam();
