@@ -5,7 +5,8 @@
 //
 // This  class inherits from the PMNS_Fast class
 //
-// N. R. Khan Chowdhury
+// \author Joao Coelho - coelho\@lal.in2p3.fr and
+// \colaborator Nafis R. K. Chowdhury - nrkhanchowdhury\@km3net.de 
 ////////////////////////////////////////////////////////////////////////
 
 #include "PMNS_LIV.h"
