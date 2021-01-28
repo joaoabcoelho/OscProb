@@ -4,6 +4,8 @@
 /// Brief Implementation of oscillations of neutrinos in matter in a
 ///        three-neutrino framework with LIV.
 ///
+///\author Joao Coelho - coelho\@lal.in2p3.fr and
+/// \colaborator Nafis R. K. Chowdhury - nrkhanchowdhury\@km3net.de 
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifndef PMNS_LIV1_H
