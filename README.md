@@ -10,6 +10,7 @@ Available classes are:
 - **PMNS_Sterile:** Oscillations with any number of neutrinos
 - **PMNS_NSI:** Oscillations with 3 flavours including Non-Standard Interactions
 - **PMNS_Deco:** Oscillations with 3 flavours including a simple decoherence model
+- **PMNS_LIV:** Oscillations with 3 flavours including Lorentz Invariance Violations
 - **PMNS_Decay:** Oscillations with 3 flavours including neutrino decay of the neutrino mass state \nu_3. [Requires external library Eigen3, see the instructions below.]
 
 A few example macros on how to use OscProb are available in a tutorial directory.
