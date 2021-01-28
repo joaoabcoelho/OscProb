@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////////////////////////
 //
 // Implementation of oscillations of neutrinos in matter in a
-// three-neutrino framework with LIV1.
+// three-neutrino framework with LIV.
 //
 // This  class inherits from the PMNS_Fast class
 //
-// M.L. Abdelali
+// N. R. Khan Chowdhury
 ////////////////////////////////////////////////////////////////////////
 
 #include "PMNS_LIV.h"
@@ -42,22 +42,22 @@ PMNS_LIV::~PMNS_LIV(){}
 
 //......................................................................
 ///
-/// Set all LIV1 parameters at once.
+/// Set all LIV parameters at once.
 ///
 /// This will check if value is changing to keep track of whether
 /// the eigensystem needs to be recomputed.
 ///
-/// @param aT_ij       - The absolute value of the complex parameter aT_ij
+/// @param aT_ij       - The absolute value of the parameter aT_ij
 /// @param delta_aT_ij - The phase of the complex parameter aT_ij in radians
-/// @param cTT_ij       - The absolute value of the complex parameter cTT_ij
-/// @param delta_cTT_ij - The phase of the complex parameter cTT_ij in radians
+/// @param cT_ij       - The absolute value of the complex parameter cT_ij
+/// @param delta_cT_ij - The phase of the complex parameter cT_ij in radians
 ///
 void PMNS_LIV::SetLIV(double aT_ee,     double aT_mumu,      double aT_tautau,
 		                double aT_emu,     double aT_etau,      double aT_mutau,
 		                double cT_ee,     double cT_mumu,      double cT_tautau,
-                        double cT_emu,     double cT_etau,      double cT_mutau,
-					    double delta_aT_emu, double delta_aT_etau, double delta_aT_mutau,
-					    double delta_cT_emu, double delta_cT_etau, double delta_cT_mutau)
+                                double cT_emu,     double cT_etau,      double cT_mutau,
+			        double delta_aT_emu, double delta_aT_etau, double delta_aT_mutau,
+			        double delta_cT_emu, double delta_cT_etau, double delta_cT_mutau)
 {
 
   SetaT(0,0, aT_ee, 0);
@@ -81,7 +81,7 @@ void PMNS_LIV::SetLIV(double aT_ee,     double aT_mumu,      double aT_tautau,
 
 //......................................................................
 ///
-/// Set any given LIV1 parameter (aT & cTT).
+/// Set any given LIV1 parameter (aT & cT).
 ///
 /// This will check if value is changing to keep track of whether
 /// the eigensystem needs to be recomputed.
@@ -112,9 +112,9 @@ void PMNS_LIV::SetaT(int flvi, int flvj, double val, double phase){
     return;
   }
 
-  complex h = val;
+  complexD h = val;
 
-  if(flvi != flvj) h *= complex(cos(phase), sin(phase));
+  if(flvi != flvj) h *= complexD(cos(phase), sin(phase));
 
   //bool isSame = (faT[flvi][flvj] == h);
 
@@ -141,9 +141,9 @@ void PMNS_LIV::SetcT(int flvi, int flvj, double val, double phase){
     return;
   }
 
-  complex h = val;
+  complexD h = val;
 
-  if(flvi != flvj) h *= complex(cos(phase), sin(phase));
+  if(flvi != flvj) h *= complexD(cos(phase), sin(phase));
 
   //bool isSame = (fcTT[flvi][flvj] == h);
 
