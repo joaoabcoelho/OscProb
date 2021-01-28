@@ -31,7 +31,6 @@ using namespace std;
 PMNS_LIV::PMNS_LIV() : PMNS_Fast()
 {
   SetStdPath();
-  //SetLIV(0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.);
   SetLIV(0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.);
 }
 
@@ -82,7 +81,7 @@ void PMNS_LIV::SetLIV(double aT_ee,     double aT_mumu,      double aT_tautau,
 
 //......................................................................
 ///
-/// Set any given LIV1 parameter (aT & cT).
+/// Set any given LIV parameter (aT & cT).
 ///
 /// This will check if value is changing to keep track of whether
 /// the eigensystem needs to be recomputed.
@@ -148,7 +147,7 @@ void PMNS_LIV::SetcT(int flvi, int flvj, double val, double phase){
 
   //bool isSame = (fcTT[flvi][flvj] == h);
 
-//  if(!isSame) ClearCache();
+  //if(!isSame) ClearCache();
 
   //fGotES *= isSame;
   fGotES *= (faT[flvi][flvj] == h);
@@ -228,7 +227,7 @@ void PMNS_LIV::SetaT_mutau(double a, double phi){ SetaT(1,2, a, phi); }
 
 //......................................................................
 ///
-/// Set cTT_ij parameter
+/// Set cT_ij parameter
 ///
 /// This will check if value is changing to keep track of whether
 /// the eigensystem needs to be recomputed.
