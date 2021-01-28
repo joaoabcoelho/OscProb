@@ -8,8 +8,8 @@
 /// \colaborator Nafis R. K. Chowdhury - nrkhanchowdhury\@km3net.de 
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef PMNS_LIV1_H
-#define PMNS_LIV1_H
+#ifndef PMNS_LIV_H
+#define PMNS_LIV_H
 
 #include "PMNS_Fast.h"
 
