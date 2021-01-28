@@ -1,18 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// \class OscProb::PMNS_LIV1
+/// class OscProb::PMNS_LIV
 ///
-/// \brief Implementation of oscillations of neutrinos in matter in a
-///        three-neutrino framework with LIV1.
+/// Brief Implementation of oscillations of neutrinos in matter in a
+///        three-neutrino framework with LIV.
 ///
-/// This class expands the PMNS_Fast class including an additional
-/// Hamiltonian part matrix describing Lorentz Invariance Violation (LIV1).
-///
-/// The additional part is parametrized by six quantities (aT, cTT).
-/// see paper arxiv: arXiv:1410.4267v2 [hep-ex] for details of the model.
-///
-/// \sa PMNS_Fast
-///
-/// \author M.L. Abdelali
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifndef PMNS_LIV1_H
@@ -37,31 +28,32 @@ namespace OscProb {
             double aT_emu,     double aT_etau,      double aT_mutau,
             double cT_ee,     double CT_mumu,      double CT_tautau,
             double cT_emu,     double cT_etau,      double cT_mutau,
-                double delta_aT_emu=0, double delta_aT_etau=0, double delta_aT_mutau=0,
-				double delta_cT_emu=0, double delta_cT_etau=0, double delta_cT_mutau=0);
+            double delta_aT_emu=0, double delta_aT_etau=0, double delta_aT_mutau=0,
+	    double delta_cT_emu=0, double delta_cT_etau=0, double delta_cT_mutau=0);
 
     //Set diagonal LIV pars
     virtual void SetaT_ee    (double a); ///< Set eps_ee parameter
     virtual void SetaT_mumu  (double a); ///< Set eps_mumu parameter
     virtual void SetaT_tautau(double a); ///< Set eps_tautau parameter
+    
+    virtual void SetcT_ee    (double a); ///< Set eps_ee parameter
+    virtual void SetcT_mumu  (double a); ///< Set eps_mumu parameter
+    virtual void SetcT_tautau(double a); ///< Set eps_tautau parameter
 
 
-    /// Set any given LIV1 parameter
+    /// Set diagonal LIV pars
     virtual void SetaT_emu  (double a, double phi);
     virtual void SetaT_etau (double a, double phi);
     virtual void SetaT_mutau(double a, double phi);
 
-    virtual void SetcT_ee    (double a); ///< Set eps_ee parameter
-    virtual void SetcT_mumu  (double a); ///< Set eps_mumu parameter
-    virtual void SetcT_tautau(double a); ///< Set eps_tautau parameter
 
     virtual void SetcT_emu  (double a, double phi);
     virtual void SetcT_etau (double a, double phi);
     virtual void SetcT_mutau(double a, double phi);
 
-    /// Get any given LIV1 parameter
-    virtual complex GetaT(int flvi, int flvj);
-    virtual complex GetcT(int flvi, int flvj);
+    /// Get any given LIV par
+    virtual complexD GetaT(int flvi, int flvj);
+    virtual complexD GetcT(int flvi, int flvj);
 
   protected:
 
@@ -69,7 +61,7 @@ namespace OscProb {
     virtual void UpdateHam();
 
     complex faT[3][3]; ///< Stores each LIV1 parameter
-	complex fcT[3][3]; ///< Stores each LIV1 parameter
+    complex fcT[3][3]; ///< Stores each LIV1 parameter
 
   };
 
