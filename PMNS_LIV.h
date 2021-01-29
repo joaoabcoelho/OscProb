@@ -62,8 +62,8 @@ namespace OscProb {
     /// Build the full Hamiltonian
     virtual void UpdateHam();
 
-    complex faT[3][3]; ///< Stores each LIV1 parameter
-    complex fcT[3][3]; ///< Stores each LIV1 parameter
+    complexD faT[3][3]; ///< Stores each LIV1 parameter
+    complexD fcT[3][3]; ///< Stores each LIV1 parameter
 
   };
 
