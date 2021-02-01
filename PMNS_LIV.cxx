@@ -263,8 +263,8 @@ void PMNS_LIV::UpdateHam()
   // Finish build Hamiltonian in matter with dimension of eV
   for(int i=0;i<fNumNus;i++){
     for(int j=i;j<fNumNus;j++){
-      if(!fIsNuBar) fHam[i][j] = fHms[i][j]/lv + kGeV2eV*(faT[i][j] + (4.*fEnergy / 3.)*fcT[i][j]);
-      else          fHam[i][j] = conj(fHms[i][j]/lv - kGeV2eV*(faT[i][j] + (4.*fEnergy / 3.)*fcT[i][j]));
+      if(!fIsNuBar) fHam[i][j] = fHms[i][j]/lv + kGeV2eV*(faT[i][j] - (4.*fEnergy / 3.)*fcT[i][j]);
+      else          fHam[i][j] = conj(fHms[i][j]/lv + kGeV2eV*(- faT[i][j] - (4.*fEnergy / 3.)*fcT[i][j])); // +/- faTs for nu/nubar (CPTodd) 
     }
   }
 
