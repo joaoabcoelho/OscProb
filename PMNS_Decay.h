@@ -35,15 +35,14 @@ namespace OscProb {
     std::vector<double>                  fEvalI;
     
     virtual void SetAlpha3(double alpha3);
+    virtual void SetAlpha2(double alpha2);
     virtual double GetAlpha3();
-    virtual bool CheckProb(int flvi);
+    virtual double GetAlpha2();
     virtual void SetIsNuBar(bool isNuBar);
     
   protected:
     virtual void BuildHam();
    
- //   virtual void BuildHt();
-    virtual void RotateH(int i, int j);
     virtual void RotateHd(int i, int j);
     /// Build the full Hamiltonian
     virtual void UpdateHam();
