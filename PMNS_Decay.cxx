@@ -29,7 +29,7 @@ PMNS_Decay::PMNS_Decay() : PMNS_Base(), fHam() {
 	falpha    = vector<double>(fNumNus, 0);
 	fEvalI = vector<double>(fNumNus, 0); /////
 	fEvecinv = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero)); /////
-	 
+	fHd     = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));	 
 	}
 
 //......................................................................
@@ -122,132 +122,6 @@ double PMNS_Decay::GetAlpha2()
   return falpha[1];
 }
 
-void PMNS_Decay::RotateHd(int i,int j){
-
-  // Do nothing if angle is zero
-  if(fTheta[i][j]==0) return;
-
-  double fSinBuffer = sin(fTheta[i][j]);
-  double fCosBuffer = cos(fTheta[i][j]);
-
-  double  fHdBufferD;
-  complexD fHdBufferC;
-
-  // With Delta
-  if(i+1<j){
-    complexD fExpBuffer;
-      fExpBuffer = complexD(cos(fDelta[i][j]), -sin(fDelta[i][j]));
-    
-
-
-    // General case
-    if(i>0){
-      // Top columns
-      for(int k=0; k<i; k++){
-        fHdBufferC = fHd[k][i];
-
-        fHd[k][i] *= fCosBuffer;
-        fHd[k][i] += fHd[k][j] * fSinBuffer * conj(fExpBuffer);
-
-        fHd[k][j] *= fCosBuffer;
-        fHd[k][j] -= fHdBufferC * fSinBuffer * fExpBuffer;
-      }
-
-      // Middle row and column
-      for(int k=i+1; k<j; k++){
-        fHdBufferC = fHd[k][j];
-
-        fHd[k][j] *= fCosBuffer;
-        fHd[k][j] -= conj(fHd[i][k]) * fSinBuffer * fExpBuffer;
-
-        fHd[i][k] *= fCosBuffer;
-        fHd[i][k] += fSinBuffer * fExpBuffer * conj(fHdBufferC);
-      }
-
-      // Nodes ij
-      fHdBufferC = fHd[i][i];
-      fHdBufferD = real(fHd[j][j]);
-
-      fHd[i][i] *= fCosBuffer * fCosBuffer;
-      fHd[i][i] += 2 * fSinBuffer * fCosBuffer * real(fHd[i][j] * conj(fExpBuffer));
-      fHd[i][i] += fSinBuffer * fHd[j][j] * fSinBuffer;
-
-      fHd[j][j] *= fCosBuffer * fCosBuffer;
-      fHd[j][j] += fSinBuffer * fHdBufferC * fSinBuffer;
-      fHd[j][j] -= 2 * fSinBuffer * fCosBuffer * real(fHd[i][j] * conj(fExpBuffer));
-
-      fHd[i][j] -= 2 * fSinBuffer * real(fHd[i][j] * conj(fExpBuffer)) * fSinBuffer * fExpBuffer;
-      fHd[i][j] += fSinBuffer * fCosBuffer * (fHdBufferD - fHdBufferC) * fExpBuffer;
-
-    }
-    // First rotation on j (No top columns)
-    else{
-      // Middle rows and columns
-      for(int k=i+1; k<j; k++){
-        fHd[k][j] = -conj(fHd[i][k]) * fSinBuffer * fExpBuffer;
-
-        fHd[i][k] *= fCosBuffer;
-      }
-
-      // Nodes ij
-      fHdBufferD = real(fHd[i][i]);
-
-      fHd[i][j] = fSinBuffer * fCosBuffer * (fHd[j][j] - fHdBufferD) * fExpBuffer;
-
-      fHd[i][i] *= fCosBuffer * fCosBuffer;
-      fHd[i][i] += fSinBuffer * fHd[j][j] * fSinBuffer;
-
-      fHd[j][j] *= fCosBuffer * fCosBuffer;
-      fHd[j][j] += fSinBuffer * fHdBufferD * fSinBuffer;
-    }
-
-  }
-  // Without Delta (No middle rows or columns: j = i+1)
-  else{
-    // General case
-    if(i>0){
-      // Top columns
-      for(int k=0; k<i; k++){
-        fHdBufferC = fHd[k][i];
-
-        fHd[k][i] *= fCosBuffer;
-        fHd[k][i] += fHd[k][j] * fSinBuffer;
-
-        fHd[k][j] *= fCosBuffer;
-        fHd[k][j] -= fHdBufferC * fSinBuffer;
-      }
-
-      // Nodes ij
-      fHdBufferC = fHd[i][i];
-      fHdBufferD = real(fHd[j][j]);
-
-      fHd[i][i] *= fCosBuffer * fCosBuffer;
-      fHd[i][i] += 2 * fSinBuffer * fCosBuffer * real(fHd[i][j]);
-      fHd[i][i] += fSinBuffer * fHd[j][j] * fSinBuffer;
-
-      fHd[j][j] *= fCosBuffer * fCosBuffer;
-      fHd[j][j] += fSinBuffer * fHdBufferC * fSinBuffer;
-      fHd[j][j] -= 2 * fSinBuffer * fCosBuffer * real(fHd[i][j]);
-
-      fHd[i][j] -= 2 * fSinBuffer * real(fHd[i][j]) * fSinBuffer;
-      fHd[i][j] += fSinBuffer * fCosBuffer * (fHdBufferD - fHdBufferC);
-
-    }
-    // First rotation (theta12)
-    else{
-
-      fHd[i][j] = fSinBuffer * fCosBuffer * fHd[j][j];
-
-      fHd[i][i] = fSinBuffer * fHd[j][j] * fSinBuffer;
-
-      fHd[j][j] *= fCosBuffer * fCosBuffer;
-
-    }
-  }
-
-}
-
-
 
 void PMNS_Decay::BuildHam()
 {
@@ -269,7 +143,7 @@ void PMNS_Decay::BuildHam()
      fHms[j][j] = fDm[j]; 
      //Rotate j neutrinos
      for(int i=0; i<j; i++){
-       RotateH(i,j);
+       RotateH(i,j,fHms);
      }
    }
   //Taking care of antineutrinos delta-> -delta and filling the upper triangle
@@ -300,7 +174,7 @@ void PMNS_Decay::BuildHam()
      
     // Rotate j neutrinos
      for(int i=0; i<j; i++){
-       RotateHd(i,j);
+       RotateH(i,j,fHd);
      }
    }
    //Taking care of antineutrinos delta-> -delta and filling the upper triangle

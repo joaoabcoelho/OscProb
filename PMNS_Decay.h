@@ -43,7 +43,6 @@ namespace OscProb {
   protected:
     virtual void BuildHam();
    
-    virtual void RotateHd(int i, int j);
     /// Build the full Hamiltonian
     virtual void UpdateHam();
    
@@ -55,9 +54,9 @@ namespace OscProb {
     virtual void PropagatePath(OscProb::NuPath p);    ///< Propagate neutrino through a single path
     
     
-    complexD fHam[3][3]; ///< The full hamiltonian
-    complexD fHd[3][3];
-    complexD fHt[3][3];
+    std::vector< std::vector<complexD> > fHd; //Decay hamiltonian
+    complexD fHam[3][3]; //Final hamiltonian 
+    complexD fHt[3][3]; //Standard+Decay hamiltonian
     
   };
 
