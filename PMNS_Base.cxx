@@ -906,6 +906,7 @@ std::vector<complexD> PMNS_Base::GetMassEigenstate(int mi){
 /// and it speeds up computation by skipping null terms
 ///
 /// @param i,j - the indices of the rotation ij
+/// @param Ham - the Hamiltonian to be rotated
 ///
 void PMNS_Base::RotateH(int i,int j,std::vector< std::vector<complexD> >& Ham){
 
