@@ -55,9 +55,12 @@ namespace OscProb {
     
     
     std::vector< std::vector<complexD> > fHd; //Decay hamiltonian
-    complexD fHam[3][3]; //Final hamiltonian 
-    complexD fHt[3][3]; //Standard+Decay hamiltonian
-    
+    std::vector< std::vector<complexD> > fHam;  //Final hamiltonian 
+    std::vector< std::vector<complexD> > fHt;  //Standard+Decay hamiltonian
+   
+    std::vector< complexD > fEvalEigen;
+    std::vector< std::vector<complexD> > fEvecEigen;
+    std::vector< std::vector<complexD> > fEvecEigeninv;    
   };
 
 }

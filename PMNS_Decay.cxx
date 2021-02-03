@@ -26,10 +26,15 @@ using namespace OscProb;
 /// This class is restricted to 3 neutrino flavours.
 ///
 PMNS_Decay::PMNS_Decay() : PMNS_Base(), fHam() {
-	falpha    = vector<double>(fNumNus, 0);
-	fEvalI = vector<double>(fNumNus, 0); /////
-	fEvecinv = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero)); /////
-	fHd     = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));	 
+	falpha         = vector<double>(fNumNus, 0);
+	fEvalI         = vector<double>(fNumNus, 0); 
+	fEvecinv       = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
+	fEvalEigen     = vector<complexD>(fNumNus, 0);
+	fEvecEigen     = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
+	fEvecEigeninv  = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
+	fHd            = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));	 
+	fHam           = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
+	fHt            = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
 	}
 
 //......................................................................
@@ -263,13 +268,8 @@ void PMNS_Decay::SolveHam()
 
   UpdateHam();
 
-
-  complexD fEvalEigen[3];
-  complexD fEvecEigen[3][3];
-  complexD fEvecEigeninv[3][3];
   // Solve Hamiltonian for eigensystem using the Eigen library method 
   complexsolver(fHam,fEvecEigen,fEvecEigeninv,fEvalEigen);
-
 
 
   // Fill fEval and fEvec vectors from Eigen arrays  
@@ -311,7 +311,6 @@ void PMNS_Decay::PropagatePath(NuPath p)
     double arg = fEval[i] * LengthIneV;
     double argI = fEvalI[i] * LengthIneV;
     std::complex<double> numi=std::complex<double>(0,1.0);
-    // fPhases[i] = complexD(cos(arg)*exp(argI), -sin(arg)*exp(argI));
     fPhases[i] = exp(-numi*(arg+numi*argI));
    
    
