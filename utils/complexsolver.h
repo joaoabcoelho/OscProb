@@ -1,23 +1,26 @@
 #include <iostream>
 #include "Eigenvalues"
+#include <complex>
+#include <vector>
 
 using namespace Eigen;
 using namespace std;
 
-void complexsolver(std::complex<double> A[3][3], std::complex<double> Q[3][3], std::complex<double> Qinv[3][3], std::complex<double> w[3])
-{
 
-  Matrix3cd l;
-  Matrix3cd evc, evcinv;
-  Vector3cd evl;
+void complexsolver(std::vector< std::vector<complexD> > A, std::vector< std::vector<complexD> >& Q, std::vector< std::vector<complexD> >& Qinv, std::vector< complexD >& w)  
+{
+  int size=w.size();
+  MatrixXcd l(size,size);
+  MatrixXcd evc(size,size), evcinv(size,size);
+  VectorXcd evl(size);
   
-  for(int n=0; n<3; n++){
-    for(int m=0; m<3; m++){
+  for(int n=0; n<size; n++){
+    for(int m=0; m<size; m++){
       l(n,m)=A[n][m];
     } 
   }  
                   
-  ComplexEigenSolver<Matrix3cd> eigensolver;
+  ComplexEigenSolver<MatrixXcd> eigensolver;
   eigensolver.compute(l);
  
   if(eigensolver.info() != Success){ 
@@ -28,13 +31,13 @@ void complexsolver(std::complex<double> A[3][3], std::complex<double> Q[3][3], s
   evl = eigensolver.eigenvalues();
   evc= eigensolver.eigenvectors();
   evcinv=evc.inverse();
-  for(int n=0; n<3; n++){
-    for(int m=0; m<3; m++){
+  for(int n=0; n<size; n++){
+    for(int m=0; m<size; m++){
       Q[n][m] = evc(n,m);
       Qinv[n][m]= evcinv(n,m);
     } 
   }  
-  for(int t=0; t<3; t++){
+  for(int t=0; t<size; t++){
     w[t] = evl(t);
   }
               

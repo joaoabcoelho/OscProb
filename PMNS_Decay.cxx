@@ -3,8 +3,8 @@
 // Implementation of oscillations of neutrinos in matter in a
 // three-neutrino framework with Neutrino Decay in the 3rd state. 
 //
-// This class expands the PMNS_Fast class including the decay of the third mass// state of the neutrino through a decay constant alpha3=m3/tau3 (eV^2), where 
-// m3 is the mass in the restframe and tau3 is the lifetime in the restframe.
+// This class expands the PMNS_Fast class including the decay of the second and third mass// state of the neutrino through a decay constant alpha_i=m_i/tau_i (eV^2), where 
+// m_i is the mass in the restframe and tau_i is the lifetime in the restframe.
 //
 // Diagonalization of the matrix is done using the Eigen library. 
 //
@@ -26,10 +26,15 @@ using namespace OscProb;
 /// This class is restricted to 3 neutrino flavours.
 ///
 PMNS_Decay::PMNS_Decay() : PMNS_Base(), fHam() {
-	falpha    = vector<double>(fNumNus, 0);
-	fEvalI = vector<double>(fNumNus, 0); /////
-	fEvecinv = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero)); /////
-	 
+	falpha         = vector<double>(fNumNus, 0);
+	fEvalI         = vector<double>(fNumNus, 0); 
+	fEvecinv       = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
+	fEvalEigen     = vector<complexD>(fNumNus, 0);
+	fEvecEigen     = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
+	fEvecEigeninv  = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
+	fHd            = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));	 
+	fHam           = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
+	fHt            = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
 	}
 
 //......................................................................
@@ -66,11 +71,21 @@ if(alpha3<0){
 }
 
 fBuiltHms *= (falpha[2] == alpha3);
-
-
- falpha[0]=0;
- falpha[1]=0;
  falpha[2] = alpha3;
+
+}
+//......................................................................                                              
+///     Setting Alpha2 parameter, it must be possitive, and units are eV^2 .
+///     Alpha2=m2/tau2, mass and lifetime of the second state in the restframe
+void PMNS_Decay::SetAlpha2(double alpha2)
+{
+  if(alpha2<0){
+    cout << "Alpha2 must be positive" << endl;
+    return;
+  }
+
+  fBuiltHms *= (falpha[1] == alpha2);
+  falpha[1] = alpha2;
 
 }
 
@@ -81,7 +96,6 @@ void PMNS_Decay::SetIsNuBar(bool isNuBar)
   fGotES *= (fIsNuBar == isNuBar);
   fBuiltHms *= (fIsNuBar == isNuBar);
   fIsNuBar = isNuBar;
-
 }
 //......................................................................
 ///
@@ -107,130 +121,11 @@ double PMNS_Decay::GetAlpha3()
 {
 return falpha[2];
 }
-///Build the Hamiltonian and rotate it
-
-void PMNS_Decay::RotateHd(int i,int j){
-
-  // Do nothing if angle is zero
-  if(fTheta[i][j]==0) return;
-
-  double fSinBuffer = sin(fTheta[i][j]);
-  double fCosBuffer = cos(fTheta[i][j]);
-
-  double  fHdBufferD;
-  complexD fHdBufferC;
-
-  // With Delta
-  if(i+1<j){
-    complexD fExpBuffer = complexD(cos(fDelta[i][j]), -sin(fDelta[i][j]));
-
-    // General case
-    if(i>0){
-      // Top columns
-      for(int k=0; k<i; k++){
-        fHdBufferC = fHd[k][i];
-
-        fHd[k][i] *= fCosBuffer;
-        fHd[k][i] += fHd[k][j] * fSinBuffer * conj(fExpBuffer);
-
-        fHd[k][j] *= fCosBuffer;
-        fHd[k][j] -= fHdBufferC * fSinBuffer * fExpBuffer;
-      }
-
-      // Middle row and column
-      for(int k=i+1; k<j; k++){
-        fHdBufferC = fHd[k][j];
-
-        fHd[k][j] *= fCosBuffer;
-        fHd[k][j] -= conj(fHd[i][k]) * fSinBuffer * fExpBuffer;
-
-        fHd[i][k] *= fCosBuffer;
-        fHd[i][k] += fSinBuffer * fExpBuffer * conj(fHdBufferC);
-      }
-
-      // Nodes ij
-      fHdBufferC = fHd[i][i];
-      fHdBufferD = real(fHd[j][j]);
-
-      fHd[i][i] *= fCosBuffer * fCosBuffer;
-      fHd[i][i] += 2 * fSinBuffer * fCosBuffer * real(fHd[i][j] * conj(fExpBuffer));
-      fHd[i][i] += fSinBuffer * fHd[j][j] * fSinBuffer;
-
-      fHd[j][j] *= fCosBuffer * fCosBuffer;
-      fHd[j][j] += fSinBuffer * fHdBufferC * fSinBuffer;
-      fHd[j][j] -= 2 * fSinBuffer * fCosBuffer * real(fHd[i][j] * conj(fExpBuffer));
-
-      fHd[i][j] -= 2 * fSinBuffer * real(fHd[i][j] * conj(fExpBuffer)) * fSinBuffer * fExpBuffer;
-      fHd[i][j] += fSinBuffer * fCosBuffer * (fHdBufferD - fHdBufferC) * fExpBuffer;
-
-    }
-    // First rotation on j (No top columns)
-    else{
-      // Middle rows and columns
-      for(int k=i+1; k<j; k++){
-        fHd[k][j] = -conj(fHd[i][k]) * fSinBuffer * fExpBuffer;
-
-        fHd[i][k] *= fCosBuffer;
-      }
-
-      // Nodes ij
-      fHdBufferD = real(fHd[i][i]);
-
-      fHd[i][j] = fSinBuffer * fCosBuffer * (fHd[j][j] - fHdBufferD) * fExpBuffer;
-
-      fHd[i][i] *= fCosBuffer * fCosBuffer;
-      fHd[i][i] += fSinBuffer * fHd[j][j] * fSinBuffer;
-
-      fHd[j][j] *= fCosBuffer * fCosBuffer;
-      fHd[j][j] += fSinBuffer * fHdBufferD * fSinBuffer;
-    }
-
-  }
-  // Without Delta (No middle rows or columns: j = i+1)
-  else{
-    // General case
-    if(i>0){
-      // Top columns
-      for(int k=0; k<i; k++){
-        fHdBufferC = fHd[k][i];
-
-        fHd[k][i] *= fCosBuffer;
-        fHd[k][i] += fHd[k][j] * fSinBuffer;
-
-        fHd[k][j] *= fCosBuffer;
-        fHd[k][j] -= fHdBufferC * fSinBuffer;
-      }
-
-      // Nodes ij
-      fHdBufferC = fHd[i][i];
-      fHdBufferD = real(fHd[j][j]);
-
-      fHd[i][i] *= fCosBuffer * fCosBuffer;
-      fHd[i][i] += 2 * fSinBuffer * fCosBuffer * real(fHd[i][j]);
-      fHd[i][i] += fSinBuffer * fHd[j][j] * fSinBuffer;
-
-      fHd[j][j] *= fCosBuffer * fCosBuffer;
-      fHd[j][j] += fSinBuffer * fHdBufferC * fSinBuffer;
-      fHd[j][j] -= 2 * fSinBuffer * fCosBuffer * real(fHd[i][j]);
-
-      fHd[i][j] -= 2 * fSinBuffer * real(fHd[i][j]) * fSinBuffer;
-      fHd[i][j] += fSinBuffer * fCosBuffer * (fHdBufferD - fHdBufferC);
-
-    }
-    // First rotation (theta12)
-    else{
-
-      fHd[i][j] = fSinBuffer * fCosBuffer * fHd[j][j];
-
-      fHd[i][i] = fSinBuffer * fHd[j][j] * fSinBuffer;
-
-      fHd[j][j] *= fCosBuffer * fCosBuffer;
-
-    }
-  }
-
+/// Get alpha2
+double PMNS_Decay::GetAlpha2()
+{
+  return falpha[1];
 }
-
 
 
 void PMNS_Decay::BuildHam()
@@ -238,90 +133,87 @@ void PMNS_Decay::BuildHam()
 
   // Check if anything changed
   if(fBuiltHms) return;
-  
+   
   // Tag to recompute eigensystem
   fGotES = false;
-  if(fIsNuBar==true){
-	  double delta=GetDelta(1,3);
-	  SetDelta(1,3,-delta);
-	  }
+  
   ///Reset everything
    for(int i=0; i<fNumNus; i++){
-   for(int j=0; j<fNumNus; j++){
-	   fHms[i][j]= 0;
-	   }
+     for(int j=0; j<fNumNus; j++){
+       fHms[i][j]= 0;
+     }
    }
-  
-  for(int j=0; j<fNumNus; j++){
-    // Set mass splitting
-    fHms[j][j] = fDm[j];
-    // Reset off-diagonal elements
-    for(int i=0; i<j; i++){
-      fHms[i][j] = 0;
-    }
- 
-    //Rotate j neutrinos
-    for(int i=0; i<j; i++){
-      RotateH(i,j);
-    }
-  }
-  
+   for(int j=0; j<fNumNus; j++){
+     // Set mass splitting
+     fHms[j][j] = fDm[j]; 
+     //Rotate j neutrinos
+     for(int i=0; i<j; i++){
+       RotateH(i,j,fHms);
+     }
+   }
+  //Taking care of antineutrinos delta-> -delta and filling the upper triangle
+  // because final hamiltonian will be non-hermitian.
    for(int i=0; i<fNumNus; i++){
-   for(int j=i+1; j<fNumNus; j++){
-	   fHms[j][i]= conj(fHms[i][j]);
-	   }
+     for(int j=i+1; j<fNumNus; j++){
+       if(fIsNuBar){
+	 fHms[i][j]=conj(fHms[i][j]);
+       }           
+       fHms[j][i]= conj(fHms[i][j]);
+     }
    }
   
 
   ///Introduction of the alpha3
   ///Reset everything
    for(int i=0; i<fNumNus; i++){
-   for(int j=0; j<fNumNus; j++){
-	   fHd[i][j]= 0;
-	   }
+     for(int j=0; j<fNumNus; j++){
+       fHd[i][j]= 0;
+     }
    }
   
    for(int j=0; j<fNumNus; j++){
 	   
     // Set alpha
-    fHd[j][j] = falpha[j];
+     fHd[j][j] = falpha[j];
     
-    // Reset off-diagonal elements
-    for(int i=0; i<j; i++){
-      fHd[i][j] = 0;
-    }
- 
+     
     // Rotate j neutrinos
-    for(int i=0; i<j; i++){
-      RotateHd(i,j);
-    }
-  }
-  
+     for(int i=0; i<j; i++){
+       RotateH(i,j,fHd);
+     }
+   }
+   //Taking care of antineutrinos delta-> -delta and filling the upper triangle
+   // because final hamiltonian will be non-hermitian.
    for(int i=0; i<fNumNus; i++){
-   for(int j=i+1; j<fNumNus; j++){
-	   fHd[j][i]= conj(fHd[i][j]);
-	   }
+     for(int j=i+1; j<fNumNus; j++){
+       if(fIsNuBar){
+	 fHd[i][j]=conj(fHd[i][j]);
+       }
+       fHd[j][i]= conj(fHd[i][j]);
+     }
    }
   
 
-  const   complex<double> numi(0.0,1.0);  
-  ///Construct the total Hms+Hd
-  for(int j=0; j<fNumNus; j++){
-	for(int i=0; i<fNumNus; i++){
-		fHt[i][j]=fHms[i][j]-numi*fHd[i][j];
-  }
-}  
+   const   complex<double> numi(0.0,1.0);  
+   ///Construct the total Hms+Hd
+   for(int j=0; j<fNumNus; j++){
+     for(int i=0; i<fNumNus; i++){
+       fHt[i][j]=fHms[i][j]-numi*fHd[i][j];
+     }
+   }  
  
  
  
-  ClearCache();
+  //ClearCache();
 
   // Tag as built
   fBuiltHms = true;
+  
 
  
 
 }
+
 
 //......................................................................
 ///
@@ -353,7 +245,7 @@ void PMNS_Decay::UpdateHam()
 
   if(!fIsNuBar) fHam[0][0] += kr2GNe;
   else          fHam[0][0] -= kr2GNe;
-
+  
 }
 //......................................................................
 ///
@@ -372,17 +264,12 @@ void PMNS_Decay::SolveHam()
   if(fGotES) return;
 
   // Try caching if activated
-  if(TryCache()) return;
+  //if(TryCache()) return;
 
   UpdateHam();
 
-
-  complexD fEvalEigen[3];
-  complexD fEvecEigen[3][3];
-  complexD fEvecEigeninv[3][3];
   // Solve Hamiltonian for eigensystem using the Eigen library method 
   complexsolver(fHam,fEvecEigen,fEvecEigeninv,fEvalEigen);
-
 
 
   // Fill fEval and fEvec vectors from Eigen arrays  
@@ -398,24 +285,10 @@ void PMNS_Decay::SolveHam()
   fGotES = true;
 
   // Fill cache if activated
-  FillCache();
+  //FillCache();
 
 }
 
-bool PMNS_Decay::CheckProb(int flvi)
-{
-	double controler=0;
-for( int i=0; i<fNumNus; i++){
-	controler+=Prob(flvi,i);
-}
-
-if(controler <= 1.0005)
-{
-	return true;
-	}
-else{
-	return false;}
-}
 //.....................................................................
 ///
 /// Set the eigensystem to the analytic solution in vacuum.
@@ -438,19 +311,14 @@ void PMNS_Decay::PropagatePath(NuPath p)
     double arg = fEval[i] * LengthIneV;
     double argI = fEvalI[i] * LengthIneV;
     std::complex<double> numi=std::complex<double>(0,1.0);
-   // fPhases[i] = complexD(cos(arg)*exp(argI), -sin(arg)*exp(argI));
-   fPhases[i] = exp(-numi*(arg+numi*argI));
+    fPhases[i] = exp(-numi*(arg+numi*argI));
    
    
-}
+  }
   for(int i=0;i<fNumNus;i++){
     fBuffer[i] = 0;
     for(int j=0;j<fNumNus;j++){
-		//if(falpha[2]==0){
       fBuffer[i] += fEvecinv[i][j] * fNuState[j];
-        //                }
-     // else{
-	//	  fBuffer[i] += conj(fEvec[j][i]) * fNuState[j];
     }
     fBuffer[i] *= fPhases[i];
   }
@@ -461,11 +329,7 @@ void PMNS_Decay::PropagatePath(NuPath p)
     for(int j=0;j<fNumNus;j++){
       fNuState[i] +=  fEvec[i][j] * fBuffer[j];
       
-    }
-    
-	
-		
-		
+    }		
 	
   }
 

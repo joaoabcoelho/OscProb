@@ -155,7 +155,7 @@ namespace OscProb {
 
 
     // Building and solving
-    virtual void RotateH(int i,int j); ///< Rotate the Hamiltonian by theta_ij and delta_ij
+    virtual void RotateH(int i,int j,std::vector< std::vector<complexD> >& Ham); ///< Rotate the Hamiltonian by theta_ij and delta_ij
     virtual void RotateState(int i,int j); ///< Rotate the neutrino state by theta_ij and delta_ij
 
     virtual void BuildHms();           ///< Build the matrix of masses squared.
