@@ -36,7 +36,7 @@ double Absorption::Trans(double xsec){
     //cout << l << '\t' << n << '\t' << xsec << '\t' << p_trans << endl;
     p_trans_vec.push_back(p_trans); //probability of NO absorption!
   }
-  return 1.-accumulate(p_trans_vec.begin(),p_trans_vec.end(),1.,multiplies<double>()); //returns probability of absorption
+  return accumulate(p_trans_vec.begin(),p_trans_vec.end(),1.,multiplies<double>()); //returns probability of transmission 
 }
 
 void Absorption::SetPath(std::vector<OscProb::NuPath> paths){
