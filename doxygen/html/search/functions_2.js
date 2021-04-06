@@ -4,5 +4,6 @@ var searchData=
   ['clearcache',['ClearCache',['../classOscProb_1_1PMNS__Base.html#ac47fd33e69aa6490f99e2fd147a92f03',1,'OscProb::PMNS_Base']]],
   ['clearmodel',['ClearModel',['../classOscProb_1_1PremModel.html#aaead53a9385bda9b0219fd051d0cdd11',1,'OscProb::PremModel']]],
   ['clearpath',['ClearPath',['../classOscProb_1_1PMNS__Base.html#aefe521239031c418cfaaaa550a6e13bb',1,'OscProb::PMNS_Base']]],
+  ['complexsolver',['complexsolver',['../complexsolver_8h.html#a4189e2725ab85d164f494133d55d4363',1,'complexsolver.h']]],
   ['ctransp',['CTransp',['../classOscProb_1_1PMNS__Deco.html#aca391ff02be7abc2fd3dba40e9ce2665',1,'OscProb::PMNS_Deco']]]
 ];

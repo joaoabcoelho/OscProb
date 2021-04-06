@@ -1,0 +1,65 @@
+\hypertarget{complexsolver_8h}{}\section{/home/jcoelho/test\+Osc\+Prob/utils/complexsolver.h File Reference}
+\label{complexsolver_8h}\index{/home/jcoelho/test\+Osc\+Prob/utils/complexsolver.\+h@{/home/jcoelho/test\+Osc\+Prob/utils/complexsolver.\+h}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include \char`\"{}Eigenvalues\char`\"{}}\newline
+{\ttfamily \#include $<$complex$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{complexsolver_8h_a4189e2725ab85d164f494133d55d4363}{complexsolver} (std\+::vector$<$ std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ $>$ A, std\+::vector$<$ std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ $>$ \&Q, std\+::vector$<$ std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ $>$ \&Qinv, std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ \&w)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{complexsolver_8h_a4189e2725ab85d164f494133d55d4363}\label{complexsolver_8h_a4189e2725ab85d164f494133d55d4363}} 
+\index{complexsolver.\+h@{complexsolver.\+h}!complexsolver@{complexsolver}}
+\index{complexsolver@{complexsolver}!complexsolver.\+h@{complexsolver.\+h}}
+\subsubsection{\texorpdfstring{complexsolver()}{complexsolver()}}
+{\footnotesize\ttfamily void complexsolver (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ $>$}]{A,  }\item[{std\+::vector$<$ std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ $>$ \&}]{Q,  }\item[{std\+::vector$<$ std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ $>$ \&}]{Qinv,  }\item[{std\+::vector$<$ \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} $>$ \&}]{w }\end{DoxyParamCaption})}
+
+
+
+Definition at line 10 of file complexsolver.\+h.
+
+
+
+Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Decay\+::\+Solve\+Ham().
+
+
+\begin{DoxyCode}
+11 \{
+12   \textcolor{keywordtype}{int} size=w.size();
+13   MatrixXcd l(size,size);
+14   MatrixXcd evc(size,size), evcinv(size,size);
+15   VectorXcd evl(size);
+16   
+17   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} n=0; n<size; n++)\{
+18     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} m=0; m<size; m++)\{
+19       l(n,m)=A[n][m];
+20     \} 
+21   \}  
+22                   
+23   ComplexEigenSolver<MatrixXcd> eigensolver;
+24   eigensolver.compute(l);
+25  
+26   \textcolor{keywordflow}{if}(eigensolver.info() != Success)\{ 
+27     cout << \textcolor{stringliteral}{"The diagonalization is failing"} << endl;
+28     abort();
+29   \}
+30   
+31   evl = eigensolver.eigenvalues();
+32   evc= eigensolver.eigenvectors();
+33   evcinv=evc.inverse();
+34   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} n=0; n<size; n++)\{
+35     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} m=0; m<size; m++)\{
+36       Q[n][m] = evc(n,m);
+37       Qinv[n][m]= evcinv(n,m);
+38     \} 
+39   \}  
+40   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} t=0; t<size; t++)\{
+41     w[t] = evl(t);
+42   \}
+43               
+44 \}
+\end{DoxyCode}

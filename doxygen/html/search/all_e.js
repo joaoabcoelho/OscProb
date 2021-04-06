@@ -4,12 +4,18 @@ var searchData=
   ['pmns_5fbase',['PMNS_Base',['../classOscProb_1_1PMNS__Base.html',1,'OscProb::PMNS_Base'],['../classOscProb_1_1PMNS__Base.html#aa53e83b03a9cf4bdfa0a07136bd17a79',1,'OscProb::PMNS_Base::PMNS_Base()']]],
   ['pmns_5fbase_2ecxx',['PMNS_Base.cxx',['../PMNS__Base_8cxx.html',1,'']]],
   ['pmns_5fbase_2eh',['PMNS_Base.h',['../PMNS__Base_8h.html',1,'']]],
+  ['pmns_5fdecay',['PMNS_Decay',['../classOscProb_1_1PMNS__Decay.html',1,'OscProb::PMNS_Decay'],['../classOscProb_1_1PMNS__Decay.html#a866c08feec7ec2cc4b756f327af62635',1,'OscProb::PMNS_Decay::PMNS_Decay()']]],
+  ['pmns_5fdecay_2ecxx',['PMNS_Decay.cxx',['../PMNS__Decay_8cxx.html',1,'']]],
+  ['pmns_5fdecay_2eh',['PMNS_Decay.h',['../PMNS__Decay_8h.html',1,'']]],
   ['pmns_5fdeco',['PMNS_Deco',['../classOscProb_1_1PMNS__Deco.html',1,'OscProb::PMNS_Deco'],['../classOscProb_1_1PMNS__Deco.html#a976dc43bb65547af5f4a27f5a8fccbba',1,'OscProb::PMNS_Deco::PMNS_Deco()']]],
   ['pmns_5fdeco_2ecxx',['PMNS_Deco.cxx',['../PMNS__Deco_8cxx.html',1,'']]],
   ['pmns_5fdeco_2eh',['PMNS_Deco.h',['../PMNS__Deco_8h.html',1,'']]],
   ['pmns_5ffast',['PMNS_Fast',['../classOscProb_1_1PMNS__Fast.html',1,'OscProb::PMNS_Fast'],['../classOscProb_1_1PMNS__Fast.html#a2bbac744bf63753105d766a860af7c0d',1,'OscProb::PMNS_Fast::PMNS_Fast()']]],
   ['pmns_5ffast_2ecxx',['PMNS_Fast.cxx',['../PMNS__Fast_8cxx.html',1,'']]],
   ['pmns_5ffast_2eh',['PMNS_Fast.h',['../PMNS__Fast_8h.html',1,'']]],
+  ['pmns_5fliv',['PMNS_LIV',['../classOscProb_1_1PMNS__LIV.html',1,'OscProb::PMNS_LIV'],['../classOscProb_1_1PMNS__LIV.html#a4a79b80700c14fe8d6a6034c6dd5870c',1,'OscProb::PMNS_LIV::PMNS_LIV()']]],
+  ['pmns_5fliv_2ecxx',['PMNS_LIV.cxx',['../PMNS__LIV_8cxx.html',1,'']]],
+  ['pmns_5fliv_2eh',['PMNS_LIV.h',['../PMNS__LIV_8h.html',1,'']]],
   ['pmns_5fnsi',['PMNS_NSI',['../classOscProb_1_1PMNS__NSI.html',1,'OscProb::PMNS_NSI'],['../classOscProb_1_1PMNS__NSI.html#ab41e79fb427c7a5662443acad31ce7e9',1,'OscProb::PMNS_NSI::PMNS_NSI()']]],
   ['pmns_5fnsi_2ecxx',['PMNS_NSI.cxx',['../PMNS__NSI_8cxx.html',1,'']]],
   ['pmns_5fnsi_2eh',['PMNS_NSI.h',['../PMNS__NSI_8h.html',1,'']]],
@@ -22,5 +28,5 @@ var searchData=
   ['premmodel_2eh',['PremModel.h',['../PremModel_8h.html',1,'']]],
   ['prob',['Prob',['../classOscProb_1_1PMNS__Base.html#aa2e10704d2d205a1ec8988de14b1a66f',1,'OscProb::PMNS_Base::Prob(std::vector&lt; complexD &gt; nu_in, int flvf)'],['../classOscProb_1_1PMNS__Base.html#a0190a79284289aacf682c78d7cef9a81',1,'OscProb::PMNS_Base::Prob(std::vector&lt; complexD &gt; nu_in, int flvf, double E)'],['../classOscProb_1_1PMNS__Base.html#a01fba31729345376705e02408e835f67',1,'OscProb::PMNS_Base::Prob(std::vector&lt; complexD &gt; nu_in, int flvf, double E, double L)'],['../classOscProb_1_1PMNS__Base.html#aec5c399b93261f1962a4b7dbbb44b973',1,'OscProb::PMNS_Base::Prob(int flvi, int flvf)'],['../classOscProb_1_1PMNS__Base.html#aa3cee10639d5c0879ccb9e78d62128d3',1,'OscProb::PMNS_Base::Prob(int flvi, int flvf, double E)'],['../classOscProb_1_1PMNS__Base.html#a6e0a74508d9d6db7be02e242b8467563',1,'OscProb::PMNS_Base::Prob(int flvi, int flvf, double E, double L)']]],
   ['propagate',['Propagate',['../classOscProb_1_1PMNS__Base.html#a054e3a8b05b9a958b6fa416e4a835e3e',1,'OscProb::PMNS_Base']]],
-  ['propagatepath',['PropagatePath',['../classOscProb_1_1PMNS__Base.html#accb08503acc162188041d7a96a280462',1,'OscProb::PMNS_Base::PropagatePath()'],['../classOscProb_1_1PMNS__Deco.html#aa75341a3608bb12d7792a14e67ef2d5e',1,'OscProb::PMNS_Deco::PropagatePath()']]]
+  ['propagatepath',['PropagatePath',['../classOscProb_1_1PMNS__Base.html#accb08503acc162188041d7a96a280462',1,'OscProb::PMNS_Base::PropagatePath()'],['../classOscProb_1_1PMNS__Decay.html#a12dda597f214e874e958070abc63a37c',1,'OscProb::PMNS_Decay::PropagatePath()'],['../classOscProb_1_1PMNS__Deco.html#aa75341a3608bb12d7792a14e67ef2d5e',1,'OscProb::PMNS_Deco::PropagatePath()']]]
 ];

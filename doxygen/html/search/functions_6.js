@@ -1,7 +1,11 @@
 var searchData=
 [
+  ['getalpha2',['GetAlpha2',['../classOscProb_1_1PMNS__Decay.html#a11c0e3144517ad49712d3d3020358149',1,'OscProb::PMNS_Decay']]],
+  ['getalpha3',['GetAlpha3',['../classOscProb_1_1PMNS__Decay.html#a5a1e1b0cc312c334b22f4efa307d18d8',1,'OscProb::PMNS_Decay']]],
   ['getangle',['GetAngle',['../classOscProb_1_1PMNS__Base.html#acee137091304c919642293ddf015bbc8',1,'OscProb::PMNS_Base']]],
+  ['getat',['GetaT',['../classOscProb_1_1PMNS__LIV.html#a7e0c2ca289729b5736bbbccc5c15ab09',1,'OscProb::PMNS_LIV']]],
   ['getcost',['GetCosT',['../classOscProb_1_1PremModel.html#a5328474bdbb703eb4c9d4df49999cda6',1,'OscProb::PremModel']]],
+  ['getct',['GetcT',['../classOscProb_1_1PMNS__LIV.html#a91b249e33e6bf12a44b7d52d96679a92',1,'OscProb::PMNS_LIV']]],
   ['getdecoangle',['GetDecoAngle',['../classOscProb_1_1PMNS__Deco.html#a5dadf6a39dec4a229babeff6a650179c',1,'OscProb::PMNS_Deco']]],
   ['getdelta',['GetDelta',['../classOscProb_1_1PMNS__Base.html#adb8dbc91d4286d2e7c8f768c59476241',1,'OscProb::PMNS_Base']]],
   ['getdm',['GetDm',['../classOscProb_1_1PMNS__Base.html#ad26815ac5f4805d1259817e4936e5f8f',1,'OscProb::PMNS_Base']]],
