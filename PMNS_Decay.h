@@ -1,7 +1,8 @@
 ////////////////////////////////////////////////////////////////////////
 /// \class OscProb::PMNS_Decay
 ///
-/// \brief Implementation of neutrino decay of the third mass state \nu_3 with oscillations of neutrinos in matter in a
+/// \brief Implementation of neutrino decay of the third mass state 
+///        \f$\nu_3\f$ with oscillations of neutrinos in matter in a
 ///        three-neutrino framework.
 ///
 ///                               
