@@ -26,7 +26,7 @@ Eigen_INCS = ${PWD}/eigen/Eigen
 
 override CXXFLAGS += $(GSL_INCS) -I$(Eigen_INCS) -I$(CURDIR)/utils
 override GSL_INCS += -I$(Eigen_INCS) -I${CURDIR}/utils
-override LDFLAGS  += $(GSL_LIBS) 
+override LDFLAGS  += $(GSL_LIBS)
 
 # the sets of directories to do various things in
 MATRIX=$(CURDIR)/MatrixDecomp/libMatrixDecomp.so
@@ -38,7 +38,7 @@ PREMDIR = $(CURDIR)/PremTables
 PREMFILE = $(PREMDIR)/prem_default.txt
 PREMINC = $(CURDIR)/prem_default.hpp
 
-all: $(BUILDDIRS) $(PREMINC) $(TARGET_LIB)
+all: $(Eigen_INCS) $(BUILDDIRS) $(PREMINC) $(TARGET_LIB)
 
 $(TARGET_LIB): $(DICTIONARY) $(SOURCES) $(MATRIX)
 	@echo "  Building $(PACKAGE)..."
@@ -49,6 +49,11 @@ $(DICTIONARY): $(HEADERS) LinkDef.h
 	@mkdir -p tmp
 	@$(DICTEXE) -f $@ -c -p $(GSL_INCS) $^
 	@if [ -e $(DICTIONARY:%.cxx=%_rdict.pcm) ] ; then mv -f $(DICTIONARY:%.cxx=%_rdict.pcm) $(CURDIR)/ ; fi # ROOT 6
+
+$(Eigen_INCS):
+	@echo "  Eigen not found. Trying to initialize submodule..."
+	@echo "  git submodule update --init"
+	@git submodule update --init
 
 $(BUILDDIRS):
 	@exec $(MAKE) -s -C $(@:build-%=%)
