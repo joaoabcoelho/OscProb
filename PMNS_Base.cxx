@@ -906,8 +906,9 @@ std::vector<complexD> PMNS_Base::GetMassEigenstate(int mi){
 /// and it speeds up computation by skipping null terms
 ///
 /// @param i,j - the indices of the rotation ij
+/// @param Ham - the Hamiltonian to be rotated
 ///
-void PMNS_Base::RotateH(int i,int j){
+void PMNS_Base::RotateH(int i,int j,std::vector< std::vector<complexD> >& Ham){
 
   // Do nothing if angle is zero
   if(fTheta[i][j]==0) return;
@@ -926,61 +927,61 @@ void PMNS_Base::RotateH(int i,int j){
     if(i>0){
       // Top columns
       for(int k=0; k<i; k++){
-        fHmsBufferC = fHms[k][i];
+        fHmsBufferC = Ham[k][i];
 
-        fHms[k][i] *= fCosBuffer;
-        fHms[k][i] += fHms[k][j] * fSinBuffer * conj(fExpBuffer);
+        Ham[k][i] *= fCosBuffer;
+        Ham[k][i] += Ham[k][j] * fSinBuffer * conj(fExpBuffer);
 
-        fHms[k][j] *= fCosBuffer;
-        fHms[k][j] -= fHmsBufferC * fSinBuffer * fExpBuffer;
+        Ham[k][j] *= fCosBuffer;
+        Ham[k][j] -= fHmsBufferC * fSinBuffer * fExpBuffer;
       }
 
       // Middle row and column
       for(int k=i+1; k<j; k++){
-        fHmsBufferC = fHms[k][j];
+        fHmsBufferC = Ham[k][j];
 
-        fHms[k][j] *= fCosBuffer;
-        fHms[k][j] -= conj(fHms[i][k]) * fSinBuffer * fExpBuffer;
+        Ham[k][j] *= fCosBuffer;
+        Ham[k][j] -= conj(Ham[i][k]) * fSinBuffer * fExpBuffer;
 
-        fHms[i][k] *= fCosBuffer;
-        fHms[i][k] += fSinBuffer * fExpBuffer * conj(fHmsBufferC);
+        Ham[i][k] *= fCosBuffer;
+        Ham[i][k] += fSinBuffer * fExpBuffer * conj(fHmsBufferC);
       }
 
       // Nodes ij
-      fHmsBufferC = fHms[i][i];
-      fHmsBufferD = real(fHms[j][j]);
+      fHmsBufferC = Ham[i][i];
+      fHmsBufferD = real(Ham[j][j]);
 
-      fHms[i][i] *= fCosBuffer * fCosBuffer;
-      fHms[i][i] += 2 * fSinBuffer * fCosBuffer * real(fHms[i][j] * conj(fExpBuffer));
-      fHms[i][i] += fSinBuffer * fHms[j][j] * fSinBuffer;
+      Ham[i][i] *= fCosBuffer * fCosBuffer;
+      Ham[i][i] += 2 * fSinBuffer * fCosBuffer * real(Ham[i][j] * conj(fExpBuffer));
+      Ham[i][i] += fSinBuffer * Ham[j][j] * fSinBuffer;
 
-      fHms[j][j] *= fCosBuffer * fCosBuffer;
-      fHms[j][j] += fSinBuffer * fHmsBufferC * fSinBuffer;
-      fHms[j][j] -= 2 * fSinBuffer * fCosBuffer * real(fHms[i][j] * conj(fExpBuffer));
+      Ham[j][j] *= fCosBuffer * fCosBuffer;
+      Ham[j][j] += fSinBuffer * fHmsBufferC * fSinBuffer;
+      Ham[j][j] -= 2 * fSinBuffer * fCosBuffer * real(Ham[i][j] * conj(fExpBuffer));
 
-      fHms[i][j] -= 2 * fSinBuffer * real(fHms[i][j] * conj(fExpBuffer)) * fSinBuffer * fExpBuffer;
-      fHms[i][j] += fSinBuffer * fCosBuffer * (fHmsBufferD - fHmsBufferC) * fExpBuffer;
+      Ham[i][j] -= 2 * fSinBuffer * real(Ham[i][j] * conj(fExpBuffer)) * fSinBuffer * fExpBuffer;
+      Ham[i][j] += fSinBuffer * fCosBuffer * (fHmsBufferD - fHmsBufferC) * fExpBuffer;
 
     }
     // First rotation on j (No top columns)
     else{
       // Middle rows and columns
       for(int k=i+1; k<j; k++){
-        fHms[k][j] = -conj(fHms[i][k]) * fSinBuffer * fExpBuffer;
+        Ham[k][j] = -conj(Ham[i][k]) * fSinBuffer * fExpBuffer;
 
-        fHms[i][k] *= fCosBuffer;
+        Ham[i][k] *= fCosBuffer;
       }
 
       // Nodes ij
-      fHmsBufferD = real(fHms[i][i]);
+      fHmsBufferD = real(Ham[i][i]);
 
-      fHms[i][j] = fSinBuffer * fCosBuffer * (fHms[j][j] - fHmsBufferD) * fExpBuffer;
+      Ham[i][j] = fSinBuffer * fCosBuffer * (Ham[j][j] - fHmsBufferD) * fExpBuffer;
 
-      fHms[i][i] *= fCosBuffer * fCosBuffer;
-      fHms[i][i] += fSinBuffer * fHms[j][j] * fSinBuffer;
+      Ham[i][i] *= fCosBuffer * fCosBuffer;
+      Ham[i][i] += fSinBuffer * Ham[j][j] * fSinBuffer;
 
-      fHms[j][j] *= fCosBuffer * fCosBuffer;
-      fHms[j][j] += fSinBuffer * fHmsBufferD * fSinBuffer;
+      Ham[j][j] *= fCosBuffer * fCosBuffer;
+      Ham[j][j] += fSinBuffer * fHmsBufferD * fSinBuffer;
     }
 
   }
@@ -990,39 +991,39 @@ void PMNS_Base::RotateH(int i,int j){
     if(i>0){
       // Top columns
       for(int k=0; k<i; k++){
-        fHmsBufferC = fHms[k][i];
+        fHmsBufferC = Ham[k][i];
 
-        fHms[k][i] *= fCosBuffer;
-        fHms[k][i] += fHms[k][j] * fSinBuffer;
+        Ham[k][i] *= fCosBuffer;
+        Ham[k][i] += Ham[k][j] * fSinBuffer;
 
-        fHms[k][j] *= fCosBuffer;
-        fHms[k][j] -= fHmsBufferC * fSinBuffer;
+        Ham[k][j] *= fCosBuffer;
+        Ham[k][j] -= fHmsBufferC * fSinBuffer;
       }
 
       // Nodes ij
-      fHmsBufferC = fHms[i][i];
-      fHmsBufferD = real(fHms[j][j]);
+      fHmsBufferC = Ham[i][i];
+      fHmsBufferD = real(Ham[j][j]);
 
-      fHms[i][i] *= fCosBuffer * fCosBuffer;
-      fHms[i][i] += 2 * fSinBuffer * fCosBuffer * real(fHms[i][j]);
-      fHms[i][i] += fSinBuffer * fHms[j][j] * fSinBuffer;
+      Ham[i][i] *= fCosBuffer * fCosBuffer;
+      Ham[i][i] += 2 * fSinBuffer * fCosBuffer * real(Ham[i][j]);
+      Ham[i][i] += fSinBuffer * Ham[j][j] * fSinBuffer;
 
-      fHms[j][j] *= fCosBuffer * fCosBuffer;
-      fHms[j][j] += fSinBuffer * fHmsBufferC * fSinBuffer;
-      fHms[j][j] -= 2 * fSinBuffer * fCosBuffer * real(fHms[i][j]);
+      Ham[j][j] *= fCosBuffer * fCosBuffer;
+      Ham[j][j] += fSinBuffer * fHmsBufferC * fSinBuffer;
+      Ham[j][j] -= 2 * fSinBuffer * fCosBuffer * real(Ham[i][j]);
 
-      fHms[i][j] -= 2 * fSinBuffer * real(fHms[i][j]) * fSinBuffer;
-      fHms[i][j] += fSinBuffer * fCosBuffer * (fHmsBufferD - fHmsBufferC);
+      Ham[i][j] -= 2 * fSinBuffer * real(Ham[i][j]) * fSinBuffer;
+      Ham[i][j] += fSinBuffer * fCosBuffer * (fHmsBufferD - fHmsBufferC);
 
     }
     // First rotation (theta12)
     else{
 
-      fHms[i][j] = fSinBuffer * fCosBuffer * fHms[j][j];
+      Ham[i][j] = fSinBuffer * fCosBuffer * Ham[j][j];
 
-      fHms[i][i] = fSinBuffer * fHms[j][j] * fSinBuffer;
+      Ham[i][i] = fSinBuffer * Ham[j][j] * fSinBuffer;
 
-      fHms[j][j] *= fCosBuffer * fCosBuffer;
+      Ham[j][j] *= fCosBuffer * fCosBuffer;
 
     }
   }
@@ -1059,7 +1060,7 @@ void PMNS_Base::BuildHms()
     }
     // Rotate j neutrinos
     for(int i=0; i<j; i++){
-      RotateH(i,j);
+      RotateH(i,j,fHms);
     }
   }
 
