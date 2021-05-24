@@ -6,5 +6,9 @@
 *_C.d
 *_C.so
 
+# Ignore compilated macros
+*.d
+AutoDict*
+
 tmp/
 
