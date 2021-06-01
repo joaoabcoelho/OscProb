@@ -12,6 +12,7 @@ Available classes are:
 - **PMNS_Deco:** Oscillations with 3 flavours including a simple decoherence model
 - **PMNS_LIV:** Oscillations with 3 flavours including Lorentz Invariance Violations
 - **PMNS_Decay:** Oscillations with 3 flavours including neutrino decays of the second and third neutrino mass states \nu_2 and \nu_3. [Requires external library Eigen3, see the instructions below.]
+- **Absorption:** Computes absorption probabilities for high-energy neutrinos
 
 A few example macros on how to use OscProb are available in a tutorial directory.
 
