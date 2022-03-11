@@ -7,6 +7,7 @@ OscProb contains a basic framework for computing neutrino oscillation probabilit
 Available classes are:
 - **PremModel:** Used for determining neutrino paths through the earth
 - **PMNS_Fast:** Standard 3-flavour oscillations
+- **PMNS_Iter:** Standard 3-flavour oscillations (iterative)
 - **PMNS_Sterile:** Oscillations with any number of neutrinos
 - **PMNS_NSI:** Oscillations with 3 flavours including Non-Standard Interactions
 - **PMNS_Deco:** Oscillations with 3 flavours including a simple decoherence model
