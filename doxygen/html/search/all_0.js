@@ -1,5 +1,8 @@
 var searchData=
 [
+  ['absorption',['Absorption',['../classOscProb_1_1Absorption.html',1,'OscProb::Absorption'],['../classOscProb_1_1Absorption.html#a425183cbac1b7ea23a0366733d89a239',1,'OscProb::Absorption::Absorption()']]],
+  ['absorption_2ecxx',['Absorption.cxx',['../Absorption_8cxx.html',1,'']]],
+  ['absorption_2eh',['Absorption.h',['../Absorption_8h.html',1,'']]],
   ['addlayer',['AddLayer',['../classOscProb_1_1PremModel.html#a08c337b84138adc46ee4dd002e9262d2',1,'OscProb::PremModel']]],
   ['addpath',['AddPath',['../classOscProb_1_1PMNS__Base.html#a887dc9d4dc569ec0cdef3933b4c60efc',1,'OscProb::PMNS_Base::AddPath(OscProb::NuPath p)'],['../classOscProb_1_1PMNS__Base.html#ab7f89ad9e7e1224adaa59d3c41594cd9',1,'OscProb::PMNS_Base::AddPath(double length, double density, double zoa=0.5, int layer=0)'],['../classOscProb_1_1PremModel.html#aca013f7ac5494282834048786a0e07a6',1,'OscProb::PremModel::AddPath()']]],
   ['avgpath',['AvgPath',['../namespaceOscProb.html#a999a7944bad8bc72d7ee9f56f81a210e',1,'OscProb::AvgPath(OscProb::NuPath &amp;p1, OscProb::NuPath &amp;p2)'],['../namespaceOscProb.html#a68e2c991fb8e0e76833482be455a55ee',1,'OscProb::AvgPath(std::vector&lt; OscProb::NuPath &gt; &amp;pv)']]],

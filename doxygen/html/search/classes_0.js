@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['eigenpoint',['EigenPoint',['../structOscProb_1_1EigenPoint.html',1,'OscProb']]]
+  ['absorption',['Absorption',['../classOscProb_1_1Absorption.html',1,'OscProb']]]
 ];

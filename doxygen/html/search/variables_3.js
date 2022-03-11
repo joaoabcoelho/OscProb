@@ -4,5 +4,6 @@ var searchData=
   ['kgf',['kGf',['../classOscProb_1_1PMNS__Base.html#a7f26a3456128234b2ae6cc9141a6532f',1,'OscProb::PMNS_Base']]],
   ['kk2',['kK2',['../classOscProb_1_1PMNS__Base.html#a326fc5016d7dd7ce05682c06cdcb6d94',1,'OscProb::PMNS_Base']]],
   ['kkm2ev',['kKm2eV',['../classOscProb_1_1PMNS__Base.html#a382ddd7b76ca89b43f22614a2ea7327b',1,'OscProb::PMNS_Base']]],
-  ['kna',['kNA',['../classOscProb_1_1PMNS__Base.html#a69355e770b89e99437c2b8a66e48eeb9',1,'OscProb::PMNS_Base']]]
+  ['kna',['kNA',['../classOscProb_1_1Absorption.html#a4b3f52bb9c7fffbd55dc9d345375d9b0',1,'OscProb::Absorption::kNA()'],['../classOscProb_1_1PMNS__Base.html#a69355e770b89e99437c2b8a66e48eeb9',1,'OscProb::PMNS_Base::kNA()']]],
+  ['ku',['kU',['../classOscProb_1_1Absorption.html#ab33e87a30b5761dbf7fca55ee9cb58a7',1,'OscProb::Absorption']]]
 ];

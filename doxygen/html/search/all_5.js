@@ -21,6 +21,7 @@ var searchData=
   ['feveceigeninv',['fEvecEigeninv',['../classOscProb_1_1PMNS__Decay.html#ab6ea0333a390cb35a2a2d24b2d5fc3dd',1,'OscProb::PMNS_Decay']]],
   ['fevecgsl',['fEvecGSL',['../structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6',1,'OscProb::GSL_EinSys']]],
   ['fevecinv',['fEvecinv',['../classOscProb_1_1PMNS__Decay.html#a519f7489e14237438f54bd82ac150f6a',1,'OscProb::PMNS_Decay']]],
+  ['fexpvl',['fExpVL',['../classOscProb_1_1PMNS__Iter.html#a0cf9756787eb3c10f20444b5410f4893',1,'OscProb::PMNS_Iter']]],
   ['fgamma',['fGamma',['../classOscProb_1_1PMNS__Deco.html#ae2f30ac9f8b25344959f1698616d337a',1,'OscProb::PMNS_Deco']]],
   ['fgotes',['fGotES',['../classOscProb_1_1PMNS__Base.html#a6dc5cd010d2d70b2324745b4e53e9839',1,'OscProb::PMNS_Base']]],
   ['fgsl',['fGSL',['../classOscProb_1_1PMNS__Sterile.html#a92e9493bcec35167cef6cc472d178449',1,'OscProb::PMNS_Sterile']]],
@@ -38,15 +39,17 @@ var searchData=
   ['fnubar',['fNubar',['../structOscProb_1_1EigenPoint.html#a42655458f601a178afca216036e7b7d8',1,'OscProb::EigenPoint']]],
   ['fnumnus',['fNumNus',['../classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e',1,'OscProb::PMNS_Base::fNumNus()'],['../structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99',1,'OscProb::GSL_EinSys::fNumNus()']]],
   ['fnupath',['fNuPath',['../classOscProb_1_1PremModel.html#aaf3c77e35798d664853157013c90ad2b',1,'OscProb::PremModel']]],
-  ['fnupaths',['fNuPaths',['../classOscProb_1_1PMNS__Base.html#a69db9d57e12fc7cbe0431bc6c18fac93',1,'OscProb::PMNS_Base']]],
+  ['fnupaths',['fNuPaths',['../classOscProb_1_1Absorption.html#aabe51d0748a0d48972780811e90acf69',1,'OscProb::Absorption::fNuPaths()'],['../classOscProb_1_1PMNS__Base.html#a69db9d57e12fc7cbe0431bc6c18fac93',1,'OscProb::PMNS_Base::fNuPaths()']]],
   ['fnustate',['fNuState',['../classOscProb_1_1PMNS__Base.html#abf99f2339e3ee989600740b5d88063e8',1,'OscProb::PMNS_Base']]],
   ['fpath',['fPath',['../structOscProb_1_1EigenPoint.html#a1c263b6ceef5bd4de3181182f944efbb',1,'OscProb::EigenPoint::fPath()'],['../classOscProb_1_1PMNS__Base.html#a849437aa8891fe042e86886ce8f81c6e',1,'OscProb::PMNS_Base::fPath()']]],
   ['fphases',['fPhases',['../classOscProb_1_1PMNS__Base.html#ab8d26b722047d49d977f5f2d83026ede',1,'OscProb::PMNS_Base']]],
   ['fpower',['fPower',['../classOscProb_1_1PMNS__Deco.html#a19fdcdf9a8b2bd9677f72ca1fd77dc3e',1,'OscProb::PMNS_Deco']]],
+  ['fprec',['fPrec',['../classOscProb_1_1PMNS__Iter.html#a5a75316e1ec61004e90aff61b91bce6c',1,'OscProb::PMNS_Iter']]],
   ['fpremlayers',['fPremLayers',['../classOscProb_1_1PremModel.html#a19a9a3b23ec154ad7a29f92b74aa5bc6',1,'OscProb::PremModel']]],
   ['fprobe',['fProbe',['../classOscProb_1_1PMNS__Base.html#ab1fe4800ee3ae48df4fc942dce00e0d3',1,'OscProb::PMNS_Base']]],
   ['fremovesmallpaths',['fRemoveSmallPaths',['../classOscProb_1_1PremModel.html#a3973df6f5f2ff219cd2f865b31aacfd2',1,'OscProb::PremModel']]],
   ['frho',['fRho',['../classOscProb_1_1PMNS__Deco.html#a0488d62b4ef4cf5b43425769f5fcdbdf',1,'OscProb::PMNS_Deco']]],
   ['ftheta',['fTheta',['../classOscProb_1_1PMNS__Base.html#a1976887cd658dd86b2336c181f1470b4',1,'OscProb::PMNS_Base']]],
-  ['fusecache',['fUseCache',['../classOscProb_1_1PMNS__Base.html#ad28c12ef897b5555eda509ea55c99107',1,'OscProb::PMNS_Base']]]
+  ['fusecache',['fUseCache',['../classOscProb_1_1PMNS__Base.html#ad28c12ef897b5555eda509ea55c99107',1,'OscProb::PMNS_Base']]],
+  ['fvl',['fVL',['../classOscProb_1_1PMNS__Iter.html#aa40651843140811e531dacd6ce9721c0',1,'OscProb::PMNS_Iter']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['idxcompare',['IdxCompare',['../structOscProb_1_1IdxCompare.html',1,'OscProb']]]
+  ['gsl_5feinsys',['GSL_EinSys',['../structOscProb_1_1GSL__EinSys.html',1,'OscProb']]]
 ];
