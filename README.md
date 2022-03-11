@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/91241668.svg)](https://zenodo.org/badge/latestdoi/91241668)
+
 # OscProb
 
 OscProb is a small set of classes aimed at computing exact neutrino oscillation probabilities with a few different models.
