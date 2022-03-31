@@ -38,6 +38,7 @@ void PMNS_Iter::SetExpVL(NuPath p)
   fVL = kr2GNe * kKm2eV * p.length;
 
   fExpVL = complexD(cos(fVL), -sin(fVL));
+  if(fIsNuBar) fExpVL = conj(fExpVL);
 
 }
 
