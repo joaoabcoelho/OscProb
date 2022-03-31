@@ -1568,7 +1568,7 @@ Reimplemented from \hyperlink{classOscProb_1_1PMNS__Base_a054e3a8b05b9a958b6fa41
 
 
 
-Definition at line 76 of file P\+M\+N\+S\+\_\+\+Iter.\+cxx.
+Definition at line 77 of file P\+M\+N\+S\+\_\+\+Iter.\+cxx.
 
 
 
@@ -1576,15 +1576,15 @@ References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Nu\+Paths, and Split\+Pro
 
 
 \begin{DoxyCode}
-77 \{
-78 
-79   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<int(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size()); i++)\{
-80 
-81     \hyperlink{classOscProb_1_1PMNS__Iter_a408c3a4399ce8feab49914d4ab612ca6}{SplitPropagate}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[i]);
-82 
-83   \}
-84 
-85 \}
+78 \{
+79 
+80   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<int(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}.size()); i++)\{
+81 
+82     \hyperlink{classOscProb_1_1PMNS__Iter_a408c3a4399ce8feab49914d4ab612ca6}{SplitPropagate}(\hyperlink{classOscProb_1_1PMNS__Base_a69db9d57e12fc7cbe0431bc6c18fac93}{fNuPaths}[i]);
+83 
+84   \}
+85 
+86 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_accb08503acc162188041d7a96a280462}\label{classOscProb_1_1PMNS__Base_accb08503acc162188041d7a96a280462}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter}!Propagate\+Path@{Propagate\+Path}}
@@ -1655,7 +1655,7 @@ Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Propagate(), and Split\
 
 Propagate neutrino through matter component. 
 
-Definition at line 48 of file P\+M\+N\+S\+\_\+\+Iter.\+cxx.
+Definition at line 49 of file P\+M\+N\+S\+\_\+\+Iter.\+cxx.
 
 
 
@@ -1667,11 +1667,11 @@ Referenced by Split\+Propagate().
 
 
 \begin{DoxyCode}
-49 \{
-50 
-51   \hyperlink{classOscProb_1_1PMNS__Base_abf99f2339e3ee989600740b5d88063e8}{fNuState}[0] *= \hyperlink{classOscProb_1_1PMNS__Iter_a0cf9756787eb3c10f20444b5410f4893}{fExpVL};
-52 
-53 \}
+50 \{
+51 
+52   \hyperlink{classOscProb_1_1PMNS__Base_abf99f2339e3ee989600740b5d88063e8}{fNuState}[0] *= \hyperlink{classOscProb_1_1PMNS__Iter_a0cf9756787eb3c10f20444b5410f4893}{fExpVL};
+53 
+54 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_ac0d4bf8ff1318ef96d3dafa62e0cec25}\label{classOscProb_1_1PMNS__Base_ac0d4bf8ff1318ef96d3dafa62e0cec25}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter}!Reset\+To\+Flavour@{Reset\+To\+Flavour}}
@@ -2413,7 +2413,7 @@ Definition at line 32 of file P\+M\+N\+S\+\_\+\+Iter.\+cxx.
 
 
 
-References Osc\+Prob\+::\+Nu\+Path\+::density, f\+Exp\+VL, f\+VL, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+Gf, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+K2, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+Km2eV, Osc\+Prob\+::\+Nu\+Path\+::length, and Osc\+Prob\+::\+Nu\+Path\+::zoa.
+References Osc\+Prob\+::\+Nu\+Path\+::density, f\+Exp\+VL, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Is\+Nu\+Bar, f\+VL, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+Gf, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+K2, Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::k\+Km2eV, Osc\+Prob\+::\+Nu\+Path\+::length, and Osc\+Prob\+::\+Nu\+Path\+::zoa.
 
 
 
@@ -2429,8 +2429,9 @@ Referenced by Split\+Propagate().
 38   \hyperlink{classOscProb_1_1PMNS__Iter_aa40651843140811e531dacd6ce9721c0}{fVL} = kr2GNe * \hyperlink{classOscProb_1_1PMNS__Base_a382ddd7b76ca89b43f22614a2ea7327b}{kKm2eV} * p.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length};
 39 
 40   \hyperlink{classOscProb_1_1PMNS__Iter_a0cf9756787eb3c10f20444b5410f4893}{fExpVL} = \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD}(cos(\hyperlink{classOscProb_1_1PMNS__Iter_aa40651843140811e531dacd6ce9721c0}{fVL}), -sin(\hyperlink{classOscProb_1_1PMNS__Iter_aa40651843140811e531dacd6ce9721c0}{fVL}));
-41 
-42 \}
+41   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar}) \hyperlink{classOscProb_1_1PMNS__Iter_a0cf9756787eb3c10f20444b5410f4893}{fExpVL} = conj(\hyperlink{classOscProb_1_1PMNS__Iter_a0cf9756787eb3c10f20444b5410f4893}{fExpVL});
+42 
+43 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a717e0348cf762f3961854e332a9b52e0}\label{classOscProb_1_1PMNS__Base_a717e0348cf762f3961854e332a9b52e0}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter}!Set\+Is\+Nu\+Bar@{Set\+Is\+Nu\+Bar}}
@@ -2744,7 +2745,7 @@ References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Nu\+Paths.
 
 Set iterator precision 
 
-Definition at line 91 of file P\+M\+N\+S\+\_\+\+Iter.\+cxx.
+Definition at line 92 of file P\+M\+N\+S\+\_\+\+Iter.\+cxx.
 
 
 
@@ -2752,10 +2753,10 @@ References f\+Prec.
 
 
 \begin{DoxyCode}
-92 \{
-93   \hyperlink{classOscProb_1_1PMNS__Iter_a5a75316e1ec61004e90aff61b91bce6c}{fPrec} = prec;
-94   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Iter_a5a75316e1ec61004e90aff61b91bce6c}{fPrec}<=0) \hyperlink{classOscProb_1_1PMNS__Iter_a5a75316e1ec61004e90aff61b91bce6c}{fPrec} = 1e-3;
-95 \}
+93 \{
+94   \hyperlink{classOscProb_1_1PMNS__Iter_a5a75316e1ec61004e90aff61b91bce6c}{fPrec} = prec;
+95   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Iter_a5a75316e1ec61004e90aff61b91bce6c}{fPrec}<=0) \hyperlink{classOscProb_1_1PMNS__Iter_a5a75316e1ec61004e90aff61b91bce6c}{fPrec} = 1e-3;
+96 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a4de96ac9b6d1e9b029ab877e57d211ad}\label{classOscProb_1_1PMNS__Base_a4de96ac9b6d1e9b029ab877e57d211ad}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter}!Set\+Std\+Pars@{Set\+Std\+Pars}}
@@ -2881,7 +2882,7 @@ Reimplemented from \hyperlink{classOscProb_1_1PMNS__Fast_a76dd5a761df8689c502b28
 
 
 
-Definition at line 133 of file P\+M\+N\+S\+\_\+\+Iter.\+cxx.
+Definition at line 134 of file P\+M\+N\+S\+\_\+\+Iter.\+cxx.
 
 
 
@@ -2893,40 +2894,40 @@ Referenced by Solve\+Ham().
 
 
 \begin{DoxyCode}
-134 \{
-135 
-136   \textcolor{keywordflow}{if}(!\hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms})\{
-137 
-138     \textcolor{keywordtype}{double}  s12, s23, s13, c12, c23, c13;
-139     \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} idelta(0.0, \hyperlink{classOscProb_1_1PMNS__Base_ab2a5fa40e689b221c8a7d2c17213810d}{fDelta}[0][2]);
-140     \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar}) idelta = conj(idelta);
-141 
-142     s12 = sin(\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[0][1]);  s23 = sin(\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[1][2]);  s13 = sin(
+135 \{
+136 
+137   \textcolor{keywordflow}{if}(!\hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms})\{
+138 
+139     \textcolor{keywordtype}{double}  s12, s23, s13, c12, c23, c13;
+140     \hyperlink{EigenPoint_8h_a67ca8e107e20610c3fff78d5e726ece0}{complexD} idelta(0.0, \hyperlink{classOscProb_1_1PMNS__Base_ab2a5fa40e689b221c8a7d2c17213810d}{fDelta}[0][2]);
+141     \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a0ebaeaefab36a3ff381c6293faedfdd6}{fIsNuBar}) idelta = conj(idelta);
+142 
+143     s12 = sin(\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[0][1]);  s23 = sin(\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[1][2]);  s13 = sin(
       \hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[0][2]);
-143     c12 = cos(\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[0][1]);  c23 = cos(\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[1][2]);  c13 = cos(
+144     c12 = cos(\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[0][1]);  c23 = cos(\hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[1][2]);  c13 = cos(
       \hyperlink{classOscProb_1_1PMNS__Base_a1976887cd658dd86b2336c181f1470b4}{fTheta}[0][2]);
-144 
-145     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[0][0] =  c12*c13;
-146     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[0][1] =  s12*c13;
-147     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[0][2] =  s13*exp(-idelta);
-148 
-149     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[1][0] = -s12*c23-c12*s23*s13*exp(idelta);
-150     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[1][1] =  c12*c23-s12*s23*s13*exp(idelta);
-151     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[1][2] =  s23*c13;
-152 
-153     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[2][0] =  s12*s23-c12*c23*s13*exp(idelta);
-154     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[2][1] = -c12*s23-s12*c23*s13*exp(idelta);
-155     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[2][2] =  c23*c13;
-156 
-157   \}
-158 
-159   \hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms} = \textcolor{keyword}{true};
-160 
-161   \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[0] = 0;
-162   \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[1] = \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[1] / (2 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV}*\hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy});
-163   \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[2] = \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[2] / (2 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV}*\hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy});
-164 
-165 \}
+145 
+146     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[0][0] =  c12*c13;
+147     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[0][1] =  s12*c13;
+148     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[0][2] =  s13*exp(-idelta);
+149 
+150     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[1][0] = -s12*c23-c12*s23*s13*exp(idelta);
+151     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[1][1] =  c12*c23-s12*s23*s13*exp(idelta);
+152     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[1][2] =  s23*c13;
+153 
+154     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[2][0] =  s12*s23-c12*c23*s13*exp(idelta);
+155     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[2][1] = -c12*s23-s12*c23*s13*exp(idelta);
+156     \hyperlink{classOscProb_1_1PMNS__Base_a87be137356c5f27ab83cab5e1298ef8f}{fEvec}[2][2] =  c23*c13;
+157 
+158   \}
+159 
+160   \hyperlink{classOscProb_1_1PMNS__Base_a9ac3cadeac8db1b90f3152f476244780}{fBuiltHms} = \textcolor{keyword}{true};
+161 
+162   \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[0] = 0;
+163   \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[1] = \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[1] / (2 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV}*\hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy});
+164   \hyperlink{classOscProb_1_1PMNS__Base_a6319c34d7decbb9d7d6da279c06e8c2d}{fEval}[2] = \hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[2] / (2 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV}*\hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy});
+165 
+166 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a1bf3ea8fd2507fd2fd82d7410ff8f578}\label{classOscProb_1_1PMNS__Base_a1bf3ea8fd2507fd2fd82d7410ff8f578}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter}!Set\+ZoA@{Set\+ZoA}}
@@ -3002,7 +3003,7 @@ Reimplemented from \hyperlink{classOscProb_1_1PMNS__Fast_a8a0828401591e88c60e005
 
 
 
-Definition at line 59 of file P\+M\+N\+S\+\_\+\+Iter.\+cxx.
+Definition at line 60 of file P\+M\+N\+S\+\_\+\+Iter.\+cxx.
 
 
 
@@ -3010,17 +3011,17 @@ References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Got\+ES, and Set\+Vacuum\
 
 
 \begin{DoxyCode}
-60 \{
-61 
-62   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES}) \textcolor{keywordflow}{return};
-63 
-64   \textcolor{comment}{// Do vacuum oscillation in low density}
-65   \hyperlink{classOscProb_1_1PMNS__Iter_a39db92ee063e813ef68b3e0177778429}{SetVacuumEigensystem}();
-66 
-67   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} = \textcolor{keyword}{true};
-68   \textcolor{keywordflow}{return};
-69 
-70 \}
+61 \{
+62 
+63   \textcolor{keywordflow}{if}(\hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES}) \textcolor{keywordflow}{return};
+64 
+65   \textcolor{comment}{// Do vacuum oscillation in low density}
+66   \hyperlink{classOscProb_1_1PMNS__Iter_a39db92ee063e813ef68b3e0177778429}{SetVacuumEigensystem}();
+67 
+68   \hyperlink{classOscProb_1_1PMNS__Base_a6dc5cd010d2d70b2324745b4e53e9839}{fGotES} = \textcolor{keyword}{true};
+69   \textcolor{keywordflow}{return};
+70 
+71 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Iter_a408c3a4399ce8feab49914d4ab612ca6}\label{classOscProb_1_1PMNS__Iter_a408c3a4399ce8feab49914d4ab612ca6}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter}!Split\+Propagate@{Split\+Propagate}}
@@ -3030,7 +3031,7 @@ References Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::f\+Got\+ES, and Set\+Vacuum\
 
 Propagate neutrino state through split path 
 
-Definition at line 101 of file P\+M\+N\+S\+\_\+\+Iter.\+cxx.
+Definition at line 102 of file P\+M\+N\+S\+\_\+\+Iter.\+cxx.
 
 
 
@@ -3042,30 +3043,30 @@ Referenced by Propagate().
 
 
 \begin{DoxyCode}
-102 \{
-103 
-104   \hyperlink{classOscProb_1_1PMNS__Iter_a55dea4885aa184ee47c470e3a42ff945}{SetExpVL}(p);
-105 
-106   \textcolor{keywordtype}{double} dm = 0;
-107   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}; i++)\{
-108     \textcolor{keywordflow}{if}(dm<fabs(\hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[i])) dm = fabs(\hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[i]);
-109   \}
-110   dm *= \hyperlink{classOscProb_1_1PMNS__Base_a382ddd7b76ca89b43f22614a2ea7327b}{kKm2eV} * p.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} / (2 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV} * \hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy});
-111 
-112   \textcolor{keywordtype}{int} nsplit = sqrt(dm * \hyperlink{classOscProb_1_1PMNS__Iter_aa40651843140811e531dacd6ce9721c0}{fVL} / \hyperlink{classOscProb_1_1PMNS__Iter_a5a75316e1ec61004e90aff61b91bce6c}{fPrec});
-113   nsplit++;
-114   
-115   p.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} /= nsplit;
-116   \hyperlink{classOscProb_1_1PMNS__Iter_a55dea4885aa184ee47c470e3a42ff945}{SetExpVL}(p);
-117   
-118   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nsplit; i++)\{
-119 
-120     \hyperlink{classOscProb_1_1PMNS__Base_accb08503acc162188041d7a96a280462}{PropagatePath}(p);
-121     \hyperlink{classOscProb_1_1PMNS__Iter_a28ba69fe58eed875ae502278bb1d3dcd}{PropMatter}();
-122 
-123   \}
-124 
-125 \}
+103 \{
+104 
+105   \hyperlink{classOscProb_1_1PMNS__Iter_a55dea4885aa184ee47c470e3a42ff945}{SetExpVL}(p);
+106 
+107   \textcolor{keywordtype}{double} dm = 0;
+108   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<\hyperlink{classOscProb_1_1PMNS__Base_a24bb74bed63569dfe88b18fa6a08060e}{fNumNus}; i++)\{
+109     \textcolor{keywordflow}{if}(dm<fabs(\hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[i])) dm = fabs(\hyperlink{classOscProb_1_1PMNS__Base_a406a31c3b5d620e5a0cace5b411f9f70}{fDm}[i]);
+110   \}
+111   dm *= \hyperlink{classOscProb_1_1PMNS__Base_a382ddd7b76ca89b43f22614a2ea7327b}{kKm2eV} * p.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} / (2 * \hyperlink{classOscProb_1_1PMNS__Base_ad36a0a6bf58d6ec093d3947784bd89e9}{kGeV2eV} * \hyperlink{classOscProb_1_1PMNS__Base_a2800af6d436972f3e900867790c046b0}{fEnergy});
+112 
+113   \textcolor{keywordtype}{int} nsplit = sqrt(dm * \hyperlink{classOscProb_1_1PMNS__Iter_aa40651843140811e531dacd6ce9721c0}{fVL} / \hyperlink{classOscProb_1_1PMNS__Iter_a5a75316e1ec61004e90aff61b91bce6c}{fPrec});
+114   nsplit++;
+115   
+116   p.\hyperlink{structOscProb_1_1NuPath_af22660894b6e25cf835500381b155557}{length} /= nsplit;
+117   \hyperlink{classOscProb_1_1PMNS__Iter_a55dea4885aa184ee47c470e3a42ff945}{SetExpVL}(p);
+118   
+119   \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nsplit; i++)\{
+120 
+121     \hyperlink{classOscProb_1_1PMNS__Base_accb08503acc162188041d7a96a280462}{PropagatePath}(p);
+122     \hyperlink{classOscProb_1_1PMNS__Iter_a28ba69fe58eed875ae502278bb1d3dcd}{PropMatter}();
+123 
+124   \}
+125 
+126 \}
 \end{DoxyCode}
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_abe533da5f64bec1f4724ab7b58606b77}\label{classOscProb_1_1PMNS__Base_abe533da5f64bec1f4724ab7b58606b77}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter}!Try\+Cache@{Try\+Cache}}
@@ -3336,7 +3337,7 @@ Definition at line 199 of file P\+M\+N\+S\+\_\+\+Base.\+h.
 
 
 
-Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Decay\+::\+Build\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Is\+Nu\+Bar(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Decay\+::\+Set\+Is\+Nu\+Bar(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Is\+Nu\+Bar(), Set\+Vacuum\+Eigensystem(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Set\+Vacuum\+Eigensystem(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+Solve\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Try\+Cache(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Decay\+::\+Update\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Update\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+L\+I\+V\+::\+Update\+Ham(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Update\+Ham().
+Referenced by Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Decay\+::\+Build\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Get\+Is\+Nu\+Bar(), Set\+Exp\+V\+L(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Decay\+::\+Set\+Is\+Nu\+Bar(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Set\+Is\+Nu\+Bar(), Set\+Vacuum\+Eigensystem(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Set\+Vacuum\+Eigensystem(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Sterile\+::\+Solve\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Base\+::\+Try\+Cache(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Decay\+::\+Update\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Fast\+::\+Update\+Ham(), Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+L\+I\+V\+::\+Update\+Ham(), and Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+N\+S\+I\+::\+Update\+Ham().
 
 \mbox{\Hypertarget{classOscProb_1_1PMNS__Base_a74c13356eafec2490d8c3c19759ba7f0}\label{classOscProb_1_1PMNS__Base_a74c13356eafec2490d8c3c19759ba7f0}} 
 \index{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter@{Osc\+Prob\+::\+P\+M\+N\+S\+\_\+\+Iter}!f\+Max\+Cache@{f\+Max\+Cache}}
