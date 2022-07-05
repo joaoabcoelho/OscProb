@@ -2,6 +2,9 @@
 #include "SetNiceStyle.C"
 #include "LoadOscProb.C"
 
+// Define the PREM tables path
+#include "../prem_default.hpp"
+
 #ifndef __CINT__
 #include "PremModel.h"
 #include "PMNS_Fast.h"
@@ -28,7 +31,7 @@ void DrawEarthOscillation(double energy = 4,  bool isNuBar = false){
   // PREM Model
   // OscProb::PremModel prem = new OscProb::PremModel("prem_425layers.txt");
   OscProb::PremModel prem;
-  prem.LoadModel("/Users/lukas/Documents/PhD/OscProb/PremTables/prem_425layers.txt");
+  prem.LoadModel(PREM_DIR + "/prem_425layers.txt");
   
   // Fill straight-upward path
   prem.FillPath(-1);
