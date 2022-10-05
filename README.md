@@ -64,6 +64,19 @@ To run macros in compiled mode you will need to preload the OscProb library, e.g
 root -l LoadOscProb.C MakeOscillogram.C+
 ```
 
+# Python
+
+You can use OscProb in Python using PyROOT by simply loading the shared library:
+
+```py
+import ROOT
+ROOT.gSystem.Load('/path/to/OscProb/libOscProb.so')
+
+p = ROOT.OscProb.PMNS_Fast()
+
+print(p.Prob(1, 1, 5.0))
+```
+
 # Documentation
 
 More detailed documentation of the code can be found in a Doxygen page here:
