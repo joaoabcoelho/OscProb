@@ -800,6 +800,24 @@ double PMNS_Base::GetDm(int j)
 
 //......................................................................
 ///
+/// Get the indices of the sorted x vector
+///
+/// @param x - input vector
+///
+/// @return The vector of sorted indices
+///
+vector<int> PMNS_Base::GetSortedIndices(const vector<double> x){
+
+  vector<int> idx(x.size(),0);
+  for(int i=0; i<x.size(); i++) idx[i] = i;
+  sort(idx.begin(), idx.end(), IdxCompare(x));
+
+  return idx;
+
+}
+
+//......................................................................
+///
 /// Get the effective mass-splitting dm_j1 in matter in eV^2
 ///
 /// Requires that j>1. Will notify you if input is wrong.
@@ -810,7 +828,7 @@ double PMNS_Base::GetDmEff(int j)
 {
 
   if(j<2 || j>fNumNus){
-    cout << "ERROR: Dm" << j << "1 not valid for " << fNumNus;
+    cout << "ERROR: Dm_" << j << "1 not valid for " << fNumNus;
     cout << " neutrinos. Returning zero." << endl;
     return 0;
   }
@@ -819,20 +837,13 @@ double PMNS_Base::GetDmEff(int j)
   SolveHam();
   
   // Sort eigenvalues in same order as vacuum Dm^2
-  vector<int> TrueIdx(fNumNus, 0);
-  vector<double> TrueVals(fNumNus, 0);
-  vector<int> EffIdx(fNumNus, 0);
-  for(int i=0; i<fNumNus; i++){
-    TrueIdx[i] = i;
-    EffIdx[i] = i;
-  }
-  sort(TrueIdx.begin(), TrueIdx.end(), IdxCompare(fDm));
-  for(int i=0; i<fNumNus; i++) TrueVals[i] = TrueIdx[i];
-  sort(TrueIdx.begin(), TrueIdx.end(), IdxCompare(TrueVals));
-  sort(EffIdx.begin(), EffIdx.end(), IdxCompare(fEval));
+  vector<int> dm_idx = GetSortedIndices(fDm);
+  vector<double> dm_idx_double(dm_idx.begin(), dm_idx.end());
+  dm_idx = GetSortedIndices(dm_idx_double);
+  vector<int> ev_idx = GetSortedIndices(fEval);
 
-  // Return eigenvalues * 2E
-  return (fEval[EffIdx[TrueIdx[j-1]]] - fEval[EffIdx[TrueIdx[0]]]) * fEnergy * 2e9;
+  // Return difference in eigenvalues * 2E
+  return (fEval[ev_idx[dm_idx[j-1]]] - fEval[ev_idx[dm_idx[0]]]) * 2*fEnergy * kGeV2eV;
 
 }
 
