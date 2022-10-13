@@ -12,3 +12,4 @@ AutoDict*
 
 tmp/
 test/plots/*
+!test/plots/.gitkeep
