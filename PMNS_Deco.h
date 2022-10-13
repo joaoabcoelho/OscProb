@@ -61,7 +61,6 @@ namespace OscProb {
 
     virtual double P(int flv);    ///< Return the probability of final state in flavour flv
 
-    
     virtual matrix Dot(matrix A, matrix B);
     virtual matrix Mult(matrix A, matrix B);
     virtual matrix CTransp(matrix A);

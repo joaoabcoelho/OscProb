@@ -177,6 +177,7 @@ namespace OscProb {
 
     virtual double P(int flv);    ///< Return the probability of final state in flavour flv
 
+    virtual std::vector<int> GetSortedIndices(const std::vector<double> x); ///< Get indices that sort a vector
 
     // Attributes
 

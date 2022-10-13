@@ -11,6 +11,7 @@
 #include <iostream>
 #include <cassert>
 #include <stdlib.h>
+#include <algorithm>
 
 #include "PMNS_Deco.h"
 
@@ -58,6 +59,13 @@ void PMNS_Deco::SetGamma(int j, double val){
     return;
   }
 
+  if(val<0){
+    cout << "Warning: Gamma_" << j << 1 << " must be positive. "
+         << "Setting it to absolute value of input: "
+         << -val << endl;
+    val = -val;
+  }
+
   fGamma[j-1] = val;
   
 }
@@ -79,6 +87,13 @@ void PMNS_Deco::SetGamma(int j, double val){
 ///
 void PMNS_Deco::SetGamma32(double val){
 
+  if(val<0){
+    cout << "Warning: Gamma_32 must be positive. "
+         << "Setting it to absolute value of input: "
+         << -val << endl;
+    val = -val;
+  }
+  
   double min32 = 0.25*fGamma[1];
 
   if(fGamma[0] >= 0) min32 *= 1 - pow(fGamma[0],2);
@@ -325,35 +340,12 @@ void PMNS_Deco::PropagatePath(NuPath p)
   matrix evolve(3, row(3,1));
   
   // Some ugly way of matching gamma and dmsqr indices
-  int maxdm = 0; 
-  if(fDm[1] > fDm[maxdm]) maxdm = 1;
-  if(fDm[2] > fDm[maxdm]) maxdm = 2;
+  vector<int> dm_idx = GetSortedIndices(fDm); 
+  vector<int> ev_idx = GetSortedIndices(fEval); 
 
-  int mindm = 0; 
-  if(fDm[1] < fDm[mindm]) mindm = 1;
-  if(fDm[2] < fDm[mindm]) mindm = 2;
-
-  int middm = 0;
-  if(middm == maxdm || middm == mindm) middm = 1; 
-  if(middm == maxdm || middm == mindm) middm = 2; 
-
-  int maxev = 0; 
-  if(fEval[1] > fEval[maxev]) maxev = 1;
-  if(fEval[2] > fEval[maxev]) maxev = 2;
-
-  int minev = 0; 
-  if(fEval[1] < fEval[minev]) minev = 1;
-  if(fEval[2] < fEval[minev]) minev = 2;
-
-  int midev = 0;
-  if(midev == maxev || midev == minev) midev = 1; 
-  if(midev == maxev || midev == minev) midev = 2; 
-  
   int idx[3];
-  idx[minev] = mindm;
-  idx[midev] = middm;
-  idx[maxev] = maxdm;
-  
+  for(int i=0; i<3; i++) idx[ev_idx[i]] = dm_idx[i];
+    
   double energyCorr = pow(fEnergy, fPower);
 
   for(int j=0; j<3; j++){ 
