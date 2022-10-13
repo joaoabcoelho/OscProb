@@ -15,8 +15,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Install git
-      run: apt-get install -y git
+    - name: Checkout submodules
+      uses: textbook/git-checkout-submodule-action@master
     - name: make
       run: make
     - name: make test
