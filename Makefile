@@ -72,6 +72,9 @@ $(PREMINC): $(PREMDIR) $(PREMFILE)
 	@echo "const std::string PREM_DIR = \"$(PREMDIR)\";" >> $@
 	@echo "const std::string PREM_DEFAULT = \"$(PREMFILE)\";" >> $@
 
+test: $(TARGET_LIB)
+	@cd test && root -l -b -q CheckProbs.C
+
 clean: $(CLEANDIRS)
 	@echo "  Cleaning $(PACKAGE)..."
 	@rm -f $(TARGET_LIB)
