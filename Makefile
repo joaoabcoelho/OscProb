@@ -73,7 +73,7 @@ $(PREMINC): $(PREMDIR) $(PREMFILE)
 	@echo "const std::string PREM_DEFAULT = \"$(PREMFILE)\";" >> $@
 
 test: $(TARGET_LIB)
-	@cd test && root -l -b -q CheckProbs.C
+	@cd test && root -l -b -q ../tutorial/LoadOscProb.C ../tutorial/SetNiceStyle.C CheckProbs.C
 
 clean: $(CLEANDIRS)
 	@echo "  Cleaning $(PACKAGE)..."
@@ -84,4 +84,4 @@ clean: $(CLEANDIRS)
 	@rm -f $(DICTIONARY:%.cxx=%.h) # ROOT 5
 	@rm -rf tmp
 
-.PHONY: $(SUBDIRS) $(BUILDDIRS) $(CLEANDIRS) clean all
+.PHONY: $(SUBDIRS) $(BUILDDIRS) $(CLEANDIRS) test clean all
