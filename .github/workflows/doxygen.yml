@@ -23,7 +23,7 @@ jobs:
     - name: Doxygen Action
       uses: mattnotmitt/doxygen-action@v1.9.4
       with:
-        enable-latex: true
+        additional-packages: perl build-base texlive-full biblatex ghostscript
     
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
