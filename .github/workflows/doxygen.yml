@@ -25,7 +25,7 @@ jobs:
     - name: Doxygen Action
       uses: mattnotmitt/doxygen-action@v1.9.4
       with:
-        additional-packages: texlive-full
+        additional-packages: texlive ghostscript
       #  enable-latex: true
     
     - name: Deploy
