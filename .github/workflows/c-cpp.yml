@@ -23,3 +23,5 @@ jobs:
       run: make
     - name: make test
       run: make test
+    - name: doxygen
+      uses: mattnotmitt/doxygen-action@v1.9.4
