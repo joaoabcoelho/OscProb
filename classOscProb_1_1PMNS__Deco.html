@@ -111,7 +111,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac06a9c503d1c5b4a43c4eb797881898d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set any given decoherence parameter.  <a href="classOscProb_1_1PMNS__Deco.html#ac06a9c503d1c5b4a43c4eb797881898d">More...</a><br /></td></tr>
 <tr class="separator:ac06a9c503d1c5b4a43c4eb797881898d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bc2d1fb1bab9841baa37eecc0135fe9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PMNS__Deco.html#a1bc2d1fb1bab9841baa37eecc0135fe9">SetGamma32</a> (double val)</td></tr>
-<tr class="memdesc:a1bc2d1fb1bab9841baa37eecc0135fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <img class="formulaInl" alt="$\Gamma_{32}$" src="form_2.png" width="19" height="13"/> parameter.  <a href="classOscProb_1_1PMNS__Deco.html#a1bc2d1fb1bab9841baa37eecc0135fe9">More...</a><br /></td></tr>
+<tr class="memdesc:a1bc2d1fb1bab9841baa37eecc0135fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <img class="formulaInl" alt="$\Gamma_{32}$" src="form_2.png"/> parameter.  <a href="classOscProb_1_1PMNS__Deco.html#a1bc2d1fb1bab9841baa37eecc0135fe9">More...</a><br /></td></tr>
 <tr class="separator:a1bc2d1fb1bab9841baa37eecc0135fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35e79054682aa88c55f4350c29336014"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PMNS__Deco.html#a35e79054682aa88c55f4350c29336014">SetDecoAngle</a> (double th)</td></tr>
 <tr class="memdesc:a35e79054682aa88c55f4350c29336014"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the decoherence angle.  <a href="classOscProb_1_1PMNS__Deco.html#a35e79054682aa88c55f4350c29336014">More...</a><br /></td></tr>
@@ -1199,7 +1199,7 @@ Static Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>- <img class="formulaInl" alt="$A^{\dagger}$" src="form_9.png" width="15" height="11"/> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>- <img class="formulaInl" alt="$A^{\dagger}$" src="form_9.png"/> </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="PMNS__Deco_8cxx_source.html#l00297">297</a> of file <a class="el" href="PMNS__Deco_8cxx_source.html">PMNS_Deco.cxx</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  298</span>{</div>
@@ -3448,7 +3448,7 @@ Static Protected Attributes</h2></td></tr>
 <p ><img class="formulaInl" alt="$ 
   \Gamma_{32} = \Gamma_{31} + \Gamma_{21} \cos^2\theta - 
   \cos\theta \sqrt{\Gamma_{21} (4\Gamma_{31} - \Gamma_{21} (1 - \cos^2\theta))} 
-  $" src="form_7.png" width="321" height="16"/></p>
+  $" src="form_7.png"/></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">th</td><td>- decoherence angle </td></tr>
@@ -3843,7 +3843,7 @@ The corresponding Dm_31 is set in the class attributes.</p>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >Set the decoherence parameter <img class="formulaInl" alt="$\Gamma_{j1}$" src="form_1.png" width="18" height="14"/>.</p>
+<p >Set the decoherence parameter <img class="formulaInl" alt="$\Gamma_{j1}$" src="form_1.png"/>.</p>
 <p >Requires that j = 2 or 3. Will notify you if input is wrong.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -3902,13 +3902,13 @@ The corresponding Dm_31 is set in the class attributes.</p>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >Set the decoherence parameter <img class="formulaInl" alt="$\Gamma_{32}$" src="form_2.png" width="19" height="13"/>.</p>
-<p >In practice, this sets <img class="formulaInl" alt="$\Gamma_{31}$" src="form_3.png" width="19" height="13"/> internally via the formula:</p>
+<p >Set the decoherence parameter <img class="formulaInl" alt="$\Gamma_{32}$" src="form_2.png"/>.</p>
+<p >In practice, this sets <img class="formulaInl" alt="$\Gamma_{31}$" src="form_3.png"/> internally via the formula:</p>
 <p ><img class="formulaInl" alt="$
   \Gamma_{31} = \Gamma_{32} + \Gamma_{21} \cos^2\theta +
   \cos\theta \sqrt{\Gamma_{21} (4\Gamma_{32} - \Gamma_{21} (1 - \cos^2\theta))}
-  $" src="form_4.png" width="321" height="16"/></p>
-<p >IMPORTANT: Note this needs to be used AFTER defining <img class="formulaInl" alt="$\Gamma_{21}$" src="form_5.png" width="19" height="13"/> and <img class="formulaInl" alt="$\theta$" src="form_6.png" width="6" height="10"/>.</p>
+  $" src="form_4.png"/></p>
+<p >IMPORTANT: Note this needs to be used AFTER defining <img class="formulaInl" alt="$\Gamma_{21}$" src="form_5.png"/> and <img class="formulaInl" alt="$\theta$" src="form_6.png"/>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">val</td><td>- The absolute value of the parameter </td></tr>
@@ -4436,7 +4436,7 @@ The corresponding Dm_31 is set in the class attributes.</p>
 <p >Set the power index of the decoherence energy dependence. This will multiply the Gammas such that the final parameters are:</p>
 <p ><img class="formulaInl" alt="$ 
   \Gamma_{ij} \rightarrow \Gamma_{ij} \times \left(\frac{E}{[1 \mbox{GeV}]}\right)^n
-  $" src="form_8.png" width="128" height="25"/></p>
+  $" src="form_8.png"/></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">n</td><td>- power index </td></tr>
