@@ -81,4 +81,4 @@ print(p.Prob(1, 1, 5.0))
 
 More detailed documentation of the code can be found in a Doxygen page here:
 
-[Doxygen](https://joaoabcoelho.github.io/OscProb/doxygen/html/annotated.html "OscProb Doxygen page")
+[Doxygen](https://joaoabcoelho.github.io/OscProb/ "OscProb Doxygen page")
