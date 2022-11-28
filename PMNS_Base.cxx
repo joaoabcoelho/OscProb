@@ -49,7 +49,7 @@ PMNS_Base::PMNS_Base(int numNus) :
 fGotES(false), fBuiltHms(false), fMaxCache(1e6), fProbe(numNus)
 {
 
-  SetUseCache(false);  // Don't cache eigensystems
+  SetUseCache(true);  // Don't cache eigensystems
 
   fNumNus = numNus;    // Set the number of neutrinos
 
@@ -62,6 +62,11 @@ fGotES(false), fBuiltHms(false), fMaxCache(1e6), fProbe(numNus)
   SetStdPars();        // Set PDG parameters
 
   ResetToFlavour(1);   // Numu by default
+  
+  fUsedCache = 0;
+  
+  fMixCache.max_load_factor(0.25);
+  fMixCache.reserve(512);
   
 }
 
@@ -78,18 +83,18 @@ PMNS_Base::~PMNS_Base(){}
 void PMNS_Base::InitializeVectors()
 {
 
-  fDm    = vector<double>(fNumNus, 0);
-  fTheta = vector< vector<double> >(fNumNus, vector<double>(fNumNus,0));
-  fDelta = vector< vector<double> >(fNumNus, vector<double>(fNumNus,0));
+  fDm    = vectorD(fNumNus, 0);
+  fTheta = matrixD(fNumNus, vectorD(fNumNus,0));
+  fDelta = matrixD(fNumNus, vectorD(fNumNus,0));
 
-  fNuState = vector<complexD>(fNumNus, zero);
-  fHms     = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
+  fNuState = vectorC(fNumNus, zero);
+  fHms     = matrixC(fNumNus, vectorC(fNumNus,zero));
 
-  fPhases = vector<complexD>(fNumNus, zero);
-  fBuffer = vector<complexD>(fNumNus, zero);
+  fPhases = vectorC(fNumNus, zero);
+  fBuffer = vectorC(fNumNus, zero);
 
-  fEval = vector<double>(fNumNus, 0);
-  fEvec = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
+  fEval = vectorD(fNumNus, 0);
+  fEvec = matrixC(fNumNus, vectorC(fNumNus,zero));
 
 }
 
@@ -141,9 +146,10 @@ bool PMNS_Base::TryCache()
 
     fProbe.SetVars(fEnergy, fPath, fIsNuBar);
     
-    std::set<EigenPoint>::iterator it = fMixCache.find(fProbe);
+    std::unordered_set<EigenPoint>::iterator it = fMixCache.find(fProbe);
 
     if(it != fMixCache.end()){
+      fUsedCache++;
       for(int i=0; i<fNumNus; i++){
         fEval[i] = (*it).fEval[i] * (*it).fEnergy / fEnergy;
         for(int j=0; j<fNumNus; j++){
@@ -169,7 +175,7 @@ void PMNS_Base::FillCache()
   if(fUseCache){
     if(fMixCache.size()>fMaxCache){
       fMixCache.erase(fMixCache.begin());
-      fMixCache.erase(--fMixCache.end());
+      //fMixCache.erase(--fMixCache.end());
     }
     for(int i=0; i<fNumNus; i++){
       fProbe.fEval[i] = fEval[i];
@@ -327,7 +333,7 @@ void PMNS_Base::ClearPath(){
 /// Set vector of neutrino paths.
 /// @param paths - A sequence of neutrino paths
 ///
-void PMNS_Base::SetPath(std::vector<OscProb::NuPath> paths){
+void PMNS_Base::SetPath(std::vector<NuPath> paths){
 
   fNuPaths=paths;
 
@@ -489,7 +495,7 @@ void PMNS_Base::SetZoA(double zoa){
 /// @param att - The values of the attribute
 /// @param idx - The index of the attribute (0,1,2,3) = (L, Rho, Z/A, Layer)
 ///
-void PMNS_Base::SetAtt(std::vector<double> att, int idx){
+void PMNS_Base::SetAtt(vectorD att, int idx){
 
   // Get the sizes of the attribute and
   // path sequence vectors
@@ -557,7 +563,7 @@ void PMNS_Base::SetAtt(std::vector<double> att, int idx){
 ///
 /// @param L - The lengths of the path segments in km
 ///
-void PMNS_Base::SetLength(std::vector<double> L){
+void PMNS_Base::SetLength(vectorD L){
 
   SetAtt(L, 0);
 
@@ -572,7 +578,7 @@ void PMNS_Base::SetLength(std::vector<double> L){
 ///
 /// @param rho - The densities of the path segments in g/cm^3
 ///
-void PMNS_Base::SetDensity(std::vector<double> rho){
+void PMNS_Base::SetDensity(vectorD rho){
 
   SetAtt(rho, 1);
 
@@ -587,7 +593,7 @@ void PMNS_Base::SetDensity(std::vector<double> rho){
 ///
 /// @param zoa - The effective Z/A of the path segments
 ///
-void PMNS_Base::SetZoA(std::vector<double> zoa){
+void PMNS_Base::SetZoA(vectorD zoa){
 
   SetAtt(zoa, 2);
 
@@ -604,7 +610,7 @@ void PMNS_Base::SetZoA(std::vector<double> zoa){
 ///
 void PMNS_Base::SetLayers(std::vector<int> lay){
 
-  vector<double> lay_double(lay.begin(), lay.end());
+  vectorD lay_double(lay.begin(), lay.end());
 
   SetAtt(lay_double, 3);
 
@@ -806,7 +812,7 @@ double PMNS_Base::GetDm(int j)
 ///
 /// @return The vector of sorted indices
 ///
-vector<int> PMNS_Base::GetSortedIndices(const vector<double> x){
+vector<int> PMNS_Base::GetSortedIndices(const vectorD x){
 
   vector<int> idx(x.size(),0);
   for(int i=0; i<x.size(); i++) idx[i] = i;
@@ -838,7 +844,7 @@ double PMNS_Base::GetDmEff(int j)
   
   // Sort eigenvalues in same order as vacuum Dm^2
   vector<int> dm_idx = GetSortedIndices(fDm);
-  vector<double> dm_idx_double(dm_idx.begin(), dm_idx.end());
+  vectorD dm_idx_double(dm_idx.begin(), dm_idx.end());
   dm_idx = GetSortedIndices(dm_idx_double);
   vector<int> ev_idx = GetSortedIndices(fEval);
 
@@ -890,9 +896,9 @@ void PMNS_Base::RotateState(int i, int j){
 ///
 /// @return The mass eigenstate
 ///
-std::vector<complexD> PMNS_Base::GetMassEigenstate(int mi){
+vectorC PMNS_Base::GetMassEigenstate(int mi){
 
-  vector<complexD> oldState = fNuState;
+  vectorC oldState = fNuState;
 
   ResetToFlavour(mi);
   
@@ -901,7 +907,7 @@ std::vector<complexD> PMNS_Base::GetMassEigenstate(int mi){
     RotateState(i,j);
   }}
 
-  vector<complexD> newState = fNuState;
+  vectorC newState = fNuState;
   fNuState = oldState;
   
   return newState;
@@ -919,7 +925,7 @@ std::vector<complexD> PMNS_Base::GetMassEigenstate(int mi){
 /// @param i,j - the indices of the rotation ij
 /// @param Ham - the Hamiltonian to be rotated
 ///
-void PMNS_Base::RotateH(int i,int j,std::vector< std::vector<complexD> >& Ham){
+void PMNS_Base::RotateH(int i,int j, matrixC& Ham){
 
   // Do nothing if angle is zero
   if(fTheta[i][j]==0) return;
@@ -1211,7 +1217,7 @@ double PMNS_Base::Prob(int flvi, int flvf)
 ///
 /// @return Neutrino oscillation probability
 ///
-double PMNS_Base::Prob(std::vector<complexD> nu_in, int flvf)
+double PMNS_Base::Prob(vectorC nu_in, int flvf)
 {
 
   assert(nu_in.size() == fNumNus);
@@ -1240,7 +1246,7 @@ double PMNS_Base::Prob(std::vector<complexD> nu_in, int flvf)
 ///
 /// @return Neutrino oscillation probability
 ///
-double PMNS_Base::Prob(std::vector<complexD> nu_in, int flvf, double E)
+double PMNS_Base::Prob(vectorC nu_in, int flvf, double E)
 {
 
   SetEnergy(E);
@@ -1295,7 +1301,7 @@ double PMNS_Base::Prob(int flvi, int flvf, double E)
 ///
 /// @return Neutrino oscillation probability
 ///
-double PMNS_Base::Prob(std::vector<complexD> nu_in, int flvf, double E, double L)
+double PMNS_Base::Prob(vectorC nu_in, int flvf, double E, double L)
 {
 
   SetEnergy(E);
@@ -1339,6 +1345,264 @@ double PMNS_Base::Prob(int flvi, int flvf, double E, double L)
 
 //.....................................................................
 ///
+/// Compute the probability of nu_in going to all flavours.
+///
+/// @param nu_in - The neutrino initial state in flavour basis.
+///
+/// @return Neutrino oscillation probabilities
+///
+vectorD PMNS_Base::ProbVector(vectorC nu_in)
+{
+
+  assert(nu_in.size() == fNumNus);
+
+  Propagate();
+  
+  vectorD probs(fNumNus);
+  
+  for(int i=0; i<probs.size(); i++){
+    probs[i] = norm(fNuState[i]);
+  }
+
+  return probs;
+
+}
+
+//.....................................................................
+///
+/// Compute the probability of flvi going to all flavours.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+/// @param flvi - The neutrino starting flavour.
+///
+/// @return Neutrino oscillation probabilities
+///
+vectorD PMNS_Base::ProbVector(int flvi)
+{
+
+  ResetToFlavour(flvi);
+
+  return ProbVector(fNuState);
+
+}
+
+//.....................................................................
+///
+/// Compute the probability of nu_in going to all flavours
+/// for a given energy in GeV.
+///
+/// @param nu_in - The neutrino initial state in flavour basis.
+/// @param E     - The neutrino energy in GeV
+///
+/// @return Neutrino oscillation probabilities
+///
+vectorD PMNS_Base::ProbVector(vectorC nu_in, double E)
+{
+
+  SetEnergy(E);
+  
+  return ProbVector(nu_in);
+
+}
+
+//.....................................................................
+///
+/// Compute the probability of flvi going to all flavours
+/// for a given energy in GeV.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+/// @param flvi - The neutrino starting flavour.
+/// @param E    - The neutrino energy in GeV
+///
+/// @return Neutrino oscillation probability
+///
+vectorD PMNS_Base::ProbVector(int flvi, double E)
+{
+
+  SetEnergy(E);
+  
+  return ProbVector(flvi);
+
+}
+
+//.....................................................................
+///
+/// Compute the probability of nu_in going to all flavours for a given
+/// energy in GeV and distance in km in a single path.
+///
+/// If the path sequence is not a single path, a new single path will
+/// be created and the previous sequence will be lost.
+///
+/// Don't use this if you want to propagate over multiple path segments.
+///
+/// @param nu_in - The neutrino initial state in flavour basis.
+/// @param E     - The neutrino energy in GeV
+/// @param L     - The neutrino path length in km
+///
+/// @return Neutrino oscillation probabilities
+///
+vectorD PMNS_Base::ProbVector(vectorC nu_in, double E, double L)
+{
+
+  SetEnergy(E);
+  SetLength(L);
+  
+  return ProbVector(nu_in);
+
+}
+
+//.....................................................................
+///
+/// Compute the probability of flvi going to all flavours for a given
+/// energy in GeV and distance in km in a single path.
+///
+/// If the path sequence is not a single path, a new single path will
+/// be created and the previous sequence will be lost.
+///
+/// Don't use this if you want to propagate over multiple path segments.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+/// @param flvi - The neutrino starting flavour.
+/// @param E     - The neutrino energy in GeV
+/// @param L     - The neutrino path length in km
+///
+/// @return Neutrino oscillation probability
+///
+vectorD PMNS_Base::ProbVector(int flvi, double E, double L)
+{
+
+  SetEnergy(E);
+  SetLength(L);
+  
+  return ProbVector(flvi);
+
+}
+
+
+//.....................................................................
+///
+/// Compute the probability matrix for the first nflvi and nflvf states.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+/// @param nflvi - The number of initial flavours in the matrix.
+/// @param nflvi - The number of final flavours in the matrix.
+///
+/// @return Neutrino oscillation probabilities
+///
+matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf)
+{
+
+  assert(nflvi<=fNumNus && nflvi>=0);
+  assert(nflvf<=fNumNus && nflvf>=0);
+
+  // Output probabilities
+  matrixD probs(nflvi, vectorD(nflvf));
+
+  // List of states
+  matrixC allstates(nflvi, vectorC(fNumNus));
+
+  // Reset all initial states
+  for(int i=0; i<nflvi; i++){
+    ResetToFlavour(i);
+    allstates[i] = fNuState;
+  }
+  
+  // Propagate all states in parallel
+  for(int i=0; i<int(fNuPaths.size()); i++){
+
+    for(int flvi=0; flvi<nflvi; flvi++){
+      fNuState = allstates[flvi];
+      PropagatePath(fNuPaths[i]);
+      allstates[flvi] = fNuState;
+    }
+
+  }
+  
+  // Get all probabilities
+  for(int flvi=0; flvi<nflvi; flvi++){
+  for(int flvj=0; flvj<nflvf; flvj++){
+    probs[flvi][flvj] = norm(allstates[flvi][flvj]);
+  }}
+  
+  return probs;
+  
+}
+
+//.....................................................................
+///
+/// Compute the probability matrix for the first nflvi and nflvf states
+/// for a given energy in GeV.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+/// @param nflvi - The number of initial flavours in the matrix.
+/// @param nflvi - The number of final flavours in the matrix.
+/// @param E     - The neutrino energy in GeV
+///
+/// @return Neutrino oscillation probabilities
+///
+matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf, double E)
+{
+ 
+ SetEnergy(E);
+ 
+ return ProbMatrix(nflvi, nflvf);
+
+}
+
+//.....................................................................
+///
+/// Compute the probability matrix for the first nflvi and nflvf states
+/// for a given energy in GeV and distance in km in a single path.
+///
+/// If the path sequence is not a single path, a new single path will
+/// be created and the previous sequence will be lost.
+///
+/// Don't use this if you want to propagate over multiple path segments.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+/// @param nflvi - The number of initial flavours in the matrix.
+/// @param nflvi - The number of final flavours in the matrix.
+/// @param E     - The neutrino energy in GeV
+/// @param L     - The neutrino path length in km
+///
+/// @return Neutrino oscillation probabilities
+///
+matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf, double E, double L)
+{
+ 
+ SetEnergy(E);
+ SetLength(L);
+ 
+ return ProbMatrix(nflvi, nflvf);
+
+}
+
+//.....................................................................
+///
 /// Compute the average probability of flvi going to flvf
 /// over a bin of energy E with width dE.
 ///
@@ -1372,6 +1636,43 @@ double PMNS_Base::AvgProb(int flvi, int flvf, double E, double dE)
 
 //.....................................................................
 ///
+/// Convert a bin of energy into a bin of L/E
+///
+/// @param E  - energy bin center in GeV
+/// @param dE - energy bin width in GeV
+///
+/// @return The L/E bin center and width in km/GeV
+///
+vectorD PMNS_Base::ConvertEtoLoE(double E, double dE){
+
+  // Make sure fPath is set
+  // Use average if multiple paths
+  SetCurPath(AvgPath(fNuPaths));
+
+  // Define L/E variables
+  vectorD LoEbin(2);  
+
+  // Set a minimum energy
+  double minE = 0.1 * E;
+
+  // Transform range to L/E
+  // Full range if low edge > minE
+  if(E-dE/2 > minE){
+    LoEbin[0] = 0.5 * (fPath.length/(E-dE/2) + fPath.length/(E+dE/2));
+    LoEbin[1] = fPath.length/(E-dE/2) - fPath.length/(E+dE/2);
+  }
+  // Else start at minE
+  else{
+    LoEbin[0] = 0.5 * (fPath.length/minE + fPath.length/(E+dE/2));
+    LoEbin[1] = fPath.length/minE - fPath.length/(E+dE/2);
+  }
+
+  return LoEbin;
+
+}
+
+//.....................................................................
+///
 /// Compute the average probability of nu_in going to flvf
 /// over a bin of energy E with width dE.
 ///
@@ -1394,7 +1695,7 @@ double PMNS_Base::AvgProb(int flvi, int flvf, double E, double dE)
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_Base::AvgProb(std::vector<complexD> nu_in, int flvf, double E, double dE)
+double PMNS_Base::AvgProb(vectorC nu_in, int flvf, double E, double dE)
 {
 
   // Do nothing if energy is not positive
@@ -1405,31 +1706,10 @@ double PMNS_Base::AvgProb(std::vector<complexD> nu_in, int flvf, double E, doubl
   // Don't average zero width
   if(dE<=0) return Prob(nu_in, flvf, E);
 
-  // Make sure fPath is set
-  // Use average if multiple paths
-  SetCurPath(AvgPath(fNuPaths));
-
-  // Define L/E variables
-  double LoE = 0;
-  double dLoE = 0;
-
-  // Set a minimum energy
-  double minE = 0.1 * E;
-
-  // Transform range to L/E
-  // Full range if low edge > minE
-  if(E-dE/2 > minE){
-    LoE = 0.5 * (fPath.length/(E-dE/2) + fPath.length/(E+dE/2));
-    dLoE = fPath.length/(E-dE/2) - fPath.length/(E+dE/2);
-  }
-  // Else start at minE
-  else{
-    LoE = 0.5 * (fPath.length/minE + fPath.length/(E+dE/2));
-    dLoE = fPath.length/minE - fPath.length/(E+dE/2);
-  }
+  vectorD LoEbin = ConvertEtoLoE(E, dE);
 
   // Compute average in LoE
-  return AvgProbLoE(nu_in, flvf, LoE, dLoE);
+  return AvgProbLoE(nu_in, flvf, LoEbin[0], LoEbin[1]);
 
 }
 
@@ -1494,7 +1774,7 @@ double PMNS_Base::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_Base::AvgProbLoE(std::vector<complexD> nu_in, int flvf, double LoE, double dLoE)
+double PMNS_Base::AvgProbLoE(vectorC nu_in, int flvf, double LoE, double dLoE)
 {
 
   // Do nothing if L/E is not positive
@@ -1513,7 +1793,7 @@ double PMNS_Base::AvgProbLoE(std::vector<complexD> nu_in, int flvf, double LoE, 
   if(dLoE<=0) return Prob(nu_in, flvf);
 
   // Get sample points for this bin
-  vector<double> samples = GetSamplePoints(LoE, dLoE);
+  vectorD samples = GetSamplePoints(LoE, dLoE);
 
   // Variables to fill sample
   // probabilities and weights
@@ -1542,6 +1822,290 @@ double PMNS_Base::AvgProbLoE(std::vector<complexD> nu_in, int flvf, double LoE, 
 
 //.....................................................................
 ///
+/// Compute the average probability of flvi going to all flavours
+/// over a bin of L/E with width dLoE.
+///
+/// The probabilities are weighted by (L/E)^-2 so that event
+/// density is flat in energy. This avoids giving too much
+/// weight to low energies. Better approximations would be
+/// achieved if we used an interpolated event density.
+///
+/// This function works best for single paths.
+/// In multiple paths the accuracy may be somewhat worse.
+/// If needed, average over smaller L/E ranges.
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param LoE   - The neutrino  L/E value in the bin center in km/GeV
+/// @param dLoE  - The L/E bin width in km/GeV
+///
+/// @return Average neutrino oscillation probabilities
+///
+vectorD PMNS_Base::AvgProbVectorLoE(int flvi,
+                                    double LoE, double dLoE)
+{
+  ResetToFlavour(flvi);
+  AvgProbVectorLoE(fNuState, LoE, dLoE);
+}
+
+//.....................................................................
+///
+/// Compute the average probability of nu_in going to all flavours
+/// over a bin of energy E with width dE.
+///
+/// This gets transformed into L/E, since the oscillation terms
+/// have arguments linear in L/E and not E.
+///
+/// This function works best for single paths.
+/// In multiple paths the accuracy may be somewhat worse.
+/// If needed, average over smaller energy ranges.
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param E     - The neutrino energy in the bin center in GeV
+/// @param dE    - The energy bin width in GeV
+///
+/// @return Average neutrino oscillation probabilities
+///
+vectorD PMNS_Base::AvgProbVector(int flvi, double E, double dE)
+{
+  ResetToFlavour(flvi);
+  return AvgProbVector(fNuState, E, dE);
+}
+
+//.....................................................................
+///
+/// Compute the average probability of nu_in going to all flavours
+/// over a bin of energy E with width dE.
+///
+/// This gets transformed into L/E, since the oscillation terms
+/// have arguments linear in L/E and not E.
+///
+/// This function works best for single paths.
+/// In multiple paths the accuracy may be somewhat worse.
+/// If needed, average over smaller energy ranges.
+///
+/// @param nu_in - The neutrino initial state in flavour.
+/// @param E     - The neutrino energy in the bin center in GeV
+/// @param dE    - The energy bin width in GeV
+///
+/// @return Average neutrino oscillation probabilities
+///
+vectorD PMNS_Base::AvgProbVector(vectorC nu_in, double E, double dE)
+{
+
+  vectorD probs(fNumNus, 0);
+
+  // Do nothing if energy is not positive
+  if(E<=0) return probs;
+
+  if(fNuPaths.empty()) return probs;
+
+  // Don't average zero width
+  if(dE<=0) return ProbVector(nu_in, E);
+
+  vectorD LoEbin = ConvertEtoLoE(E, dE);
+
+  // Compute average in LoE
+  return AvgProbVectorLoE(nu_in, LoEbin[0], LoEbin[1]);
+
+}
+
+//.....................................................................
+///
+/// Compute the average probability of nu_in going to all flavours
+/// over a bin of L/E with width dLoE.
+///
+/// The probabilities are weighted by (L/E)^-2 so that event
+/// density is flat in energy. This avoids giving too much
+/// weight to low energies. Better approximations would be
+/// achieved if we used an interpolated event density.
+///
+/// This function works best for single paths.
+/// In multiple paths the accuracy may be somewhat worse.
+/// If needed, average over smaller L/E ranges.
+///
+/// @param nu_in - The neutrino intial state in flavour basis.
+/// @param LoE   - The neutrino  L/E value in the bin center in km/GeV
+/// @param dLoE  - The L/E bin width in km/GeV
+///
+/// @return Average neutrino oscillation probabilities
+///
+vectorD PMNS_Base::AvgProbVectorLoE(vectorC nu_in,
+                                    double LoE, double dLoE)
+{
+
+  vectorD probs(fNumNus, 0);
+
+  // Do nothing if L/E is not positive
+  if(LoE<=0) return probs;
+
+  if(fNuPaths.empty()) return probs;
+
+  // Make sure fPath is set
+  // Use average if multiple paths
+  SetCurPath(AvgPath(fNuPaths));
+
+  // Set the energy at bin center
+  SetEnergy(fPath.length/LoE);
+
+  // Don't average zero width
+  if(dLoE<=0) return ProbVector(nu_in);
+
+  // Get sample points for this bin
+  vectorD samples = GetSamplePoints(LoE, dLoE);
+
+  // Variables to fill sample
+  // probabilities and weights
+  double sumw = 0;
+  double length = fPath.length;
+
+  // Loop over all sample points
+  for(int j=0; j<int(samples.size()); j++){
+
+    // Set (L/E)^-2 weights
+    double w = 1./pow(samples[j],2);
+    
+    vectorD sample_probs = ProbVector(nu_in, length / samples[j]);
+
+    for(int i=0; i<probs.size(); i++){
+      // Add weighted probability
+      probs[i] += w * sample_probs[i];
+    }
+    // Increment sum of weights
+    sumw += w;
+
+  }
+
+  for(int i=0; i<probs.size(); i++){
+    // Divide by total sampling weight
+    probs[i] /= sumw;
+  }
+
+  // Return weighted average of probabilities
+  return probs;
+
+}
+
+//.....................................................................
+///
+/// Compute the average probability matrix for nflvi and nflvf
+/// over a bin of energy E with width dE.
+///
+/// This gets transformed into L/E, since the oscillation terms
+/// have arguments linear in L/E and not E.
+///
+/// This function works best for single paths.
+/// In multiple paths the accuracy may be somewhat worse.
+/// If needed, average over smaller energy ranges.
+///
+/// @param nflvi - The number of initial flavours in the matrix.
+/// @param nflvi - The number of final flavours in the matrix.
+/// @param E     - The neutrino energy in the bin center in GeV
+/// @param dE    - The energy bin width in GeV
+///
+/// @return Average neutrino oscillation probabilities
+///
+matrixD PMNS_Base::AvgProbMatrix(int nflvi, int nflvf,
+                                 double E, double dE)
+{
+  
+  matrixD probs(nflvi, vectorD(nflvf, 0));
+
+  // Do nothing if energy is not positive
+  if(E<=0) return probs;
+
+  if(fNuPaths.empty()) return probs;
+
+  // Don't average zero width
+  if(dE<=0) return ProbMatrix(nflvi, nflvf, E);
+
+  vectorD LoEbin = ConvertEtoLoE(E, dE);
+
+  // Compute average in LoE
+  return AvgProbMatrixLoE(nflvi, nflvf, LoEbin[0], LoEbin[1]);
+
+}
+
+//.....................................................................
+///
+/// Compute the average probability matrix for nflvi and nflvf
+/// over a bin of L/E with width dLoE.
+///
+/// The probabilities are weighted by (L/E)^-2 so that event
+/// density is flat in energy. This avoids giving too much
+/// weight to low energies. Better approximations would be
+/// achieved if we used an interpolated event density.
+///
+/// This function works best for single paths.
+/// In multiple paths the accuracy may be somewhat worse.
+/// If needed, average over smaller L/E ranges.
+///
+/// @param nflvi - The number of initial flavours in the matrix.
+/// @param nflvi - The number of final flavours in the matrix.
+/// @param LoE   - The neutrino  L/E value in the bin center in km/GeV
+/// @param dLoE  - The L/E bin width in km/GeV
+///
+/// @return Average neutrino oscillation probabilities
+///
+matrixD PMNS_Base::AvgProbMatrixLoE(int nflvi, int nflvf,
+                                    double LoE, double dLoE)
+{
+
+  matrixD probs(nflvi, vectorD(nflvf, 0));
+
+  // Do nothing if L/E is not positive
+  if(LoE<=0) return probs;
+
+  if(fNuPaths.empty()) return probs;
+
+  // Make sure fPath is set
+  // Use average if multiple paths
+  SetCurPath(AvgPath(fNuPaths));
+
+  // Set the energy at bin center
+  SetEnergy(fPath.length/LoE);
+
+  // Don't average zero width
+  if(dLoE<=0) return ProbMatrix(nflvi, nflvf);
+
+  // Get sample points for this bin
+  vectorD samples = GetSamplePoints(LoE, dLoE);
+
+  // Variables to fill sample
+  // probabilities and weights
+  double sumw = 0;
+  double length = fPath.length;
+
+  // Loop over all sample points
+  for(int j=0; j<int(samples.size()); j++){
+
+    // Set (L/E)^-2 weights
+    double w = 1./pow(samples[j],2);
+    
+    matrixD sample_probs = ProbMatrix(nflvi, nflvf, length / samples[j]);
+
+    for(int flvi=0; flvi<nflvi; flvi++){
+    for(int flvf=0; flvf<nflvf; flvf++){
+      // Add weighted probability
+      probs[flvi][flvf] += w * sample_probs[flvi][flvf];
+    }}
+    // Increment sum of weights
+    sumw += w;
+
+  }
+
+  for(int flvi=0; flvi<nflvi; flvi++){
+  for(int flvf=0; flvf<nflvf; flvf++){
+    // Divide by total sampling weight
+    probs[flvi][flvf] /= sumw;
+  }}
+
+  // Return weighted average of probabilities
+  return probs;
+
+}
+
+//.....................................................................
+///
 /// Compute the sample points for a bin of L/E with width dLoE
 ///
 /// This is used for averaging the probability over a bin of L/E.
@@ -1553,7 +2117,7 @@ double PMNS_Base::AvgProbLoE(std::vector<complexD> nu_in, int flvf, double LoE, 
 /// @param LoE  - The neutrino  L/E value in the bin center in km/GeV
 /// @param dLoE   - The L/E bin width in km/GeV
 ///
-vector<double> PMNS_Base::GetSamplePoints(double LoE, double dLoE)
+vectorD PMNS_Base::GetSamplePoints(double LoE, double dLoE)
 {
 
   // Solve Hamiltonian to get eigenvalues
@@ -1563,7 +2127,7 @@ vector<double> PMNS_Base::GetSamplePoints(double LoE, double dLoE)
   const double k1267 = kKm2eV / (4 * kGeV2eV);
 
   // Get list of all effective Dm^2
-  vector<double> effDm;
+  vectorD effDm;
 
   for(int i=0; i<fNumNus-1; i++){
     for(int j=i+1; j<fNumNus; j++){
@@ -1582,7 +2146,7 @@ vector<double> PMNS_Base::GetSamplePoints(double LoE, double dLoE)
   //int n_div = 1;
 
   // A vector to store sample points
-  vector<double> allSamples;
+  vectorD allSamples;
 
   // Loop over sub-divisions
   for(int k=0; k<n_div; k++){
@@ -1593,7 +2157,7 @@ vector<double> PMNS_Base::GetSamplePoints(double LoE, double dLoE)
 
     // Make a vector of L/E sample values
     // Initialized in the sub-division center
-    vector<double> samples;
+    vectorD samples;
     samples.push_back(bctr);
 
     // Loop over all Dm^2 to average each frequency
@@ -1602,7 +2166,7 @@ vector<double> PMNS_Base::GetSamplePoints(double LoE, double dLoE)
     for(int i=0; i<numDm; i++){
 
       // Copy the list of sample L/E values
-      vector<double> prev = samples;
+      vectorD prev = samples;
 
       // Redefine bin width to lie within full sub-division
       double Width = 2*min(prev[0] - (bctr - bwdt/2), (bctr + bwdt/2) - prev[0]);
