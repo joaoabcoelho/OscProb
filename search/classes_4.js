@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nupath_0',['NuPath',['../structOscProb_1_1NuPath.html',1,'OscProb']]]
+  ['idxcompare_0',['IdxCompare',['../structOscProb_1_1IdxCompare.html',1,'OscProb']]]
 ];

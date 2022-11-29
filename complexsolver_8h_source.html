@@ -71,14 +71,14 @@ $(function() {
 <div class="contents">
 <a href="complexsolver_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;Eigenvalues&quot;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;complex&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Definitions_8h.html">Definitions.h</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">using namespace </span>Eigen;</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">using namespace </span>std;</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacestd.html">std</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespaceOscProb.html">OscProb</a>;</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="complexsolver_8h.html#a4189e2725ab85d164f494133d55d4363">   10</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="complexsolver_8h.html#a4189e2725ab85d164f494133d55d4363">complexsolver</a>(std::vector&lt; std::vector&lt;complexD&gt; &gt; A, std::vector&lt; std::vector&lt;complexD&gt; &gt;&amp; Q, std::vector&lt; std::vector&lt;complexD&gt; &gt;&amp; Qinv, std::vector&lt; complexD &gt;&amp; w)  </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="complexsolver_8h.html#a3a6e3e65083c914257f8e530e0e5b0fa">   10</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="complexsolver_8h.html#a3a6e3e65083c914257f8e530e0e5b0fa">complexsolver</a>(<a class="code hl_typedef" href="namespaceOscProb.html#aeb338ac53fcdff178797945ff5e19137">matrixC</a> A, <a class="code hl_typedef" href="namespaceOscProb.html#aeb338ac53fcdff178797945ff5e19137">matrixC</a>&amp; Q, <a class="code hl_typedef" href="namespaceOscProb.html#aeb338ac53fcdff178797945ff5e19137">matrixC</a>&amp; Qinv, <a class="code hl_typedef" href="namespaceOscProb.html#a91f46d70c79f25dac1a66b7b6dc7605c">vectorC</a>&amp; w)</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  <span class="keywordtype">int</span> size=w.size();</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  MatrixXcd l(size,size);</div>
@@ -113,7 +113,12 @@ $(function() {
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  }</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>              </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
-<div class="ttc" id="acomplexsolver_8h_html_a4189e2725ab85d164f494133d55d4363"><div class="ttname"><a href="complexsolver_8h.html#a4189e2725ab85d164f494133d55d4363">complexsolver</a></div><div class="ttdeci">void complexsolver(std::vector&lt; std::vector&lt; complexD &gt; &gt; A, std::vector&lt; std::vector&lt; complexD &gt; &gt; &amp;Q, std::vector&lt; std::vector&lt; complexD &gt; &gt; &amp;Qinv, std::vector&lt; complexD &gt; &amp;w)</div><div class="ttdef"><b>Definition:</b> <a href="complexsolver_8h_source.html#l00010">complexsolver.h:10</a></div></div>
+<div class="ttc" id="aDefinitions_8h_html"><div class="ttname"><a href="Definitions_8h.html">Definitions.h</a></div></div>
+<div class="ttc" id="acomplexsolver_8h_html_a3a6e3e65083c914257f8e530e0e5b0fa"><div class="ttname"><a href="complexsolver_8h.html#a3a6e3e65083c914257f8e530e0e5b0fa">complexsolver</a></div><div class="ttdeci">void complexsolver(matrixC A, matrixC &amp;Q, matrixC &amp;Qinv, vectorC &amp;w)</div><div class="ttdef"><b>Definition:</b> <a href="complexsolver_8h_source.html#l00010">complexsolver.h:10</a></div></div>
+<div class="ttc" id="anamespaceOscProb_html"><div class="ttname"><a href="namespaceOscProb.html">OscProb</a></div><div class="ttdoc">Some useful general definitions.</div><div class="ttdef"><b>Definition:</b> <a href="Absorption_8h_source.html#l00010">Absorption.h:10</a></div></div>
+<div class="ttc" id="anamespaceOscProb_html_a91f46d70c79f25dac1a66b7b6dc7605c"><div class="ttname"><a href="namespaceOscProb.html#a91f46d70c79f25dac1a66b7b6dc7605c">OscProb::vectorC</a></div><div class="ttdeci">std::vector&lt; complexD &gt; vectorC</div><div class="ttdef"><b>Definition:</b> <a href="Definitions_8h_source.html#l00022">Definitions.h:22</a></div></div>
+<div class="ttc" id="anamespaceOscProb_html_aeb338ac53fcdff178797945ff5e19137"><div class="ttname"><a href="namespaceOscProb.html#aeb338ac53fcdff178797945ff5e19137">OscProb::matrixC</a></div><div class="ttdeci">std::vector&lt; vectorC &gt; matrixC</div><div class="ttdef"><b>Definition:</b> <a href="Definitions_8h_source.html#l00023">Definitions.h:23</a></div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definition:</b> <a href="EigenPoint_8h_source.html#l00045">EigenPoint.h:45</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

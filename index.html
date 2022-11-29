@@ -62,11 +62,11 @@ $(function() {
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title"><a class="el" href="namespaceOscProb.html">OscProb</a> </div></div>
+  <div class="headertitle"><div class="title"><a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a> </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p ><a class="anchor" id="index"></a> <a class="el" href="namespaceOscProb.html">OscProb</a> is a small set of classes aimed at computing exact neutrino oscillation probabilities with a few different models.</p>
-<p ><a class="el" href="namespaceOscProb.html">OscProb</a> contains a basic framework for computing neutrino oscillation probabilities. It is integrated into <a href="https://root.cern.ch/">ROOT</a>, so that each class can be used as you would any ROOT class.</p>
+<div class="textblock"><p ><a class="anchor" id="index"></a> <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a> is a small set of classes aimed at computing exact neutrino oscillation probabilities with a few different models.</p>
+<p ><a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a> contains a basic framework for computing neutrino oscillation probabilities. It is integrated into <a href="https://root.cern.ch/">ROOT</a>, so that each class can be used as you would any ROOT class.</p>
 <p >Available classes are:</p><ul>
 <li><b><a class="el" href="classOscProb_1_1PremModel.html">PremModel</a>:</b> Used for determining neutrino paths through the earth</li>
 <li><b><a class="el" href="classOscProb_1_1PMNS__Fast.html">PMNS_Fast</a>:</b> Standard 3-flavour oscillations</li>
@@ -78,11 +78,11 @@ $(function() {
 <li><b><a class="el" href="classOscProb_1_1PMNS__Decay.html">PMNS_Decay</a>:</b> Oscillations with 3 flavours including neutrino decays of the second and third neutrino mass states nu_2 and nu_3. [Requires external library Eigen3, see the instructions below.]</li>
 <li><b><a class="el" href="classOscProb_1_1Absorption.html">Absorption</a>:</b> Computes absorption probabilities for high-energy neutrinos</li>
 </ul>
-<p >A few example macros on how to use <a class="el" href="namespaceOscProb.html">OscProb</a> are available in a tutorial directory.</p>
+<p >A few example macros on how to use <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a> are available in a tutorial directory.</p>
 <h1><a class="anchor" id="autotoc_md0"></a>
 Installing OscProb</h1>
-<p ><a class="el" href="namespaceOscProb.html">OscProb</a> is very easy to install. The only requirements is to have ROOT installed with the GSL libraries.</p>
-<p ><b>NEW: Thanks to Jacek Holeczek, <a class="el" href="namespaceOscProb.html">OscProb</a> now also builds with ROOT 6!!</b></p>
+<p ><a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a> is very easy to install. The only requirements is to have ROOT installed with the GSL libraries.</p>
+<p ><b>NEW: Thanks to Jacek Holeczek, <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a> now also builds with ROOT 6!!</b></p>
 <p >In order to compile the <a class="el" href="classOscProb_1_1PMNS__Decay.html">PMNS_Decay</a> class, it is necessary to donwload the external Eigen library. This library is added as a submodule. There are two options:</p><ul>
 <li>During cloning: <code>git clone --recurse-submodules <a href="https://github.com/joaoabcoelho/OscProb.git">https://github.com/joaoabcoelho/OscProb.git</a></code></li>
 <li>After clonning: <code>git submodule update --init</code></li>
@@ -95,16 +95,16 @@ Installing OscProb</h1>
 </div><!-- fragment --><p >Or use the <code>LoadOscProb.C</code> macro (see below).</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Tutorial</h1>
-<p >In the directory OscProb/tutorial you will find a few macros with examples using <a class="el" href="namespaceOscProb.html">OscProb</a>.</p>
+<p >In the directory OscProb/tutorial you will find a few macros with examples using <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a>.</p>
 <p >Two macros are particularly useful:</p><ul>
 <li><code>simpleExamples.C</code> : Contains some short pieces of code on how to perform different tasks.</li>
 <li><code>MakeOscillogram.C</code> : Runs a full example of how to plot an oscillogram with the PREM model.</li>
 </ul>
 <p >Additionally, these macros contain useful tools:</p><ul>
-<li><code>LoadOscProb.C</code>: Searches for the <a class="el" href="namespaceOscProb.html">OscProb</a> library in your current directory, parent directory, or library path, and then loads it. It is called within the tutorial macros as a possible usage example.</li>
-<li><code>SetNiceStyle.C</code>: Provides simple tools to make your plots look nicer. Feel free to use it anytime you're making plots, even if you're not running <a class="el" href="namespaceOscProb.html">OscProb</a>. This is completely independent of <a class="el" href="namespaceOscProb.html">OscProb</a>.</li>
+<li><code>LoadOscProb.C</code>: Searches for the <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a> library in your current directory, parent directory, or library path, and then loads it. It is called within the tutorial macros as a possible usage example.</li>
+<li><code>SetNiceStyle.C</code>: Provides simple tools to make your plots look nicer. Feel free to use it anytime you're making plots, even if you're not running <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a>. This is completely independent of <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a>.</li>
 </ul>
-<p >To run macros in compiled mode you will need to preload the <a class="el" href="namespaceOscProb.html">OscProb</a> library, e.g:</p>
+<p >To run macros in compiled mode you will need to preload the <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a> library, e.g:</p>
 <div class="fragment"><div class="line">root -l LoadOscProb.C MakeOscillogram.C+</div>
 </div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->

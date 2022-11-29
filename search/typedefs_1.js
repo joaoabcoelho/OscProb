@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['matrix_0',['matrix',['../classOscProb_1_1PMNS__Deco.html#a77b4e0c041b6268910a270be0f5387c9',1,'OscProb::PMNS_Deco']]]
+  ['matrixc_0',['matrixC',['../namespaceOscProb.html#aeb338ac53fcdff178797945ff5e19137',1,'OscProb']]],
+  ['matrixd_1',['matrixD',['../namespaceOscProb.html#aa43d1e6e97b6dcad3a6cbbd7decbf0c6',1,'OscProb']]]
 ];

@@ -5,6 +5,7 @@ var searchData=
   ['clearcache_2',['ClearCache',['../classOscProb_1_1PMNS__Base.html#ac47fd33e69aa6490f99e2fd147a92f03',1,'OscProb::PMNS_Base']]],
   ['clearmodel_3',['ClearModel',['../classOscProb_1_1PremModel.html#aaead53a9385bda9b0219fd051d0cdd11',1,'OscProb::PremModel']]],
   ['clearpath_4',['ClearPath',['../classOscProb_1_1PMNS__Base.html#aefe521239031c418cfaaaa550a6e13bb',1,'OscProb::PMNS_Base']]],
-  ['complexsolver_5',['complexsolver',['../complexsolver_8h.html#a4189e2725ab85d164f494133d55d4363',1,'complexsolver.h']]],
-  ['ctransp_6',['CTransp',['../classOscProb_1_1PMNS__Deco.html#aca391ff02be7abc2fd3dba40e9ce2665',1,'OscProb::PMNS_Deco']]]
+  ['complexsolver_5',['complexsolver',['../complexsolver_8h.html#a3a6e3e65083c914257f8e530e0e5b0fa',1,'complexsolver.h']]],
+  ['convertetoloe_6',['ConvertEtoLoE',['../classOscProb_1_1PMNS__Base.html#a1998ea292e904a83a7fdc2d8589c6535',1,'OscProb::PMNS_Base']]],
+  ['ctransp_7',['CTransp',['../classOscProb_1_1PMNS__Deco.html#adef92cf7d2cb1a6022b8d2ac601e41e6',1,'OscProb::PMNS_Deco']]]
 ];

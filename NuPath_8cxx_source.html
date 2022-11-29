@@ -69,16 +69,16 @@ $(function() {
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// Implements functions to average neutrino paths</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// coelho@lal.in2p3.fr</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// jcoelho\@apc.in2p3.fr</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"></span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="NuPath_8h.html">NuPath.h</a>&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">using namespace </span>std;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacestd.html">std</a>;</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespaceOscProb.html">OscProb</a>;</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">//......................................................................</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="namespaceOscProb.html#a999a7944bad8bc72d7ee9f56f81a210e">   27</a></span><span class="comment"></span><a class="code hl_struct" href="structOscProb_1_1NuPath.html">NuPath</a> <a class="code hl_function" href="namespaceOscProb.html#a999a7944bad8bc72d7ee9f56f81a210e">OscProb::AvgPath</a>(<a class="code hl_struct" href="structOscProb_1_1NuPath.html">NuPath</a>&amp; p1, <a class="code hl_struct" href="structOscProb_1_1NuPath.html">NuPath</a>&amp; p2){</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="namespaceOscProb.html#ac4f1bdf84ce6aa7a16b6d3c91272d428">   27</a></span><span class="comment"></span><a class="code hl_struct" href="structOscProb_1_1NuPath.html">NuPath</a> <a class="code hl_function" href="namespaceOscProb.html#ac4f1bdf84ce6aa7a16b6d3c91272d428">OscProb::AvgPath</a>(<a class="code hl_struct" href="structOscProb_1_1NuPath.html">NuPath</a>&amp; p1, <a class="code hl_struct" href="structOscProb_1_1NuPath.html">NuPath</a>&amp; p2){</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="comment">// Start with the first path</span></div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <a class="code hl_struct" href="structOscProb_1_1NuPath.html">NuPath</a> mergedPath = p1;</div>
@@ -98,7 +98,7 @@ $(function() {
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">//......................................................................</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="namespaceOscProb.html#a68e2c991fb8e0e76833482be455a55ee">   58</a></span><span class="comment"></span><a class="code hl_struct" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> <a class="code hl_function" href="namespaceOscProb.html#a999a7944bad8bc72d7ee9f56f81a210e">OscProb::AvgPath</a>(std::vector&lt;OscProb::NuPath&gt;&amp; pv){</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment"></span><a class="code hl_struct" href="structOscProb_1_1NuPath.html">NuPath</a> <a class="code hl_function" href="namespaceOscProb.html#ac4f1bdf84ce6aa7a16b6d3c91272d428">OscProb::AvgPath</a>(vector&lt;NuPath&gt;&amp; pv){</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="comment">// Get size of vector</span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keywordtype">int</span> np = pv.size();</div>
@@ -112,7 +112,7 @@ $(function() {
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="comment">// Merge each of the following paths</span></div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=1; i&lt;np; i++){</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    mergedPath = <a class="code hl_function" href="namespaceOscProb.html#a999a7944bad8bc72d7ee9f56f81a210e">AvgPath</a>(mergedPath, pv[i]);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    mergedPath = <a class="code hl_function" href="namespaceOscProb.html#ac4f1bdf84ce6aa7a16b6d3c91272d428">AvgPath</a>(mergedPath, pv[i]);</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  }</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <span class="comment">// return merged path</span></div>
@@ -121,7 +121,7 @@ $(function() {
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">//......................................................................</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="namespaceOscProb.html#a7c203d8583a34acf2ae90185ba45f866">   88</a></span><span class="comment"></span>std::vector&lt;OscProb::NuPath&gt; <a class="code hl_function" href="namespaceOscProb.html#a7c203d8583a34acf2ae90185ba45f866">OscProb::MergePaths</a>(std::vector&lt;OscProb::NuPath&gt;&amp; inputPath, <span class="keywordtype">int</span> j, <span class="keywordtype">int</span> k){</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"></span>vector&lt;NuPath&gt; <a class="code hl_function" href="namespaceOscProb.html#a33ee28eee12941e35edc03a7370ae81f">OscProb::MergePaths</a>(vector&lt;NuPath&gt;&amp; inputPath, <span class="keywordtype">int</span> j, <span class="keywordtype">int</span> k){</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  <span class="comment">// Output vector</span></div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  vector&lt;NuPath&gt; mergedPath;</div>
@@ -130,7 +130,7 @@ $(function() {
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;inputPath.size(); i++){</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="comment">// If first index, merge the paths j and k</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">if</span>(i==j) mergedPath.push_back(<a class="code hl_function" href="namespaceOscProb.html#a999a7944bad8bc72d7ee9f56f81a210e">AvgPath</a>(inputPath[j], inputPath[k]));</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">if</span>(i==j) mergedPath.push_back(<a class="code hl_function" href="namespaceOscProb.html#ac4f1bdf84ce6aa7a16b6d3c91272d428">AvgPath</a>(inputPath[j], inputPath[k]));</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="comment">// If not second index add the path as is</span></div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(i!=k) mergedPath.push_back(inputPath[i]);</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
@@ -142,9 +142,10 @@ $(function() {
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>}</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
 <div class="ttc" id="aNuPath_8h_html"><div class="ttname"><a href="NuPath_8h.html">NuPath.h</a></div></div>
-<div class="ttc" id="anamespaceOscProb_html"><div class="ttname"><a href="namespaceOscProb.html">OscProb</a></div><div class="ttdef"><b>Definition:</b> <a href="Absorption_8h_source.html#l00010">Absorption.h:10</a></div></div>
-<div class="ttc" id="anamespaceOscProb_html_a7c203d8583a34acf2ae90185ba45f866"><div class="ttname"><a href="namespaceOscProb.html#a7c203d8583a34acf2ae90185ba45f866">OscProb::MergePaths</a></div><div class="ttdeci">std::vector&lt; OscProb::NuPath &gt; MergePaths(std::vector&lt; OscProb::NuPath &gt; &amp;inputPath, int j, int k)</div><div class="ttdoc">Merge paths j and k in vector.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8cxx_source.html#l00088">NuPath.cxx:88</a></div></div>
-<div class="ttc" id="anamespaceOscProb_html_a999a7944bad8bc72d7ee9f56f81a210e"><div class="ttname"><a href="namespaceOscProb.html#a999a7944bad8bc72d7ee9f56f81a210e">OscProb::AvgPath</a></div><div class="ttdeci">OscProb::NuPath AvgPath(OscProb::NuPath &amp;p1, OscProb::NuPath &amp;p2)</div><div class="ttdoc">Get the average of two paths.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8cxx_source.html#l00027">NuPath.cxx:27</a></div></div>
+<div class="ttc" id="anamespaceOscProb_html"><div class="ttname"><a href="namespaceOscProb.html">OscProb</a></div><div class="ttdoc">Some useful general definitions.</div><div class="ttdef"><b>Definition:</b> <a href="Absorption_8h_source.html#l00010">Absorption.h:10</a></div></div>
+<div class="ttc" id="anamespaceOscProb_html_a33ee28eee12941e35edc03a7370ae81f"><div class="ttname"><a href="namespaceOscProb.html#a33ee28eee12941e35edc03a7370ae81f">OscProb::MergePaths</a></div><div class="ttdeci">std::vector&lt; NuPath &gt; MergePaths(std::vector&lt; NuPath &gt; &amp;inputPath, int j, int k)</div><div class="ttdoc">Merge paths j and k in vector.</div></div>
+<div class="ttc" id="anamespaceOscProb_html_ac4f1bdf84ce6aa7a16b6d3c91272d428"><div class="ttname"><a href="namespaceOscProb.html#ac4f1bdf84ce6aa7a16b6d3c91272d428">OscProb::AvgPath</a></div><div class="ttdeci">NuPath AvgPath(NuPath &amp;p1, NuPath &amp;p2)</div><div class="ttdoc">Get the average of two paths.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8cxx_source.html#l00027">NuPath.cxx:27</a></div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definition:</b> <a href="EigenPoint_8h_source.html#l00045">EigenPoint.h:45</a></div></div>
 <div class="ttc" id="astructOscProb_1_1NuPath_html"><div class="ttname"><a href="structOscProb_1_1NuPath.html">OscProb::NuPath</a></div><div class="ttdoc">A struct representing a neutrino path segment.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00034">NuPath.h:35</a></div></div>
 <div class="ttc" id="astructOscProb_1_1NuPath_html_a54ddd451db69bc54434de3cf18a117ca"><div class="ttname"><a href="structOscProb_1_1NuPath.html#a54ddd451db69bc54434de3cf18a117ca">OscProb::NuPath::density</a></div><div class="ttdeci">double density</div><div class="ttdoc">The density of the path segment in g/cm^3.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00077">NuPath.h:77</a></div></div>
 <div class="ttc" id="astructOscProb_1_1NuPath_html_af22660894b6e25cf835500381b155557"><div class="ttname"><a href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">OscProb::NuPath::length</a></div><div class="ttdeci">double length</div><div class="ttdoc">The length of the path segment in km.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00076">NuPath.h:76</a></div></div>
