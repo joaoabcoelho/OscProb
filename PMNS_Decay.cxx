@@ -11,7 +11,7 @@
 /// Diagonalization of the matrix is done using the Eigen library. 
 ///
 /// \author Victor Carretero - vcarretero\@km3net.de  
-/// \author Joao Coelho - coelho\@lal.in2p3.fr
+/// \author Joao Coelho - jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #include "PMNS_Decay.h"
@@ -28,16 +28,18 @@ using namespace OscProb;
 /// This class is restricted to 3 neutrino flavours.
 ///
 PMNS_Decay::PMNS_Decay() : PMNS_Base(), fHam() {
-	falpha         = vector<double>(fNumNus, 0);
-	fEvalI         = vector<double>(fNumNus, 0); 
-	fEvecinv       = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
-	fEvalEigen     = vector<complexD>(fNumNus, 0);
-	fEvecEigen     = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
-	fEvecEigeninv  = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
-	fHd            = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));	 
-	fHam           = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
-	fHt            = vector< vector<complexD> >(fNumNus, vector<complexD>(fNumNus,zero));
-	}
+
+  falpha         = vectorD(fNumNus, 0);
+  fEvalI         = vectorD(fNumNus, 0);
+  fEvecinv       = matrixC(fNumNus, vectorC(fNumNus,zero));
+  fEvalEigen     = vectorC(fNumNus, 0);
+  fEvecEigen     = matrixC(fNumNus, vectorC(fNumNus,zero));
+  fEvecEigeninv  = matrixC(fNumNus, vectorC(fNumNus,zero));
+  fHd            = matrixC(fNumNus, vectorC(fNumNus,zero));
+  fHam           = matrixC(fNumNus, vectorC(fNumNus,zero));
+  fHt            = matrixC(fNumNus, vectorC(fNumNus,zero));
+
+}
 
 //......................................................................
 ///
@@ -55,27 +57,26 @@ PMNS_Decay::~PMNS_Decay(){}
 ///
 void PMNS_Decay::SetMix(double th12, double th23, double th13, double deltacp) 
 {
-
   SetAngle(1,2, th12);
   SetAngle(1,3, th13);
   SetAngle(2,3, th23);
   SetDelta(1,3, deltacp);
-
 }
+
 //......................................................................                                                       
 ///     Setting Alpha3 parameter, it must be possitive, and units are eV^2 .
 ///     Alpha3=m3/tau3, mass and lifetime of the third state in the restframe 
 void PMNS_Decay::SetAlpha3(double alpha3) 
 {
-if(alpha3<0){
-	cout << "Alpha3 must be positive" << endl;
-	return;
+  if(alpha3<0){
+    cout << "Alpha3 must be positive" << endl;
+    return;
+  }
+
+  fBuiltHms *= (falpha[2] == alpha3);
+  falpha[2] = alpha3;
 }
 
-fBuiltHms *= (falpha[2] == alpha3);
- falpha[2] = alpha3;
-
-}
 //......................................................................                                              
 ///     Setting Alpha2 parameter, it must be possitive, and units are eV^2 .
 ///     Alpha2=m2/tau2, mass and lifetime of the second state in the restframe
@@ -88,17 +89,20 @@ void PMNS_Decay::SetAlpha2(double alpha2)
 
   fBuiltHms *= (falpha[1] == alpha2);
   falpha[1] = alpha2;
-
 }
 
+//......................................................................
+///
+/// Reimplement SetIsNuBar to also rebuild hamiltonian..
+///
 void PMNS_Decay::SetIsNuBar(bool isNuBar)
 {
-
   // Check if value is actually changing
   fGotES *= (fIsNuBar == isNuBar);
   fBuiltHms *= (fIsNuBar == isNuBar);
   fIsNuBar = isNuBar;
 }
+
 //......................................................................
 ///
 /// Set both mass-splittings at once.
@@ -111,18 +115,17 @@ void PMNS_Decay::SetIsNuBar(bool isNuBar)
 ///
 void PMNS_Decay::SetDeltaMsqrs(double dm21, double dm32) 
 {
-
   SetDm(2, dm21);
   SetDm(3, dm32 + dm21);
-
 }
 
 //
 /// Get alpha3
 double PMNS_Decay::GetAlpha3() 
 {
-return falpha[2];
+  return falpha[2];
 }
+
 /// Get alpha2
 double PMNS_Decay::GetAlpha2()
 {
@@ -130,6 +133,10 @@ double PMNS_Decay::GetAlpha2()
 }
 
 
+//......................................................................
+///
+///  Implement building decay hamiltonian
+///
 void PMNS_Decay::BuildHam()
 {
 
@@ -158,7 +165,7 @@ void PMNS_Decay::BuildHam()
    for(int i=0; i<fNumNus; i++){
      for(int j=i+1; j<fNumNus; j++){
        if(fIsNuBar){
-	 fHms[i][j]=conj(fHms[i][j]);
+         fHms[i][j]=conj(fHms[i][j]);
        }           
        fHms[j][i]= conj(fHms[i][j]);
      }
@@ -174,7 +181,7 @@ void PMNS_Decay::BuildHam()
    }
   
    for(int j=0; j<fNumNus; j++){
-	   
+     
     // Set alpha
      fHd[j][j] = falpha[j];
     
@@ -189,7 +196,7 @@ void PMNS_Decay::BuildHam()
    for(int i=0; i<fNumNus; i++){
      for(int j=i+1; j<fNumNus; j++){
        if(fIsNuBar){
-	 fHd[i][j]=conj(fHd[i][j]);
+         fHd[i][j]=conj(fHd[i][j]);
        }
        fHd[j][i]= conj(fHd[i][j]);
      }
@@ -204,15 +211,11 @@ void PMNS_Decay::BuildHam()
      }
    }  
  
- 
- 
+  // Clear eigensystem cache
   //ClearCache();
 
   // Tag as built
   fBuiltHms = true;
-  
-
- 
 
 }
 
@@ -225,8 +228,6 @@ void PMNS_Decay::BuildHam()
 /// to obtain the vacuum Hamiltonian in eV. Then, the matter
 /// potential is added to the electron component.
 ///
-
-
 void PMNS_Decay::UpdateHam()
 {
 
@@ -237,18 +238,16 @@ void PMNS_Decay::UpdateHam()
 
   // Finish building Hamiltonian in matter with dimension of eV
   for(int i=0;i<fNumNus;i++){
-	  for(int j=0; j<fNumNus; j++){
-    fHam[i][j] = fHt[i][j]/lv;
-    
-    
+    for(int j=0; j<fNumNus; j++){
+      fHam[i][j] = fHt[i][j]/lv;
     }
   }
  
-
   if(!fIsNuBar) fHam[0][0] += kr2GNe;
   else          fHam[0][0] -= kr2GNe;
   
 }
+
 //......................................................................
 ///
 /// Solve the full Hamiltonian for eigenvectors and eigenvalues.
@@ -257,7 +256,6 @@ void PMNS_Decay::UpdateHam()
 ///
 void PMNS_Decay::SolveHam()
 {
-
 
   // Build Hamiltonian
   BuildHam();
@@ -271,7 +269,7 @@ void PMNS_Decay::SolveHam()
   UpdateHam();
 
   // Solve Hamiltonian for eigensystem using the Eigen library method 
-  complexsolver(fHam,fEvecEigen,fEvecEigeninv,fEvalEigen);
+  complexsolver(fHam, fEvecEigen, fEvecEigeninv, fEvalEigen);
 
 
   // Fill fEval and fEvec vectors from Eigen arrays  
@@ -297,7 +295,6 @@ void PMNS_Decay::SolveHam()
 ///
 /// We know the vacuum eigensystem, so just write it explicitly
 ///
-
 void PMNS_Decay::PropagatePath(NuPath p)
 {
 
@@ -309,13 +306,8 @@ void PMNS_Decay::PropagatePath(NuPath p)
 
   double LengthIneV = kKm2eV * p.length;
   for(int i=0; i<fNumNus; i++){
-
-    double arg = fEval[i] * LengthIneV;
-    double argI = fEvalI[i] * LengthIneV;
-    std::complex<double> numi=std::complex<double>(0,1.0);
-    fPhases[i] = exp(-numi*(arg+numi*argI));
-   
-   
+    complexD arg(fEvalI[i], -fEval[i]);
+    fPhases[i] = exp(arg * LengthIneV);
   }
   for(int i=0;i<fNumNus;i++){
     fBuffer[i] = 0;
@@ -329,10 +321,8 @@ void PMNS_Decay::PropagatePath(NuPath p)
   for(int i=0;i<fNumNus;i++){
     fNuState[i] = 0;
     for(int j=0;j<fNumNus;j++){
-      fNuState[i] +=  fEvec[i][j] * fBuffer[j];
-      
-    }		
-	
+      fNuState[i] += fEvec[i][j] * fBuffer[j];
+    }
   }
 
 }

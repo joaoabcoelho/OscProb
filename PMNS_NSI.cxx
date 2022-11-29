@@ -5,7 +5,7 @@
 //
 // This  class inherits from the PMNS_Fast class
 //
-// coelho@lal.in2p3.fr
+// jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #include "PMNS_NSI.h"

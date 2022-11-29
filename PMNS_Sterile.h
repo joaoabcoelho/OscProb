@@ -13,7 +13,7 @@
 /// The eigensystem solution is performed by GSL, which makes it slower
 /// than the PMNS_Fast class, which only works for 3 neutrinos. 
 ///
-/// \author coelho\@lal.in2p3.fr
+/// \author jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef PMNS_STERILE_H

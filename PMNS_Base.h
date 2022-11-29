@@ -10,14 +10,13 @@
 ///
 /// \sa PMNS_Fast PMNS_NSI PMNS_Sterile
 ///
-/// \author Joao Coelho - coelho\@lal.in2p3.fr
+/// \author Joao Coelho - jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef PMNS_BASE_H
 #define PMNS_BASE_H
-#include <complex>
-#include <vector>
-#include <set>
+
+#include <unordered_set>
 
 #include "NuPath.h"
 #include "EigenPoint.h"
@@ -32,11 +31,11 @@ namespace OscProb {
     
 
     // Get the oscillation probability
-    virtual double Prob(std::vector<complexD> nu_in, 
+    virtual double Prob(vectorC nu_in, 
                         int flvf);           ///< Compute the probability of nu_in going to flvf
-    virtual double Prob(std::vector<complexD> nu_in,
+    virtual double Prob(vectorC nu_in,
                         int flvf, double E); ///< Compute the probability of nu_in going to flvf for energy E
-    virtual double Prob(std::vector<complexD> nu_in,
+    virtual double Prob(vectorC nu_in,
                         int flvf, double E,
                         double L);           ///< Compute the probability of nu_in going to flvf for energy E and distance L
 
@@ -47,11 +46,30 @@ namespace OscProb {
     virtual double Prob(int flvi, int flvf,
                         double E, double L); ///< Compute the probability of flvi going to flvf for energy E and distance L
 
+    // Get the oscillation probability vector
+    virtual vectorD ProbVector(vectorC nu_in);      ///< Compute the probabilities of nu_in going to all flavours
+    virtual vectorD ProbVector(vectorC nu_in,
+                               double E);           ///< Compute the probabilities of nu_in going to all flavours for energy E
+    virtual vectorD ProbVector(vectorC nu_in,
+                               double E, double L); ///< Compute the probabilities of nu_in going to all flavours for energy E and distance L
+
+    // Get the oscillation probability vector
+    virtual vectorD ProbVector(int flvi);           ///< Compute the probabilities of flvi going to all flavours
+    virtual vectorD ProbVector(int flvi, double E); ///< Compute the probabilities of flvi going to all flavours for energy E
+    virtual vectorD ProbVector(int flvi,
+                               double E, double L); ///< Compute the probabilities of flvi going to all flavours for energy E and distance L
+
+    // Get the oscillation probability matrix
+    virtual matrixD ProbMatrix(int nflvi, int nflvf); ///< Compute the probability matrix
+    virtual matrixD ProbMatrix(int nflvi, int nflvf,
+                               double E);             ///< Compute the probability matrix for energy E
+    virtual matrixD ProbMatrix(int nflvi, int nflvf,
+                               double E, double L);   ///< Compute the probability matrix for energy E and distance L
 
     // Get probability averaged over a bin
-    virtual double AvgProb(std::vector<complexD> nu_in, 
+    virtual double AvgProb(vectorC nu_in, 
                            int flvf, double E, double dE=0);        ///< Compute the average probability over a bin of energy
-    virtual double AvgProbLoE(std::vector<complexD> nu_in, 
+    virtual double AvgProbLoE(vectorC nu_in, 
                               int flvf, double LoE, double dLoE=0); ///< Compute the average probability over a bin of L/E
 
     // Get probability averaged over a bin
@@ -60,8 +78,26 @@ namespace OscProb {
     virtual double AvgProbLoE(int flvi, int flvf, 
                               double LoE, double dLoE=0); ///< Compute the average probability over a bin of L/E
 
+    // Get probability vector averaged over a bin
+    virtual vectorD AvgProbVector(vectorC nu_in, 
+                                  double E, double dE=0);        ///< Compute the average probability vector over a bin of energy
+    virtual vectorD AvgProbVectorLoE(vectorC nu_in, 
+                                     double LoE, double dLoE=0); ///< Compute the average probability vector over a bin of L/E
 
-    virtual std::vector<complexD> GetMassEigenstate(int mi); ///< Get a neutrino mass eigenstate
+    // Get probability vector averaged over a bin
+    virtual vectorD AvgProbVector(int flvi,
+                                  double E, double dE=0);        ///< Compute the average probability vector over a bin of energy
+    virtual vectorD AvgProbVectorLoE(int flvi, 
+                                     double LoE, double dLoE=0); ///< Compute the average probability vector over a bin of L/E
+
+    // Get probability vector averaged over a bin
+    virtual matrixD AvgProbMatrix(int nflvi, int nflvf,
+                                  double E, double dE=0);        ///< Compute the average probability matrix over a bin of energy
+    virtual matrixD AvgProbMatrixLoE(int nflvi, int nflvf, 
+                                     double LoE, double dLoE=0); ///< Compute the average probability matrix over a bin of L/E
+
+
+    virtual vectorC GetMassEigenstate(int mi); ///< Get a neutrino mass eigenstate
 
     // Set the oscillation parameters
     virtual void SetAngle(int i, int j, double th);    ///< Set the mixing angle theta_ij
@@ -107,9 +143,9 @@ namespace OscProb {
     virtual void SetDensity(double rho); ///< Set single path density in g/cm^3
     virtual void SetZoA    (double zoa); ///< Set Z/A value for single path
 
-    virtual void SetLength (std::vector<double> L);   ///< Set multiple path lengths
-    virtual void SetDensity(std::vector<double> rho); ///< Set multiple path densities
-    virtual void SetZoA    (std::vector<double> zoa); ///< Set multiple path Z/A values
+    virtual void SetLength (vectorD L);   ///< Set multiple path lengths
+    virtual void SetDensity(vectorD rho); ///< Set multiple path densities
+    virtual void SetZoA    (vectorD zoa); ///< Set multiple path Z/A values
     virtual void SetLayers (std::vector<int>    lay); ///< Set multiple path layer indices
 
     // Set a default neutrino path
@@ -119,7 +155,7 @@ namespace OscProb {
     virtual std::vector<OscProb::NuPath> GetPath(); ///< Get the neutrino path sequence
 
     /// Compute the sample points for a bin of L/E with width dLoE
-    virtual std::vector<double> GetSamplePoints(double LoE, double dLoE);
+    virtual vectorD GetSamplePoints(double LoE, double dLoE);
 
     // Setup the caching system
     virtual void SetUseCache(bool u=true); ///< Set caching on/off
@@ -151,11 +187,11 @@ namespace OscProb {
     virtual void SetCurPath(OscProb::NuPath p); ///< Set the path currently in use by the class
 
     virtual void SetAtt(double att, int idx);              ///< Set one of the path attributes
-    virtual void SetAtt(std::vector<double> att, int idx); ///< Set all values of a path attribute
+    virtual void SetAtt(vectorD att, int idx); ///< Set all values of a path attribute
 
 
     // Building and solving
-    virtual void RotateH(int i,int j,std::vector< std::vector<complexD> >& Ham); ///< Rotate the Hamiltonian by theta_ij and delta_ij
+    virtual void RotateH(int i,int j, matrixC& Ham); ///< Rotate the Hamiltonian by theta_ij and delta_ij
     virtual void RotateState(int i,int j); ///< Rotate the neutrino state by theta_ij and delta_ij
 
     virtual void BuildHms();           ///< Build the matrix of masses squared.
@@ -177,24 +213,26 @@ namespace OscProb {
 
     virtual double P(int flv);    ///< Return the probability of final state in flavour flv
 
-    virtual std::vector<int> GetSortedIndices(const std::vector<double> x); ///< Get indices that sort a vector
+    virtual std::vector<int> GetSortedIndices(const vectorD x); ///< Get indices that sort a vector
+
+    virtual vectorD ConvertEtoLoE(double E, double dE);
 
     // Attributes
 
     int fNumNus; ///< Number of neutrino flavours
 
-    std::vector<double>                  fDm;      ///< m^2_i - m^2_1 in vacuum
-    std::vector< std::vector<double> >   fTheta;   ///< theta[i][j] mixing angle
-    std::vector< std::vector<double> >   fDelta;   ///< delta[i][j] CP violating phase
+    vectorD fDm;      ///< m^2_i - m^2_1 in vacuum
+    matrixD fTheta;   ///< theta[i][j] mixing angle
+    matrixD fDelta;   ///< delta[i][j] CP violating phase
 
-    std::vector<complexD>                fNuState; ///< The neutrino current state
-    std::vector< std::vector<complexD> > fHms;     ///< matrix H*2E in eV^2
+    vectorC fNuState; ///< The neutrino current state
+    matrixC fHms;     ///< matrix H*2E in eV^2
 
-    std::vector<complexD>                fPhases;  ///< Buffer for oscillation phases
-    std::vector<complexD>                fBuffer;  ///< Buffer for neutrino state tranformations
+    vectorC fPhases;  ///< Buffer for oscillation phases
+    vectorC fBuffer;  ///< Buffer for neutrino state tranformations
 
-    std::vector<double>                  fEval;    ///< Eigenvalues of the Hamiltonian
-    std::vector< std::vector<complexD> > fEvec;    ///< Eigenvectors of the Hamiltonian
+    vectorD fEval;    ///< Eigenvalues of the Hamiltonian
+    matrixC fEvec;    ///< Eigenvectors of the Hamiltonian
 
     double fEnergy;  ///< Neutrino energy
     bool   fIsNuBar; ///< Anti-neutrino flag
@@ -209,7 +247,7 @@ namespace OscProb {
     double fCachePrec; ///< Precision of cache matching
     int    fMaxCache;  ///< Maximum cache size
 
-    std::set<OscProb::EigenPoint> fMixCache; ///< Caching set of eigensystems
+    std::unordered_set<OscProb::EigenPoint> fMixCache; ///< Caching set of eigensystems
     EigenPoint fProbe;                       ///< EigenpPoint to try
     
   };
@@ -218,7 +256,7 @@ namespace OscProb {
   struct IdxCompare {
 
       /// Take in a target vector
-      IdxCompare(const std::vector<double>& target): target(target) {}
+      IdxCompare(const vectorD& target): target(target) {}
 
       /// Compare elements a and b of target vector
       bool operator()(int a, int b) const { return target[a] < target[b]; }
@@ -226,7 +264,7 @@ namespace OscProb {
     private:
     
       /// Attribute to store the target vector
-      const std::vector<double> target;
+      const vectorD target;
 
   };
 

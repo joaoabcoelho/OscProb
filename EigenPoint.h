@@ -6,18 +6,14 @@
 /// This struct allows for comparisons of eigensystems based on
 /// the neutrino energy, nu-nubar status, path density and Z/A.
 ///
-/// \author Joao Coelho - coelho\@lal.in2p3.fr
+/// \author Joao Coelho - jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef EIGENPOINT_H
 #define EIGENPOINT_H
-#include <complex>
-#include <vector>
 
+#include "Definitions.h"
 #include "NuPath.h"
-
-// A shorthand...
-typedef std::complex<double> complexD;
 
 namespace OscProb {
 
@@ -39,11 +35,23 @@ namespace OscProb {
     bool operator < (const EigenPoint &rhs) const;  ///< Comparison operator
     bool operator == (const EigenPoint &rhs) const; ///< Identity operator
     
-    std::vector<double>                  fEval;    ///< Eigenvalues to be cached
-    std::vector< std::vector<complexD> > fEvec;    ///< Eigenvectors to be cached
+    vectorD fEval;  ///< Eigenvalues to be cached
+    matrixC fEvec;  ///< Eigenvectors to be cached
 
   };
 
 }
+
+namespace std {
+
+  template <>
+  struct hash<OscProb::EigenPoint> {
+    auto operator()(const OscProb::EigenPoint &ep) const -> size_t {
+      return hash<double>()(ep.fNE) ^ hash<double>()(ep.fPath.zoa);
+    }
+  };
+
+}
+
 #endif
 

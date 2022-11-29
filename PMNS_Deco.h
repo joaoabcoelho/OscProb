@@ -12,7 +12,7 @@
 ///
 /// \sa PMNS_Fast
 ///
-/// \author coelho\@lal.in2p3.fr
+/// \author jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef PMNS_Deco_H
@@ -49,9 +49,6 @@ namespace OscProb {
     /// Get the power index
     virtual double GetPower();
 
-    typedef std::vector<complexD> row;
-    typedef std::vector<row> matrix;
-
   protected:
   
     // Resetting and propagating
@@ -61,14 +58,14 @@ namespace OscProb {
 
     virtual double P(int flv);    ///< Return the probability of final state in flavour flv
 
-    virtual matrix Dot(matrix A, matrix B);
-    virtual matrix Mult(matrix A, matrix B);
-    virtual matrix CTransp(matrix A);
+    virtual matrixC Dot(matrixC A, matrixC B);
+    virtual matrixC Mult(matrixC A, matrixC B);
+    virtual matrixC CTransp(matrixC A);
     
     double fGamma[3]; ///< Stores each decoherence parameter
     double fPower;    ///< Stores the power index parameter
     
-    matrix fRho; ///< The neutrino density matrix state
+    matrixC fRho; ///< The neutrino density matrix state
 
   };
 

@@ -7,7 +7,7 @@
 /// so that the neutrino propagation through a path is done
 /// consistently in the PMNS classes.
 ///
-/// \author coelho\@lal.in2p3.fr
+/// \author jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////
@@ -21,7 +21,7 @@
 /// earth model. Only the outer radius of the shell is stored,
 /// so PremLayer's need to be assembled in order inside a vector.
 ///
-/// \author coelho\@lal.in2p3.fr
+/// \author jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef NUPATH_H
@@ -129,9 +129,9 @@ namespace OscProb {
 
   };
   
-  OscProb::NuPath AvgPath(OscProb::NuPath &p1, OscProb::NuPath &p2); ///< Get the average of two paths
-  OscProb::NuPath AvgPath(std::vector<OscProb::NuPath> &pv); ///< Get the average of a vector of paths
-  std::vector<OscProb::NuPath> MergePaths(std::vector<OscProb::NuPath> &inputPath, int j, int k); ///< Merge paths j and k in vector
+  NuPath AvgPath(NuPath& p1, NuPath& p2); ///< Get the average of two paths
+  NuPath AvgPath(std::vector<NuPath>& pv); ///< Get the average of a vector of paths
+  std::vector<NuPath> MergePaths(std::vector<NuPath> &inputPath, int j, int k); ///< Merge paths j and k in vector
 
 }
 
