@@ -1356,6 +1356,8 @@ vectorD PMNS_Base::ProbVector(vectorC nu_in)
 
   assert(nu_in.size() == fNumNus);
 
+  fNuState = nu_in;
+
   Propagate();
   
   vectorD probs(fNumNus);
@@ -1966,7 +1968,7 @@ vectorD PMNS_Base::AvgProbVectorLoE(vectorC nu_in,
     
     vectorD sample_probs = ProbVector(nu_in, length / samples[j]);
 
-    for(int i=0; i<probs.size(); i++){
+    for(int i=0; i<fNumNus; i++){
       // Add weighted probability
       probs[i] += w * sample_probs[i];
     }
@@ -1975,7 +1977,7 @@ vectorD PMNS_Base::AvgProbVectorLoE(vectorC nu_in,
 
   }
 
-  for(int i=0; i<probs.size(); i++){
+  for(int i=0; i<fNumNus; i++){
     // Divide by total sampling weight
     probs[i] /= sumw;
   }
