@@ -4,7 +4,7 @@
 //
 //.................................................
 //
-// coelho\@lal.in2p3.fr
+// jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #include "EigenPoint.h"
@@ -23,7 +23,7 @@ using namespace OscProb;
 /// @param n      - nu-nubar flag
 ///
 EigenPoint::EigenPoint(int numNus, double e, NuPath p, bool n) :
-fEval(numNus,0), fEvec(numNus, std::vector<complexD>(numNus,0))
+fEval(numNus,0), fEvec(numNus, vectorC(numNus,0))
 {
   SetVars(e,p,n);
 }

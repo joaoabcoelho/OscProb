@@ -5,7 +5,7 @@
 ///        three-neutrino framework with LIV.
 ///
 /// \author Nafis R. K. Chowdhury - nrkhanchowdhury\@km3net.de 
-/// \author Joao Coelho - coelho\@lal.in2p3.fr
+/// \author Joao Coelho - jcoelho\@apc.in2p3.fr
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifndef PMNS_LIV_H

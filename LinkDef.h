@@ -11,8 +11,6 @@
 #pragma link C++ struct OscProb::EigenPoint+;
 #pragma link C++ class vector<OscProb::NuPath>;
 #pragma link C++ class vector<OscProb::PremLayer>;
-#pragma link C++ class vector<complexD>;
-//#pragma link C++ class set<OscProb::EigenPoint>;
 #pragma link C++ class unordered_set<OscProb::EigenPoint>;
 
 

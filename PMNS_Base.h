@@ -10,31 +10,16 @@
 ///
 /// \sa PMNS_Fast PMNS_NSI PMNS_Sterile
 ///
-/// \author Joao Coelho - coelho\@lal.in2p3.fr
+/// \author Joao Coelho - jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef PMNS_BASE_H
 #define PMNS_BASE_H
-#include <complex>
-#include <vector>
+
 #include <unordered_set>
 
 #include "NuPath.h"
 #include "EigenPoint.h"
-
-namespace std {
-  template <>
-  struct hash<OscProb::EigenPoint> {
-    auto operator()(const OscProb::EigenPoint &ep) const -> size_t {
-      return hash<double>()(ep.fNE) ^ hash<double>()(ep.fPath.zoa);
-    }
-  };
-}  // namespace std
-
-typedef std::vector<double>   vectorD;
-typedef std::vector<vectorD>  matrixD;
-typedef std::vector<complexD> vectorC;
-typedef std::vector<vectorC>  matrixC;
 
 namespace OscProb {
 
@@ -176,10 +161,6 @@ namespace OscProb {
     virtual void SetUseCache(bool u=true); ///< Set caching on/off
     virtual void ClearCache();             ///< Clear the cache
     virtual void SetMaxCache(int mc=1e6);  ///< Set max cache size
-
-    int fUsedCache;
-    
-    virtual int GetCacheSize(){ return fMixCache.size(); }
 
   protected:
     

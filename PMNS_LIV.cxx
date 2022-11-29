@@ -6,7 +6,7 @@
 // This  class inherits from the PMNS_Fast class
 //
 // \author Nafis R. K. Chowdhury - nrkhanchowdhury\@km3net.de 
-// \author Joao Coelho - coelho\@lal.in2p3.fr
+// \author Joao Coelho - jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #include "PMNS_LIV.h"
@@ -127,11 +127,11 @@ void PMNS_LIV::SetaT(int flvi, int flvj, double val, double phase){
 
   if(flvi != flvj) h *= complexD(cos(phase), sin(phase));
 
-  //bool isSame = (faT[flvi][flvj] == h);
+  bool isSame = (faT[flvi][flvj] == h);
 
-  //if(!isSame) ClearCache();
+  if(!isSame) ClearCache();
 
-  fGotES *= (faT[flvi][flvj] == h);
+  fGotES *= isSame;
 
   faT[flvi][flvj] = h;
 
@@ -174,12 +174,11 @@ void PMNS_LIV::SetcT(int flvi, int flvj, double val, double phase){
 
   if(flvi != flvj) h *= complexD(cos(phase), sin(phase));
 
-  //bool isSame = (fcTT[flvi][flvj] == h);
+  bool isSame = (fcT[flvi][flvj] == h);
 
-  //if(!isSame) ClearCache();
+  if(!isSame) ClearCache();
 
-  //fGotES *= isSame;
-  fGotES *= (faT[flvi][flvj] == h);
+  fGotES *= isSame;
 
   fcT[flvi][flvj] = h;
 

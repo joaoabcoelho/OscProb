@@ -31,9 +31,9 @@ namespace OscProb {
     /// Set both mass-splittings at once
     virtual void SetDeltaMsqrs(double dm21, double dm32);
     //Set Alpha 3
-    std::vector<double>               	 falpha;
-    std::vector< std::vector<complexD> > fEvecinv; 
-    std::vector<double>                  fEvalI;
+    vectorD falpha;
+    matrixC fEvecinv;
+    vectorD fEvalI;
     
     virtual void SetAlpha3(double alpha3);
     virtual void SetAlpha2(double alpha2);
@@ -55,13 +55,13 @@ namespace OscProb {
     virtual void PropagatePath(OscProb::NuPath p);    ///< Propagate neutrino through a single path
     
     
-    std::vector< std::vector<complexD> > fHd; //Decay hamiltonian
-    std::vector< std::vector<complexD> > fHam;  //Final hamiltonian 
-    std::vector< std::vector<complexD> > fHt;  //Standard+Decay hamiltonian
+    matrixC fHd;  //Decay hamiltonian
+    matrixC fHam; //Final hamiltonian
+    matrixC fHt;  //Standard+Decay hamiltonian
    
-    std::vector< complexD > fEvalEigen;
-    std::vector< std::vector<complexD> > fEvecEigen;
-    std::vector< std::vector<complexD> > fEvecEigeninv;    
+    vectorC fEvalEigen;
+    matrixC fEvecEigen;
+    matrixC fEvecEigeninv;
   };
 
 }

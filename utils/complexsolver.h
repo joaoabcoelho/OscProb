@@ -1,13 +1,13 @@
 #include <iostream>
 #include "Eigenvalues"
-#include <complex>
-#include <vector>
+
+#include "Definitions.h"
 
 using namespace Eigen;
 using namespace std;
+using namespace OscProb;
 
-
-void complexsolver(std::vector< std::vector<complexD> > A, std::vector< std::vector<complexD> >& Q, std::vector< std::vector<complexD> >& Qinv, std::vector< complexD >& w)  
+void complexsolver(matrixC A, matrixC& Q, matrixC& Qinv, vectorC& w)
 {
   int size=w.size();
   MatrixXcd l(size,size);

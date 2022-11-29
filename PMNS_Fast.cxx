@@ -3,7 +3,7 @@
 // Implementation of oscillations of neutrinos in matter in a
 // three-neutrino framework. 
 //
-// coelho@lal.in2p3.fr
+// jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #include "PMNS_Fast.h"

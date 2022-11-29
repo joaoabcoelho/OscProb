@@ -5,7 +5,7 @@
 //
 //......................................................................
 //
-// coelho@lal.in2p3.fr
+// jcoelho\@apc.in2p3.fr
 //
 ////////////////////////////////////////////////////////////////////////
 
@@ -49,7 +49,7 @@ PMNS_Base::PMNS_Base(int numNus) :
 fGotES(false), fBuiltHms(false), fMaxCache(1e6), fProbe(numNus)
 {
 
-  SetUseCache(true);  // Don't cache eigensystems
+  SetUseCache(true);   // Cache eigensystems
 
   fNumNus = numNus;    // Set the number of neutrinos
 
@@ -63,8 +63,7 @@ fGotES(false), fBuiltHms(false), fMaxCache(1e6), fProbe(numNus)
 
   ResetToFlavour(1);   // Numu by default
   
-  fUsedCache = 0;
-  
+  // Set some better hash table parameters
   fMixCache.max_load_factor(0.25);
   fMixCache.reserve(512);
   
@@ -146,10 +145,9 @@ bool PMNS_Base::TryCache()
 
     fProbe.SetVars(fEnergy, fPath, fIsNuBar);
     
-    std::unordered_set<EigenPoint>::iterator it = fMixCache.find(fProbe);
+    unordered_set<EigenPoint>::iterator it = fMixCache.find(fProbe);
 
     if(it != fMixCache.end()){
-      fUsedCache++;
       for(int i=0; i<fNumNus; i++){
         fEval[i] = (*it).fEval[i] * (*it).fEnergy / fEnergy;
         for(int j=0; j<fNumNus; j++){
@@ -175,7 +173,6 @@ void PMNS_Base::FillCache()
   if(fUseCache){
     if(fMixCache.size()>fMaxCache){
       fMixCache.erase(fMixCache.begin());
-      //fMixCache.erase(--fMixCache.end());
     }
     for(int i=0; i<fNumNus; i++){
       fProbe.fEval[i] = fEval[i];
@@ -333,7 +330,7 @@ void PMNS_Base::ClearPath(){
 /// Set vector of neutrino paths.
 /// @param paths - A sequence of neutrino paths
 ///
-void PMNS_Base::SetPath(std::vector<NuPath> paths){
+void PMNS_Base::SetPath(vector<NuPath> paths){
 
   fNuPaths=paths;
 
@@ -608,7 +605,7 @@ void PMNS_Base::SetZoA(vectorD zoa){
 ///
 /// @param lay - Indices to identify the layer types (e.g. earth inner core)
 ///
-void PMNS_Base::SetLayers(std::vector<int> lay){
+void PMNS_Base::SetLayers(vectorI lay){
 
   vectorD lay_double(lay.begin(), lay.end());
 
@@ -812,9 +809,9 @@ double PMNS_Base::GetDm(int j)
 ///
 /// @return The vector of sorted indices
 ///
-vector<int> PMNS_Base::GetSortedIndices(const vectorD x){
+vectorI PMNS_Base::GetSortedIndices(const vectorD x){
 
-  vector<int> idx(x.size(),0);
+  vectorI idx(x.size(),0);
   for(int i=0; i<x.size(); i++) idx[i] = i;
   sort(idx.begin(), idx.end(), IdxCompare(x));
 
@@ -843,10 +840,10 @@ double PMNS_Base::GetDmEff(int j)
   SolveHam();
   
   // Sort eigenvalues in same order as vacuum Dm^2
-  vector<int> dm_idx = GetSortedIndices(fDm);
+  vectorI dm_idx = GetSortedIndices(fDm);
   vectorD dm_idx_double(dm_idx.begin(), dm_idx.end());
   dm_idx = GetSortedIndices(dm_idx_double);
-  vector<int> ev_idx = GetSortedIndices(fEval);
+  vectorI ev_idx = GetSortedIndices(fEval);
 
   // Return difference in eigenvalues * 2E
   return (fEval[ev_idx[dm_idx[j-1]]] - fEval[ev_idx[dm_idx[0]]]) * 2*fEnergy * kGeV2eV;

@@ -2,7 +2,7 @@
 //
 // Implements an earth model with spherical shells
 //
-// coelho@lal.in2p3.fr
+// jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #include <iostream>

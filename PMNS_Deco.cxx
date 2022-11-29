@@ -5,7 +5,7 @@
 //
 // This  class inherits from the PMNS_Fast class
 //
-// coelho@lal.in2p3.fr
+// jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
@@ -27,7 +27,7 @@ using namespace std;
 /// This class is restricted to 3 neutrino flavours.
 ///
 PMNS_Deco::PMNS_Deco() : PMNS_Fast(), fGamma(),
-fRho(3, row(3,0))
+fRho(3, vectorC(3,0))
 {
   SetStdPath();
   SetGamma(2,0);
@@ -246,10 +246,10 @@ double PMNS_Deco::GetGamma(int i, int j)
 ///
 /// @return - matrix A.B
 ///
-PMNS_Deco::matrix PMNS_Deco::Dot(matrix A, matrix B)
+matrixC PMNS_Deco::Dot(matrixC A, matrixC B)
 {
 
-  matrix out(3, row(3,0));
+  matrixC out(3, vectorC(3,0));
   
   for(int i=0; i<3; i++){
   for(int j=0; j<3; j++){
@@ -271,10 +271,10 @@ PMNS_Deco::matrix PMNS_Deco::Dot(matrix A, matrix B)
 ///
 /// @return - matrix A * B
 ///
-PMNS_Deco::matrix PMNS_Deco::Mult(matrix A, matrix B)
+matrixC PMNS_Deco::Mult(matrixC A, matrixC B)
 {
 
-  matrix out(3, row(3,0));
+  matrixC out(3, vectorC(3,0));
   
   for(int i=0; i<3; i++){
   for(int j=0; j<3; j++){
@@ -294,10 +294,10 @@ PMNS_Deco::matrix PMNS_Deco::Mult(matrix A, matrix B)
 ///
 /// @return - \f$A^{\dagger}\f$
 ///
-PMNS_Deco::matrix PMNS_Deco::CTransp(matrix A)
+matrixC PMNS_Deco::CTransp(matrixC A)
 {
 
-  matrix out(3, row(3,0));
+  matrixC out(3, vectorC(3,0));
   
   for(int i=0; i<3; i++){
   for(int j=0; j<3; j++){
@@ -330,18 +330,18 @@ void PMNS_Deco::PropagatePath(NuPath p)
   // symmetry. The index sorting is also terrible. Needs improving.
 
   // Store rotation matrices
-  matrix U = fEvec;
-  matrix Ut = CTransp(fEvec);
+  matrixC U = fEvec;
+  matrixC Ut = CTransp(fEvec);
 
   // Rotate to effective mass basis
   fRho = Dot(Ut, Dot(fRho, U));
   
   // Compute evolution matrix
-  matrix evolve(3, row(3,1));
+  matrixC evolve(3, vectorC(3,1));
   
   // Some ugly way of matching gamma and dmsqr indices
-  vector<int> dm_idx = GetSortedIndices(fDm); 
-  vector<int> ev_idx = GetSortedIndices(fEval); 
+  vectorI dm_idx = GetSortedIndices(fDm); 
+  vectorI ev_idx = GetSortedIndices(fEval); 
 
   int idx[3];
   for(int i=0; i<3; i++) idx[ev_idx[i]] = dm_idx[i];
@@ -401,7 +401,7 @@ void PMNS_Deco::ResetToFlavour(int flv)
 double PMNS_Deco::P(int flv)
 {
   assert(flv>=0 && flv<fNumNus);
-  return std::abs(fRho[flv][flv]);
+  return abs(fRho[flv][flv]);
 }
 
 ////////////////////////////////////////////////////////////////////////

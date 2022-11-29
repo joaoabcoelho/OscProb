@@ -19,17 +19,17 @@
 ///
 /// This class inherits from TObject and can be saved in ROOT files.
 ///
-/// \author coelho\@lal.in2p3.fr
+/// \author jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
 #ifndef PREMMODEL_H
 #define PREMMODEL_H
 
 #include <string>
-#include <vector>
 
 #include "TObject.h"
 
+#include "Definitions.h"
 #include "NuPath.h"
 
 namespace OscProb {
@@ -43,9 +43,9 @@ namespace OscProb {
 
       virtual int FillPath(double cosT); ///< Fill the path sequence in a vector
 
-      virtual std::vector<OscProb::NuPath> GetNuPath(); ///< Get the current neutrino path sequence
+      virtual std::vector<NuPath> GetNuPath(); ///< Get the current neutrino path sequence
 
-      virtual std::vector<OscProb::NuPath> GetMergedPaths(double prec = 0.25); ///< Get merged path sequence in a vector
+      virtual std::vector<NuPath> GetMergedPaths(double prec = 0.25); ///< Get merged path sequence in a vector
 
       virtual double GetTotalL(double cosT); ///< Get the total baseline for a given cosTheta
       virtual double GetCosT(double L); ///< Get the cosTheta for a given total baseline
@@ -59,7 +59,7 @@ namespace OscProb {
 
       virtual void SetDetPos(double pos); ///< Set the detector position in km
 
-      virtual std::vector<OscProb::PremLayer> GetPremLayers(); ///< Get the set of earth layers
+      virtual std::vector<PremLayer> GetPremLayers(); ///< Get the set of earth layers
 
       virtual void SetRemoveSmallPaths(bool rp = true); ///< Set tag to remove small paths
 
@@ -72,9 +72,9 @@ namespace OscProb {
 
       virtual void AddPath(double length, PremLayer pl);  ///< Add a path segment to the sequence
 
-      std::vector<OscProb::PremLayer> fPremLayers; ///< The layers in the earth model
+      std::vector<PremLayer> fPremLayers; ///< The layers in the earth model
 
-      std::vector<OscProb::NuPath> fNuPath; ///< The current neutrino path sequence
+      std::vector<NuPath> fNuPath; ///< The current neutrino path sequence
 
       int fDetLayer;  ///< The layer index of the detector
       double fDetPos; ///< The radius where the detector lives
