@@ -63,9 +63,7 @@ fGotES(false), fBuiltHms(false), fMaxCache(1e6), fProbe(numNus)
 
   ResetToFlavour(1);   // Numu by default
   
-  // Set some better hash table parameters
-  fMixCache.max_load_factor(0.25);
-  fMixCache.reserve(512);
+  ClearCache(); // Clear cache to initialize it
   
 }
 
@@ -119,6 +117,10 @@ void PMNS_Base::SetUseCache(bool u)
 void PMNS_Base::ClearCache()
 {
   fMixCache.clear();
+
+  // Set some better hash table parameters
+  fMixCache.max_load_factor(0.25);
+  fMixCache.reserve(512);
 }
         
 //......................................................................
@@ -174,6 +176,7 @@ void PMNS_Base::FillCache()
     if(fMixCache.size()>fMaxCache){
       fMixCache.erase(fMixCache.begin());
     }
+    fProbe.SetVars(fEnergy, fPath, fIsNuBar);
     for(int i=0; i<fNumNus; i++){
       fProbe.fEval[i] = fEval[i];
       for(int j=0; j<fNumNus; j++){
