@@ -228,9 +228,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a35b983270613072a3df58b574d80dbfd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PMNS__Base.html#a35b983270613072a3df58b574d80dbfd">SetPath</a> (double length, double density, double zoa=0.5, int layer=0)</td></tr>
 <tr class="memdesc:a35b983270613072a3df58b574d80dbfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a single path.  <a href="classOscProb_1_1PMNS__Base.html#a35b983270613072a3df58b574d80dbfd">More...</a><br /></td></tr>
 <tr class="separator:a35b983270613072a3df58b574d80dbfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26e7a0badf41692ceef7e3f3c4e8235e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PMNS__Base.html#a26e7a0badf41692ceef7e3f3c4e8235e">SetPath</a> (std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> &gt; paths)</td></tr>
-<tr class="memdesc:a26e7a0badf41692ceef7e3f3c4e8235e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a path sequence.  <a href="classOscProb_1_1PMNS__Base.html#a26e7a0badf41692ceef7e3f3c4e8235e">More...</a><br /></td></tr>
-<tr class="separator:a26e7a0badf41692ceef7e3f3c4e8235e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a637d19dd850b4246507796526622643c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PMNS__Base.html#a637d19dd850b4246507796526622643c">SetPath</a> (std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> &gt; paths)</td></tr>
+<tr class="memdesc:a637d19dd850b4246507796526622643c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a path sequence.  <a href="classOscProb_1_1PMNS__Base.html#a637d19dd850b4246507796526622643c">More...</a><br /></td></tr>
+<tr class="separator:a637d19dd850b4246507796526622643c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a887dc9d4dc569ec0cdef3933b4c60efc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PMNS__Base.html#a887dc9d4dc569ec0cdef3933b4c60efc">AddPath</a> (<a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> p)</td></tr>
 <tr class="memdesc:a887dc9d4dc569ec0cdef3933b4c60efc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a path to the sequence.  <a href="classOscProb_1_1PMNS__Base.html#a887dc9d4dc569ec0cdef3933b4c60efc">More...</a><br /></td></tr>
 <tr class="separator:a887dc9d4dc569ec0cdef3933b4c60efc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -4982,8 +4982,8 @@ The corresponding Dm_31 is set in the class attributes.</p>
 
 </div>
 </div>
-<a id="a26e7a0badf41692ceef7e3f3c4e8235e" name="a26e7a0badf41692ceef7e3f3c4e8235e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26e7a0badf41692ceef7e3f3c4e8235e">&#9670;&nbsp;</a></span>SetPath() <span class="overload">[3/3]</span></h2>
+<a id="a637d19dd850b4246507796526622643c" name="a637d19dd850b4246507796526622643c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a637d19dd850b4246507796526622643c">&#9670;&nbsp;</a></span>SetPath() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -4992,7 +4992,7 @@ The corresponding Dm_31 is set in the class attributes.</p>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void OscProb::PMNS_Base::SetPath </td>
+          <td class="memname">void PMNS_Base::SetPath </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> &gt;&#160;</td>
           <td class="paramname"><em>paths</em></td><td>)</td>
@@ -5005,6 +5005,21 @@ The corresponding Dm_31 is set in the class attributes.</p>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Set vector of neutrino paths. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">paths</td><td>- A sequence of neutrino paths </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="PMNS__Base_8cxx_source.html#l00336">336</a> of file <a class="el" href="PMNS__Base_8cxx_source.html">PMNS_Base.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  336</span>                                                     {</div>
+<div class="line"><span class="lineno">  337</span> </div>
+<div class="line"><span class="lineno">  338</span>  <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a69db9d57e12fc7cbe0431bc6c18fac93">fNuPaths</a>=paths;</div>
+<div class="line"><span class="lineno">  339</span> </div>
+<div class="line"><span class="lineno">  340</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="PMNS__Base_8h_source.html#l00240">OscProb::PMNS_Base::fNuPaths</a>.</p>
 
 </div>
 </div>
@@ -5900,7 +5915,7 @@ We should cite them accordingly </p>
 
 <p class="definition">Definition at line <a class="el" href="PMNS__Base_8h_source.html#l00240">240</a> of file <a class="el" href="PMNS__Base_8h_source.html">PMNS_Base.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l00357">OscProb::PMNS_Base::AddPath()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01700">OscProb::PMNS_Base::AvgProb()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01779">OscProb::PMNS_Base::AvgProbLoE()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l02009">OscProb::PMNS_Base::AvgProbMatrix()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l02051">OscProb::PMNS_Base::AvgProbMatrixLoE()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01894">OscProb::PMNS_Base::AvgProbVector()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01934">OscProb::PMNS_Base::AvgProbVectorLoE()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00325">OscProb::PMNS_Base::ClearPath()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01648">OscProb::PMNS_Base::ConvertEtoLoE()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00346">OscProb::PMNS_Base::GetPath()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01510">OscProb::PMNS_Base::ProbMatrix()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01133">OscProb::PMNS_Base::Propagate()</a>, <a class="el" href="PMNS__Iter_8cxx_source.html#l00077">OscProb::PMNS_Iter::Propagate()</a>, and <a class="el" href="PMNS__Base_8cxx_source.html#l00421">OscProb::PMNS_Base::SetAtt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PMNS__Base_8cxx_source.html#l00357">OscProb::PMNS_Base::AddPath()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01700">OscProb::PMNS_Base::AvgProb()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01779">OscProb::PMNS_Base::AvgProbLoE()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l02009">OscProb::PMNS_Base::AvgProbMatrix()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l02051">OscProb::PMNS_Base::AvgProbMatrixLoE()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01894">OscProb::PMNS_Base::AvgProbVector()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01934">OscProb::PMNS_Base::AvgProbVectorLoE()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00325">OscProb::PMNS_Base::ClearPath()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01648">OscProb::PMNS_Base::ConvertEtoLoE()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00346">OscProb::PMNS_Base::GetPath()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01510">OscProb::PMNS_Base::ProbMatrix()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l01133">OscProb::PMNS_Base::Propagate()</a>, <a class="el" href="PMNS__Iter_8cxx_source.html#l00077">OscProb::PMNS_Iter::Propagate()</a>, <a class="el" href="PMNS__Base_8cxx_source.html#l00421">OscProb::PMNS_Base::SetAtt()</a>, and <a class="el" href="PMNS__Base_8cxx_source.html#l00336">OscProb::PMNS_Base::SetPath()</a>.</p>
 
 </div>
 </div>
