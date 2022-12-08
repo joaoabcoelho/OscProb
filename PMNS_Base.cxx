@@ -333,7 +333,7 @@ void PMNS_Base::ClearPath(){
 /// Set vector of neutrino paths.
 /// @param paths - A sequence of neutrino paths
 ///
-void PMNS_Base::SetPath(vector<NuPath> paths){
+void PMNS_Base::SetPath(std::vector<NuPath> paths){
 
   fNuPaths=paths;
 
@@ -1503,7 +1503,7 @@ vectorD PMNS_Base::ProbVector(int flvi, double E, double L)
 ///   3 = sterile_1, 4 = sterile_2, etc.
 /// </pre>
 /// @param nflvi - The number of initial flavours in the matrix.
-/// @param nflvi - The number of final flavours in the matrix.
+/// @param nflvf - The number of final flavours in the matrix.
 ///
 /// @return Neutrino oscillation probabilities
 ///
@@ -1557,7 +1557,7 @@ matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf)
 ///   3 = sterile_1, 4 = sterile_2, etc.
 /// </pre>
 /// @param nflvi - The number of initial flavours in the matrix.
-/// @param nflvi - The number of final flavours in the matrix.
+/// @param nflvf - The number of final flavours in the matrix.
 /// @param E     - The neutrino energy in GeV
 ///
 /// @return Neutrino oscillation probabilities
@@ -1587,7 +1587,7 @@ matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf, double E)
 ///   3 = sterile_1, 4 = sterile_2, etc.
 /// </pre>
 /// @param nflvi - The number of initial flavours in the matrix.
-/// @param nflvi - The number of final flavours in the matrix.
+/// @param nflvf - The number of final flavours in the matrix.
 /// @param E     - The neutrino energy in GeV
 /// @param L     - The neutrino path length in km
 ///
@@ -2000,7 +2000,7 @@ vectorD PMNS_Base::AvgProbVectorLoE(vectorC nu_in,
 /// If needed, average over smaller energy ranges.
 ///
 /// @param nflvi - The number of initial flavours in the matrix.
-/// @param nflvi - The number of final flavours in the matrix.
+/// @param nflvf - The number of final flavours in the matrix.
 /// @param E     - The neutrino energy in the bin center in GeV
 /// @param dE    - The energy bin width in GeV
 ///
@@ -2042,7 +2042,7 @@ matrixD PMNS_Base::AvgProbMatrix(int nflvi, int nflvf,
 /// If needed, average over smaller L/E ranges.
 ///
 /// @param nflvi - The number of initial flavours in the matrix.
-/// @param nflvi - The number of final flavours in the matrix.
+/// @param nflvf - The number of final flavours in the matrix.
 /// @param LoE   - The neutrino  L/E value in the bin center in km/GeV
 /// @param dLoE  - The L/E bin width in km/GeV
 ///

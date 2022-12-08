@@ -55,7 +55,7 @@ NuPath OscProb::AvgPath(NuPath& p1, NuPath& p2){
 /// @param pv - vector of paths to merge
 /// @return The merged path
 ///
-NuPath OscProb::AvgPath(vector<NuPath>& pv){
+NuPath OscProb::AvgPath(std::vector<NuPath>& pv){
 
   // Get size of vector
   int np = pv.size();
@@ -85,7 +85,7 @@ NuPath OscProb::AvgPath(vector<NuPath>& pv){
 /// @param j,k - The indices of the two paths to merge
 /// @return The merged vector of paths
 ///
-vector<NuPath> OscProb::MergePaths(vector<NuPath>& inputPath, int j, int k){
+vector<NuPath> OscProb::MergePaths(std::vector<NuPath>& inputPath, int j, int k){
 
   // Output vector
   vector<NuPath> mergedPath;
