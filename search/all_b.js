@@ -4,6 +4,6 @@ var searchData=
   ['mainpage_2emd_1',['MainPage.md',['../MainPage_8md.html',1,'']]],
   ['matrixc_2',['matrixC',['../namespaceOscProb.html#aeb338ac53fcdff178797945ff5e19137',1,'OscProb']]],
   ['matrixd_3',['matrixD',['../namespaceOscProb.html#aa43d1e6e97b6dcad3a6cbbd7decbf0c6',1,'OscProb']]],
-  ['mergepaths_4',['MergePaths',['../namespaceOscProb.html#a33ee28eee12941e35edc03a7370ae81f',1,'OscProb']]],
+  ['mergepaths_4',['MergePaths',['../namespaceOscProb.html#a21f576551c47cf787c2df50a4f4b5c83',1,'OscProb']]],
   ['mult_5',['Mult',['../classOscProb_1_1PMNS__Deco.html#aa534d74e984b015c45aac88071bc9b94',1,'OscProb::PMNS_Deco']]]
 ];
