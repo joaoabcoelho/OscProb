@@ -333,7 +333,7 @@ void PMNS_Base::ClearPath(){
 /// Set vector of neutrino paths.
 /// @param paths - A sequence of neutrino paths
 ///
-void OscProb::PMNS_Base::SetPath(std::vector<NuPath> paths){
+void PMNS_Base::SetPath(std::vector<OscProb::NuPath> paths){
 
   fNuPaths=paths;
 
