@@ -1846,7 +1846,7 @@ vectorD PMNS_Base::AvgProbVectorLoE(int flvi,
                                     double LoE, double dLoE)
 {
   ResetToFlavour(flvi);
-  AvgProbVectorLoE(fNuState, LoE, dLoE);
+  return AvgProbVectorLoE(fNuState, LoE, dLoE);
 }
 
 //.....................................................................
