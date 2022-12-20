@@ -29,11 +29,12 @@ var searchData=
   ['getpath_26',['GetPath',['../classOscProb_1_1PMNS__Base.html#ac8e196f2e85a2b1caaf705073ee95a5c',1,'OscProb::PMNS_Base']]],
   ['getpower_27',['GetPower',['../classOscProb_1_1PMNS__Deco.html#aa40b92e0f204f499a24b18ba399b8b0e',1,'OscProb::PMNS_Deco']]],
   ['getpremlayers_28',['GetPremLayers',['../classOscProb_1_1PremModel.html#ae4feeccc7027253f5c2e2493098145ca',1,'OscProb::PremModel']]],
-  ['getsamplepoints_29',['GetSamplePoints',['../classOscProb_1_1PMNS__Base.html#aeb64c66a5fee1b84376568896f4d2a57',1,'OscProb::PMNS_Base']]],
-  ['getsortedindices_30',['GetSortedIndices',['../classOscProb_1_1PMNS__Base.html#af1fb40562abbdb8d193249ae628a630d',1,'OscProb::PMNS_Base']]],
-  ['getsterile_31',['GetSterile',['../Utils_8h.html#a9d6dfcc22a32d923e1170c5401f52e2e',1,'Utils.h']]],
-  ['gettotall_32',['GetTotalL',['../classOscProb_1_1PremModel.html#ae258b41cca80631e3041f0421b25afeb',1,'OscProb::PremModel']]],
-  ['getupcoup_33',['GetUpCoup',['../classOscProb_1_1PMNS__NSI.html#a5fbeeb25bd00fbda7c484dbdb6748a58',1,'OscProb::PMNS_NSI']]],
-  ['getzoacoup_34',['GetZoACoup',['../classOscProb_1_1PMNS__NSI.html#a42b2db6f2f42dbca7545a10d101a7950',1,'OscProb::PMNS_NSI']]],
-  ['gsl_5feinsys_35',['GSL_EinSys',['../structOscProb_1_1GSL__EinSys.html#af6a40b1ed40d5d9b36a7a7bdf8aedc99',1,'OscProb::GSL_EinSys::GSL_EinSys(int numNus)'],['../structOscProb_1_1GSL__EinSys.html#adec9051a3cee7956d84d230f371fa898',1,'OscProb::GSL_EinSys::GSL_EinSys(const GSL_EinSys &amp;other)'],['../structOscProb_1_1GSL__EinSys.html',1,'OscProb::GSL_EinSys']]]
+  ['getprobvector_29',['GetProbVector',['../classOscProb_1_1PMNS__Base.html#afc8c5d0779b2cd8415c6a58416ed197e',1,'OscProb::PMNS_Base']]],
+  ['getsamplepoints_30',['GetSamplePoints',['../classOscProb_1_1PMNS__Base.html#aeb64c66a5fee1b84376568896f4d2a57',1,'OscProb::PMNS_Base']]],
+  ['getsortedindices_31',['GetSortedIndices',['../classOscProb_1_1PMNS__Base.html#af1fb40562abbdb8d193249ae628a630d',1,'OscProb::PMNS_Base']]],
+  ['getsterile_32',['GetSterile',['../Utils_8h.html#a9d6dfcc22a32d923e1170c5401f52e2e',1,'Utils.h']]],
+  ['gettotall_33',['GetTotalL',['../classOscProb_1_1PremModel.html#ae258b41cca80631e3041f0421b25afeb',1,'OscProb::PremModel']]],
+  ['getupcoup_34',['GetUpCoup',['../classOscProb_1_1PMNS__NSI.html#a5fbeeb25bd00fbda7c484dbdb6748a58',1,'OscProb::PMNS_NSI']]],
+  ['getzoacoup_35',['GetZoACoup',['../classOscProb_1_1PMNS__NSI.html#a42b2db6f2f42dbca7545a10d101a7950',1,'OscProb::PMNS_NSI']]],
+  ['gsl_5feinsys_36',['GSL_EinSys',['../structOscProb_1_1GSL__EinSys.html#af6a40b1ed40d5d9b36a7a7bdf8aedc99',1,'OscProb::GSL_EinSys::GSL_EinSys(int numNus)'],['../structOscProb_1_1GSL__EinSys.html#adec9051a3cee7956d84d230f371fa898',1,'OscProb::GSL_EinSys::GSL_EinSys(const GSL_EinSys &amp;other)'],['../structOscProb_1_1GSL__EinSys.html',1,'OscProb::GSL_EinSys']]]
 ];
