@@ -377,6 +377,9 @@ void PMNS_Deco::PropagatePath(NuPath p)
 ///
 void PMNS_Deco::ResetToFlavour(int flv)
 {
+
+  PMNS_Base::ResetToFlavour(flv);
+
   assert(flv>=0 && flv<fNumNus);
   for (int i=0; i<fNumNus; ++i){
   for (int j=0; j<fNumNus; ++j){
@@ -402,6 +405,76 @@ double PMNS_Deco::P(int flv)
 {
   assert(flv>=0 && flv<fNumNus);
   return abs(fRho[flv][flv]);
+}
+
+//.....................................................................
+///
+/// Set the density matrix from a pure state
+///
+/// @param nu_in - The neutrino initial state in flavour basis.
+///
+void PMNS_Deco::SetPureState(vectorC nu_in){
+
+  assert(nu_in.size() == fNumNus);
+
+  for(int i=0; i<fNumNus; i++){
+  for(int j=0; j<fNumNus; j++){
+    fRho[i][j] = conj(nu_in[i]) * nu_in[j];
+  }}
+
+}
+
+//.....................................................................
+///
+/// Compute the probability matrix for the first nflvi and nflvf states.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+/// @param nflvi - The number of initial flavours in the matrix.
+/// @param nflvf - The number of final flavours in the matrix.
+///
+/// @return Neutrino oscillation probabilities
+///
+matrixD PMNS_Deco::ProbMatrix(int nflvi, int nflvf)
+{
+
+  assert(nflvi<=fNumNus && nflvi>=0);
+  assert(nflvf<=fNumNus && nflvf>=0);
+
+  // Output probabilities
+  matrixD probs(nflvi, vectorD(nflvf));
+
+  // List of states
+  vector<matrixC> allstates(nflvi, matrixC(fNumNus, vectorC(fNumNus)));
+
+  // Reset all initial states
+  for(int i=0; i<nflvi; i++){
+    ResetToFlavour(i);
+    allstates[i] = fRho;
+  }
+  
+  // Propagate all states in parallel
+  for(int i=0; i<int(fNuPaths.size()); i++){
+
+    for(int flvi=0; flvi<nflvi; flvi++){
+      fRho = allstates[flvi];
+      PropagatePath(fNuPaths[i]);
+      allstates[flvi] = fRho;
+    }
+
+  }
+  
+  // Get all probabilities
+  for(int flvi=0; flvi<nflvi; flvi++){
+  for(int flvj=0; flvj<nflvf; flvj++){
+    probs[flvi][flvj] = abs(allstates[flvi][flvj][flvj]);
+  }}
+  
+  return probs;
+  
 }
 
 ////////////////////////////////////////////////////////////////////////
