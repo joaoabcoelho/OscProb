@@ -1182,6 +1182,20 @@ double PMNS_Base::P(int flv)
 
 //.....................................................................
 ///
+/// Set the initial state from a pure state
+///
+/// @param nu_in - The neutrino initial state in flavour basis.
+///
+void PMNS_Base::SetPureState(vectorC nu_in){
+
+  assert(nu_in.size() == fNumNus);
+
+  fNuState = nu_in;
+
+}
+
+//.....................................................................
+///
 /// Compute the probability of flvi going to flvf.
 ///
 /// Flavours are:
@@ -1199,7 +1213,9 @@ double PMNS_Base::Prob(int flvi, int flvf)
 
   ResetToFlavour(flvi);
 
-  return Prob(fNuState, flvf);
+  Propagate();
+
+  return P(flvf);
 
 }
 
@@ -1220,10 +1236,7 @@ double PMNS_Base::Prob(int flvi, int flvf)
 double PMNS_Base::Prob(vectorC nu_in, int flvf)
 {
 
-  assert(nu_in.size() == fNumNus);
-  assert(flvf >= 0 && flvf < fNumNus);
-
-  fNuState = nu_in;
+  SetPureState(nu_in);
 
   Propagate();
 
@@ -1345,6 +1358,24 @@ double PMNS_Base::Prob(int flvi, int flvf, double E, double L)
 
 //.....................................................................
 ///
+/// Get the vector of probabilities for current state
+///
+/// @return Neutrino oscillation probabilities
+///
+vectorD PMNS_Base::GetProbVector(){
+
+  vectorD probs(fNumNus);
+  
+  for(int i=0; i<probs.size(); i++){
+    probs[i] = P(i);
+  }
+
+  return probs;
+
+}
+
+//.....................................................................
+///
 /// Compute the probability of nu_in going to all flavours.
 ///
 /// @param nu_in - The neutrino initial state in flavour basis.
@@ -1354,20 +1385,12 @@ double PMNS_Base::Prob(int flvi, int flvf, double E, double L)
 vectorD PMNS_Base::ProbVector(vectorC nu_in)
 {
 
-  assert(nu_in.size() == fNumNus);
-
-  fNuState = nu_in;
+  SetPureState(nu_in);
 
   Propagate();
-  
-  vectorD probs(fNumNus);
-  
-  for(int i=0; i<probs.size(); i++){
-    probs[i] = norm(fNuState[i]);
-  }
 
-  return probs;
-
+  return GetProbVector();
+  
 }
 
 //.....................................................................
@@ -1388,7 +1411,9 @@ vectorD PMNS_Base::ProbVector(int flvi)
 
   ResetToFlavour(flvi);
 
-  return ProbVector(fNuState);
+  Propagate();
+
+  return GetProbVector();
 
 }
 

@@ -207,11 +207,13 @@ namespace OscProb {
 
     // Resetting and propagating
     virtual void ResetToFlavour(int flv); ///< Reset neutrino state to pure flavour flv
+    virtual void SetPureState(vectorC nu_in); ///< Set the initial state from a pure state
 
     virtual void PropagatePath(OscProb::NuPath p);    ///< Propagate neutrino through a single path
     virtual void Propagate();                         ///< Propagate neutrino through full path
 
     virtual double P(int flv);    ///< Return the probability of final state in flavour flv
+    virtual vectorD GetProbVector(); ///< Return vector of probabilities from final state
 
     virtual std::vector<int> GetSortedIndices(const vectorD x); ///< Get indices that sort a vector
 

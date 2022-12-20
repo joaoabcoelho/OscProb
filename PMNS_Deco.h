@@ -48,11 +48,16 @@ namespace OscProb {
 
     /// Get the power index
     virtual double GetPower();
+    
+    /// Compute the probability matrix
+    using PMNS_Base::ProbMatrix;
+    virtual matrixD ProbMatrix(int nflvi, int nflvf);
 
   protected:
   
     // Resetting and propagating
     virtual void ResetToFlavour(int flv); ///< Reset neutrino state to pure flavour flv
+    virtual void SetPureState(vectorC nu_in); ///< Set the density matrix from a pure state
 
     virtual void PropagatePath(OscProb::NuPath p);    ///< Propagate neutrino through a single path
 
