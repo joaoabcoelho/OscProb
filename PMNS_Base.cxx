@@ -65,6 +65,8 @@ fGotES(false), fBuiltHms(false), fMaxCache(1e6), fProbe(numNus)
   
   ClearCache(); // Clear cache to initialize it
   
+  SetAvgProbPrec(1e-4); // Set default AvgProb precision
+  
 }
 
 //......................................................................
@@ -2133,6 +2135,21 @@ matrixD PMNS_Base::AvgProbMatrixLoE(int nflvi, int nflvf,
 
 //.....................................................................
 ///
+/// Set the precision for the AvgProb method
+///
+/// @param prec - AvgProb precision
+///
+void PMNS_Base::SetAvgProbPrec(double prec){
+  if(prec<1e-8){
+    cout << "WARNING: Cannot set AvgProb precision lower that 1e-6."
+         << "Setting to 1e-6." << endl;
+    prec = 1e-8;
+  }
+  fAvgProbPrec = prec;
+}
+
+//.....................................................................
+///
 /// Compute the sample points for a bin of L/E with width dLoE
 ///
 /// This is used for averaging the probability over a bin of L/E.
@@ -2169,7 +2186,7 @@ vectorD PMNS_Base::GetSamplePoints(double LoE, double dLoE)
 
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
-  int n_div = ceil( 20 * pow(dLoE/LoE,0.8) );
+  int n_div = ceil( 200 * pow(dLoE/LoE,0.8) / sqrt(fAvgProbPrec/1e-4) );
   //int n_div = 1;
 
   // A vector to store sample points

@@ -73,6 +73,7 @@ $(PREMINC): $(PREMDIR) $(PREMFILE)
 	@echo "const std::string PREM_DEFAULT = \"$(PREMFILE)\";" >> $@
 
 test: $(TARGET_LIB)
+	@cd test && root -l -b -q ../tutorial/LoadOscProb.C ../tutorial/SetNiceStyle.C TestMethods.C
 	@cd test && root -l -b -q ../tutorial/LoadOscProb.C ../tutorial/SetNiceStyle.C CheckProbs.C
 
 clean: $(CLEANDIRS)

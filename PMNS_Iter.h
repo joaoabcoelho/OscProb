@@ -36,6 +36,7 @@ namespace OscProb {
     PMNS_Iter();          ///< Constructor
     virtual ~PMNS_Iter(); ///< Destructor
     
+    /// Set the iterative precision
     virtual void SetPrec(double prec);
     
   protected:
@@ -46,19 +47,20 @@ namespace OscProb {
     /// Propagate through matter part
     virtual void PropMatter();
 
+    /// Set the matter propagation term
     virtual void SetExpVL(NuPath p);
     
-    /// Reimplement full propagation
-    virtual void Propagate();
+    /// Reimplement propagation
+    virtual void PropagatePath(NuPath p);
     
-    virtual void SplitPropagate(NuPath p);
-    
+    /// Set the main eigensystem to vacuum
     virtual void SetVacuumEigensystem();
-    
+
+    /// Iterative precision
     double fPrec;
     
-    double fVL;
-    complexD fExpVL;
+    double fVL; ///< Matter potential
+    complexD fExpVL; ///< Matter phase shift
     
   };
 
