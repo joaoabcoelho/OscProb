@@ -161,6 +161,9 @@ namespace OscProb {
     virtual void SetUseCache(bool u=true); ///< Set caching on/off
     virtual void ClearCache();             ///< Clear the cache
     virtual void SetMaxCache(int mc=1e6);  ///< Set max cache size
+    
+    /// Set the AvgProb precision
+    virtual void SetAvgProbPrec(double prec);
 
   protected:
     
@@ -248,6 +251,8 @@ namespace OscProb {
     bool   fUseCache;  ///< Flag for whether to use caching
     double fCachePrec; ///< Precision of cache matching
     int    fMaxCache;  ///< Maximum cache size
+    
+    double fAvgProbPrec; ///< AvgProb precision
 
     std::unordered_set<OscProb::EigenPoint> fMixCache; ///< Caching set of eigensystems
     EigenPoint fProbe;                       ///< EigenpPoint to try

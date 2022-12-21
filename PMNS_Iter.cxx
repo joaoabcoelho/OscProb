@@ -72,21 +72,6 @@ void PMNS_Iter::SolveHam()
 
 //......................................................................
 ///
-/// Propagate neutrino state through full path
-///
-void PMNS_Iter::Propagate()
-{
-
-  for(int i=0; i<int(fNuPaths.size()); i++){
-
-    SplitPropagate(fNuPaths[i]);
-
-  }
-
-}
-
-//......................................................................
-///
 /// Set iterator precision
 ///
 void PMNS_Iter::SetPrec(double prec)
@@ -99,7 +84,7 @@ void PMNS_Iter::SetPrec(double prec)
 ///
 /// Propagate neutrino state through split path
 ///
-void PMNS_Iter::SplitPropagate(NuPath p)
+void PMNS_Iter::PropagatePath(NuPath p)
 {
 
   SetExpVL(p);
@@ -118,7 +103,7 @@ void PMNS_Iter::SplitPropagate(NuPath p)
   
   for(int i=0; i<nsplit; i++){
 
-    PropagatePath(p);
+    PMNS_Base::PropagatePath(p);
     PropMatter();
 
   }
