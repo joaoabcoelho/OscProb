@@ -35,7 +35,7 @@ PMNS_LIV::PMNS_LIV() : PMNS_Fast()
   SetStdPath();
 
     for(int flvi = 0; flvi < 3; flvi++){
-    for(int flvi = 0; flvi < 3; flvi++){
+    for(int flvj = 0; flvj < 3; flvj++){
       SetaT(flvi, flvj, dim, 0, 0);
       SetcT(flvi, flvj, dim+1, 0, 0);
     }}
@@ -248,7 +248,7 @@ void PMNS_LIV::UpdateHam()
       complexD liv_term = 0;
       for(int dim = 0; dim < 6; dim++){
         complexD dim_term = std::pow(fEnergy, dim);
-        if(dim%2==0) dim_term *= (fIsNuBar ? -1 : 1) * faT[i][j][dim/2];
+        if(dim%2==0) dim_term *= (fIsNuBar ? -1. : 1.) * faT[i][j][dim/2];
         else         dim_term *= -4/3. * fcT[i][j][dim/2];
         liv_term += dim_term;
       }
