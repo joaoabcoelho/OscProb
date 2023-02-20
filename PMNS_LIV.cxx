@@ -34,11 +34,12 @@ PMNS_LIV::PMNS_LIV() : PMNS_Fast()
 {
   SetStdPath();
 
+    for(int dim = 3; dim < 8; dim+=2){
     for(int flvi = 0; flvi < 3; flvi++){
     for(int flvj = 0; flvj < 3; flvj++){
       SetaT(flvi, flvj, dim, 0, 0);
       SetcT(flvi, flvj, dim+1, 0, 0);
-    }}
+    }}}
 }
 
 //......................................................................
