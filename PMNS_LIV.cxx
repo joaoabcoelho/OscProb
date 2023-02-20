@@ -36,7 +36,7 @@ PMNS_LIV::PMNS_LIV() : PMNS_Fast()
 
     for(int dim = 3; dim < 8; dim+=2){
     for(int flvi = 0; flvi < 3; flvi++){
-    for(int flvj = 0; flvj < 3; flvj++){
+    for(int flvj = flvi; flvj < 3; flvj++){
       SetaT(flvi, flvj, dim, 0, 0);
       SetcT(flvi, flvj, dim+1, 0, 0);
     }}}
@@ -264,5 +264,208 @@ void PMNS_LIV::UpdateHam()
   else          fHam[0][0] -= kr2GNe;
 
 }
+
+////////////////////////////////////////////////////////////////////////
+//
+// Obsolete functions for backward compatibility...
+//
+////////////////////////////////////////////////////////////////////////
+
+//......................................................................
+///
+/// Set all LIV parameters at once.
+///
+/// @param aT_ee          - The absolute value of the parameter aT_ee
+/// @param aT_mumu        - The absolute value of the parameter aT_mumu
+/// @param aT_tautau      - The absolute value of the parameter aT_tautau
+/// @param aT_emu         - The absolute value of the parameter aT_emu
+/// @param aT_etau        - The absolute value of the parameter aT_etau
+/// @param aT_mutau       - The absolute value of the parameter aT_mutau
+/// @param delta_aT_emu   - The phase of the complex parameter aT_emu in radians
+/// @param delta_aT_etau  - The phase of the complex parameter aT_etau in radians
+/// @param delta_aT_mutau - The phase of the complex parameter aT_mutau in radians
+/// @param cT_ee          - The absolute value of the parameter cT_ee
+/// @param cT_mumu        - The absolute value of the parameter cT_mumu
+/// @param cT_tautau      - The absolute value of the parameter cT_tautau
+/// @param cT_emu         - The absolute value of the parameter cT_emu
+/// @param cT_etau        - The absolute value of the parameter cT_etau
+/// @param cT_mutau       - The absolute value of the parameter cT_mutau
+/// @param delta_cT_emu   - The phase of the complex parameter cT_emu in radians
+/// @param delta_cT_etau  - The phase of the complex parameter cT_etau in radians
+/// @param delta_cT_mutau - The phase of the complex parameter cT_mutau in radians
+///
+void PMNS_LIV::SetLIV(double aT_ee,        double aT_mumu,       double aT_tautau,
+                      double aT_emu,       double aT_etau,       double aT_mutau,
+                      double cT_ee,        double cT_mumu,       double cT_tautau,
+                      double cT_emu,       double cT_etau,       double cT_mutau,
+                      double delta_aT_emu, double delta_aT_etau, double delta_aT_mutau,
+                      double delta_cT_emu, double delta_cT_etau, double delta_cT_mutau)
+{
+
+  SetaT(0,0, aT_ee, 0);
+  SetaT(1,1, aT_mumu, 0);
+  SetaT(2,2, aT_tautau, 0);
+
+  SetaT(0,1, aT_emu, delta_aT_emu);
+  SetaT(0,2, aT_etau, delta_aT_etau);
+  SetaT(1,2, aT_mutau, delta_aT_mutau);
+
+  SetcT(0,0, cT_ee, 0);
+  SetcT(1,1, cT_mumu, 0);
+  SetcT(2,2, cT_tautau, 0);
+
+  SetcT(0,1, cT_emu, delta_cT_emu);
+  SetcT(0,2, cT_etau, delta_cT_etau);
+  SetcT(1,2, cT_mutau, delta_cT_mutau);
+
+}
+
+//......................................................................
+///
+/// Set any given aT parameter with dimension 3.
+///
+/// This will check if value is changing to keep track of whether
+/// the eigensystem needs to be recomputed.
+///
+/// Flavours are:\n
+/// - 0 = nue, 1 = numu, 2 = nutau
+///
+/// Requires that flvi < flvj. Will notify you if input is wrong.
+/// If flvi > flvj, will assume reverse order and swap flvi and flvj.
+///
+/// @param flvi  - The first flavour index
+/// @param flvj  - The second flavour index
+/// @param val   - The absolute value of the parameter
+/// @param phase - The complex phase of the parameter in radians
+///
+void PMNS_LIV::SetaT(int flvi, int flvj, double val, double phase){
+  SetaT(flvi, flvj, 3, val, phase);
+}
+
+//......................................................................
+///
+/// Set any given cT parameter with dimension 4.
+///
+/// This will check if value is changing to keep track of whether
+/// the eigensystem needs to be recomputed.
+///
+/// Flavours are:\n
+/// - 0 = nue, 1 = numu, 2 = nutau
+///
+/// Requires that flvi < flvj. Will notify you if input is wrong.
+/// If flvi > flvj, will assume reverse order and swap flvi and flvj.
+///
+/// @param flvi  - The first flavour index
+/// @param flvj  - The second flavour index
+/// @param val   - The absolute value of the parameter
+/// @param phase - The complex phase of the parameter in radians
+///
+void PMNS_LIV::SetcT(int flvi, int flvj, double val, double phase){
+
+  SetcT(flvi, flvj, 4, val, phase);
+
+}
+
+//......................................................................
+///
+/// Set aT_ee parameter
+///
+/// @param a   - The absolute value of the parameter
+///
+void PMNS_LIV::SetaT_ee(double a){ SetaT(0,0, a, 0); }
+
+//......................................................................
+///
+/// Set aT_mumu parameter
+///
+/// @param a   - The absolute value of the parameter
+///
+void PMNS_LIV::SetaT_mumu(double a){ SetaT(1,1, a, 0); }
+
+//......................................................................
+///
+/// Set aT_tautau parameter
+///
+/// @param a   - The absolute value of the parameter
+///
+void PMNS_LIV::SetaT_tautau(double a){ SetaT(2,2, a, 0); }
+
+//......................................................................
+///
+/// Set aT_emu parameter
+///
+/// @param a   - The absolute value of the parameter
+/// @param phi - The complex phase of the parameter in radians
+///
+void PMNS_LIV::SetaT_emu(double a, double phi){ SetaT(0,1, a, phi); }
+
+//......................................................................
+///
+/// Set aT_etau parameter
+///
+/// @param a   - The absolute value of the parameter
+/// @param phi - The complex phase of the parameter in radians
+///
+void PMNS_LIV::SetaT_etau(double a, double phi){ SetaT(0,2, a, phi); }
+
+//......................................................................
+///
+/// Set aT_mutau parameter
+///
+/// @param a   - The absolute value of the parameter
+/// @param phi - The complex phase of the parameter in radians
+///
+void PMNS_LIV::SetaT_mutau(double a, double phi){ SetaT(1,2, a, phi); }
+
+//......................................................................
+///
+/// Set cT_ee parameter
+///
+/// @param a   - The absolute value of the parameter
+///
+void PMNS_LIV::SetcT_ee(double a){ SetcT(0,0, a, 0); }
+
+//......................................................................
+///
+/// Set cT_mumu parameter
+///
+/// @param a   - The absolute value of the parameter
+///
+void PMNS_LIV::SetcT_mumu(double a){ SetcT(1,1, a, 0); }
+
+//......................................................................
+///
+/// Set cT_tautau parameter
+///
+/// @param a   - The absolute value of the parameter
+///
+void PMNS_LIV::SetcT_tautau(double a){ SetcT(2,2, a, 0); }
+
+//......................................................................
+///
+/// Set cT_emu parameter
+///
+/// @param a   - The absolute value of the parameter
+/// @param phi - The complex phase of the parameter in radians
+///
+void PMNS_LIV::SetcT_emu(double a, double phi){ SetcT(0,1, a, phi); }
+
+//......................................................................
+///
+/// Set cT_etau parameter
+///
+/// @param a   - The absolute value of the parameter
+/// @param phi - The complex phase of the parameter in radians
+///
+void PMNS_LIV::SetcT_etau(double a, double phi){ SetcT(0,2, a, phi); }
+
+//......................................................................
+///
+/// Set cT_mutau parameter
+///
+/// @param a   - The absolute value of the parameter
+/// @param phi - The complex phase of the parameter in radians
+///
+void PMNS_LIV::SetcT_mutau(double a, double phi){ SetcT(1,2, a, phi); }
 
 ////////////////////////////////////////////////////////////////////////
