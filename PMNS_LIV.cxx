@@ -83,18 +83,18 @@ void PMNS_LIV::SetaT(int flvi, int flvj, int dim, double val, double phase){
   }
 
   int pos = (dim-3)/2;
-  complexD h[3];
-  h[pos] = val;
 
-  if(flvi != flvj) h[pos] *= complexD(cos(phase), sin(phase));
+  complexD h = val;
 
-  bool isSame = (faT[flvi][flvj][pos] == h[pos]);
+  if(flvi != flvj) h *= complexD(cos(phase), sin(phase));
+
+  bool isSame = (faT[flvi][flvj][pos] == h);
 
   if(!isSame) ClearCache();
 
   fGotES *= isSame;
 
-  faT[flvi][flvj][pos] = h[pos];
+  faT[flvi][flvj][pos] = h;
 
 }
 
@@ -133,18 +133,18 @@ void PMNS_LIV::SetcT(int flvi, int flvj, int dim, double val, double phase){
   }
 
   int pos = dim/2 - 2;
-  complexD h[3];
-  h[pos] = val;
 
-  if(flvi != flvj) h[pos] *= complexD(cos(phase), sin(phase));
+  complexD h = val;
 
-  bool isSame = (fcT[flvi][flvj][pos] == h[pos]);
+  if(flvi != flvj) h *= complexD(cos(phase), sin(phase));
+
+  bool isSame = (fcT[flvi][flvj][pos] == h);
 
   if(!isSame) ClearCache();
 
   fGotES *= isSame;
 
-  fcT[flvi][flvj][pos] = h[pos];
+  fcT[flvi][flvj][pos] = h;
 
 }
 
