@@ -245,22 +245,17 @@ void PMNS_LIV::UpdateHam()
   // Finish build Hamiltonian in matter with dimension of eV
   for(int i=0;i<fNumNus;i++){
     for(int j=i;j<fNumNus;j++){
-      if(!fIsNuBar){
-	fHam[i][j] = fHms[i][j]/lv + kGeV2eV*(faT[i][j][0]
-					      -4./3. * fEnergy * fcT[i][j][0]
-					      +std::pow(fEnergy, 2) * faT[i][j][1]
-					      -4./3. * std::pow(fEnergy, 3) * fcT[i][j][1]
-					      +std::pow(fEnergy, 4) * faT[i][j][2]
-					      -4./3. * std::pow(fEnergy, 5) * fcT[i][j][2]);
-
-      } else {
-	fHam[i][j] = conj(fHms[i][j]/lv + kGeV2eV*(-faT[i][j][0]
-						   -4./3. * fEnergy * fcT[i][j][0]
-						   -std::pow(fEnergy, 2) * faT[i][j][1]
-						   -4./3. * std::pow(fEnergy, 3) * fcT[i][j][1]
-						   -std::pow(fEnergy, 4) * faT[i][j][2]
-						   -4./3. * std::pow(fEnergy, 5) * fcT[i][j][2]));
+      complexD liv_term = 0;
+      for(int dim = 0; dim < 6; dim++){
+        complexD dim_term = std::pow(fEnergy, dim);
+        if(dim%2==0) dim_term *= (fIsNuBar ? -1 : 1) * faT[i][j][dim/2];
+        else         dim_term *= -4/3. * fcT[i][j][dim/2];
+        liv_term += dim_term;
       }
+      
+      fHam[i][j] = fHms[i][j]/lv + kGeV2eV * liv_term;
+
+      if(fIsNuBar) fHam[i][j] = conj(fHam[i][j]);
     }
   }
 
