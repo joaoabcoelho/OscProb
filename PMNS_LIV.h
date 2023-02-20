@@ -40,8 +40,8 @@ namespace OscProb {
     ///   e   -> 0                                                                                        
     ///   mu  -> 1                                                                                        
     ///   tau -> 2    
-    virtual complexD GetaT(int flvi, int flvj, int dim);
-    virtual complexD GetcT(int flvi, int flvj, int dim);
+    virtual complexD GetaT(int flvi, int flvj, int dim=3);
+    virtual complexD GetcT(int flvi, int flvj, int dim=4);
 
   protected:
 

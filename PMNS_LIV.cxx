@@ -34,28 +34,16 @@ PMNS_LIV::PMNS_LIV() : PMNS_Fast()
 {
   SetStdPath();
 
-  for(int dim = 3; dim <= 7; dim += 2){
-    SetaT(0,0, dim, 0, 0);
-    SetaT(1,1, dim, 0, 0);
-    SetaT(2,2, dim, 0, 0);
-    SetaT(0,1, dim, 0, 0);
-    SetaT(0,2, dim, 0, 0);
-    SetaT(1,2, dim, 0, 0);
-  }
-
-  for(int dim = 4; dim <= 8; dim += 2){
-    SetcT(0,0, 4, 0, 0);
-    SetcT(1,1, 4, 0, 0);
-    SetcT(2,2, 4, 0, 0);
-    SetcT(0,1, 4, 0, 0);
-    SetcT(0,2, 4, 0, 0);
-    SetcT(1,2, 4, 0, 0);
-  }
+    for(int flvi = 0; flvi < 3; flvi++){
+    for(int flvi = 0; flvi < 3; flvi++){
+      SetaT(flvi, flvj, dim, 0, 0);
+      SetcT(flvi, flvj, dim+1, 0, 0);
+    }}
 }
 
 //......................................................................
 ///
-/// Distructor.
+/// Destructor.
 ///
 PMNS_LIV::~PMNS_LIV(){}
 
@@ -89,11 +77,11 @@ void PMNS_LIV::SetaT(int flvi, int flvj, int dim, double val, double phase){
     return;
   }
   if(dim != 3 && dim != 5 && dim != 7){
-    cout << "aT coefficient dimension should be an odd value, starting from 3\n";
+    cout << "Warninig: Invalid aT coefficient dimension dim=" << dim << " not in  [3,5,7].\n";
     return;
   }
 
-  int pos = dim == 3 ? 0: dim == 5 ? 1 : dim == 7 ? 2 : 4;
+  int pos = (dim-3)/2;
   complexD h[3];
   h[pos] = val;
 
@@ -139,11 +127,11 @@ void PMNS_LIV::SetcT(int flvi, int flvj, int dim, double val, double phase){
     return;
   }
   if(dim != 4 && dim != 6 && dim != 8){
-    cout << "cT coefficient dimension should be an even value, starting from 4\n";
+    cout << "Warninig: Invalid cT coefficient dimension dim=" << dim << " not in  [4,6,8].\n";
     return;
   }
 
-  int pos = dim == 4 ? 0: dim == 6 ? 1 : dim == 8 ? 2 : 4;
+  int pos = dim/2 - 2;
   complexD h[3];
   h[pos] = val;
 
@@ -188,11 +176,11 @@ complex<double> PMNS_LIV::GetaT(int flvi, int flvj, int dim){
     return zero;
   }
   if(dim != 3 && dim != 5 && dim != 7){
-    cout << "aT coefficient dimension should be an odd value, starting from 3\n";
+    cout << "Warninig: Invalid aT coefficient dimension dim=" << dim << " not in  [3,5,7].\n";
     return zero;
   }
 
-  int pos = dim == 3 ? 0: dim == 5 ? 1 : dim == 7 ? 2 : 4;
+  int pos = (dim-3)/2;
   
   return faT[flvi][flvj][pos];
 
@@ -227,11 +215,11 @@ complex<double> PMNS_LIV::GetcT(int flvi, int flvj, int dim){
     return zero;
   }
   if(dim != 4 && dim != 6 && dim != 8){
-    cout << "cT coefficient dimension should be an even value, starting from 4\n";
+    cout << "Warninig: Invalid cT coefficient dimension dim=" << dim << " not in  [4,6,8].\n";
     return zero;
   }
   
-  int pos = dim == 4 ? 0: dim == 6 ? 1 : dim == 8 ? 2 : 4;
+  int pos = dim/2 - 2;
   
   return fcT[flvi][flvj][pos];
 
