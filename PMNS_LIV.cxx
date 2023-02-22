@@ -247,10 +247,10 @@ void PMNS_LIV::UpdateHam()
   for(int i=0;i<fNumNus;i++){
     for(int j=i;j<fNumNus;j++){
       complexD liv_term = 0;
-      for(int dim = 0; dim < 6; dim++){
-        complexD dim_term = std::pow(fEnergy, dim);
-        if(dim%2==0) dim_term *= (fIsNuBar ? -1. : 1.) * faT[i][j][dim/2];
-        else         dim_term *= -4/3. * fcT[i][j][dim/2];
+      for(int dim = 3; dim < 9; dim++){
+        complexD dim_term = std::pow(fEnergy, dim-3);
+        if(dim%2==1) dim_term *= (fIsNuBar ? -1. : 1.) * faT[i][j][(dim-3)/2];
+        else         dim_term *= (dim==4 ? -4/3. : -1.) * fcT[i][j][(dim-4)/2];
         liv_term += dim_term;
       }
       
