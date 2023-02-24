@@ -23,5 +23,6 @@
 #pragma link C++ class OscProb::PMNS_Decay+;
 
 #pragma link C++ class OscProb::PremModel+;
+#pragma link C++ class OscProb::EarthModel+;
 
 #endif
