@@ -44,7 +44,7 @@
 
 #include <TObject.h>
 
-#include <NuPath.h>
+#include "NuPath.h"
 
 namespace OscProb {
 
