@@ -61,16 +61,16 @@ namespace OscProb {
     ///
     /// The properties of the layer can be given directly in the construction.
     ///
-    /// @param d_out  - The outer depth of the bin in km
-    /// @param d_in  - The inner depth of the bin in km
+    /// @param r_out  - The outer radius of the bin in km
+    /// @param r_in  - The inner radius of the bin in km
     /// @param lat - Latitude of bin center in deg
     /// @param lon - Longitude of bin center in deg
     /// @param den  - The density of the matter in the bin in g/cm^3
     /// @param z  - The effective Z/A value of the matter in the bin
     /// @param n - An index to identify the matter type (e.g. earth inner core)
     ///
-    EarthBin(double d_out=0, double d_in=0, double lat=0, double lon=0, double den=0, double z=0.5, int n=0){
-      SetLayer(d_out, d_in, lat, lon, den, z, n);
+    EarthBin(double r_out=0, double r_in=0, double lat=0, double lon=0, double den=0, double z=0.5, int n=0){
+      SetLayer(r_out, r_in, lat, lon, den, z, n);
     }
 
     ///
@@ -81,28 +81,28 @@ namespace OscProb {
     /// By default it creates a bin of zero radius, zero latitude, zero longitude, and zero density.
     /// The effective Z/A value is set to 0.5 by default.
     ///
-    /// @param d_out  - The outer depth of the bin in km
-    /// @param d_in  - The inner depth of the bin in km
+    /// @param r_out  - The outer radius of the bin in km
+    /// @param r_in  - The inner radius of the bin in km
     /// @param lat - Latitude of bin center in deg
     /// @param lon - Longitude of bin center in deg
     /// @param den  - The density of the matter in the bin in g/cm^3
     /// @param z  - The effective Z/A value of the matter in the bin
     /// @param n - An index to identify the matter type (e.g. earth inner core)
     ///
-    void SetLayer(double d_out=0, double d_in=0, double lat=0, double lon=0, double den=0, double z=0.5, int n=0){
-      depth_out = d_out;
-      depth_in = d_in;
-      latitude = lat;
-      longitude = lon;
+    void SetLayer(double r_out=0, double r_in=0, double lat=0, double lon=0, double den=0, double z=0.5, int n=0){
+      radius_out = r_out;
+      radius_in = r_in;
+      latitude = lat*M_PI/180.0; //convert to radians
+      longitude = lon*M_PI/180.0; //convert to radians
       density = den;
       zoa = z;
       index = n;
     }
 
-    double depth_out;  ///< The outer depth of the bin in km
-    double depth_in;  ///< The inner depth of the bin in km
-    double latitude; ///< The latitude of the bin center in degrees
-    double longitude; ///< The longitude of the bin center in degrees
+    double radius_out;  ///< The outer radius of the bin in km
+    double radius_in;  ///< The inner radius of the bin in km
+    double latitude; ///< The latitude of the bin center in radians
+    double longitude; ///< The longitude of the bin center in radians
     double density; ///< The density of the matter in the bin in g/cm^3
     double zoa;     ///< The effective Z/A value of the matter in the bin
     int index;      ///< An index to identify the matter type
@@ -116,7 +116,7 @@ namespace OscProb {
       EarthModel(std::string filename=""); ///< Constructor
       virtual ~EarthModel();          ///< Destructor
 
-      virtual int FillPath(double cosT); ///< Fill the path sequence in a vector
+      virtual int FillPath(double cosT, double phi); ///< Fill the path sequence in a vector (phi in degrees)
 
       virtual std::vector<OscProb::NuPath> GetNuPath(); ///< Get the current neutrino path sequence
 
@@ -142,32 +142,42 @@ namespace OscProb {
 
       virtual void ClearModel(); ///< Clear the earth model information
 
-      virtual void AddBin(double depth_out, double depth_in, double latitude, double longitude, double density,
-                            double zoa,    double layer); ///< Add a bin to the model
-
-//      virtual void AddLayer(double radius, double density,
-//                            double zoa,    double layer); ///< Add a layer to the model  ***THIS NEEDS HELP!!!***
+      virtual void AddBin(double radius_out, double radius_in, double latitude, double longitude, double density,
+                            double zoa,    double layer); ///< Add a bin to the model (angles in degrees)
 
       virtual void AddPath(double length, EarthBin bin);  ///< Add a path segment to the sequence
 
+      virtual double DetDistForNextLatBin(int cur_index, int &dir, double dLat, double maxSinSqLat, int &max_reached, double beta, double gamma, double gammaSq, double rDetGammaSinDetLat, double rDetCosAcosDetLat, double rDetSinDetLat, double rDetCosT, double rDetSinT); ///< Calculate the detector distance at the edge of the current lat bin along the neutrino's trajectory
+
+      virtual double DetDistForNextLonBin(double prev_lon, double dLon, int &lon_bin, double min_lon, double max_lon, double sinDetLon, double cosDetLon, double alpha, double sinTsinAsinDetLon, double sinTsinAcosDetLon, double rDetCosDetLat); ///< Calculate the detector distance at the edge of the current lon bin along the neutrino's trajectory and increment lon_bin
+
+      virtual void RecordLatLonBinCrossings(double detDist_nextDbin, double &DetDist, int &index, int &latBin, int &nextLatBin, double &detDist_nextLatBin, int &sign, double dLat, double maxSinSqLat, int &maxlatreached, int &lonBin, int &nextLonBin, double &detDist_nextLonBin, double dLon, double min_lon, double max_lon, double alpha, double beta, double gamma, double gammaSq, double rDetGammaSinDetLat, double rDetCosAcosDetLat, double rDetSinDetLat, double rDetCosDetLat, double rDetCosT, double rDetSinT, double sinTsinAsinDetLon, double sinTsinAcosDetLon, double sinDetLon, double cosDetLon); ///< Record path segments for each latitude/longitude bin crossed before reaching detDist_nextDbin
+
       std::vector<OscProb::EarthBin> fEarthBins; ///< The layers in the earth model
       int fnDepthBins; ///< Total number of depth bins
+      int fnLonBins; ///< Total number of longitude bins
       int fnLatBins; ///< Total number of latitude bins
+      double fInvLonBinWidth; ///< 1/binwidth for each longitude bin
+      double fInvLatBinWidth; ///< 1/binwidth for each latitude bin
+      double fHalfLonBinWidth; ///< Half-width of each longitude bin
+      double fHalfLatBinWidth; ///< Half-width of each latitude bin
 
       std::vector<OscProb::NuPath> fNuPath; ///< The current neutrino path sequence
 
       double fEarthRadius; ///< Biggest depth value in Earth model
+      double fRadiusMax; ///< Minimum depth value (converted to radius) in Earth model
 
-      int fDetBin;  ///< The index of bin containing the detector
-      int fDetDepthBin;  ///< The index of depth bin containing the detector
-//      double fDetPos; ///< The radius where the detector lives
-      double fDetDepth; ///< The depth where the detector lives
-      double fDetLat; ///< The latitude where the detector lives
-      double fDetLon; ///< The longitude where the detector lives
+      double fDetRadius; ///< The radius where the detector lives
+      double fDetLat; ///< The latitude (in rad) where the detector lives
+      double fDetLon; ///< The longitude (in rad) where the detector lives
 
       bool fRemoveSmallPaths; ///< Tag whether to merge small paths
 
       static const double DET_TOL; ///< The detector position tolerance near boundaries
+
+      //For Latitude Calculation Error Message
+      std::string fErrorMessage_LonInfo; ///< Part of error message containing the longitude information
+      int fLonError;
 
       // Required for saving in ROOT files
       ClassDef(EarthModel, 1);
