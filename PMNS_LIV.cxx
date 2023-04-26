@@ -3,7 +3,9 @@
 ///                                                                                                     
 /// Implementation of neutrino oscillations in matter in a                                                
 /// three-neutrino framework with LIV as modelled by the SME.                                               
-/// The SME coefficients are included up to the 8th order.                                            
+/// The SME coefficients are included up to the 8th order,
+/// following the approach described in 
+/// https://doi.org/10.1103/PhysRevD.85.096005.
 ///                                                                                                        
 /// This developement is part of the QGRANT project with                                                   
 /// ID: 101068013,                                                                                        
