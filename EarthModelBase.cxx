@@ -35,8 +35,9 @@ void EarthModelBase::SetDetPos(double rad, double lat, double lon)
 
   //Force latitude to be between -90 and 90 deg
   lat -= floor((lat+90.0)/360.0)*360.0;
-  if (lat > 90)
+  if (lat > 90) {
     lat = 180.0-lat;
+  }
   fDetLat = lat/180.0*M_PI; //convert to radians
 
   //Force longitude to be between 0 and 360 deg
