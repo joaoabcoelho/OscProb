@@ -27,8 +27,10 @@ void EarthModelBase::SetDetPos(double rad, double lat, double lon)
 {
 
   //Force radius to be non-negative
-  if(rad < 0)
+  if(rad < 0) {
+    cerr << "WARNING: Negative radius detected. Setting to absolute value." << endl;
     rad = -rad;
+  }
   fDetRadius = rad;
 
   //Force latitude to be between -90 and 90 deg
