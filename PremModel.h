@@ -44,7 +44,6 @@ namespace OscProb {
 
       int FillPath(double cosT, double phi=0); ///< Fill the path sequence in a vector
 
-//      virtual void SetDetPos(double pos); ///< Set the detector position in km
       virtual void LoadModel(std::string filename); ///< Load an earth model from a file
 
       virtual std::vector<PremLayer> GetPremLayers(); ///< Get the set of earth layers
