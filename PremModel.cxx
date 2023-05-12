@@ -33,9 +33,10 @@ const double PremModel::DET_TOL = 0.2; // Tolerance in km
 /// @param filename - The txt file containing a table of earth layers
 ///
 PremModel::PremModel(string filename) :
-fDetLayer(0), fRemoveSmallPaths(false)
+fDetLayer(0)
 {
 
+  SetRemoveSmallPaths(false);
   SetDetPos(6368);
   LoadModel(filename);
 
@@ -46,31 +47,6 @@ fDetLayer(0), fRemoveSmallPaths(false)
 /// Nothing to clean.
 ///
 PremModel::~PremModel(){}
-
-//......................................................................
-///
-/// Set the detector position in km.
-///
-/// If the position is within 200m of a layer boundary,
-/// the detector is considered to be on the boundary.
-/// If not, an extra boundary is inserted in the detector
-/// position to distinguish what parts of the earth are above
-/// and below the detector.
-///
-/// This must be done before loading the earth model file.
-///
-/// @param pos - The radius where the detector is in km
-///
-void PremModel::SetDetPos(double pos){ fDetPos = pos; }
-
-//......................................................................
-///
-/// Get the current neutrino path sequence
-///
-/// The path needs to be filled for a given cosTheta before
-/// calling this function.
-///
-vector<NuPath> PremModel::GetNuPath(){ return fNuPath; }
 
 //......................................................................
 ///
@@ -163,15 +139,19 @@ void PremModel::LoadModel(string filename)
 
     // See if we passed the detector and decide whether
     // to create a special layer for it
-    if(radius > fDetPos - DET_TOL && !crossed_det){
+    if(radius > fDetRadius - DET_TOL && !crossed_det){
 
       crossed_det = true;
 
       fDetLayer = fPremLayers.size();
 
       // If detector is not near boundary, add a special layer
-      if(radius > fDetPos + DET_TOL){
-        AddLayer(fDetPos, density, zoa, layer);
+      if(radius > fDetRadius + DET_TOL){
+        AddLayer(fDetRadius, density, zoa, layer);
+      } else if(radius != fDetRadius) {
+        //update detector radius
+        cout << "WARNING: Adjusting detector radius from " << fDetRadius << " km to " << radius << " km." << endl;
+        fDetRadius = radius;
       }
 
     }
@@ -180,6 +160,9 @@ void PremModel::LoadModel(string filename)
     AddLayer(radius, density, zoa, layer);
 
   }
+
+  //Set the maximum radius in the model
+  fRadiusMax = fPremLayers.back().radius;
 
 }
 
@@ -216,6 +199,7 @@ void PremModel::SetLayerZoA(int layer, double zoa)
 /// outer-core layers.
 ///
 /// @param layer - The index of the layer type
+/// @return Z/A corresponding to layer
 ///
 double PremModel::GetLayerZoA(int layer)
 {
@@ -275,52 +259,8 @@ void PremModel::SetTopLayerSize(double thick)
 
   fPremLayers[nlayers-1].radius = topRadius;
 
-}
-
-//......................................................................
-///
-/// Get the total baseline for a given cosTheta.
-///
-/// The total baseline contains both from above and below the detector.
-///
-/// @param cosT - The cosine of the neutrino direction
-///
-double PremModel::GetTotalL(double cosT)
-{
-
-  if(fabs(cosT) > 1) return 0;
-
-  double rAbove = fPremLayers.back().radius;     // Radius above detector
-  double rBelow = fPremLayers[fDetLayer].radius; // Radius below detector
-
-  double sinsqrT = 1 - cosT*cosT;
-
-  return -rBelow*cosT + sqrt(rAbove*rAbove - rBelow*rBelow*sinsqrT);
-
-}
-
-//......................................................................
-///
-/// Get the cosTheta for a given total baseline.
-///
-/// Given a baseline, find the direction of the neutrino.
-/// This could be useful for experiments with fixed baselines for example.
-///
-/// The baseline must be within the range of possible values in this
-/// earth model. Will return vertical neutrinos otherwise.
-///
-/// @param L - The total baseline of the neutrino
-///
-double PremModel::GetCosT(double L)
-{
-
-  double rAbove = fPremLayers.back().radius;     // Radius above detector
-  double rBelow = fPremLayers[fDetLayer].radius; // Radius below detector
-
-  if(L < rAbove - rBelow) return  1;
-  if(L > rAbove + rBelow) return -1;
-
-  return (rAbove*rAbove - rBelow*rBelow - L*L) / (2*rBelow*L);
+  //Update max radius
+  fRadiusMax = fPremLayers.back().radius;
 
 }
 
@@ -336,7 +276,7 @@ double PremModel::GetCosT(double L)
 void PremModel::AddPath(double length, PremLayer pl)
 {
 
-  fNuPath.push_back( NuPath(length, pl.density, pl.zoa, pl.layer) );
+  AddPathSegment(length, pl.density, pl.zoa, pl.layer);
 
 }
 
@@ -352,10 +292,11 @@ void PremModel::AddPath(double length, PremLayer pl)
 /// The path sequence is stored as an attribute and can be retrieved with
 /// the function GetNuPath.
 ///
-/// @param cosT - The cosine of the neutrino direction
+/// @param cosT - The cosine of the zenith angle of the neutrino direction
+/// @param phi - The azimuthal angle of the neutrino direction (default = 0; not used)
 /// @return The number of path segments in the sequence
 ///
-int PremModel::FillPath(double cosT)
+int PremModel::FillPath(double cosT, double phi)
 {
 
   // Clear current path sequence
@@ -365,7 +306,8 @@ int PremModel::FillPath(double cosT)
   if(fabs(cosT) > 1) return 0;
 
   // Define the minimum path radius
-  double minR = fPremLayers[fDetLayer].radius * sqrt(1 - cosT*cosT);
+  double minR = fDetRadius * sqrt(1 - cosT*cosT);
+  double minRsq = minR*minR;
 
   // Set the top layer index
   int toplayer = fPremLayers.size() - 1;
@@ -387,7 +329,7 @@ int PremModel::FillPath(double cosT)
 
     // Get square of the path length between this layer's
     // outer radius and  inner-most radius
-    double L1 = pow(fPremLayers[layer].radius,2) - minR*minR;
+    double L1 = pow(fPremLayers[layer].radius,2) - minRsq;
 
     // If L1 is negative, outer radius is not crossed.
     // This only happens if detector is at the top layer and the
@@ -396,7 +338,7 @@ int PremModel::FillPath(double cosT)
 
     // Get square of the path length between this layer's
     // inner radius and  inner-most radius
-    double L2 = -minR*minR;
+    double L2 = -minRsq;
     if(layer>0) L2 += pow(fPremLayers[layer-1].radius,2);
 
     // If L2 is negative, inner radius is not crossed,
@@ -432,92 +374,3 @@ int PremModel::FillPath(double cosT)
   return fNuPath.size();
 
 }
-
-//......................................................................
-///
-/// Merge similar paths to reduce number of steps
-///
-/// This method will merge consecutive paths and take their averages
-/// until it finds a large enough gap to start a new merged path.
-///
-/// The merged paths will be returned, and the original detailed path
-/// will not be changed and will stay stored as an attribute.
-///
-/// @param prec - The precision to merge paths in g/cm^3
-/// @return The vector of merged path segments
-///
-vector<NuPath> PremModel::GetMergedPaths(double prec){
-
-  // The output vector
-  vector<NuPath> mergedPath;
-
-  // Start with the first path
-  OscProb::NuPath path = fNuPath[0];
-
-  // Track the total length
-  double totL = 0;
-
-  // Loop over all paths starting from second
-  for(int i=1; i<fNuPath.size(); i++){
-
-    // If this path electron density is beyond the tolerance
-    if( fabs(path.density*path.zoa - fNuPath[i].density*fNuPath[i].zoa) > prec*path.zoa ){
-
-      // Add merged path to vector
-      mergedPath.push_back(path);
-
-      // Set this path as new merged path
-      path = fNuPath[i];
-
-    }
-    // If path is within tolerance
-    else{
-
-      // Merge the path with current merged path
-      path = OscProb::AvgPath(path, fNuPath[i]);
-
-    }
-
-    // Increment total length
-    totL += fNuPath[i].length;
-
-  }// End of loop over paths
-
-  // Add the final merged path to vector
-  mergedPath.push_back(path);
-
-  // If tag is true, remove small paths
-  if(fRemoveSmallPaths){
-
-    // Start at first path
-    int k = 0;
-
-    // While not at the end of vector
-    while(k + 1 < mergedPath.size()){
-
-      // If length is less than 1% of total
-      if(mergedPath[k].length < 0.01*totL){
-
-        // Merge path with following path
-        mergedPath = MergePaths(mergedPath, k, k+1);
-
-      }
-      // If path is long enough skip it
-      else k++;
-
-    }// End of while loop
-
-  }// End of if statement
-
-  // return the merged vector
-  return mergedPath;
-
-}
-
-//......................................................................
-///
-/// Set the boolean to tag whether to remove small paths when merging
-///
-/// @param rp - Boolean value to set
-///
-void PremModel::SetRemoveSmallPaths(bool rp){ fRemoveSmallPaths = rp; }
