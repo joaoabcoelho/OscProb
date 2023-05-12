@@ -9,7 +9,7 @@
 #include <fstream>
 
 #include "EarthModelBinned.h"
-#include "EarthTables/model_defaults.hpp"
+#include "prem_default.hpp"
 
 using namespace std;
 

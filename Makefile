@@ -16,7 +16,7 @@ else
   DICTFLAGS = -c -p
 endif
 
-PACKAGE = OscProb
+PACKAGE = OscProb2
 HEADERS := $(filter-out $(CURDIR)/LinkDef.h, $(wildcard $(CURDIR)/*.h))
 SOURCES := $(wildcard $(CURDIR)/*.cxx)
 TARGET = lib$(PACKAGE)
@@ -41,7 +41,9 @@ BUILDDIRS = $(SUBDIRS:%=build-%)
 CLEANDIRS = $(SUBDIRS:%=clean-%)
 
 PREMDIR = $(CURDIR)/PremTables
+MODEL3DDIR = $(CURDIR)/EarthTables
 PREMFILE = $(PREMDIR)/prem_default.txt
+PREM3DFILE = $(MODEL3DDIR)/prem_default.txt
 PREMINC = $(CURDIR)/prem_default.hpp
 
 all: $(Eigen_INCS) $(BUILDDIRS) $(PREMINC) $(TARGET_LIB)
@@ -70,7 +72,9 @@ $(CLEANDIRS):
 $(PREMINC): $(PREMDIR) $(PREMFILE)
 	@echo "#include <string>" > $@
 	@echo "const std::string PREM_DIR = \"$(PREMDIR)\";" >> $@
+	@echo "const std::string MODEL3D_DIR = \"$(MODEL3DDIR)\";" >> $@
 	@echo "const std::string PREM_DEFAULT = \"$(PREMFILE)\";" >> $@
+	@echo "const std::string PREM3D_DEFAULT = \"$(PREM3DFILE)\";" >> $@
 
 test: $(TARGET_LIB)
 	@cd test && root -l -b -q ../tutorial/LoadOscProb.C ../tutorial/SetNiceStyle.C TestMethods.C
