@@ -19,7 +19,7 @@ using namespace OscProb;
 ///
 /// Constructor.
 ///
-/// By default this implements the model stored in EarthTables/prem_default.txt
+/// By default this implements the model stored in EarthTables/earth_binned_default.txt
 /// with the detector 6368 km from the center of the Earth, having a
 /// latitude of 0 deg N and a longitude of 0 deg E.
 ///
@@ -86,7 +86,7 @@ void EarthModelBinned::AddBin(double radius_out, double radius_in, double latitu
 ///
 /// Load an earth model from a file.
 ///
-/// By default it loads the model stored in EarthTables/prem_default.txt
+/// By default it loads the model stored in EarthTables/earth_binned_default.txt
 ///
 /// The row format for the model table needs to be:
 /// 	longitude (deg)	latitude (deg)	outer depth (km)	density (g/cm^3?)	Z/A	region_index

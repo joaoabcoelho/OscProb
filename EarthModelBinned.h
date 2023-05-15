@@ -18,7 +18,7 @@
 /// Z/A value), the Z/A value for a region can be changed, and the density
 /// throughout the region can be scaled by a constant factor.
 ///
-/// By default this implements the model stored in EarthTables/prem_default.txt
+/// By default this implements the model stored in EarthTables/earth_binned_default.txt
 /// with the detector at the bottom of the ocean layer (radius = 6368 km)
 /// where the prime meridian intersects the equator.
 ///
