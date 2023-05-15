@@ -16,7 +16,7 @@ else
   DICTFLAGS = -c -p
 endif
 
-PACKAGE = OscProb2
+PACKAGE = OscProb
 HEADERS := $(filter-out $(CURDIR)/LinkDef.h, $(wildcard $(CURDIR)/*.h))
 SOURCES := $(wildcard $(CURDIR)/*.cxx)
 TARGET = lib$(PACKAGE)
@@ -43,7 +43,7 @@ CLEANDIRS = $(SUBDIRS:%=clean-%)
 PREMDIR = $(CURDIR)/PremTables
 MODEL3DDIR = $(CURDIR)/EarthTables
 PREMFILE = $(PREMDIR)/prem_default.txt
-PREM3DFILE = $(MODEL3DDIR)/prem_default.txt
+PREM3DFILE = $(MODEL3DDIR)/earth_binned_default.txt
 PREMINC = $(CURDIR)/prem_default.hpp
 
 all: $(Eigen_INCS) $(BUILDDIRS) $(PREMINC) $(TARGET_LIB)
@@ -69,7 +69,7 @@ $(BUILDDIRS):
 $(CLEANDIRS):
 	@exec $(MAKE) -s -C $(@:clean-%=%) clean
 
-$(PREMINC): $(PREMDIR) $(PREMFILE)
+$(PREMINC): $(PREMDIR) $(PREMFILE) $(MODEL3DDIR) $(PREM3DFILE)
 	@echo "#include <string>" > $@
 	@echo "const std::string PREM_DIR = \"$(PREMDIR)\";" >> $@
 	@echo "const std::string MODEL3D_DIR = \"$(MODEL3DDIR)\";" >> $@
