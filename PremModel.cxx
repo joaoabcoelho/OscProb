@@ -33,9 +33,10 @@ const double PremModel::DET_TOL = 0.2; // Tolerance in km
 /// @param filename - The txt file containing a table of earth layers
 ///
 PremModel::PremModel(string filename) :
-fDetLayer(0), fRemoveSmallPaths(false)
+fDetLayer(0)
 {
-
+  
+  SetRemoveSmallPaths(false);
   SetDetPos(6368);
   LoadModel(filename);
 
