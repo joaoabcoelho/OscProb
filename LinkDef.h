@@ -8,6 +8,8 @@
 
 #pragma link C++ struct OscProb::NuPath+;
 #pragma link C++ struct OscProb::PremLayer+;
+#pragma link C++ struct OscProb::EarthBin+;
+#pragma link C++ struct OscProb::TrajConstants+;
 #pragma link C++ struct OscProb::EigenPoint+;
 #pragma link C++ class vector<OscProb::NuPath>;
 #pragma link C++ class vector<OscProb::PremLayer>;
@@ -23,6 +25,8 @@
 #pragma link C++ class OscProb::PMNS_Decay+;
 #pragma link C++ class OscProb::PMNS_LIV+;
 
+#pragma link C++ class OscProb::EarthModelBase+;
 #pragma link C++ class OscProb::PremModel+;
+#pragma link C++ class OscProb::EarthModelBinned+;
 
 #endif

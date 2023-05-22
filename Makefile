@@ -41,7 +41,9 @@ BUILDDIRS = $(SUBDIRS:%=build-%)
 CLEANDIRS = $(SUBDIRS:%=clean-%)
 
 PREMDIR = $(CURDIR)/PremTables
+MODEL3DDIR = $(CURDIR)/EarthTables
 PREMFILE = $(PREMDIR)/prem_default.txt
+PREM3DFILE = $(MODEL3DDIR)/earth_binned_default.txt
 PREMINC = $(CURDIR)/prem_default.hpp
 
 all: $(Eigen_INCS) $(BUILDDIRS) $(PREMINC) $(TARGET_LIB)
@@ -67,10 +69,12 @@ $(BUILDDIRS):
 $(CLEANDIRS):
 	@exec $(MAKE) -s -C $(@:clean-%=%) clean
 
-$(PREMINC): $(PREMDIR) $(PREMFILE)
+$(PREMINC): $(PREMDIR) $(PREMFILE) $(MODEL3DDIR) $(PREM3DFILE)
 	@echo "#include <string>" > $@
 	@echo "const std::string PREM_DIR = \"$(PREMDIR)\";" >> $@
+	@echo "const std::string MODEL3D_DIR = \"$(MODEL3DDIR)\";" >> $@
 	@echo "const std::string PREM_DEFAULT = \"$(PREMFILE)\";" >> $@
+	@echo "const std::string PREM3D_DEFAULT = \"$(PREM3DFILE)\";" >> $@
 
 test: $(TARGET_LIB)
 	@cd test && root -l -b -q ../tutorial/LoadOscProb.C ../tutorial/SetNiceStyle.C TestMethods.C
