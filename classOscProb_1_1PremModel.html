@@ -106,8 +106,11 @@ $(document).ready(function(){initNavTree('classOscProb_1_1PremModel.html',''); i
 Inheritance diagram for OscProb::PremModel:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classOscProb_1_1PremModel.png" alt=""/>
- </div></div>
+  <img src="classOscProb_1_1PremModel.png" usemap="#OscProb::PremModel_map" alt=""/>
+  <map id="OscProb::PremModel_map" name="OscProb::PremModel_map">
+<area href="classOscProb_1_1EarthModelBase.html" title="Base class for implementing an earth model." alt="OscProb::EarthModelBase" shape="rect" coords="0,56,161,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -117,21 +120,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aac484ca4e607f2b0fc6f599358cb95fb"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#aac484ca4e607f2b0fc6f599358cb95fb">~PremModel</a> ()</td></tr>
 <tr class="memdesc:aac484ca4e607f2b0fc6f599358cb95fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="classOscProb_1_1PremModel.html#aac484ca4e607f2b0fc6f599358cb95fb">More...</a><br /></td></tr>
 <tr class="separator:aac484ca4e607f2b0fc6f599358cb95fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac69162cc5e3c8b7c1b8a85571ff2063b"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#ac69162cc5e3c8b7c1b8a85571ff2063b">FillPath</a> (double cosT)</td></tr>
-<tr class="memdesc:ac69162cc5e3c8b7c1b8a85571ff2063b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill the path sequence in a vector.  <a href="classOscProb_1_1PremModel.html#ac69162cc5e3c8b7c1b8a85571ff2063b">More...</a><br /></td></tr>
-<tr class="separator:ac69162cc5e3c8b7c1b8a85571ff2063b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbe7a5df260cba3923f5cbcb8ab2f03f"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">NuPath</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#adbe7a5df260cba3923f5cbcb8ab2f03f">GetNuPath</a> ()</td></tr>
-<tr class="memdesc:adbe7a5df260cba3923f5cbcb8ab2f03f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current neutrino path sequence.  <a href="classOscProb_1_1PremModel.html#adbe7a5df260cba3923f5cbcb8ab2f03f">More...</a><br /></td></tr>
-<tr class="separator:adbe7a5df260cba3923f5cbcb8ab2f03f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b6f83f2e9b7087e8faad1f19f00ebd5"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">NuPath</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#a5b6f83f2e9b7087e8faad1f19f00ebd5">GetMergedPaths</a> (double prec=0.25)</td></tr>
-<tr class="memdesc:a5b6f83f2e9b7087e8faad1f19f00ebd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get merged path sequence in a vector.  <a href="classOscProb_1_1PremModel.html#a5b6f83f2e9b7087e8faad1f19f00ebd5">More...</a><br /></td></tr>
-<tr class="separator:a5b6f83f2e9b7087e8faad1f19f00ebd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae258b41cca80631e3041f0421b25afeb"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#ae258b41cca80631e3041f0421b25afeb">GetTotalL</a> (double cosT)</td></tr>
-<tr class="memdesc:ae258b41cca80631e3041f0421b25afeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the total baseline for a given cosTheta.  <a href="classOscProb_1_1PremModel.html#ae258b41cca80631e3041f0421b25afeb">More...</a><br /></td></tr>
-<tr class="separator:ae258b41cca80631e3041f0421b25afeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5328474bdbb703eb4c9d4df49999cda6"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#a5328474bdbb703eb4c9d4df49999cda6">GetCosT</a> (double L)</td></tr>
-<tr class="memdesc:a5328474bdbb703eb4c9d4df49999cda6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the cosTheta for a given total baseline.  <a href="classOscProb_1_1PremModel.html#a5328474bdbb703eb4c9d4df49999cda6">More...</a><br /></td></tr>
-<tr class="separator:a5328474bdbb703eb4c9d4df49999cda6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ac188948d15a5ce6df7926ef9d46c0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#a6ac188948d15a5ce6df7926ef9d46c0a">SetDetPos</a> (double rad, double lat=0, double lon=0)</td></tr>
+<tr class="memdesc:a6ac188948d15a5ce6df7926ef9d46c0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the detector position (rad = radius in km, lat/lon in deg)  <a href="classOscProb_1_1PremModel.html#a6ac188948d15a5ce6df7926ef9d46c0a">More...</a><br /></td></tr>
+<tr class="separator:a6ac188948d15a5ce6df7926ef9d46c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a802363021cc9d46506314f961e0e769f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#a802363021cc9d46506314f961e0e769f">FillPath</a> (double cosT, double phi=0)</td></tr>
+<tr class="memdesc:a802363021cc9d46506314f961e0e769f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill the path sequence in a vector.  <a href="classOscProb_1_1PremModel.html#a802363021cc9d46506314f961e0e769f">More...</a><br /></td></tr>
+<tr class="separator:a802363021cc9d46506314f961e0e769f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6363a5e711dd8b0d2e684677e585b293"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#a6363a5e711dd8b0d2e684677e585b293">LoadModel</a> (std::string filename)</td></tr>
+<tr class="memdesc:a6363a5e711dd8b0d2e684677e585b293"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load an earth model from a file.  <a href="classOscProb_1_1PremModel.html#a6363a5e711dd8b0d2e684677e585b293">More...</a><br /></td></tr>
+<tr class="separator:a6363a5e711dd8b0d2e684677e585b293"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4feeccc7027253f5c2e2493098145ca"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="structOscProb_1_1PremLayer.html">PremLayer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#ae4feeccc7027253f5c2e2493098145ca">GetPremLayers</a> ()</td></tr>
+<tr class="memdesc:ae4feeccc7027253f5c2e2493098145ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the set of earth layers.  <a href="classOscProb_1_1PremModel.html#ae4feeccc7027253f5c2e2493098145ca">More...</a><br /></td></tr>
+<tr class="separator:ae4feeccc7027253f5c2e2493098145ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9887d1af4b3c02925fe3228349f593d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#ac9887d1af4b3c02925fe3228349f593d">SetLayerZoA</a> (int layer, double zoa)</td></tr>
 <tr class="memdesc:ac9887d1af4b3c02925fe3228349f593d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Z/A of all layers of a given type.  <a href="classOscProb_1_1PremModel.html#ac9887d1af4b3c02925fe3228349f593d">More...</a><br /></td></tr>
 <tr class="separator:ac9887d1af4b3c02925fe3228349f593d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,18 +141,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a095bd601f6cd91926de9928e96ea7751"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#a095bd601f6cd91926de9928e96ea7751">SetTopLayerSize</a> (double thick)</td></tr>
 <tr class="memdesc:a095bd601f6cd91926de9928e96ea7751"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the outermost layer thickness in km.  <a href="classOscProb_1_1PremModel.html#a095bd601f6cd91926de9928e96ea7751">More...</a><br /></td></tr>
 <tr class="separator:a095bd601f6cd91926de9928e96ea7751"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6363a5e711dd8b0d2e684677e585b293"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#a6363a5e711dd8b0d2e684677e585b293">LoadModel</a> (std::string filename)</td></tr>
-<tr class="memdesc:a6363a5e711dd8b0d2e684677e585b293"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load an earth model from a file.  <a href="classOscProb_1_1PremModel.html#a6363a5e711dd8b0d2e684677e585b293">More...</a><br /></td></tr>
-<tr class="separator:a6363a5e711dd8b0d2e684677e585b293"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55b314e97ed9b92931e08ada0c0947eb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#a55b314e97ed9b92931e08ada0c0947eb">SetDetPos</a> (double pos)</td></tr>
-<tr class="memdesc:a55b314e97ed9b92931e08ada0c0947eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the detector position in km.  <a href="classOscProb_1_1PremModel.html#a55b314e97ed9b92931e08ada0c0947eb">More...</a><br /></td></tr>
-<tr class="separator:a55b314e97ed9b92931e08ada0c0947eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4feeccc7027253f5c2e2493098145ca"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="structOscProb_1_1PremLayer.html">PremLayer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#ae4feeccc7027253f5c2e2493098145ca">GetPremLayers</a> ()</td></tr>
-<tr class="memdesc:ae4feeccc7027253f5c2e2493098145ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the set of earth layers.  <a href="classOscProb_1_1PremModel.html#ae4feeccc7027253f5c2e2493098145ca">More...</a><br /></td></tr>
-<tr class="separator:ae4feeccc7027253f5c2e2493098145ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5496d6d5bafcf7740c60838d3eee7b3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#ac5496d6d5bafcf7740c60838d3eee7b3">SetRemoveSmallPaths</a> (bool rp=true)</td></tr>
-<tr class="memdesc:ac5496d6d5bafcf7740c60838d3eee7b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set tag to remove small paths.  <a href="classOscProb_1_1PremModel.html#ac5496d6d5bafcf7740c60838d3eee7b3">More...</a><br /></td></tr>
-<tr class="separator:ac5496d6d5bafcf7740c60838d3eee7b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad8f4560e43656b5ea964151b864c99f"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">NuPath</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#aad8f4560e43656b5ea964151b864c99f">GetNuPath</a> ()</td></tr>
+<tr class="memdesc:aad8f4560e43656b5ea964151b864c99f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current neutrino path sequence.  <a href="classOscProb_1_1EarthModelBase.html#aad8f4560e43656b5ea964151b864c99f">More...</a><br /></td></tr>
+<tr class="separator:aad8f4560e43656b5ea964151b864c99f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78f0fafc9dbdd01fb9fc6dbadf69fb4e"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">NuPath</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#a78f0fafc9dbdd01fb9fc6dbadf69fb4e">GetMergedPaths</a> (double prec=0.25)</td></tr>
+<tr class="memdesc:a78f0fafc9dbdd01fb9fc6dbadf69fb4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get merged path sequence in a vector.  <a href="classOscProb_1_1EarthModelBase.html#a78f0fafc9dbdd01fb9fc6dbadf69fb4e">More...</a><br /></td></tr>
+<tr class="separator:a78f0fafc9dbdd01fb9fc6dbadf69fb4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a83f69ca6cb7438917d16afaa376c97"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#a3a83f69ca6cb7438917d16afaa376c97">GetTotalL</a> (double cosT)</td></tr>
+<tr class="memdesc:a3a83f69ca6cb7438917d16afaa376c97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the total baseline for a given cosTheta.  <a href="classOscProb_1_1EarthModelBase.html#a3a83f69ca6cb7438917d16afaa376c97">More...</a><br /></td></tr>
+<tr class="separator:a3a83f69ca6cb7438917d16afaa376c97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e7fd7dc94d2749ddc1af8db11bda962"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#a7e7fd7dc94d2749ddc1af8db11bda962">GetCosT</a> (double L)</td></tr>
+<tr class="memdesc:a7e7fd7dc94d2749ddc1af8db11bda962"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the cosTheta for a given total baseline.  <a href="classOscProb_1_1EarthModelBase.html#a7e7fd7dc94d2749ddc1af8db11bda962">More...</a><br /></td></tr>
+<tr class="separator:a7e7fd7dc94d2749ddc1af8db11bda962"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc6399e4d3ec17a360f2fe3f7d39576c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#abc6399e4d3ec17a360f2fe3f7d39576c">SetRemoveSmallPaths</a> (bool rp=true)</td></tr>
+<tr class="memdesc:abc6399e4d3ec17a360f2fe3f7d39576c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set tag to remove small paths.  <a href="classOscProb_1_1EarthModelBase.html#abc6399e4d3ec17a360f2fe3f7d39576c">More...</a><br /></td></tr>
+<tr class="separator:abc6399e4d3ec17a360f2fe3f7d39576c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -167,24 +170,41 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:aca013f7ac5494282834048786a0e07a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a1d78e29217bb0dd00ae3bd96d22b69"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#a9a1d78e29217bb0dd00ae3bd96d22b69">ClassDef</a> (<a class="el" href="classOscProb_1_1PremModel.html">PremModel</a>, 1)</td></tr>
 <tr class="separator:a9a1d78e29217bb0dd00ae3bd96d22b69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7f17dd5f4b429897b5f3d027bdb37fe"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#af7f17dd5f4b429897b5f3d027bdb37fe">SetDetectorCoordinates</a> (double rad, double lat, double lon)</td></tr>
+<tr class="memdesc:af7f17dd5f4b429897b5f3d027bdb37fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the coordinates of the detector (rad = radius in km, lat/lon in deg)  <a href="classOscProb_1_1EarthModelBase.html#af7f17dd5f4b429897b5f3d027bdb37fe">More...</a><br /></td></tr>
+<tr class="separator:af7f17dd5f4b429897b5f3d027bdb37fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4398bca05cdac15da15027b30d04a8d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#ad4398bca05cdac15da15027b30d04a8d">AddPathSegment</a> (double length, double density, double zoa, int index)</td></tr>
+<tr class="memdesc:ad4398bca05cdac15da15027b30d04a8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a path segment to the sequence.  <a href="classOscProb_1_1EarthModelBase.html#ad4398bca05cdac15da15027b30d04a8d">More...</a><br /></td></tr>
+<tr class="separator:ad4398bca05cdac15da15027b30d04a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae384b3a9ebacc19a9af429a29153e5ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#ae384b3a9ebacc19a9af429a29153e5ba">ClassDef</a> (<a class="el" href="classOscProb_1_1EarthModelBase.html">EarthModelBase</a>, 1)</td></tr>
+<tr class="separator:ae384b3a9ebacc19a9af429a29153e5ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aa84534556fd6e35ed67bd899883249fb"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structOscProb_1_1PremLayer.html">PremLayer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a></td></tr>
 <tr class="memdesc:aa84534556fd6e35ed67bd899883249fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">The layers in the earth model.  <a href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">More...</a><br /></td></tr>
 <tr class="separator:aa84534556fd6e35ed67bd899883249fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade38d7c8851ef79e436e8c019856377d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">NuPath</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#ade38d7c8851ef79e436e8c019856377d">fNuPath</a></td></tr>
-<tr class="memdesc:ade38d7c8851ef79e436e8c019856377d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current neutrino path sequence.  <a href="classOscProb_1_1PremModel.html#ade38d7c8851ef79e436e8c019856377d">More...</a><br /></td></tr>
-<tr class="separator:ade38d7c8851ef79e436e8c019856377d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fb68506493666349f418b893a996185"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a></td></tr>
 <tr class="memdesc:a4fb68506493666349f418b893a996185"><td class="mdescLeft">&#160;</td><td class="mdescRight">The layer index of the detector.  <a href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">More...</a><br /></td></tr>
 <tr class="separator:a4fb68506493666349f418b893a996185"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab12ea0343cd11b9233ffd20ab5e620c7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#ab12ea0343cd11b9233ffd20ab5e620c7">fDetPos</a></td></tr>
-<tr class="memdesc:ab12ea0343cd11b9233ffd20ab5e620c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The radius where the detector lives.  <a href="classOscProb_1_1PremModel.html#ab12ea0343cd11b9233ffd20ab5e620c7">More...</a><br /></td></tr>
-<tr class="separator:ab12ea0343cd11b9233ffd20ab5e620c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3973df6f5f2ff219cd2f865b31aacfd2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#a3973df6f5f2ff219cd2f865b31aacfd2">fRemoveSmallPaths</a></td></tr>
-<tr class="memdesc:a3973df6f5f2ff219cd2f865b31aacfd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag whether to merge small paths.  <a href="classOscProb_1_1PremModel.html#a3973df6f5f2ff219cd2f865b31aacfd2">More...</a><br /></td></tr>
-<tr class="separator:a3973df6f5f2ff219cd2f865b31aacfd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae40eaf3d8b666cfd4fe9242decf78121"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">NuPath</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a></td></tr>
+<tr class="memdesc:ae40eaf3d8b666cfd4fe9242decf78121"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current neutrino path sequence.  <a href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">More...</a><br /></td></tr>
+<tr class="separator:ae40eaf3d8b666cfd4fe9242decf78121"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cbe53a328039a65b25736151dc6d586"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">fRadiusMax</a></td></tr>
+<tr class="memdesc:a3cbe53a328039a65b25736151dc6d586"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum radius in Earth model (in km)  <a href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">More...</a><br /></td></tr>
+<tr class="separator:a3cbe53a328039a65b25736151dc6d586"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af11bb0a5e0d6348513e46ede9ff16cda"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a></td></tr>
+<tr class="memdesc:af11bb0a5e0d6348513e46ede9ff16cda"><td class="mdescLeft">&#160;</td><td class="mdescRight">The radius where the detector sits (in km)  <a href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">More...</a><br /></td></tr>
+<tr class="separator:af11bb0a5e0d6348513e46ede9ff16cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c1e80b6c99f58dcbb4eec872f013fdd"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#a5c1e80b6c99f58dcbb4eec872f013fdd">fDetLat</a></td></tr>
+<tr class="memdesc:a5c1e80b6c99f58dcbb4eec872f013fdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The latitude (in rad) where the detector sits.  <a href="classOscProb_1_1EarthModelBase.html#a5c1e80b6c99f58dcbb4eec872f013fdd">More...</a><br /></td></tr>
+<tr class="separator:a5c1e80b6c99f58dcbb4eec872f013fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fc2d1736dd6ebdb38cc2da60a44a4de"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#a9fc2d1736dd6ebdb38cc2da60a44a4de">fDetLon</a></td></tr>
+<tr class="memdesc:a9fc2d1736dd6ebdb38cc2da60a44a4de"><td class="mdescLeft">&#160;</td><td class="mdescRight">The longitude (in rad) where the detector sits.  <a href="classOscProb_1_1EarthModelBase.html#a9fc2d1736dd6ebdb38cc2da60a44a4de">More...</a><br /></td></tr>
+<tr class="separator:a9fc2d1736dd6ebdb38cc2da60a44a4de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4176958be65c82a111e03c38aeadbe4e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#a4176958be65c82a111e03c38aeadbe4e">fRemoveSmallPaths</a></td></tr>
+<tr class="memdesc:a4176958be65c82a111e03c38aeadbe4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tag whether to merge small paths.  <a href="classOscProb_1_1EarthModelBase.html#a4176958be65c82a111e03c38aeadbe4e">More...</a><br /></td></tr>
+<tr class="separator:a4176958be65c82a111e03c38aeadbe4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -197,10 +217,10 @@ Static Protected Attributes</h2></td></tr>
 <p >The class is then able to produce path sequences through the different earth layers as a function of the cosine of the zenith angle with respect to the detector.</p>
 <p >The detector can be positioned at any radius within the model and the path sequences will take into account the fact that some layers are above the detector.</p>
 <p >By default this implements the model stored in PremTables/prem_default.txt with the detector at the bottom of the ocean layer (radius = 6368 km).</p>
-<p >This class inherits from TObject and can be saved in ROOT files.</p>
+<p >This class inherits from <a class="el" href="classOscProb_1_1EarthModelBase.html" title="Base class for implementing an earth model.">EarthModelBase</a> and can be saved in ROOT files.</p>
 <dl class="section author"><dt>Author</dt><dd>jcoelho@apc.in2p3.fr </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00037">37</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00038">38</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a959f8da5c78881b950bd647b67c1ef9b" name="a959f8da5c78881b950bd647b67c1ef9b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a959f8da5c78881b950bd647b67c1ef9b">&#9670;&nbsp;</a></span>PremModel()</h2>
@@ -228,19 +248,20 @@ Static Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00035">35</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   35</span>                                    :</div>
-<div class="line"><span class="lineno">   36</span><a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a>(0), <a class="code hl_variable" href="classOscProb_1_1PremModel.html#a3973df6f5f2ff219cd2f865b31aacfd2">fRemoveSmallPaths</a>(<span class="keyword">false</span>)</div>
+<div class="line"><span class="lineno">   36</span><a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a>(0)</div>
 <div class="line"><span class="lineno">   37</span>{</div>
-<div class="line"><span class="lineno">   38</span> </div>
-<div class="line"><span class="lineno">   39</span>  <a class="code hl_function" href="classOscProb_1_1PremModel.html#a55b314e97ed9b92931e08ada0c0947eb">SetDetPos</a>(6368);</div>
-<div class="line"><span class="lineno">   40</span>  <a class="code hl_function" href="classOscProb_1_1PremModel.html#a6363a5e711dd8b0d2e684677e585b293">LoadModel</a>(filename);</div>
-<div class="line"><span class="lineno">   41</span> </div>
-<div class="line"><span class="lineno">   42</span>}</div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_a3973df6f5f2ff219cd2f865b31aacfd2"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a3973df6f5f2ff219cd2f865b31aacfd2">OscProb::PremModel::fRemoveSmallPaths</a></div><div class="ttdeci">bool fRemoveSmallPaths</div><div class="ttdoc">Tag whether to merge small paths.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00082">PremModel.h:82</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_a4fb68506493666349f418b893a996185"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">OscProb::PremModel::fDetLayer</a></div><div class="ttdeci">int fDetLayer</div><div class="ttdoc">The layer index of the detector.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00079">PremModel.h:79</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_a55b314e97ed9b92931e08ada0c0947eb"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a55b314e97ed9b92931e08ada0c0947eb">OscProb::PremModel::SetDetPos</a></div><div class="ttdeci">virtual void SetDetPos(double pos)</div><div class="ttdoc">Set the detector position in km.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00064">PremModel.cxx:64</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_a6363a5e711dd8b0d2e684677e585b293"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a6363a5e711dd8b0d2e684677e585b293">OscProb::PremModel::LoadModel</a></div><div class="ttdeci">virtual void LoadModel(std::string filename)</div><div class="ttdoc">Load an earth model from a file.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00125">PremModel.cxx:125</a></div></div>
+<div class="line"><span class="lineno">   38</span>  </div>
+<div class="line"><span class="lineno">   39</span>  <a class="code hl_function" href="classOscProb_1_1EarthModelBase.html#abc6399e4d3ec17a360f2fe3f7d39576c">SetRemoveSmallPaths</a>(<span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">   40</span>  <a class="code hl_function" href="classOscProb_1_1PremModel.html#a6ac188948d15a5ce6df7926ef9d46c0a">SetDetPos</a>(6368);</div>
+<div class="line"><span class="lineno">   41</span>  <a class="code hl_function" href="classOscProb_1_1PremModel.html#a6363a5e711dd8b0d2e684677e585b293">LoadModel</a>(filename);</div>
+<div class="line"><span class="lineno">   42</span> </div>
+<div class="line"><span class="lineno">   43</span>}</div>
+<div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_abc6399e4d3ec17a360f2fe3f7d39576c"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#abc6399e4d3ec17a360f2fe3f7d39576c">OscProb::EarthModelBase::SetRemoveSmallPaths</a></div><div class="ttdeci">virtual void SetRemoveSmallPaths(bool rp=true)</div><div class="ttdoc">Set tag to remove small paths.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8cxx_source.html#l00201">EarthModelBase.cxx:201</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PremModel_html_a4fb68506493666349f418b893a996185"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">OscProb::PremModel::fDetLayer</a></div><div class="ttdeci">int fDetLayer</div><div class="ttdoc">The layer index of the detector.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00069">PremModel.h:69</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PremModel_html_a6363a5e711dd8b0d2e684677e585b293"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a6363a5e711dd8b0d2e684677e585b293">OscProb::PremModel::LoadModel</a></div><div class="ttdeci">virtual void LoadModel(std::string filename)</div><div class="ttdoc">Load an earth model from a file.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00126">PremModel.cxx:126</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PremModel_html_a6ac188948d15a5ce6df7926ef9d46c0a"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a6ac188948d15a5ce6df7926ef9d46c0a">OscProb::PremModel::SetDetPos</a></div><div class="ttdeci">void SetDetPos(double rad, double lat=0, double lon=0)</div><div class="ttdoc">Set the detector position (rad = radius in km, lat/lon in deg)</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00069">PremModel.cxx:69</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8cxx_source.html#l00125">LoadModel()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00064">SetDetPos()</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8cxx_source.html#l00126">LoadModel()</a>, <a class="el" href="PremModel_8cxx_source.html#l00069">SetDetPos()</a>, and <a class="el" href="EarthModelBase_8cxx_source.html#l00201">OscProb::EarthModelBase::SetRemoveSmallPaths()</a>.</p>
 
 </div>
 </div>
@@ -268,8 +289,8 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >Nothing to clean. </p>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00048">48</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   48</span>{}</div>
+<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00049">49</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   49</span>{}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -330,18 +351,18 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00105">105</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  107</span>{</div>
-<div class="line"><span class="lineno">  108</span> </div>
-<div class="line"><span class="lineno">  109</span>  <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.push_back( <a class="code hl_struct" href="structOscProb_1_1PremLayer.html">PremLayer</a>(radius, density, zoa, layer) );</div>
-<div class="line"><span class="lineno">  110</span> </div>
-<div class="line"><span class="lineno">  111</span>}</div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_aa84534556fd6e35ed67bd899883249fb"><div class="ttname"><a href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">OscProb::PremModel::fPremLayers</a></div><div class="ttdeci">std::vector&lt; PremLayer &gt; fPremLayers</div><div class="ttdoc">The layers in the earth model.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00075">PremModel.h:75</a></div></div>
+<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00106">106</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  108</span>{</div>
+<div class="line"><span class="lineno">  109</span> </div>
+<div class="line"><span class="lineno">  110</span>  <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.push_back( <a class="code hl_struct" href="structOscProb_1_1PremLayer.html">PremLayer</a>(radius, density, zoa, layer) );</div>
+<div class="line"><span class="lineno">  111</span> </div>
+<div class="line"><span class="lineno">  112</span>}</div>
+<div class="ttc" id="aclassOscProb_1_1PremModel_html_aa84534556fd6e35ed67bd899883249fb"><div class="ttname"><a href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">OscProb::PremModel::fPremLayers</a></div><div class="ttdeci">std::vector&lt; PremLayer &gt; fPremLayers</div><div class="ttdoc">The layers in the earth model.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00067">PremModel.h:67</a></div></div>
 <div class="ttc" id="astructOscProb_1_1PremLayer_html"><div class="ttname"><a href="structOscProb_1_1PremLayer.html">OscProb::PremLayer</a></div><div class="ttdoc">A struct representing a spherical shell of matter for earth models.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00083">NuPath.h:84</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00075">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00067">fPremLayers</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00125">LoadModel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00126">LoadModel()</a>.</p>
 
 </div>
 </div>
@@ -388,26 +409,133 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00336">336</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  337</span>{</div>
-<div class="line"><span class="lineno">  338</span> </div>
-<div class="line"><span class="lineno">  339</span>  <a class="code hl_variable" href="classOscProb_1_1PremModel.html#ade38d7c8851ef79e436e8c019856377d">fNuPath</a>.push_back( <a class="code hl_struct" href="structOscProb_1_1NuPath.html">NuPath</a>(length, pl.<a class="code hl_variable" href="structOscProb_1_1PremLayer.html#aba2536cbdab87d0db33df47f95c4f2c3">density</a>, pl.<a class="code hl_variable" href="structOscProb_1_1PremLayer.html#a8687a8169d786fca79908292d11077f5">zoa</a>, pl.<a class="code hl_variable" href="structOscProb_1_1PremLayer.html#aca8d7df68e6f982155b68b7e6a7ef389">layer</a>) );</div>
-<div class="line"><span class="lineno">  340</span> </div>
-<div class="line"><span class="lineno">  341</span>}</div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_ade38d7c8851ef79e436e8c019856377d"><div class="ttname"><a href="classOscProb_1_1PremModel.html#ade38d7c8851ef79e436e8c019856377d">OscProb::PremModel::fNuPath</a></div><div class="ttdeci">std::vector&lt; NuPath &gt; fNuPath</div><div class="ttdoc">The current neutrino path sequence.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00077">PremModel.h:77</a></div></div>
-<div class="ttc" id="astructOscProb_1_1NuPath_html"><div class="ttname"><a href="structOscProb_1_1NuPath.html">OscProb::NuPath</a></div><div class="ttdoc">A struct representing a neutrino path segment.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00034">NuPath.h:35</a></div></div>
+<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00301">301</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  302</span>{</div>
+<div class="line"><span class="lineno">  303</span> </div>
+<div class="line"><span class="lineno">  304</span>  <a class="code hl_function" href="classOscProb_1_1EarthModelBase.html#ad4398bca05cdac15da15027b30d04a8d">AddPathSegment</a>(length, pl.<a class="code hl_variable" href="structOscProb_1_1PremLayer.html#aba2536cbdab87d0db33df47f95c4f2c3">density</a>, pl.<a class="code hl_variable" href="structOscProb_1_1PremLayer.html#a8687a8169d786fca79908292d11077f5">zoa</a>, pl.<a class="code hl_variable" href="structOscProb_1_1PremLayer.html#aca8d7df68e6f982155b68b7e6a7ef389">layer</a>);</div>
+<div class="line"><span class="lineno">  305</span> </div>
+<div class="line"><span class="lineno">  306</span>}</div>
+<div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_ad4398bca05cdac15da15027b30d04a8d"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#ad4398bca05cdac15da15027b30d04a8d">OscProb::EarthModelBase::AddPathSegment</a></div><div class="ttdeci">virtual void AddPathSegment(double length, double density, double zoa, int index)</div><div class="ttdoc">Add a path segment to the sequence.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8cxx_source.html#l00069">EarthModelBase.cxx:69</a></div></div>
 <div class="ttc" id="astructOscProb_1_1PremLayer_html_a8687a8169d786fca79908292d11077f5"><div class="ttname"><a href="structOscProb_1_1PremLayer.html#a8687a8169d786fca79908292d11077f5">OscProb::PremLayer::zoa</a></div><div class="ttdeci">double zoa</div><div class="ttdoc">The effective Z/A value of the layer.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00127">NuPath.h:127</a></div></div>
 <div class="ttc" id="astructOscProb_1_1PremLayer_html_aba2536cbdab87d0db33df47f95c4f2c3"><div class="ttname"><a href="structOscProb_1_1PremLayer.html#aba2536cbdab87d0db33df47f95c4f2c3">OscProb::PremLayer::density</a></div><div class="ttdeci">double density</div><div class="ttdoc">The density of the layer in g/cm^3.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00126">NuPath.h:126</a></div></div>
 <div class="ttc" id="astructOscProb_1_1PremLayer_html_aca8d7df68e6f982155b68b7e6a7ef389"><div class="ttname"><a href="structOscProb_1_1PremLayer.html#aca8d7df68e6f982155b68b7e6a7ef389">OscProb::PremLayer::layer</a></div><div class="ttdeci">int layer</div><div class="ttdoc">An index to identify the matter type.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00128">NuPath.h:128</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="NuPath_8h_source.html#l00126">OscProb::PremLayer::density</a>, <a class="el" href="PremModel_8h_source.html#l00077">fNuPath</a>, <a class="el" href="NuPath_8h_source.html#l00128">OscProb::PremLayer::layer</a>, and <a class="el" href="NuPath_8h_source.html#l00127">OscProb::PremLayer::zoa</a>.</p>
+<p class="reference">References <a class="el" href="EarthModelBase_8cxx_source.html#l00069">OscProb::EarthModelBase::AddPathSegment()</a>, <a class="el" href="NuPath_8h_source.html#l00126">OscProb::PremLayer::density</a>, <a class="el" href="NuPath_8h_source.html#l00128">OscProb::PremLayer::layer</a>, and <a class="el" href="NuPath_8h_source.html#l00127">OscProb::PremLayer::zoa</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00358">FillPath()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00324">FillPath()</a>.</p>
+
+</div>
+</div>
+<a id="ad4398bca05cdac15da15027b30d04a8d" name="ad4398bca05cdac15da15027b30d04a8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4398bca05cdac15da15027b30d04a8d">&#9670;&nbsp;</a></span>AddPathSegment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EarthModelBase::AddPathSegment </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>density</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>zoa</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Add a path segment to the sequence.</p>
+<p >For a given <a class="el" href="structOscProb_1_1EarthBin.html">EarthBin</a>, adds a path of a given length in that material</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">length</td><td>- The length of the path segment in km </td></tr>
+    <tr><td class="paramname">density</td><td>- The density along the path segment </td></tr>
+    <tr><td class="paramname">zoa</td><td>- Z/A along the path segment </td></tr>
+    <tr><td class="paramname">index</td><td>- Index for the matter along the path segment </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="EarthModelBase_8cxx_source.html#l00069">69</a> of file <a class="el" href="EarthModelBase_8cxx_source.html">EarthModelBase.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   70</span>{</div>
+<div class="line"><span class="lineno">   71</span> </div>
+<div class="line"><span class="lineno">   72</span>  <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a>.push_back( <a class="code hl_struct" href="structOscProb_1_1NuPath.html">NuPath</a>(length, density, zoa, index) );</div>
+<div class="line"><span class="lineno">   73</span> </div>
+<div class="line"><span class="lineno">   74</span>}</div>
+<div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_ae40eaf3d8b666cfd4fe9242decf78121"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">OscProb::EarthModelBase::fNuPath</a></div><div class="ttdeci">std::vector&lt; NuPath &gt; fNuPath</div><div class="ttdoc">The current neutrino path sequence.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8h_source.html#l00065">EarthModelBase.h:65</a></div></div>
+<div class="ttc" id="astructOscProb_1_1NuPath_html"><div class="ttname"><a href="structOscProb_1_1NuPath.html">OscProb::NuPath</a></div><div class="ttdoc">A struct representing a neutrino path segment.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00034">NuPath.h:35</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="EarthModelBase_8h_source.html#l00065">OscProb::EarthModelBase::fNuPath</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00365">OscProb::EarthModelBinned::AddPath()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00301">AddPath()</a>.</p>
+
+</div>
+</div>
+<a id="ae384b3a9ebacc19a9af429a29153e5ba" name="ae384b3a9ebacc19a9af429a29153e5ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae384b3a9ebacc19a9af429a29153e5ba">&#9670;&nbsp;</a></span>ClassDef() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">OscProb::EarthModelBase::ClassDef </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classOscProb_1_1EarthModelBase.html">EarthModelBase</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">1&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
 <a id="a9a1d78e29217bb0dd00ae3bd96d22b69" name="a9a1d78e29217bb0dd00ae3bd96d22b69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a1d78e29217bb0dd00ae3bd96d22b69">&#9670;&nbsp;</a></span>ClassDef()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a1d78e29217bb0dd00ae3bd96d22b69">&#9670;&nbsp;</a></span>ClassDef() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -466,22 +594,22 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >Clear the earth model information. </p>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00088">88</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   89</span>{</div>
-<div class="line"><span class="lineno">   90</span> </div>
-<div class="line"><span class="lineno">   91</span>  <a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a> = 0;</div>
-<div class="line"><span class="lineno">   92</span>  <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.clear();</div>
-<div class="line"><span class="lineno">   93</span> </div>
-<div class="line"><span class="lineno">   94</span>}</div>
+<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00089">89</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   90</span>{</div>
+<div class="line"><span class="lineno">   91</span> </div>
+<div class="line"><span class="lineno">   92</span>  <a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a> = 0;</div>
+<div class="line"><span class="lineno">   93</span>  <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.clear();</div>
+<div class="line"><span class="lineno">   94</span> </div>
+<div class="line"><span class="lineno">   95</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00079">fDetLayer</a>, and <a class="el" href="PremModel_8h_source.html#l00075">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00069">fDetLayer</a>, and <a class="el" href="PremModel_8h_source.html#l00067">fPremLayers</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00125">LoadModel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00126">LoadModel()</a>.</p>
 
 </div>
 </div>
-<a id="ac69162cc5e3c8b7c1b8a85571ff2063b" name="ac69162cc5e3c8b7c1b8a85571ff2063b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac69162cc5e3c8b7c1b8a85571ff2063b">&#9670;&nbsp;</a></span>FillPath()</h2>
+<a id="a802363021cc9d46506314f961e0e769f" name="a802363021cc9d46506314f961e0e769f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a802363021cc9d46506314f961e0e769f">&#9670;&nbsp;</a></span>FillPath()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -493,8 +621,18 @@ Static Protected Attributes</h2></td></tr>
           <td class="memname">int PremModel::FillPath </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>cosT</em></td><td>)</td>
+          <td class="paramname"><em>cosT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>phi</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -508,97 +646,102 @@ Static Protected Attributes</h2></td></tr>
 <p >The path sequence is stored as an attribute and can be retrieved with the function GetNuPath.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cosT</td><td>- The cosine of the neutrino direction </td></tr>
+    <tr><td class="paramname">cosT</td><td>- The cosine of the zenith angle of the neutrino direction </td></tr>
+    <tr><td class="paramname">phi</td><td>- The azimuthal angle of the neutrino direction (default = 0; not used) </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The number of path segments in the sequence </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00358">358</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  359</span>{</div>
-<div class="line"><span class="lineno">  360</span> </div>
-<div class="line"><span class="lineno">  361</span>  <span class="comment">// Clear current path sequence</span></div>
-<div class="line"><span class="lineno">  362</span>  <a class="code hl_variable" href="classOscProb_1_1PremModel.html#ade38d7c8851ef79e436e8c019856377d">fNuPath</a>.clear();</div>
+<p>Implements <a class="el" href="classOscProb_1_1EarthModelBase.html#a5b66f8bb3016dd042e352802e9af54a6">OscProb::EarthModelBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00324">324</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  325</span>{</div>
+<div class="line"><span class="lineno">  326</span> </div>
+<div class="line"><span class="lineno">  327</span>  <span class="comment">// Clear current path sequence</span></div>
+<div class="line"><span class="lineno">  328</span>  <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a>.clear();</div>
+<div class="line"><span class="lineno">  329</span> </div>
+<div class="line"><span class="lineno">  330</span>  <span class="comment">// Do nothing if cosine is unphysical</span></div>
+<div class="line"><span class="lineno">  331</span>  <span class="keywordflow">if</span>(fabs(cosT) &gt; 1) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  332</span> </div>
+<div class="line"><span class="lineno">  333</span>  <span class="comment">// Define the minimum path radius</span></div>
+<div class="line"><span class="lineno">  334</span>  <span class="keywordtype">double</span> minR = <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a> * sqrt(1 - cosT*cosT);</div>
+<div class="line"><span class="lineno">  335</span>  <span class="keywordtype">double</span> minRsq = minR*minR;</div>
+<div class="line"><span class="lineno">  336</span> </div>
+<div class="line"><span class="lineno">  337</span>  <span class="comment">// Set the top layer index</span></div>
+<div class="line"><span class="lineno">  338</span>  <span class="keywordtype">int</span> toplayer = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.size() - 1;</div>
+<div class="line"><span class="lineno">  339</span> </div>
+<div class="line"><span class="lineno">  340</span>  <span class="comment">// Find the inner-most crossed layer</span></div>
+<div class="line"><span class="lineno">  341</span>  <span class="keywordtype">int</span> minlayer = 0;</div>
+<div class="line"><span class="lineno">  342</span>  <span class="keywordflow">while</span>(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[minlayer].radius &lt; minR) minlayer++;</div>
+<div class="line"><span class="lineno">  343</span> </div>
+<div class="line"><span class="lineno">  344</span>  <span class="comment">// Compute the number of path segments needed</span></div>
+<div class="line"><span class="lineno">  345</span>  <span class="keywordtype">int</span> nsteps = toplayer - <a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a>;</div>
+<div class="line"><span class="lineno">  346</span>  <span class="keywordflow">if</span>(cosT &lt; 0) nsteps += 2*(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a> - minlayer) + 1;</div>
+<div class="line"><span class="lineno">  347</span> </div>
+<div class="line"><span class="lineno">  348</span>  <span class="comment">// Start at the top layer and go down</span></div>
+<div class="line"><span class="lineno">  349</span>  <span class="keywordtype">int</span> layer = toplayer;</div>
+<div class="line"><span class="lineno">  350</span>  <span class="keywordtype">int</span> dl = -1;</div>
+<div class="line"><span class="lineno">  351</span> </div>
+<div class="line"><span class="lineno">  352</span>  <span class="comment">// Loop over all path segments</span></div>
+<div class="line"><span class="lineno">  353</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;nsteps; i++){</div>
+<div class="line"><span class="lineno">  354</span> </div>
+<div class="line"><span class="lineno">  355</span>    <span class="comment">// Get square of the path length between this layer&#39;s</span></div>
+<div class="line"><span class="lineno">  356</span>    <span class="comment">// outer radius and  inner-most radius</span></div>
+<div class="line"><span class="lineno">  357</span>    <span class="keywordtype">double</span> L1 = pow(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[layer].radius,2) - minRsq;</div>
+<div class="line"><span class="lineno">  358</span> </div>
+<div class="line"><span class="lineno">  359</span>    <span class="comment">// If L1 is negative, outer radius is not crossed.</span></div>
+<div class="line"><span class="lineno">  360</span>    <span class="comment">// This only happens if detector is at the top layer and the</span></div>
+<div class="line"><span class="lineno">  361</span>    <span class="comment">// neutrino is coming from above.</span></div>
+<div class="line"><span class="lineno">  362</span>    <span class="keywordflow">if</span>(L1 &lt; 0) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  363</span> </div>
-<div class="line"><span class="lineno">  364</span>  <span class="comment">// Do nothing if cosine is unphysical</span></div>
-<div class="line"><span class="lineno">  365</span>  <span class="keywordflow">if</span>(fabs(cosT) &gt; 1) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  366</span> </div>
-<div class="line"><span class="lineno">  367</span>  <span class="comment">// Define the minimum path radius</span></div>
-<div class="line"><span class="lineno">  368</span>  <span class="keywordtype">double</span> minR = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[<a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a>].radius * sqrt(1 - cosT*cosT);</div>
-<div class="line"><span class="lineno">  369</span> </div>
-<div class="line"><span class="lineno">  370</span>  <span class="comment">// Set the top layer index</span></div>
-<div class="line"><span class="lineno">  371</span>  <span class="keywordtype">int</span> toplayer = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.size() - 1;</div>
+<div class="line"><span class="lineno">  364</span>    <span class="comment">// Get square of the path length between this layer&#39;s</span></div>
+<div class="line"><span class="lineno">  365</span>    <span class="comment">// inner radius and  inner-most radius</span></div>
+<div class="line"><span class="lineno">  366</span>    <span class="keywordtype">double</span> L2 = -minRsq;</div>
+<div class="line"><span class="lineno">  367</span>    <span class="keywordflow">if</span>(layer&gt;0) L2 += pow(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[layer-1].radius,2);</div>
+<div class="line"><span class="lineno">  368</span> </div>
+<div class="line"><span class="lineno">  369</span>    <span class="comment">// If L2 is negative, inner radius is not crossed,</span></div>
+<div class="line"><span class="lineno">  370</span>    <span class="comment">// so set this as the minimum layer.</span></div>
+<div class="line"><span class="lineno">  371</span>    <span class="keywordtype">bool</span> ismin = (L2&lt;=0 &amp;&amp; cosT &lt; 0);</div>
 <div class="line"><span class="lineno">  372</span> </div>
-<div class="line"><span class="lineno">  373</span>  <span class="comment">// Find the inner-most crossed layer</span></div>
-<div class="line"><span class="lineno">  374</span>  <span class="keywordtype">int</span> minlayer = 0;</div>
-<div class="line"><span class="lineno">  375</span>  <span class="keywordflow">while</span>(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[minlayer].radius &lt; minR) minlayer++;</div>
-<div class="line"><span class="lineno">  376</span> </div>
-<div class="line"><span class="lineno">  377</span>  <span class="comment">// Compute the number of path segments needed</span></div>
-<div class="line"><span class="lineno">  378</span>  <span class="keywordtype">int</span> nsteps = toplayer - <a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a>;</div>
-<div class="line"><span class="lineno">  379</span>  <span class="keywordflow">if</span>(cosT &lt; 0) nsteps += 2*(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a> - minlayer) + 1;</div>
-<div class="line"><span class="lineno">  380</span> </div>
-<div class="line"><span class="lineno">  381</span>  <span class="comment">// Start at the top layer and go down</span></div>
-<div class="line"><span class="lineno">  382</span>  <span class="keywordtype">int</span> layer = toplayer;</div>
-<div class="line"><span class="lineno">  383</span>  <span class="keywordtype">int</span> dl = -1;</div>
-<div class="line"><span class="lineno">  384</span> </div>
-<div class="line"><span class="lineno">  385</span>  <span class="comment">// Loop over all path segments</span></div>
-<div class="line"><span class="lineno">  386</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;nsteps; i++){</div>
-<div class="line"><span class="lineno">  387</span> </div>
-<div class="line"><span class="lineno">  388</span>    <span class="comment">// Get square of the path length between this layer&#39;s</span></div>
-<div class="line"><span class="lineno">  389</span>    <span class="comment">// outer radius and  inner-most radius</span></div>
-<div class="line"><span class="lineno">  390</span>    <span class="keywordtype">double</span> L1 = pow(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[layer].radius,2) - minR*minR;</div>
-<div class="line"><span class="lineno">  391</span> </div>
-<div class="line"><span class="lineno">  392</span>    <span class="comment">// If L1 is negative, outer radius is not crossed.</span></div>
-<div class="line"><span class="lineno">  393</span>    <span class="comment">// This only happens if detector is at the top layer and the</span></div>
-<div class="line"><span class="lineno">  394</span>    <span class="comment">// neutrino is coming from above.</span></div>
-<div class="line"><span class="lineno">  395</span>    <span class="keywordflow">if</span>(L1 &lt; 0) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  396</span> </div>
-<div class="line"><span class="lineno">  397</span>    <span class="comment">// Get square of the path length between this layer&#39;s</span></div>
-<div class="line"><span class="lineno">  398</span>    <span class="comment">// inner radius and  inner-most radius</span></div>
-<div class="line"><span class="lineno">  399</span>    <span class="keywordtype">double</span> L2 = -minR*minR;</div>
-<div class="line"><span class="lineno">  400</span>    <span class="keywordflow">if</span>(layer&gt;0) L2 += pow(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[layer-1].radius,2);</div>
-<div class="line"><span class="lineno">  401</span> </div>
-<div class="line"><span class="lineno">  402</span>    <span class="comment">// If L2 is negative, inner radius is not crossed,</span></div>
-<div class="line"><span class="lineno">  403</span>    <span class="comment">// so set this as the minimum layer.</span></div>
-<div class="line"><span class="lineno">  404</span>    <span class="keywordtype">bool</span> ismin = (L2&lt;=0 &amp;&amp; cosT &lt; 0);</div>
-<div class="line"><span class="lineno">  405</span> </div>
-<div class="line"><span class="lineno">  406</span>    <span class="comment">// Store the path segment length</span></div>
-<div class="line"><span class="lineno">  407</span>    <span class="keywordtype">double</span> dL;</div>
-<div class="line"><span class="lineno">  408</span> </div>
-<div class="line"><span class="lineno">  409</span>    <span class="comment">// If it&#39;s the minimum layer, connect two outer radius</span></div>
-<div class="line"><span class="lineno">  410</span>    <span class="comment">// crossing points. If not, compute difference between</span></div>
-<div class="line"><span class="lineno">  411</span>    <span class="comment">// inner and outer radius crossings.</span></div>
-<div class="line"><span class="lineno">  412</span>    <span class="keywordflow">if</span>(ismin)      dL = 2 * sqrt(L1);</div>
-<div class="line"><span class="lineno">  413</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(L2&gt;=0) dL = sqrt(L1) - sqrt(L2);</div>
-<div class="line"><span class="lineno">  414</span>    <span class="keywordflow">else</span>           dL = sqrt(L1); <span class="comment">// This should never actually happen,</span></div>
-<div class="line"><span class="lineno">  415</span>                                  <span class="comment">// but protect in case L2 is slightly</span></div>
-<div class="line"><span class="lineno">  416</span>                                  <span class="comment">// negative when it should be zero.</span></div>
-<div class="line"><span class="lineno">  417</span>                                  <span class="comment">// e.g. arriving at the detector from above.</span></div>
-<div class="line"><span class="lineno">  418</span> </div>
-<div class="line"><span class="lineno">  419</span>    <span class="comment">// Add this path segment to the sequence</span></div>
-<div class="line"><span class="lineno">  420</span>    <a class="code hl_function" href="classOscProb_1_1PremModel.html#aca013f7ac5494282834048786a0e07a6">AddPath</a>(dL, <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[layer]);</div>
-<div class="line"><span class="lineno">  421</span> </div>
-<div class="line"><span class="lineno">  422</span>    <span class="comment">// If we reached the inner-most layer,</span></div>
-<div class="line"><span class="lineno">  423</span>    <span class="comment">// start moving up again.</span></div>
-<div class="line"><span class="lineno">  424</span>    <span class="keywordflow">if</span>(ismin) dl = 1;</div>
-<div class="line"><span class="lineno">  425</span> </div>
-<div class="line"><span class="lineno">  426</span>    <span class="comment">// Move to next layer</span></div>
-<div class="line"><span class="lineno">  427</span>    layer += dl;</div>
-<div class="line"><span class="lineno">  428</span> </div>
-<div class="line"><span class="lineno">  429</span>  }</div>
-<div class="line"><span class="lineno">  430</span> </div>
-<div class="line"><span class="lineno">  431</span>  <span class="comment">// Return the number of path segments</span></div>
-<div class="line"><span class="lineno">  432</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1PremModel.html#ade38d7c8851ef79e436e8c019856377d">fNuPath</a>.size();</div>
-<div class="line"><span class="lineno">  433</span> </div>
-<div class="line"><span class="lineno">  434</span>}</div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_aca013f7ac5494282834048786a0e07a6"><div class="ttname"><a href="classOscProb_1_1PremModel.html#aca013f7ac5494282834048786a0e07a6">OscProb::PremModel::AddPath</a></div><div class="ttdeci">virtual void AddPath(double length, PremLayer pl)</div><div class="ttdoc">Add a path segment to the sequence.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00336">PremModel.cxx:336</a></div></div>
+<div class="line"><span class="lineno">  373</span>    <span class="comment">// Store the path segment length</span></div>
+<div class="line"><span class="lineno">  374</span>    <span class="keywordtype">double</span> dL;</div>
+<div class="line"><span class="lineno">  375</span> </div>
+<div class="line"><span class="lineno">  376</span>    <span class="comment">// If it&#39;s the minimum layer, connect two outer radius</span></div>
+<div class="line"><span class="lineno">  377</span>    <span class="comment">// crossing points. If not, compute difference between</span></div>
+<div class="line"><span class="lineno">  378</span>    <span class="comment">// inner and outer radius crossings.</span></div>
+<div class="line"><span class="lineno">  379</span>    <span class="keywordflow">if</span>(ismin)      dL = 2 * sqrt(L1);</div>
+<div class="line"><span class="lineno">  380</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(L2&gt;=0) dL = sqrt(L1) - sqrt(L2);</div>
+<div class="line"><span class="lineno">  381</span>    <span class="keywordflow">else</span>           dL = sqrt(L1); <span class="comment">// This should never actually happen,</span></div>
+<div class="line"><span class="lineno">  382</span>                                  <span class="comment">// but protect in case L2 is slightly</span></div>
+<div class="line"><span class="lineno">  383</span>                                  <span class="comment">// negative when it should be zero.</span></div>
+<div class="line"><span class="lineno">  384</span>                                  <span class="comment">// e.g. arriving at the detector from above.</span></div>
+<div class="line"><span class="lineno">  385</span> </div>
+<div class="line"><span class="lineno">  386</span>    <span class="comment">// Add this path segment to the sequence</span></div>
+<div class="line"><span class="lineno">  387</span>    <a class="code hl_function" href="classOscProb_1_1PremModel.html#aca013f7ac5494282834048786a0e07a6">AddPath</a>(dL, <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[layer]);</div>
+<div class="line"><span class="lineno">  388</span> </div>
+<div class="line"><span class="lineno">  389</span>    <span class="comment">// If we reached the inner-most layer,</span></div>
+<div class="line"><span class="lineno">  390</span>    <span class="comment">// start moving up again.</span></div>
+<div class="line"><span class="lineno">  391</span>    <span class="keywordflow">if</span>(ismin) dl = 1;</div>
+<div class="line"><span class="lineno">  392</span> </div>
+<div class="line"><span class="lineno">  393</span>    <span class="comment">// Move to next layer</span></div>
+<div class="line"><span class="lineno">  394</span>    layer += dl;</div>
+<div class="line"><span class="lineno">  395</span> </div>
+<div class="line"><span class="lineno">  396</span>  }</div>
+<div class="line"><span class="lineno">  397</span> </div>
+<div class="line"><span class="lineno">  398</span>  <span class="comment">// Return the number of path segments</span></div>
+<div class="line"><span class="lineno">  399</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a>.size();</div>
+<div class="line"><span class="lineno">  400</span> </div>
+<div class="line"><span class="lineno">  401</span>}</div>
+<div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_af11bb0a5e0d6348513e46ede9ff16cda"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">OscProb::EarthModelBase::fDetRadius</a></div><div class="ttdeci">double fDetRadius</div><div class="ttdoc">The radius where the detector sits (in km)</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8h_source.html#l00068">EarthModelBase.h:68</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PremModel_html_aca013f7ac5494282834048786a0e07a6"><div class="ttname"><a href="classOscProb_1_1PremModel.html#aca013f7ac5494282834048786a0e07a6">OscProb::PremModel::AddPath</a></div><div class="ttdeci">virtual void AddPath(double length, PremLayer pl)</div><div class="ttdoc">Add a path segment to the sequence.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00301">PremModel.cxx:301</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8cxx_source.html#l00336">AddPath()</a>, <a class="el" href="PremModel_8h_source.html#l00079">fDetLayer</a>, <a class="el" href="PremModel_8h_source.html#l00077">fNuPath</a>, and <a class="el" href="PremModel_8h_source.html#l00075">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8cxx_source.html#l00301">AddPath()</a>, <a class="el" href="PremModel_8h_source.html#l00069">fDetLayer</a>, <a class="el" href="EarthModelBase_8h_source.html#l00068">OscProb::EarthModelBase::fDetRadius</a>, <a class="el" href="EarthModelBase_8h_source.html#l00065">OscProb::EarthModelBase::fNuPath</a>, and <a class="el" href="PremModel_8h_source.html#l00067">fPremLayers</a>.</p>
 
 </div>
 </div>
-<a id="a5328474bdbb703eb4c9d4df49999cda6" name="a5328474bdbb703eb4c9d4df49999cda6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5328474bdbb703eb4c9d4df49999cda6">&#9670;&nbsp;</a></span>GetCosT()</h2>
+<a id="a7e7fd7dc94d2749ddc1af8db11bda962" name="a7e7fd7dc94d2749ddc1af8db11bda962"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e7fd7dc94d2749ddc1af8db11bda962">&#9670;&nbsp;</a></span>GetCosT()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -607,7 +750,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PremModel::GetCosT </td>
+          <td class="memname">double EarthModelBase::GetCosT </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>L</em></td><td>)</td>
@@ -616,7 +759,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -630,20 +773,18 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00314">314</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  315</span>{</div>
-<div class="line"><span class="lineno">  316</span> </div>
-<div class="line"><span class="lineno">  317</span>  <span class="keywordtype">double</span> rAbove = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.back().radius;     <span class="comment">// Radius above detector</span></div>
-<div class="line"><span class="lineno">  318</span>  <span class="keywordtype">double</span> rBelow = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[<a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a>].radius; <span class="comment">// Radius below detector</span></div>
-<div class="line"><span class="lineno">  319</span> </div>
-<div class="line"><span class="lineno">  320</span>  <span class="keywordflow">if</span>(L &lt; rAbove - rBelow) <span class="keywordflow">return</span>  1;</div>
-<div class="line"><span class="lineno">  321</span>  <span class="keywordflow">if</span>(L &gt; rAbove + rBelow) <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  322</span> </div>
-<div class="line"><span class="lineno">  323</span>  <span class="keywordflow">return</span> (rAbove*rAbove - rBelow*rBelow - L*L) / (2*rBelow*L);</div>
-<div class="line"><span class="lineno">  324</span> </div>
-<div class="line"><span class="lineno">  325</span>}</div>
+<p class="definition">Definition at line <a class="el" href="EarthModelBase_8cxx_source.html#l00105">105</a> of file <a class="el" href="EarthModelBase_8cxx_source.html">EarthModelBase.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  106</span>{</div>
+<div class="line"><span class="lineno">  107</span> </div>
+<div class="line"><span class="lineno">  108</span>  <span class="keywordflow">if</span>(L &lt; <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">fRadiusMax</a> - <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a>) <span class="keywordflow">return</span>  1;</div>
+<div class="line"><span class="lineno">  109</span>  <span class="keywordflow">if</span>(L &gt; <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">fRadiusMax</a> + <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a>) <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  110</span> </div>
+<div class="line"><span class="lineno">  111</span>  <span class="keywordflow">return</span> (<a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">fRadiusMax</a>*<a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">fRadiusMax</a> - <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a>*<a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a> - L*L) / (2*<a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a>*L);</div>
+<div class="line"><span class="lineno">  112</span> </div>
+<div class="line"><span class="lineno">  113</span>}</div>
+<div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_a3cbe53a328039a65b25736151dc6d586"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">OscProb::EarthModelBase::fRadiusMax</a></div><div class="ttdeci">double fRadiusMax</div><div class="ttdoc">Maximum radius in Earth model (in km)</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8h_source.html#l00067">EarthModelBase.h:67</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00079">fDetLayer</a>, and <a class="el" href="PremModel_8h_source.html#l00075">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="EarthModelBase_8h_source.html#l00068">OscProb::EarthModelBase::fDetRadius</a>, and <a class="el" href="EarthModelBase_8h_source.html#l00067">OscProb::EarthModelBase::fRadiusMax</a>.</p>
 
 </div>
 </div>
@@ -677,39 +818,40 @@ Static Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>Z/A corresponding to layer </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00220">220</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  221</span>{</div>
-<div class="line"><span class="lineno">  222</span> </div>
-<div class="line"><span class="lineno">  223</span>  <span class="keywordtype">int</span> nlayers = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.size();</div>
-<div class="line"><span class="lineno">  224</span> </div>
-<div class="line"><span class="lineno">  225</span>  <span class="comment">// This check assumes the layer types are in increasing order</span></div>
-<div class="line"><span class="lineno">  226</span>  <span class="keywordflow">if</span>(layer &gt; <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.back().layer){</div>
-<div class="line"><span class="lineno">  227</span>    cout &lt;&lt; <span class="stringliteral">&quot;ERROR: Not that many layer types&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  228</span>    cout &lt;&lt; <span class="stringliteral">&quot;Returning 0&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  229</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  230</span>  }</div>
+<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00229">229</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  230</span>{</div>
 <div class="line"><span class="lineno">  231</span> </div>
-<div class="line"><span class="lineno">  232</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;nlayers; i++){</div>
+<div class="line"><span class="lineno">  232</span>  <span class="keywordtype">int</span> nlayers = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.size();</div>
 <div class="line"><span class="lineno">  233</span> </div>
-<div class="line"><span class="lineno">  234</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[i].layer != layer) <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">  235</span> </div>
-<div class="line"><span class="lineno">  236</span>    <span class="keywordflow">else</span> <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[i].zoa;</div>
-<div class="line"><span class="lineno">  237</span> </div>
-<div class="line"><span class="lineno">  238</span>  }</div>
-<div class="line"><span class="lineno">  239</span> </div>
-<div class="line"><span class="lineno">  240</span>  <span class="comment">// End of vector reached without finding input type</span></div>
-<div class="line"><span class="lineno">  241</span>  cout &lt;&lt; <span class="stringliteral">&quot;ERROR: layer type not found&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  242</span>  cout &lt;&lt; <span class="stringliteral">&quot;Returning 0&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  243</span>  <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  244</span>}</div>
+<div class="line"><span class="lineno">  234</span>  <span class="comment">// This check assumes the layer types are in increasing order</span></div>
+<div class="line"><span class="lineno">  235</span>  <span class="keywordflow">if</span>(layer &gt; <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.back().layer){</div>
+<div class="line"><span class="lineno">  236</span>    cout &lt;&lt; <span class="stringliteral">&quot;ERROR: Not that many layer types&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  237</span>    cout &lt;&lt; <span class="stringliteral">&quot;Returning 0&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  238</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  239</span>  }</div>
+<div class="line"><span class="lineno">  240</span> </div>
+<div class="line"><span class="lineno">  241</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;nlayers; i++){</div>
+<div class="line"><span class="lineno">  242</span> </div>
+<div class="line"><span class="lineno">  243</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[i].layer != layer) <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  244</span> </div>
+<div class="line"><span class="lineno">  245</span>    <span class="keywordflow">else</span> <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[i].zoa;</div>
+<div class="line"><span class="lineno">  246</span> </div>
+<div class="line"><span class="lineno">  247</span>  }</div>
+<div class="line"><span class="lineno">  248</span> </div>
+<div class="line"><span class="lineno">  249</span>  <span class="comment">// End of vector reached without finding input type</span></div>
+<div class="line"><span class="lineno">  250</span>  cout &lt;&lt; <span class="stringliteral">&quot;ERROR: layer type not found&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  251</span>  cout &lt;&lt; <span class="stringliteral">&quot;Returning 0&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  252</span>  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  253</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00075">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00067">fPremLayers</a>.</p>
 
 </div>
 </div>
-<a id="a5b6f83f2e9b7087e8faad1f19f00ebd5" name="a5b6f83f2e9b7087e8faad1f19f00ebd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b6f83f2e9b7087e8faad1f19f00ebd5">&#9670;&nbsp;</a></span>GetMergedPaths()</h2>
+<a id="a78f0fafc9dbdd01fb9fc6dbadf69fb4e" name="a78f0fafc9dbdd01fb9fc6dbadf69fb4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78f0fafc9dbdd01fb9fc6dbadf69fb4e">&#9670;&nbsp;</a></span>GetMergedPaths()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -718,7 +860,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">NuPath</a> &gt; PremModel::GetMergedPaths </td>
+          <td class="memname">vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">NuPath</a> &gt; EarthModelBase::GetMergedPaths </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>prec</em> = <code>0.25</code></td><td>)</td>
@@ -727,7 +869,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -742,85 +884,84 @@ Static Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The vector of merged path segments </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00449">449</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  449</span>                                                   {</div>
-<div class="line"><span class="lineno">  450</span> </div>
-<div class="line"><span class="lineno">  451</span>  <span class="comment">// The output vector</span></div>
-<div class="line"><span class="lineno">  452</span>  vector&lt;NuPath&gt; mergedPath;</div>
-<div class="line"><span class="lineno">  453</span> </div>
-<div class="line"><span class="lineno">  454</span>  <span class="comment">// Start with the first path</span></div>
-<div class="line"><span class="lineno">  455</span>  <a class="code hl_struct" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> path = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#ade38d7c8851ef79e436e8c019856377d">fNuPath</a>[0];</div>
-<div class="line"><span class="lineno">  456</span> </div>
-<div class="line"><span class="lineno">  457</span>  <span class="comment">// Track the total length</span></div>
-<div class="line"><span class="lineno">  458</span>  <span class="keywordtype">double</span> totL = 0;</div>
-<div class="line"><span class="lineno">  459</span> </div>
-<div class="line"><span class="lineno">  460</span>  <span class="comment">// Loop over all paths starting from second</span></div>
-<div class="line"><span class="lineno">  461</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=1; i&lt;<a class="code hl_variable" href="classOscProb_1_1PremModel.html#ade38d7c8851ef79e436e8c019856377d">fNuPath</a>.size(); i++){</div>
-<div class="line"><span class="lineno">  462</span> </div>
-<div class="line"><span class="lineno">  463</span>    <span class="comment">// If this path electron density is beyond the tolerance</span></div>
-<div class="line"><span class="lineno">  464</span>    <span class="keywordflow">if</span>( fabs(path.<a class="code hl_variable" href="structOscProb_1_1NuPath.html#a54ddd451db69bc54434de3cf18a117ca">density</a>*path.<a class="code hl_variable" href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">zoa</a> - <a class="code hl_variable" href="classOscProb_1_1PremModel.html#ade38d7c8851ef79e436e8c019856377d">fNuPath</a>[i].density*<a class="code hl_variable" href="classOscProb_1_1PremModel.html#ade38d7c8851ef79e436e8c019856377d">fNuPath</a>[i].zoa) &gt; prec*path.<a class="code hl_variable" href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">zoa</a> ){</div>
-<div class="line"><span class="lineno">  465</span> </div>
-<div class="line"><span class="lineno">  466</span>      <span class="comment">// Add merged path to vector</span></div>
-<div class="line"><span class="lineno">  467</span>      mergedPath.push_back(path);</div>
-<div class="line"><span class="lineno">  468</span> </div>
-<div class="line"><span class="lineno">  469</span>      <span class="comment">// Set this path as new merged path</span></div>
-<div class="line"><span class="lineno">  470</span>      path = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#ade38d7c8851ef79e436e8c019856377d">fNuPath</a>[i];</div>
-<div class="line"><span class="lineno">  471</span> </div>
-<div class="line"><span class="lineno">  472</span>    }</div>
-<div class="line"><span class="lineno">  473</span>    <span class="comment">// If path is within tolerance</span></div>
-<div class="line"><span class="lineno">  474</span>    <span class="keywordflow">else</span>{</div>
-<div class="line"><span class="lineno">  475</span> </div>
-<div class="line"><span class="lineno">  476</span>      <span class="comment">// Merge the path with current merged path</span></div>
-<div class="line"><span class="lineno">  477</span>      path = <a class="code hl_function" href="namespaceOscProb.html#ac4f1bdf84ce6aa7a16b6d3c91272d428">OscProb::AvgPath</a>(path, <a class="code hl_variable" href="classOscProb_1_1PremModel.html#ade38d7c8851ef79e436e8c019856377d">fNuPath</a>[i]);</div>
-<div class="line"><span class="lineno">  478</span> </div>
-<div class="line"><span class="lineno">  479</span>    }</div>
-<div class="line"><span class="lineno">  480</span> </div>
-<div class="line"><span class="lineno">  481</span>    <span class="comment">// Increment total length</span></div>
-<div class="line"><span class="lineno">  482</span>    totL += <a class="code hl_variable" href="classOscProb_1_1PremModel.html#ade38d7c8851ef79e436e8c019856377d">fNuPath</a>[i].length;</div>
-<div class="line"><span class="lineno">  483</span> </div>
-<div class="line"><span class="lineno">  484</span>  }<span class="comment">// End of loop over paths</span></div>
-<div class="line"><span class="lineno">  485</span> </div>
-<div class="line"><span class="lineno">  486</span>  <span class="comment">// Add the final merged path to vector</span></div>
-<div class="line"><span class="lineno">  487</span>  mergedPath.push_back(path);</div>
-<div class="line"><span class="lineno">  488</span> </div>
-<div class="line"><span class="lineno">  489</span>  <span class="comment">// If tag is true, remove small paths</span></div>
-<div class="line"><span class="lineno">  490</span>  <span class="keywordflow">if</span>(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#a3973df6f5f2ff219cd2f865b31aacfd2">fRemoveSmallPaths</a>){</div>
-<div class="line"><span class="lineno">  491</span> </div>
-<div class="line"><span class="lineno">  492</span>    <span class="comment">// Start at first path</span></div>
-<div class="line"><span class="lineno">  493</span>    <span class="keywordtype">int</span> k = 0;</div>
-<div class="line"><span class="lineno">  494</span> </div>
-<div class="line"><span class="lineno">  495</span>    <span class="comment">// While not at the end of vector</span></div>
-<div class="line"><span class="lineno">  496</span>    <span class="keywordflow">while</span>(k + 1 &lt; mergedPath.size()){</div>
-<div class="line"><span class="lineno">  497</span> </div>
-<div class="line"><span class="lineno">  498</span>      <span class="comment">// If length is less than 1% of total</span></div>
-<div class="line"><span class="lineno">  499</span>      <span class="keywordflow">if</span>(mergedPath[k].length &lt; 0.01*totL){</div>
-<div class="line"><span class="lineno">  500</span> </div>
-<div class="line"><span class="lineno">  501</span>        <span class="comment">// Merge path with following path</span></div>
-<div class="line"><span class="lineno">  502</span>        mergedPath = <a class="code hl_function" href="namespaceOscProb.html#a21f576551c47cf787c2df50a4f4b5c83">MergePaths</a>(mergedPath, k, k+1);</div>
-<div class="line"><span class="lineno">  503</span> </div>
-<div class="line"><span class="lineno">  504</span>      }</div>
-<div class="line"><span class="lineno">  505</span>      <span class="comment">// If path is long enough skip it</span></div>
-<div class="line"><span class="lineno">  506</span>      <span class="keywordflow">else</span> k++;</div>
-<div class="line"><span class="lineno">  507</span> </div>
-<div class="line"><span class="lineno">  508</span>    }<span class="comment">// End of while loop</span></div>
-<div class="line"><span class="lineno">  509</span> </div>
-<div class="line"><span class="lineno">  510</span>  }<span class="comment">// End of if statement</span></div>
-<div class="line"><span class="lineno">  511</span> </div>
-<div class="line"><span class="lineno">  512</span>  <span class="comment">// return the merged vector</span></div>
-<div class="line"><span class="lineno">  513</span>  <span class="keywordflow">return</span> mergedPath;</div>
-<div class="line"><span class="lineno">  514</span> </div>
-<div class="line"><span class="lineno">  515</span>}</div>
+<p class="definition">Definition at line <a class="el" href="EarthModelBase_8cxx_source.html#l00128">128</a> of file <a class="el" href="EarthModelBase_8cxx_source.html">EarthModelBase.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  128</span>                                                        {</div>
+<div class="line"><span class="lineno">  129</span> </div>
+<div class="line"><span class="lineno">  130</span>  <span class="comment">// The output vector</span></div>
+<div class="line"><span class="lineno">  131</span>  vector&lt;NuPath&gt; mergedPath;</div>
+<div class="line"><span class="lineno">  132</span> </div>
+<div class="line"><span class="lineno">  133</span>  <span class="comment">// Start with the first path</span></div>
+<div class="line"><span class="lineno">  134</span>  <a class="code hl_struct" href="structOscProb_1_1NuPath.html">OscProb::NuPath</a> path = <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a>[0];</div>
+<div class="line"><span class="lineno">  135</span> </div>
+<div class="line"><span class="lineno">  136</span>  <span class="comment">// Track the total length</span></div>
+<div class="line"><span class="lineno">  137</span>  <span class="keywordtype">double</span> totL = 0;</div>
+<div class="line"><span class="lineno">  138</span> </div>
+<div class="line"><span class="lineno">  139</span>  <span class="comment">// Loop over all paths starting from second</span></div>
+<div class="line"><span class="lineno">  140</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=1; i&lt;<a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a>.size(); i++){</div>
+<div class="line"><span class="lineno">  141</span> </div>
+<div class="line"><span class="lineno">  142</span>    <span class="comment">// If this path electron density is beyond the tolerance</span></div>
+<div class="line"><span class="lineno">  143</span>    <span class="keywordflow">if</span>( fabs(path.<a class="code hl_variable" href="structOscProb_1_1NuPath.html#a54ddd451db69bc54434de3cf18a117ca">density</a>*path.<a class="code hl_variable" href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">zoa</a> - <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a>[i].density*<a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a>[i].zoa) &gt; prec*path.<a class="code hl_variable" href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">zoa</a> ){</div>
+<div class="line"><span class="lineno">  144</span> </div>
+<div class="line"><span class="lineno">  145</span>      <span class="comment">// Add merged path to vector</span></div>
+<div class="line"><span class="lineno">  146</span>      mergedPath.push_back(path);</div>
+<div class="line"><span class="lineno">  147</span> </div>
+<div class="line"><span class="lineno">  148</span>      <span class="comment">// Set this path as new merged path</span></div>
+<div class="line"><span class="lineno">  149</span>      path = <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a>[i];</div>
+<div class="line"><span class="lineno">  150</span> </div>
+<div class="line"><span class="lineno">  151</span>    } <span class="keywordflow">else</span> { <span class="comment">// If path is within tolerance</span></div>
+<div class="line"><span class="lineno">  152</span> </div>
+<div class="line"><span class="lineno">  153</span>      <span class="comment">// Merge the path with current merged path</span></div>
+<div class="line"><span class="lineno">  154</span>      path = <a class="code hl_function" href="namespaceOscProb.html#ac4f1bdf84ce6aa7a16b6d3c91272d428">OscProb::AvgPath</a>(path, <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a>[i]);</div>
+<div class="line"><span class="lineno">  155</span> </div>
+<div class="line"><span class="lineno">  156</span>    }</div>
+<div class="line"><span class="lineno">  157</span> </div>
+<div class="line"><span class="lineno">  158</span>    <span class="comment">// Increment total length</span></div>
+<div class="line"><span class="lineno">  159</span>    totL += <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a>[i].length;</div>
+<div class="line"><span class="lineno">  160</span> </div>
+<div class="line"><span class="lineno">  161</span>  }<span class="comment">// End of loop over paths</span></div>
+<div class="line"><span class="lineno">  162</span> </div>
+<div class="line"><span class="lineno">  163</span>  <span class="comment">// Add the final merged path to vector</span></div>
+<div class="line"><span class="lineno">  164</span>  mergedPath.push_back(path);</div>
+<div class="line"><span class="lineno">  165</span> </div>
+<div class="line"><span class="lineno">  166</span>  <span class="comment">// If tag is true, remove small paths</span></div>
+<div class="line"><span class="lineno">  167</span>  <span class="keywordflow">if</span>(<a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#a4176958be65c82a111e03c38aeadbe4e">fRemoveSmallPaths</a>){</div>
+<div class="line"><span class="lineno">  168</span> </div>
+<div class="line"><span class="lineno">  169</span>    <span class="comment">// Start at first path</span></div>
+<div class="line"><span class="lineno">  170</span>    <span class="keywordtype">int</span> k = 0;</div>
+<div class="line"><span class="lineno">  171</span> </div>
+<div class="line"><span class="lineno">  172</span>    <span class="comment">// While not at the end of vector</span></div>
+<div class="line"><span class="lineno">  173</span>    <span class="keywordflow">while</span>(k + 1 &lt; mergedPath.size()){</div>
+<div class="line"><span class="lineno">  174</span> </div>
+<div class="line"><span class="lineno">  175</span>      <span class="comment">// If length is less than 1% of total</span></div>
+<div class="line"><span class="lineno">  176</span>      <span class="keywordflow">if</span>(mergedPath[k].length &lt; 0.01*totL){</div>
+<div class="line"><span class="lineno">  177</span> </div>
+<div class="line"><span class="lineno">  178</span>        <span class="comment">// Merge path with following path</span></div>
+<div class="line"><span class="lineno">  179</span>        mergedPath = <a class="code hl_function" href="namespaceOscProb.html#a21f576551c47cf787c2df50a4f4b5c83">MergePaths</a>(mergedPath, k, k+1);</div>
+<div class="line"><span class="lineno">  180</span> </div>
+<div class="line"><span class="lineno">  181</span>      }</div>
+<div class="line"><span class="lineno">  182</span>      <span class="comment">// If path is long enough skip it</span></div>
+<div class="line"><span class="lineno">  183</span>      <span class="keywordflow">else</span> k++;</div>
+<div class="line"><span class="lineno">  184</span> </div>
+<div class="line"><span class="lineno">  185</span>    }<span class="comment">// End of while loop</span></div>
+<div class="line"><span class="lineno">  186</span> </div>
+<div class="line"><span class="lineno">  187</span>  }<span class="comment">// End of if statement</span></div>
+<div class="line"><span class="lineno">  188</span> </div>
+<div class="line"><span class="lineno">  189</span>  <span class="comment">// return the merged vector</span></div>
+<div class="line"><span class="lineno">  190</span>  <span class="keywordflow">return</span> mergedPath;</div>
+<div class="line"><span class="lineno">  191</span> </div>
+<div class="line"><span class="lineno">  192</span>}</div>
+<div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_a4176958be65c82a111e03c38aeadbe4e"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#a4176958be65c82a111e03c38aeadbe4e">OscProb::EarthModelBase::fRemoveSmallPaths</a></div><div class="ttdeci">bool fRemoveSmallPaths</div><div class="ttdoc">Tag whether to merge small paths.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8h_source.html#l00072">EarthModelBase.h:72</a></div></div>
 <div class="ttc" id="anamespaceOscProb_html_a21f576551c47cf787c2df50a4f4b5c83"><div class="ttname"><a href="namespaceOscProb.html#a21f576551c47cf787c2df50a4f4b5c83">OscProb::MergePaths</a></div><div class="ttdeci">std::vector&lt; NuPath &gt; MergePaths(std::vector&lt; NuPath &gt; &amp;inputPath, int j, int k)</div><div class="ttdoc">Merge paths j and k in vector.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8cxx_source.html#l00088">NuPath.cxx:88</a></div></div>
 <div class="ttc" id="anamespaceOscProb_html_ac4f1bdf84ce6aa7a16b6d3c91272d428"><div class="ttname"><a href="namespaceOscProb.html#ac4f1bdf84ce6aa7a16b6d3c91272d428">OscProb::AvgPath</a></div><div class="ttdeci">NuPath AvgPath(NuPath &amp;p1, NuPath &amp;p2)</div><div class="ttdoc">Get the average of two paths.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8cxx_source.html#l00027">NuPath.cxx:27</a></div></div>
 <div class="ttc" id="astructOscProb_1_1NuPath_html_a54ddd451db69bc54434de3cf18a117ca"><div class="ttname"><a href="structOscProb_1_1NuPath.html#a54ddd451db69bc54434de3cf18a117ca">OscProb::NuPath::density</a></div><div class="ttdeci">double density</div><div class="ttdoc">The density of the path segment in g/cm^3.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00077">NuPath.h:77</a></div></div>
 <div class="ttc" id="astructOscProb_1_1NuPath_html_af3213f3691ba83c6bc05f4a3490f6b31"><div class="ttname"><a href="structOscProb_1_1NuPath.html#af3213f3691ba83c6bc05f4a3490f6b31">OscProb::NuPath::zoa</a></div><div class="ttdeci">double zoa</div><div class="ttdoc">The effective Z/A value of the path segment.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00078">NuPath.h:78</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="NuPath_8cxx_source.html#l00027">OscProb::AvgPath()</a>, <a class="el" href="NuPath_8h_source.html#l00077">OscProb::NuPath::density</a>, <a class="el" href="PremModel_8h_source.html#l00077">fNuPath</a>, <a class="el" href="PremModel_8h_source.html#l00082">fRemoveSmallPaths</a>, <a class="el" href="NuPath_8cxx_source.html#l00088">OscProb::MergePaths()</a>, and <a class="el" href="NuPath_8h_source.html#l00078">OscProb::NuPath::zoa</a>.</p>
+<p class="reference">References <a class="el" href="NuPath_8cxx_source.html#l00027">OscProb::AvgPath()</a>, <a class="el" href="NuPath_8h_source.html#l00077">OscProb::NuPath::density</a>, <a class="el" href="EarthModelBase_8h_source.html#l00065">OscProb::EarthModelBase::fNuPath</a>, <a class="el" href="EarthModelBase_8h_source.html#l00072">OscProb::EarthModelBase::fRemoveSmallPaths</a>, <a class="el" href="NuPath_8cxx_source.html#l00088">OscProb::MergePaths()</a>, and <a class="el" href="NuPath_8h_source.html#l00078">OscProb::NuPath::zoa</a>.</p>
 
 </div>
 </div>
-<a id="adbe7a5df260cba3923f5cbcb8ab2f03f" name="adbe7a5df260cba3923f5cbcb8ab2f03f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adbe7a5df260cba3923f5cbcb8ab2f03f">&#9670;&nbsp;</a></span>GetNuPath()</h2>
+<a id="aad8f4560e43656b5ea964151b864c99f" name="aad8f4560e43656b5ea964151b864c99f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad8f4560e43656b5ea964151b864c99f">&#9670;&nbsp;</a></span>GetNuPath()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -829,7 +970,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">NuPath</a> &gt; PremModel::GetNuPath </td>
+          <td class="memname">vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">NuPath</a> &gt; EarthModelBase::GetNuPath </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -837,17 +978,17 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p >Get the current neutrino path sequence</p>
 <p >The path needs to be filled for a given cosTheta before calling this function. </p>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00073">73</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   73</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1PremModel.html#ade38d7c8851ef79e436e8c019856377d">fNuPath</a>; }</div>
+<p class="definition">Definition at line <a class="el" href="EarthModelBase_8cxx_source.html#l00056">56</a> of file <a class="el" href="EarthModelBase_8cxx_source.html">EarthModelBase.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   56</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a>; }</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00077">fNuPath</a>.</p>
+<p class="reference">References <a class="el" href="EarthModelBase_8h_source.html#l00065">OscProb::EarthModelBase::fNuPath</a>.</p>
 
 </div>
 </div>
@@ -876,15 +1017,15 @@ Static Protected Attributes</h2></td></tr>
 <p >Get the set of earth layers</p>
 <p >This returns the set of <a class="el" href="structOscProb_1_1PremLayer.html" title="A struct representing a spherical shell of matter for earth models.">PremLayer</a>'s for this earth model and detector position. </p>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00082">82</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   82</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>; }</div>
+<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00083">83</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   83</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>; }</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00075">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00067">fPremLayers</a>.</p>
 
 </div>
 </div>
-<a id="ae258b41cca80631e3041f0421b25afeb" name="ae258b41cca80631e3041f0421b25afeb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae258b41cca80631e3041f0421b25afeb">&#9670;&nbsp;</a></span>GetTotalL()</h2>
+<a id="a3a83f69ca6cb7438917d16afaa376c97" name="a3a83f69ca6cb7438917d16afaa376c97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a83f69ca6cb7438917d16afaa376c97">&#9670;&nbsp;</a></span>GetTotalL()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -893,7 +1034,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double PremModel::GetTotalL </td>
+          <td class="memname">double EarthModelBase::GetTotalL </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>cosT</em></td><td>)</td>
@@ -902,12 +1043,11 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p >Get the total baseline for a given cosTheta.</p>
-<p >The total baseline contains both from above and below the detector.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cosT</td><td>- The cosine of the neutrino direction </td></tr>
@@ -915,21 +1055,18 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00288">288</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  289</span>{</div>
-<div class="line"><span class="lineno">  290</span> </div>
-<div class="line"><span class="lineno">  291</span>  <span class="keywordflow">if</span>(fabs(cosT) &gt; 1) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  292</span> </div>
-<div class="line"><span class="lineno">  293</span>  <span class="keywordtype">double</span> rAbove = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.back().radius;     <span class="comment">// Radius above detector</span></div>
-<div class="line"><span class="lineno">  294</span>  <span class="keywordtype">double</span> rBelow = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[<a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a>].radius; <span class="comment">// Radius below detector</span></div>
-<div class="line"><span class="lineno">  295</span> </div>
-<div class="line"><span class="lineno">  296</span>  <span class="keywordtype">double</span> sinsqrT = 1 - cosT*cosT;</div>
-<div class="line"><span class="lineno">  297</span> </div>
-<div class="line"><span class="lineno">  298</span>  <span class="keywordflow">return</span> -rBelow*cosT + sqrt(rAbove*rAbove - rBelow*rBelow*sinsqrT);</div>
-<div class="line"><span class="lineno">  299</span> </div>
-<div class="line"><span class="lineno">  300</span>}</div>
+<p class="definition">Definition at line <a class="el" href="EarthModelBase_8cxx_source.html#l00082">82</a> of file <a class="el" href="EarthModelBase_8cxx_source.html">EarthModelBase.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   83</span>{</div>
+<div class="line"><span class="lineno">   84</span> </div>
+<div class="line"><span class="lineno">   85</span>  <span class="keywordflow">if</span>(fabs(cosT) &gt; 1) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   86</span> </div>
+<div class="line"><span class="lineno">   87</span>  <span class="keywordtype">double</span> sinsqrT = 1 - cosT*cosT;</div>
+<div class="line"><span class="lineno">   88</span> </div>
+<div class="line"><span class="lineno">   89</span>  <span class="keywordflow">return</span> -<a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a>*cosT + sqrt(<a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">fRadiusMax</a>*<a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">fRadiusMax</a> - <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a>*<a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a>*sinsqrT);</div>
+<div class="line"><span class="lineno">   90</span> </div>
+<div class="line"><span class="lineno">   91</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00079">fDetLayer</a>, and <a class="el" href="PremModel_8h_source.html#l00075">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="EarthModelBase_8h_source.html#l00068">OscProb::EarthModelBase::fDetRadius</a>, and <a class="el" href="EarthModelBase_8h_source.html#l00067">OscProb::EarthModelBase::fRadiusMax</a>.</p>
 
 </div>
 </div>
@@ -966,79 +1103,165 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00125">125</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  126</span>{</div>
-<div class="line"><span class="lineno">  127</span> </div>
-<div class="line"><span class="lineno">  128</span>  <span class="comment">// Clear the current model</span></div>
-<div class="line"><span class="lineno">  129</span>  <a class="code hl_function" href="classOscProb_1_1PremModel.html#aaead53a9385bda9b0219fd051d0cdd11">ClearModel</a>();</div>
-<div class="line"><span class="lineno">  130</span> </div>
-<div class="line"><span class="lineno">  131</span>  <span class="comment">// Use default if no file provided</span></div>
-<div class="line"><span class="lineno">  132</span>  <span class="keywordflow">if</span>(filename == <span class="stringliteral">&quot;&quot;</span>){</div>
-<div class="line"><span class="lineno">  133</span>    filename = PREM_DEFAULT;</div>
-<div class="line"><span class="lineno">  134</span>  }</div>
-<div class="line"><span class="lineno">  135</span> </div>
-<div class="line"><span class="lineno">  136</span>  <span class="comment">// Open the file</span></div>
-<div class="line"><span class="lineno">  137</span>  ifstream fin;</div>
-<div class="line"><span class="lineno">  138</span>  fin.open(filename.c_str());</div>
-<div class="line"><span class="lineno">  139</span> </div>
-<div class="line"><span class="lineno">  140</span>  <span class="keywordflow">if</span>(!fin){</div>
-<div class="line"><span class="lineno">  141</span>    cout &lt;&lt; <span class="stringliteral">&quot;ERROR: File &quot;</span> &lt;&lt; filename &lt;&lt; <span class="stringliteral">&quot; not found!&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  142</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  143</span>  }</div>
-<div class="line"><span class="lineno">  144</span> </div>
-<div class="line"><span class="lineno">  145</span>  <span class="comment">// Variables for storing table rows</span></div>
-<div class="line"><span class="lineno">  146</span>  <span class="keywordtype">float</span> radius, density, zoa, layer;</div>
-<div class="line"><span class="lineno">  147</span> </div>
-<div class="line"><span class="lineno">  148</span>  <span class="comment">// Flag to mark we&#39;ve passed the detector</span></div>
-<div class="line"><span class="lineno">  149</span>  <span class="keywordtype">bool</span> crossed_det = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  150</span> </div>
-<div class="line"><span class="lineno">  151</span>  <span class="comment">// Keep track of previous radius</span></div>
-<div class="line"><span class="lineno">  152</span>  <span class="keywordtype">double</span> rprev = 0;</div>
-<div class="line"><span class="lineno">  153</span> </div>
-<div class="line"><span class="lineno">  154</span>  <span class="comment">// Loop over table rows</span></div>
-<div class="line"><span class="lineno">  155</span>  <span class="keywordflow">while</span>(fin &gt;&gt; radius &gt;&gt; density &gt;&gt; zoa &gt;&gt; layer){</div>
-<div class="line"><span class="lineno">  156</span> </div>
-<div class="line"><span class="lineno">  157</span>    <span class="comment">// Radii must be ordered in model file</span></div>
-<div class="line"><span class="lineno">  158</span>    <span class="keywordflow">if</span>(radius &lt;= rprev){</div>
-<div class="line"><span class="lineno">  159</span>      cout &lt;&lt; <span class="stringliteral">&quot;ERROR: Radii are not sorted in increasing order in the model file&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  160</span>      <a class="code hl_function" href="classOscProb_1_1PremModel.html#aaead53a9385bda9b0219fd051d0cdd11">ClearModel</a>();</div>
-<div class="line"><span class="lineno">  161</span>      <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  162</span>    }</div>
-<div class="line"><span class="lineno">  163</span> </div>
-<div class="line"><span class="lineno">  164</span>    <span class="comment">// See if we passed the detector and decide whether</span></div>
-<div class="line"><span class="lineno">  165</span>    <span class="comment">// to create a special layer for it</span></div>
-<div class="line"><span class="lineno">  166</span>    <span class="keywordflow">if</span>(radius &gt; <a class="code hl_variable" href="classOscProb_1_1PremModel.html#ab12ea0343cd11b9233ffd20ab5e620c7">fDetPos</a> - <a class="code hl_variable" href="classOscProb_1_1PremModel.html#a8ad1335ebe80ee1cd1cdf59d774ab34b">DET_TOL</a> &amp;&amp; !crossed_det){</div>
-<div class="line"><span class="lineno">  167</span> </div>
-<div class="line"><span class="lineno">  168</span>      crossed_det = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  169</span> </div>
-<div class="line"><span class="lineno">  170</span>      <a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a> = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.size();</div>
-<div class="line"><span class="lineno">  171</span> </div>
-<div class="line"><span class="lineno">  172</span>      <span class="comment">// If detector is not near boundary, add a special layer</span></div>
-<div class="line"><span class="lineno">  173</span>      <span class="keywordflow">if</span>(radius &gt; <a class="code hl_variable" href="classOscProb_1_1PremModel.html#ab12ea0343cd11b9233ffd20ab5e620c7">fDetPos</a> + <a class="code hl_variable" href="classOscProb_1_1PremModel.html#a8ad1335ebe80ee1cd1cdf59d774ab34b">DET_TOL</a>){</div>
-<div class="line"><span class="lineno">  174</span>        <a class="code hl_function" href="classOscProb_1_1PremModel.html#a08c337b84138adc46ee4dd002e9262d2">AddLayer</a>(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#ab12ea0343cd11b9233ffd20ab5e620c7">fDetPos</a>, density, zoa, layer);</div>
-<div class="line"><span class="lineno">  175</span>      }</div>
-<div class="line"><span class="lineno">  176</span> </div>
-<div class="line"><span class="lineno">  177</span>    }</div>
-<div class="line"><span class="lineno">  178</span> </div>
-<div class="line"><span class="lineno">  179</span>    <span class="comment">// Add this layer to the model</span></div>
-<div class="line"><span class="lineno">  180</span>    <a class="code hl_function" href="classOscProb_1_1PremModel.html#a08c337b84138adc46ee4dd002e9262d2">AddLayer</a>(radius, density, zoa, layer);</div>
+<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00126">126</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  127</span>{</div>
+<div class="line"><span class="lineno">  128</span> </div>
+<div class="line"><span class="lineno">  129</span>  <span class="comment">// Clear the current model</span></div>
+<div class="line"><span class="lineno">  130</span>  <a class="code hl_function" href="classOscProb_1_1PremModel.html#aaead53a9385bda9b0219fd051d0cdd11">ClearModel</a>();</div>
+<div class="line"><span class="lineno">  131</span> </div>
+<div class="line"><span class="lineno">  132</span>  <span class="comment">// Use default if no file provided</span></div>
+<div class="line"><span class="lineno">  133</span>  <span class="keywordflow">if</span>(filename == <span class="stringliteral">&quot;&quot;</span>){</div>
+<div class="line"><span class="lineno">  134</span>    filename = PREM_DEFAULT;</div>
+<div class="line"><span class="lineno">  135</span>  }</div>
+<div class="line"><span class="lineno">  136</span> </div>
+<div class="line"><span class="lineno">  137</span>  <span class="comment">// Open the file</span></div>
+<div class="line"><span class="lineno">  138</span>  ifstream fin;</div>
+<div class="line"><span class="lineno">  139</span>  fin.open(filename.c_str());</div>
+<div class="line"><span class="lineno">  140</span> </div>
+<div class="line"><span class="lineno">  141</span>  <span class="keywordflow">if</span>(!fin){</div>
+<div class="line"><span class="lineno">  142</span>    cout &lt;&lt; <span class="stringliteral">&quot;ERROR: File &quot;</span> &lt;&lt; filename &lt;&lt; <span class="stringliteral">&quot; not found!&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  143</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  144</span>  }</div>
+<div class="line"><span class="lineno">  145</span> </div>
+<div class="line"><span class="lineno">  146</span>  <span class="comment">// Variables for storing table rows</span></div>
+<div class="line"><span class="lineno">  147</span>  <span class="keywordtype">float</span> radius, density, zoa, layer;</div>
+<div class="line"><span class="lineno">  148</span> </div>
+<div class="line"><span class="lineno">  149</span>  <span class="comment">// Flag to mark we&#39;ve passed the detector</span></div>
+<div class="line"><span class="lineno">  150</span>  <span class="keywordtype">bool</span> crossed_det = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  151</span> </div>
+<div class="line"><span class="lineno">  152</span>  <span class="comment">// Keep track of previous radius</span></div>
+<div class="line"><span class="lineno">  153</span>  <span class="keywordtype">double</span> rprev = 0;</div>
+<div class="line"><span class="lineno">  154</span> </div>
+<div class="line"><span class="lineno">  155</span>  <span class="comment">// Loop over table rows</span></div>
+<div class="line"><span class="lineno">  156</span>  <span class="keywordflow">while</span>(fin &gt;&gt; radius &gt;&gt; density &gt;&gt; zoa &gt;&gt; layer){</div>
+<div class="line"><span class="lineno">  157</span> </div>
+<div class="line"><span class="lineno">  158</span>    <span class="comment">// Radii must be ordered in model file</span></div>
+<div class="line"><span class="lineno">  159</span>    <span class="keywordflow">if</span>(radius &lt;= rprev){</div>
+<div class="line"><span class="lineno">  160</span>      cout &lt;&lt; <span class="stringliteral">&quot;ERROR: Radii are not sorted in increasing order in the model file&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  161</span>      <a class="code hl_function" href="classOscProb_1_1PremModel.html#aaead53a9385bda9b0219fd051d0cdd11">ClearModel</a>();</div>
+<div class="line"><span class="lineno">  162</span>      <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  163</span>    }</div>
+<div class="line"><span class="lineno">  164</span> </div>
+<div class="line"><span class="lineno">  165</span>    <span class="comment">// See if we passed the detector and decide whether</span></div>
+<div class="line"><span class="lineno">  166</span>    <span class="comment">// to create a special layer for it</span></div>
+<div class="line"><span class="lineno">  167</span>    <span class="keywordflow">if</span>(radius &gt; <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a> - <a class="code hl_variable" href="classOscProb_1_1PremModel.html#a8ad1335ebe80ee1cd1cdf59d774ab34b">DET_TOL</a> &amp;&amp; !crossed_det){</div>
+<div class="line"><span class="lineno">  168</span> </div>
+<div class="line"><span class="lineno">  169</span>      crossed_det = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  170</span> </div>
+<div class="line"><span class="lineno">  171</span>      <a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a> = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.size();</div>
+<div class="line"><span class="lineno">  172</span> </div>
+<div class="line"><span class="lineno">  173</span>      <span class="comment">// If detector is not near boundary, add a special layer</span></div>
+<div class="line"><span class="lineno">  174</span>      <span class="keywordflow">if</span>(radius &gt; <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a> + <a class="code hl_variable" href="classOscProb_1_1PremModel.html#a8ad1335ebe80ee1cd1cdf59d774ab34b">DET_TOL</a>){</div>
+<div class="line"><span class="lineno">  175</span>        <a class="code hl_function" href="classOscProb_1_1PremModel.html#a08c337b84138adc46ee4dd002e9262d2">AddLayer</a>(<a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a>, density, zoa, layer);</div>
+<div class="line"><span class="lineno">  176</span>      } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(radius != <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a>) {</div>
+<div class="line"><span class="lineno">  177</span>        <span class="comment">//update detector radius</span></div>
+<div class="line"><span class="lineno">  178</span>        cout &lt;&lt; <span class="stringliteral">&quot;WARNING: Adjusting detector radius from &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a> &lt;&lt; <span class="stringliteral">&quot; km to &quot;</span> &lt;&lt; radius &lt;&lt; <span class="stringliteral">&quot; km.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  179</span>        <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a> = radius;</div>
+<div class="line"><span class="lineno">  180</span>      }</div>
 <div class="line"><span class="lineno">  181</span> </div>
-<div class="line"><span class="lineno">  182</span>  }</div>
+<div class="line"><span class="lineno">  182</span>    }</div>
 <div class="line"><span class="lineno">  183</span> </div>
-<div class="line"><span class="lineno">  184</span>}</div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_a08c337b84138adc46ee4dd002e9262d2"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a08c337b84138adc46ee4dd002e9262d2">OscProb::PremModel::AddLayer</a></div><div class="ttdeci">virtual void AddLayer(double radius, double density, double zoa, double layer)</div><div class="ttdoc">Add a layer to the model.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00105">PremModel.cxx:105</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_a8ad1335ebe80ee1cd1cdf59d774ab34b"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a8ad1335ebe80ee1cd1cdf59d774ab34b">OscProb::PremModel::DET_TOL</a></div><div class="ttdeci">static const double DET_TOL</div><div class="ttdoc">The detector position tolerance near boundaries.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00084">PremModel.h:84</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_aaead53a9385bda9b0219fd051d0cdd11"><div class="ttname"><a href="classOscProb_1_1PremModel.html#aaead53a9385bda9b0219fd051d0cdd11">OscProb::PremModel::ClearModel</a></div><div class="ttdeci">virtual void ClearModel()</div><div class="ttdoc">Clear the earth model information.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00088">PremModel.cxx:88</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_ab12ea0343cd11b9233ffd20ab5e620c7"><div class="ttname"><a href="classOscProb_1_1PremModel.html#ab12ea0343cd11b9233ffd20ab5e620c7">OscProb::PremModel::fDetPos</a></div><div class="ttdeci">double fDetPos</div><div class="ttdoc">The radius where the detector lives.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00080">PremModel.h:80</a></div></div>
+<div class="line"><span class="lineno">  184</span>    <span class="comment">// Add this layer to the model</span></div>
+<div class="line"><span class="lineno">  185</span>    <a class="code hl_function" href="classOscProb_1_1PremModel.html#a08c337b84138adc46ee4dd002e9262d2">AddLayer</a>(radius, density, zoa, layer);</div>
+<div class="line"><span class="lineno">  186</span> </div>
+<div class="line"><span class="lineno">  187</span>  }</div>
+<div class="line"><span class="lineno">  188</span> </div>
+<div class="line"><span class="lineno">  189</span>  <span class="comment">//Set the maximum radius in the model</span></div>
+<div class="line"><span class="lineno">  190</span>  <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">fRadiusMax</a> = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.back().radius;</div>
+<div class="line"><span class="lineno">  191</span> </div>
+<div class="line"><span class="lineno">  192</span>}</div>
+<div class="ttc" id="aclassOscProb_1_1PremModel_html_a08c337b84138adc46ee4dd002e9262d2"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a08c337b84138adc46ee4dd002e9262d2">OscProb::PremModel::AddLayer</a></div><div class="ttdeci">virtual void AddLayer(double radius, double density, double zoa, double layer)</div><div class="ttdoc">Add a layer to the model.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00106">PremModel.cxx:106</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PremModel_html_a8ad1335ebe80ee1cd1cdf59d774ab34b"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a8ad1335ebe80ee1cd1cdf59d774ab34b">OscProb::PremModel::DET_TOL</a></div><div class="ttdeci">static const double DET_TOL</div><div class="ttdoc">The detector position tolerance near boundaries.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00071">PremModel.h:71</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PremModel_html_aaead53a9385bda9b0219fd051d0cdd11"><div class="ttname"><a href="classOscProb_1_1PremModel.html#aaead53a9385bda9b0219fd051d0cdd11">OscProb::PremModel::ClearModel</a></div><div class="ttdeci">virtual void ClearModel()</div><div class="ttdoc">Clear the earth model information.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00089">PremModel.cxx:89</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8cxx_source.html#l00105">AddLayer()</a>, <a class="el" href="PremModel_8cxx_source.html#l00088">ClearModel()</a>, <a class="el" href="PremModel_8h_source.html#l00084">DET_TOL</a>, <a class="el" href="PremModel_8h_source.html#l00079">fDetLayer</a>, <a class="el" href="PremModel_8h_source.html#l00080">fDetPos</a>, and <a class="el" href="PremModel_8h_source.html#l00075">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8cxx_source.html#l00106">AddLayer()</a>, <a class="el" href="PremModel_8cxx_source.html#l00089">ClearModel()</a>, <a class="el" href="PremModel_8h_source.html#l00071">DET_TOL</a>, <a class="el" href="PremModel_8h_source.html#l00069">fDetLayer</a>, <a class="el" href="EarthModelBase_8h_source.html#l00068">OscProb::EarthModelBase::fDetRadius</a>, <a class="el" href="PremModel_8h_source.html#l00067">fPremLayers</a>, and <a class="el" href="EarthModelBase_8h_source.html#l00067">OscProb::EarthModelBase::fRadiusMax</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00035">PremModel()</a>.</p>
 
 </div>
 </div>
-<a id="a55b314e97ed9b92931e08ada0c0947eb" name="a55b314e97ed9b92931e08ada0c0947eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55b314e97ed9b92931e08ada0c0947eb">&#9670;&nbsp;</a></span>SetDetPos()</h2>
+<a id="af7f17dd5f4b429897b5f3d027bdb37fe" name="af7f17dd5f4b429897b5f3d027bdb37fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7f17dd5f4b429897b5f3d027bdb37fe">&#9670;&nbsp;</a></span>SetDetectorCoordinates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EarthModelBase::SetDetectorCoordinates </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>rad</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lat</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lon</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Set the coordinates of the detector: radius in km, latitude in degrees, longitude in degrees</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rad</td><td>- The distance from the detector to the Earth's center in km </td></tr>
+    <tr><td class="paramname">lat</td><td>- The latitude of the detector in deg N (between -90 and 90) </td></tr>
+    <tr><td class="paramname">lon</td><td>- The longitude of the detector in deg E (between 0 and 360) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="EarthModelBase_8cxx_source.html#l00026">26</a> of file <a class="el" href="EarthModelBase_8cxx_source.html">EarthModelBase.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   27</span>{</div>
+<div class="line"><span class="lineno">   28</span> </div>
+<div class="line"><span class="lineno">   29</span>  <span class="comment">//Force radius to be non-negative</span></div>
+<div class="line"><span class="lineno">   30</span>  <span class="keywordflow">if</span>(rad &lt; 0) {</div>
+<div class="line"><span class="lineno">   31</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: Negative radius detected. Setting to absolute value.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">   32</span>    rad = -rad;</div>
+<div class="line"><span class="lineno">   33</span>  }</div>
+<div class="line"><span class="lineno">   34</span>  <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a> = rad;</div>
+<div class="line"><span class="lineno">   35</span> </div>
+<div class="line"><span class="lineno">   36</span>  <span class="comment">//Force latitude to be between -90 and 90 deg</span></div>
+<div class="line"><span class="lineno">   37</span>  lat -= floor((lat+90.0)/360.0)*360.0;</div>
+<div class="line"><span class="lineno">   38</span>  <span class="keywordflow">if</span> (lat &gt; 90) {</div>
+<div class="line"><span class="lineno">   39</span>    lat = 180.0-lat;</div>
+<div class="line"><span class="lineno">   40</span>  }</div>
+<div class="line"><span class="lineno">   41</span>  <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#a5c1e80b6c99f58dcbb4eec872f013fdd">fDetLat</a> = lat/180.0*M_PI; <span class="comment">//convert to radians</span></div>
+<div class="line"><span class="lineno">   42</span> </div>
+<div class="line"><span class="lineno">   43</span>  <span class="comment">//Force longitude to be between 0 and 360 deg</span></div>
+<div class="line"><span class="lineno">   44</span>  lon -= floor(lon/360.0)*360.0;</div>
+<div class="line"><span class="lineno">   45</span>  <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#a9fc2d1736dd6ebdb38cc2da60a44a4de">fDetLon</a> = lon/180.0*M_PI; <span class="comment">//convert to radians</span></div>
+<div class="line"><span class="lineno">   46</span> </div>
+<div class="line"><span class="lineno">   47</span>}</div>
+<div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_a5c1e80b6c99f58dcbb4eec872f013fdd"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#a5c1e80b6c99f58dcbb4eec872f013fdd">OscProb::EarthModelBase::fDetLat</a></div><div class="ttdeci">double fDetLat</div><div class="ttdoc">The latitude (in rad) where the detector sits.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8h_source.html#l00069">EarthModelBase.h:69</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_a9fc2d1736dd6ebdb38cc2da60a44a4de"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#a9fc2d1736dd6ebdb38cc2da60a44a4de">OscProb::EarthModelBase::fDetLon</a></div><div class="ttdeci">double fDetLon</div><div class="ttdoc">The longitude (in rad) where the detector sits.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8h_source.html#l00070">EarthModelBase.h:70</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="EarthModelBase_8h_source.html#l00069">OscProb::EarthModelBase::fDetLat</a>, <a class="el" href="EarthModelBase_8h_source.html#l00070">OscProb::EarthModelBase::fDetLon</a>, and <a class="el" href="EarthModelBase_8h_source.html#l00068">OscProb::EarthModelBase::fDetRadius</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00138">OscProb::EarthModelBinned::SetDetPos()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00069">SetDetPos()</a>.</p>
+
+</div>
+</div>
+<a id="a6ac188948d15a5ce6df7926ef9d46c0a" name="a6ac188948d15a5ce6df7926ef9d46c0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ac188948d15a5ce6df7926ef9d46c0a">&#9670;&nbsp;</a></span>SetDetPos()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1050,8 +1273,24 @@ Static Protected Attributes</h2></td></tr>
           <td class="memname">void PremModel::SetDetPos </td>
           <td>(</td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>pos</em></td><td>)</td>
+          <td class="paramname"><em>rad</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lat</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>lon</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -1060,20 +1299,29 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >Set the detector position in km.</p>
+<p >Set the coordinates of the detector: radius in km, latitude in degrees, longitude in degrees The latitude and longitude are not actually used in <a class="el" href="classOscProb_1_1PremModel.html" title="Implements an earth model with spherical shells.">PremModel</a> functions.</p>
 <p >If the position is within 200m of a layer boundary, the detector is considered to be on the boundary. If not, an extra boundary is inserted in the detector position to distinguish what parts of the earth are above and below the detector.</p>
 <p >This must be done before loading the earth model file.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pos</td><td>- The radius where the detector is in km </td></tr>
+    <tr><td class="paramname">rad</td><td>- The distance from the detector to the Earth's center in km </td></tr>
+    <tr><td class="paramname">lat</td><td>- The latitude of the detector in deg N (between -90 and 90) </td></tr>
+    <tr><td class="paramname">lon</td><td>- The longitude of the detector in deg E (between 0 and 360) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00064">64</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   64</span>{ <a class="code hl_variable" href="classOscProb_1_1PremModel.html#ab12ea0343cd11b9233ffd20ab5e620c7">fDetPos</a> = pos; }</div>
+<p>Implements <a class="el" href="classOscProb_1_1EarthModelBase.html#ac5fb0679e8095f3e1502dd1876eacae8">OscProb::EarthModelBase</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00069">69</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   70</span>{</div>
+<div class="line"><span class="lineno">   71</span> </div>
+<div class="line"><span class="lineno">   72</span>  <a class="code hl_function" href="classOscProb_1_1EarthModelBase.html#af7f17dd5f4b429897b5f3d027bdb37fe">SetDetectorCoordinates</a>(rad, lat, lon);</div>
+<div class="line"><span class="lineno">   73</span> </div>
+<div class="line"><span class="lineno">   74</span>}</div>
+<div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_af7f17dd5f4b429897b5f3d027bdb37fe"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#af7f17dd5f4b429897b5f3d027bdb37fe">OscProb::EarthModelBase::SetDetectorCoordinates</a></div><div class="ttdeci">virtual void SetDetectorCoordinates(double rad, double lat, double lon)</div><div class="ttdoc">Set the coordinates of the detector (rad = radius in km, lat/lon in deg)</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8cxx_source.html#l00026">EarthModelBase.cxx:26</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00080">fDetPos</a>.</p>
+<p class="reference">References <a class="el" href="EarthModelBase_8cxx_source.html#l00026">OscProb::EarthModelBase::SetDetectorCoordinates()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00035">PremModel()</a>.</p>
 
@@ -1122,29 +1370,29 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00196">196</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  197</span>{</div>
-<div class="line"><span class="lineno">  198</span> </div>
-<div class="line"><span class="lineno">  199</span>  <span class="keywordtype">int</span> nlayers = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.size();</div>
-<div class="line"><span class="lineno">  200</span> </div>
-<div class="line"><span class="lineno">  201</span>  <span class="comment">// Loop over all layers and change the ones</span></div>
-<div class="line"><span class="lineno">  202</span>  <span class="comment">// with the given index</span></div>
-<div class="line"><span class="lineno">  203</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;nlayers; i++){</div>
-<div class="line"><span class="lineno">  204</span> </div>
-<div class="line"><span class="lineno">  205</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[i].layer != layer) <span class="keywordflow">continue</span>;</div>
+<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00204">204</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  205</span>{</div>
 <div class="line"><span class="lineno">  206</span> </div>
-<div class="line"><span class="lineno">  207</span>    <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[i].zoa = zoa;</div>
+<div class="line"><span class="lineno">  207</span>  <span class="keywordtype">int</span> nlayers = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.size();</div>
 <div class="line"><span class="lineno">  208</span> </div>
-<div class="line"><span class="lineno">  209</span>  }</div>
-<div class="line"><span class="lineno">  210</span> </div>
-<div class="line"><span class="lineno">  211</span>}</div>
+<div class="line"><span class="lineno">  209</span>  <span class="comment">// Loop over all layers and change the ones</span></div>
+<div class="line"><span class="lineno">  210</span>  <span class="comment">// with the given index</span></div>
+<div class="line"><span class="lineno">  211</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;nlayers; i++){</div>
+<div class="line"><span class="lineno">  212</span> </div>
+<div class="line"><span class="lineno">  213</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[i].layer != layer) <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  214</span> </div>
+<div class="line"><span class="lineno">  215</span>    <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[i].zoa = zoa;</div>
+<div class="line"><span class="lineno">  216</span> </div>
+<div class="line"><span class="lineno">  217</span>  }</div>
+<div class="line"><span class="lineno">  218</span> </div>
+<div class="line"><span class="lineno">  219</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00075">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00067">fPremLayers</a>.</p>
 
 </div>
 </div>
-<a id="ac5496d6d5bafcf7740c60838d3eee7b3" name="ac5496d6d5bafcf7740c60838d3eee7b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5496d6d5bafcf7740c60838d3eee7b3">&#9670;&nbsp;</a></span>SetRemoveSmallPaths()</h2>
+<a id="abc6399e4d3ec17a360f2fe3f7d39576c" name="abc6399e4d3ec17a360f2fe3f7d39576c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc6399e4d3ec17a360f2fe3f7d39576c">&#9670;&nbsp;</a></span>SetRemoveSmallPaths()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1153,7 +1401,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void PremModel::SetRemoveSmallPaths </td>
+          <td class="memname">void EarthModelBase::SetRemoveSmallPaths </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>rp</em> = <code>true</code></td><td>)</td>
@@ -1162,11 +1410,11 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >Set the boolean to tag whether to remove small paths when merging</p>
+<p >Set the boolean to tag whether to remove small paths when merging Small is defined as &lt;1% of the total baseline</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">rp</td><td>- Boolean value to set </td></tr>
@@ -1174,10 +1422,12 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00523">523</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  523</span>{ <a class="code hl_variable" href="classOscProb_1_1PremModel.html#a3973df6f5f2ff219cd2f865b31aacfd2">fRemoveSmallPaths</a> = rp; }</div>
+<p class="definition">Definition at line <a class="el" href="EarthModelBase_8cxx_source.html#l00201">201</a> of file <a class="el" href="EarthModelBase_8cxx_source.html">EarthModelBase.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  201</span>{ <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#a4176958be65c82a111e03c38aeadbe4e">fRemoveSmallPaths</a> = rp; }</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00082">fRemoveSmallPaths</a>.</p>
+<p class="reference">References <a class="el" href="EarthModelBase_8h_source.html#l00072">OscProb::EarthModelBase::fRemoveSmallPaths</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00089">OscProb::EarthModelBinned::EarthModelBinned()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00035">PremModel()</a>.</p>
 
 </div>
 </div>
@@ -1213,32 +1463,35 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00255">255</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  256</span>{</div>
-<div class="line"><span class="lineno">  257</span> </div>
-<div class="line"><span class="lineno">  258</span>  <span class="keywordflow">if</span>(thick &lt;= 0){</div>
-<div class="line"><span class="lineno">  259</span>    cout &lt;&lt; <span class="stringliteral">&quot;Layer thickness should be positive. Do nothing.&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  260</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  261</span>  }</div>
-<div class="line"><span class="lineno">  262</span> </div>
-<div class="line"><span class="lineno">  263</span>  <span class="keywordtype">int</span> nlayers = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.size();</div>
-<div class="line"><span class="lineno">  264</span> </div>
-<div class="line"><span class="lineno">  265</span>  <span class="keywordflow">if</span>(nlayers &lt; 1){</div>
-<div class="line"><span class="lineno">  266</span>    cout &lt;&lt; <span class="stringliteral">&quot;PremModel has no layers. Do nothing.&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  267</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  268</span>  }</div>
-<div class="line"><span class="lineno">  269</span> </div>
-<div class="line"><span class="lineno">  270</span>  <span class="keywordtype">double</span> bottomRadius;</div>
-<div class="line"><span class="lineno">  271</span>  <span class="keywordflow">if</span>(nlayers&gt;1) bottomRadius = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[nlayers-2].radius;</div>
-<div class="line"><span class="lineno">  272</span>  <span class="keywordflow">else</span>          bottomRadius = 0;</div>
+<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00264">264</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  265</span>{</div>
+<div class="line"><span class="lineno">  266</span> </div>
+<div class="line"><span class="lineno">  267</span>  <span class="keywordflow">if</span>(thick &lt;= 0){</div>
+<div class="line"><span class="lineno">  268</span>    cout &lt;&lt; <span class="stringliteral">&quot;Layer thickness should be positive. Do nothing.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  269</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  270</span>  }</div>
+<div class="line"><span class="lineno">  271</span> </div>
+<div class="line"><span class="lineno">  272</span>  <span class="keywordtype">int</span> nlayers = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.size();</div>
 <div class="line"><span class="lineno">  273</span> </div>
-<div class="line"><span class="lineno">  274</span>  <span class="keywordtype">double</span> topRadius = bottomRadius + thick;</div>
-<div class="line"><span class="lineno">  275</span> </div>
-<div class="line"><span class="lineno">  276</span>  <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[nlayers-1].radius = topRadius;</div>
-<div class="line"><span class="lineno">  277</span> </div>
-<div class="line"><span class="lineno">  278</span>}</div>
+<div class="line"><span class="lineno">  274</span>  <span class="keywordflow">if</span>(nlayers &lt; 1){</div>
+<div class="line"><span class="lineno">  275</span>    cout &lt;&lt; <span class="stringliteral">&quot;PremModel has no layers. Do nothing.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  276</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  277</span>  }</div>
+<div class="line"><span class="lineno">  278</span> </div>
+<div class="line"><span class="lineno">  279</span>  <span class="keywordtype">double</span> bottomRadius;</div>
+<div class="line"><span class="lineno">  280</span>  <span class="keywordflow">if</span>(nlayers&gt;1) bottomRadius = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[nlayers-2].radius;</div>
+<div class="line"><span class="lineno">  281</span>  <span class="keywordflow">else</span>          bottomRadius = 0;</div>
+<div class="line"><span class="lineno">  282</span> </div>
+<div class="line"><span class="lineno">  283</span>  <span class="keywordtype">double</span> topRadius = bottomRadius + thick;</div>
+<div class="line"><span class="lineno">  284</span> </div>
+<div class="line"><span class="lineno">  285</span>  <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[nlayers-1].radius = topRadius;</div>
+<div class="line"><span class="lineno">  286</span> </div>
+<div class="line"><span class="lineno">  287</span>  <span class="comment">//Update max radius</span></div>
+<div class="line"><span class="lineno">  288</span>  <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">fRadiusMax</a> = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.back().radius;</div>
+<div class="line"><span class="lineno">  289</span> </div>
+<div class="line"><span class="lineno">  290</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00075">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00067">fPremLayers</a>, and <a class="el" href="EarthModelBase_8h_source.html#l00067">OscProb::EarthModelBase::fRadiusMax</a>.</p>
 
 </div>
 </div>
@@ -1264,9 +1517,35 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >Define the tolerance of the detector around a boundary when considering whether to add a new layer for the detector position. </p>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00084">84</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00071">71</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00125">LoadModel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00126">LoadModel()</a>.</p>
+
+</div>
+</div>
+<a id="a5c1e80b6c99f58dcbb4eec872f013fdd" name="a5c1e80b6c99f58dcbb4eec872f013fdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c1e80b6c99f58dcbb4eec872f013fdd">&#9670;&nbsp;</a></span>fDetLat</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double OscProb::EarthModelBase::fDetLat</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="EarthModelBase_8h_source.html#l00069">69</a> of file <a class="el" href="EarthModelBase_8h_source.html">EarthModelBase.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00596">OscProb::EarthModelBinned::FillPath()</a>, <a class="el" href="EarthModelBase_8cxx_source.html#l00026">OscProb::EarthModelBase::SetDetectorCoordinates()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00138">OscProb::EarthModelBinned::SetDetPos()</a>.</p>
 
 </div>
 </div>
@@ -1290,14 +1569,14 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00079">79</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00069">69</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00088">ClearModel()</a>, <a class="el" href="PremModel_8cxx_source.html#l00358">FillPath()</a>, <a class="el" href="PremModel_8cxx_source.html#l00314">GetCosT()</a>, <a class="el" href="PremModel_8cxx_source.html#l00288">GetTotalL()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00125">LoadModel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00089">ClearModel()</a>, <a class="el" href="PremModel_8cxx_source.html#l00324">FillPath()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00126">LoadModel()</a>.</p>
 
 </div>
 </div>
-<a id="ab12ea0343cd11b9233ffd20ab5e620c7" name="ab12ea0343cd11b9233ffd20ab5e620c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab12ea0343cd11b9233ffd20ab5e620c7">&#9670;&nbsp;</a></span>fDetPos</h2>
+<a id="a9fc2d1736dd6ebdb38cc2da60a44a4de" name="a9fc2d1736dd6ebdb38cc2da60a44a4de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fc2d1736dd6ebdb38cc2da60a44a4de">&#9670;&nbsp;</a></span>fDetLon</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1306,24 +1585,24 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double OscProb::PremModel::fDetPos</td>
+          <td class="memname">double OscProb::EarthModelBase::fDetLon</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00080">80</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EarthModelBase_8h_source.html#l00070">70</a> of file <a class="el" href="EarthModelBase_8h_source.html">EarthModelBase.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00125">LoadModel()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00064">SetDetPos()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00596">OscProb::EarthModelBinned::FillPath()</a>, <a class="el" href="EarthModelBase_8cxx_source.html#l00026">OscProb::EarthModelBase::SetDetectorCoordinates()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00138">OscProb::EarthModelBinned::SetDetPos()</a>.</p>
 
 </div>
 </div>
-<a id="ade38d7c8851ef79e436e8c019856377d" name="ade38d7c8851ef79e436e8c019856377d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade38d7c8851ef79e436e8c019856377d">&#9670;&nbsp;</a></span>fNuPath</h2>
+<a id="af11bb0a5e0d6348513e46ede9ff16cda" name="af11bb0a5e0d6348513e46ede9ff16cda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af11bb0a5e0d6348513e46ede9ff16cda">&#9670;&nbsp;</a></span>fDetRadius</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1332,19 +1611,45 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="structOscProb_1_1NuPath.html">NuPath</a>&gt; OscProb::PremModel::fNuPath</td>
+          <td class="memname">double OscProb::EarthModelBase::fDetRadius</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00077">77</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EarthModelBase_8h_source.html#l00068">68</a> of file <a class="el" href="EarthModelBase_8h_source.html">EarthModelBase.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00336">AddPath()</a>, <a class="el" href="PremModel_8cxx_source.html#l00358">FillPath()</a>, <a class="el" href="PremModel_8cxx_source.html#l00449">GetMergedPaths()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00073">GetNuPath()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00596">OscProb::EarthModelBinned::FillPath()</a>, <a class="el" href="PremModel_8cxx_source.html#l00324">FillPath()</a>, <a class="el" href="EarthModelBase_8cxx_source.html#l00105">OscProb::EarthModelBase::GetCosT()</a>, <a class="el" href="EarthModelBase_8cxx_source.html#l00082">OscProb::EarthModelBase::GetTotalL()</a>, <a class="el" href="PremModel_8cxx_source.html#l00126">LoadModel()</a>, <a class="el" href="EarthModelBase_8cxx_source.html#l00026">OscProb::EarthModelBase::SetDetectorCoordinates()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00138">OscProb::EarthModelBinned::SetDetPos()</a>.</p>
+
+</div>
+</div>
+<a id="ae40eaf3d8b666cfd4fe9242decf78121" name="ae40eaf3d8b666cfd4fe9242decf78121"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae40eaf3d8b666cfd4fe9242decf78121">&#9670;&nbsp;</a></span>fNuPath</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="structOscProb_1_1NuPath.html">NuPath</a>&gt; OscProb::EarthModelBase::fNuPath</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="EarthModelBase_8h_source.html#l00065">65</a> of file <a class="el" href="EarthModelBase_8h_source.html">EarthModelBase.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="EarthModelBase_8cxx_source.html#l00069">OscProb::EarthModelBase::AddPathSegment()</a>, <a class="el" href="EarthModelBinned_8cxx_source.html#l00596">OscProb::EarthModelBinned::FillPath()</a>, <a class="el" href="PremModel_8cxx_source.html#l00324">FillPath()</a>, <a class="el" href="EarthModelBase_8cxx_source.html#l00128">OscProb::EarthModelBase::GetMergedPaths()</a>, and <a class="el" href="EarthModelBase_8cxx_source.html#l00056">OscProb::EarthModelBase::GetNuPath()</a>.</p>
 
 </div>
 </div>
@@ -1368,14 +1673,14 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00075">75</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00067">67</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00105">AddLayer()</a>, <a class="el" href="PremModel_8cxx_source.html#l00088">ClearModel()</a>, <a class="el" href="PremModel_8cxx_source.html#l00358">FillPath()</a>, <a class="el" href="PremModel_8cxx_source.html#l00314">GetCosT()</a>, <a class="el" href="PremModel_8cxx_source.html#l00220">GetLayerZoA()</a>, <a class="el" href="PremModel_8cxx_source.html#l00082">GetPremLayers()</a>, <a class="el" href="PremModel_8cxx_source.html#l00288">GetTotalL()</a>, <a class="el" href="PremModel_8cxx_source.html#l00125">LoadModel()</a>, <a class="el" href="PremModel_8cxx_source.html#l00196">SetLayerZoA()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00255">SetTopLayerSize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00106">AddLayer()</a>, <a class="el" href="PremModel_8cxx_source.html#l00089">ClearModel()</a>, <a class="el" href="PremModel_8cxx_source.html#l00324">FillPath()</a>, <a class="el" href="PremModel_8cxx_source.html#l00229">GetLayerZoA()</a>, <a class="el" href="PremModel_8cxx_source.html#l00083">GetPremLayers()</a>, <a class="el" href="PremModel_8cxx_source.html#l00126">LoadModel()</a>, <a class="el" href="PremModel_8cxx_source.html#l00204">SetLayerZoA()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00264">SetTopLayerSize()</a>.</p>
 
 </div>
 </div>
-<a id="a3973df6f5f2ff219cd2f865b31aacfd2" name="a3973df6f5f2ff219cd2f865b31aacfd2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3973df6f5f2ff219cd2f865b31aacfd2">&#9670;&nbsp;</a></span>fRemoveSmallPaths</h2>
+<a id="a3cbe53a328039a65b25736151dc6d586" name="a3cbe53a328039a65b25736151dc6d586"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cbe53a328039a65b25736151dc6d586">&#9670;&nbsp;</a></span>fRadiusMax</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1384,19 +1689,45 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool OscProb::PremModel::fRemoveSmallPaths</td>
+          <td class="memname">double OscProb::EarthModelBase::fRadiusMax</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00082">82</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EarthModelBase_8h_source.html#l00067">67</a> of file <a class="el" href="EarthModelBase_8h_source.html">EarthModelBase.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00449">GetMergedPaths()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00523">SetRemoveSmallPaths()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00596">OscProb::EarthModelBinned::FillPath()</a>, <a class="el" href="EarthModelBase_8cxx_source.html#l00105">OscProb::EarthModelBase::GetCosT()</a>, <a class="el" href="EarthModelBase_8cxx_source.html#l00082">OscProb::EarthModelBase::GetTotalL()</a>, <a class="el" href="EarthModelBinned_8cxx_source.html#l00183">OscProb::EarthModelBinned::LoadModel()</a>, <a class="el" href="PremModel_8cxx_source.html#l00126">LoadModel()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00264">SetTopLayerSize()</a>.</p>
+
+</div>
+</div>
+<a id="a4176958be65c82a111e03c38aeadbe4e" name="a4176958be65c82a111e03c38aeadbe4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4176958be65c82a111e03c38aeadbe4e">&#9670;&nbsp;</a></span>fRemoveSmallPaths</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool OscProb::EarthModelBase::fRemoveSmallPaths</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="EarthModelBase_8h_source.html#l00072">72</a> of file <a class="el" href="EarthModelBase_8h_source.html">EarthModelBase.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="EarthModelBase_8cxx_source.html#l00128">OscProb::EarthModelBase::GetMergedPaths()</a>, and <a class="el" href="EarthModelBase_8cxx_source.html#l00201">OscProb::EarthModelBase::SetRemoveSmallPaths()</a>.</p>
 
 </div>
 </div>

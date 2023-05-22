@@ -1,10 +1,14 @@
 var hierarchy =
 [
     [ "OscProb::Absorption", "classOscProb_1_1Absorption.html", null ],
+    [ "OscProb::EarthBin", "structOscProb_1_1EarthBin.html", null ],
+    [ "EarthBins", "structOscProb_1_1EarthBins.html", null ],
     [ "OscProb::EigenPoint", "structOscProb_1_1EigenPoint.html", null ],
     [ "OscProb::GSL_EinSys", "structOscProb_1_1GSL__EinSys.html", null ],
     [ "std::hash< OscProb::EigenPoint >", "structstd_1_1hash_3_01OscProb_1_1EigenPoint_01_4.html", null ],
     [ "OscProb::IdxCompare", "structOscProb_1_1IdxCompare.html", null ],
+    [ "OscProb::EarthModelBinned::LatBinInfo", "structOscProb_1_1EarthModelBinned_1_1LatBinInfo.html", null ],
+    [ "OscProb::EarthModelBinned::LonBinInfo", "structOscProb_1_1EarthModelBinned_1_1LonBinInfo.html", null ],
     [ "OscProb::NuPath", "structOscProb_1_1NuPath.html", null ],
     [ "OscProb::PMNS_Base", "classOscProb_1_1PMNS__Base.html", [
       [ "OscProb::PMNS_Decay", "classOscProb_1_1PMNS__Decay.html", null ],
@@ -18,6 +22,10 @@ var hierarchy =
     ] ],
     [ "OscProb::PremLayer", "structOscProb_1_1PremLayer.html", null ],
     [ "TObject", null, [
-      [ "OscProb::PremModel", "classOscProb_1_1PremModel.html", null ]
-    ] ]
+      [ "OscProb::EarthModelBase", "classOscProb_1_1EarthModelBase.html", [
+        [ "OscProb::EarthModelBinned", "classOscProb_1_1EarthModelBinned.html", null ],
+        [ "OscProb::PremModel", "classOscProb_1_1PremModel.html", null ]
+      ] ]
+    ] ],
+    [ "OscProb::TrajConstants", "structOscProb_1_1TrajConstants.html", null ]
 ];

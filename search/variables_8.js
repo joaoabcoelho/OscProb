@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['w_5fgsl_0',['W_GSL',['../structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1',1,'OscProb::GSL_EinSys']]]
+  ['index_0',['index',['../structOscProb_1_1EarthBin.html#ac93310c7dde51855e5d3dd869322ba94',1,'OscProb::EarthBin']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['layer_0',['layer',['../structOscProb_1_1NuPath.html#a442b160899e554ad1d800989510d5309',1,'OscProb::NuPath::layer()'],['../structOscProb_1_1PremLayer.html#aca8d7df68e6f982155b68b7e6a7ef389',1,'OscProb::PremLayer::layer()']]],
-  ['length_1',['length',['../structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557',1,'OscProb::NuPath']]]
+  ['err_5fmessage_0',['err_message',['../structOscProb_1_1EarthModelBinned_1_1LonBinInfo.html#ab207194fcd42f113237943d99b6c1ca6',1,'OscProb::EarthModelBinned::LonBinInfo']]],
+  ['error_1',['error',['../structOscProb_1_1EarthModelBinned_1_1LonBinInfo.html#a8acd4e4d736c1ef07795368b4ffb4bbc',1,'OscProb::EarthModelBinned::LonBinInfo']]]
 ];

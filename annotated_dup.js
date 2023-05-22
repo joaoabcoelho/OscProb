@@ -2,6 +2,9 @@ var annotated_dup =
 [
     [ "OscProb", "namespaceOscProb.html", [
       [ "Absorption", "classOscProb_1_1Absorption.html", "classOscProb_1_1Absorption" ],
+      [ "EarthBin", "structOscProb_1_1EarthBin.html", "structOscProb_1_1EarthBin" ],
+      [ "EarthModelBase", "classOscProb_1_1EarthModelBase.html", "classOscProb_1_1EarthModelBase" ],
+      [ "EarthModelBinned", "classOscProb_1_1EarthModelBinned.html", "classOscProb_1_1EarthModelBinned" ],
       [ "EigenPoint", "structOscProb_1_1EigenPoint.html", "structOscProb_1_1EigenPoint" ],
       [ "GSL_EinSys", "structOscProb_1_1GSL__EinSys.html", "structOscProb_1_1GSL__EinSys" ],
       [ "IdxCompare", "structOscProb_1_1IdxCompare.html", "structOscProb_1_1IdxCompare" ],
@@ -15,9 +18,11 @@ var annotated_dup =
       [ "PMNS_NSI", "classOscProb_1_1PMNS__NSI.html", "classOscProb_1_1PMNS__NSI" ],
       [ "PMNS_Sterile", "classOscProb_1_1PMNS__Sterile.html", "classOscProb_1_1PMNS__Sterile" ],
       [ "PremLayer", "structOscProb_1_1PremLayer.html", "structOscProb_1_1PremLayer" ],
-      [ "PremModel", "classOscProb_1_1PremModel.html", "classOscProb_1_1PremModel" ]
+      [ "PremModel", "classOscProb_1_1PremModel.html", "classOscProb_1_1PremModel" ],
+      [ "TrajConstants", "structOscProb_1_1TrajConstants.html", "structOscProb_1_1TrajConstants" ]
     ] ],
     [ "std", "namespacestd.html", [
       [ "hash< OscProb::EigenPoint >", "structstd_1_1hash_3_01OscProb_1_1EigenPoint_01_4.html", "structstd_1_1hash_3_01OscProb_1_1EigenPoint_01_4" ]
-    ] ]
+    ] ],
+    [ "EarthBins", "structOscProb_1_1EarthBins.html", null ]
 ];
