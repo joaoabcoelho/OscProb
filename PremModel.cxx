@@ -33,10 +33,9 @@ const double PremModel::DET_TOL = 0.2; // Tolerance in km
 /// @param filename - The txt file containing a table of earth layers
 ///
 PremModel::PremModel(string filename) :
-fDetLayer(0)
+fDetLayer(0), fRemoveSmallPaths(false)
 {
 
-  SetRemoveSmallPaths(false);
   SetDetPos(6368);
   LoadModel(filename);
 
@@ -52,6 +51,15 @@ PremModel::~PremModel(){}
 ///
 /// Set the coordinates of the detector:
 ///   radius in km, latitude in degrees, longitude in degrees
+/// The latitude and longitude are not actually used in PremModel functions.
+///
+/// If the position is within 200m of a layer boundary,
+/// the detector is considered to be on the boundary.
+/// If not, an extra boundary is inserted in the detector
+/// position to distinguish what parts of the earth are above
+/// and below the detector.
+///
+/// This must be done before loading the earth model file.
 ///
 /// @param rad - The distance from the detector to the Earth's center in km 
 /// @param lat - The latitude of the detector in deg N (between -90 and 90)
