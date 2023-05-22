@@ -18,7 +18,8 @@
 /// Z/A value), the Z/A value for a region can be changed, and the density
 /// throughout the region can be scaled by a constant factor.
 ///
-/// By default this implements the model stored in EarthTables/earth_binned_default.txt
+/// By default this implements the model stored in
+/// EarthTables/earth_binned_default.txt
 /// with the detector at the bottom of the ocean layer (radius = 6368 km)
 /// where the prime meridian intersects the equator.
 ///
@@ -40,6 +41,35 @@
 /// \author rpestes\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////
+/// \struct OscProb::TrajConstants
+///
+/// \brief A struct holding useful combinations of trajectory variables
+///
+/// This struct holds combinations of variables that are useful when
+/// doing the calculations needed for FindPath within EarthModelBinned.
+///
+/// \author rpestes\@apc.in2p3.fr
+////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////
+/// \struct OscProb::EarthModelBinned::LatBinInfo
+///
+/// \brief A struct holding information about upcoming latitude bin
+/// crossings along the neutrino's trajectory
+///
+/// \author rpestes\@apc.in2p3.fr
+////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////
+/// \struct OscProb::EarthModelBinned::LonBinInfo
+///
+/// \brief A struct holding information about upcoming longitude bin
+/// crossings along the neutrino's trajectory
+///
+/// \author rpestes\@apc.in2p3.fr
+////////////////////////////////////////////////////////////////////////
+
 #ifndef EARTHMODELBINNED_H
 #define EARTHMODELBINNED_H
 
@@ -52,6 +82,67 @@
 #include "NuPath.h"
 
 namespace OscProb {
+
+  struct TrajConstants
+  {
+    ///
+    /// \brief Constructor.
+    ///
+    /// Constructor.
+    ///
+    /// By default, it sets cosT, Az, latD, and lonD equal to 0, and it uses
+    /// 6368km for rD.
+    ///
+    /// @param cosT - Cosine of the zenith angle for the neutrino trajectory
+    /// @param phi - The azimuthal angle for the neutrino trajectory (in rad)
+    /// @param DetLat - The latitude of the detector (in rad)
+    /// @param DetLon - The longitude of the detector (in rad)
+    /// @param rDet - The distance from the center of the Earth to the detector (in km)
+    ///
+    TrajConstants(double cosT=0, double phi=0, double DetLat=0, double DetLon=0, double rDet=6368) {
+      UpdateNuAngles(cosT, phi);
+      UpdateDetPos(DetLat, DetLon, rDet);
+    }
+
+    void UpdateNuAngles(double cosTheta, double phi); ///< Update values of zenith angle and azimuthal angle for neutrino trajectory
+    void UpdateDetPos(double rDet, double DetLat, double DetLon); ///< Update detector position for neutrino trajectory calculations
+    void Recalculate(); ///< Calculate constants that use combinations of detector position variables and neutrino direction angles
+
+    //Variables defining trajectory
+    double cosT; ///< cosT
+    double cosA; ///< cos(phi)
+    double sinA; ///< sin(phi)
+    double sinDetLat; ///< sin(DetLat)
+    double cosDetLon; ///< cos(DetLon)
+    double sinDetLon; ///< sin(DetLon)
+    double DetRadius; ///< rDet
+
+    //Derived Variables Calculated by UpdateNuAngles()
+    double sinSqT; ///< sin^2(T) = 1 - (cosT)^2
+    double sinT; ///< sin(T) = sqrt(sinSqT)
+    double sinTsinA; ///< sin(T)*sin(phi)
+    double sinTcosA; ///< sin(T)*cos(phi)
+
+    //Derived Variables Calculated by UpdateDetPos()
+    double cosDetLat; ///< cos(DetLat)
+    double rDetSinDetLat; ///< rDet*sin(DetLat)
+    double rDetCosDetLat; ///< rDet*cos(DetLat)
+
+    //Derived Variables Calculated by Recalculate()
+    double sinTsinAsinDetLon; ///< sin(T)*sin(phi)*sin(DetLon)
+    double sinTsinAcosDetLon; ///< sin(T)*sin(phi)*cos(DetLon)
+    double cosTcosDetLat; ///< cosT*cos(DetLat)
+    double rDetCosT; ///< rDet*cosT
+    double rDetSinT; ///< rDet*sin(T)
+    double rDetCosAcosDetLat; ///< rDet*cos(phi)*cos(DetLat)
+    double alpha; ///< sin(T)*cos(phi)*sin(DetLat)-cosT*cos(DetLat)
+    double beta; ///< sin(T)*sin(DetLat)-cos(phi)*cosT*cos(DetLat)
+    double gamma; ///< sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)
+    double gammaSq; ///< [sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)]^2
+    double rDetGammaSinDetLat; ///< rDet*sin(DetLat)*[sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)]
+    double maxSinSqLat; ///< 1 - [sin(phi)*cos(DetLat)]^2
+
+  };
 
   struct EarthBin
   {
@@ -121,9 +212,9 @@ namespace OscProb {
       EarthModelBinned(std::string filename=""); ///< Constructor
       virtual ~EarthModelBinned();          ///< Destructor
 
-      int FillPath(double cosT, double phi=0); ///< Fill the path sequence in a vector (phi in degrees)
+      void SetDetPos(double rad, double lat=0, double lon=0); ///< Set the detector position (rad = radius in km, lat/lon in deg)
 
-//      virtual void SetDetPos(double dep, double lat, double lon); ///< Set the detector position (dep = depth in km, lat/lon in deg)
+      int FillPath(double cosT, double phi=0); ///< Fill the path sequence in a vector (phi in degrees)
 
       virtual void LoadModel(std::string filename); ///< Load an earth model from a file
 
@@ -135,19 +226,43 @@ namespace OscProb {
 
     protected:
 
+      struct LatBinInfo
+      {
+        int bin; ///< Index of current latitude bin
+        int nextBin; ///< Index of next latitude bin
+        double detDist_nextBin; ///< Distance along the neutrino trajectory from the edge of next latitude bin to the detector
+        int sign; ///< Indicates whether latitude is increasing or decreasing with respect to decreasing distance from the detector (+1 => inc, -1 => dec)
+        double dLat; ///< Change in lat from bin center to next bin (excludes direction; 0 if no more than 1 lat bin change)
+        int maxreached; ///< Indicates whether the latitude function transition is still to come (0 => yes, 1 => no)
+      };
+
+      struct LonBinInfo
+      {
+        int bin; ///< Index of current longitude bin
+        int nextBin; ///< Index of next longitude bin
+        double detDist_nextBin; ///< Distance along the neutrino trajectory from the edge of next longitude bin to the detector
+        double dLon; ///< Change in lon from bin center to next bin (includes direction; 0 if no more than 1 lon bin change)
+        double min; ///< "Minimum" longitude
+        double max; ///< "Maximum" longitude
+        int error = 0; ///< Indicates if an error has been detected (0 => no, -1 => yes)
+        std::string err_message; ///< Part of error message specific to piece of path
+      };
+
       virtual void ClearModel(); ///< Clear the earth model information
 
       virtual void AddBin(double radius_out, double radius_in, double latitude, double longitude, double density, double zoa, double layer); ///< Add a bin to the model (angles in degrees)
 
       virtual void AddPath(double length, EarthBin bin);  ///< Add a path segment to the sequence
 
-      virtual double DetDistForNextLatBin(int cur_index, int &dir, double dLat, double maxSinSqLat, int &max_reached, double beta, double gamma, double gammaSq, double rDetGammaSinDetLat, double rDetCosAcosDetLat, double rDetSinDetLat, double rDetCosT, double rDetSinT); ///< Calculate the detector distance at the edge of the current lat bin along the neutrino's trajectory
+      virtual double DetDistForNextLatBin(int cur_index, LatBinInfo &L); ///< Calculate the detector distance at the edge of the current lat bin along the neutrino's trajectory
 
-      virtual double DetDistForNextLonBin(double prev_lon, double dLon, int &lon_bin, double min_lon, double max_lon, double sinDetLon, double cosDetLon, double alpha, double sinTsinAsinDetLon, double sinTsinAcosDetLon, double rDetCosDetLat); ///< Calculate the detector distance at the edge of the current lon bin along the neutrino's trajectory and increment lon_bin
+      virtual double DetDistForNextLonBin(double prev_lon, LonBinInfo &L); ///< Calculate the detector distance at the edge of the current lon bin along the neutrino's trajectory and increment L.bin
 
-      virtual void RecordLatLonBinCrossings(double detDist_nextDbin, double &DetDist, int &index, int &latBin, int &nextLatBin, double &detDist_nextLatBin, int &sign, double dLat, double maxSinSqLat, int &maxlatreached, int &lonBin, int &nextLonBin, double &detDist_nextLonBin, double dLon, double min_lon, double max_lon, double alpha, double beta, double gamma, double gammaSq, double rDetGammaSinDetLat, double rDetCosAcosDetLat, double rDetSinDetLat, double rDetCosDetLat, double rDetCosT, double rDetSinT, double sinTsinAsinDetLon, double sinTsinAcosDetLon, double sinDetLon, double cosDetLon); ///< Record path segments for each latitude/longitude bin crossed before reaching detDist_nextDbin
+      virtual void RecordLatLonBinCrossings(double detDist_nextDbin, double &DetDist, int &index, LatBinInfo &latI, LonBinInfo &lonI); ///< Record path segments for each latitude/longitude bin crossed before reaching detDist_nextDbin
 
       virtual int LonBinIndex(double longitude); ///< Find lon bin index containing longitude
+
+      OscProb::TrajConstants fC; ///< Useful constants for the trajectory
 
       std::vector<OscProb::EarthBin> fEarthBins; ///< The layers in the earth model
       int fnDepthBins; ///< Total number of depth bins

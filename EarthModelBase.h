@@ -31,7 +31,13 @@ namespace OscProb {
 
     public:
 
-      virtual void SetDetPos(double rad, double lat=0, double lon=0); ///< Set the detector position (rad = radius in km, lat/lon in deg)
+      ///
+      /// Set the coordinates of the detector:
+      ///   radius in km, latitude in degrees, longitude in degrees
+      ///
+      /// Not implemented in base class.
+      ///
+      virtual void SetDetPos(double rad, double lat=0, double lon=0) = 0; ///< Set the detector position (rad = radius in km, lat/lon in deg)
 
       ///
       /// Construct the neutrino path through the Earth having
@@ -51,6 +57,8 @@ namespace OscProb {
       virtual void SetRemoveSmallPaths(bool rp = true); ///< Set tag to remove small paths
 
     protected:
+
+      virtual void SetDetectorCoordinates(double rad, double lat, double lon); ///< Set the coordinates of the detector (rad = radius in km, lat/lon in deg)
 
       virtual void AddPathSegment(double length, double density, double zoa, int index);  ///< Add a path segment to the sequence
 

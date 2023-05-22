@@ -23,7 +23,7 @@ using namespace OscProb;
 /// @param lat - The latitude of the detector in deg N (between -90 and 90)
 /// @param lon - The longitude of the detector in deg E (between 0 and 360)
 ///
-void EarthModelBase::SetDetPos(double rad, double lat, double lon)
+void EarthModelBase::SetDetectorCoordinates(double rad, double lat, double lon)
 {
 
   //Force radius to be non-negative
@@ -43,6 +43,7 @@ void EarthModelBase::SetDetPos(double rad, double lat, double lon)
   //Force longitude to be between 0 and 360 deg
   lon -= floor(lon/360.0)*360.0;
   fDetLon = lon/180.0*M_PI; //convert to radians
+
 }
 
 //......................................................................

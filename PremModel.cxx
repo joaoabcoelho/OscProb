@@ -50,6 +50,22 @@ PremModel::~PremModel(){}
 
 //......................................................................
 ///
+/// Set the coordinates of the detector:
+///   radius in km, latitude in degrees, longitude in degrees
+///
+/// @param rad - The distance from the detector to the Earth's center in km 
+/// @param lat - The latitude of the detector in deg N (between -90 and 90)
+/// @param lon - The longitude of the detector in deg E (between 0 and 360)
+///
+void PremModel::SetDetPos(double rad, double lat, double lon)
+{
+
+  SetDetectorCoordinates(rad, lat, lon);
+
+}
+
+//......................................................................
+///
 /// Get the set of earth layers
 ///
 /// This returns the set of PremLayer's for this earth model

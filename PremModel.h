@@ -42,6 +42,8 @@ namespace OscProb {
       PremModel(std::string filename=""); ///< Constructor
       virtual ~PremModel();          ///< Destructor
 
+      void SetDetPos(double rad, double lat=0, double lon=0); ///< Set the detector position (rad = radius in km, lat/lon in deg)
+
       int FillPath(double cosT, double phi=0); ///< Fill the path sequence in a vector
 
       virtual void LoadModel(std::string filename); ///< Load an earth model from a file
