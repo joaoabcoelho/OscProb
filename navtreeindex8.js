@@ -1,5 +1,7 @@
 var NAVTREEINDEX8 =
 {
+"classOscProb_1_1PMNS__Sterile.html#a62af840aa5b50fbe18bf90b3233a3ede":[2,0,0,15,88],
+"classOscProb_1_1PMNS__Sterile.html#a62af840aa5b50fbe18bf90b3233a3ede":[3,0,0,15,88],
 "classOscProb_1_1PMNS__Sterile.html#a637d19dd850b4246507796526622643c":[3,0,0,15,68],
 "classOscProb_1_1PMNS__Sterile.html#a637d19dd850b4246507796526622643c":[2,0,0,15,68],
 "classOscProb_1_1PMNS__Sterile.html#a6606074ad140684aff9f48ff0f4f943a":[3,0,0,15,64],
@@ -247,7 +249,5 @@ var NAVTREEINDEX8 =
 "functions_func_~.html":[3,2,1,17],
 "functions_g.html":[3,2,0,6],
 "functions_h.html":[3,2,0,7],
-"functions_i.html":[3,2,0,8],
-"functions_k.html":[3,2,0,9],
-"functions_l.html":[3,2,0,10]
+"functions_i.html":[3,2,0,8]
 };

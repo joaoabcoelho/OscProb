@@ -38,6 +38,7 @@ var classOscProb_1_1EarthModelBinned =
     [ "fInvLatBinWidth", "classOscProb_1_1EarthModelBinned.html#ab84542bc6b02f9197f79276b1a809339", null ],
     [ "fInvLonBinWidth", "classOscProb_1_1EarthModelBinned.html#a104ef294d4ac7099ebb4a8531f45ddae", null ],
     [ "fLonError", "classOscProb_1_1EarthModelBinned.html#a326ad46fde69ecbe295cd41419eb868b", null ],
+    [ "fmaxRegIndex", "classOscProb_1_1EarthModelBinned.html#ac58d53ccb36e3bb4e250af0fa914cc09", null ],
     [ "fnDepthBins", "classOscProb_1_1EarthModelBinned.html#a269a23478b10150833e98908e177f584", null ],
     [ "fnLatBins", "classOscProb_1_1EarthModelBinned.html#a70d55291b081a7e3e0ad785d13419506", null ],
     [ "fnLonBins", "classOscProb_1_1EarthModelBinned.html#ade362672b6324e8a619a584690f8321c", null ],
