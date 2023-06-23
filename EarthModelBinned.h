@@ -264,7 +264,7 @@ namespace OscProb {
 
       OscProb::TrajConstants fC; ///< Useful constants for the trajectory
 
-      std::vector<OscProb::EarthBin> fEarthBins; ///< The layers in the earth model
+      std::vector<OscProb::EarthBin> fEarthBins; ///< The bins in the earth model
       int fnDepthBins; ///< Total number of depth bins
       int fnLonBins; ///< Total number of longitude bins
       int fnLatBins; ///< Total number of latitude bins
@@ -272,6 +272,8 @@ namespace OscProb {
       double fInvLatBinWidth; ///< 1/binwidth for each latitude bin
       double fHalfLonBinWidth; ///< Half-width of each longitude bin
       double fHalfLatBinWidth; ///< Half-width of each latitude bin
+
+      int fmaxRegIndex; ///< Largest region index in model
 
       //For Latitude Calculation Error Message
       std::string fErrorMessage_LonInfo; ///< Part of error message containing the longitude information
