@@ -55,7 +55,7 @@ namespace OscProb {
 
     virtual void SetM(double m); ///< Set m3
     
-    virtual void SetLowestMass(double m); ///< Set lightest neutrino mass
+   // virtual void SetLowestMass(double m); ///< Set lightest neutrino mass
     
     // Get lowest neutrino mass
     virtual double GetM(); ///< Get m3
