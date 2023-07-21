@@ -68,12 +68,12 @@ OscProb::PMNS_NSI* GetSNSI(bool is_nominal){
 
   OscProb::PMNS_SNSI* p = new OscProb::PMNS_SNSI();
   if(!is_nominal){
-    p->SetEps(0,0, 0.01, 0);
-    p->SetEps(0,1, 0.02, 0);
-    p->SetEps(0,2, 0.03, 0);
-    p->SetEps(1,1, 0.04, 0);
-    p->SetEps(1,2, 0.05, 0);
-    p->SetEps(2,2, 0.06, 0);
+    p->SetEps(0,0, 1e-3, 0);
+    p->SetEps(0,1, 2e-3, 0);
+    p->SetEps(0,2, 3e-3, 0);
+    p->SetEps(1,1, 4e-3, 0);
+    p->SetEps(1,2, 5e-3, 0);
+    p->SetEps(2,2, 6e-3, 0);
   }
   
   return p;
