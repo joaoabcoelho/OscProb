@@ -6,7 +6,7 @@
 // jcoelho@apc.in2p3.fr and urahaman@km3net.de
 ////////////////////////////////////////////////////////////////////////
 
-#include "PMNS_ScalarNSI.h"
+#include "PMNS_SNSI.h"
 
 using namespace OscProb;
 
@@ -16,7 +16,7 @@ using namespace OscProb;
 ///
 /// This class is restricted to 3 neutrino flavours.
 ///
-PMNS_ScalarNSI::PMNS_ScalarNSI() : PMNS_NSI()
+PMNS_SNSI::PMNS_SNSI() : PMNS_NSI()
 {
   SetLowestMass(0);
 }
@@ -25,7 +25,7 @@ PMNS_ScalarNSI::PMNS_ScalarNSI() : PMNS_NSI()
 ///
 /// Nothing to clean.
 ///
-PMNS_ScalarNSI::~PMNS_ScalarNSI(){}
+PMNS_SNSI::~PMNS_SNSI(){}
 
 //......................................................................
 ///
@@ -33,7 +33,7 @@ PMNS_ScalarNSI::~PMNS_ScalarNSI(){}
 ///
 /// @param m - The lightest mass in eV
 ///
-void PMNS_ScalarNSI::SetLowestMass(double m)
+void PMNS_SNSI::SetLowestMass(double m)
 {
   fM = m;
 }
@@ -44,7 +44,7 @@ void PMNS_ScalarNSI::SetLowestMass(double m)
 ///
 /// @return The lightest mass in eV
 ///
-double PMNS_ScalarNSI::GetLowestMass()
+double PMNS_SNSI::GetLowestMass()
 {
   return fM;
 }
@@ -55,7 +55,7 @@ double PMNS_ScalarNSI::GetLowestMass()
 ///
 /// \sa PMNS_Base::BuildHms
 ///
-void PMNS_ScalarNSI::BuildHms()
+void PMNS_SNSI::BuildHms()
 {
 
   // Check if anything changed
@@ -135,7 +135,7 @@ void HermitianSquare(complexD (&A)[3][3])
 /// to obtain the vacuum Hamiltonian in eV. Then, the matter
 /// potential is added to the electron component.
 ///
-void PMNS_ScalarNSI::UpdateHam()
+void PMNS_SNSI::UpdateHam()
 {
 
   double lv = 2 * kGeV2eV*fEnergy; // 2*E in eV

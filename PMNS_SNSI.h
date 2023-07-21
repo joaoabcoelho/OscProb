@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-/// \class OscProb::PMNS_ScalarNSI
+/// \class OscProb::PMNS_SNSI
 ///
 /// \brief Implementation of oscillations of neutrinos in matter in a
 ///        three-neutrino framework with scalar NSI. 
@@ -14,18 +14,18 @@
 /// \author jcoelho\@apc.in2p3.fr and urahaman\@km3net.de
 ////////////////////////////////////////////////////////////////////////
 
-#ifndef PMNS_ScalarNSI_H
-#define PMNS_ScalarNSI_H
+#ifndef PMNS_SNSI_H
+#define PMNS_SNSI_H
 
 #include "PMNS_NSI.h"
 
 namespace OscProb {
-  class PMNS_ScalarNSI : public PMNS_NSI {
+  class PMNS_SNSI : public PMNS_NSI {
 
   public:
 
-    PMNS_ScalarNSI();          ///< Constructor
-    virtual ~PMNS_ScalarNSI(); ///< Destructor
+    PMNS_SNSI();          ///< Constructor
+    virtual ~PMNS_SNSI(); ///< Destructor
 
     virtual void SetLowestMass(double m); ///< Set lightest neutrino mass
     virtual double GetLowestMass(); ///< Get lightest neutrino mass
