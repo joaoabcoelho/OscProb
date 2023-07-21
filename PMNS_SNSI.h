@@ -30,6 +30,8 @@ namespace OscProb {
     virtual void SetLowestMass(double m); ///< Set lightest neutrino mass
     virtual double GetLowestMass(); ///< Get lightest neutrino mass
     
+    virtual void SetAvgProbPrec(double prec); ///< Reimplement SetAvgProbPrec
+
   protected:
 
     /// Build the full Hamiltonian
