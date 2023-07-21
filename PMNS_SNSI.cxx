@@ -138,7 +138,7 @@ void HermitianSquare(complexD (&A)[3][3])
 void PMNS_SNSI::UpdateHam()
 {
 
-  double lv = 2 * kGeV2eV*fEnergy; // 2*E in eV
+  double sqrtlv = sqrt(2 * kGeV2eV*fEnergy); // sqrt(2*E) in eV^1/2
 
   // Effective density of fermions
   double nsiCoup = fPath.density * GetZoACoup();
@@ -146,7 +146,7 @@ void PMNS_SNSI::UpdateHam()
   // Add the dM matrix
   for(int i=0; i<fNumNus; i++){
   for(int j=i; j<fNumNus; j++){
-    fHam[i][j] = (fHms[i][j] + nsiCoup * fEps[i][j]) / lv;
+    fHam[i][j] = (fHms[i][j] + nsiCoup * fEps[i][j]) / sqrtlv;
     if(fIsNuBar) fHam[i][j] = conj(fHam[i][j]);
   }}
 
@@ -154,7 +154,7 @@ void PMNS_SNSI::UpdateHam()
   HermitianSquare(fHam);
 
   // Add matter potential
-  double kr2GNe   = kK2*M_SQRT2*kGf * fPath.density;
+  double kr2GNe   = kK2*M_SQRT2*kGf * fPath.density * fPath.zoa;
 
   if(!fIsNuBar) fHam[0][0] += kr2GNe;
   else          fHam[0][0] -= kr2GNe;
