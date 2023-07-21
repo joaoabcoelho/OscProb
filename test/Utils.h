@@ -1,77 +1,118 @@
-OscProb::PMNS_Fast GetFast(){
 
-  return OscProb::PMNS_Fast();
+OscProb::PMNS_Fast* GetFast(bool is_nominal){
 
-}
-
-OscProb::PMNS_Iter GetIter(){
-
-  return OscProb::PMNS_Iter();
+  return new OscProb::PMNS_Fast();
 
 }
 
-OscProb::PMNS_Deco GetDeco(){
+OscProb::PMNS_Iter* GetIter(bool is_nominal){
 
-  OscProb::PMNS_Deco p;
-  p.SetGamma(2, 1e-23);
-  p.SetGamma(3, 1e-22);
+  return new OscProb::PMNS_Iter();
+
+}
+
+OscProb::PMNS_Deco* GetDeco(bool is_nominal){
+
+  OscProb::PMNS_Deco* p = new OscProb::PMNS_Deco();
+  if(!is_nominal){
+    p->SetGamma(2, 1e-23);
+    p->SetGamma(3, 1e-22);
+  }
   
   return p;
 
 }
 
-OscProb::PMNS_Sterile GetSterile(){
+OscProb::PMNS_Sterile* GetSterile(bool is_nominal){
 
-  OscProb::PMNS_Sterile p(4);
-  p.SetDm(4, 0.1);
-  p.SetAngle(1,4, 0.1);
-  p.SetAngle(2,4, 0.1);
-  p.SetAngle(3,4, 0.1);
+  OscProb::PMNS_Sterile* p = new OscProb::PMNS_Sterile(4);
+  if(!is_nominal){
+    p->SetDm(4, 0.1);
+    p->SetAngle(1,4, 0.1);
+    p->SetAngle(2,4, 0.1);
+    p->SetAngle(3,4, 0.1);
+  }
   
   return p;
 
 }
 
-OscProb::PMNS_Decay GetDecay(){
+OscProb::PMNS_Decay* GetDecay(bool is_nominal){
 
-  OscProb::PMNS_Decay p;
-  p.SetAlpha3(1e-4);
+  OscProb::PMNS_Decay* p = new OscProb::PMNS_Decay();
+  if(!is_nominal){
+    p->SetAlpha3(1e-4);
+  }
   
   return p;
 
 }
 
-OscProb::PMNS_NSI GetNSI(){
+OscProb::PMNS_NSI* GetNSI(bool is_nominal){
 
-  OscProb::PMNS_NSI p;
-  p.SetEps(0,0, 0.1, 0);
-  p.SetEps(0,1, 0.2, 0);
-  p.SetEps(0,2, 0.3, 0);
-  p.SetEps(1,1, 0.4, 0);
-  p.SetEps(1,2, 0.5, 0);
-  p.SetEps(2,2, 0.6, 0);
+  OscProb::PMNS_NSI* p = new OscProb::PMNS_NSI();
+  if(!is_nominal){
+    p->SetEps(0,0, 0.1, 0);
+    p->SetEps(0,1, 0.2, 0);
+    p->SetEps(0,2, 0.3, 0);
+    p->SetEps(1,1, 0.4, 0);
+    p->SetEps(1,2, 0.5, 0);
+    p->SetEps(2,2, 0.6, 0);
+  }
   
   return p;
 
 }
 
-OscProb::PMNS_LIV GetLIV(){
+OscProb::PMNS_NSI* GetSNSI(bool is_nominal){
 
-  OscProb::PMNS_LIV p;
-  p.SetaT(0,0, 0.1e-22, 0);
-  p.SetaT(0,1, 0.2e-22, 0);
-  p.SetaT(0,2, 0.3e-22, 0);
-  p.SetaT(1,1, 0.4e-22, 0);
-  p.SetaT(1,2, 0.5e-22, 0);
-  p.SetaT(2,2, 0.6e-22, 0);
-  p.SetcT(0,0, 0.1e-22, 0);
-  p.SetcT(0,1, 0.2e-22, 0);
-  p.SetcT(0,2, 0.3e-22, 0);
-  p.SetcT(1,1, 0.4e-22, 0);
-  p.SetcT(1,2, 0.5e-22, 0);
-  p.SetcT(2,2, 0.6e-22, 0);
+  OscProb::PMNS_SNSI* p = new OscProb::PMNS_SNSI();
+  if(!is_nominal){
+    p->SetEps(0,0, 0.01, 0);
+    p->SetEps(0,1, 0.02, 0);
+    p->SetEps(0,2, 0.03, 0);
+    p->SetEps(1,1, 0.04, 0);
+    p->SetEps(1,2, 0.05, 0);
+    p->SetEps(2,2, 0.06, 0);
+  }
   
   return p;
+
+}
+
+OscProb::PMNS_LIV* GetLIV(bool is_nominal){
+
+  OscProb::PMNS_LIV* p = new OscProb::PMNS_LIV();
+  if(!is_nominal){
+    p->SetaT(0,0, 0.1e-22, 0);
+    p->SetaT(0,1, 0.2e-22, 0);
+    p->SetaT(0,2, 0.3e-22, 0);
+    p->SetaT(1,1, 0.4e-22, 0);
+    p->SetaT(1,2, 0.5e-22, 0);
+    p->SetaT(2,2, 0.6e-22, 0);
+    p->SetcT(0,0, 0.1e-22, 0);
+    p->SetcT(0,1, 0.2e-22, 0);
+    p->SetcT(0,2, 0.3e-22, 0);
+    p->SetcT(1,1, 0.4e-22, 0);
+    p->SetcT(1,2, 0.5e-22, 0);
+    p->SetcT(2,2, 0.6e-22, 0);
+  }
+  
+  return p;
+
+}
+
+OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
+
+  if(model == "Iter")    return GetIter(is_nominal);
+  if(model == "Deco")    return GetDeco(is_nominal);
+  if(model == "Sterile") return GetSterile(is_nominal);
+  if(model == "Decay")   return GetDecay(is_nominal);
+  if(model == "NSI")     return GetNSI(is_nominal);
+  if(model == "LIV")     return GetLIV(is_nominal);
+  if(model == "SNSI")    return GetSNSI(is_nominal);
+
+  return GetFast(is_nominal);
 
 }
 
