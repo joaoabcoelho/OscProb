@@ -2141,8 +2141,8 @@ matrixD PMNS_Base::AvgProbMatrixLoE(int nflvi, int nflvf,
 ///
 void PMNS_Base::SetAvgProbPrec(double prec){
   if(prec<1e-8){
-    cout << "WARNING: Cannot set AvgProb precision lower that 1e-6."
-         << "Setting to 1e-6." << endl;
+    cout << "WARNING: Cannot set AvgProb precision lower that 1e-8."
+         << "Setting to 1e-8." << endl;
     prec = 1e-8;
   }
   fAvgProbPrec = prec;
