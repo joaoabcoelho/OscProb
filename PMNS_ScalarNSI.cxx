@@ -147,7 +147,6 @@ void PMNS_ScalarNSI::UpdateHam()
   for(int i=0; i<fNumNus; i++){
   for(int j=i; j<fNumNus; j++){
     fHam[i][j] = (fHms[i][j] + nsiCoup * fEps[i][j]) / lv;
-    if(i<j) fHam[j][i] = conj(fHam[i][j]);
   }}
 
   // Square fHam
