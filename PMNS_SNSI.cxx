@@ -49,20 +49,6 @@ double PMNS_SNSI::GetLowestMass()
   return fM;
 }
 
-//.....................................................................
-///
-/// Reimplement precision for the AvgProb method with
-/// stronger requirements
-///
-/// @param prec - AvgProb precision
-///
-void PMNS_SNSI::SetAvgProbPrec(double prec){
-
-  PMNS_Base::SetAvgProbPrec(prec);
-  fAvgProbPrec *= 0.1;
-
-}
-
 //......................................................................
 ///
 /// Reimplement vacuum Hms update
