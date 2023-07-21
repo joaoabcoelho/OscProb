@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////
 //
-// Implementation of oscillations of neutrinos in matter in a
+// Implementation of oscillations of neutrinos with scalar NSI
 // three-neutrino framework. 
 //
-// coelho@lal.in2p3.fr
+// jcoelho@apc.in2p3.fr and urahaman@km3net.de
 ////////////////////////////////////////////////////////////////////////
 
 #include "PMNS_ScalarNSI.h"
