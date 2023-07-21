@@ -147,10 +147,11 @@ void PMNS_ScalarNSI::UpdateHam()
   for(int i=0; i<fNumNus; i++){
   for(int j=i; j<fNumNus; j++){
     fHam[i][j] = (fHms[i][j] + nsiCoup * fEps[i][j]) / lv;
+    if(isNuBar) fHam[i][j] = conj(fHam[i][j]);
   }}
 
   // Square fHam
-  HermitianSquare(fHam); 
+  HermitianSquare(fHam);
 
   // Add matter potential
   double kr2GNe   = kK2*M_SQRT2*kGf * fPath.density;
