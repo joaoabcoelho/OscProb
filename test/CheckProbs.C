@@ -3,7 +3,7 @@
 int CheckProbs(){
 
   vector<string> models = {"Fast", "Iter", "Sterile", "NSI", "Deco", "Decay",
-                           "LIV"};
+                           "LIV", "SNSI"};
 
   for(int i=0; i<models.size(); i++){
 
