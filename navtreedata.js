@@ -25,8 +25,6 @@
 var NAVTREE =
 [
   [ "OscProb", "index.html", [
-    [ "Installing OscProb", "index.html#autotoc_md0", null ],
-    [ "Tutorial", "index.html#autotoc_md1", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -68,7 +66,7 @@ var NAVTREEINDEX =
 "classOscProb_1_1PMNS__SNSI.html#a3ac719f0e70ffce3df7d4dc5de527fd5",
 "classOscProb_1_1PMNS__Sterile.html#a2d0f021378d6c782a88298ae2f734f4c",
 "functions.html",
-"structOscProb_1_1TrajConstants.html#ab4892bf4a9c5bacae35e1caf4e58ad78"
+"structOscProb_1_1TrajConstants.html#ac0c5f8ad095f9f55a2a1f94af7402757"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

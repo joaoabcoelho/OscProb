@@ -98,41 +98,15 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <li><b><a class="el" href="classOscProb_1_1PMNS__Fast.html">PMNS_Fast</a>:</b> Standard 3-flavour oscillations</li>
 <li><b><a class="el" href="classOscProb_1_1PMNS__Iter.html">PMNS_Iter</a>:</b> Standard 3-flavour oscillations (iterative)</li>
 <li><b><a class="el" href="classOscProb_1_1PMNS__Sterile.html">PMNS_Sterile</a>:</b> Oscillations with any number of neutrinos</li>
-<li><b><a class="el" href="classOscProb_1_1PMNS__NSI.html">PMNS_NSI</a>:</b> Oscillations with 3 flavours including Non-Standard Interactions</li>
+<li><b><a class="el" href="classOscProb_1_1PMNS__NSI.html">PMNS_NSI</a>:</b> Oscillations with 3 flavours including vector Non-Standard Interactions</li>
+<li><b><a class="el" href="classOscProb_1_1PMNS__SNSI.html">PMNS_SNSI</a>:</b> Oscillations with 3 flavours including scalar Non-Standard Interactions</li>
 <li><b><a class="el" href="classOscProb_1_1PMNS__Deco.html">PMNS_Deco</a>:</b> Oscillations with 3 flavours including a simple decoherence model</li>
 <li><b><a class="el" href="classOscProb_1_1PMNS__LIV.html">PMNS_LIV</a>:</b> Oscillations with 3 flavours including Lorentz Invariance Violations</li>
 <li><b><a class="el" href="classOscProb_1_1PMNS__Decay.html">PMNS_Decay</a>:</b> Oscillations with 3 flavours including neutrino decays of the second and third neutrino mass states nu_2 and nu_3. [Requires external library Eigen3, see the instructions below.]</li>
 <li><b><a class="el" href="classOscProb_1_1Absorption.html">Absorption</a>:</b> Computes absorption probabilities for high-energy neutrinos</li>
 </ul>
-<p >A few example macros on how to use <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a> are available in a tutorial directory.</p>
-<h1><a class="anchor" id="autotoc_md0"></a>
-Installing OscProb</h1>
-<p ><a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a> is very easy to install. The only requirements is to have ROOT installed with the GSL libraries.</p>
-<p ><b>NEW: Thanks to Jacek Holeczek, <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a> now also builds with ROOT 6!!</b></p>
-<p >In order to compile the <a class="el" href="classOscProb_1_1PMNS__Decay.html">PMNS_Decay</a> class, it is necessary to donwload the external Eigen library. This library is added as a submodule. There are two options:</p><ul>
-<li>During cloning: <code>git clone --recurse-submodules <a href="https://github.com/joaoabcoelho/OscProb.git">https://github.com/joaoabcoelho/OscProb.git</a></code></li>
-<li>After clonning: <code>git submodule update --init</code></li>
-</ul>
-<p >Once you have ROOT setup, simply do: </p><div class="fragment"><div class="line">cd OscProb</div>
-<div class="line">make</div>
-</div><!-- fragment --><p >A shared library will be produced: <code>libOscProb.so</code></p>
-<p >This should take a few seconds and you are all set.</p>
-<p >Just load the shared library in your ROOT macros with: </p><div class="fragment"><div class="line">gSystem-&gt;Load(<span class="stringliteral">&quot;/full/path/to/libOscProb.so&quot;</span>);</div>
-</div><!-- fragment --><p >Or use the <code>LoadOscProb.C</code> macro (see below).</p>
-<h1><a class="anchor" id="autotoc_md1"></a>
-Tutorial</h1>
-<p >In the directory OscProb/tutorial you will find a few macros with examples using <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a>.</p>
-<p >Two macros are particularly useful:</p><ul>
-<li><code>simpleExamples.C</code> : Contains some short pieces of code on how to perform different tasks.</li>
-<li><code>MakeOscillogram.C</code> : Runs a full example of how to plot an oscillogram with the PREM model.</li>
-</ul>
-<p >Additionally, these macros contain useful tools:</p><ul>
-<li><code>LoadOscProb.C</code>: Searches for the <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a> library in your current directory, parent directory, or library path, and then loads it. It is called within the tutorial macros as a possible usage example.</li>
-<li><code>SetNiceStyle.C</code>: Provides simple tools to make your plots look nicer. Feel free to use it anytime you're making plots, even if you're not running <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a>. This is completely independent of <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a>.</li>
-</ul>
-<p >To run macros in compiled mode you will need to preload the <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a> library, e.g:</p>
-<div class="fragment"><div class="line">root -l LoadOscProb.C MakeOscillogram.C+</div>
-</div><!-- fragment --> </div></div><!-- PageDoc -->
+<p >A few example macros on how to use <a class="el" href="namespaceOscProb.html" title="Some useful general definitions.">OscProb</a> are available in a tutorial directory. </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
