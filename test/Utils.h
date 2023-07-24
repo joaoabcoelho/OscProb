@@ -64,7 +64,7 @@ OscProb::PMNS_NSI* GetNSI(bool is_nominal){
 
 }
 
-OscProb::PMNS_NSI* GetSNSI(bool is_nominal){
+OscProb::PMNS_SNSI* GetSNSI(bool is_nominal){
 
   OscProb::PMNS_SNSI* p = new OscProb::PMNS_SNSI();
   if(!is_nominal){
