@@ -7,7 +7,7 @@
 /// This class reimplements the PMNS_NSI class to a scalar NSI scenario.
 ///
 /// The matter potential is parametrized by epsilon parameters with 
-/// dimensions of mass in MeV^-2.
+/// dimensions of 1/mass^2 in MeV^-2.
 ///
 /// \sa PMNS_NSI
 ///
