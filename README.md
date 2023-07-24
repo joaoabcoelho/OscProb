@@ -11,7 +11,8 @@ Available classes are:
 - **PMNS_Fast:** Standard 3-flavour oscillations
 - **PMNS_Iter:** Standard 3-flavour oscillations (iterative)
 - **PMNS_Sterile:** Oscillations with any number of neutrinos
-- **PMNS_NSI:** Oscillations with 3 flavours including Non-Standard Interactions
+- **PMNS_NSI:** Oscillations with 3 flavours including vector Non-Standard Interactions
+- **PMNS_SNSI:** Oscillations with 3 flavours including scalar Non-Standard Interactions
 - **PMNS_Deco:** Oscillations with 3 flavours including a simple decoherence model
 - **PMNS_LIV:** Oscillations with 3 flavours including Lorentz Invariance Violations
 - **PMNS_Decay:** Oscillations with 3 flavours including neutrino decays of the second and third neutrino mass states \nu_2 and \nu_3. [Requires external library Eigen3, see the instructions below.]
@@ -25,10 +26,16 @@ OscProb is very easy to install. The only requirements is to have ROOT installed
 
 **NEW: Thanks to Jacek Holeczek, OscProb now also builds with ROOT 6!!**
 
-In order to compile the PMNS_Decay class, it is necessary to donwload the external Eigen library. This library is added as a submodule. There are two options:
-- During cloning: `git clone --recurse-submodules https://github.com/joaoabcoelho/OscProb.git`
-- After clonning: `git submodule update --init`
-
+<details>
+  <summary>Details: Eigen</summary>
+  
+  In order to compile the PMNS_Decay class, it is necessary to donwload the external Eigen library. This library is added as a submodule and will be downloaded by make.
+  
+  Alternatively, you can trigger them manually with:
+  * During cloning: `git clone --recurse-submodules https://github.com/joaoabcoelho/OscProb.git`
+  * After clonning: `git submodule update --init`
+</details>
+  
 Once you have ROOT setup, simply do:
 ```sh
 cd OscProb
