@@ -27,6 +27,8 @@ var files_dup =
     [ "PMNS_LIV.h", "PMNS__LIV_8h.html", "PMNS__LIV_8h" ],
     [ "PMNS_NSI.cxx", "PMNS__NSI_8cxx.html", null ],
     [ "PMNS_NSI.h", "PMNS__NSI_8h.html", "PMNS__NSI_8h" ],
+    [ "PMNS_SNSI.cxx", "PMNS__SNSI_8cxx.html", "PMNS__SNSI_8cxx" ],
+    [ "PMNS_SNSI.h", "PMNS__SNSI_8h.html", "PMNS__SNSI_8h" ],
     [ "PMNS_Sterile.cxx", "PMNS__Sterile_8cxx.html", null ],
     [ "PMNS_Sterile.h", "PMNS__Sterile_8h.html", "PMNS__Sterile_8h" ],
     [ "PremModel.cxx", "PremModel_8cxx.html", null ],

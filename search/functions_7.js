@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['idxcompare_0',['IdxCompare',['../structOscProb_1_1IdxCompare.html#acf7d8627e8dfa6bfc821896647f3d7e8',1,'OscProb::IdxCompare']]],
-  ['initializevectors_1',['InitializeVectors',['../classOscProb_1_1PMNS__Base.html#adf23b569112f9f9e0e592f01d79a5f3d',1,'OscProb::PMNS_Base']]]
+  ['hermitiansquare_0',['HermitianSquare',['../PMNS__SNSI_8cxx.html#a7ba5f57db89b95bd00a661629385635e',1,'PMNS_SNSI.cxx']]]
 ];

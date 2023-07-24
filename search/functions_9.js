@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['mergepaths_0',['MergePaths',['../namespaceOscProb.html#a21f576551c47cf787c2df50a4f4b5c83',1,'OscProb']]],
-  ['mult_1',['Mult',['../classOscProb_1_1PMNS__Deco.html#aa534d74e984b015c45aac88071bc9b94',1,'OscProb::PMNS_Deco']]]
+  ['loadmodel_0',['LoadModel',['../classOscProb_1_1EarthModelBinned.html#a456945c25af7160616ed421228af41e9',1,'OscProb::EarthModelBinned::LoadModel()'],['../classOscProb_1_1PremModel.html#a6363a5e711dd8b0d2e684677e585b293',1,'OscProb::PremModel::LoadModel()']]],
+  ['lonbinindex_1',['LonBinIndex',['../classOscProb_1_1EarthModelBinned.html#ab87bc7e45352b116395fe0ae04f2bd03',1,'OscProb::EarthModelBinned']]]
 ];

@@ -16,6 +16,7 @@ var annotated_dup =
       [ "PMNS_Iter", "classOscProb_1_1PMNS__Iter.html", "classOscProb_1_1PMNS__Iter" ],
       [ "PMNS_LIV", "classOscProb_1_1PMNS__LIV.html", "classOscProb_1_1PMNS__LIV" ],
       [ "PMNS_NSI", "classOscProb_1_1PMNS__NSI.html", "classOscProb_1_1PMNS__NSI" ],
+      [ "PMNS_SNSI", "classOscProb_1_1PMNS__SNSI.html", "classOscProb_1_1PMNS__SNSI" ],
       [ "PMNS_Sterile", "classOscProb_1_1PMNS__Sterile.html", "classOscProb_1_1PMNS__Sterile" ],
       [ "PremLayer", "structOscProb_1_1PremLayer.html", "structOscProb_1_1PremLayer" ],
       [ "PremModel", "classOscProb_1_1PremModel.html", "classOscProb_1_1PremModel" ],
