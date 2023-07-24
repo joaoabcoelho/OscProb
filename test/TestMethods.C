@@ -1,5 +1,6 @@
 #include "Utils.h"
 
+//.............................................................................
 bool TestAvgProb(OscProb::PMNS_Base* p, double energy, double &max_diff){
  
   double dE = 0.1 * energy;
@@ -39,6 +40,7 @@ bool TestAvgProb(OscProb::PMNS_Base* p, double energy, double &max_diff){
 
 }
 
+//.............................................................................
 bool TestParallel(OscProb::PMNS_Base* p, double energy){
  
   p->SetEnergy(energy);
@@ -83,13 +85,82 @@ bool TestParallel(OscProb::PMNS_Base* p, double energy){
 
 }
 
+//.............................................................................
+bool TestNominal(string model, double &max_diff){
+
+  max_diff = 0;
+
+  double prec = 1e-12;
+
+  if(model == "Fast") return true;
+
+  OscProb::PMNS_Fast p0;
+  OscProb::PMNS_Base* p = GetModel(model, true);
+
+  if(model == "Iter"){
+    prec = 1e-3;
+    static_cast<OscProb::PMNS_Iter*> (p)->SetPrec(prec);
+  }
+
+  SetTestPath(&p0);
+  SetTestPath(p);
+
+  int nbins = 100;
+  vector<double> xbins = GetLogAxis(nbins, 0.1, 100);
+  for(int isnb=0; isnb<2; isnb++){
+
+    p->SetIsNuBar(isnb);
+    p0.SetIsNuBar(isnb);
+    
+    for(int i=0; i<=nbins; i++){
+
+      double energy = xbins[i];
+
+      for(int flvi=0; flvi<3; flvi++){
+      for(int flvf=0; flvf<3; flvf++){
+
+        double nom_prob = p0.Prob(flvi, flvf, energy);
+        double alt_prob = p->Prob(flvi, flvf, energy);
+
+        if(abs(nom_prob - alt_prob) > max_diff){
+          max_diff = abs(nom_prob - alt_prob);
+        }
+
+        if(abs(nom_prob - alt_prob) > prec){
+          cerr << "Found mismatch in nominal Prob(" 
+               << flvi << ", " << flvf << ", " << energy << "): "
+               << nom_prob << " - " << alt_prob
+               << " = " << nom_prob - alt_prob
+               << "; with IsNuBar = " << p->GetIsNuBar()
+               << endl;
+          cerr << "FAILED: Model PMNS_" << model 
+               << " comparison to nominal" << endl;
+          return false;
+        }
+
+      }}
+  
+    }
+
+  }
+
+  delete p;
+
+  return true;
+
+}
+
+//.............................................................................
 bool TestMethodsModel(OscProb::PMNS_Base* p, string model){
+
+  double nom_max_diff;
+  if(!TestNominal(model, nom_max_diff)) return false;
 
   SetTestPath(p);
 
   int nbins = 30;
   vector<double> xbins = GetLogAxis(nbins, 0.1, 100);
-  double max_diff = 0;
+  double avg_max_diff = 0;
   for(int isnb=0; isnb<2; isnb++){
 
     p->SetIsNuBar(isnb);
@@ -98,7 +169,7 @@ bool TestMethodsModel(OscProb::PMNS_Base* p, string model){
 
       double energy = xbins[i];
       
-      if(!TestAvgProb(p, energy, max_diff)){
+      if(!TestAvgProb(p, energy, avg_max_diff)){
         cerr << "FAILED: Model PMNS_" << model 
              << " AvgProb" << endl;
         return false;
@@ -115,36 +186,30 @@ bool TestMethodsModel(OscProb::PMNS_Base* p, string model){
   }
   
   cout << "PASSED: PMNS_" << model 
-       << " with maximum AvgProb error: "
-       << max_diff << endl;
+       << " with max nominal error: "
+       << nom_max_diff
+       << " and max AvgProb error: "
+       << avg_max_diff << endl;
   
   return true;
 
 }
 
+//.............................................................................
 int TestMethods(){
 
-  OscProb::PMNS_Fast p_fast = GetFast();
-  if(!TestMethodsModel(&p_fast, "Fast")) return 1;
+  vector<string> models = {"Fast", "Iter", "Sterile", "NSI", "Deco", "Decay",
+                           "LIV", "SNSI"};
 
-  OscProb::PMNS_Iter p_iter = GetIter();
-  if(!TestMethodsModel(&p_iter, "Iter")) return 1;
+  for(int i=0; i<models.size(); i++){
 
-  OscProb::PMNS_Sterile p_sterile = GetSterile();
-  if(!TestMethodsModel(&p_sterile, "Sterile")) return 1;
+    OscProb::PMNS_Base* p = GetModel(models[i]);
+    if(!TestMethodsModel(p, models[i])) return 1;
 
-  OscProb::PMNS_NSI p_nsi = GetNSI();
-  if(!TestMethodsModel(&p_nsi, "NSI")) return 1;
+    delete p;
 
-  OscProb::PMNS_Deco p_deco = GetDeco();
-  if(!TestMethodsModel(&p_deco, "Deco")) return 1;
-
-  OscProb::PMNS_Decay p_decay = GetDecay();
-  if(!TestMethodsModel(&p_decay, "Decay")) return 1;
-
-  OscProb::PMNS_LIV p_liv = GetLIV();
-  if(!TestMethodsModel(&p_liv, "LIV")) return 1;
-
+  }
+  
   return 0;
 
 }
