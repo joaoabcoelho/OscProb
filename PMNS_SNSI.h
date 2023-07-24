@@ -36,6 +36,8 @@ namespace OscProb {
     virtual void UpdateHam();
     virtual void BuildHms();
 
+    virtual void FillCache(){} ///< Deactivate cache
+
     double fM; ///< Lightest neutrino mass
 
   };

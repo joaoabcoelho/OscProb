@@ -93,8 +93,6 @@ void PMNS_SNSI::BuildHms()
     fHms[i][i] += m1;
   }
 
-  ClearCache();
- 
   // Tag as built
   fBuiltHms = true;
 
