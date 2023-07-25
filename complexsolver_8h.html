@@ -93,8 +93,7 @@ $(document).ready(function(){initNavTree('complexsolver_8h.html',''); initResiza
   <div class="headertitle"><div class="title">complexsolver.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
-<code>#include &quot;Eigenvalues&quot;</code><br />
+<div class="textblock"><code>#include &quot;Eigenvalues&quot;</code><br />
 <code>#include &quot;<a class="el" href="Definitions_8h_source.html">Definitions.h</a>&quot;</code><br />
 </div>
 <p><a href="complexsolver_8h_source.html">Go to the source code of this file.</a></p>
@@ -153,42 +152,42 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="complexsolver_8cxx_source.html#l00013">13</a> of file <a class="el" href="complexsolver_8cxx_source.html">complexsolver.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   17</span>{</div>
-<div class="line"><span class="lineno">   18</span> </div>
-<div class="line"><span class="lineno">   19</span>  <span class="keywordtype">int</span> size=w.size();</div>
-<div class="line"><span class="lineno">   20</span>  Eigen::MatrixXcd l(size,size);</div>
-<div class="line"><span class="lineno">   21</span>  Eigen::MatrixXcd evc(size,size), evcinv(size,size);</div>
-<div class="line"><span class="lineno">   22</span>  Eigen::VectorXcd evl(size);</div>
-<div class="line"><span class="lineno">   23</span>  </div>
-<div class="line"><span class="lineno">   24</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> n=0; n&lt;size; n++){</div>
-<div class="line"><span class="lineno">   25</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> m=0; m&lt;size; m++){</div>
-<div class="line"><span class="lineno">   26</span>      l(n,m)=A[n][m];</div>
-<div class="line"><span class="lineno">   27</span>    } </div>
-<div class="line"><span class="lineno">   28</span>  }  </div>
-<div class="line"><span class="lineno">   29</span>                  </div>
-<div class="line"><span class="lineno">   30</span>  Eigen::ComplexEigenSolver&lt;Eigen::MatrixXcd&gt; eigensolver;</div>
-<div class="line"><span class="lineno">   31</span>  eigensolver.compute(l);</div>
-<div class="line"><span class="lineno">   32</span> </div>
-<div class="line"><span class="lineno">   33</span>  <span class="keywordflow">if</span>(eigensolver.info() != Eigen::Success){</div>
-<div class="line"><span class="lineno">   34</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;The diagonalization is failing&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><span class="lineno">   35</span>    abort();</div>
-<div class="line"><span class="lineno">   36</span>  }</div>
-<div class="line"><span class="lineno">   37</span>  </div>
-<div class="line"><span class="lineno">   38</span>  evl = eigensolver.eigenvalues();</div>
-<div class="line"><span class="lineno">   39</span>  evc= eigensolver.eigenvectors();</div>
-<div class="line"><span class="lineno">   40</span>  evcinv=evc.inverse();</div>
-<div class="line"><span class="lineno">   41</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> n=0; n&lt;size; n++){</div>
-<div class="line"><span class="lineno">   42</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> m=0; m&lt;size; m++){</div>
-<div class="line"><span class="lineno">   43</span>      Q[n][m] = evc(n,m);</div>
-<div class="line"><span class="lineno">   44</span>      Qinv[n][m]= evcinv(n,m);</div>
-<div class="line"><span class="lineno">   45</span>    }</div>
-<div class="line"><span class="lineno">   46</span>  }  </div>
-<div class="line"><span class="lineno">   47</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> t=0; t&lt;size; t++){</div>
-<div class="line"><span class="lineno">   48</span>    w[t] = evl(t);</div>
-<div class="line"><span class="lineno">   49</span>  }</div>
-<div class="line"><span class="lineno">   50</span>              </div>
-<div class="line"><span class="lineno">   51</span>}</div>
+<p class="definition">Definition at line <a class="el" href="complexsolver_8cxx_source.html#l00015">15</a> of file <a class="el" href="complexsolver_8cxx_source.html">complexsolver.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   19</span>{</div>
+<div class="line"><span class="lineno">   20</span> </div>
+<div class="line"><span class="lineno">   21</span>  <span class="keywordtype">int</span> size=w.size();</div>
+<div class="line"><span class="lineno">   22</span>  Eigen::MatrixXcd l(size,size);</div>
+<div class="line"><span class="lineno">   23</span>  Eigen::MatrixXcd evc(size,size), evcinv(size,size);</div>
+<div class="line"><span class="lineno">   24</span>  Eigen::VectorXcd evl(size);</div>
+<div class="line"><span class="lineno">   25</span>  </div>
+<div class="line"><span class="lineno">   26</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> n=0; n&lt;size; n++){</div>
+<div class="line"><span class="lineno">   27</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> m=0; m&lt;size; m++){</div>
+<div class="line"><span class="lineno">   28</span>      l(n,m)=A[n][m];</div>
+<div class="line"><span class="lineno">   29</span>    } </div>
+<div class="line"><span class="lineno">   30</span>  }  </div>
+<div class="line"><span class="lineno">   31</span>                  </div>
+<div class="line"><span class="lineno">   32</span>  Eigen::ComplexEigenSolver&lt;Eigen::MatrixXcd&gt; eigensolver;</div>
+<div class="line"><span class="lineno">   33</span>  eigensolver.compute(l);</div>
+<div class="line"><span class="lineno">   34</span> </div>
+<div class="line"><span class="lineno">   35</span>  <span class="keywordflow">if</span>(eigensolver.info() != Eigen::Success){</div>
+<div class="line"><span class="lineno">   36</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;The diagonalization is failing&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><span class="lineno">   37</span>    abort();</div>
+<div class="line"><span class="lineno">   38</span>  }</div>
+<div class="line"><span class="lineno">   39</span>  </div>
+<div class="line"><span class="lineno">   40</span>  evl = eigensolver.eigenvalues();</div>
+<div class="line"><span class="lineno">   41</span>  evc= eigensolver.eigenvectors();</div>
+<div class="line"><span class="lineno">   42</span>  evcinv=evc.inverse();</div>
+<div class="line"><span class="lineno">   43</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> n=0; n&lt;size; n++){</div>
+<div class="line"><span class="lineno">   44</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> m=0; m&lt;size; m++){</div>
+<div class="line"><span class="lineno">   45</span>      Q[n][m] = evc(n,m);</div>
+<div class="line"><span class="lineno">   46</span>      Qinv[n][m]= evcinv(n,m);</div>
+<div class="line"><span class="lineno">   47</span>    }</div>
+<div class="line"><span class="lineno">   48</span>  }  </div>
+<div class="line"><span class="lineno">   49</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> t=0; t&lt;size; t++){</div>
+<div class="line"><span class="lineno">   50</span>    w[t] = evl(t);</div>
+<div class="line"><span class="lineno">   51</span>  }</div>
+<div class="line"><span class="lineno">   52</span>              </div>
+<div class="line"><span class="lineno">   53</span>}</div>
 </div><!-- fragment -->
 <p class="reference">Referenced by <a class="el" href="PMNS__Decay_8cxx_source.html#l00259">OscProb::PMNS_Decay::SolveHam()</a>.</p>
 

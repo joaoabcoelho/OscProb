@@ -133,7 +133,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00027">27</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00028">28</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af6a40b1ed40d5d9b36a7a7bdf8aedc99" name="af6a40b1ed40d5d9b36a7a7bdf8aedc99"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af6a40b1ed40d5d9b36a7a7bdf8aedc99">&#9670;&nbsp;</a></span>GSL_EinSys() <span class="overload">[1/2]</span></h2>
@@ -158,26 +158,26 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8cxx_source.html#l00036">36</a> of file <a class="el" href="PMNS__Sterile_8cxx_source.html">PMNS_Sterile.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   36</span>                                 : </div>
-<div class="line"><span class="lineno">   37</span><a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>(numNus), </div>
-<div class="line"><span class="lineno">   38</span><a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>(0), <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>(0), <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>(0), <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a>(0)</div>
-<div class="line"><span class="lineno">   39</span>{</div>
-<div class="line"><span class="lineno">   40</span> </div>
-<div class="line"><span class="lineno">   41</span>  <span class="comment">// Allocate memory for the GSL objects</span></div>
-<div class="line"><span class="lineno">   42</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a> = gsl_vector_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
-<div class="line"><span class="lineno">   43</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a> = gsl_matrix_complex_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>, <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
-<div class="line"><span class="lineno">   44</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a> = gsl_matrix_complex_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>, <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
-<div class="line"><span class="lineno">   45</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a> = gsl_eigen_hermv_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
-<div class="line"><span class="lineno">   46</span> </div>
-<div class="line"><span class="lineno">   47</span>}</div>
-<div class="ttc" id="astructOscProb_1_1GSL__EinSys_html_a366b813a541dcfbaad2ac3d096f31aa1"><div class="ttname"><a href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">OscProb::GSL_EinSys::W_GSL</a></div><div class="ttdeci">gsl_eigen_hermv_workspace * W_GSL</div><div class="ttdoc">Allocates memory for GSL solution.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Sterile_8h_source.html#l00039">PMNS_Sterile.h:39</a></div></div>
-<div class="ttc" id="astructOscProb_1_1GSL__EinSys_html_a853e4eae015326445776f9ad7e17e513"><div class="ttname"><a href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">OscProb::GSL_EinSys::H_GSL</a></div><div class="ttdeci">gsl_matrix_complex * H_GSL</div><div class="ttdoc">The Hamiltonian to be solved by GSL.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Sterile_8h_source.html#l00038">PMNS_Sterile.h:38</a></div></div>
-<div class="ttc" id="astructOscProb_1_1GSL__EinSys_html_a91ee7084c424d7a92b5001931e036fd6"><div class="ttname"><a href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">OscProb::GSL_EinSys::fEvecGSL</a></div><div class="ttdeci">gsl_matrix_complex * fEvecGSL</div><div class="ttdoc">Stores the GSL eigenvectors.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Sterile_8h_source.html#l00037">PMNS_Sterile.h:37</a></div></div>
-<div class="ttc" id="astructOscProb_1_1GSL__EinSys_html_abb8928986203b5904d078f4f4e337a99"><div class="ttname"><a href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">OscProb::GSL_EinSys::fNumNus</a></div><div class="ttdeci">int fNumNus</div><div class="ttdoc">Number of neutrino flavors.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Sterile_8h_source.html#l00034">PMNS_Sterile.h:34</a></div></div>
-<div class="ttc" id="astructOscProb_1_1GSL__EinSys_html_af69688ebfa983199ae54513628658b4d"><div class="ttname"><a href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">OscProb::GSL_EinSys::fEvalGSL</a></div><div class="ttdeci">gsl_vector * fEvalGSL</div><div class="ttdoc">Stores the GSL eigenvalues.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Sterile_8h_source.html#l00036">PMNS_Sterile.h:36</a></div></div>
+<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8cxx_source.html#l00032">32</a> of file <a class="el" href="PMNS__Sterile_8cxx_source.html">PMNS_Sterile.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   32</span>                                 : </div>
+<div class="line"><span class="lineno">   33</span><a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>(numNus), </div>
+<div class="line"><span class="lineno">   34</span><a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>(0), <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>(0), <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>(0), <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a>(0)</div>
+<div class="line"><span class="lineno">   35</span>{</div>
+<div class="line"><span class="lineno">   36</span> </div>
+<div class="line"><span class="lineno">   37</span>  <span class="comment">// Allocate memory for the GSL objects</span></div>
+<div class="line"><span class="lineno">   38</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a> = gsl_vector_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
+<div class="line"><span class="lineno">   39</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a> = gsl_matrix_complex_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>, <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
+<div class="line"><span class="lineno">   40</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a> = gsl_matrix_complex_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>, <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
+<div class="line"><span class="lineno">   41</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a> = gsl_eigen_hermv_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
+<div class="line"><span class="lineno">   42</span> </div>
+<div class="line"><span class="lineno">   43</span>}</div>
+<div class="ttc" id="astructOscProb_1_1GSL__EinSys_html_a366b813a541dcfbaad2ac3d096f31aa1"><div class="ttname"><a href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">OscProb::GSL_EinSys::W_GSL</a></div><div class="ttdeci">gsl_eigen_hermv_workspace * W_GSL</div><div class="ttdoc">Allocates memory for GSL solution.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Sterile_8h_source.html#l00040">PMNS_Sterile.h:40</a></div></div>
+<div class="ttc" id="astructOscProb_1_1GSL__EinSys_html_a853e4eae015326445776f9ad7e17e513"><div class="ttname"><a href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">OscProb::GSL_EinSys::H_GSL</a></div><div class="ttdeci">gsl_matrix_complex * H_GSL</div><div class="ttdoc">The Hamiltonian to be solved by GSL.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Sterile_8h_source.html#l00039">PMNS_Sterile.h:39</a></div></div>
+<div class="ttc" id="astructOscProb_1_1GSL__EinSys_html_a91ee7084c424d7a92b5001931e036fd6"><div class="ttname"><a href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">OscProb::GSL_EinSys::fEvecGSL</a></div><div class="ttdeci">gsl_matrix_complex * fEvecGSL</div><div class="ttdoc">Stores the GSL eigenvectors.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Sterile_8h_source.html#l00038">PMNS_Sterile.h:38</a></div></div>
+<div class="ttc" id="astructOscProb_1_1GSL__EinSys_html_abb8928986203b5904d078f4f4e337a99"><div class="ttname"><a href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">OscProb::GSL_EinSys::fNumNus</a></div><div class="ttdeci">int fNumNus</div><div class="ttdoc">Number of neutrino flavors.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Sterile_8h_source.html#l00035">PMNS_Sterile.h:35</a></div></div>
+<div class="ttc" id="astructOscProb_1_1GSL__EinSys_html_af69688ebfa983199ae54513628658b4d"><div class="ttname"><a href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">OscProb::GSL_EinSys::fEvalGSL</a></div><div class="ttdeci">gsl_vector * fEvalGSL</div><div class="ttdoc">Stores the GSL eigenvalues.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Sterile_8h_source.html#l00037">PMNS_Sterile.h:37</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PMNS__Sterile_8h_source.html#l00036">fEvalGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00037">fEvecGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00034">fNumNus</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00038">H_GSL</a>, and <a class="el" href="PMNS__Sterile_8h_source.html#l00039">W_GSL</a>.</p>
+<p class="reference">References <a class="el" href="PMNS__Sterile_8h_source.html#l00037">fEvalGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00038">fEvecGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00035">fNumNus</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00039">H_GSL</a>, and <a class="el" href="PMNS__Sterile_8h_source.html#l00040">W_GSL</a>.</p>
 
 </div>
 </div>
@@ -205,25 +205,25 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8cxx_source.html#l00057">57</a> of file <a class="el" href="PMNS__Sterile_8cxx_source.html">PMNS_Sterile.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   57</span>                                              :</div>
-<div class="line"><span class="lineno">   58</span><a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>(other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>), </div>
-<div class="line"><span class="lineno">   59</span><a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>(0), <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>(0), <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>(0), <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a>(0)</div>
-<div class="line"><span class="lineno">   60</span>{</div>
-<div class="line"><span class="lineno">   61</span> </div>
-<div class="line"><span class="lineno">   62</span>  <span class="comment">// Allocate memory for the GSL objects</span></div>
-<div class="line"><span class="lineno">   63</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a> = gsl_vector_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
-<div class="line"><span class="lineno">   64</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a> = gsl_matrix_complex_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>, <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
-<div class="line"><span class="lineno">   65</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a> = gsl_matrix_complex_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>, <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
-<div class="line"><span class="lineno">   66</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a> = gsl_eigen_hermv_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
+<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8cxx_source.html#l00053">53</a> of file <a class="el" href="PMNS__Sterile_8cxx_source.html">PMNS_Sterile.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   53</span>                                              :</div>
+<div class="line"><span class="lineno">   54</span><a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>(other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>), </div>
+<div class="line"><span class="lineno">   55</span><a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>(0), <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>(0), <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>(0), <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a>(0)</div>
+<div class="line"><span class="lineno">   56</span>{</div>
+<div class="line"><span class="lineno">   57</span> </div>
+<div class="line"><span class="lineno">   58</span>  <span class="comment">// Allocate memory for the GSL objects</span></div>
+<div class="line"><span class="lineno">   59</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a> = gsl_vector_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
+<div class="line"><span class="lineno">   60</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a> = gsl_matrix_complex_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>, <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
+<div class="line"><span class="lineno">   61</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a> = gsl_matrix_complex_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>, <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
+<div class="line"><span class="lineno">   62</span>  <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a> = gsl_eigen_hermv_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
+<div class="line"><span class="lineno">   63</span> </div>
+<div class="line"><span class="lineno">   64</span>  gsl_vector_memcpy(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>, other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>);</div>
+<div class="line"><span class="lineno">   65</span>  gsl_matrix_complex_memcpy(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>, other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>);</div>
+<div class="line"><span class="lineno">   66</span>  gsl_matrix_complex_memcpy(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>, other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>);</div>
 <div class="line"><span class="lineno">   67</span> </div>
-<div class="line"><span class="lineno">   68</span>  gsl_vector_memcpy(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>, other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>);</div>
-<div class="line"><span class="lineno">   69</span>  gsl_matrix_complex_memcpy(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>, other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>);</div>
-<div class="line"><span class="lineno">   70</span>  gsl_matrix_complex_memcpy(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>, other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>);</div>
-<div class="line"><span class="lineno">   71</span> </div>
-<div class="line"><span class="lineno">   72</span>}</div>
+<div class="line"><span class="lineno">   68</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PMNS__Sterile_8h_source.html#l00036">fEvalGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00037">fEvecGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00034">fNumNus</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00038">H_GSL</a>, and <a class="el" href="PMNS__Sterile_8h_source.html#l00039">W_GSL</a>.</p>
+<p class="reference">References <a class="el" href="PMNS__Sterile_8h_source.html#l00037">fEvalGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00038">fEvecGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00035">fNumNus</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00039">H_GSL</a>, and <a class="el" href="PMNS__Sterile_8h_source.html#l00040">W_GSL</a>.</p>
 
 </div>
 </div>
@@ -252,18 +252,18 @@ Public Attributes</h2></td></tr>
 <p >Destructor.</p>
 <p >Clear GSL objects. </p>
 
-<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8cxx_source.html#l00117">117</a> of file <a class="el" href="PMNS__Sterile_8cxx_source.html">PMNS_Sterile.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  117</span>                       {</div>
-<div class="line"><span class="lineno">  118</span> </div>
-<div class="line"><span class="lineno">  119</span>  <span class="comment">// Free memory from GSL objects</span></div>
-<div class="line"><span class="lineno">  120</span>  gsl_matrix_complex_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a> = 0;</div>
-<div class="line"><span class="lineno">  121</span>  gsl_eigen_hermv_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a> = 0;</div>
-<div class="line"><span class="lineno">  122</span>  gsl_matrix_complex_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a> = 0;</div>
-<div class="line"><span class="lineno">  123</span>  gsl_vector_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a> = 0;</div>
-<div class="line"><span class="lineno">  124</span> </div>
-<div class="line"><span class="lineno">  125</span>}</div>
+<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8cxx_source.html#l00113">113</a> of file <a class="el" href="PMNS__Sterile_8cxx_source.html">PMNS_Sterile.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  113</span>                       {</div>
+<div class="line"><span class="lineno">  114</span> </div>
+<div class="line"><span class="lineno">  115</span>  <span class="comment">// Free memory from GSL objects</span></div>
+<div class="line"><span class="lineno">  116</span>  gsl_matrix_complex_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a> = 0;</div>
+<div class="line"><span class="lineno">  117</span>  gsl_eigen_hermv_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a> = 0;</div>
+<div class="line"><span class="lineno">  118</span>  gsl_matrix_complex_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a> = 0;</div>
+<div class="line"><span class="lineno">  119</span>  gsl_vector_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a> = 0;</div>
+<div class="line"><span class="lineno">  120</span> </div>
+<div class="line"><span class="lineno">  121</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PMNS__Sterile_8h_source.html#l00036">fEvalGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00037">fEvecGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00038">H_GSL</a>, and <a class="el" href="PMNS__Sterile_8h_source.html#l00039">W_GSL</a>.</p>
+<p class="reference">References <a class="el" href="PMNS__Sterile_8h_source.html#l00037">fEvalGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00038">fEvecGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00039">H_GSL</a>, and <a class="el" href="PMNS__Sterile_8h_source.html#l00040">W_GSL</a>.</p>
 
 </div>
 </div>
@@ -292,36 +292,36 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8cxx_source.html#l00082">82</a> of file <a class="el" href="PMNS__Sterile_8cxx_source.html">PMNS_Sterile.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   83</span>{</div>
-<div class="line"><span class="lineno">   84</span> </div>
-<div class="line"><span class="lineno">   85</span>  <span class="keywordflow">if</span>(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a> != other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>){</div>
-<div class="line"><span class="lineno">   86</span> </div>
-<div class="line"><span class="lineno">   87</span>    <span class="comment">// Free memory from GSL objects</span></div>
-<div class="line"><span class="lineno">   88</span>    gsl_matrix_complex_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a> = 0;</div>
-<div class="line"><span class="lineno">   89</span>    gsl_eigen_hermv_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a> = 0;</div>
-<div class="line"><span class="lineno">   90</span>    gsl_matrix_complex_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a> = 0;</div>
-<div class="line"><span class="lineno">   91</span>    gsl_vector_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a> = 0;</div>
-<div class="line"><span class="lineno">   92</span> </div>
-<div class="line"><span class="lineno">   93</span>    <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a> = other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>;</div>
-<div class="line"><span class="lineno">   94</span> </div>
-<div class="line"><span class="lineno">   95</span>    <span class="comment">// Allocate memory for the GSL objects</span></div>
-<div class="line"><span class="lineno">   96</span>    <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a> = gsl_vector_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
-<div class="line"><span class="lineno">   97</span>    <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a> = gsl_matrix_complex_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>, <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
-<div class="line"><span class="lineno">   98</span>    <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a> = gsl_matrix_complex_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>, <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
-<div class="line"><span class="lineno">   99</span>    <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a> = gsl_eigen_hermv_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
-<div class="line"><span class="lineno">  100</span> </div>
-<div class="line"><span class="lineno">  101</span>  }</div>
-<div class="line"><span class="lineno">  102</span> </div>
-<div class="line"><span class="lineno">  103</span>  gsl_vector_memcpy(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>, other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>);</div>
-<div class="line"><span class="lineno">  104</span>  gsl_matrix_complex_memcpy(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>, other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>);</div>
-<div class="line"><span class="lineno">  105</span>  gsl_matrix_complex_memcpy(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>, other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>);</div>
-<div class="line"><span class="lineno">  106</span>  </div>
-<div class="line"><span class="lineno">  107</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><span class="lineno">  108</span> </div>
-<div class="line"><span class="lineno">  109</span>}</div>
+<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">78</a> of file <a class="el" href="PMNS__Sterile_8cxx_source.html">PMNS_Sterile.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   79</span>{</div>
+<div class="line"><span class="lineno">   80</span> </div>
+<div class="line"><span class="lineno">   81</span>  <span class="keywordflow">if</span>(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a> != other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>){</div>
+<div class="line"><span class="lineno">   82</span> </div>
+<div class="line"><span class="lineno">   83</span>    <span class="comment">// Free memory from GSL objects</span></div>
+<div class="line"><span class="lineno">   84</span>    gsl_matrix_complex_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a> = 0;</div>
+<div class="line"><span class="lineno">   85</span>    gsl_eigen_hermv_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a> = 0;</div>
+<div class="line"><span class="lineno">   86</span>    gsl_matrix_complex_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a> = 0;</div>
+<div class="line"><span class="lineno">   87</span>    gsl_vector_free(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>); <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a> = 0;</div>
+<div class="line"><span class="lineno">   88</span> </div>
+<div class="line"><span class="lineno">   89</span>    <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a> = other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>;</div>
+<div class="line"><span class="lineno">   90</span> </div>
+<div class="line"><span class="lineno">   91</span>    <span class="comment">// Allocate memory for the GSL objects</span></div>
+<div class="line"><span class="lineno">   92</span>    <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a> = gsl_vector_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
+<div class="line"><span class="lineno">   93</span>    <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a> = gsl_matrix_complex_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>, <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
+<div class="line"><span class="lineno">   94</span>    <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a> = gsl_matrix_complex_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>, <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
+<div class="line"><span class="lineno">   95</span>    <a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a366b813a541dcfbaad2ac3d096f31aa1">W_GSL</a> = gsl_eigen_hermv_alloc(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#abb8928986203b5904d078f4f4e337a99">fNumNus</a>);</div>
+<div class="line"><span class="lineno">   96</span> </div>
+<div class="line"><span class="lineno">   97</span>  }</div>
+<div class="line"><span class="lineno">   98</span> </div>
+<div class="line"><span class="lineno">   99</span>  gsl_vector_memcpy(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>, other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#af69688ebfa983199ae54513628658b4d">fEvalGSL</a>);</div>
+<div class="line"><span class="lineno">  100</span>  gsl_matrix_complex_memcpy(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>, other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a91ee7084c424d7a92b5001931e036fd6">fEvecGSL</a>);</div>
+<div class="line"><span class="lineno">  101</span>  gsl_matrix_complex_memcpy(<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>, other.<a class="code hl_variable" href="structOscProb_1_1GSL__EinSys.html#a853e4eae015326445776f9ad7e17e513">H_GSL</a>);</div>
+<div class="line"><span class="lineno">  102</span>  </div>
+<div class="line"><span class="lineno">  103</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><span class="lineno">  104</span> </div>
+<div class="line"><span class="lineno">  105</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PMNS__Sterile_8h_source.html#l00036">fEvalGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00037">fEvecGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00034">fNumNus</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00038">H_GSL</a>, and <a class="el" href="PMNS__Sterile_8h_source.html#l00039">W_GSL</a>.</p>
+<p class="reference">References <a class="el" href="PMNS__Sterile_8h_source.html#l00037">fEvalGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00038">fEvecGSL</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00035">fNumNus</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00039">H_GSL</a>, and <a class="el" href="PMNS__Sterile_8h_source.html#l00040">W_GSL</a>.</p>
 
 </div>
 </div>
@@ -338,9 +338,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00036">36</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00037">37</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PMNS__Sterile_8cxx_source.html#l00036">GSL_EinSys()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00082">operator=()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00150">OscProb::PMNS_Sterile::SolveHam()</a>, and <a class="el" href="PMNS__Sterile_8cxx_source.html#l00117">~GSL_EinSys()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PMNS__Sterile_8cxx_source.html#l00032">GSL_EinSys()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">operator=()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00146">OscProb::PMNS_Sterile::SolveHam()</a>, and <a class="el" href="PMNS__Sterile_8cxx_source.html#l00113">~GSL_EinSys()</a>.</p>
 
 </div>
 </div>
@@ -356,9 +356,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00037">37</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00038">38</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PMNS__Sterile_8cxx_source.html#l00036">GSL_EinSys()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00082">operator=()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00150">OscProb::PMNS_Sterile::SolveHam()</a>, and <a class="el" href="PMNS__Sterile_8cxx_source.html#l00117">~GSL_EinSys()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PMNS__Sterile_8cxx_source.html#l00032">GSL_EinSys()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">operator=()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00146">OscProb::PMNS_Sterile::SolveHam()</a>, and <a class="el" href="PMNS__Sterile_8cxx_source.html#l00113">~GSL_EinSys()</a>.</p>
 
 </div>
 </div>
@@ -374,9 +374,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00034">34</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00035">35</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PMNS__Sterile_8cxx_source.html#l00036">GSL_EinSys()</a>, and <a class="el" href="PMNS__Sterile_8cxx_source.html#l00082">operator=()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PMNS__Sterile_8cxx_source.html#l00032">GSL_EinSys()</a>, and <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">operator=()</a>.</p>
 
 </div>
 </div>
@@ -392,9 +392,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00038">38</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00039">39</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PMNS__Sterile_8cxx_source.html#l00036">GSL_EinSys()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00082">operator=()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00150">OscProb::PMNS_Sterile::SolveHam()</a>, and <a class="el" href="PMNS__Sterile_8cxx_source.html#l00117">~GSL_EinSys()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PMNS__Sterile_8cxx_source.html#l00032">GSL_EinSys()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">operator=()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00146">OscProb::PMNS_Sterile::SolveHam()</a>, and <a class="el" href="PMNS__Sterile_8cxx_source.html#l00113">~GSL_EinSys()</a>.</p>
 
 </div>
 </div>
@@ -410,9 +410,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00039">39</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00040">40</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PMNS__Sterile_8cxx_source.html#l00036">GSL_EinSys()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00082">operator=()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00150">OscProb::PMNS_Sterile::SolveHam()</a>, and <a class="el" href="PMNS__Sterile_8cxx_source.html#l00117">~GSL_EinSys()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PMNS__Sterile_8cxx_source.html#l00032">GSL_EinSys()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00078">operator=()</a>, <a class="el" href="PMNS__Sterile_8cxx_source.html#l00146">OscProb::PMNS_Sterile::SolveHam()</a>, and <a class="el" href="PMNS__Sterile_8cxx_source.html#l00113">~GSL_EinSys()</a>.</p>
 
 </div>
 </div>
