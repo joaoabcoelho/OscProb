@@ -94,50 +94,51 @@ $(document).ready(function(){initNavTree('Absorption_8cxx_source.html',''); init
 <a href="Absorption_8cxx.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;cmath&gt;</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;numeric&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Absorption_8h.html">Absorption.h</a>&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacestd.html">std</a>;</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespaceOscProb.html">OscProb</a>;</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">const</span> <span class="keywordtype">double</span> Absorption::kU  = 1.660539066e-24; <span class="comment">// atomic mass unit [g]</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classOscProb_1_1Absorption.html#a425183cbac1b7ea23a0366733d89a239">   13</a></span>Absorption::Absorption(){}</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classOscProb_1_1Absorption.html#ab7221ec8a2f72effbbb420aceca3df60">   14</a></span><a class="code hl_function" href="classOscProb_1_1Absorption.html#ab7221ec8a2f72effbbb420aceca3df60">Absorption::~Absorption</a>(){}</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//.............................................................................</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classOscProb_1_1Absorption.html#afe0c4cfc50a6f6434554fbb75c4272ac">   17</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="classOscProb_1_1Absorption.html#afe0c4cfc50a6f6434554fbb75c4272ac">Absorption::Trans</a>(<span class="keywordtype">double</span> xsec)</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  vector&lt;double&gt; p_trans_vec;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;int(<a class="code hl_variable" href="classOscProb_1_1Absorption.html#a5a869a7322c87e94559a3b42d2d02ad2">fNuPaths</a>.size()); i++){</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">double</span> n = <a class="code hl_variable" href="classOscProb_1_1Absorption.html#a5a869a7322c87e94559a3b42d2d02ad2">fNuPaths</a>[i].density / <a class="code hl_variable" href="classOscProb_1_1Absorption.html#ab33e87a30b5761dbf7fca55ee9cb58a7">kU</a>;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">double</span> l = <a class="code hl_variable" href="classOscProb_1_1Absorption.html#a5a869a7322c87e94559a3b42d2d02ad2">fNuPaths</a>[i].length * 1e5; <span class="comment">//l in km -&gt; cm</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">double</span> p_trans = exp( -l * n * xsec );</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    p_trans_vec.push_back(p_trans); <span class="comment">//probability of NO absorption!</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  }</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="comment">//returns probability of transmission</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="keywordflow">return</span> accumulate(p_trans_vec.begin(),</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>                    p_trans_vec.end(),</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                    1.,</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                    multiplies&lt;double&gt;());</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">//.............................................................................</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classOscProb_1_1Absorption.html#a212db59a69ec8612ab29bbbe24093f9d">   38</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classOscProb_1_1Absorption.html#a212db59a69ec8612ab29bbbe24093f9d">Absorption::SetPath</a>(vector&lt;NuPath&gt; paths)</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>{</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <a class="code hl_variable" href="classOscProb_1_1Absorption.html#a5a869a7322c87e94559a3b42d2d02ad2">fNuPaths</a> = paths;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="Absorption_8h.html">Absorption.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespacestd.html">std</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">using namespace </span><a class="code hl_namespace" href="namespaceOscProb.html">OscProb</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">const</span> <span class="keywordtype">double</span> Absorption::kU  = 1.660539066e-24; <span class="comment">// atomic mass unit [g]</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classOscProb_1_1Absorption.html#a425183cbac1b7ea23a0366733d89a239">   14</a></span>Absorption::Absorption(){}</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classOscProb_1_1Absorption.html#ab7221ec8a2f72effbbb420aceca3df60">   15</a></span><a class="code hl_function" href="classOscProb_1_1Absorption.html#ab7221ec8a2f72effbbb420aceca3df60">Absorption::~Absorption</a>(){}</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">//.............................................................................</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classOscProb_1_1Absorption.html#afe0c4cfc50a6f6434554fbb75c4272ac">   18</a></span><span class="keywordtype">double</span> <a class="code hl_function" href="classOscProb_1_1Absorption.html#afe0c4cfc50a6f6434554fbb75c4272ac">Absorption::Trans</a>(<span class="keywordtype">double</span> xsec)</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>{</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  vector&lt;double&gt; p_trans_vec;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;int(<a class="code hl_variable" href="classOscProb_1_1Absorption.html#a5a869a7322c87e94559a3b42d2d02ad2">fNuPaths</a>.size()); i++){</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">double</span> n = <a class="code hl_variable" href="classOscProb_1_1Absorption.html#a5a869a7322c87e94559a3b42d2d02ad2">fNuPaths</a>[i].density / <a class="code hl_variable" href="classOscProb_1_1Absorption.html#ab33e87a30b5761dbf7fca55ee9cb58a7">kU</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">double</span> l = <a class="code hl_variable" href="classOscProb_1_1Absorption.html#a5a869a7322c87e94559a3b42d2d02ad2">fNuPaths</a>[i].length * 1e5; <span class="comment">//l in km -&gt; cm</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">double</span> p_trans = exp( -l * n * xsec );</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    p_trans_vec.push_back(p_trans); <span class="comment">//probability of NO absorption!</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="comment">//returns probability of transmission</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keywordflow">return</span> accumulate(p_trans_vec.begin(),</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                    p_trans_vec.end(),</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                    1.,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>                    multiplies&lt;double&gt;());</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>}</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">//.............................................................................</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classOscProb_1_1Absorption.html#a212db59a69ec8612ab29bbbe24093f9d">   39</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classOscProb_1_1Absorption.html#a212db59a69ec8612ab29bbbe24093f9d">Absorption::SetPath</a>(vector&lt;NuPath&gt; paths)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>{</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <a class="code hl_variable" href="classOscProb_1_1Absorption.html#a5a869a7322c87e94559a3b42d2d02ad2">fNuPaths</a> = paths;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>}</div>
 <div class="ttc" id="aAbsorption_8h_html"><div class="ttname"><a href="Absorption_8h.html">Absorption.h</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1Absorption_html_a212db59a69ec8612ab29bbbe24093f9d"><div class="ttname"><a href="classOscProb_1_1Absorption.html#a212db59a69ec8612ab29bbbe24093f9d">OscProb::Absorption::SetPath</a></div><div class="ttdeci">virtual void SetPath(std::vector&lt; NuPath &gt; paths)</div><div class="ttdoc">Set a path sequence.</div><div class="ttdef"><b>Definition:</b> <a href="Absorption_8cxx_source.html#l00038">Absorption.cxx:38</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1Absorption_html_a212db59a69ec8612ab29bbbe24093f9d"><div class="ttname"><a href="classOscProb_1_1Absorption.html#a212db59a69ec8612ab29bbbe24093f9d">OscProb::Absorption::SetPath</a></div><div class="ttdeci">virtual void SetPath(std::vector&lt; NuPath &gt; paths)</div><div class="ttdoc">Set a path sequence.</div><div class="ttdef"><b>Definition:</b> <a href="Absorption_8cxx_source.html#l00039">Absorption.cxx:39</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1Absorption_html_a5a869a7322c87e94559a3b42d2d02ad2"><div class="ttname"><a href="classOscProb_1_1Absorption.html#a5a869a7322c87e94559a3b42d2d02ad2">OscProb::Absorption::fNuPaths</a></div><div class="ttdeci">std::vector&lt; NuPath &gt; fNuPaths</div><div class="ttdoc">Vector of neutrino paths.</div><div class="ttdef"><b>Definition:</b> <a href="Absorption_8h_source.html#l00021">Absorption.h:21</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1Absorption_html_ab33e87a30b5761dbf7fca55ee9cb58a7"><div class="ttname"><a href="classOscProb_1_1Absorption.html#ab33e87a30b5761dbf7fca55ee9cb58a7">OscProb::Absorption::kU</a></div><div class="ttdeci">static const double kU</div><div class="ttdoc">Atomic mass unit.</div><div class="ttdef"><b>Definition:</b> <a href="Absorption_8h_source.html#l00023">Absorption.h:23</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1Absorption_html_ab7221ec8a2f72effbbb420aceca3df60"><div class="ttname"><a href="classOscProb_1_1Absorption.html#ab7221ec8a2f72effbbb420aceca3df60">OscProb::Absorption::~Absorption</a></div><div class="ttdeci">virtual ~Absorption()</div><div class="ttdef"><b>Definition:</b> <a href="Absorption_8cxx_source.html#l00014">Absorption.cxx:14</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1Absorption_html_afe0c4cfc50a6f6434554fbb75c4272ac"><div class="ttname"><a href="classOscProb_1_1Absorption.html#afe0c4cfc50a6f6434554fbb75c4272ac">OscProb::Absorption::Trans</a></div><div class="ttdeci">virtual double Trans(double xsec)</div><div class="ttdef"><b>Definition:</b> <a href="Absorption_8cxx_source.html#l00017">Absorption.cxx:17</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1Absorption_html_ab7221ec8a2f72effbbb420aceca3df60"><div class="ttname"><a href="classOscProb_1_1Absorption.html#ab7221ec8a2f72effbbb420aceca3df60">OscProb::Absorption::~Absorption</a></div><div class="ttdeci">virtual ~Absorption()</div><div class="ttdef"><b>Definition:</b> <a href="Absorption_8cxx_source.html#l00015">Absorption.cxx:15</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1Absorption_html_afe0c4cfc50a6f6434554fbb75c4272ac"><div class="ttname"><a href="classOscProb_1_1Absorption.html#afe0c4cfc50a6f6434554fbb75c4272ac">OscProb::Absorption::Trans</a></div><div class="ttdeci">virtual double Trans(double xsec)</div><div class="ttdef"><b>Definition:</b> <a href="Absorption_8cxx_source.html#l00018">Absorption.cxx:18</a></div></div>
 <div class="ttc" id="anamespaceOscProb_html"><div class="ttname"><a href="namespaceOscProb.html">OscProb</a></div><div class="ttdoc">Some useful general definitions.</div><div class="ttdef"><b>Definition:</b> <a href="Absorption_8h_source.html#l00006">Absorption.h:6</a></div></div>
 <div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definition:</b> <a href="EigenPoint_8h_source.html#l00045">EigenPoint.h:45</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
