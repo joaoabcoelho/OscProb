@@ -28,21 +28,21 @@ OscProb is very easy to install. The only requirements is to have ROOT installed
 
 <details>
   <summary>Details: Eigen</summary>
-  
+
   In order to compile the PMNS_Decay class, it is necessary to donwload the external Eigen library. This library is added as a submodule and will be downloaded by make.
-  
+
   Alternatively, you can trigger them manually with:
   * During cloning: `git clone --recurse-submodules https://github.com/joaoabcoelho/OscProb.git`
   * After clonning: `git submodule update --init`
 </details>
-  
+
 Once you have ROOT setup, simply do:
 ```sh
 cd OscProb
 make
 ```
 
-A shared library will be produced: ```libOscProb.so```
+A shared library will be produced: ```lib/libOscProb.so```
 
 This should take a few seconds and you are all set.
 

@@ -18,7 +18,7 @@ void LoadOscProb(TString logLevel = "info") {
   TString s("libOscProb.so");
 
   // Search for the library here or in your library paths
-  gSystem->FindFile(TString::Format("./:../:%s", gSystem->GetDynamicPath()), s);
+  gSystem->FindFile(TString::Format("./lib:../lib:%s", gSystem->GetDynamicPath()), s);
 
   // Check if library file was found
   if(s.Length() == 0){

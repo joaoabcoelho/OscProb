@@ -19,7 +19,9 @@
 #include <cassert>
 #include <stdlib.h>
 #include "complexsolver.h"
+
 using namespace OscProb;
+using namespace std;
 
 //......................................................................
 ///
@@ -203,7 +205,7 @@ void PMNS_Decay::BuildHam()
    }
   
 
-   const   complex<double> numi(0.0,1.0);  
+   const complexD numi(0.0,1.0);  
    ///Construct the total Hms+Hd
    for(int j=0; j<fNumNus; j++){
      for(int i=0; i<fNumNus; i++){

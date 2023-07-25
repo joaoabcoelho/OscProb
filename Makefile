@@ -17,10 +17,11 @@ else
 endif
 
 PACKAGE = OscProb
-HEADERS := $(filter-out $(CURDIR)/LinkDef.h, $(wildcard $(CURDIR)/*.h))
-SOURCES := $(wildcard $(CURDIR)/*.cxx)
+HEADERS := $(filter-out $(CURDIR)/inc/LinkDef.h, $(wildcard $(CURDIR)/inc/*.h))
+SOURCES := $(wildcard $(CURDIR)/src/*.cxx)
 TARGET = lib$(PACKAGE)
-TARGET_LIB = $(CURDIR)/$(TARGET).so
+TARGET_LIB = $(CURDIR)/lib/$(TARGET).so
+TARGET_PCM = $(CURDIR)/lib/$(TARGET)_rdict.pcm
 DICTIONARY = $(CURDIR)/tmp/$(TARGET).cxx
 
 # GSL library
@@ -30,8 +31,9 @@ GSL_LIBS := $(shell gsl-config --libs)
 #Eigen library
 Eigen_INCS = ${CURDIR}/eigen/Eigen
 
-override CXXFLAGS += $(GSL_INCS) -I$(Eigen_INCS) -I$(CURDIR)/utils
-override GSL_INCS += -I$(Eigen_INCS) -I${CURDIR}/utils
+INCDIRS = -I$(CURDIR) -I$(CURDIR)/inc $(GSL_INCS) -I$(Eigen_INCS)
+
+override CXXFLAGS += $(INCDIRS)
 override LDFLAGS  += $(GSL_LIBS)
 
 # the sets of directories to do various things in
@@ -44,19 +46,20 @@ PREMDIR = $(CURDIR)/PremTables
 MODEL3DDIR = $(CURDIR)/EarthTables
 PREMFILE = $(PREMDIR)/prem_default.txt
 PREM3DFILE = $(MODEL3DDIR)/earth_binned_default.txt
-PREMINC = $(CURDIR)/prem_default.hpp
+PREMINC = $(CURDIR)/inc/prem_default.hpp
 
 all: $(Eigen_INCS) $(BUILDDIRS) $(PREMINC) $(TARGET_LIB)
 
 $(TARGET_LIB): $(DICTIONARY) $(SOURCES) $(MATRIX)
 	@echo "  Building $(PACKAGE)..."
+	@mkdir -p lib
 	@$(CXX) $(CXXFLAGS) -O3 -shared -o$@ $^ $(LDFLAGS)
 
-$(DICTIONARY): $(HEADERS) LinkDef.h
+$(DICTIONARY): $(HEADERS) inc/LinkDef.h
 	@echo "  Making dictionary for $(PACKAGE)..."
 	@mkdir -p tmp
-	@$(DICTEXE) -f $@ $(DICTFLAGS) $(GSL_INCS) $^
-	@if [ -e $(DICTIONARY:%.cxx=%_rdict.pcm) ] ; then mv -f $(DICTIONARY:%.cxx=%_rdict.pcm) $(CURDIR)/ ; fi # ROOT 6
+	@$(DICTEXE) -f $@ $(DICTFLAGS) $(INCDIRS) $^
+	@if [ -e $(DICTIONARY:%.cxx=%_rdict.pcm) ] ; then mkdir -p lib && mv $(DICTIONARY:%.cxx=%_rdict.pcm) $(TARGET_PCM) ; fi # ROOT 6
 
 $(Eigen_INCS):
 	@echo "  Eigen not found. Trying to initialize submodule..."
@@ -82,11 +85,7 @@ test: $(TARGET_LIB)
 
 clean: $(CLEANDIRS)
 	@echo "  Cleaning $(PACKAGE)..."
-	@rm -f $(TARGET_LIB)
-	@rm -f $(TARGET_LIB:%.so=%_rdict.pcm) # ROOT 6
 	@rm -f $(PREMINC)
-	@rm -f $(DICTIONARY)
-	@rm -f $(DICTIONARY:%.cxx=%.h) # ROOT 5
-	@rm -rf tmp
+	@rm -rf tmp lib
 
 .PHONY: $(SUBDIRS) $(BUILDDIRS) $(CLEANDIRS) test clean all
