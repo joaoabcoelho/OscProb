@@ -1,6 +1,6 @@
 \_form#0=11x9:$\nu_3$
-\_form#1=18x14:$\Gamma_{j1}$
-\_form#2=19x13:$\Gamma_{32}$
+\_form#1=19x13:$\Gamma_{32}$
+\_form#2=18x14:$\Gamma_{j1}$
 \_form#3=19x13:$\Gamma_{31}$
 \_form#4=321x16:$
   \Gamma_{31} = \Gamma_{32} + \Gamma_{21} \cos^2\theta +
