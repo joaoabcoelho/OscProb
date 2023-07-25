@@ -5,7 +5,7 @@
 //
 // jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
-#include <iostream>
+
 #include "PMNS_Iter.h"
 
 using namespace OscProb;

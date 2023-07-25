@@ -73,13 +73,7 @@
 #ifndef EARTHMODELBINNED_H
 #define EARTHMODELBINNED_H
 
-#include <string>
-#include <vector>
-#include <math.h>
-
 #include "EarthModelBase.h"
-//#include "TObject.h"
-#include "NuPath.h"
 
 namespace OscProb {
 
@@ -218,7 +212,7 @@ namespace OscProb {
 
       virtual void LoadModel(std::string filename); ///< Load an earth model from a file
 
-      virtual std::vector<OscProb::EarthBin> GetEarthBins(); ///< Get the set of earth layers
+      virtual std::vector<EarthBin> GetEarthBins(); ///< Get the set of earth layers
 
       virtual void SetRegionZoA(int index, double zoa); ///< Set Z/A of all bins with specified region index
       virtual double GetRegionZoA(int index); ///< Get Z/A of all bins with specified region index
@@ -262,9 +256,9 @@ namespace OscProb {
 
       virtual int LonBinIndex(double longitude); ///< Find lon bin index containing longitude
 
-      OscProb::TrajConstants fC; ///< Useful constants for the trajectory
+      TrajConstants fC; ///< Useful constants for the trajectory
 
-      std::vector<OscProb::EarthBin> fEarthBins; ///< The bins in the earth model
+      std::vector<EarthBin> fEarthBins; ///< The bins in the earth model
       int fnDepthBins; ///< Total number of depth bins
       int fnLonBins; ///< Total number of longitude bins
       int fnLatBins; ///< Total number of latitude bins

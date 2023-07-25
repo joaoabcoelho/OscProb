@@ -18,7 +18,6 @@
 
 #include <unordered_set>
 
-#include "NuPath.h"
 #include "EigenPoint.h"
 
 namespace OscProb {
@@ -127,13 +126,13 @@ namespace OscProb {
 
 
     // Set the neutrino path
-    virtual void SetPath(OscProb::NuPath p);              ///< Set a single path
+    virtual void SetPath(NuPath p);              ///< Set a single path
     virtual void SetPath(double length, double density,
                          double zoa=0.5,    int layer=0); ///< Set a single path
 
-    virtual void SetPath(std::vector<OscProb::NuPath> paths);  ///< Set a path sequence
+    virtual void SetPath(std::vector<NuPath> paths);  ///< Set a path sequence
 
-    virtual void AddPath(OscProb::NuPath p);              ///< Add a path to the sequence
+    virtual void AddPath(NuPath p);              ///< Add a path to the sequence
     virtual void AddPath(double length, double density,
                          double zoa=0.5,    int layer=0); ///< Add a path to the sequence
 
@@ -152,7 +151,7 @@ namespace OscProb {
     virtual void SetStdPath(); ///< Set standard neutrino path
     
     // Get the neutrino path
-    virtual std::vector<OscProb::NuPath> GetPath(); ///< Get the neutrino path sequence
+    virtual std::vector<NuPath> GetPath(); ///< Get the neutrino path sequence
 
     /// Compute the sample points for a bin of L/E with width dLoE
     virtual vectorD GetSamplePoints(double LoE, double dLoE);
@@ -187,7 +186,7 @@ namespace OscProb {
 
 
     // Auxiliary path functions
-    virtual void SetCurPath(OscProb::NuPath p); ///< Set the path currently in use by the class
+    virtual void SetCurPath(NuPath p); ///< Set the path currently in use by the class
 
     virtual void SetAtt(double att, int idx);              ///< Set one of the path attributes
     virtual void SetAtt(vectorD att, int idx); ///< Set all values of a path attribute
@@ -212,7 +211,7 @@ namespace OscProb {
     virtual void ResetToFlavour(int flv); ///< Reset neutrino state to pure flavour flv
     virtual void SetPureState(vectorC nu_in); ///< Set the initial state from a pure state
 
-    virtual void PropagatePath(OscProb::NuPath p);    ///< Propagate neutrino through a single path
+    virtual void PropagatePath(NuPath p);    ///< Propagate neutrino through a single path
     virtual void Propagate();                         ///< Propagate neutrino through full path
 
     virtual double P(int flv);    ///< Return the probability of final state in flavour flv
@@ -242,8 +241,8 @@ namespace OscProb {
     double fEnergy;  ///< Neutrino energy
     bool   fIsNuBar; ///< Anti-neutrino flag
     
-    std::vector<OscProb::NuPath> fNuPaths; ///< Vector of neutrino paths
-    OscProb::NuPath fPath;                 ///< Current neutrino path
+    std::vector<NuPath> fNuPaths; ///< Vector of neutrino paths
+    NuPath fPath;                 ///< Current neutrino path
 
     bool   fBuiltHms;      ///< Tag to avoid rebuilding Hms
     bool   fGotES;         ///< Tag to avoid recalculating eigensystem
@@ -254,7 +253,7 @@ namespace OscProb {
     
     double fAvgProbPrec; ///< AvgProb precision
 
-    std::unordered_set<OscProb::EigenPoint> fMixCache; ///< Caching set of eigensystems
+    std::unordered_set<EigenPoint> fMixCache; ///< Caching set of eigensystems
     EigenPoint fProbe;                       ///< EigenpPoint to try
     
   };

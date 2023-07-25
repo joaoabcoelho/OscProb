@@ -5,6 +5,7 @@
  * Created by Rebekah Pestes (last modified: 4/4/23)
  *************************************************************************/
 
+#include <cmath>
 #include <iostream>
 #include <fstream>
 

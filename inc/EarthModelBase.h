@@ -19,9 +19,6 @@
 #ifndef EARTHMODELBASE_H
 #define EARTHMODELBASE_H
 
-#include <string>
-#include <vector>
-
 #include "TObject.h"
 #include "NuPath.h"
 

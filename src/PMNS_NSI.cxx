@@ -8,12 +8,9 @@
 // jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
-#include "PMNS_NSI.h"
-#include "MatrixDecomp/zheevh3.h"
-
 #include <iostream>
-#include <cassert>
-#include <stdlib.h>
+
+#include "PMNS_NSI.h"
 
 using namespace OscProb;
 

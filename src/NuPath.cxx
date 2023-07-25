@@ -9,7 +9,7 @@
 
 using namespace std;
 
-using namespace OscProb;
+using OscProb::NuPath;
 
 //......................................................................
 ///

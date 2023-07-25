@@ -59,7 +59,7 @@ namespace OscProb {
     virtual void ResetToFlavour(int flv); ///< Reset neutrino state to pure flavour flv
     virtual void SetPureState(vectorC nu_in); ///< Set the density matrix from a pure state
 
-    virtual void PropagatePath(OscProb::NuPath p);    ///< Propagate neutrino through a single path
+    virtual void PropagatePath(NuPath p);    ///< Propagate neutrino through a single path
 
     virtual double P(int flv);    ///< Return the probability of final state in flavour flv
 

@@ -4,9 +4,8 @@
  * (created by Rebekah Pestes based on PremModel.cxx)
  *************************************************************************/
 
+#include <cmath>
 #include <iostream>
-#include <fstream>
-#include <math.h>
 
 #include "EarthModelBase.h"
 
@@ -131,7 +130,7 @@ vector<NuPath> EarthModelBase::GetMergedPaths(double prec){
   vector<NuPath> mergedPath;
 
   // Start with the first path
-  OscProb::NuPath path = fNuPath[0];
+  NuPath path = fNuPath[0];
 
   // Track the total length
   double totL = 0;
@@ -151,7 +150,7 @@ vector<NuPath> EarthModelBase::GetMergedPaths(double prec){
     } else { // If path is within tolerance
 
       // Merge the path with current merged path
-      path = OscProb::AvgPath(path, fNuPath[i]);
+      path = AvgPath(path, fNuPath[i]);
 
     }
 

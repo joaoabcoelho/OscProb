@@ -14,11 +14,11 @@
 /// \author Joao Coelho - jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
-#include "PMNS_Decay.h"
 #include <iostream>
-#include <cassert>
-#include <stdlib.h>
+
 #include "complexsolver.h"
+
+#include "PMNS_Decay.h"
 
 using namespace OscProb;
 using namespace std;

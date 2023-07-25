@@ -6,12 +6,9 @@
 // jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
-#include "PMNS_Fast.h"
 #include "MatrixDecomp/zheevh3.h"
 
-#include <iostream>
-#include <cassert>
-#include <stdlib.h>
+#include "PMNS_Fast.h"
 
 using namespace OscProb;
 

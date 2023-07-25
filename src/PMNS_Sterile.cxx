@@ -15,13 +15,9 @@
 // jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
-#include "PMNS_Sterile.h"
-
-#include <iostream>
-#include <cassert>
-#include <stdlib.h>
-
 #include <gsl/gsl_complex_math.h>
+
+#include "PMNS_Sterile.h"
 
 using namespace std;
 

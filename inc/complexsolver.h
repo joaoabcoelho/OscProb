@@ -1,7 +1,6 @@
 #ifndef COMPLEXSOLVER_H
 #define COMPLEXSOLVER_H
 
-#include <iostream>
 #include "Eigenvalues"
 
 #include "Definitions.h"

@@ -16,12 +16,9 @@
 /// \author Alba Domi - alba.domi\@fau.de                       
 ///////////////////////////////////////////////////////////////////////////////  
 
-#include "PMNS_LIV.h"
-#include "MatrixDecomp/zheevh3.h"
-
 #include <iostream>
-#include <cassert>
-#include <stdlib.h>
+
+#include "PMNS_LIV.h"
 
 using namespace OscProb;
 
@@ -34,14 +31,16 @@ using namespace std;
 ///
 PMNS_LIV::PMNS_LIV() : PMNS_Fast()
 {
+
   SetStdPath();
 
-    for(int dim = 3; dim < 8; dim+=2){
-    for(int flvi = 0; flvi < 3; flvi++){
-    for(int flvj = flvi; flvj < 3; flvj++){
-      SetaT(flvi, flvj, dim, 0, 0);
-      SetcT(flvi, flvj, dim+1, 0, 0);
-    }}}
+  for(int dim = 3; dim < 8; dim+=2){
+  for(int flvi = 0; flvi < 3; flvi++){
+  for(int flvj = flvi; flvj < 3; flvj++){
+    SetaT(flvi, flvj, dim, 0, 0);
+    SetcT(flvi, flvj, dim+1, 0, 0);
+  }}}
+
 }
 
 //......................................................................

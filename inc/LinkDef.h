@@ -12,6 +12,7 @@
 #pragma link C++ struct OscProb::TrajConstants+;
 #pragma link C++ struct OscProb::EigenPoint+;
 #pragma link C++ class vector<OscProb::NuPath>;
+#pragma link C++ class vector<OscProb::EarthBin>;
 #pragma link C++ class vector<OscProb::PremLayer>;
 #pragma link C++ class unordered_set<OscProb::EigenPoint>;
 

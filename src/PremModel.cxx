@@ -5,9 +5,9 @@
 // jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
 
+#include <cmath>
 #include <iostream>
 #include <fstream>
-#include <math.h>
 
 #include "PremModel.h"
 #include "prem_default.hpp"

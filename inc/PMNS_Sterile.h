@@ -18,9 +18,10 @@
 
 #ifndef PMNS_STERILE_H
 #define PMNS_STERILE_H
-#include "PMNS_Base.h"
 
 #include <gsl/gsl_eigen.h>
+
+#include "PMNS_Base.h"
 
 namespace OscProb {
 

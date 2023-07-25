@@ -25,13 +25,8 @@
 #ifndef PREMMODEL_H
 #define PREMMODEL_H
 
-#include <string>
-
-#include "EarthModelBase.h"
-//#include "TObject.h"
-
 #include "Definitions.h"
-#include "NuPath.h"
+#include "EarthModelBase.h"
 
 namespace OscProb {
 

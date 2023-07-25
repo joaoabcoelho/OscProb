@@ -11,7 +11,6 @@
 
 #include <iostream>
 #include <cassert>
-#include <stdlib.h>
 #include <algorithm>
 #include "PMNS_Base.h"
 
@@ -335,7 +334,7 @@ void PMNS_Base::ClearPath(){
 /// Set vector of neutrino paths.
 /// @param paths - A sequence of neutrino paths
 ///
-void PMNS_Base::SetPath(std::vector<OscProb::NuPath> paths){
+void PMNS_Base::SetPath(std::vector<NuPath> paths){
 
   fNuPaths=paths;
 

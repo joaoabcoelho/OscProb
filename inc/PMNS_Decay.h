@@ -52,7 +52,7 @@ namespace OscProb {
     virtual void SolveHam();
     
     ///Propagation with D
-    virtual void PropagatePath(OscProb::NuPath p);    ///< Propagate neutrino through a single path
+    virtual void PropagatePath(NuPath p);    ///< Propagate neutrino through a single path
     
     
     matrixC fHd;  //Decay hamiltonian

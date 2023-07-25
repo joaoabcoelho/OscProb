@@ -10,8 +10,6 @@
 
 #include <iostream>
 #include <cassert>
-#include <stdlib.h>
-#include <algorithm>
 
 #include "PMNS_Deco.h"
 
