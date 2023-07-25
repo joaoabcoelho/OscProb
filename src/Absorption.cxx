@@ -1,6 +1,7 @@
 
 #include <cmath>
 #include <numeric>
+#include <functional>
 
 #include "Absorption.h"
 
