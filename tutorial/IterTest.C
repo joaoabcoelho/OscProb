@@ -2,9 +2,7 @@
 #ifndef __CINT__
 #include "PremModel.h"
 #include "PMNS_Fast.h"
-#include "PMNS_NSI.h"
-#include "PMNS_Sterile.h"
-#include "TObjArray.h"
+#include "PMNS_Iter.h"
 bool isCINT = false;
 #else
 bool isCINT = true;
