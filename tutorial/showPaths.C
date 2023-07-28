@@ -13,7 +13,7 @@ bool isCINT = true;
 #include "LoadOscProb.C"
 
 // Define the PREM tables path
-#include "../prem_default.hpp"
+#include "prem_default.hpp"
 
 // Function to draw paths fractions as a function of cosT
 void DrawPath(double cosT, TString opt = "alp", int col = kBlue, int model = 0);

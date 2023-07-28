@@ -9,7 +9,7 @@ bool isCINT = true;
 
 #include "SetNiceStyle.C"
 #include "LoadOscProb.C"
-#include "../prem_default.hpp"
+#include "prem_default.hpp"
 
 void DrawFixedBaseline_Deco(double L = 1300, bool isNuBar = false){
 

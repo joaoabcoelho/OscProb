@@ -13,7 +13,7 @@ bool isCINT = true;
 #include "LoadOscProb.C"
 
 // Define the PREM tables path
-#include "../prem_default.hpp"
+#include "prem_default.hpp"
 
 // Function to draw all layers from upgoing path
 void DrawModel(TString opt = "alp", int col = kBlue, int model = 0);
