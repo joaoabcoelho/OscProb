@@ -1,15 +1,7 @@
 
-#ifndef __CINT__
 #include "PremModel.h"
 #include "PMNS_Fast.h"
 #include "PMNS_Iter.h"
-bool isCINT = false;
-#else
-bool isCINT = true;
-#endif
-
-// Macro to load OscProb library
-#include "LoadOscProb.C"
 
 #include "SetNiceStyle.C"
 
@@ -37,11 +29,6 @@ struct TimeIt {
 
 void IterTest(){
  
-  // Load the library.
-  // You can also include this in your rootrc file
-  // The library must be in your path
-  if(isCINT) LoadOscProb();
-
   // Initialize your objects
   OscProb::PMNS_Fast pStd;
   OscProb::PMNS_Iter pItr;

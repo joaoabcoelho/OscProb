@@ -1,15 +1,8 @@
-#ifndef __CINT__
+
 #include "PMNS_Fast.h"
-bool isCINT = false;
-#else
-bool isCINT = true;
-#endif
 
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
-
-// Macro to load OscProb library
-#include "LoadOscProb.C"
 
 // Check the accuracy of the
 // oscillation averaging function
@@ -18,9 +11,6 @@ void testAvgProb(){
   // Set nice overall style
   SetNiceStyle();
 
-  // Load OscProb
-  if(isCINT) LoadOscProb();
-  
   // Get a PMNS object
   OscProb::PMNS_Fast p;
 

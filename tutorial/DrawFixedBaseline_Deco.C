@@ -1,23 +1,14 @@
 
-#ifndef __CINT__
 #include "PremModel.h"
 #include "PMNS_Deco.h"
-bool isCINT = false;
-#else
-bool isCINT = true;
-#endif
 
 #include "SetNiceStyle.C"
-#include "LoadOscProb.C"
 #include "prem_default.hpp"
 
 void DrawFixedBaseline_Deco(double L = 1300, bool isNuBar = false){
 
   // Load some nice styles
   SetNiceStyle();
-
-  // Load OscProb library
-  if(isCINT) LoadOscProb();
 
   // Probability Calculator
   OscProb::PMNS_Deco p;

@@ -1,24 +1,14 @@
 
-#include "SetNiceStyle.C"
-#include "LoadOscProb.C"
-
-#ifndef __CINT__
 #include "PremModel.h"
 #include "PMNS_Fast.h"
 #include "PMNS_Decay.h"
 
-bool isCINT = false;
-#else
-bool isCINT = true;
-#endif
+#include "SetNiceStyle.C"
 
 void DrawDecayCompare(double cosT = -0.7, bool isNuBar = false, double alpha3=1e-4){
 
   // Load some nice styles
   SetNiceStyle();
-
-  // Load OscProb library
-  if(isCINT) LoadOscProb();
 
   // Probability Calculator
   OscProb::PMNS_Fast p;

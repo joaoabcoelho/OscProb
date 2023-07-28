@@ -1,22 +1,13 @@
 
-#include "SetNiceStyle.C"
-#include "LoadOscProb.C"
-
-#ifndef __CINT__
 #include "PremModel.h"
 #include "PMNS_Fast.h"
-bool isCINT = false;
-#else
-bool isCINT = true;
-#endif
+
+#include "SetNiceStyle.C"
 
 void DrawFixedCosT(double cosT = -0.7, bool isNuBar = false){
 
   // Load some nice styles
   SetNiceStyle();
-
-  // Load OscProb library
-  if(isCINT) LoadOscProb();
 
   // Probability Calculator
   OscProb::PMNS_Fast p;

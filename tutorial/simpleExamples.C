@@ -1,26 +1,11 @@
 
-#ifndef __CINT__
 #include "PremModel.h"
 #include "PMNS_Fast.h"
 #include "PMNS_NSI.h"
 #include "PMNS_Sterile.h"
-bool isCINT = false;
-#else
-bool isCINT = true;
-#endif
-
-// Macro to load OscProb library
-#include "LoadOscProb.C"
 
 void simpleExamples(){
  
-  // Load the library.
-  // You can also include this in your rootrc file
-  // The library must be in your path
-  if(isCINT) LoadOscProb();
-
-
-
   // Initialize your objects
   OscProb::PMNS_Fast myPMNS;
   

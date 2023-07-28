@@ -1,16 +1,8 @@
 
-#ifndef __CINT__
 #include "PremModel.h"
-bool isCINT = false;
-#else
-bool isCINT = true;
-#endif
 
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
-
-// Macro to load OscProb library
-#include "LoadOscProb.C"
 
 // Define the PREM tables path
 #include "prem_default.hpp"
@@ -21,9 +13,6 @@ void DrawPath(double cosT, TString opt = "alp", int col = kBlue, int model = 0);
 // Plot a series of paths as a
 // function of cosTheta.
 void showPaths(){
-
-  // Load the OscProb library.
-  if(isCINT) LoadOscProb();
 
   // Set a nice overall style
   SetNiceStyle();
