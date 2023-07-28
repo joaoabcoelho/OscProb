@@ -62,11 +62,17 @@ Two macros are particularly useful:
 - ```MakeOscillogram.C``` : Runs a full example of how to plot an oscillogram with the PREM model.
 
 Additionally, these macros contain useful tools:
-- ```LoadOscProb.C```: Searches for the OscProb library in your current directory, parent directory, or library path, and then loads it. It is called within the tutorial macros as a possible usage example.
+- ```LoadOscProb.C```: Searches for the OscProb library in your current directory, parent directory, or library path, and then loads it.
 - ```SetNiceStyle.C```: Provides simple tools to make your plots look nicer. Feel free to use it anytime you're making plots, even if you're not running OscProb. This is completely independent of OscProb.
 
-To run macros in compiled mode you will need to preload the OscProb library, e.g:
+To run macros you will need to preload the OscProb library, e.g:
 
+## Interpreter mode
+```sh
+root -l LoadOscProb.C MakeOscillogram.C
+```
+
+## Compiler mode
 ```sh
 root -l LoadOscProb.C MakeOscillogram.C+
 ```
