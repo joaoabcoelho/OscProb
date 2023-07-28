@@ -62,7 +62,7 @@ void LoadOscProb(TString logLevel = "info") {
   }
 
   TString dirname = gSystem->DirName(s);
-  dirname += "/inc";
+  dirname += "/../inc";
   
   if(verbose) std::cout << "Adding " << dirname << " to include path" << std::endl;
   gInterpreter->AddIncludePath(dirname);
