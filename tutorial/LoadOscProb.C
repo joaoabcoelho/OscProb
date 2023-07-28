@@ -60,8 +60,11 @@ void LoadOscProb(TString logLevel = "info") {
     std::cout << "Loaded library " << s << std::endl;
 
   }
+
+  TString dirname = gSystem->DirName(s);
+  dirname += "/inc";
   
-  if(verbose) std::cout << "Adding " << gSystem->DirName(s) << " to include path" << std::endl;
-  gInterpreter->AddIncludePath(gSystem->DirName(s));
+  if(verbose) std::cout << "Adding " << dirname << " to include path" << std::endl;
+  gInterpreter->AddIncludePath(dirname);
 
 }
