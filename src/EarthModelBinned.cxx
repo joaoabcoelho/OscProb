@@ -198,7 +198,7 @@ void EarthModelBinned::LoadModel(string filename)
   ifstream fin;
   fin.open(filename.c_str());
   if(!fin){
-    cout << "ERROR: File " << filename << " not found!" << endl;
+    cerr << "ERROR: File " << filename << " not found!" << endl;
     return;
   }
 
@@ -226,19 +226,24 @@ void EarthModelBinned::LoadModel(string filename)
       lat_prev = -90.0;
       lon_prev = 0.0;
       fnDepthBins++;
-    } else if(outer_radius < radius_prev){ // Depths must be ordered in model file
-      cout << "ERROR: Depths are not sorted in decreasing order in the model file (or depth is greater than " << EarthRadius << " km)." << endl;
+    }
+    else if(outer_radius < radius_prev){ // Depths must be ordered in model file
+      cerr << "ERROR: Depths are not sorted in decreasing order in the model file "
+           << "(or depth is greater than " << EarthRadius << " km)." << endl;
       ClearModel();
       return;
-    } else if(longitude > lon_prev){ // Reset latitude if longitude has changed from previous one
+    }
+    else if(longitude > lon_prev){ // Reset latitude if longitude has changed from previous one
       lat_prev = -90.0;
       fnLonBins++;
-    } else if(longitude < lon_prev){ // Longitudes must be ordered in model file (after depths)
-      cout << "ERROR: Longitudes are not sorted in increasing order (after depths) in the model file." << endl;
+    }
+    else if(longitude < lon_prev){ // Longitudes must be ordered in model file (after depths)
+      cerr << "ERROR: Longitudes are not sorted in increasing order (after depths) in the model file." << endl;
       ClearModel();
       return;
-    } else if(latitude < lat_prev){ // Latitudes must be ordered in model file (after longitudes)
-      cout << "ERROR: Latitudes are not sorted in increasing order (after longitudes) in the model file." << endl;
+    }
+    else if(latitude < lat_prev){ // Latitudes must be ordered in model file (after longitudes)
+      cerr << "ERROR: Latitudes are not sorted in increasing order (after longitudes) in the model file." << endl;
       ClearModel();
       return;
     }
@@ -273,12 +278,17 @@ void EarthModelBinned::LoadModel(string filename)
 
   //Error if first latitude bin center deviates from about half of the calculated latitude bin width
   if(abs(fHalfLatBinWidth-(fEarthBins[0].latitude+0.5*M_PI))>fHalfLatBinWidth*0.1) { //Warn if first latitude bin center isn't about half of the latitude bin width
-    cout << "ERROR: Latitude of 1st bin center (" << fEarthBins[0].latitude << ") is not in the middle of the first bin, whose size should be " << 2*fHalfLatBinWidth << " rad, as calculated from having " << fnLatBins << " latitude bins." << endl;
+    cerr << "ERROR: Latitude of 1st bin center (" << fEarthBins[0].latitude
+         << ") is not in the middle of the first bin, whose size should be "
+         << 2*fHalfLatBinWidth << " rad, as calculated from having " << fnLatBins
+         << " latitude bins." << endl;
     ClearModel();
     return;
   }
 
-  cout << "\t...done (" << fEarthBins.size() << " bins: " << fnDepthBins << " depth, " << fnLatBins << " latitude, and " << fnLonBins << " longitude)." << endl;
+  cout << "\t...done (" << fEarthBins.size() << " bins: " << fnDepthBins 
+       << " depth, " << fnLatBins << " latitude, and " << fnLonBins 
+       << " longitude)." << endl;
 }
 
 //......................................................................
@@ -295,7 +305,9 @@ void EarthModelBinned::SetRegionZoA(int index, double zoa)
 {
 
   if (index > fmaxRegIndex) {
-    cerr << "WARNING: Index " << index << " does not exist in model (max index = " << fmaxRegIndex << ")." << endl;
+    cerr << "WARNING: Index " << index << " does not exist in model "
+         << "(max index = " << fmaxRegIndex << ")." << endl
+         << "Doing nothing." << endl;
     return;
   }
 
@@ -326,7 +338,8 @@ double EarthModelBinned::GetRegionZoA(int index)
 {
 
   if (index > fmaxRegIndex) {
-    cerr << "ERROR: Index " << index << " does not exist in model (max index = " << fmaxRegIndex << ")." << endl << "Returning 0" << endl;
+    cerr << "ERROR: Index " << index << " does not exist in model "
+         << "(max index = " << fmaxRegIndex << "). Returning 0" << endl;
     return 0;
   }
 
@@ -341,8 +354,7 @@ double EarthModelBinned::GetRegionZoA(int index)
   }
 
   // End of vector reached without finding index
-  cout << "ERROR: Index " << index << " not found!" << endl;
-  cout << "Returning 0" << endl;
+  cerr << "ERROR: Index " << index << " not found! Returning 0" << endl;
   return 0;
 }
 
@@ -358,7 +370,9 @@ void EarthModelBinned::ScaleRegionDensity(int index, double factor)
 {
 
   if (index > fmaxRegIndex) {
-    cerr << "WARNING: Index " << index << " does not exist in model (max index = " << fmaxRegIndex << ")." << endl;
+    cerr << "WARNING: Index " << index << " does not exist in model "
+         << "(max index = " << fmaxRegIndex << ")." << endl
+         << "Doing nothing." << endl;
     return;
   }
 
@@ -446,7 +460,8 @@ double EarthModelBinned::DetDistForNextLatBin(int cur_index, LatBinInfo &L)
   double answer = 0;
   if (denominator == 0) {
      answer = 0.5*(fC.rDetCosAcosDetLat/fC.beta-fC.rDetSinDetLat/fC.gamma);
-  } else {
+  }
+  else {
     answer = -(fC.rDetCosT*NsinSqNewLat+fC.rDetGammaSinDetLat+L.sign*fC.rDetSinT*sinNewLat*sqrt(radicand))/denominator;
   }
   //Indicates that going to the edge of the bin jumped to an invalid part of the function
@@ -484,7 +499,8 @@ double EarthModelBinned::DetDistForNextLonBin(double prev_lon, LonBinInfo &L)
       //cross from 2pi to 0
       L.nextBin = 0;
     }
-  } else {
+  }
+  else {
     L.nextBin = L.bin - 1;
     if(L.nextBin < 0) {
       //cross from 0 to 2pi
@@ -496,7 +512,8 @@ double EarthModelBinned::DetDistForNextLonBin(double prev_lon, LonBinInfo &L)
   if (L.max < L.min) {
     if (0 > lon-L.min && L.max-lon < 0)
       return -1;
-  } else {
+  }
+  else {
     if (0 > lon-L.min || L.max-lon < 0)
       return -1;
   } 
@@ -538,7 +555,6 @@ void EarthModelBinned::RecordLatLonBinCrossings(double detDist_nextDbin, double 
   while(detDist_nextDbin < latI.detDist_nextBin || detDist_nextDbin < lonI.detDist_nextBin) {
 
     if (latI.detDist_nextBin > lonI.detDist_nextBin) {
-//    cout << "\tChanging lat bins (to " << latI.nextBin << ") at x=" << latI.detDist_nextBin << "km" << endl;
 
       //Add segment to next lat bin to path
       AddPath(DetDist - latI.detDist_nextBin, fEarthBins[index]);
@@ -551,12 +567,13 @@ void EarthModelBinned::RecordLatLonBinCrossings(double detDist_nextDbin, double 
       //Find next lat bin
       if (latI.dLat == 0) {
         latI.detDist_nextBin = -1;
-      } else {
+      }
+      else {
         latI.detDist_nextBin = DetDistForNextLatBin(index, latI);
         latI.nextBin = latI.bin + latI.sign;
       }
-    } else {
-//    cout << "\tChanging lon bins (to " << lonI.nextBin << ") at x=" << lonI.detDist_nextBin << "km" << endl;
+    }
+    else {
 
       //Add segment to next lon bin to path
       AddPath(DetDist - lonI.detDist_nextBin, fEarthBins[index]);
@@ -569,7 +586,8 @@ void EarthModelBinned::RecordLatLonBinCrossings(double detDist_nextDbin, double 
       //Find next lon bin
       if (lonI.dLon == 0) {
         lonI.detDist_nextBin = -1;
-      } else {
+      }
+      else {
         lonI.detDist_nextBin = DetDistForNextLonBin(fEarthBins[index].longitude, lonI);
       }
     }
@@ -642,7 +660,8 @@ int EarthModelBinned::FillPath(double cosT, double phi)
   double init_lat = asin((fC.rDetSinT*fC.beta+fC.gamma*distEdgeToMin)/fRadiusMax); //in radians
 
   // Starting longitude
-  double init_lon = atan2(fC.sinDetLon*fC.rDetCosDetLat-baseline*(fC.alpha*fC.sinDetLon+fC.sinTsinAcosDetLon), fC.cosDetLon*fC.rDetCosDetLat+baseline*(fC.sinTsinAsinDetLon-fC.alpha*fC.cosDetLon)); //in radians (between -M_PI and M_PI)
+  double init_lon = atan2(fC.sinDetLon*fC.rDetCosDetLat-baseline*(fC.alpha*fC.sinDetLon+fC.sinTsinAcosDetLon),
+                          fC.cosDetLon*fC.rDetCosDetLat+baseline*(fC.sinTsinAsinDetLon-fC.alpha*fC.cosDetLon)); //in radians (between -M_PI and M_PI)
   if (init_lon < 0) {
     init_lon += 2*M_PI;
   }
@@ -654,7 +673,7 @@ int EarthModelBinned::FillPath(double cosT, double phi)
   int init_lonBin = LonBinIndex(init_lon);
   int init_latBin = floor((init_lat+M_PI/2)*fInvLatBinWidth);
   int index = fEarthBins.size()-binsPerDepth + init_lonBin*fnLatBins + init_latBin;
-//  cout << "\t...Initial (Lat,Long) = (" << init_lat << "," << init_lon << ") => Initial bin: " << index << "(lat bin " << init_latBin << " and lon bin " << init_lonBin << ")..." << endl;
+
   latinfo.bin = init_latBin;
   loninfo.bin = init_lonBin;
 
@@ -666,7 +685,8 @@ int EarthModelBinned::FillPath(double cosT, double phi)
   if (fC.beta < 0)
     latinfo.sign = -1;
   if (fC.beta == 0) { if (fC.cosA > 0) latinfo.sign = -1;
-  } else if (baseline < fC.rDetCosAcosDetLat/fC.beta) {
+  }
+  else if (baseline < fC.rDetCosAcosDetLat/fC.beta) {
     latinfo.sign = -(latinfo.sign);
     latinfo.maxreached++;
   }
@@ -691,18 +711,22 @@ int EarthModelBinned::FillPath(double cosT, double phi)
     latinfo.detDist_nextBin = loninfo.detDist_nextBin;
     latinfo.nextBin = floor((fDetLat+0.5*M_PI)*fInvLatBinWidth);
     latinfo.dLat = 0;
-  } else {
+  }
+  else {
     if (fC.sinA == 0) {
       if (fC.alpha == 0) { //crosses "at" infinity
         loninfo.detDist_nextBin = -1;
-      } else { //longitude flips at center of the Earth
+      }
+      else { //longitude flips at center of the Earth
         loninfo.detDist_nextBin = fC.rDetCosDetLat/fC.alpha;
         loninfo.nextBin = LonBinIndex(fDetLon);
       }
       loninfo.dLon = 0;
-    } else if (fC.cosDetLat == 0) {
+    }
+    else if (fC.cosDetLat == 0) {
       loninfo.detDist_nextBin = -1;
-    } else {
+    }
+    else {
       //x(lon) calculation
       loninfo.detDist_nextBin = DetDistForNextLonBin(fEarthBins[index].longitude, loninfo); //also sets loninfo.nextBin
     }
@@ -761,13 +785,18 @@ int EarthModelBinned::FillPath(double cosT, double phi)
 
   //Longitude calculation error message, if needed
   if (loninfo.error < 0) {
-    cerr << "ERROR:  Oops... It turns out that I was wrong about the denominator of the x(long) equation never being 0 apart from the cases where sin(Zenith) = 0, sin(Azimuthal) = 0, or cos(Detector Longitude) = 0.  Send the following message to rpestes@apc.in2p3.fr:" << endl << endl;
-    cerr << "You were wrong about the denominator of x(long)... Here are the values of the variables that broke it:" << endl;
-    cerr << "\tDetector Coordinates (r,lat,lon) = (" << fDetRadius << ", " << fDetLat << ", " << fDetLon << ")" << endl;
-    cerr << "\tcos(Zenith Angle) = " << cosT << endl;
-    cerr << "\tAzimuthal Angle = " << phi << " deg" << endl;
-    cerr << "\t" << loninfo.err_message << endl;
-    cerr << "Please fix this ASAP!" << endl;
+    cerr << "ERROR:  Oops... It turns out that I was wrong about the denominator"
+         << " of the x(long) equation never being 0 apart from the cases where "
+         << "sin(Zenith) = 0, sin(Azimuthal) = 0, or cos(Detector Longitude) = 0."
+         << "  Send the following message to rpestes@apc.in2p3.fr:" << endl << endl
+         << "You were wrong about the denominator of x(long)... "
+         << "Here are the values of the variables that broke it:" << endl
+         << "\tDetector Coordinates (r,lat,lon) = (" << fDetRadius << ", " 
+         << fDetLat << ", " << fDetLon << ")" << endl
+         << "\tcos(Zenith Angle) = " << cosT << endl
+         << "\tAzimuthal Angle = " << phi << " deg" << endl
+         << "\t" << loninfo.err_message << endl
+         << "Please fix this ASAP!" << endl;
     return -1;
   }
 

@@ -89,15 +89,15 @@ void PMNS_NSI::SetNSI(double eps_ee,    double eps_emu,    double eps_etau,
 void PMNS_NSI::SetEps(int flvi, int flvj, double val, double phase){
 
   if(flvi > flvj){
-    cout << "First argument should be smaller or equal to second argument" << endl;
-    cout << "Setting reverse order (Eps_" << flvj << flvi << "). " << endl;
+    cerr << "WARNING: First argument should be smaller or equal to second argument" << endl
+         << "Setting reverse order (Eps_" << flvj << flvi << "). " << endl;
     int temp = flvi;
     flvi = flvj;
     flvj = temp;
   }
   if(flvi<0 || flvi>2 || flvj < flvi || flvj > 2){
-    cout << "Eps_" << flvi << flvj << " not valid for " << fNumNus;
-    cout << " neutrinos. Doing nothing." << endl;
+    cerr << "WARNING: Eps_" << flvi << flvj << " not valid for " << fNumNus
+         << " neutrinos. Doing nothing." << endl;
     return;
   }
 
@@ -131,15 +131,15 @@ void PMNS_NSI::SetEps(int flvi, int flvj, double val, double phase){
 complexD PMNS_NSI::GetEps(int flvi, int flvj){
 
   if(flvi > flvj){
-    cout << "First argument should be smaller or equal to second argument" << endl;
-    cout << "Setting reverse order (Eps_" << flvj << flvi << "). " << endl;
+    cerr << "WARNING: First argument should be smaller or equal to second argument" << endl
+         << "Setting reverse order (Eps_" << flvj << flvi << "). " << endl;
     int temp = flvi;
     flvi = flvj;
     flvj = temp;
   }
   if(flvi<0 || flvi>2 || flvj < flvi || flvj > 2){
-    cout << "Eps_" << flvi << flvj << " not valid for " << fNumNus;
-    cout << " neutrinos. Returning 0." << endl;
+    cerr << "WARNING: Eps_" << flvi << flvj << " not valid for " << fNumNus
+         << " neutrinos. Returning 0." << endl;
     return zero;
   }
 

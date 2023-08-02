@@ -33,7 +33,7 @@ void complexsolver(OscProb::matrixC  A,
   eigensolver.compute(l);
  
   if(eigensolver.info() != Eigen::Success){
-    std::cout << "The diagonalization is failing" << std::endl;
+    std::cerr << "ERROR: The diagonalization is failing" << std::endl;
     abort();
   }
   

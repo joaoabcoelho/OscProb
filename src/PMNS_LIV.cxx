@@ -67,19 +67,19 @@ PMNS_LIV::~PMNS_LIV(){}
 void PMNS_LIV::SetaT(int flvi, int flvj, int dim, double val, double phase){
 
   if(flvi > flvj){
-    cout << "First argument should be smaller or equal to second argument" << endl;
-    cout << "Setting reverse order (aT_" << flvj << flvi << "). " << endl;
+    cerr << "WARNING: First argument should be smaller or equal to second argument" << endl
+         << "Setting reverse order (aT_" << flvj << flvi << "). " << endl;
     int temp = flvi;
     flvi = flvj;
     flvj = temp;
   }
   if(flvi<0 || flvi>2 || flvj < flvi || flvj > 2){
-    cout << "aT_" << flvi << flvj << " not valid for " << fNumNus;
-    cout << " neutrinos. Doing nothing." << endl;
+    cerr << "WARNING: aT_" << flvi << flvj << " not valid for " << fNumNus
+         << " neutrinos. Doing nothing." << endl;
     return;
   }
   if(dim != 3 && dim != 5 && dim != 7){
-    cout << "Warninig: Invalid aT coefficient dimension dim=" << dim << " not in  [3,5,7].\n";
+    cerr << "WARNING: Invalid aT coefficient dimension dim=" << dim << " not in  [3,5,7].\n";
     return;
   }
 
@@ -117,19 +117,19 @@ void PMNS_LIV::SetaT(int flvi, int flvj, int dim, double val, double phase){
 void PMNS_LIV::SetcT(int flvi, int flvj, int dim, double val, double phase){
 
   if(flvi > flvj){
-    cout << "First argument should be smaller or equal to second argument" << endl;
-    cout << "Setting reverse order (cT_" << flvj << flvi << "). " << endl;
+    cerr << "WARNING: First argument should be smaller or equal to second argument" << endl
+         << "Setting reverse order (cT_" << flvj << flvi << "). " << endl;
     int temp = flvi;
     flvi = flvj;
     flvj = temp;
   }
   if(flvi<0 || flvi>2 || flvj < flvi || flvj > 2){
-    cout << "cT_" << flvi << flvj << " not valid for " << fNumNus;
-    cout << " neutrinos. Doing nothing." << endl;
+    cerr << "WARNING: cT_" << flvi << flvj << " not valid for " << fNumNus
+         << " neutrinos. Doing nothing." << endl;
     return;
   }
   if(dim != 4 && dim != 6 && dim != 8){
-    cout << "Warninig: Invalid cT coefficient dimension dim=" << dim << " not in  [4,6,8].\n";
+    cerr << "WARNING: Invalid cT coefficient dimension dim=" << dim << " not in  [4,6,8].\n";
     return;
   }
 
@@ -166,19 +166,19 @@ void PMNS_LIV::SetcT(int flvi, int flvj, int dim, double val, double phase){
 complex<double> PMNS_LIV::GetaT(int flvi, int flvj, int dim){
 
   if(flvi > flvj){
-    cout << "First argument should be smaller or equal to second argument" << endl;
-    cout << "Setting reverse order (aT_" << flvj << flvi << "). " << endl;
+    cerr << "WARNING: First argument should be smaller or equal to second argument" << endl
+         << "Setting reverse order (aT_" << flvj << flvi << "). " << endl;
     int temp = flvi;
     flvi = flvj;
     flvj = temp;
   }
   if(flvi<0 || flvi>2 || flvj < flvi || flvj > 2){
-    cout << "aT_" << flvi << flvj << " not valid for " << fNumNus;
-    cout << " neutrinos. Returning 0." << endl;
+    cerr << "WARNING: aT_" << flvi << flvj << " not valid for " << fNumNus
+         << " neutrinos. Returning 0." << endl;
     return zero;
   }
   if(dim != 3 && dim != 5 && dim != 7){
-    cout << "Warninig: Invalid aT coefficient dimension dim=" << dim << " not in  [3,5,7].\n";
+    cerr << "WARNING: Invalid aT coefficient dimension dim=" << dim << " not in  [3,5,7].\n";
     return zero;
   }
 
@@ -205,19 +205,19 @@ complex<double> PMNS_LIV::GetaT(int flvi, int flvj, int dim){
 complex<double> PMNS_LIV::GetcT(int flvi, int flvj, int dim){
 
   if(flvi > flvj){
-    cout << "First argument should be smaller or equal to second argument" << endl;
-    cout << "Setting reverse order (cT_" << flvj << flvi << "). " << endl;
+    cerr << "WARNING: First argument should be smaller or equal to second argument" << endl
+         << "Setting reverse order (cT_" << flvj << flvi << "). " << endl;
     int temp = flvi;
     flvi = flvj;
     flvj = temp;
   }
   if(flvi<0 || flvi>2 || flvj < flvi || flvj > 2){
-    cout << "cT_" << flvi << flvj << " not valid for " << fNumNus;
-    cout << " neutrinos. Returning 0." << endl;
+    cerr << "WARNING: cT_" << flvi << flvj << " not valid for " << fNumNus
+         << " neutrinos. Returning 0." << endl;
     return zero;
   }
   if(dim != 4 && dim != 6 && dim != 8){
-    cout << "Warninig: Invalid cT coefficient dimension dim=" << dim << " not in  [4,6,8].\n";
+    cerr << "WARNING: Invalid cT coefficient dimension dim=" << dim << " not in  [4,6,8].\n";
     return zero;
   }
   

@@ -423,8 +423,8 @@ void PMNS_Base::SetAtt(double att, int idx){
 
   if(fNuPaths.size() != 1){
 
-    cout << "Warning: Clearing path vector and starting new single path." << endl;
-    cout << "To avoid possible issues, use the SetPath function." << endl;
+    cerr << "WARNING: Clearing path vector and starting new single path." << endl
+         << "To avoid possible issues, use the SetPath function." << endl;
 
     SetStdPath();
 
@@ -523,8 +523,8 @@ void PMNS_Base::SetAtt(vectorD att, int idx){
   // be taken from default single path.
   else{
 
-    cout << "Warning: New vector size. Starting new path vector." << endl;
-    cout << "To avoid possible issues, use the SetPath function." << endl;
+    cerr << "WARNING: New vector size. Starting new path vector." << endl
+         << "To avoid possible issues, use the SetPath function." << endl;
 
     // Start a new standard path just
     // to set default values
@@ -634,15 +634,15 @@ void PMNS_Base::SetAngle(int i, int j, double th)
 {
 
   if(i>j){
-    cout << "Warning: First argument should be smaller than second argument" << endl;
-    cout << "         Setting reverse order (Theta" << j << i << "). " << endl;
+    cerr << "WARNING: First argument should be smaller than second argument" << endl
+         << "         Setting reverse order (Theta" << j << i << "). " << endl;
     int temp = i;
     i = j;
     j = temp;
   }
   if(i<1 || i>fNumNus-1 || j<2 || j>fNumNus){
-    cout << "ERROR: Theta" << i << j << " not valid for " << fNumNus;
-    cout << " neutrinos. Doing nothing." << endl;
+    cerr << "ERROR: Theta" << i << j << " not valid for " << fNumNus
+         << " neutrinos. Doing nothing." << endl;
     return;
   }
 
@@ -666,15 +666,15 @@ double PMNS_Base::GetAngle(int i, int j)
 {
 
   if(i>j){
-    cout << "Warning: First argument should be smaller than second argument" << endl;
-    cout << "         Setting reverse order (Theta" << j << i << "). " << endl;
+    cerr << "WARNING: First argument should be smaller than second argument" << endl
+         << "         Setting reverse order (Theta" << j << i << "). " << endl;
     int temp = i;
     i = j;
     j = temp;
   }
   if(i<1 || i>fNumNus-1 || j<2 || j>fNumNus){
-    cout << "ERROR: Theta" << i << j << " not valid for " << fNumNus;
-    cout << " neutrinos. Returning zero." << endl;
+    cerr << "ERROR: Theta" << i << j << " not valid for " << fNumNus
+         << " neutrinos. Returning zero." << endl;
     return 0;
   }
 
@@ -700,19 +700,19 @@ void PMNS_Base::SetDelta(int i, int j, double delta)
 {
 
   if(i>j){
-    cout << "Warning: First argument should be smaller than second argument" << endl;
-    cout << "         Setting reverse order (Delta" << j << i << "). " << endl;
+    cerr << "WARNING: First argument should be smaller than second argument" << endl
+         << "         Setting reverse order (Delta" << j << i << "). " << endl;
     int temp = i;
     i = j;
     j = temp;
   }
   if(i<1 || i>fNumNus-1 || j<2 || j>fNumNus){
-    cout << "ERROR: Delta" << i << j << " not valid for " << fNumNus;
-    cout << " neutrinos. Doing nothing." << endl;
+    cerr << "ERROR: Delta" << i << j << " not valid for " << fNumNus
+         << " neutrinos. Doing nothing." << endl;
     return;
   }
   if(i+1==j){
-    cout << "Warning: Rotation " << i << j << " is real. Doing nothing." << endl;
+    cerr << "WARNING: Rotation " << i << j << " is real. Doing nothing." << endl;
     return;
   }
 
@@ -736,19 +736,19 @@ double PMNS_Base::GetDelta(int i, int j)
 {
 
   if(i>j){
-    cout << "Warning: First argument should be smaller than second argument" << endl;
-    cout << "         Setting reverse order (Delta" << j << i << "). " << endl;
+    cerr << "WARNING: First argument should be smaller than second argument" << endl
+         << "         Setting reverse order (Delta" << j << i << "). " << endl;
     int temp = i;
     i = j;
     j = temp;
   }
   if(i<1 || i>fNumNus-1 || j<2 || j>fNumNus){
-    cout << "ERROR: Delta" << i << j << " not valid for " << fNumNus;
-    cout << " neutrinos. Returning zero." << endl;
+    cerr << "ERROR: Delta" << i << j << " not valid for " << fNumNus
+         << " neutrinos. Returning zero." << endl;
     return 0;
   }
   if(i+1==j){
-    cout << "Warning: Rotation " << i << j << " is real. Returning zero." << endl;
+    cerr << "WARNING: Rotation " << i << j << " is real. Returning zero." << endl;
     return 0;
   }
 
@@ -772,8 +772,8 @@ void PMNS_Base::SetDm(int j, double dm)
 {
 
   if(j<2 || j>fNumNus){
-    cout << "ERROR: Dm" << j << "1 not valid for " << fNumNus;
-    cout << " neutrinos. Doing nothing." << endl;
+    cerr << "ERROR: Dm" << j << "1 not valid for " << fNumNus
+         << " neutrinos. Doing nothing." << endl;
     return;
   }
 
@@ -796,8 +796,8 @@ double PMNS_Base::GetDm(int j)
 {
 
   if(j<2 || j>fNumNus){
-    cout << "ERROR: Dm" << j << "1 not valid for " << fNumNus;
-    cout << " neutrinos. Returning zero." << endl;
+    cerr << "ERROR: Dm" << j << "1 not valid for " << fNumNus
+         << " neutrinos. Returning zero." << endl;
     return 0;
   }
 
@@ -835,8 +835,8 @@ double PMNS_Base::GetDmEff(int j)
 {
 
   if(j<2 || j>fNumNus){
-    cout << "ERROR: Dm_" << j << "1 not valid for " << fNumNus;
-    cout << " neutrinos. Returning zero." << endl;
+    cerr << "ERROR: Dm_" << j << "1 not valid for " << fNumNus
+         << " neutrinos. Returning zero." << endl;
     return 0;
   }
 
@@ -2140,7 +2140,7 @@ matrixD PMNS_Base::AvgProbMatrixLoE(int nflvi, int nflvf,
 ///
 void PMNS_Base::SetAvgProbPrec(double prec){
   if(prec<1e-8){
-    cout << "WARNING: Cannot set AvgProb precision lower that 1e-8."
+    cerr << "WARNING: Cannot set AvgProb precision lower that 1e-8."
          << "Setting to 1e-8." << endl;
     prec = 1e-8;
   }

@@ -71,7 +71,7 @@ void PMNS_Decay::SetMix(double th12, double th23, double th13, double deltacp)
 void PMNS_Decay::SetAlpha3(double alpha3) 
 {
   if(alpha3<0){
-    cout << "Alpha3 must be positive" << endl;
+    cerr << "WARNING: Alpha3 must be positive. Doing nothing." << endl;
     return;
   }
 
@@ -85,7 +85,7 @@ void PMNS_Decay::SetAlpha3(double alpha3)
 void PMNS_Decay::SetAlpha2(double alpha2)
 {
   if(alpha2<0){
-    cout << "Alpha2 must be positive" << endl;
+    cerr << "WARNING: Alpha2 must be positive. Doing nothing." << endl;
     return;
   }
 

@@ -287,8 +287,7 @@ double PremModel::GetLayerZoA(int layer)
 
   // This check assumes the layer types are in increasing order
   if(layer > fPremLayers.back().layer){
-    cerr << "ERROR: Not that many layer types" << endl;
-    cerr << "Returning 0" << endl;
+    cerr << "ERROR: Not that many layer types. Returning 0" << endl;
     return 0;
   }
 
@@ -301,8 +300,7 @@ double PremModel::GetLayerZoA(int layer)
   }
 
   // End of vector reached without finding input type
-  cerr << "ERROR: layer type not found" << endl;
-  cerr << "Returning 0" << endl;
+  cerr << "ERROR: layer type not found. Returning 0" << endl;
   return 0;
 }
 
@@ -319,14 +317,14 @@ void PremModel::SetTopLayerSize(double thick)
 {
 
   if(thick <= 0){
-    cerr << "Layer thickness should be positive. Do nothing." << endl;
+    cerr << "WARNING: Layer thickness should be positive. Do nothing." << endl;
     return;
   }
 
   int nlayers = fPremLayers.size();
 
   if(nlayers < 1){
-    cerr << "PremModel has no layers. Do nothing." << endl;
+    cerr << "WARNING: PremModel has no layers. Do nothing." << endl;
     return;
   }
 

@@ -52,13 +52,13 @@ PMNS_Deco::~PMNS_Deco(){}
 void PMNS_Deco::SetGamma(int j, double val){
 
   if(j < 2 || j > 3){
-    cout << "Gamma_" << j << 1 << " not valid for " << fNumNus;
-    cout << " neutrinos. Doing nothing." << endl;
+    cerr << "WARNING: Gamma_" << j << 1 << " not valid for " << fNumNus
+         << " neutrinos. Doing nothing." << endl;
     return;
   }
 
   if(val<0){
-    cout << "Warning: Gamma_" << j << 1 << " must be positive. "
+    cerr << "WARNING: Gamma_" << j << 1 << " must be positive. "
          << "Setting it to absolute value of input: "
          << -val << endl;
     val = -val;
@@ -86,7 +86,7 @@ void PMNS_Deco::SetGamma(int j, double val){
 void PMNS_Deco::SetGamma32(double val){
 
   if(val<0){
-    cout << "Warning: Gamma_32 must be positive. "
+    cerr << "WARNING: Gamma_32 must be positive. "
          << "Setting it to absolute value of input: "
          << -val << endl;
     val = -val;
@@ -108,7 +108,7 @@ void PMNS_Deco::SetGamma32(double val){
       fGamma[2] = 0.25*fGamma[1]*(1 - pow(fGamma[0],2));
     }
     
-    cout << "WARNING: Impossible to have Gamma32 = "        << val
+    cerr << "WARNING: Impossible to have Gamma32 = "        << val
          << " with current Gamma21 and theta parameters."   << endl
          << "         Changing the value of cos(theta) to " << fGamma[0] 
          << endl;
@@ -122,7 +122,7 @@ void PMNS_Deco::SetGamma32(double val){
   if(arg < 0){
     arg = 0;
     fGamma[0] = sqrt(1 - 4*val/fGamma[1]);
-    cout << "WARNING: Imaginary Gamma31 found. Changing the value of cos(theta) to " 
+    cerr << "WARNING: Imaginary Gamma31 found. Changing the value of cos(theta) to " 
          << fGamma[0] << endl;
   }
   
@@ -131,7 +131,7 @@ void PMNS_Deco::SetGamma32(double val){
   fGamma[2] = gamma31;
   
   if(fabs(val - GetGamma(3,2)) > 1e-6){
-    cout << "ERROR: Failed sanity check: GetGamma(3,2) = "
+    cerr << "ERROR: Failed sanity check: GetGamma(3,2) = "
          << GetGamma(3,2) << " != " << val << endl;
   }
   
@@ -209,15 +209,15 @@ double PMNS_Deco::GetGamma(int i, int j)
 {
 
   if(i < j){
-    cout << "First argument should be larger than second argument" << endl;
-    cout << "Setting reverse order (Gamma_" << j << i << "). " << endl;
+    cerr << "WARNING: First argument should be larger than second argument" << endl
+         << "Setting reverse order (Gamma_" << j << i << "). " << endl;
     int temp = i;
     i = j;
     j = temp;
   }
   if(i<1 || i>3 || i <= j || j < 1){
-    cout << "Gamma_" << i << j << " not valid for " << fNumNus;
-    cout << " neutrinos. Returning 0." << endl;
+    cerr << "WARNING: Gamma_" << i << j << " not valid for " << fNumNus
+         << " neutrinos. Returning 0." << endl;
     return 0;
   }
 
