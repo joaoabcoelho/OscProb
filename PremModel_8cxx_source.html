@@ -299,141 +299,139 @@ $(document).ready(function(){initNavTree('PremModel_8cxx_source.html',''); initR
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span> </div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  <span class="comment">// This check assumes the layer types are in increasing order</span></div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>  <span class="keywordflow">if</span>(layer &gt; <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.back().layer){</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    cerr &lt;&lt; <span class="stringliteral">&quot;ERROR: Not that many layer types&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    cerr &lt;&lt; <span class="stringliteral">&quot;Returning 0&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>  }</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;nlayers; i++){</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[i].layer != layer) <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <span class="keywordflow">else</span> <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[i].zoa;</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  }</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>  <span class="comment">// End of vector reached without finding input type</span></div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  cerr &lt;&lt; <span class="stringliteral">&quot;ERROR: layer type not found&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  cerr &lt;&lt; <span class="stringliteral">&quot;Returning 0&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>  <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>}</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span><span class="comment">//......................................................................</span></div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno"><a class="line" href="classOscProb_1_1PremModel.html#a095bd601f6cd91926de9928e96ea7751">  318</a></span><span class="comment"></span><span class="keywordtype">void</span> <a class="code hl_function" href="classOscProb_1_1PremModel.html#a095bd601f6cd91926de9928e96ea7751">PremModel::SetTopLayerSize</a>(<span class="keywordtype">double</span> thick)</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>{</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  <span class="keywordflow">if</span>(thick &lt;= 0){</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    cerr &lt;&lt; <span class="stringliteral">&quot;Layer thickness should be positive. Do nothing.&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>  }</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    cerr &lt;&lt; <span class="stringliteral">&quot;ERROR: Not that many layer types. Returning 0&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>  }</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;nlayers; i++){</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[i].layer != layer) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <span class="keywordflow">else</span> <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[i].zoa;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>  }</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>  <span class="comment">// End of vector reached without finding input type</span></div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>  cerr &lt;&lt; <span class="stringliteral">&quot;ERROR: layer type not found. Returning 0&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>}</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="comment">//......................................................................</span></div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno"><a class="line" href="classOscProb_1_1PremModel.html#a095bd601f6cd91926de9928e96ea7751">  316</a></span><span class="comment"></span><span class="keywordtype">void</span> <a class="code hl_function" href="classOscProb_1_1PremModel.html#a095bd601f6cd91926de9928e96ea7751">PremModel::SetTopLayerSize</a>(<span class="keywordtype">double</span> thick)</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>{</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  <span class="keywordflow">if</span>(thick &lt;= 0){</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: Layer thickness should be positive. Do nothing.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>  }</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>  <span class="keywordtype">int</span> nlayers = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.size();</div>
 <div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span> </div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>  <span class="keywordtype">int</span> nlayers = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.size();</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>  <span class="keywordflow">if</span>(nlayers &lt; 1){</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    cerr &lt;&lt; <span class="stringliteral">&quot;PremModel has no layers. Do nothing.&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  }</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span> </div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>  <span class="keywordtype">double</span> bottomRadius;</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>  <span class="keywordflow">if</span>(nlayers&gt;1) bottomRadius = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[nlayers-2].radius;</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>  <span class="keywordflow">else</span>          bottomRadius = 0;</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>  <span class="keywordflow">if</span>(nlayers &lt; 1){</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: PremModel has no layers. Do nothing.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>  }</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span> </div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  <span class="keywordtype">double</span> bottomRadius;</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>  <span class="keywordflow">if</span>(nlayers&gt;1) bottomRadius = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[nlayers-2].radius;</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>  <span class="keywordflow">else</span>          bottomRadius = 0;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>  <span class="keywordtype">double</span> topRadius = bottomRadius + thick;</div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span> </div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>  <span class="keywordtype">double</span> topRadius = bottomRadius + thick;</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>  <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[nlayers-1].radius = topRadius;</div>
 <div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span> </div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>  <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[nlayers-1].radius = topRadius;</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>  <span class="comment">//Update max radius</span></div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>  <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">fRadiusMax</a> = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.back().radius;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>  <span class="comment">//Update max radius</span></div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>  <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">fRadiusMax</a> = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.back().radius;</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span> </div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>}</div>
 <div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span> </div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>}</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><span class="comment">//......................................................................</span></div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno"><a class="line" href="classOscProb_1_1PremModel.html#aca013f7ac5494282834048786a0e07a6">  355</a></span><span class="comment"></span><span class="keywordtype">void</span> <a class="code hl_function" href="classOscProb_1_1PremModel.html#aca013f7ac5494282834048786a0e07a6">PremModel::AddPath</a>(<span class="keywordtype">double</span> length, <a class="code hl_struct" href="structOscProb_1_1PremLayer.html">PremLayer</a> pl)</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>{</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span><span class="comment">//......................................................................</span></div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno"><a class="line" href="classOscProb_1_1PremModel.html#aca013f7ac5494282834048786a0e07a6">  353</a></span><span class="comment"></span><span class="keywordtype">void</span> <a class="code hl_function" href="classOscProb_1_1PremModel.html#aca013f7ac5494282834048786a0e07a6">PremModel::AddPath</a>(<span class="keywordtype">double</span> length, <a class="code hl_struct" href="structOscProb_1_1PremLayer.html">PremLayer</a> pl)</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>{</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span> </div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>  <a class="code hl_function" href="classOscProb_1_1EarthModelBase.html#ad4398bca05cdac15da15027b30d04a8d">AddPathSegment</a>(length, pl.<a class="code hl_variable" href="structOscProb_1_1PremLayer.html#aba2536cbdab87d0db33df47f95c4f2c3">density</a>, pl.<a class="code hl_variable" href="structOscProb_1_1PremLayer.html#a8687a8169d786fca79908292d11077f5">zoa</a>, pl.<a class="code hl_variable" href="structOscProb_1_1PremLayer.html#aca8d7df68e6f982155b68b7e6a7ef389">layer</a>);</div>
 <div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span> </div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>  <a class="code hl_function" href="classOscProb_1_1EarthModelBase.html#ad4398bca05cdac15da15027b30d04a8d">AddPathSegment</a>(length, pl.<a class="code hl_variable" href="structOscProb_1_1PremLayer.html#aba2536cbdab87d0db33df47f95c4f2c3">density</a>, pl.<a class="code hl_variable" href="structOscProb_1_1PremLayer.html#a8687a8169d786fca79908292d11077f5">zoa</a>, pl.<a class="code hl_variable" href="structOscProb_1_1PremLayer.html#aca8d7df68e6f982155b68b7e6a7ef389">layer</a>);</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>}</div>
 <div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span> </div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>}</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span><span class="comment">//......................................................................</span></div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno"><a class="line" href="classOscProb_1_1PremModel.html#a802363021cc9d46506314f961e0e769f">  378</a></span><span class="comment"></span><span class="keywordtype">int</span> <a class="code hl_function" href="classOscProb_1_1PremModel.html#a802363021cc9d46506314f961e0e769f">PremModel::FillPath</a>(<span class="keywordtype">double</span> cosT, <span class="keywordtype">double</span> phi)</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>{</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span> </div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>  <span class="comment">// Clear current path sequence</span></div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>  <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a>.clear();</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span> </div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>  <span class="comment">// Do nothing if cosine is unphysical</span></div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>  <span class="keywordflow">if</span>(fabs(cosT) &gt; 1) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span> </div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>  <span class="comment">// Define the minimum path radius</span></div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>  <span class="keywordtype">double</span> minR = <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a> * sqrt(1 - cosT*cosT);</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  <span class="keywordtype">double</span> minRsq = minR*minR;</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span> </div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>  <span class="comment">// Set the top layer index</span></div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>  <span class="keywordtype">int</span> toplayer = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.size() - 1;</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span> </div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>  <span class="comment">// Find the inner-most crossed layer</span></div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span>  <span class="keywordtype">int</span> minlayer = 0;</div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>  <span class="keywordflow">while</span>(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[minlayer].radius &lt; minR) minlayer++;</div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span> </div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>  <span class="comment">// Compute the number of path segments needed</span></div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>  <span class="keywordtype">int</span> nsteps = toplayer - <a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a>;</div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>  <span class="keywordflow">if</span>(cosT &lt; 0) nsteps += 2*(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a> - minlayer) + 1;</div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span> </div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>  <span class="comment">// Start at the top layer and go down</span></div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>  <span class="keywordtype">int</span> layer = toplayer;</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>  <span class="keywordtype">int</span> dl = -1;</div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span> </div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>  <span class="comment">// Loop over all path segments</span></div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;nsteps; i++){</div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span> </div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>    <span class="comment">// Get square of the path length between this layer&#39;s</span></div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>    <span class="comment">// outer radius and  inner-most radius</span></div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>    <span class="keywordtype">double</span> L1 = pow(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[layer].radius,2) - minRsq;</div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span> </div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>    <span class="comment">// If L1 is negative, outer radius is not crossed.</span></div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    <span class="comment">// This only happens if detector is at the top layer and the</span></div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>    <span class="comment">// neutrino is coming from above.</span></div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>    <span class="keywordflow">if</span>(L1 &lt; 0) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span> </div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>    <span class="comment">// Get square of the path length between this layer&#39;s</span></div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    <span class="comment">// inner radius and  inner-most radius</span></div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>    <span class="keywordtype">double</span> L2 = -minRsq;</div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>    <span class="keywordflow">if</span>(layer&gt;0) L2 += pow(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[layer-1].radius,2);</div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span> </div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>    <span class="comment">// If L2 is negative, inner radius is not crossed,</span></div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>    <span class="comment">// so set this as the minimum layer.</span></div>
-<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>    <span class="keywordtype">bool</span> ismin = (L2&lt;=0 &amp;&amp; cosT &lt; 0);</div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span> </div>
-<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>    <span class="comment">// Store the path segment length</span></div>
-<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>    <span class="keywordtype">double</span> dL;</div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span> </div>
-<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>    <span class="comment">// If it&#39;s the minimum layer, connect two outer radius</span></div>
-<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>    <span class="comment">// crossing points. If not, compute difference between</span></div>
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>    <span class="comment">// inner and outer radius crossings.</span></div>
-<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>    <span class="keywordflow">if</span>(ismin)      dL = 2 * sqrt(L1);</div>
-<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(L2&gt;=0) dL = sqrt(L1) - sqrt(L2);</div>
-<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>    <span class="keywordflow">else</span>           dL = sqrt(L1); <span class="comment">// This should never actually happen,</span></div>
-<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>                                  <span class="comment">// but protect in case L2 is slightly</span></div>
-<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>                                  <span class="comment">// negative when it should be zero.</span></div>
-<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>                                  <span class="comment">// e.g. arriving at the detector from above.</span></div>
-<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span> </div>
-<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>    <span class="comment">// Add this path segment to the sequence</span></div>
-<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>    <a class="code hl_function" href="classOscProb_1_1PremModel.html#aca013f7ac5494282834048786a0e07a6">AddPath</a>(dL, <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[layer]);</div>
-<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span> </div>
-<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>    <span class="comment">// If we reached the inner-most layer,</span></div>
-<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>    <span class="comment">// start moving up again.</span></div>
-<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>    <span class="keywordflow">if</span>(ismin) dl = 1;</div>
-<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span> </div>
-<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>    <span class="comment">// Move to next layer</span></div>
-<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>    layer += dl;</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span><span class="comment">//......................................................................</span></div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno"><a class="line" href="classOscProb_1_1PremModel.html#a802363021cc9d46506314f961e0e769f">  376</a></span><span class="comment"></span><span class="keywordtype">int</span> <a class="code hl_function" href="classOscProb_1_1PremModel.html#a802363021cc9d46506314f961e0e769f">PremModel::FillPath</a>(<span class="keywordtype">double</span> cosT, <span class="keywordtype">double</span> phi)</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>{</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span> </div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>  <span class="comment">// Clear current path sequence</span></div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>  <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a>.clear();</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span> </div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>  <span class="comment">// Do nothing if cosine is unphysical</span></div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>  <span class="keywordflow">if</span>(fabs(cosT) &gt; 1) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span> </div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>  <span class="comment">// Define the minimum path radius</span></div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>  <span class="keywordtype">double</span> minR = <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a> * sqrt(1 - cosT*cosT);</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>  <span class="keywordtype">double</span> minRsq = minR*minR;</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span> </div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>  <span class="comment">// Set the top layer index</span></div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>  <span class="keywordtype">int</span> toplayer = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.size() - 1;</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span> </div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>  <span class="comment">// Find the inner-most crossed layer</span></div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>  <span class="keywordtype">int</span> minlayer = 0;</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>  <span class="keywordflow">while</span>(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[minlayer].radius &lt; minR) minlayer++;</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>  <span class="comment">// Compute the number of path segments needed</span></div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>  <span class="keywordtype">int</span> nsteps = toplayer - <a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a>;</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>  <span class="keywordflow">if</span>(cosT &lt; 0) nsteps += 2*(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">fDetLayer</a> - minlayer) + 1;</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span> </div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>  <span class="comment">// Start at the top layer and go down</span></div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>  <span class="keywordtype">int</span> layer = toplayer;</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>  <span class="keywordtype">int</span> dl = -1;</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span> </div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>  <span class="comment">// Loop over all path segments</span></div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;nsteps; i++){</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span> </div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>    <span class="comment">// Get square of the path length between this layer&#39;s</span></div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>    <span class="comment">// outer radius and  inner-most radius</span></div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>    <span class="keywordtype">double</span> L1 = pow(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[layer].radius,2) - minRsq;</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span> </div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>    <span class="comment">// If L1 is negative, outer radius is not crossed.</span></div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>    <span class="comment">// This only happens if detector is at the top layer and the</span></div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>    <span class="comment">// neutrino is coming from above.</span></div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    <span class="keywordflow">if</span>(L1 &lt; 0) <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span> </div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>    <span class="comment">// Get square of the path length between this layer&#39;s</span></div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>    <span class="comment">// inner radius and  inner-most radius</span></div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>    <span class="keywordtype">double</span> L2 = -minRsq;</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    <span class="keywordflow">if</span>(layer&gt;0) L2 += pow(<a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[layer-1].radius,2);</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span> </div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>    <span class="comment">// If L2 is negative, inner radius is not crossed,</span></div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>    <span class="comment">// so set this as the minimum layer.</span></div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>    <span class="keywordtype">bool</span> ismin = (L2&lt;=0 &amp;&amp; cosT &lt; 0);</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span> </div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>    <span class="comment">// Store the path segment length</span></div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>    <span class="keywordtype">double</span> dL;</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span> </div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>    <span class="comment">// If it&#39;s the minimum layer, connect two outer radius</span></div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>    <span class="comment">// crossing points. If not, compute difference between</span></div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>    <span class="comment">// inner and outer radius crossings.</span></div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>    <span class="keywordflow">if</span>(ismin)      dL = 2 * sqrt(L1);</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(L2&gt;=0) dL = sqrt(L1) - sqrt(L2);</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>    <span class="keywordflow">else</span>           dL = sqrt(L1); <span class="comment">// This should never actually happen,</span></div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>                                  <span class="comment">// but protect in case L2 is slightly</span></div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>                                  <span class="comment">// negative when it should be zero.</span></div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>                                  <span class="comment">// e.g. arriving at the detector from above.</span></div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span> </div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>    <span class="comment">// Add this path segment to the sequence</span></div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>    <a class="code hl_function" href="classOscProb_1_1PremModel.html#aca013f7ac5494282834048786a0e07a6">AddPath</a>(dL, <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>[layer]);</div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span> </div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>    <span class="comment">// If we reached the inner-most layer,</span></div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>    <span class="comment">// start moving up again.</span></div>
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>    <span class="keywordflow">if</span>(ismin) dl = 1;</div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span> </div>
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>    <span class="comment">// Move to next layer</span></div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>    layer += dl;</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span> </div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>  }</div>
 <div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span> </div>
-<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>  }</div>
-<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span> </div>
-<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>  <span class="comment">// Return the number of path segments</span></div>
-<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a>.size();</div>
-<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span> </div>
-<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>}</div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>  <span class="comment">// Return the number of path segments</span></div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#ae40eaf3d8b666cfd4fe9242decf78121">fNuPath</a>.size();</div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span> </div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>}</div>
 <div class="ttc" id="aPremModel_8h_html"><div class="ttname"><a href="PremModel_8h.html">PremModel.h</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_a3cbe53a328039a65b25736151dc6d586"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">OscProb::EarthModelBase::fRadiusMax</a></div><div class="ttdeci">double fRadiusMax</div><div class="ttdoc">Maximum radius in Earth model (in km)</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8h_source.html#l00064">EarthModelBase.h:64</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_abc6399e4d3ec17a360f2fe3f7d39576c"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#abc6399e4d3ec17a360f2fe3f7d39576c">OscProb::EarthModelBase::SetRemoveSmallPaths</a></div><div class="ttdeci">virtual void SetRemoveSmallPaths(bool rp=true)</div><div class="ttdoc">Set tag to remove small paths.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8cxx_source.html#l00200">EarthModelBase.cxx:200</a></div></div>
@@ -442,19 +440,19 @@ $(document).ready(function(){initNavTree('PremModel_8cxx_source.html',''); initR
 <div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_af11bb0a5e0d6348513e46ede9ff16cda"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">OscProb::EarthModelBase::fDetRadius</a></div><div class="ttdeci">double fDetRadius</div><div class="ttdoc">The radius where the detector sits (in km)</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8h_source.html#l00065">EarthModelBase.h:65</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_af7f17dd5f4b429897b5f3d027bdb37fe"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#af7f17dd5f4b429897b5f3d027bdb37fe">OscProb::EarthModelBase::SetDetectorCoordinates</a></div><div class="ttdeci">virtual void SetDetectorCoordinates(double rad, double lat, double lon)</div><div class="ttdoc">Set the coordinates of the detector (rad = radius in km, lat/lon in deg)</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8cxx_source.html#l00025">EarthModelBase.cxx:25</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_a08c337b84138adc46ee4dd002e9262d2"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a08c337b84138adc46ee4dd002e9262d2">OscProb::PremModel::AddLayer</a></div><div class="ttdeci">virtual void AddLayer(double radius, double density, double zoa, double layer)</div><div class="ttdoc">Add a layer to the model.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00184">PremModel.cxx:184</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_a095bd601f6cd91926de9928e96ea7751"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a095bd601f6cd91926de9928e96ea7751">OscProb::PremModel::SetTopLayerSize</a></div><div class="ttdeci">virtual void SetTopLayerSize(double thick)</div><div class="ttdoc">Set the outermost layer thickness in km.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00318">PremModel.cxx:318</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PremModel_html_a095bd601f6cd91926de9928e96ea7751"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a095bd601f6cd91926de9928e96ea7751">OscProb::PremModel::SetTopLayerSize</a></div><div class="ttdeci">virtual void SetTopLayerSize(double thick)</div><div class="ttdoc">Set the outermost layer thickness in km.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00316">PremModel.cxx:316</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_a1f21b99398bd0d0c89998a040398c810"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a1f21b99398bd0d0c89998a040398c810">OscProb::PremModel::CleanIdentical</a></div><div class="ttdeci">virtual void CleanIdentical()</div><div class="ttdoc">Clear identical consecutive layers.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00058">PremModel.cxx:58</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_a4fb68506493666349f418b893a996185"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">OscProb::PremModel::fDetLayer</a></div><div class="ttdeci">int fDetLayer</div><div class="ttdoc">The layer index of the detector.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00067">PremModel.h:67</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_a52e58a747587bdec80e9c9ac7215d2df"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a52e58a747587bdec80e9c9ac7215d2df">OscProb::PremModel::AddDetLayer</a></div><div class="ttdeci">virtual void AddDetLayer()</div><div class="ttdoc">Add the detector layer.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00080">PremModel.cxx:80</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_a6363a5e711dd8b0d2e684677e585b293"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a6363a5e711dd8b0d2e684677e585b293">OscProb::PremModel::LoadModel</a></div><div class="ttdeci">virtual void LoadModel(std::string filename)</div><div class="ttdoc">Load an earth model from a file.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00200">PremModel.cxx:200</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_a6ac188948d15a5ce6df7926ef9d46c0a"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a6ac188948d15a5ce6df7926ef9d46c0a">OscProb::PremModel::SetDetPos</a></div><div class="ttdeci">void SetDetPos(double rad, double lat=0, double lon=0)</div><div class="ttdoc">Set the detector position (rad = radius in km, lat/lon in deg)</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00145">PremModel.cxx:145</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_a802363021cc9d46506314f961e0e769f"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a802363021cc9d46506314f961e0e769f">OscProb::PremModel::FillPath</a></div><div class="ttdeci">int FillPath(double cosT, double phi=0)</div><div class="ttdoc">Fill the path sequence in a vector.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00378">PremModel.cxx:378</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PremModel_html_a802363021cc9d46506314f961e0e769f"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a802363021cc9d46506314f961e0e769f">OscProb::PremModel::FillPath</a></div><div class="ttdeci">int FillPath(double cosT, double phi=0)</div><div class="ttdoc">Fill the path sequence in a vector.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00376">PremModel.cxx:376</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_a8ad1335ebe80ee1cd1cdf59d774ab34b"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a8ad1335ebe80ee1cd1cdf59d774ab34b">OscProb::PremModel::DET_TOL</a></div><div class="ttdeci">static const double DET_TOL</div><div class="ttdoc">The detector position tolerance near boundaries.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00071">PremModel.h:71</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_aa84534556fd6e35ed67bd899883249fb"><div class="ttname"><a href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">OscProb::PremModel::fPremLayers</a></div><div class="ttdeci">std::vector&lt; PremLayer &gt; fPremLayers</div><div class="ttdoc">The layers in the earth model.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00065">PremModel.h:65</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_aac484ca4e607f2b0fc6f599358cb95fb"><div class="ttname"><a href="classOscProb_1_1PremModel.html#aac484ca4e607f2b0fc6f599358cb95fb">OscProb::PremModel::~PremModel</a></div><div class="ttdeci">virtual ~PremModel()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00049">PremModel.cxx:49</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_aaead53a9385bda9b0219fd051d0cdd11"><div class="ttname"><a href="classOscProb_1_1PremModel.html#aaead53a9385bda9b0219fd051d0cdd11">OscProb::PremModel::ClearModel</a></div><div class="ttdeci">virtual void ClearModel()</div><div class="ttdoc">Clear the earth model information.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00167">PremModel.cxx:167</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_ac9887d1af4b3c02925fe3228349f593d"><div class="ttname"><a href="classOscProb_1_1PremModel.html#ac9887d1af4b3c02925fe3228349f593d">OscProb::PremModel::SetLayerZoA</a></div><div class="ttdeci">virtual void SetLayerZoA(int layer, double zoa)</div><div class="ttdoc">Set Z/A of all layers of a given type.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00258">PremModel.cxx:258</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_aca013f7ac5494282834048786a0e07a6"><div class="ttname"><a href="classOscProb_1_1PremModel.html#aca013f7ac5494282834048786a0e07a6">OscProb::PremModel::AddPath</a></div><div class="ttdeci">virtual void AddPath(double length, PremLayer pl)</div><div class="ttdoc">Add a path segment to the sequence.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00355">PremModel.cxx:355</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PremModel_html_aca013f7ac5494282834048786a0e07a6"><div class="ttname"><a href="classOscProb_1_1PremModel.html#aca013f7ac5494282834048786a0e07a6">OscProb::PremModel::AddPath</a></div><div class="ttdeci">virtual void AddPath(double length, PremLayer pl)</div><div class="ttdoc">Add a path segment to the sequence.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00353">PremModel.cxx:353</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_ae4feeccc7027253f5c2e2493098145ca"><div class="ttname"><a href="classOscProb_1_1PremModel.html#ae4feeccc7027253f5c2e2493098145ca">OscProb::PremModel::GetPremLayers</a></div><div class="ttdeci">virtual std::vector&lt; PremLayer &gt; GetPremLayers()</div><div class="ttdoc">Get the set of earth layers.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00161">PremModel.cxx:161</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_af1b8392d1b00560c6322bf8707c304f6"><div class="ttname"><a href="classOscProb_1_1PremModel.html#af1b8392d1b00560c6322bf8707c304f6">OscProb::PremModel::GetLayerZoA</a></div><div class="ttdeci">virtual double GetLayerZoA(int layer)</div><div class="ttdoc">Get Z/A of all layers of a given type.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00283">PremModel.cxx:283</a></div></div>
 <div class="ttc" id="anamespaceOscProb_html"><div class="ttname"><a href="namespaceOscProb.html">OscProb</a></div><div class="ttdoc">Some useful general definitions.</div><div class="ttdef"><b>Definition:</b> <a href="Absorption_8h_source.html#l00006">Absorption.h:6</a></div></div>

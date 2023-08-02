@@ -170,7 +170,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   33</span>  eigensolver.compute(l);</div>
 <div class="line"><span class="lineno">   34</span> </div>
 <div class="line"><span class="lineno">   35</span>  <span class="keywordflow">if</span>(eigensolver.info() != Eigen::Success){</div>
-<div class="line"><span class="lineno">   36</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;The diagonalization is failing&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><span class="lineno">   36</span>    std::cerr &lt;&lt; <span class="stringliteral">&quot;ERROR: The diagonalization is failing&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"><span class="lineno">   37</span>    abort();</div>
 <div class="line"><span class="lineno">   38</span>  }</div>
 <div class="line"><span class="lineno">   39</span>  </div>

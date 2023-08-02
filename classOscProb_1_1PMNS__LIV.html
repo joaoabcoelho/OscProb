@@ -1916,15 +1916,15 @@ Static Protected Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  666</span>{</div>
 <div class="line"><span class="lineno">  667</span> </div>
 <div class="line"><span class="lineno">  668</span>  <span class="keywordflow">if</span>(i&gt;j){</div>
-<div class="line"><span class="lineno">  669</span>    cout &lt;&lt; <span class="stringliteral">&quot;Warning: First argument should be smaller than second argument&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  670</span>    cout &lt;&lt; <span class="stringliteral">&quot;         Setting reverse order (Theta&quot;</span> &lt;&lt; j &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  669</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: First argument should be smaller than second argument&quot;</span> &lt;&lt; endl</div>
+<div class="line"><span class="lineno">  670</span>         &lt;&lt; <span class="stringliteral">&quot;         Setting reverse order (Theta&quot;</span> &lt;&lt; j &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  671</span>    <span class="keywordtype">int</span> temp = i;</div>
 <div class="line"><span class="lineno">  672</span>    i = j;</div>
 <div class="line"><span class="lineno">  673</span>    j = temp;</div>
 <div class="line"><span class="lineno">  674</span>  }</div>
 <div class="line"><span class="lineno">  675</span>  <span class="keywordflow">if</span>(i&lt;1 || i&gt;<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>-1 || j&lt;2 || j&gt;<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>){</div>
-<div class="line"><span class="lineno">  676</span>    cout &lt;&lt; <span class="stringliteral">&quot;ERROR: Theta&quot;</span> &lt;&lt; i &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>;</div>
-<div class="line"><span class="lineno">  677</span>    cout &lt;&lt; <span class="stringliteral">&quot; neutrinos. Returning zero.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  676</span>    cerr &lt;&lt; <span class="stringliteral">&quot;ERROR: Theta&quot;</span> &lt;&lt; i &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a></div>
+<div class="line"><span class="lineno">  677</span>         &lt;&lt; <span class="stringliteral">&quot; neutrinos. Returning zero.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  678</span>    <span class="keywordflow">return</span> 0;</div>
 <div class="line"><span class="lineno">  679</span>  }</div>
 <div class="line"><span class="lineno">  680</span> </div>
@@ -2002,19 +2002,19 @@ Static Protected Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  166</span>                                                          {</div>
 <div class="line"><span class="lineno">  167</span> </div>
 <div class="line"><span class="lineno">  168</span>  <span class="keywordflow">if</span>(flvi &gt; flvj){</div>
-<div class="line"><span class="lineno">  169</span>    cout &lt;&lt; <span class="stringliteral">&quot;First argument should be smaller or equal to second argument&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  170</span>    cout &lt;&lt; <span class="stringliteral">&quot;Setting reverse order (aT_&quot;</span> &lt;&lt; flvj &lt;&lt; flvi &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  169</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: First argument should be smaller or equal to second argument&quot;</span> &lt;&lt; endl</div>
+<div class="line"><span class="lineno">  170</span>         &lt;&lt; <span class="stringliteral">&quot;Setting reverse order (aT_&quot;</span> &lt;&lt; flvj &lt;&lt; flvi &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  171</span>    <span class="keywordtype">int</span> temp = flvi;</div>
 <div class="line"><span class="lineno">  172</span>    flvi = flvj;</div>
 <div class="line"><span class="lineno">  173</span>    flvj = temp;</div>
 <div class="line"><span class="lineno">  174</span>  }</div>
 <div class="line"><span class="lineno">  175</span>  <span class="keywordflow">if</span>(flvi&lt;0 || flvi&gt;2 || flvj &lt; flvi || flvj &gt; 2){</div>
-<div class="line"><span class="lineno">  176</span>    cout &lt;&lt; <span class="stringliteral">&quot;aT_&quot;</span> &lt;&lt; flvi &lt;&lt; flvj &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>;</div>
-<div class="line"><span class="lineno">  177</span>    cout &lt;&lt; <span class="stringliteral">&quot; neutrinos. Returning 0.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  176</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: aT_&quot;</span> &lt;&lt; flvi &lt;&lt; flvj &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a></div>
+<div class="line"><span class="lineno">  177</span>         &lt;&lt; <span class="stringliteral">&quot; neutrinos. Returning 0.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  178</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a05e595848c2521dc795efa7645728b94">zero</a>;</div>
 <div class="line"><span class="lineno">  179</span>  }</div>
 <div class="line"><span class="lineno">  180</span>  <span class="keywordflow">if</span>(dim != 3 &amp;&amp; dim != 5 &amp;&amp; dim != 7){</div>
-<div class="line"><span class="lineno">  181</span>    cout &lt;&lt; <span class="stringliteral">&quot;Warninig: Invalid aT coefficient dimension dim=&quot;</span> &lt;&lt; dim &lt;&lt; <span class="stringliteral">&quot; not in  [3,5,7].\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  181</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: Invalid aT coefficient dimension dim=&quot;</span> &lt;&lt; dim &lt;&lt; <span class="stringliteral">&quot; not in  [3,5,7].\n&quot;</span>;</div>
 <div class="line"><span class="lineno">  182</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a05e595848c2521dc795efa7645728b94">zero</a>;</div>
 <div class="line"><span class="lineno">  183</span>  }</div>
 <div class="line"><span class="lineno">  184</span> </div>
@@ -2088,19 +2088,19 @@ Static Protected Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  205</span>                                                          {</div>
 <div class="line"><span class="lineno">  206</span> </div>
 <div class="line"><span class="lineno">  207</span>  <span class="keywordflow">if</span>(flvi &gt; flvj){</div>
-<div class="line"><span class="lineno">  208</span>    cout &lt;&lt; <span class="stringliteral">&quot;First argument should be smaller or equal to second argument&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  209</span>    cout &lt;&lt; <span class="stringliteral">&quot;Setting reverse order (cT_&quot;</span> &lt;&lt; flvj &lt;&lt; flvi &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  208</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: First argument should be smaller or equal to second argument&quot;</span> &lt;&lt; endl</div>
+<div class="line"><span class="lineno">  209</span>         &lt;&lt; <span class="stringliteral">&quot;Setting reverse order (cT_&quot;</span> &lt;&lt; flvj &lt;&lt; flvi &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  210</span>    <span class="keywordtype">int</span> temp = flvi;</div>
 <div class="line"><span class="lineno">  211</span>    flvi = flvj;</div>
 <div class="line"><span class="lineno">  212</span>    flvj = temp;</div>
 <div class="line"><span class="lineno">  213</span>  }</div>
 <div class="line"><span class="lineno">  214</span>  <span class="keywordflow">if</span>(flvi&lt;0 || flvi&gt;2 || flvj &lt; flvi || flvj &gt; 2){</div>
-<div class="line"><span class="lineno">  215</span>    cout &lt;&lt; <span class="stringliteral">&quot;cT_&quot;</span> &lt;&lt; flvi &lt;&lt; flvj &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>;</div>
-<div class="line"><span class="lineno">  216</span>    cout &lt;&lt; <span class="stringliteral">&quot; neutrinos. Returning 0.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  215</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: cT_&quot;</span> &lt;&lt; flvi &lt;&lt; flvj &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a></div>
+<div class="line"><span class="lineno">  216</span>         &lt;&lt; <span class="stringliteral">&quot; neutrinos. Returning 0.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  217</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a05e595848c2521dc795efa7645728b94">zero</a>;</div>
 <div class="line"><span class="lineno">  218</span>  }</div>
 <div class="line"><span class="lineno">  219</span>  <span class="keywordflow">if</span>(dim != 4 &amp;&amp; dim != 6 &amp;&amp; dim != 8){</div>
-<div class="line"><span class="lineno">  220</span>    cout &lt;&lt; <span class="stringliteral">&quot;Warninig: Invalid cT coefficient dimension dim=&quot;</span> &lt;&lt; dim &lt;&lt; <span class="stringliteral">&quot; not in  [4,6,8].\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  220</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: Invalid cT coefficient dimension dim=&quot;</span> &lt;&lt; dim &lt;&lt; <span class="stringliteral">&quot; not in  [4,6,8].\n&quot;</span>;</div>
 <div class="line"><span class="lineno">  221</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a05e595848c2521dc795efa7645728b94">zero</a>;</div>
 <div class="line"><span class="lineno">  222</span>  }</div>
 <div class="line"><span class="lineno">  223</span>  </div>
@@ -2161,19 +2161,19 @@ Static Protected Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  736</span>{</div>
 <div class="line"><span class="lineno">  737</span> </div>
 <div class="line"><span class="lineno">  738</span>  <span class="keywordflow">if</span>(i&gt;j){</div>
-<div class="line"><span class="lineno">  739</span>    cout &lt;&lt; <span class="stringliteral">&quot;Warning: First argument should be smaller than second argument&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  740</span>    cout &lt;&lt; <span class="stringliteral">&quot;         Setting reverse order (Delta&quot;</span> &lt;&lt; j &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  739</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: First argument should be smaller than second argument&quot;</span> &lt;&lt; endl</div>
+<div class="line"><span class="lineno">  740</span>         &lt;&lt; <span class="stringliteral">&quot;         Setting reverse order (Delta&quot;</span> &lt;&lt; j &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  741</span>    <span class="keywordtype">int</span> temp = i;</div>
 <div class="line"><span class="lineno">  742</span>    i = j;</div>
 <div class="line"><span class="lineno">  743</span>    j = temp;</div>
 <div class="line"><span class="lineno">  744</span>  }</div>
 <div class="line"><span class="lineno">  745</span>  <span class="keywordflow">if</span>(i&lt;1 || i&gt;<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>-1 || j&lt;2 || j&gt;<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>){</div>
-<div class="line"><span class="lineno">  746</span>    cout &lt;&lt; <span class="stringliteral">&quot;ERROR: Delta&quot;</span> &lt;&lt; i &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>;</div>
-<div class="line"><span class="lineno">  747</span>    cout &lt;&lt; <span class="stringliteral">&quot; neutrinos. Returning zero.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  746</span>    cerr &lt;&lt; <span class="stringliteral">&quot;ERROR: Delta&quot;</span> &lt;&lt; i &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a></div>
+<div class="line"><span class="lineno">  747</span>         &lt;&lt; <span class="stringliteral">&quot; neutrinos. Returning zero.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  748</span>    <span class="keywordflow">return</span> 0;</div>
 <div class="line"><span class="lineno">  749</span>  }</div>
 <div class="line"><span class="lineno">  750</span>  <span class="keywordflow">if</span>(i+1==j){</div>
-<div class="line"><span class="lineno">  751</span>    cout &lt;&lt; <span class="stringliteral">&quot;Warning: Rotation &quot;</span> &lt;&lt; i &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot; is real. Returning zero.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  751</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: Rotation &quot;</span> &lt;&lt; i &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot; is real. Returning zero.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  752</span>    <span class="keywordflow">return</span> 0;</div>
 <div class="line"><span class="lineno">  753</span>  }</div>
 <div class="line"><span class="lineno">  754</span> </div>
@@ -2222,8 +2222,8 @@ Static Protected Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  796</span>{</div>
 <div class="line"><span class="lineno">  797</span> </div>
 <div class="line"><span class="lineno">  798</span>  <span class="keywordflow">if</span>(j&lt;2 || j&gt;<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>){</div>
-<div class="line"><span class="lineno">  799</span>    cout &lt;&lt; <span class="stringliteral">&quot;ERROR: Dm&quot;</span> &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot;1 not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>;</div>
-<div class="line"><span class="lineno">  800</span>    cout &lt;&lt; <span class="stringliteral">&quot; neutrinos. Returning zero.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  799</span>    cerr &lt;&lt; <span class="stringliteral">&quot;ERROR: Dm&quot;</span> &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot;1 not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a></div>
+<div class="line"><span class="lineno">  800</span>         &lt;&lt; <span class="stringliteral">&quot; neutrinos. Returning zero.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  801</span>    <span class="keywordflow">return</span> 0;</div>
 <div class="line"><span class="lineno">  802</span>  }</div>
 <div class="line"><span class="lineno">  803</span> </div>
@@ -2271,8 +2271,8 @@ Static Protected Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  835</span>{</div>
 <div class="line"><span class="lineno">  836</span> </div>
 <div class="line"><span class="lineno">  837</span>  <span class="keywordflow">if</span>(j&lt;2 || j&gt;<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>){</div>
-<div class="line"><span class="lineno">  838</span>    cout &lt;&lt; <span class="stringliteral">&quot;ERROR: Dm_&quot;</span> &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot;1 not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>;</div>
-<div class="line"><span class="lineno">  839</span>    cout &lt;&lt; <span class="stringliteral">&quot; neutrinos. Returning zero.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  838</span>    cerr &lt;&lt; <span class="stringliteral">&quot;ERROR: Dm_&quot;</span> &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot;1 not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a></div>
+<div class="line"><span class="lineno">  839</span>         &lt;&lt; <span class="stringliteral">&quot; neutrinos. Returning zero.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  840</span>    <span class="keywordflow">return</span> 0;</div>
 <div class="line"><span class="lineno">  841</span>  }</div>
 <div class="line"><span class="lineno">  842</span> </div>
@@ -4271,15 +4271,15 @@ Static Protected Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  634</span>{</div>
 <div class="line"><span class="lineno">  635</span> </div>
 <div class="line"><span class="lineno">  636</span>  <span class="keywordflow">if</span>(i&gt;j){</div>
-<div class="line"><span class="lineno">  637</span>    cout &lt;&lt; <span class="stringliteral">&quot;Warning: First argument should be smaller than second argument&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  638</span>    cout &lt;&lt; <span class="stringliteral">&quot;         Setting reverse order (Theta&quot;</span> &lt;&lt; j &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  637</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: First argument should be smaller than second argument&quot;</span> &lt;&lt; endl</div>
+<div class="line"><span class="lineno">  638</span>         &lt;&lt; <span class="stringliteral">&quot;         Setting reverse order (Theta&quot;</span> &lt;&lt; j &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  639</span>    <span class="keywordtype">int</span> temp = i;</div>
 <div class="line"><span class="lineno">  640</span>    i = j;</div>
 <div class="line"><span class="lineno">  641</span>    j = temp;</div>
 <div class="line"><span class="lineno">  642</span>  }</div>
 <div class="line"><span class="lineno">  643</span>  <span class="keywordflow">if</span>(i&lt;1 || i&gt;<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>-1 || j&lt;2 || j&gt;<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>){</div>
-<div class="line"><span class="lineno">  644</span>    cout &lt;&lt; <span class="stringliteral">&quot;ERROR: Theta&quot;</span> &lt;&lt; i &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>;</div>
-<div class="line"><span class="lineno">  645</span>    cout &lt;&lt; <span class="stringliteral">&quot; neutrinos. Doing nothing.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  644</span>    cerr &lt;&lt; <span class="stringliteral">&quot;ERROR: Theta&quot;</span> &lt;&lt; i &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a></div>
+<div class="line"><span class="lineno">  645</span>         &lt;&lt; <span class="stringliteral">&quot; neutrinos. Doing nothing.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  646</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><span class="lineno">  647</span>  }</div>
 <div class="line"><span class="lineno">  648</span> </div>
@@ -4440,19 +4440,19 @@ Static Protected Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">   67</span>                                                                         {</div>
 <div class="line"><span class="lineno">   68</span> </div>
 <div class="line"><span class="lineno">   69</span>  <span class="keywordflow">if</span>(flvi &gt; flvj){</div>
-<div class="line"><span class="lineno">   70</span>    cout &lt;&lt; <span class="stringliteral">&quot;First argument should be smaller or equal to second argument&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">   71</span>    cout &lt;&lt; <span class="stringliteral">&quot;Setting reverse order (aT_&quot;</span> &lt;&lt; flvj &lt;&lt; flvi &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">   70</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: First argument should be smaller or equal to second argument&quot;</span> &lt;&lt; endl</div>
+<div class="line"><span class="lineno">   71</span>         &lt;&lt; <span class="stringliteral">&quot;Setting reverse order (aT_&quot;</span> &lt;&lt; flvj &lt;&lt; flvi &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">   72</span>    <span class="keywordtype">int</span> temp = flvi;</div>
 <div class="line"><span class="lineno">   73</span>    flvi = flvj;</div>
 <div class="line"><span class="lineno">   74</span>    flvj = temp;</div>
 <div class="line"><span class="lineno">   75</span>  }</div>
 <div class="line"><span class="lineno">   76</span>  <span class="keywordflow">if</span>(flvi&lt;0 || flvi&gt;2 || flvj &lt; flvi || flvj &gt; 2){</div>
-<div class="line"><span class="lineno">   77</span>    cout &lt;&lt; <span class="stringliteral">&quot;aT_&quot;</span> &lt;&lt; flvi &lt;&lt; flvj &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>;</div>
-<div class="line"><span class="lineno">   78</span>    cout &lt;&lt; <span class="stringliteral">&quot; neutrinos. Doing nothing.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">   77</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: aT_&quot;</span> &lt;&lt; flvi &lt;&lt; flvj &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a></div>
+<div class="line"><span class="lineno">   78</span>         &lt;&lt; <span class="stringliteral">&quot; neutrinos. Doing nothing.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">   79</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><span class="lineno">   80</span>  }</div>
 <div class="line"><span class="lineno">   81</span>  <span class="keywordflow">if</span>(dim != 3 &amp;&amp; dim != 5 &amp;&amp; dim != 7){</div>
-<div class="line"><span class="lineno">   82</span>    cout &lt;&lt; <span class="stringliteral">&quot;Warninig: Invalid aT coefficient dimension dim=&quot;</span> &lt;&lt; dim &lt;&lt; <span class="stringliteral">&quot; not in  [3,5,7].\n&quot;</span>;</div>
+<div class="line"><span class="lineno">   82</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: Invalid aT coefficient dimension dim=&quot;</span> &lt;&lt; dim &lt;&lt; <span class="stringliteral">&quot; not in  [3,5,7].\n&quot;</span>;</div>
 <div class="line"><span class="lineno">   83</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><span class="lineno">   84</span>  }</div>
 <div class="line"><span class="lineno">   85</span> </div>
@@ -4788,8 +4788,8 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  423</span> </div>
 <div class="line"><span class="lineno">  424</span>  <span class="keywordflow">if</span>(<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a273d49f3c5390e7bce624c97c4da5677">fNuPaths</a>.size() != 1){</div>
 <div class="line"><span class="lineno">  425</span> </div>
-<div class="line"><span class="lineno">  426</span>    cout &lt;&lt; <span class="stringliteral">&quot;Warning: Clearing path vector and starting new single path.&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  427</span>    cout &lt;&lt; <span class="stringliteral">&quot;To avoid possible issues, use the SetPath function.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  426</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: Clearing path vector and starting new single path.&quot;</span> &lt;&lt; endl</div>
+<div class="line"><span class="lineno">  427</span>         &lt;&lt; <span class="stringliteral">&quot;To avoid possible issues, use the SetPath function.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  428</span> </div>
 <div class="line"><span class="lineno">  429</span>    <a class="code hl_function" href="classOscProb_1_1PMNS__Base.html#add6533a9fc9acdfc7ae258b62570d78d">SetStdPath</a>();</div>
 <div class="line"><span class="lineno">  430</span> </div>
@@ -4882,8 +4882,8 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  523</span>  <span class="comment">// be taken from default single path.</span></div>
 <div class="line"><span class="lineno">  524</span>  <span class="keywordflow">else</span>{</div>
 <div class="line"><span class="lineno">  525</span> </div>
-<div class="line"><span class="lineno">  526</span>    cout &lt;&lt; <span class="stringliteral">&quot;Warning: New vector size. Starting new path vector.&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  527</span>    cout &lt;&lt; <span class="stringliteral">&quot;To avoid possible issues, use the SetPath function.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  526</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: New vector size. Starting new path vector.&quot;</span> &lt;&lt; endl</div>
+<div class="line"><span class="lineno">  527</span>         &lt;&lt; <span class="stringliteral">&quot;To avoid possible issues, use the SetPath function.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  528</span> </div>
 <div class="line"><span class="lineno">  529</span>    <span class="comment">// Start a new standard path just</span></div>
 <div class="line"><span class="lineno">  530</span>    <span class="comment">// to set default values</span></div>
@@ -4956,7 +4956,7 @@ Static Protected Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="PMNS__Base_8cxx_source.html#l02141">2141</a> of file <a class="el" href="PMNS__Base_8cxx_source.html">PMNS_Base.cxx</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno"> 2141</span>                                         {</div>
 <div class="line"><span class="lineno"> 2142</span>  <span class="keywordflow">if</span>(prec&lt;1e-8){</div>
-<div class="line"><span class="lineno"> 2143</span>    cout &lt;&lt; <span class="stringliteral">&quot;WARNING: Cannot set AvgProb precision lower that 1e-8.&quot;</span></div>
+<div class="line"><span class="lineno"> 2143</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: Cannot set AvgProb precision lower that 1e-8.&quot;</span></div>
 <div class="line"><span class="lineno"> 2144</span>         &lt;&lt; <span class="stringliteral">&quot;Setting to 1e-8.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno"> 2145</span>    prec = 1e-8;</div>
 <div class="line"><span class="lineno"> 2146</span>  }</div>
@@ -5122,19 +5122,19 @@ Static Protected Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  117</span>                                                                         {</div>
 <div class="line"><span class="lineno">  118</span> </div>
 <div class="line"><span class="lineno">  119</span>  <span class="keywordflow">if</span>(flvi &gt; flvj){</div>
-<div class="line"><span class="lineno">  120</span>    cout &lt;&lt; <span class="stringliteral">&quot;First argument should be smaller or equal to second argument&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  121</span>    cout &lt;&lt; <span class="stringliteral">&quot;Setting reverse order (cT_&quot;</span> &lt;&lt; flvj &lt;&lt; flvi &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  120</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: First argument should be smaller or equal to second argument&quot;</span> &lt;&lt; endl</div>
+<div class="line"><span class="lineno">  121</span>         &lt;&lt; <span class="stringliteral">&quot;Setting reverse order (cT_&quot;</span> &lt;&lt; flvj &lt;&lt; flvi &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  122</span>    <span class="keywordtype">int</span> temp = flvi;</div>
 <div class="line"><span class="lineno">  123</span>    flvi = flvj;</div>
 <div class="line"><span class="lineno">  124</span>    flvj = temp;</div>
 <div class="line"><span class="lineno">  125</span>  }</div>
 <div class="line"><span class="lineno">  126</span>  <span class="keywordflow">if</span>(flvi&lt;0 || flvi&gt;2 || flvj &lt; flvi || flvj &gt; 2){</div>
-<div class="line"><span class="lineno">  127</span>    cout &lt;&lt; <span class="stringliteral">&quot;cT_&quot;</span> &lt;&lt; flvi &lt;&lt; flvj &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>;</div>
-<div class="line"><span class="lineno">  128</span>    cout &lt;&lt; <span class="stringliteral">&quot; neutrinos. Doing nothing.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  127</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: cT_&quot;</span> &lt;&lt; flvi &lt;&lt; flvj &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a></div>
+<div class="line"><span class="lineno">  128</span>         &lt;&lt; <span class="stringliteral">&quot; neutrinos. Doing nothing.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  129</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><span class="lineno">  130</span>  }</div>
 <div class="line"><span class="lineno">  131</span>  <span class="keywordflow">if</span>(dim != 4 &amp;&amp; dim != 6 &amp;&amp; dim != 8){</div>
-<div class="line"><span class="lineno">  132</span>    cout &lt;&lt; <span class="stringliteral">&quot;Warninig: Invalid cT coefficient dimension dim=&quot;</span> &lt;&lt; dim &lt;&lt; <span class="stringliteral">&quot; not in  [4,6,8].\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  132</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: Invalid cT coefficient dimension dim=&quot;</span> &lt;&lt; dim &lt;&lt; <span class="stringliteral">&quot; not in  [4,6,8].\n&quot;</span>;</div>
 <div class="line"><span class="lineno">  133</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><span class="lineno">  134</span>  }</div>
 <div class="line"><span class="lineno">  135</span> </div>
@@ -5525,19 +5525,19 @@ Static Protected Attributes</h2></td></tr>
 <div class="fragment"><div class="line"><span class="lineno">  700</span>{</div>
 <div class="line"><span class="lineno">  701</span> </div>
 <div class="line"><span class="lineno">  702</span>  <span class="keywordflow">if</span>(i&gt;j){</div>
-<div class="line"><span class="lineno">  703</span>    cout &lt;&lt; <span class="stringliteral">&quot;Warning: First argument should be smaller than second argument&quot;</span> &lt;&lt; endl;</div>
-<div class="line"><span class="lineno">  704</span>    cout &lt;&lt; <span class="stringliteral">&quot;         Setting reverse order (Delta&quot;</span> &lt;&lt; j &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  703</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: First argument should be smaller than second argument&quot;</span> &lt;&lt; endl</div>
+<div class="line"><span class="lineno">  704</span>         &lt;&lt; <span class="stringliteral">&quot;         Setting reverse order (Delta&quot;</span> &lt;&lt; j &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot;). &quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  705</span>    <span class="keywordtype">int</span> temp = i;</div>
 <div class="line"><span class="lineno">  706</span>    i = j;</div>
 <div class="line"><span class="lineno">  707</span>    j = temp;</div>
 <div class="line"><span class="lineno">  708</span>  }</div>
 <div class="line"><span class="lineno">  709</span>  <span class="keywordflow">if</span>(i&lt;1 || i&gt;<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>-1 || j&lt;2 || j&gt;<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>){</div>
-<div class="line"><span class="lineno">  710</span>    cout &lt;&lt; <span class="stringliteral">&quot;ERROR: Delta&quot;</span> &lt;&lt; i &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>;</div>
-<div class="line"><span class="lineno">  711</span>    cout &lt;&lt; <span class="stringliteral">&quot; neutrinos. Doing nothing.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  710</span>    cerr &lt;&lt; <span class="stringliteral">&quot;ERROR: Delta&quot;</span> &lt;&lt; i &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot; not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a></div>
+<div class="line"><span class="lineno">  711</span>         &lt;&lt; <span class="stringliteral">&quot; neutrinos. Doing nothing.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  712</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><span class="lineno">  713</span>  }</div>
 <div class="line"><span class="lineno">  714</span>  <span class="keywordflow">if</span>(i+1==j){</div>
-<div class="line"><span class="lineno">  715</span>    cout &lt;&lt; <span class="stringliteral">&quot;Warning: Rotation &quot;</span> &lt;&lt; i &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot; is real. Doing nothing.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  715</span>    cerr &lt;&lt; <span class="stringliteral">&quot;WARNING: Rotation &quot;</span> &lt;&lt; i &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot; is real. Doing nothing.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  716</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><span class="lineno">  717</span>  }</div>
 <div class="line"><span class="lineno">  718</span> </div>
@@ -5746,8 +5746,8 @@ The corresponding Dm_31 is set in the class attributes.</p>
 <div class="fragment"><div class="line"><span class="lineno">  772</span>{</div>
 <div class="line"><span class="lineno">  773</span> </div>
 <div class="line"><span class="lineno">  774</span>  <span class="keywordflow">if</span>(j&lt;2 || j&gt;<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>){</div>
-<div class="line"><span class="lineno">  775</span>    cout &lt;&lt; <span class="stringliteral">&quot;ERROR: Dm&quot;</span> &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot;1 not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>;</div>
-<div class="line"><span class="lineno">  776</span>    cout &lt;&lt; <span class="stringliteral">&quot; neutrinos. Doing nothing.&quot;</span> &lt;&lt; endl;</div>
+<div class="line"><span class="lineno">  775</span>    cerr &lt;&lt; <span class="stringliteral">&quot;ERROR: Dm&quot;</span> &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot;1 not valid for &quot;</span> &lt;&lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a></div>
+<div class="line"><span class="lineno">  776</span>         &lt;&lt; <span class="stringliteral">&quot; neutrinos. Doing nothing.&quot;</span> &lt;&lt; endl;</div>
 <div class="line"><span class="lineno">  777</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><span class="lineno">  778</span>  }</div>
 <div class="line"><span class="lineno">  779</span> </div>
