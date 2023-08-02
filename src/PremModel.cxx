@@ -48,6 +48,84 @@ fDetLayer(0)
 ///
 PremModel::~PremModel(){}
 
+
+//......................................................................
+///
+/// Clean identical consecutive layers.
+/// This is used in particular to remove previously added
+/// detector layers.
+///
+void PremModel::CleanIdentical(){
+
+  int i = 0;
+
+  while(i < int(fPremLayers.size()) - 1){
+
+    if(fPremLayers[i] == fPremLayers[i+1]){
+      fPremLayers.erase(fPremLayers.begin()+i);
+      continue;
+    }
+
+    i++;
+
+  }
+
+}
+
+//......................................................................
+///
+/// Add a detector layer at the detector position if needed.
+/// If not, set the detector layer to an existing boundary.
+///
+void PremModel::AddDetLayer(){
+
+  CleanIdentical();
+
+  fDetLayer = fPremLayers.size()-1;
+
+  if(fPremLayers.size() && fDetRadius > fPremLayers.back().radius){
+
+    cerr << "WARNING: Detector must be inside Earth model." << endl
+         << "WARNING: Adjusting detector radius from " << fDetRadius
+         << " km to " << fPremLayers.back().radius << " km." << endl;
+
+    fDetRadius = fPremLayers.back().radius;
+
+    return;
+
+  }
+
+  for(int i=0; i<fPremLayers.size(); i++){
+
+    double radius = fPremLayers[i].radius;
+
+    // See if we passed the detector and decide whether
+    // to create a special layer for it
+    if(radius > fDetRadius - DET_TOL){
+
+      fDetLayer = i;
+
+      // If detector is not near boundary, add a special layer
+      if(radius > fDetRadius + DET_TOL){
+        PremLayer det_layer = fPremLayers[i];
+        det_layer.radius = fDetRadius;
+        fPremLayers.insert(fPremLayers.begin()+fDetLayer, det_layer);
+      }
+      else if(radius != fDetRadius) {
+        //update detector radius
+        cerr << "WARNING: Adjusting detector radius from " << fDetRadius
+             << " km to " << radius << " km." << endl;
+        fDetRadius = radius;
+      }
+
+      break;
+
+    }
+
+  }
+
+}
+
 //......................................................................
 ///
 /// Set the coordinates of the detector:
@@ -60,8 +138,6 @@ PremModel::~PremModel(){}
 /// position to distinguish what parts of the earth are above
 /// and below the detector.
 ///
-/// This must be done before loading the earth model file.
-///
 /// @param rad - The distance from the detector to the Earth's center in km 
 /// @param lat - The latitude of the detector in deg N (between -90 and 90)
 /// @param lon - The longitude of the detector in deg E (between 0 and 360)
@@ -70,6 +146,8 @@ void PremModel::SetDetPos(double rad, double lat, double lon)
 {
 
   SetDetectorCoordinates(rad, lat, lon);
+
+  if(fPremLayers.size()) AddDetLayer();
 
 }
 
@@ -117,10 +195,6 @@ void PremModel::AddLayer(double radius, double density,
 ///
 /// By default it loads the model stored in PremTables/prem_default.txt
 ///
-/// The decision of whether to create a layer for the detector position
-/// is made in this function, so the detector position must be set before
-/// calling this function.
-///
 /// @param filename - The txt file containing a table of earth layers
 ///
 void PremModel::LoadModel(string filename)
@@ -139,15 +213,12 @@ void PremModel::LoadModel(string filename)
   fin.open(filename.c_str());
 
   if(!fin){
-    cout << "ERROR: File " << filename << " not found!" << endl;
+    cerr << "ERROR: File " << filename << " not found!" << endl;
     return;
   }
 
   // Variables for storing table rows
   float radius, density, zoa, layer;
-
-  // Flag to mark we've passed the detector
-  bool crossed_det = false;
 
   // Keep track of previous radius
   double rprev = 0;
@@ -157,34 +228,17 @@ void PremModel::LoadModel(string filename)
 
     // Radii must be ordered in model file
     if(radius <= rprev){
-      cout << "ERROR: Radii are not sorted in increasing order in the model file" << endl;
+      cerr << "ERROR: Radii are not sorted in increasing order in the model file" << endl;
       ClearModel();
       return;
-    }
-
-    // See if we passed the detector and decide whether
-    // to create a special layer for it
-    if(radius > fDetRadius - DET_TOL && !crossed_det){
-
-      crossed_det = true;
-
-      fDetLayer = fPremLayers.size();
-
-      // If detector is not near boundary, add a special layer
-      if(radius > fDetRadius + DET_TOL){
-        AddLayer(fDetRadius, density, zoa, layer);
-      } else if(radius != fDetRadius) {
-        //update detector radius
-        cout << "WARNING: Adjusting detector radius from " << fDetRadius << " km to " << radius << " km." << endl;
-        fDetRadius = radius;
-      }
-
     }
 
     // Add this layer to the model
     AddLayer(radius, density, zoa, layer);
 
   }
+
+  AddDetLayer();
 
   //Set the maximum radius in the model
   fRadiusMax = fPremLayers.back().radius;
@@ -233,8 +287,8 @@ double PremModel::GetLayerZoA(int layer)
 
   // This check assumes the layer types are in increasing order
   if(layer > fPremLayers.back().layer){
-    cout << "ERROR: Not that many layer types" << endl;
-    cout << "Returning 0" << endl;
+    cerr << "ERROR: Not that many layer types" << endl;
+    cerr << "Returning 0" << endl;
     return 0;
   }
 
@@ -247,8 +301,8 @@ double PremModel::GetLayerZoA(int layer)
   }
 
   // End of vector reached without finding input type
-  cout << "ERROR: layer type not found" << endl;
-  cout << "Returning 0" << endl;
+  cerr << "ERROR: layer type not found" << endl;
+  cerr << "Returning 0" << endl;
   return 0;
 }
 
@@ -265,14 +319,14 @@ void PremModel::SetTopLayerSize(double thick)
 {
 
   if(thick <= 0){
-    cout << "Layer thickness should be positive. Do nothing." << endl;
+    cerr << "Layer thickness should be positive. Do nothing." << endl;
     return;
   }
 
   int nlayers = fPremLayers.size();
 
   if(nlayers < 1){
-    cout << "PremModel has no layers. Do nothing." << endl;
+    cerr << "PremModel has no layers. Do nothing." << endl;
     return;
   }
 

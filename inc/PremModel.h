@@ -59,9 +59,14 @@ namespace OscProb {
 
       virtual void AddPath(double length, PremLayer pl);  ///< Add a path segment to the sequence
 
+      virtual void AddDetLayer();    ///< Add the detector layer
+      virtual void CleanIdentical(); ///< Clear identical consecutive layers
+
       std::vector<PremLayer> fPremLayers; ///< The layers in the earth model
 
       int fDetLayer;  ///< The layer index of the detector
+
+      std::string fFilename; ///< The input filename
 
       static const double DET_TOL; ///< The detector position tolerance near boundaries
 

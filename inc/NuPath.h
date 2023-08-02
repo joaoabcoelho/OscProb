@@ -127,6 +127,16 @@ namespace OscProb {
     double zoa;     ///< The effective Z/A value of the layer
     int layer;      ///< An index to identify the matter type
 
+    ///
+    /// Define equality as all properties equal except radius
+    ///
+    bool operator== (PremLayer& rhs){
+      return
+      rhs.density == density &&
+      rhs.zoa     == zoa &&
+      rhs.layer   == layer;
+    }
+
   };
   
   NuPath AvgPath(NuPath& p1, NuPath& p2); ///< Get the average of two paths
