@@ -30,10 +30,6 @@ namespace OscProb {
     
     /// Set both mass-splittings at once
     virtual void SetDeltaMsqrs(double dm21, double dm32);
-    //Set Alpha 3
-    vectorD falpha;
-    matrixC fEvecinv;
-    vectorD fEvalI;
     
     virtual void SetAlpha3(double alpha3);
     virtual void SetAlpha2(double alpha2);
@@ -59,9 +55,12 @@ namespace OscProb {
     matrixC fHam; //Final hamiltonian
     matrixC fHt;  //Standard+Decay hamiltonian
    
+    //Set Alpha 3
+    vectorD falpha;
+
     vectorC fEvalEigen;
-    matrixC fEvecEigen;
-    matrixC fEvecEigeninv;
+    matrixC fEvecinv;
+
   };
 
 }

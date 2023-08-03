@@ -32,11 +32,8 @@ using namespace std;
 PMNS_Decay::PMNS_Decay() : PMNS_Base(), fHam() {
 
   falpha         = vectorD(fNumNus, 0);
-  fEvalI         = vectorD(fNumNus, 0);
   fEvecinv       = matrixC(fNumNus, vectorC(fNumNus,zero));
   fEvalEigen     = vectorC(fNumNus, 0);
-  fEvecEigen     = matrixC(fNumNus, vectorC(fNumNus,zero));
-  fEvecEigeninv  = matrixC(fNumNus, vectorC(fNumNus,zero));
   fHd            = matrixC(fNumNus, vectorC(fNumNus,zero));
   fHam           = matrixC(fNumNus, vectorC(fNumNus,zero));
   fHt            = matrixC(fNumNus, vectorC(fNumNus,zero));
@@ -271,17 +268,12 @@ void PMNS_Decay::SolveHam()
   UpdateHam();
 
   // Solve Hamiltonian for eigensystem using the Eigen library method 
-  complexsolver(fHam, fEvecEigen, fEvecEigeninv, fEvalEigen);
+  complexsolver(fHam, fEvec, fEvecinv, fEvalEigen);
 
 
   // Fill fEval and fEvec vectors from Eigen arrays  
   for(int i=0;i<fNumNus;i++){
     fEval[i] = fEvalEigen[i].real();
-    fEvalI[i] = fEvalEigen[i].imag();
-    for(int j=0;j<fNumNus;j++){
-      fEvec[i][j] = fEvecEigen[i][j];
-      fEvecinv[i][j] = fEvecEigeninv[i][j];
-    }
   }
   
   fGotES = true;
@@ -308,9 +300,11 @@ void PMNS_Decay::PropagatePath(NuPath p)
 
   double LengthIneV = kKm2eV * p.length;
   for(int i=0; i<fNumNus; i++){
-    complexD arg(fEvalI[i], -fEval[i]);
-    fPhases[i] = exp(arg * LengthIneV);
+    double argR = fEvalEigen[i].real() * LengthIneV;
+    double argI = fEvalEigen[i].imag() * LengthIneV;
+    fPhases[i] = exp(argI) * complexD(cos(argR), -sin(argR));
   }
+  
   for(int i=0;i<fNumNus;i++){
     fBuffer[i] = 0;
     for(int j=0;j<fNumNus;j++){
