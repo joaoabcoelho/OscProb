@@ -1,4 +1,6 @@
 
+#include "../tutorial/SetNiceStyle.C"
+
 OscProb::PMNS_Fast* GetFast(bool is_nominal){
 
   return new OscProb::PMNS_Fast();
