@@ -2,11 +2,11 @@
 
 //.............................................................................
 bool TestAvgProb(OscProb::PMNS_Base* p, double energy, double &max_diff){
- 
+
   double dE = 0.1 * energy;
   double prec = 1e-4;
   p->SetAvgProbPrec(prec);
-  
+
   for(int flvi=0; flvi<3; flvi++){
   for(int flvf=0; flvf<3; flvf++){
 
@@ -18,13 +18,13 @@ bool TestAvgProb(OscProb::PMNS_Base* p, double energy, double &max_diff){
       double energy_i = energy + dE*((i+0.5)/npts - 0.5);
       avg_test += p->Prob(flvi, flvf, energy_i) / npts;
     }
-    
+
     if(abs(avg_prob - avg_test) > max_diff){
       max_diff = abs(avg_prob - avg_test);
     }
 
     if(abs(avg_prob - avg_test) > 5*prec){
-      cerr << "Found mismatch in AvgProb(" 
+      cerr << "Found mismatch in AvgProb("
            << flvi << ", " << flvf << ", "
            << energy << ", " << dE << "): "
            << avg_prob << " - " << avg_test
@@ -35,18 +35,18 @@ bool TestAvgProb(OscProb::PMNS_Base* p, double energy, double &max_diff){
     }
 
   }}
-  
+
   return true;
 
 }
 
 //.............................................................................
 bool TestParallel(OscProb::PMNS_Base* p, double energy){
- 
+
   p->SetEnergy(energy);
 
   OscProb::matrixD pmatrix = p->ProbMatrix(3,3);
- 
+
   for(int flvi=0; flvi<3; flvi++){
 
     OscProb::vectorD pvector = p->ProbVector(flvi);
@@ -56,7 +56,7 @@ bool TestParallel(OscProb::PMNS_Base* p, double energy){
       double prob = p->Prob(flvi, flvf);
 
       if(abs(prob - pmatrix[flvi][flvf]) > 1e-12){
-        cerr << "Found mismatch in ProbMatrix(" 
+        cerr << "Found mismatch in ProbMatrix("
              << flvi << ", " << flvf << "): "
              << prob << " - " << pmatrix[flvi][flvf]
              << " = " << prob - pmatrix[flvi][flvf]
@@ -67,7 +67,7 @@ bool TestParallel(OscProb::PMNS_Base* p, double energy){
       }
 
       if(abs(prob - pvector[flvf]) > 1e-12){
-        cerr << "Found mismatch in ProbVector(" 
+        cerr << "Found mismatch in ProbVector("
              << flvi << ", " << flvf << "): "
              << prob << " - " << pvector[flvf]
              << " = " << prob - pvector[flvf]
@@ -80,7 +80,7 @@ bool TestParallel(OscProb::PMNS_Base* p, double energy){
     }
 
   }
-  
+
   return true;
 
 }
@@ -111,7 +111,7 @@ bool TestNominal(string model, double &max_diff){
 
     p->SetIsNuBar(isnb);
     p0.SetIsNuBar(isnb);
-    
+
     for(int i=0; i<=nbins; i++){
 
       double energy = xbins[i];
@@ -127,19 +127,19 @@ bool TestNominal(string model, double &max_diff){
         }
 
         if(abs(nom_prob - alt_prob) > prec){
-          cerr << "Found mismatch in nominal Prob(" 
+          cerr << "Found mismatch in nominal Prob("
                << flvi << ", " << flvf << ", " << energy << "): "
                << nom_prob << " - " << alt_prob
                << " = " << nom_prob - alt_prob
                << "; with IsNuBar = " << p->GetIsNuBar()
                << endl;
-          cerr << "FAILED: Model PMNS_" << model 
+          cerr << "FAILED: Model PMNS_" << model
                << " comparison to nominal" << endl;
           return false;
         }
 
       }}
-  
+
     }
 
   }
@@ -164,19 +164,19 @@ bool TestMethodsModel(OscProb::PMNS_Base* p, string model){
   for(int isnb=0; isnb<2; isnb++){
 
     p->SetIsNuBar(isnb);
-      
+
     for(int i=0; i<=nbins; i++){
 
       double energy = xbins[i];
-      
+
       if(!TestAvgProb(p, energy, avg_max_diff)){
-        cerr << "FAILED: Model PMNS_" << model 
+        cerr << "FAILED: Model PMNS_" << model
              << " AvgProb" << endl;
         return false;
       }
 
       if(!TestParallel(p, energy)){
-        cerr << "FAILED: Model PMNS_" << model 
+        cerr << "FAILED: Model PMNS_" << model
              << " parallel methods" << endl;
         return false;
       }
@@ -184,13 +184,13 @@ bool TestMethodsModel(OscProb::PMNS_Base* p, string model){
     }
 
   }
-  
-  cout << "PASSED: PMNS_" << model 
+
+  cout << "PASSED: PMNS_" << model
        << " with max nominal error: "
        << nom_max_diff
        << " and max AvgProb error: "
        << avg_max_diff << endl;
-  
+
   return true;
 
 }
@@ -198,8 +198,7 @@ bool TestMethodsModel(OscProb::PMNS_Base* p, string model){
 //.............................................................................
 int TestMethods(){
 
-  vector<string> models = {"Fast", "Iter", "Sterile", "NSI", "Deco", "Decay",
-                           "LIV", "SNSI"};
+  vector<string> models = GetListOfModels();
 
   for(int i=0; i<models.size(); i++){
 
@@ -209,7 +208,7 @@ int TestMethods(){
     delete p;
 
   }
-  
+
   return 0;
 
 }

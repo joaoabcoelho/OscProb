@@ -1,18 +1,21 @@
 
 #include "../tutorial/SetNiceStyle.C"
 
+//.............................................................................
 OscProb::PMNS_Fast* GetFast(bool is_nominal){
 
   return new OscProb::PMNS_Fast();
 
 }
 
+//.............................................................................
 OscProb::PMNS_Iter* GetIter(bool is_nominal){
 
   return new OscProb::PMNS_Iter();
 
 }
 
+//.............................................................................
 OscProb::PMNS_Deco* GetDeco(bool is_nominal){
 
   OscProb::PMNS_Deco* p = new OscProb::PMNS_Deco();
@@ -20,11 +23,12 @@ OscProb::PMNS_Deco* GetDeco(bool is_nominal){
     p->SetGamma(2, 1e-23);
     p->SetGamma(3, 1e-22);
   }
-  
+
   return p;
 
 }
 
+//.............................................................................
 OscProb::PMNS_Sterile* GetSterile(bool is_nominal){
 
   OscProb::PMNS_Sterile* p = new OscProb::PMNS_Sterile(4);
@@ -34,22 +38,24 @@ OscProb::PMNS_Sterile* GetSterile(bool is_nominal){
     p->SetAngle(2,4, 0.1);
     p->SetAngle(3,4, 0.1);
   }
-  
+
   return p;
 
 }
 
+//.............................................................................
 OscProb::PMNS_Decay* GetDecay(bool is_nominal){
 
   OscProb::PMNS_Decay* p = new OscProb::PMNS_Decay();
   if(!is_nominal){
     p->SetAlpha3(1e-4);
   }
-  
+
   return p;
 
 }
 
+//.............................................................................
 OscProb::PMNS_NSI* GetNSI(bool is_nominal){
 
   OscProb::PMNS_NSI* p = new OscProb::PMNS_NSI();
@@ -61,11 +67,12 @@ OscProb::PMNS_NSI* GetNSI(bool is_nominal){
     p->SetEps(1,2, 0.5, 0);
     p->SetEps(2,2, 0.6, 0);
   }
-  
+
   return p;
 
 }
 
+//.............................................................................
 OscProb::PMNS_SNSI* GetSNSI(bool is_nominal){
 
   OscProb::PMNS_SNSI* p = new OscProb::PMNS_SNSI();
@@ -77,11 +84,12 @@ OscProb::PMNS_SNSI* GetSNSI(bool is_nominal){
     p->SetEps(1,2, 0.5, 0);
     p->SetEps(2,2, 0.6, 0);
   }
-  
+
   return p;
 
 }
 
+//.............................................................................
 OscProb::PMNS_LIV* GetLIV(bool is_nominal){
 
   OscProb::PMNS_LIV* p = new OscProb::PMNS_LIV();
@@ -99,11 +107,12 @@ OscProb::PMNS_LIV* GetLIV(bool is_nominal){
     p->SetcT(1,2, 0.5e-22, 0);
     p->SetcT(2,2, 0.6e-22, 0);
   }
-  
+
   return p;
 
 }
 
+//.............................................................................
 OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
 
   if(model == "Iter")    return GetIter(is_nominal);
@@ -118,6 +127,17 @@ OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
 
 }
 
+//.............................................................................
+vector<string> GetListOfModels(){
+
+  //return {"Decay"};
+
+  return {"Fast", "Iter", "Sterile", "NSI",
+          "Deco", "Decay", "LIV", "SNSI"};
+
+}
+
+//.............................................................................
 void SetTestPath(OscProb::PMNS_Base* p){
 
   p->SetPath(1000, 2);
@@ -126,14 +146,15 @@ void SetTestPath(OscProb::PMNS_Base* p){
 
 }
 
+//.............................................................................
 void SaveTestFile(OscProb::PMNS_Base* p, TString filename){
 
   SetTestPath(p);
-  
+
   int nbins = 100;
   vector<double> xbins = GetLogAxis(nbins, 0.1, 10);
   TH1D* h = 0;
-  
+
   TFile* f = new TFile("data/"+filename, "recreate");
 
   for(int flvi=0; flvi<3; flvi++){
@@ -156,10 +177,11 @@ void SaveTestFile(OscProb::PMNS_Base* p, TString filename){
 
 }
 
+//.............................................................................
 int CheckProb(OscProb::PMNS_Base* p, TString filename){
 
   SetTestPath(p);
-  
+
   TFile* f = new TFile("data/"+filename, "read");
 
   int ntests = 0;
@@ -197,7 +219,7 @@ int CheckProb(OscProb::PMNS_Base* p, TString filename){
       SetHist(h, kRed);
       TString nu_lab = isnb ? "#bar{#nu}" : "#nu";
       TString flv_lab[3] = {"e","#mu","#tau"};
-      TString ylab = "P(" + nu_lab + "_{" + flv_lab[flvi] + 
+      TString ylab = "P(" + nu_lab + "_{" + flv_lab[flvi] +
                      "}#rightarrow" + nu_lab + "_{" + flv_lab[flvf] + "})";
       h0->SetTitle(";Energy [GeV];"+ylab+";");
       h->SetLineStyle(7);
