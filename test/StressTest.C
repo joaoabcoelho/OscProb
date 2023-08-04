@@ -29,8 +29,8 @@ struct TimeIt {
     if(tpi<1){ tpi *= 1e3; scale = "ms"; }
     if(tpi<1){ tpi *= 1e3; scale = "µs"; }
     if(tpi<1){ tpi *= 1e3; scale = "ns"; }
-    cout << "Performance = " 
-         << TString::Format(tpi>10 ? "%.0f" : "%.1f",tpi) 
+    cout << "Performance = "
+         << TString::Format(tpi>9.95 ? "%.0f" : "%.1f",tpi)
          << " " << scale << "/iteration" << endl;
   }
 
@@ -69,15 +69,16 @@ void TimeTest(OscProb::PMNS_Base* p, string model, int max_length){
   for(int k=0; k<100 && time.time()<1; k++){
     p->ClearCache(); // Clear cache at each iteration
     // Compute AvgProb for the energy range
-    for(int i=0; i<=nbins; i++){
-      double energy = xbins[i];
-      p->AvgProb(1,0, energy, 0.2*energy);
+    for(int i=0; i<nbins; i++){
+      double energy = 0.5*(xbins[i] + xbins[i+1]);
+      double dE = xbins[i+1] - xbins[i];
+      p->AvgProb(1,0, energy, dE);
       time.count++;
     }
   }
-  
+
   // Print performance estimate
-  cout << "PMNS_" << model << ": " 
+  cout << "PMNS_" << model << ": "
        << string(max_length - model.size(), ' ');
   time.Print();
 
@@ -89,8 +90,7 @@ void TimeTest(OscProb::PMNS_Base* p, string model, int max_length){
 ///
 int StressTest(){
 
-  vector<string> models = {"Fast", "Iter", "Sterile", "NSI",
-                           "Deco", "Decay", "LIV", "SNSI"};
+  vector<string> models = GetListOfModels();
 
   // Keep track of the longest name
   int max_length = 0;
@@ -107,5 +107,5 @@ int StressTest(){
   }
 
   return 0;
-  
+
 }
