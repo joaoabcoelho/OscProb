@@ -33,7 +33,7 @@ using namespace std;
 PMNS_Decay::PMNS_Decay() : PMNS_Base() {
 
   falpha         = vectorD(fNumNus, 0);
-  fHam           = matrixC(fNumNus, vectorC(fNumNus,zero));
+  fHam           = Eigen::MatrixXcd(fNumNus, fNumNus);
   fHd            = matrixC(fNumNus, vectorC(fNumNus,zero));
 
 }
@@ -208,18 +208,21 @@ void PMNS_Decay::UpdateHam()
   // Finish building Hamiltonian in matter with dimension of eV
   for(int i=0; i<fNumNus; i++){
     for(int j=0; j<fNumNus; j++){
-      fHam[i][j] = fHms[i][j]/lv;
+      fHam(i,j) = fHms[i][j]/lv;
     }
   }
  
-  if(!fIsNuBar) fHam[0][0] += kr2GNe;
-  else          fHam[0][0] -= kr2GNe;
+  if(!fIsNuBar) fHam(0,0) += kr2GNe;
+  else          fHam(0,0) -= kr2GNe;
   
 }
 
 //......................................................................
 ///
-/// Solve the full Hamiltonian for eigenvectors and eigenvalues.
+/// Solve the full Hamiltonian for eigenvalues.
+///
+/// This is needed only when estimating the oscillation frequency
+/// for computing the AvgProb method.
 ///
 /// This is using a method from the Eigen library
 ///
@@ -237,7 +240,7 @@ void PMNS_Decay::SolveHam()
 
   UpdateHam();
 
-  // Solve Hamiltonian for eigensystem using the Eigen library method 
+  // Solve Hamiltonian for eigenvalues using the Eigen library method 
   complexsolver(fHam, fEval);
 
   fGotES = true;
@@ -249,9 +252,7 @@ void PMNS_Decay::SolveHam()
 
 //.....................................................................
 ///
-/// Set the eigensystem to the analytic solution in vacuum.
-///
-/// We know the vacuum eigensystem, so just write it explicitly
+/// Propagate the neutrino through a constant density path
 ///
 void PMNS_Decay::PropagatePath(NuPath p)
 {
@@ -263,17 +264,14 @@ void PMNS_Decay::PropagatePath(NuPath p)
   BuildHam();
   UpdateHam();
 
-  Eigen::MatrixXcd H(fNumNus, fNumNus);
-
   double LengthIneV = kKm2eV * p.length;
 
-  for(int i=0; i<fNumNus; i++){
-  for(int j=0; j<fNumNus; j++){
-    H(i,j) = complexD(0,-1) * fHam[i][j] * LengthIneV;
-  }}
-
+  // Compute evolution operator exp(-I*H*L)
+  Eigen::MatrixXcd H = fHam;
+  H *= complexD(0, -LengthIneV);
   H = H.exp();
 
+  // Propagate using evolution operator
   for(int i=0;i<fNumNus;i++){
     fBuffer[i] = 0;
     for(int j=0;j<fNumNus;j++){
@@ -281,6 +279,7 @@ void PMNS_Decay::PropagatePath(NuPath p)
     }
   }
 
+  // Update neutrino state
   for(int i=0;i<fNumNus;i++){
     fNuState[i] = fBuffer[i];
   }

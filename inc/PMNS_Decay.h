@@ -14,6 +14,9 @@
 
 #ifndef PMNS_Decay_H
 #define PMNS_Decay_H
+
+#include <Eigen/Core>
+
 #include "PMNS_Base.h"
 
 namespace OscProb {
@@ -51,8 +54,8 @@ namespace OscProb {
     virtual void PropagatePath(NuPath p);    ///< Propagate neutrino through a single path
     
 
-    matrixC fHd;  //Decay hamiltonian
-    matrixC fHam; //Final hamiltonian
+    matrixC fHd;           //Decay hamiltonian
+    Eigen::MatrixXcd fHam; //Final hamiltonian
    
     //Set Alpha 3
     vectorD falpha;
