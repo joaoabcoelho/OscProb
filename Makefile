@@ -24,17 +24,12 @@ TARGET_LIB = $(CURDIR)/lib/$(TARGET).so
 TARGET_PCM = $(CURDIR)/lib/$(TARGET)_rdict.pcm
 DICTIONARY = $(CURDIR)/tmp/$(TARGET).cxx
 
-# GSL library
-GSL_INCS := $(shell gsl-config --cflags)
-GSL_LIBS := $(shell gsl-config --libs)
-
 #Eigen library
 Eigen_INCS = ${CURDIR}/eigen
 
-INCDIRS = -I$(CURDIR) -I$(CURDIR)/inc $(GSL_INCS) -I$(Eigen_INCS)
+INCDIRS = -I$(CURDIR) -I$(CURDIR)/inc -I$(Eigen_INCS)
 
 override CXXFLAGS += $(INCDIRS)
-override LDFLAGS  += $(GSL_LIBS)
 
 # the sets of directories to do various things in
 MATRIX = $(CURDIR)/MatrixDecomp/libMatrixDecomp.so
