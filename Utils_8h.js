@@ -5,6 +5,7 @@ var Utils_8h =
     [ "GetDeco", "Utils_8h.html#a35c17b847feff2e59ecf7b9c4c164eb1", null ],
     [ "GetFast", "Utils_8h.html#a1a865612535a7b341612439800cadab1", null ],
     [ "GetIter", "Utils_8h.html#a53d073d28701b7f8abf77dcbdbe25786", null ],
+    [ "GetListOfModels", "Utils_8h.html#a4f5847ce05018e2eb7cf0565e0915656", null ],
     [ "GetLIV", "Utils_8h.html#a117c7e0fb3b8e0dd9845f9f0d2ab26da", null ],
     [ "GetModel", "Utils_8h.html#a8c065748e8cb1ef6936817ac6c3bd3df", null ],
     [ "GetNSI", "Utils_8h.html#a5f6a7ac9c1c969d060726edffefd9428", null ],

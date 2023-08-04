@@ -7,7 +7,7 @@ var searchData=
   ['clearmodel_4',['ClearModel',['../classOscProb_1_1EarthModelBinned.html#a0cd434f08ca3d4d48ee339b9c16446e8',1,'OscProb::EarthModelBinned::ClearModel()'],['../classOscProb_1_1PremModel.html#aaead53a9385bda9b0219fd051d0cdd11',1,'OscProb::PremModel::ClearModel()']]],
   ['clearpath_5',['ClearPath',['../classOscProb_1_1PMNS__Base.html#aefe521239031c418cfaaaa550a6e13bb',1,'OscProb::PMNS_Base']]],
   ['complexd_6',['complexD',['../namespaceOscProb.html#a8414445995fd13f07a3c2c2b168dcb1f',1,'OscProb']]],
-  ['complexsolver_7',['complexsolver',['../complexsolver_8cxx.html#a197942050be96c9bc70128046ba8ddcc',1,'complexsolver(OscProb::matrixC A, OscProb::matrixC &amp;Q, OscProb::matrixC &amp;Qinv, OscProb::vectorC &amp;w):&#160;complexsolver.cxx'],['../complexsolver_8h.html#a197942050be96c9bc70128046ba8ddcc',1,'complexsolver(OscProb::matrixC A, OscProb::matrixC &amp;Q, OscProb::matrixC &amp;Qinv, OscProb::vectorC &amp;w):&#160;complexsolver.cxx']]],
+  ['complexsolver_7',['complexsolver',['../complexsolver_8cxx.html#a7f412e013f518d143301e5b6713a438e',1,'complexsolver(const Eigen::MatrixXcd &amp;A, OscProb::vectorD &amp;w):&#160;complexsolver.cxx'],['../complexsolver_8h.html#a7f412e013f518d143301e5b6713a438e',1,'complexsolver(const Eigen::MatrixXcd &amp;A, OscProb::vectorD &amp;w):&#160;complexsolver.cxx']]],
   ['complexsolver_2ecxx_8',['complexsolver.cxx',['../complexsolver_8cxx.html',1,'']]],
   ['complexsolver_2eh_9',['complexsolver.h',['../complexsolver_8h.html',1,'']]],
   ['convertetoloe_10',['ConvertEtoLoE',['../classOscProb_1_1PMNS__Base.html#a1998ea292e904a83a7fdc2d8589c6535',1,'OscProb::PMNS_Base']]],

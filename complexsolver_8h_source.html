@@ -94,20 +94,17 @@ $(document).ready(function(){initNavTree('complexsolver_8h_source.html',''); ini
 <a href="complexsolver_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef COMPLEXSOLVER_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define COMPLEXSOLVER_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;Eigenvalues&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;Eigen/Core&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="Definitions_8h.html">Definitions.h</a>&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keywordtype">void</span> <a class="code hl_function" href="complexsolver_8h.html#a197942050be96c9bc70128046ba8ddcc">complexsolver</a>(<a class="code hl_typedef" href="namespaceOscProb.html#aeb338ac53fcdff178797945ff5e19137">OscProb::matrixC</a>  A,</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>                   <a class="code hl_typedef" href="namespaceOscProb.html#aeb338ac53fcdff178797945ff5e19137">OscProb::matrixC</a>&amp; Q,</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>                   <a class="code hl_typedef" href="namespaceOscProb.html#aeb338ac53fcdff178797945ff5e19137">OscProb::matrixC</a>&amp; Qinv,</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>                   <a class="code hl_typedef" href="namespaceOscProb.html#a91f46d70c79f25dac1a66b7b6dc7605c">OscProb::vectorC</a>&amp; w);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keywordtype">void</span> <a class="code hl_function" href="complexsolver_8h.html#a7f412e013f518d143301e5b6713a438e">complexsolver</a>(<span class="keyword">const</span> Eigen::MatrixXcd&amp; A,</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>                   <a class="code hl_typedef" href="namespaceOscProb.html#a93a204f5324b67ab69907f71b1d8f700">OscProb::vectorD</a>&amp; w);</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aDefinitions_8h_html"><div class="ttname"><a href="Definitions_8h.html">Definitions.h</a></div></div>
-<div class="ttc" id="acomplexsolver_8h_html_a197942050be96c9bc70128046ba8ddcc"><div class="ttname"><a href="complexsolver_8h.html#a197942050be96c9bc70128046ba8ddcc">complexsolver</a></div><div class="ttdeci">void complexsolver(OscProb::matrixC A, OscProb::matrixC &amp;Q, OscProb::matrixC &amp;Qinv, OscProb::vectorC &amp;w)</div><div class="ttdef"><b>Definition:</b> <a href="complexsolver_8cxx_source.html#l00015">complexsolver.cxx:15</a></div></div>
-<div class="ttc" id="anamespaceOscProb_html_a91f46d70c79f25dac1a66b7b6dc7605c"><div class="ttname"><a href="namespaceOscProb.html#a91f46d70c79f25dac1a66b7b6dc7605c">OscProb::vectorC</a></div><div class="ttdeci">std::vector&lt; complexD &gt; vectorC</div><div class="ttdef"><b>Definition:</b> <a href="Definitions_8h_source.html#l00022">Definitions.h:22</a></div></div>
-<div class="ttc" id="anamespaceOscProb_html_aeb338ac53fcdff178797945ff5e19137"><div class="ttname"><a href="namespaceOscProb.html#aeb338ac53fcdff178797945ff5e19137">OscProb::matrixC</a></div><div class="ttdeci">std::vector&lt; vectorC &gt; matrixC</div><div class="ttdef"><b>Definition:</b> <a href="Definitions_8h_source.html#l00023">Definitions.h:23</a></div></div>
+<div class="ttc" id="acomplexsolver_8h_html_a7f412e013f518d143301e5b6713a438e"><div class="ttname"><a href="complexsolver_8h.html#a7f412e013f518d143301e5b6713a438e">complexsolver</a></div><div class="ttdeci">void complexsolver(const Eigen::MatrixXcd &amp;A, OscProb::vectorD &amp;w)</div><div class="ttdef"><b>Definition:</b> <a href="complexsolver_8cxx_source.html#l00015">complexsolver.cxx:15</a></div></div>
+<div class="ttc" id="anamespaceOscProb_html_a93a204f5324b67ab69907f71b1d8f700"><div class="ttname"><a href="namespaceOscProb.html#a93a204f5324b67ab69907f71b1d8f700">OscProb::vectorD</a></div><div class="ttdeci">std::vector&lt; double &gt; vectorD</div><div class="ttdef"><b>Definition:</b> <a href="Definitions_8h_source.html#l00018">Definitions.h:18</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
