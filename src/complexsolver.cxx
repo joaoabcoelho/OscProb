@@ -27,5 +27,5 @@ void complexsolver(const Eigen::MatrixXcd& A,
   for(int t=0; t<w.size(); t++){
     w[t] = eigensolver.eigenvalues()(t).real();
   }
- 
+
 }
