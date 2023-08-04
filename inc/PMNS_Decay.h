@@ -50,16 +50,12 @@ namespace OscProb {
     ///Propagation with D
     virtual void PropagatePath(NuPath p);    ///< Propagate neutrino through a single path
     
-    
+
     matrixC fHd;  //Decay hamiltonian
     matrixC fHam; //Final hamiltonian
-    matrixC fHt;  //Standard+Decay hamiltonian
    
     //Set Alpha 3
     vectorD falpha;
-
-    vectorC fEvalEigen;
-    matrixC fEvecinv;
 
   };
 

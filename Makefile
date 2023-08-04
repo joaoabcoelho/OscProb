@@ -29,7 +29,7 @@ GSL_INCS := $(shell gsl-config --cflags)
 GSL_LIBS := $(shell gsl-config --libs)
 
 #Eigen library
-Eigen_INCS = ${CURDIR}/eigen/Eigen
+Eigen_INCS = ${CURDIR}/eigen
 
 INCDIRS = -I$(CURDIR) -I$(CURDIR)/inc $(GSL_INCS) -I$(Eigen_INCS)
 
@@ -80,8 +80,9 @@ $(PREMINC): $(PREMDIR) $(PREMFILE) $(MODEL3DDIR) $(PREM3DFILE)
 	@echo "const std::string PREM3D_DEFAULT = \"$(PREM3DFILE)\";" >> $@
 
 test: $(TARGET_LIB)
-	@cd test && root -l -b -q ../tutorial/LoadOscProb.C ../tutorial/SetNiceStyle.C TestMethods.C
-	@cd test && root -l -b -q ../tutorial/LoadOscProb.C ../tutorial/SetNiceStyle.C CheckProbs.C
+	@cd test && root -l -b -q ../tutorial/LoadOscProb.C TestMethods.C
+	@cd test && root -l -b -q ../tutorial/LoadOscProb.C CheckProbs.C
+	@cd test && root -l -b -q ../tutorial/LoadOscProb.C StressTest.C
 
 clean: $(CLEANDIRS)
 	@echo "  Cleaning $(PACKAGE)..."

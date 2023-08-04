@@ -17,6 +17,7 @@
 #include <iostream>
 
 #include "complexsolver.h"
+#include <unsupported/Eigen/MatrixFunctions>
 
 #include "PMNS_Decay.h"
 
@@ -29,14 +30,11 @@ using namespace std;
 ///
 /// This class is restricted to 3 neutrino flavours.
 ///
-PMNS_Decay::PMNS_Decay() : PMNS_Base(), fHam() {
+PMNS_Decay::PMNS_Decay() : PMNS_Base() {
 
   falpha         = vectorD(fNumNus, 0);
-  fEvecinv       = matrixC(fNumNus, vectorC(fNumNus,zero));
-  fEvalEigen     = vectorC(fNumNus, 0);
-  fHd            = matrixC(fNumNus, vectorC(fNumNus,zero));
   fHam           = matrixC(fNumNus, vectorC(fNumNus,zero));
-  fHt            = matrixC(fNumNus, vectorC(fNumNus,zero));
+  fHd            = matrixC(fNumNus, vectorC(fNumNus,zero));
 
 }
 
@@ -145,70 +143,42 @@ void PMNS_Decay::BuildHam()
   // Tag to recompute eigensystem
   fGotES = false;
   
-  ///Reset everything
-   for(int i=0; i<fNumNus; i++){
-     for(int j=0; j<fNumNus; j++){
-       fHms[i][j]= 0;
-     }
-   }
-   for(int j=0; j<fNumNus; j++){
-     // Set mass splitting
-     fHms[j][j] = fDm[j]; 
-     //Rotate j neutrinos
-     for(int i=0; i<j; i++){
-       RotateH(i,j,fHms);
-     }
-   }
-  //Taking care of antineutrinos delta-> -delta and filling the upper triangle
-  // because final hamiltonian will be non-hermitian.
-   for(int i=0; i<fNumNus; i++){
-     for(int j=i+1; j<fNumNus; j++){
-       if(fIsNuBar){
-         fHms[i][j]=conj(fHms[i][j]);
-       }           
-       fHms[j][i]= conj(fHms[i][j]);
-     }
-   }
-  
-
-  ///Introduction of the alpha3
-  ///Reset everything
-   for(int i=0; i<fNumNus; i++){
-     for(int j=0; j<fNumNus; j++){
-       fHd[i][j]= 0;
-     }
-   }
-  
-   for(int j=0; j<fNumNus; j++){
-     
-    // Set alpha
-     fHd[j][j] = falpha[j];
-    
-     
+  for(int j=0; j<fNumNus; j++){
+    // Set mass splitting
+    fHms[j][j] = fDm[j];
+    fHd[j][j] = falpha[j];
+    // Reset off-diagonal elements
+    for(int i=0; i<j; i++){
+      fHms[i][j] = 0;
+      fHd[i][j] = 0;
+    }
     // Rotate j neutrinos
-     for(int i=0; i<j; i++){
-       RotateH(i,j,fHd);
-     }
-   }
-   //Taking care of antineutrinos delta-> -delta and filling the upper triangle
-   // because final hamiltonian will be non-hermitian.
-   for(int i=0; i<fNumNus; i++){
-     for(int j=i+1; j<fNumNus; j++){
-       if(fIsNuBar){
-         fHd[i][j]=conj(fHd[i][j]);
-       }
-       fHd[j][i]= conj(fHd[i][j]);
-     }
-   }
-  
+    for(int i=0; i<j; i++){
+      RotateH(i,j,fHms);
+      RotateH(i,j,fHd);
+    }
+  }
 
-   const complexD numi(0.0,1.0);  
-   ///Construct the total Hms+Hd
-   for(int j=0; j<fNumNus; j++){
-     for(int i=0; i<fNumNus; i++){
-       fHt[i][j]=fHms[i][j]-numi*fHd[i][j];
-     }
-   }  
+  // Taking care of antineutrinos delta-> -delta and filling the upper triangle
+  // because final hamiltonian will be non-hermitian.
+  for(int i=0; i<fNumNus; i++){
+    for(int j=i+1; j<fNumNus; j++){
+      if(fIsNuBar){
+        fHms[i][j] = conj(fHms[i][j]);
+        fHd[i][j] = conj(fHd[i][j]);
+      }
+      fHms[j][i] = conj(fHms[i][j]);
+      fHd[j][i] = conj(fHd[i][j]);
+    }
+  }
+
+  const complexD numi(0.0,1.0);  
+  ///Construct the total Hms+Hd
+  for(int j=0; j<fNumNus; j++){
+    for(int i=0; i<fNumNus; i++){
+      fHms[i][j] = fHms[i][j] - numi*fHd[i][j];
+    }
+  }  
  
   // Clear eigensystem cache
   //ClearCache();
@@ -236,9 +206,9 @@ void PMNS_Decay::UpdateHam()
   kr2GNe *= fPath.density * fPath.zoa; // Matter potential in eV
 
   // Finish building Hamiltonian in matter with dimension of eV
-  for(int i=0;i<fNumNus;i++){
+  for(int i=0; i<fNumNus; i++){
     for(int j=0; j<fNumNus; j++){
-      fHam[i][j] = fHt[i][j]/lv;
+      fHam[i][j] = fHms[i][j]/lv;
     }
   }
  
@@ -268,14 +238,8 @@ void PMNS_Decay::SolveHam()
   UpdateHam();
 
   // Solve Hamiltonian for eigensystem using the Eigen library method 
-  complexsolver(fHam, fEvec, fEvecinv, fEvalEigen);
+  complexsolver(fHam, fEval);
 
-
-  // Fill fEval and fEvec vectors from Eigen arrays  
-  for(int i=0;i<fNumNus;i++){
-    fEval[i] = fEvalEigen[i].real();
-  }
-  
   fGotES = true;
 
   // Fill cache if activated
@@ -295,32 +259,32 @@ void PMNS_Decay::PropagatePath(NuPath p)
   // Set the neutrino path
   SetCurPath(p);
 
-  // Solve for eigensystem
-  SolveHam();
+  // Build Hamiltonian
+  BuildHam();
+  UpdateHam();
+
+  Eigen::MatrixXcd H(fNumNus, fNumNus);
 
   double LengthIneV = kKm2eV * p.length;
+
   for(int i=0; i<fNumNus; i++){
-    double argR = fEvalEigen[i].real() * LengthIneV;
-    double argI = fEvalEigen[i].imag() * LengthIneV;
-    fPhases[i] = exp(argI) * complexD(cos(argR), -sin(argR));
-  }
-  
+  for(int j=0; j<fNumNus; j++){
+    H(i,j) = complexD(0,-1) * fHam[i][j] * LengthIneV;
+  }}
+
+  H = H.exp();
+
   for(int i=0;i<fNumNus;i++){
     fBuffer[i] = 0;
     for(int j=0;j<fNumNus;j++){
-      fBuffer[i] += fEvecinv[i][j] * fNuState[j];
+      fBuffer[i] += H(i,j) * fNuState[j];
     }
-    fBuffer[i] *= fPhases[i];
   }
 
-  // Propagate neutrino state
   for(int i=0;i<fNumNus;i++){
-    fNuState[i] = 0;
-    for(int j=0;j<fNumNus;j++){
-      fNuState[i] += fEvec[i][j] * fBuffer[j];
-    }
+    fNuState[i] = fBuffer[i];
   }
-
+  
 }
 
 
