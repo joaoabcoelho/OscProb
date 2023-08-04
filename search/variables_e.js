@@ -1,12 +1,13 @@
 var searchData=
 [
-  ['radius_0',['radius',['../structOscProb_1_1PremLayer.html#a39b409c20fd96a7a0bd421567c00ffed',1,'OscProb::PremLayer']]],
-  ['radius_5fin_1',['radius_in',['../structOscProb_1_1EarthBin.html#a05806de65304ceb88fc6e94c67ce8900',1,'OscProb::EarthBin']]],
-  ['radius_5fout_2',['radius_out',['../structOscProb_1_1EarthBin.html#aba8447e497833f20ea3fa87fd78d7988',1,'OscProb::EarthBin']]],
-  ['rdetcosacosdetlat_3',['rDetCosAcosDetLat',['../structOscProb_1_1TrajConstants.html#aa10a34a042a86548c7b7164d2a5153c1',1,'OscProb::TrajConstants']]],
-  ['rdetcosdetlat_4',['rDetCosDetLat',['../structOscProb_1_1TrajConstants.html#aac095b1d3d8eb15ce9c3c100349063a2',1,'OscProb::TrajConstants']]],
-  ['rdetcost_5',['rDetCosT',['../structOscProb_1_1TrajConstants.html#a7381db6a7bd21b1d654bf86ecc071267',1,'OscProb::TrajConstants']]],
-  ['rdetgammasindetlat_6',['rDetGammaSinDetLat',['../structOscProb_1_1TrajConstants.html#a7d12fa3695e0e8a68bad8bafc050d56a',1,'OscProb::TrajConstants']]],
-  ['rdetsindetlat_7',['rDetSinDetLat',['../structOscProb_1_1TrajConstants.html#aa4d40c9f867f99c00564e6f852d0dcac',1,'OscProb::TrajConstants']]],
-  ['rdetsint_8',['rDetSinT',['../structOscProb_1_1TrajConstants.html#a39ed29ebc9c25d8e9ff4ec24ef9d6fa2',1,'OscProb::TrajConstants']]]
+  ['sign_0',['sign',['../structOscProb_1_1EarthModelBinned_1_1LatBinInfo.html#a6d9d2c61cb4c117ea1173fd008f95eee',1,'OscProb::EarthModelBinned::LatBinInfo']]],
+  ['sina_1',['sinA',['../structOscProb_1_1TrajConstants.html#acf93c97174b03dfc682d17636a4320a3',1,'OscProb::TrajConstants']]],
+  ['sindetlat_2',['sinDetLat',['../structOscProb_1_1TrajConstants.html#a372e8f7e02f6709ac2bac275231ea4df',1,'OscProb::TrajConstants']]],
+  ['sindetlon_3',['sinDetLon',['../structOscProb_1_1TrajConstants.html#a8e200fae669fd9bcdbd412c5612bdd6e',1,'OscProb::TrajConstants']]],
+  ['sinsqt_4',['sinSqT',['../structOscProb_1_1TrajConstants.html#a8314e30d9a335550ca6f203ff640aa4d',1,'OscProb::TrajConstants']]],
+  ['sint_5',['sinT',['../structOscProb_1_1TrajConstants.html#ab4892bf4a9c5bacae35e1caf4e58ad78',1,'OscProb::TrajConstants']]],
+  ['sintcosa_6',['sinTcosA',['../structOscProb_1_1TrajConstants.html#a53769a1e4a973ade88e0a2e0285eb018',1,'OscProb::TrajConstants']]],
+  ['sintsina_7',['sinTsinA',['../structOscProb_1_1TrajConstants.html#a029de58b21f6ef6a52861f963bf0c030',1,'OscProb::TrajConstants']]],
+  ['sintsinacosdetlon_8',['sinTsinAcosDetLon',['../structOscProb_1_1TrajConstants.html#ac0c5f8ad095f9f55a2a1f94af7402757',1,'OscProb::TrajConstants']]],
+  ['sintsinasindetlon_9',['sinTsinAsinDetLon',['../structOscProb_1_1TrajConstants.html#a913597a42222e54e0585c8ec0e9bebc5',1,'OscProb::TrajConstants']]]
 ];

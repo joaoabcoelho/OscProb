@@ -43,6 +43,5 @@ var searchData=
   ['getsterile_40',['GetSterile',['../Utils_8h.html#a3ca82e4ad574189d41bdd72ad54bb82c',1,'Utils.h']]],
   ['gettotall_41',['GetTotalL',['../classOscProb_1_1EarthModelBase.html#a3a83f69ca6cb7438917d16afaa376c97',1,'OscProb::EarthModelBase']]],
   ['getupcoup_42',['GetUpCoup',['../classOscProb_1_1PMNS__NSI.html#a5fbeeb25bd00fbda7c484dbdb6748a58',1,'OscProb::PMNS_NSI']]],
-  ['getzoacoup_43',['GetZoACoup',['../classOscProb_1_1PMNS__NSI.html#a42b2db6f2f42dbca7545a10d101a7950',1,'OscProb::PMNS_NSI']]],
-  ['gsl_5feinsys_44',['GSL_EinSys',['../structOscProb_1_1GSL__EinSys.html#adec9051a3cee7956d84d230f371fa898',1,'OscProb::GSL_EinSys::GSL_EinSys(const GSL_EinSys &amp;other)'],['../structOscProb_1_1GSL__EinSys.html#af6a40b1ed40d5d9b36a7a7bdf8aedc99',1,'OscProb::GSL_EinSys::GSL_EinSys(int numNus)'],['../structOscProb_1_1GSL__EinSys.html',1,'OscProb::GSL_EinSys']]]
+  ['getzoacoup_43',['GetZoACoup',['../classOscProb_1_1PMNS__NSI.html#a42b2db6f2f42dbca7545a10d101a7950',1,'OscProb::PMNS_NSI']]]
 ];

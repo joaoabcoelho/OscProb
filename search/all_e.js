@@ -25,7 +25,7 @@ var searchData=
   ['pmns_5fsnsi_22',['PMNS_SNSI',['../classOscProb_1_1PMNS__SNSI.html',1,'OscProb::PMNS_SNSI'],['../classOscProb_1_1PMNS__SNSI.html#ab98d9fab9f73588a772caad6a9f8dcfc',1,'OscProb::PMNS_SNSI::PMNS_SNSI()']]],
   ['pmns_5fsnsi_2ecxx_23',['PMNS_SNSI.cxx',['../PMNS__SNSI_8cxx.html',1,'']]],
   ['pmns_5fsnsi_2eh_24',['PMNS_SNSI.h',['../PMNS__SNSI_8h.html',1,'']]],
-  ['pmns_5fsterile_25',['PMNS_Sterile',['../classOscProb_1_1PMNS__Sterile.html',1,'OscProb::PMNS_Sterile'],['../classOscProb_1_1PMNS__Sterile.html#a774766ab4278d9369a295ffa8e2d272c',1,'OscProb::PMNS_Sterile::PMNS_Sterile()']]],
+  ['pmns_5fsterile_25',['PMNS_Sterile',['../classOscProb_1_1PMNS__Sterile.html',1,'OscProb::PMNS_Sterile'],['../classOscProb_1_1PMNS__Sterile.html#a907872deb666cebdbb07ff7a7d9c26d0',1,'OscProb::PMNS_Sterile::PMNS_Sterile()']]],
   ['pmns_5fsterile_2ecxx_26',['PMNS_Sterile.cxx',['../PMNS__Sterile_8cxx.html',1,'']]],
   ['pmns_5fsterile_2eh_27',['PMNS_Sterile.h',['../PMNS__Sterile_8h.html',1,'']]],
   ['premlayer_28',['PremLayer',['../structOscProb_1_1PremLayer.html',1,'OscProb::PremLayer'],['../structOscProb_1_1PremLayer.html#abb89fe4d38627dcd49a7861e699af14f',1,'OscProb::PremLayer::PremLayer()']]],

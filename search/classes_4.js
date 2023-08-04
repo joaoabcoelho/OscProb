@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['idxcompare_0',['IdxCompare',['../structOscProb_1_1IdxCompare.html',1,'OscProb']]]
+  ['latbininfo_0',['LatBinInfo',['../structOscProb_1_1EarthModelBinned_1_1LatBinInfo.html',1,'OscProb::EarthModelBinned']]],
+  ['lonbininfo_1',['LonBinInfo',['../structOscProb_1_1EarthModelBinned_1_1LonBinInfo.html',1,'OscProb::EarthModelBinned']]]
 ];

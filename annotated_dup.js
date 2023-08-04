@@ -6,7 +6,6 @@ var annotated_dup =
       [ "EarthModelBase", "classOscProb_1_1EarthModelBase.html", "classOscProb_1_1EarthModelBase" ],
       [ "EarthModelBinned", "classOscProb_1_1EarthModelBinned.html", "classOscProb_1_1EarthModelBinned" ],
       [ "EigenPoint", "structOscProb_1_1EigenPoint.html", "structOscProb_1_1EigenPoint" ],
-      [ "GSL_EinSys", "structOscProb_1_1GSL__EinSys.html", "structOscProb_1_1GSL__EinSys" ],
       [ "IdxCompare", "structOscProb_1_1IdxCompare.html", "structOscProb_1_1IdxCompare" ],
       [ "NuPath", "structOscProb_1_1NuPath.html", "structOscProb_1_1NuPath" ],
       [ "PMNS_Base", "classOscProb_1_1PMNS__Base.html", "classOscProb_1_1PMNS__Base" ],

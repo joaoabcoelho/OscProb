@@ -4,7 +4,6 @@ var hierarchy =
     [ "OscProb::EarthBin", "structOscProb_1_1EarthBin.html", null ],
     [ "EarthBins", "structOscProb_1_1EarthBins.html", null ],
     [ "OscProb::EigenPoint", "structOscProb_1_1EigenPoint.html", null ],
-    [ "OscProb::GSL_EinSys", "structOscProb_1_1GSL__EinSys.html", null ],
     [ "std::hash< OscProb::EigenPoint >", "structstd_1_1hash_3_01OscProb_1_1EigenPoint_01_4.html", null ],
     [ "OscProb::IdxCompare", "structOscProb_1_1IdxCompare.html", null ],
     [ "OscProb::EarthModelBinned::LatBinInfo", "structOscProb_1_1EarthModelBinned_1_1LatBinInfo.html", null ],

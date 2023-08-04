@@ -1,6 +1,6 @@
 var classOscProb_1_1PMNS__Sterile =
 [
-    [ "PMNS_Sterile", "classOscProb_1_1PMNS__Sterile.html#a774766ab4278d9369a295ffa8e2d272c", null ],
+    [ "PMNS_Sterile", "classOscProb_1_1PMNS__Sterile.html#a907872deb666cebdbb07ff7a7d9c26d0", null ],
     [ "AddPath", "classOscProb_1_1PMNS__Sterile.html#ab7f89ad9e7e1224adaa59d3c41594cd9", null ],
     [ "AddPath", "classOscProb_1_1PMNS__Sterile.html#a91f81e5f12d3a5dff74686d4cbc1292c", null ],
     [ "AvgProb", "classOscProb_1_1PMNS__Sterile.html#ac03f754160422e6600da8dbae0f803ed", null ],
@@ -77,6 +77,7 @@ var classOscProb_1_1PMNS__Sterile =
     [ "SetZoA", "classOscProb_1_1PMNS__Sterile.html#a9324540d24fb809fbd1f59ee80093268", null ],
     [ "SolveHam", "classOscProb_1_1PMNS__Sterile.html#af60f89862d0fe333c62d6f87ecfd89f8", null ],
     [ "TryCache", "classOscProb_1_1PMNS__Sterile.html#abe533da5f64bec1f4724ab7b58606b77", null ],
+    [ "UpdateHam", "classOscProb_1_1PMNS__Sterile.html#a5768ec6a37cc4d1d9ada542ea506dc5c", null ],
     [ "fAvgProbPrec", "classOscProb_1_1PMNS__Sterile.html#a468e587b88f994b61691dded271b9fe1", null ],
     [ "fBuffer", "classOscProb_1_1PMNS__Sterile.html#a6afb2a19f590e4c5c745902510a4f919", null ],
     [ "fBuiltHms", "classOscProb_1_1PMNS__Sterile.html#a9ac3cadeac8db1b90f3152f476244780", null ],
@@ -87,7 +88,7 @@ var classOscProb_1_1PMNS__Sterile =
     [ "fEval", "classOscProb_1_1PMNS__Sterile.html#a995c48ab99a0241038a3f198cff5c3d0", null ],
     [ "fEvec", "classOscProb_1_1PMNS__Sterile.html#a81af6383769f5f27e9abc20a9b0acd24", null ],
     [ "fGotES", "classOscProb_1_1PMNS__Sterile.html#a6dc5cd010d2d70b2324745b4e53e9839", null ],
-    [ "fGSL", "classOscProb_1_1PMNS__Sterile.html#a92e9493bcec35167cef6cc472d178449", null ],
+    [ "fHam", "classOscProb_1_1PMNS__Sterile.html#a6610e07c0a7a53d50f7cc680df361fec", null ],
     [ "fHms", "classOscProb_1_1PMNS__Sterile.html#a62af840aa5b50fbe18bf90b3233a3ede", null ],
     [ "fIsNuBar", "classOscProb_1_1PMNS__Sterile.html#a0ebaeaefab36a3ff381c6293faedfdd6", null ],
     [ "fMaxCache", "classOscProb_1_1PMNS__Sterile.html#a74c13356eafec2490d8c3c19759ba7f0", null ],
