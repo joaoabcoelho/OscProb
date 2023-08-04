@@ -1,21 +1,19 @@
 ///////////////////////////////////////////////////////////////////////////////
-//
-// Implementation of oscillations of neutrinos in matter in a
-// n-neutrino framework.
-//
-//.............................................................................
-//
-// Throughout I have taken:
-//   - L to be the neutrino flight distance in km
-//   - E to be the neutrino energy in GeV
-//   - Dmij to be the differences between the mass-squares in eV^2
-//   - Rho to be the matter density in g/cm^3
-//   - theta_ij and delta_ij to be in radians
-//
-// jcoelho\@apc.in2p3.fr
+///
+/// Implementation of oscillations of neutrinos in matter in a
+/// n-neutrino framework.
+///
+///............................................................................
+///
+/// Throughout I have taken:
+///   - L to be the neutrino flight distance in km
+///   - E to be the neutrino energy in GeV
+///   - Dmij to be the differences between the mass-squares in eV^2
+///   - Rho to be the matter density in g/cm^3
+///   - theta_ij and delta_ij to be in radians
+///
+/// jcoelho\@apc.in2p3.fr
 ///////////////////////////////////////////////////////////////////////////////
-
-#include <iostream>
 
 #include <Eigen/Eigenvalues>
 
@@ -82,6 +80,28 @@ void PMNS_Sterile::UpdateHam(){
 
 }
 
+//.............................................................................
+///
+/// Solve the Homiltonian using the appropriate Eigen::MatrixType.\n
+/// This will implement faster methods for N<5
+///
+template <typename T>
+void PMNS_Sterile::SolveEigenSystem()
+{
+
+  Eigen::Ref<T> H(fHam);
+
+  Eigen::SelfAdjointEigenSolver<T> eigensolver(H);
+
+  // Fill fEval and fEvec vectors from GSL objects
+  for(int i=0; i<fNumNus; i++){
+    fEval[i] = eigensolver.eigenvalues()(i);
+    for(int j=0; j<fNumNus; j++){
+      fEvec[i][j] = eigensolver.eigenvectors()(i,j);
+    }
+  }
+
+}
 
 //.............................................................................
 ///
@@ -109,17 +129,13 @@ void PMNS_Sterile::SolveHam()
 
   UpdateHam();
 
-  // Solve Hamiltonian for eigensystem
-  Eigen::SelfAdjointEigenSolver<Eigen::MatrixXcd> eigensolver(fHam);
+  // Choose the appropriate MatrixType for the solver
+  if     (fNumNus==4) SolveEigenSystem<Eigen::Matrix4cd>();
+  else if(fNumNus==3) SolveEigenSystem<Eigen::Matrix3cd>();
+  else if(fNumNus==2) SolveEigenSystem<Eigen::Matrix2cd>();
+  else                SolveEigenSystem<Eigen::MatrixXcd>();
 
-  // Fill fEval and fEvec vectors from GSL objects
-  for(int i=0; i<fNumNus; i++){
-    fEval[i] = eigensolver.eigenvalues()(i);
-    for(int j=0; j<fNumNus; j++){
-      fEvec[i][j] = eigensolver.eigenvectors()(i,j);
-    }
-  }
-
+  // Mark eigensystem as solved
   fGotES = true;
 
   // Fill cache if activated
