@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['oscprob_0',['OscProb',['../namespaceOscProb.html',1,'']]]
+  ['color_0',['Color',['../namespaceColor.html',1,'']]]
 ];

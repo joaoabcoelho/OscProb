@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['std_0',['std',['../namespacestd.html',1,'']]]
+  ['oscprob_0',['OscProb',['../namespaceOscProb.html',1,'']]]
 ];
