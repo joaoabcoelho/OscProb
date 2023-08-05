@@ -1,4 +1,6 @@
 
+#include "colormod.h"
+
 #include "../tutorial/SetNiceStyle.C"
 
 //.............................................................................
@@ -250,10 +252,12 @@ int CheckProb(OscProb::PMNS_Base* p, TString filename){
   }}}
 
   if(fails>0){
-    printf("FAILED: Found %d differences in %d tests (%.3g%%) in %s\n",
+    printf((Color::FAILED + " Found %d differences in %d tests (%.3g%%) in %s\n").c_str(),
             fails, ntests, 100.*fails/ntests, filename.Data());
   }
-  else cout << "PASSED: No differences found in " << filename << endl;
+  else {
+    cout << Color::PASSED << " No differences found in " << filename << endl;
+  }
 
   return fails;
 

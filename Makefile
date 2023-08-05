@@ -76,7 +76,6 @@ $(PREMINC): $(PREMDIR) $(PREMFILE) $(MODEL3DDIR) $(PREM3DFILE)
 
 test: $(TARGET_LIB)
 	@cd test && root -l -b -q ../tutorial/LoadOscProb.C TestMethods.C
-	@cd test && root -l -b -q ../tutorial/LoadOscProb.C CheckProbs.C
 	@cd test && root -l -b -q ../tutorial/LoadOscProb.C StressTest.C
 
 clean: $(CLEANDIRS)
