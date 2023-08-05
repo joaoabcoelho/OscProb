@@ -100,12 +100,12 @@ $(document).ready(function(){initNavTree('complexsolver_8h.html',''); initResiza
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7f412e013f518d143301e5b6713a438e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="complexsolver_8h.html#a7f412e013f518d143301e5b6713a438e">complexsolver</a> (const Eigen::MatrixXcd &amp;A, <a class="el" href="namespaceOscProb.html#a93a204f5324b67ab69907f71b1d8f700">OscProb::vectorD</a> &amp;w)</td></tr>
-<tr class="separator:a7f412e013f518d143301e5b6713a438e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8645f701df9e48cfbaca849f28c42ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="complexsolver_8h.html#aa8645f701df9e48cfbaca849f28c42ed">complexsolver</a> (const Eigen::Matrix3cd &amp;A, <a class="el" href="namespaceOscProb.html#a93a204f5324b67ab69907f71b1d8f700">OscProb::vectorD</a> &amp;w)</td></tr>
+<tr class="separator:aa8645f701df9e48cfbaca849f28c42ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a7f412e013f518d143301e5b6713a438e" name="a7f412e013f518d143301e5b6713a438e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f412e013f518d143301e5b6713a438e">&#9670;&nbsp;</a></span>complexsolver()</h2>
+<a id="aa8645f701df9e48cfbaca849f28c42ed" name="aa8645f701df9e48cfbaca849f28c42ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8645f701df9e48cfbaca849f28c42ed">&#9670;&nbsp;</a></span>complexsolver()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -113,7 +113,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void complexsolver </td>
           <td>(</td>
-          <td class="paramtype">const Eigen::MatrixXcd &amp;&#160;</td>
+          <td class="paramtype">const Eigen::Matrix3cd &amp;&#160;</td>
           <td class="paramname"><em>A</em>, </td>
         </tr>
         <tr>
@@ -138,22 +138,17 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="complexsolver_8cxx_source.html#l00015">15</a> of file <a class="el" href="complexsolver_8cxx_source.html">complexsolver.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   17</span>{</div>
-<div class="line"><span class="lineno">   18</span> </div>
-<div class="line"><span class="lineno">   19</span>  Eigen::ComplexEigenSolver&lt;Eigen::MatrixXcd&gt; eigensolver;</div>
-<div class="line"><span class="lineno">   20</span>  eigensolver.compute(A);</div>
-<div class="line"><span class="lineno">   21</span> </div>
-<div class="line"><span class="lineno">   22</span>  <span class="keywordflow">if</span>(eigensolver.info() != Eigen::Success){</div>
-<div class="line"><span class="lineno">   23</span>    std::cerr &lt;&lt; <span class="stringliteral">&quot;ERROR: The diagonalization is failing&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><span class="lineno">   24</span>    abort();</div>
-<div class="line"><span class="lineno">   25</span>  }</div>
-<div class="line"><span class="lineno">   26</span> </div>
-<div class="line"><span class="lineno">   27</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> t=0; t&lt;w.size(); t++){</div>
-<div class="line"><span class="lineno">   28</span>    w[t] = eigensolver.eigenvalues()(t).real();</div>
-<div class="line"><span class="lineno">   29</span>  }</div>
-<div class="line"><span class="lineno">   30</span> </div>
-<div class="line"><span class="lineno">   31</span>}</div>
+<p class="definition">Definition at line <a class="el" href="complexsolver_8cxx_source.html#l00013">13</a> of file <a class="el" href="complexsolver_8cxx_source.html">complexsolver.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   15</span>{</div>
+<div class="line"><span class="lineno">   16</span> </div>
+<div class="line"><span class="lineno">   17</span>  Eigen::ComplexEigenSolver&lt;Eigen::Matrix3cd&gt; eigensolver;</div>
+<div class="line"><span class="lineno">   18</span>  eigensolver.compute(A);</div>
+<div class="line"><span class="lineno">   19</span> </div>
+<div class="line"><span class="lineno">   20</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> t=0; t&lt;w.size(); t++){</div>
+<div class="line"><span class="lineno">   21</span>    w[t] = eigensolver.eigenvalues()(t).real();</div>
+<div class="line"><span class="lineno">   22</span>  }</div>
+<div class="line"><span class="lineno">   23</span> </div>
+<div class="line"><span class="lineno">   24</span>}</div>
 </div><!-- fragment -->
 <p class="reference">Referenced by <a class="el" href="PMNS__Decay_8cxx_source.html#l00257">OscProb::PMNS_Decay::SolveHam()</a>.</p>
 

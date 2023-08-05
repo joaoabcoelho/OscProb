@@ -16,7 +16,7 @@ var searchData=
   ['setavgprobprec_13',['SetAvgProbPrec',['../classOscProb_1_1PMNS__Base.html#ab68bc0474bb7e4b3b136cf85985fdf01',1,'OscProb::PMNS_Base']]],
   ['setbin_14',['SetBin',['../structOscProb_1_1EarthBin.html#af074fa67904d242f01fcf5bb3785a1a9',1,'OscProb::EarthBin']]],
   ['setcoupbyindex_15',['SetCoupByIndex',['../classOscProb_1_1PMNS__NSI.html#a276d475bbebcdf24502a5555ee65b136',1,'OscProb::PMNS_NSI']]],
-  ['setct_16',['SetcT',['../classOscProb_1_1PMNS__LIV.html#aee872c8fb1e6d2bc93be711cf2455cd3',1,'OscProb::PMNS_LIV::SetcT(int flvi, int flvj, double val, double phase)'],['../classOscProb_1_1PMNS__LIV.html#aed4cfc40058c6a3cb9b23d887bb042c9',1,'OscProb::PMNS_LIV::SetcT(int flvi, int flvj, int dim, double val, double phase)']]],
+  ['setct_16',['SetcT',['../classOscProb_1_1PMNS__LIV.html#aed4cfc40058c6a3cb9b23d887bb042c9',1,'OscProb::PMNS_LIV::SetcT(int flvi, int flvj, int dim, double val, double phase)'],['../classOscProb_1_1PMNS__LIV.html#aee872c8fb1e6d2bc93be711cf2455cd3',1,'OscProb::PMNS_LIV::SetcT(int flvi, int flvj, double val, double phase)']]],
   ['setct_5fee_17',['SetcT_ee',['../classOscProb_1_1PMNS__LIV.html#a083dc35476bf5b9376e0ae86c9f10433',1,'OscProb::PMNS_LIV']]],
   ['setct_5femu_18',['SetcT_emu',['../classOscProb_1_1PMNS__LIV.html#a9b3ca3e54d0195da5dd679d2624362d2',1,'OscProb::PMNS_LIV']]],
   ['setct_5fetau_19',['SetcT_etau',['../classOscProb_1_1PMNS__LIV.html#a588a2ede297326ce1716e91ad8d72742',1,'OscProb::PMNS_LIV']]],
@@ -26,7 +26,7 @@ var searchData=
   ['setcurpath_23',['SetCurPath',['../classOscProb_1_1PMNS__Base.html#aabfeac4ff7206324565272c57b8639d1',1,'OscProb::PMNS_Base']]],
   ['setdecoangle_24',['SetDecoAngle',['../classOscProb_1_1PMNS__Deco.html#a35e79054682aa88c55f4350c29336014',1,'OscProb::PMNS_Deco']]],
   ['setdelta_25',['SetDelta',['../classOscProb_1_1PMNS__Base.html#a4bef78cfcfc4e70b4ce79cdb8862c0a3',1,'OscProb::PMNS_Base']]],
-  ['setdeltamsqrs_26',['SetDeltaMsqrs',['../classOscProb_1_1PMNS__Decay.html#a75b4b57eaefc06f9fbdb662f8772fe96',1,'OscProb::PMNS_Decay::SetDeltaMsqrs()'],['../classOscProb_1_1PMNS__Fast.html#a63733b246e6d2e609ce3de7a65ba5b9f',1,'OscProb::PMNS_Fast::SetDeltaMsqrs()']]],
+  ['setdeltamsqrs_26',['SetDeltaMsqrs',['../classOscProb_1_1PMNS__Fast.html#a63733b246e6d2e609ce3de7a65ba5b9f',1,'OscProb::PMNS_Fast::SetDeltaMsqrs()'],['../classOscProb_1_1PMNS__Decay.html#a75b4b57eaefc06f9fbdb662f8772fe96',1,'OscProb::PMNS_Decay::SetDeltaMsqrs()']]],
   ['setdensity_27',['SetDensity',['../classOscProb_1_1PMNS__Base.html#ac74206f349687da141392c81e2ba6b0d',1,'OscProb::PMNS_Base::SetDensity(double rho)'],['../classOscProb_1_1PMNS__Base.html#a804750bd98c0828835e5fd0a2cced011',1,'OscProb::PMNS_Base::SetDensity(vectorD rho)']]],
   ['setdetectorcoordinates_28',['SetDetectorCoordinates',['../classOscProb_1_1EarthModelBase.html#af7f17dd5f4b429897b5f3d027bdb37fe',1,'OscProb::EarthModelBase']]],
   ['setdetpos_29',['SetDetPos',['../classOscProb_1_1EarthModelBase.html#ac5fb0679e8095f3e1502dd1876eacae8',1,'OscProb::EarthModelBase::SetDetPos()'],['../classOscProb_1_1EarthModelBinned.html#a63c15aa64deadcd3e792c182d7ebd133',1,'OscProb::EarthModelBinned::SetDetPos()'],['../classOscProb_1_1PremModel.html#a6ac188948d15a5ce6df7926ef9d46c0a',1,'OscProb::PremModel::SetDetPos()']]],
@@ -45,7 +45,7 @@ var searchData=
   ['setfermcoup_42',['SetFermCoup',['../classOscProb_1_1PMNS__NSI.html#a78983619968493630c48080bea9af05e',1,'OscProb::PMNS_NSI']]],
   ['setgamma_43',['SetGamma',['../classOscProb_1_1PMNS__Deco.html#ac06a9c503d1c5b4a43c4eb797881898d',1,'OscProb::PMNS_Deco']]],
   ['setgamma32_44',['SetGamma32',['../classOscProb_1_1PMNS__Deco.html#a1bc2d1fb1bab9841baa37eecc0135fe9',1,'OscProb::PMNS_Deco']]],
-  ['setisnubar_45',['SetIsNuBar',['../classOscProb_1_1PMNS__Decay.html#a60b2c35652e73d8f6a087f3f2f3c9de6',1,'OscProb::PMNS_Decay::SetIsNuBar()'],['../classOscProb_1_1PMNS__Base.html#a717e0348cf762f3961854e332a9b52e0',1,'OscProb::PMNS_Base::SetIsNuBar()']]],
+  ['setisnubar_45',['SetIsNuBar',['../classOscProb_1_1PMNS__Base.html#a717e0348cf762f3961854e332a9b52e0',1,'OscProb::PMNS_Base::SetIsNuBar()'],['../classOscProb_1_1PMNS__Decay.html#a60b2c35652e73d8f6a087f3f2f3c9de6',1,'OscProb::PMNS_Decay::SetIsNuBar()']]],
   ['setlayer_46',['SetLayer',['../structOscProb_1_1PremLayer.html#a9d35d6d32ff3dab5cb1aa0c769c65c2b',1,'OscProb::PremLayer']]],
   ['setlayers_47',['SetLayers',['../classOscProb_1_1PMNS__Base.html#a904e580edf89fb98bf9a6397739b4ebe',1,'OscProb::PMNS_Base']]],
   ['setlayerzoa_48',['SetLayerZoA',['../classOscProb_1_1PremModel.html#ac9887d1af4b3c02925fe3228349f593d',1,'OscProb::PremModel']]],
@@ -53,7 +53,7 @@ var searchData=
   ['setliv_50',['SetLIV',['../classOscProb_1_1PMNS__LIV.html#a272a2e3c763ef36d08b0eacea12ea2ae',1,'OscProb::PMNS_LIV']]],
   ['setlowestmass_51',['SetLowestMass',['../classOscProb_1_1PMNS__SNSI.html#a84fca03b7b66c73bf993c6df3958127b',1,'OscProb::PMNS_SNSI']]],
   ['setmaxcache_52',['SetMaxCache',['../classOscProb_1_1PMNS__Base.html#ae67862cf58b0802487a14b047b012a78',1,'OscProb::PMNS_Base']]],
-  ['setmix_53',['SetMix',['../classOscProb_1_1PMNS__Decay.html#ab88e15cd257844331f8b54b35ccc7018',1,'OscProb::PMNS_Decay::SetMix()'],['../classOscProb_1_1PMNS__Fast.html#ad849b2231d99c5d66fb3ade8efb896e1',1,'OscProb::PMNS_Fast::SetMix()']]],
+  ['setmix_53',['SetMix',['../classOscProb_1_1PMNS__Fast.html#ad849b2231d99c5d66fb3ade8efb896e1',1,'OscProb::PMNS_Fast::SetMix()'],['../classOscProb_1_1PMNS__Decay.html#ab88e15cd257844331f8b54b35ccc7018',1,'OscProb::PMNS_Decay::SetMix()']]],
   ['setne_54',['SetNE',['../structOscProb_1_1EigenPoint.html#a30abf0fdf72716458bcf530bd3b806b0',1,'OscProb::EigenPoint']]],
   ['setnsi_55',['SetNSI',['../classOscProb_1_1PMNS__NSI.html#ae8829af10bc4051e8c74c8b1bc81c88c',1,'OscProb::PMNS_NSI']]],
   ['setpath_56',['SetPath',['../classOscProb_1_1Absorption.html#a212db59a69ec8612ab29bbbe24093f9d',1,'OscProb::Absorption::SetPath()'],['../structOscProb_1_1NuPath.html#afdaab5e2e2c5f1f2c5a2604db80bedf7',1,'OscProb::NuPath::SetPath()'],['../classOscProb_1_1PMNS__Base.html#ab4b978fb895abd3cfad07440bae1d34b',1,'OscProb::PMNS_Base::SetPath(NuPath p)'],['../classOscProb_1_1PMNS__Base.html#a35b983270613072a3df58b574d80dbfd',1,'OscProb::PMNS_Base::SetPath(double length, double density, double zoa=0.5, int layer=0)'],['../classOscProb_1_1PMNS__Base.html#ab5294b4f9760fbcda359f191ed2c122b',1,'OscProb::PMNS_Base::SetPath(std::vector&lt; NuPath &gt; paths)']]],
@@ -71,5 +71,6 @@ var searchData=
   ['setvacuumeigensystem_68',['SetVacuumEigensystem',['../classOscProb_1_1PMNS__Fast.html#a76dd5a761df8689c502b28ad0391f9e2',1,'OscProb::PMNS_Fast::SetVacuumEigensystem()'],['../classOscProb_1_1PMNS__Iter.html#a39db92ee063e813ef68b3e0177778429',1,'OscProb::PMNS_Iter::SetVacuumEigensystem()']]],
   ['setvars_69',['SetVars',['../structOscProb_1_1EigenPoint.html#a2e293e0820715950ec8fb370e8cc9477',1,'OscProb::EigenPoint']]],
   ['setzoa_70',['SetZoA',['../classOscProb_1_1PMNS__Base.html#a1bf3ea8fd2507fd2fd82d7410ff8f578',1,'OscProb::PMNS_Base::SetZoA(double zoa)'],['../classOscProb_1_1PMNS__Base.html#a9324540d24fb809fbd1f59ee80093268',1,'OscProb::PMNS_Base::SetZoA(vectorD zoa)']]],
-  ['solveham_71',['SolveHam',['../classOscProb_1_1PMNS__Base.html#a91f065cb9e910e0095e41462b4420b01',1,'OscProb::PMNS_Base::SolveHam()'],['../classOscProb_1_1PMNS__Decay.html#aab2c974ea66e13233186af8eca319496',1,'OscProb::PMNS_Decay::SolveHam()'],['../classOscProb_1_1PMNS__Fast.html#a8a0828401591e88c60e0051fbfe02d5e',1,'OscProb::PMNS_Fast::SolveHam()'],['../classOscProb_1_1PMNS__Iter.html#a0a4a4af377f11e8d4c681c17ced7c9e9',1,'OscProb::PMNS_Iter::SolveHam()'],['../classOscProb_1_1PMNS__Sterile.html#af60f89862d0fe333c62d6f87ecfd89f8',1,'OscProb::PMNS_Sterile::SolveHam()']]]
+  ['solveeigensystem_71',['SolveEigenSystem',['../classOscProb_1_1PMNS__Sterile.html#a78eab40f68f09b292ca4e31ddf69bbe1',1,'OscProb::PMNS_Sterile']]],
+  ['solveham_72',['SolveHam',['../classOscProb_1_1PMNS__Base.html#a91f065cb9e910e0095e41462b4420b01',1,'OscProb::PMNS_Base::SolveHam()'],['../classOscProb_1_1PMNS__Decay.html#aab2c974ea66e13233186af8eca319496',1,'OscProb::PMNS_Decay::SolveHam()'],['../classOscProb_1_1PMNS__Fast.html#a8a0828401591e88c60e0051fbfe02d5e',1,'OscProb::PMNS_Fast::SolveHam()'],['../classOscProb_1_1PMNS__Iter.html#a0a4a4af377f11e8d4c681c17ced7c9e9',1,'OscProb::PMNS_Iter::SolveHam()'],['../classOscProb_1_1PMNS__Sterile.html#af60f89862d0fe333c62d6f87ecfd89f8',1,'OscProb::PMNS_Sterile::SolveHam()']]]
 ];

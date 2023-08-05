@@ -96,7 +96,7 @@ var classOscProb_1_1PMNS__Decay =
     [ "fEval", "classOscProb_1_1PMNS__Decay.html#a995c48ab99a0241038a3f198cff5c3d0", null ],
     [ "fEvec", "classOscProb_1_1PMNS__Decay.html#a81af6383769f5f27e9abc20a9b0acd24", null ],
     [ "fGotES", "classOscProb_1_1PMNS__Decay.html#a6dc5cd010d2d70b2324745b4e53e9839", null ],
-    [ "fHam", "classOscProb_1_1PMNS__Decay.html#abcb78a2a42c226cf1930630fd8064d93", null ],
+    [ "fHam", "classOscProb_1_1PMNS__Decay.html#a65b778b92ccc1b48289413393e209d90", null ],
     [ "fHd", "classOscProb_1_1PMNS__Decay.html#a77d42bdab38baef91bfb39d430f14967", null ],
     [ "fHms", "classOscProb_1_1PMNS__Decay.html#a62af840aa5b50fbe18bf90b3233a3ede", null ],
     [ "fIsNuBar", "classOscProb_1_1PMNS__Decay.html#a0ebaeaefab36a3ff381c6293faedfdd6", null ],

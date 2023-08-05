@@ -75,6 +75,7 @@ var classOscProb_1_1PMNS__Sterile =
     [ "SetUseCache", "classOscProb_1_1PMNS__Sterile.html#aa94c1e1fff0ba731c75f7e633b023a9f", null ],
     [ "SetZoA", "classOscProb_1_1PMNS__Sterile.html#a1bf3ea8fd2507fd2fd82d7410ff8f578", null ],
     [ "SetZoA", "classOscProb_1_1PMNS__Sterile.html#a9324540d24fb809fbd1f59ee80093268", null ],
+    [ "SolveEigenSystem", "classOscProb_1_1PMNS__Sterile.html#a78eab40f68f09b292ca4e31ddf69bbe1", null ],
     [ "SolveHam", "classOscProb_1_1PMNS__Sterile.html#af60f89862d0fe333c62d6f87ecfd89f8", null ],
     [ "TryCache", "classOscProb_1_1PMNS__Sterile.html#abe533da5f64bec1f4724ab7b58606b77", null ],
     [ "UpdateHam", "classOscProb_1_1PMNS__Sterile.html#a5768ec6a37cc4d1d9ada542ea506dc5c", null ],

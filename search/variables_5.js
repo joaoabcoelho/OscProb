@@ -26,7 +26,7 @@ var searchData=
   ['fgotes_23',['fGotES',['../classOscProb_1_1PMNS__Base.html#a6dc5cd010d2d70b2324745b4e53e9839',1,'OscProb::PMNS_Base']]],
   ['fhalflatbinwidth_24',['fHalfLatBinWidth',['../classOscProb_1_1EarthModelBinned.html#aa3f56eafc1d45fc28e70ff92e18c632a',1,'OscProb::EarthModelBinned']]],
   ['fhalflonbinwidth_25',['fHalfLonBinWidth',['../classOscProb_1_1EarthModelBinned.html#a50d7e03565438b0f1aa96a69bddb7d55',1,'OscProb::EarthModelBinned']]],
-  ['fham_26',['fHam',['../classOscProb_1_1PMNS__Decay.html#abcb78a2a42c226cf1930630fd8064d93',1,'OscProb::PMNS_Decay::fHam()'],['../classOscProb_1_1PMNS__Fast.html#a94286a881bc53dd512a89d548346b611',1,'OscProb::PMNS_Fast::fHam()'],['../classOscProb_1_1PMNS__Sterile.html#a6610e07c0a7a53d50f7cc680df361fec',1,'OscProb::PMNS_Sterile::fHam()']]],
+  ['fham_26',['fHam',['../classOscProb_1_1PMNS__Decay.html#a65b778b92ccc1b48289413393e209d90',1,'OscProb::PMNS_Decay::fHam()'],['../classOscProb_1_1PMNS__Fast.html#a94286a881bc53dd512a89d548346b611',1,'OscProb::PMNS_Fast::fHam()'],['../classOscProb_1_1PMNS__Sterile.html#a6610e07c0a7a53d50f7cc680df361fec',1,'OscProb::PMNS_Sterile::fHam()']]],
   ['fhd_27',['fHd',['../classOscProb_1_1PMNS__Decay.html#a77d42bdab38baef91bfb39d430f14967',1,'OscProb::PMNS_Decay']]],
   ['fhms_28',['fHms',['../classOscProb_1_1PMNS__Base.html#a62af840aa5b50fbe18bf90b3233a3ede',1,'OscProb::PMNS_Base']]],
   ['finvlatbinwidth_29',['fInvLatBinWidth',['../classOscProb_1_1EarthModelBinned.html#ab84542bc6b02f9197f79276b1a809339',1,'OscProb::EarthModelBinned']]],
