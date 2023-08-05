@@ -236,8 +236,6 @@ int TestMethods(){
   }
   cout << string(80,'=') << endl;
 
-  cout << pass_all << endl;
-
   return !pass_all;
 
 }
