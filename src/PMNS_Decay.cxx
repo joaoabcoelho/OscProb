@@ -3,7 +3,7 @@
 /// Implementation of oscillations of neutrinos in matter in a
 /// three-neutrino framework with Neutrino Decay in the 3rd state.
 ///
-/// This class expands the PMNS_Fast class including the decay of the 
+/// This class expands the PMNS_Fast class including the decay of the
 /// second and third mass state of the neutrino through a decay constant
 /// alpha_i=m_i/tau_i (eV^2), where m_i is the mass in the restframe and
 /// tau_i is the lifetime in the restframe.
@@ -33,7 +33,7 @@ using namespace std;
 PMNS_Decay::PMNS_Decay() : PMNS_Base() {
 
   fAlpha         = vectorD(fNumNus, 0);
-  fHam           = Eigen::MatrixXcd(fNumNus, fNumNus);
+  fHam           = Eigen::Matrix3cd(fNumNus, fNumNus);
   fHd            = matrixC(fNumNus, vectorC(fNumNus,zero));
 
 }
@@ -124,8 +124,8 @@ void PMNS_Decay::SetIsNuBar(bool isNuBar)
 /// These are Dm_21 and Dm_32 in eV^2.\n
 /// The corresponding Dm_31 is set in the class attributes.
 ///
-/// @param dm21 - The solar mass-splitting Dm_21 
-/// @param dm32 - The atmospheric mass-splitting Dm_32 
+/// @param dm21 - The solar mass-splitting Dm_21
+/// @param dm32 - The atmospheric mass-splitting Dm_32
 ///
 void PMNS_Decay::SetDeltaMsqrs(double dm21, double dm32)
 {
@@ -228,7 +228,7 @@ void PMNS_Decay::BuildHms()
 void PMNS_Decay::UpdateHam()
 {
 
-  double lv = 2 * kGeV2eV*fEnergy;     // 2E in eV 
+  double lv = 2 * kGeV2eV*fEnergy;     // 2E in eV
 
   double kr2GNe = kK2*M_SQRT2*kGf;
   kr2GNe *= fPath.density * fPath.zoa; // Matter potential in eV
@@ -260,7 +260,7 @@ void PMNS_Decay::SolveHam()
   // Build Hamiltonian
   BuildHms();
 
-  // Check if anything changed  
+  // Check if anything changed
   if(fGotES) return;
 
   // Try caching if activated
@@ -268,7 +268,7 @@ void PMNS_Decay::SolveHam()
 
   UpdateHam();
 
-  // Solve Hamiltonian for eigenvalues using the Eigen library method 
+  // Solve Hamiltonian for eigenvalues using the Eigen library method
   complexsolver(fHam, fEval);
 
   fGotES = true;
@@ -297,7 +297,7 @@ void PMNS_Decay::PropagatePath(NuPath p)
   double LengthIneV = kKm2eV * p.length;
 
   // Compute evolution operator exp(-I*H*L)
-  Eigen::MatrixXcd H = fHam;
+  Eigen::Matrix3cd H = fHam;
   H *= complexD(0, -LengthIneV);
   H = H.exp();
 
@@ -316,5 +316,4 @@ void PMNS_Decay::PropagatePath(NuPath p)
 
 }
 
-
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////

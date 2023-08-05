@@ -39,7 +39,11 @@ namespace OscProb {
       /// Solve the full Hamiltonian for eigenvectors and eigenvalues
       virtual void SolveHam();
 
-      Eigen::MatrixXcd fHam;
+      /// Specialized solver for NxN matrices
+      template <typename T>
+      void SolveEigenSystem();
+
+      Eigen::MatrixXcd fHam; ///< The full Hamiltonian
 
   };
 

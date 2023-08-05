@@ -5,7 +5,7 @@
 
 #include "Definitions.h"
 
-void complexsolver(const Eigen::MatrixXcd& A,
+void complexsolver(const Eigen::Matrix3cd& A,
                    OscProb::vectorD& w);
 
 #endif

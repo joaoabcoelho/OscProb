@@ -19,45 +19,47 @@ namespace OscProb {
 
   class PMNS_Decay : public PMNS_Base {
 
-  public:
+    public:
 
-    PMNS_Decay();          ///< Constructor
-    virtual ~PMNS_Decay(); ///< Destructor
+      PMNS_Decay();          ///< Constructor
+      virtual ~PMNS_Decay(); ///< Destructor
 
-    /// Set the all mixing parameters at once
-    virtual void SetMix(double th12, double th23, double th13, double deltacp);
+      /// Set the all mixing parameters at once
+      virtual void SetMix(double th12, double th23, double th13, double deltacp);
 
-    /// Set both mass-splittings at once
-    virtual void SetDeltaMsqrs(double dm21, double dm32);
+      /// Set both mass-splittings at once
+      virtual void SetDeltaMsqrs(double dm21, double dm32);
 
-    virtual void SetAlpha3(double alpha3);
-    virtual void SetAlpha2(double alpha2);
-    virtual double GetAlpha3();
-    virtual double GetAlpha2();
-    virtual void SetIsNuBar(bool isNuBar);
+      virtual void SetAlpha3(double alpha3);
+      virtual void SetAlpha2(double alpha2);
+      virtual double GetAlpha3();
+      virtual double GetAlpha2();
+      virtual void SetIsNuBar(bool isNuBar);
 
-  protected:
+    protected:
 
-    /// Build the Hms Hamiltonian
-    virtual void BuildHms();
+      /// Build the Hms Hamiltonian
+      virtual void BuildHms();
 
-    /// Build the full Hamiltonian
-    virtual void UpdateHam();
+      /// Build the full Hamiltonian
+      virtual void UpdateHam();
 
-    /// Solve the full Hamiltonian for eigenvalues
-    virtual void SolveHam();
+      /// Solve the full Hamiltonian for eigenvalues
+      virtual void SolveHam();
 
-    /// Propagation with Decay
-    virtual void PropagatePath(NuPath p);
+      /// Propagation with Decay
+      virtual void PropagatePath(NuPath p);
 
 
-    matrixC fHd;           ///< Decay hamiltonian
-    Eigen::MatrixXcd fHam; ///< Final hamiltonian
+      matrixC fHd;           ///< Decay hamiltonian
+      Eigen::Matrix3cd fHam; ///< Final hamiltonian
 
-    vectorD fAlpha; ///< alpha parameters
+      vectorD fAlpha; ///< alpha parameters
 
   };
 
 }
+
 #endif
-////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
