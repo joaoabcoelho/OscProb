@@ -13,7 +13,7 @@ TH2D* GetOscHist(int flvf = 1, int mh = 1);
 // Draw energy lines
 void DrawEnergyLines(TH2* hNH);
 
-// Make an oscillogram for NH 
+// Make an oscillogram for NH
 // nue (0), numu (1) or nutau (2)
 void MakeOscillogram(int flvf = 1){
 
@@ -50,7 +50,7 @@ TH2D* GetOscHist(int flvf, int mh){
   double dcp  = (mh>0 ? 306 : 254)*TMath::Pi()/180;
 
   // Create PMNS object
-  OscProb::PMNS_Fast myPMNS; 
+  OscProb::PMNS_Fast myPMNS;
 
   // Set PMNS parameters
   myPMNS.SetDm(2, dm21);
@@ -71,28 +71,28 @@ TH2D* GetOscHist(int flvf, int mh){
 
     // Get cos(theta_z) from bin center
     double cosT = h2->GetYaxis()->GetBinCenter(ct);
-    
-    // Set total path length L  
+
+    // Set total path length L
     double L = prem.GetTotalL(cosT);
-    
-    // Skip if cosT is unphysical  
+
+    // Skip if cosT is unphysical
     if(cosT < -1 || cosT > 1) continue;
-    
+
     // Fill paths from PREM model
     prem.FillPath(cosT);
-      
-    // Set paths in OscProb  
+
+    // Set paths in OscProb
     myPMNS.SetPath(prem.GetNuPath());
 
-    // Loop of L/E  
+    // Loop of L/E
     for(int le=1; le<=nbinsx; le++){
-  
+
       // Set L/E from bin center
       double loe  = h2->GetXaxis()->GetBinCenter(le);
-      
+
       // Initialize probability
       double prob = 0;
-      
+
       // Loop over initial flavour and nu or nubar
       for(int flvi = 0; flvi<2; flvi++){
       for(int nunubar = -1; nunubar<2; nunubar+=2){
@@ -108,7 +108,7 @@ TH2D* GetOscHist(int flvf, int mh){
 
       // Fill probabilities in histogram
       h2->SetBinContent(le,ct,prob);
-    
+
     }// loe loop
   }// cosT loop
 
@@ -117,7 +117,7 @@ TH2D* GetOscHist(int flvf, int mh){
 
   // Set titles
   h2->SetTitle(";L/E (km/GeV);cos#theta_{z};P_{#mu#mu} + 0.5#timesP_{#bar{#mu#mu}} + 0.5#timesP_{e#mu} + 0.25#timesP_{#bar{e#mu}}");
-  
+
   return h2;
 
 }
@@ -145,9 +145,9 @@ void DrawEnergyLines(TH2* hNH){
   // Define earth diameter
   double dEarth = 2*6371;
 
-  // Define constant energy line 
+  // Define constant energy line
   TF1* f= new TF1("f","-x*[0]/[1]",0,xmax);
-  
+
   // Second parameter is earth's diameter
   f->SetParameter(1,dEarth);
 
@@ -159,10 +159,10 @@ void DrawEnergyLines(TH2* hNH){
   // for drawing lines
   double minE = 0.1 * dEarth/xmax;
   double maxE = 10. * dEarth/xmax;
-  
+
   // Start from a rounded power of 10 energy
   double sampleE = pow(10, floor(log10(minE)) );
-  
+
   // Define how to increase energies
   int idx = 0;
   double scale[3] = {2,2.5,2};
@@ -170,15 +170,15 @@ void DrawEnergyLines(TH2* hNH){
   // Make a set of energies to draw
   vector<double> energies;
   while(sampleE<maxE){
-  
+
     if(sampleE>minE){
       energies.push_back(sampleE);
     }
-    
+
     sampleE *= scale[idx%3];
     idx++;
   }
-  
+
   // Update pad to get correct axis ranges
   gPad->Update();
 
@@ -186,13 +186,13 @@ void DrawEnergyLines(TH2* hNH){
   for(int i=0; i<int(energies.size()); i++){
 
     double energy = energies[i];
-  
+
     // Set first parameter to energy
     f->SetParameter(0, energy);
-    
+
     // Draw line
     f->DrawCopy("same");
-    
+
     // Get position in pad to draw label
     double xval = 2*xmax*6371/(2*6371+xmax*energy);
     double ndcx = GetNDCx(xval);
@@ -203,5 +203,5 @@ void DrawEnergyLines(TH2* hNH){
     if(energy<1)  MiscText(ndcx,ndcy,0.03,TString::Format("%0.1f GeV", energy));
 
   }// energies loop
-  
+
 }

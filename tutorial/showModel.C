@@ -19,7 +19,7 @@ void showModel(){
   // Draw two different models (15 and 44 layers)
   DrawModel("alp", kBlue, 0);
   DrawModel("lp" , kRed, 1);
-  
+
   SetTH1Margin();
 
 }
@@ -35,19 +35,19 @@ void DrawModel(TString opt, int col, int model){
 
   if(model==0) filename = PREM_DIR + "/prem_44layers.txt";
   else         filename = PREM_DIR + "/prem_15layers.txt";
-  
+
   // Set the PREM model from a table
   OscProb::PremModel prem(filename);
-  
+
   // Get the prem layers
   vector<OscProb::PremLayer> pl = prem.GetPremLayers();
 
   // Number of layers
   int nlayers = pl.size();
-  
+
   // Create a TGraph to plot
   TGraph* gr = new TGraph(2*nlayers);
-  
+
   // Loop over paths
   for(int i=0; i<nlayers; i++){
     // Set graph point in start of layer
@@ -56,7 +56,7 @@ void DrawModel(TString opt, int col, int model){
     // Set graph point in end of layer
     gr->SetPoint(2*i+1, pl[i].radius, pl[i].density);
   }
-  
+
   // Setup a nice TGraph
   SetGraph(gr,col);
 
@@ -65,14 +65,14 @@ void DrawModel(TString opt, int col, int model){
    gr->SetLineStyle(7);
    gr->SetMarkerStyle(24);
   }
-  
+
   // Set the limits stopping at the earth's center
   gr->GetYaxis()->SetRangeUser(-0.1,15);
   gr->GetXaxis()->SetLimits(10,pl[nlayers-1].radius);
-  
+
   // Set the axis titles
   gr->SetTitle(";Radius (km);Density (g/cm^{3})");
-  
+
   // Draw a clone
   gr->DrawClone(opt);
 

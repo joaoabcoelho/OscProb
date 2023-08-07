@@ -25,7 +25,7 @@
 #define M_SQRT3    1.73205080756887729352744634151   // sqrt(3)
 
 // Macros
-#define SQR(x)      ((x)*(x))                        // x^2 
+#define SQR(x)      ((x)*(x))                        // x^2
 #define SQR_ABS(x)  (SQR(real(x)) + SQR(imag(x)))  // |x|^2
 
 
@@ -47,7 +47,7 @@ int zheevc3(std::complex<double> A[3][3], double w[3])
 // ----------------------------------------------------------------------------
 {
   double m, c1, c0;
-  
+
   // Determine coefficients of characteristic poynomial. We write
   //       | a   d   f  |
   //  A =  | d*  b   e  |
@@ -73,7 +73,7 @@ int zheevc3(std::complex<double> A[3][3], double w[3])
 
   phi = 27.0 * ( 0.25*SQR(c1)*(p - c1) + c0*(q + 27.0/4.0*c0));
   phi = (1.0/3.0) * atan2(sqrt(fabs(phi)), q);
-  
+
   c = sqrt_p*cos(phi);
   s = (1.0/M_SQRT3)*sqrt_p*sin(phi);
 

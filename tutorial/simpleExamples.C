@@ -5,14 +5,14 @@
 #include "PMNS_Sterile.h"
 
 void simpleExamples(){
- 
+
   // Initialize your objects
   OscProb::PMNS_Fast myPMNS;
-  
+
   // Other examples
   OscProb::PMNS_NSI  myNSI; // NSI extension
   OscProb::PMNS_Sterile mySterile(5); // 3+2 Model
-  
+
 
 
   // Set oscillation paramaters
@@ -27,20 +27,20 @@ void simpleExamples(){
   myPMNS.SetDensity(2.5); // Set the matter density in g/cm^3
   myPMNS.SetLength(1300); // Set baseline in km
   myPMNS.SetEnergy(3.0);  // Set neutrino energy in GeV
-  
+
   // Say whether you want antineutrinos
   // Default is false, i.e. neutrinos
-  myPMNS.SetIsNuBar(true); 
-  
+  myPMNS.SetIsNuBar(true);
 
 
-  // Calculate probability of 
+
+  // Calculate probability of
   // numubar to nuebar transition
   double Pme = myPMNS.Prob(1,0);
-  
+
   // Calculate again at 10 GeV
   Pme = myPMNS.Prob(1,0, 10.0);
-  
+
   // Calculate average probability
   // between 9.5 and 10.5 GeV
   // Assumes constant event rate
@@ -56,18 +56,18 @@ void simpleExamples(){
 
   // Get numubar to nuebar probability
   Pme = myPMNS.Prob(1,0);
-  
-  
-  
-  // Use a PremModel to make paths 
+
+
+
+  // Use a PremModel to make paths
   // through the earth
   OscProb::PremModel prem;
-  
+
   // Chose an angle for the neutrino
   // and fill the paths with cosTheta
   // e.g. cosTheta = -1 (vertical up-going)
   prem.FillPath(-1);
-  
+
   // Give the path to the PMNS object
   // and get the probability
   myPMNS.SetPath(prem.GetNuPath());

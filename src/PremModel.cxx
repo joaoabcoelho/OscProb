@@ -1,9 +1,9 @@
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 //
 // Implements an earth model with spherical shells
 //
 // jcoelho\@apc.in2p3.fr
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 #include <cmath>
 #include <iostream>
@@ -23,7 +23,7 @@ using namespace OscProb;
 ///
 const double PremModel::DET_TOL = 0.2; // Tolerance in km
 
-//......................................................................
+//.............................................................................
 ///
 /// Constructor.
 ///
@@ -35,21 +35,21 @@ const double PremModel::DET_TOL = 0.2; // Tolerance in km
 PremModel::PremModel(string filename) :
 fDetLayer(0)
 {
-  
+
   SetRemoveSmallPaths(false);
   SetDetPos(6368);
   LoadModel(filename);
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Nothing to clean.
 ///
 PremModel::~PremModel(){}
 
 
-//......................................................................
+//.............................................................................
 ///
 /// Clean identical consecutive layers.
 /// This is used in particular to remove previously added
@@ -72,7 +72,7 @@ void PremModel::CleanIdentical(){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Add a detector layer at the detector position if needed.
 /// If not, set the detector layer to an existing boundary.
@@ -126,7 +126,7 @@ void PremModel::AddDetLayer(){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the coordinates of the detector:
 ///   radius in km, latitude in degrees, longitude in degrees
@@ -138,7 +138,7 @@ void PremModel::AddDetLayer(){
 /// position to distinguish what parts of the earth are above
 /// and below the detector.
 ///
-/// @param rad - The distance from the detector to the Earth's center in km 
+/// @param rad - The distance from the detector to the Earth's center in km
 /// @param lat - The latitude of the detector in deg N (between -90 and 90)
 /// @param lon - The longitude of the detector in deg E (between 0 and 360)
 ///
@@ -151,7 +151,7 @@ void PremModel::SetDetPos(double rad, double lat, double lon)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the set of earth layers
 ///
@@ -160,7 +160,7 @@ void PremModel::SetDetPos(double rad, double lat, double lon)
 ///
 vector<PremLayer> PremModel::GetPremLayers(){ return fPremLayers; }
 
-//......................................................................
+//.............................................................................
 ///
 /// Clear the earth model information.
 ///
@@ -172,7 +172,7 @@ void PremModel::ClearModel()
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Add a layer to the earth model.
 ///
@@ -189,7 +189,7 @@ void PremModel::AddLayer(double radius, double density,
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Load an earth model from a file.
 ///
@@ -245,7 +245,7 @@ void PremModel::LoadModel(string filename)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the effective Z/A value for all layers of a given type.
 ///
@@ -272,7 +272,7 @@ void PremModel::SetLayerZoA(int layer, double zoa)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the effective Z/A value for all layers of a given type, e.g. all
 /// outer-core layers.
@@ -304,7 +304,7 @@ double PremModel::GetLayerZoA(int layer)
   return 0;
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the radius of the outermost layer of the model.
 ///
@@ -341,7 +341,7 @@ void PremModel::SetTopLayerSize(double thick)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Add a path segment to the sequence.
 ///
@@ -357,7 +357,7 @@ void PremModel::AddPath(double length, PremLayer pl)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Fill the path sequence in a vector.
 ///

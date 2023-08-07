@@ -1,9 +1,9 @@
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 //
 // Implements functions to average neutrino paths
 //
 // jcoelho\@apc.in2p3.fr
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 #include "NuPath.h"
 
@@ -11,7 +11,7 @@ using namespace std;
 
 using OscProb::NuPath;
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the merged average of two paths
 ///
@@ -43,7 +43,7 @@ NuPath OscProb::AvgPath(NuPath& p1, NuPath& p2){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the merged average of a vector of paths
 ///
@@ -59,10 +59,10 @@ NuPath OscProb::AvgPath(std::vector<NuPath>& pv){
 
   // Get size of vector
   int np = pv.size();
-  
+
   // Start with the first path
   NuPath mergedPath;
-  
+
   // If vector is not empty, start on first path
   if(np>0) mergedPath = pv[0];
   else return mergedPath;
@@ -77,7 +77,7 @@ NuPath OscProb::AvgPath(std::vector<NuPath>& pv){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Merge two specific paths by their indices in a path vector
 ///

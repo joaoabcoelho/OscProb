@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 /// \class OscProb::PremModel
 ///
 /// \brief Implements an earth model with spherical shells
@@ -20,7 +20,7 @@
 /// This class inherits from EarthModelBase and can be saved in ROOT files.
 ///
 /// \author jcoelho\@apc.in2p3.fr
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 #ifndef PREMMODEL_H
 #define PREMMODEL_H
@@ -30,12 +30,12 @@
 
 namespace OscProb {
 
-  class PremModel : public EarthModelBase /*: public TObject*/ {
+  class PremModel : public EarthModelBase {
 
     public:
 
       PremModel(std::string filename=""); ///< Constructor
-      virtual ~PremModel();          ///< Destructor
+      virtual ~PremModel();               ///< Destructor
 
       void SetDetPos(double rad, double lat=0, double lon=0); ///< Set the detector position (rad = radius in km, lat/lon in deg)
 
@@ -43,10 +43,10 @@ namespace OscProb {
 
       virtual void LoadModel(std::string filename); ///< Load an earth model from a file
 
-      virtual std::vector<PremLayer> GetPremLayers(); ///< Get the set of earth layers
+      virtual std::vector<PremLayer> GetPremLayers();  ///< Get the set of earth layers
 
       virtual void SetLayerZoA(int layer, double zoa); ///< Set Z/A of all layers of a given type
-      virtual double GetLayerZoA(int layer); ///< Get Z/A of all layers of a given type
+      virtual double GetLayerZoA(int layer);           ///< Get Z/A of all layers of a given type
 
       virtual void SetTopLayerSize(double thick);      ///< Set the outermost layer thickness in km
 
@@ -76,4 +76,5 @@ namespace OscProb {
   };
 
 }
+
 #endif

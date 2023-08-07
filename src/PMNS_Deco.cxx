@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 //
 // Implementation of oscillations of neutrinos in matter in a
 // three-neutrino framework with decoherence.
@@ -6,7 +6,7 @@
 // This  class inherits from the PMNS_Fast class
 //
 // jcoelho\@apc.in2p3.fr
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
 #include <cassert>
@@ -18,14 +18,14 @@ using namespace OscProb;
 using namespace std;
 
 
-//......................................................................
+//.............................................................................
 ///
 /// Constructor. \sa PMNS_Base::PMNS_Base
 ///
 /// This class is restricted to 3 neutrino flavours.
 ///
 PMNS_Deco::PMNS_Deco() : PMNS_Fast(), fGamma(),
-fRho(3, vectorC(3,0))
+fRho(3, vectorC(3,0)), fMBuffer(3, vectorC(3,0))
 {
   SetStdPath();
   SetGamma(2,0);
@@ -34,13 +34,13 @@ fRho(3, vectorC(3,0))
   SetPower(0);
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Nothing to clean.
 ///
 PMNS_Deco::~PMNS_Deco(){}
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the decoherence parameter \f$\Gamma_{j1}\f$.
 ///
@@ -65,10 +65,10 @@ void PMNS_Deco::SetGamma(int j, double val){
   }
 
   fGamma[j-1] = val;
-  
+
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the decoherence parameter \f$\Gamma_{32}\f$.
 ///
@@ -91,14 +91,14 @@ void PMNS_Deco::SetGamma32(double val){
          << -val << endl;
     val = -val;
   }
-  
+
   double min32 = 0.25*fGamma[1];
 
   if(fGamma[0] >= 0) min32 *= 1 - pow(fGamma[0],2);
   else               min32 *= 1 + 3*pow(fGamma[0],2);
-  
+
   if(val < min32){
-    
+
     if(fGamma[0]>=0 || 4*val/fGamma[1] < 1){
       fGamma[0] = sqrt(1 - 4*val/fGamma[1]);
       fGamma[2] = 0.25*fGamma[1]*(1 + 3*pow(fGamma[0],2));
@@ -107,14 +107,14 @@ void PMNS_Deco::SetGamma32(double val){
       fGamma[0] = -sqrt((4*val/fGamma[1] - 1)/3);
       fGamma[2] = 0.25*fGamma[1]*(1 - pow(fGamma[0],2));
     }
-    
+
     cerr << "WARNING: Impossible to have Gamma32 = "        << val
          << " with current Gamma21 and theta parameters."   << endl
-         << "         Changing the value of cos(theta) to " << fGamma[0] 
+         << "         Changing the value of cos(theta) to " << fGamma[0]
          << endl;
-         
+
     return;
-         
+
   }
 
   double arg = fGamma[1] * ( 4*val - fGamma[1]*(1 - pow(fGamma[0],2)) );
@@ -122,28 +122,28 @@ void PMNS_Deco::SetGamma32(double val){
   if(arg < 0){
     arg = 0;
     fGamma[0] = sqrt(1 - 4*val/fGamma[1]);
-    cerr << "WARNING: Imaginary Gamma31 found. Changing the value of cos(theta) to " 
+    cerr << "WARNING: Imaginary Gamma31 found. Changing the value of cos(theta) to "
          << fGamma[0] << endl;
   }
-  
+
   double gamma31 = val + fGamma[1]*pow(fGamma[0],2) + fGamma[0] * sqrt(arg);
-  
+
   fGamma[2] = gamma31;
-  
+
   if(fabs(val - GetGamma(3,2)) > 1e-6){
     cerr << "ERROR: Failed sanity check: GetGamma(3,2) = "
          << GetGamma(3,2) << " != " << val << endl;
   }
-  
+
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the decoherence angle. This will define the relationship:
 ///
-///   \f$ 
-///   \Gamma_{32} = \Gamma_{31} + \Gamma_{21} \cos^2\theta - 
-///   \cos\theta \sqrt{\Gamma_{21} (4\Gamma_{31} - \Gamma_{21} (1 - \cos^2\theta))} 
+///   \f$
+///   \Gamma_{32} = \Gamma_{31} + \Gamma_{21} \cos^2\theta -
+///   \cos\theta \sqrt{\Gamma_{21} (4\Gamma_{31} - \Gamma_{21} (1 - \cos^2\theta))}
 ///   \f$
 ///
 /// @param th - decoherence angle
@@ -152,15 +152,15 @@ void PMNS_Deco::SetDecoAngle(double th)
 {
 
   fGamma[0] = cos(th);
-  
+
 }
 
-//......................................................................
+//.............................................................................
 ///
-/// Set the power index of the decoherence energy dependence. 
+/// Set the power index of the decoherence energy dependence.
 /// This will multiply the Gammas such that the final parameters are:
 ///
-///   \f$ 
+///   \f$
 ///   \Gamma_{ij} \rightarrow \Gamma_{ij} \times \left(\frac{E}{[1 \mbox{GeV}]}\right)^n
 ///   \f$
 ///
@@ -170,10 +170,10 @@ void PMNS_Deco::SetPower(double n)
 {
 
   fPower = n;
-  
+
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the decoherence angle value.
 ///
@@ -181,10 +181,10 @@ double PMNS_Deco::GetDecoAngle()
 {
 
   return acos(fGamma[0]);
-  
+
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the power index for energy dependence.
 ///
@@ -192,10 +192,10 @@ double PMNS_Deco::GetPower()
 {
 
   return fPower;
-  
+
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get any given decoherence parameter.
 ///
@@ -221,13 +221,13 @@ double PMNS_Deco::GetGamma(int i, int j)
     return 0;
   }
 
-  if(j == 1){ 
+  if(j == 1){
     return fGamma[i-1];
   }
   else {
     // Combine Gamma31, Gamma21 and an angle (fGamma[0] = cos(th)) to make Gamma32
     double arg = fGamma[1] * ( 4*fGamma[2] - fGamma[1]*(1 - pow(fGamma[0],2)) );
-    
+
     if(arg < 0) return fGamma[1] - 3*fGamma[2];
 
     return fGamma[2] + fGamma[1]*pow(fGamma[0],2) - fGamma[0] * sqrt(arg);
@@ -236,79 +236,82 @@ double PMNS_Deco::GetGamma(int i, int j)
 
 }
 
-//.....................................................................
-/// Dot product of two matrices.
+//.............................................................................
 ///
-/// @param A - input matrix A
-/// @param B - input matrix B
+/// Rotate the density matrix to or from the mass basis
 ///
-/// @return - matrix A.B
+/// @param to_mass - true if to mass basis
 ///
-matrixC PMNS_Deco::Dot(matrixC A, matrixC B)
+void PMNS_Deco::RotateState(bool to_mass)
 {
 
-  matrixC out(3, vectorC(3,0));
-  
-  for(int i=0; i<3; i++){
-  for(int j=0; j<3; j++){
-  for(int k=0; k<3; k++){
-
-    out[i][j] += A[i][k] * B[k][j];
-
-  }}}
-  
-  return out;
-
-}
-
-//.....................................................................
-/// Product of elements of two matrices.
-///
-/// @param A - input matrix A
-/// @param B - input matrix B
-///
-/// @return - matrix A * B
-///
-matrixC PMNS_Deco::Mult(matrixC A, matrixC B)
-{
-
-  matrixC out(3, vectorC(3,0));
-  
-  for(int i=0; i<3; i++){
-  for(int j=0; j<3; j++){
-  
-    out[i][j] += A[i][j] * B[i][j];
-
+  // buffer = rho . U
+  for(int i=0; i<fNumNus; i++){
+  for(int j=0; j<fNumNus; j++){
+    fMBuffer[i][j] = 0;
+    for(int k=0; k<fNumNus; k++){
+      if(to_mass) fMBuffer[i][j] += fRho[i][k] * fEvec[k][j];
+      else        fMBuffer[i][j] += fRho[i][k] * conj(fEvec[j][k]);
+    }
   }}
-  
-  return out;
 
-}
-
-//.....................................................................
-/// Conjugate transpose matrix.
-///
-/// @param A - input matrix A
-///
-/// @return - \f$A^{\dagger}\f$
-///
-matrixC PMNS_Deco::CTransp(matrixC A)
-{
-
-  matrixC out(3, vectorC(3,0));
-  
-  for(int i=0; i<3; i++){
-  for(int j=0; j<3; j++){
-  
-    out[i][j] += conj(A[j][i]);
-
+  // rho = U^\dagger . buffer = U^\dagger . rho . U
+  // Final matrix is Hermitian, so copy upper to lower triangle
+  for(int i=0; i<fNumNus; i++){
+  for(int j=i; j<fNumNus; j++){
+    fRho[i][j] = 0;
+    for(int k=0; k<fNumNus; k++){
+      if(to_mass) fRho[i][j] += conj(fEvec[k][i]) * fMBuffer[k][j];
+      else        fRho[i][j] += fEvec[i][k] * fMBuffer[k][j];
+    }
+    if(j>i) fRho[j][i] = conj(fRho[i][j]);
   }}
-  
+
+}
+
+//.............................................................................
+///
+/// Simple index sorting of 3-vector
+///
+vectorI sort3(const vectorD& x){
+
+  vectorI out(3, 0);
+
+  // 1st element is smallest
+  if(x[0]<x[1] && x[0]<x[2]){
+    // 3rd element is largest
+    if(x[1]<x[2]){
+      out[1] = 1;
+      out[2] = 2;
+    }
+    // 2nd element is largest
+    else {
+      out[1] = 2;
+      out[2] = 1;
+    }
+  }
+  // 2nd element is smallest
+  else if(x[1]<x[2]){
+    out[0] = 1;
+    // 3rd element is largest
+    if(x[0]<x[2]) out[2] = 2;
+    // 1st element is largest
+    else          out[1] = 2;
+  }
+  // 3rd element is smallest
+  else {
+    out[0] = 2;
+    // 2nd element is largest
+    if(x[0]<x[1]) out[2] = 1;
+    // 1st element is largest
+    else          out[1] = 1;
+  }
+
   return out;
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Propagate the current neutrino state through a given path
 ///
@@ -322,47 +325,43 @@ void PMNS_Deco::PropagatePath(NuPath p)
 
   // Solve for eigensystem
   SolveHam();
-  
-  // The code below is not pretty or optimised at all. Lots of matrix
-  // multiplications are going on which could be otpimised due to 
-  // symmetry. The index sorting is also terrible. Needs improving.
-
-  // Store rotation matrices
-  matrixC U = fEvec;
-  matrixC Ut = CTransp(fEvec);
 
   // Rotate to effective mass basis
-  fRho = Dot(Ut, Dot(fRho, U));
-  
-  // Compute evolution matrix
-  matrixC evolve(3, vectorC(3,1));
-  
+  RotateState(true);
+
   // Some ugly way of matching gamma and dmsqr indices
-  vectorI dm_idx = GetSortedIndices(fDm); 
-  vectorI ev_idx = GetSortedIndices(fEval); 
+  vectorI dm_idx = sort3(fDm);
+  vectorI ev_idx = sort3(fEval);
 
   int idx[3];
-  for(int i=0; i<3; i++) idx[ev_idx[i]] = dm_idx[i];
-    
+  for(int i=0; i<fNumNus; i++) idx[ev_idx[i]] = dm_idx[i];
+
+  // Power law dependency of gamma parameters
   double energyCorr = pow(fEnergy, fPower);
 
-  for(int j=0; j<3; j++){ 
+  // Convert path length to eV
+  double lengthIneV = kKm2eV * p.length;
+
+  // Apply phase rotation to off-diagonal elements
+  for(int j=0; j<fNumNus; j++){
   for(int i=0; i<j; i++){
+    // Get the appropriate gamma parameters based on sorted indices
     double gamma_ij = GetGamma(max(idx[i],idx[j])+1, min(idx[i],idx[j])+1) * energyCorr;
-    complexD arg = complexD(gamma_ij * kGeV2eV, fEval[i] - fEval[j]) * kKm2eV * p.length;
-    evolve[i][j] = exp(-arg);
-    evolve[j][i] = exp(-conj(arg));
+    // Multiply by path length
+    gamma_ij *= kGeV2eV * lengthIneV;
+    // This is the standard oscillation phase
+    double arg = (fEval[i] - fEval[j]) * lengthIneV;
+    // apply phase to rho
+    fRho[i][j] *= exp(-gamma_ij) * complexD(cos(arg), -sin(arg));
+    fRho[j][i] = conj(fRho[i][j]);
   }}
-  
-  // Evolve density matrix
-  fRho = Mult(fRho, evolve);
-  
+
   // Rotate back to flavour basis
-  fRho = Dot(U, Dot(fRho, Ut));
+  RotateState(false);
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Reset the neutrino state back to a pure flavour where it starts
 ///
@@ -386,7 +385,7 @@ void PMNS_Deco::ResetToFlavour(int flv)
   }}
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Compute oscillation probability of flavour flv from current state
 ///
@@ -405,7 +404,7 @@ double PMNS_Deco::P(int flv)
   return abs(fRho[flv][flv]);
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Set the density matrix from a pure state
 ///
@@ -422,7 +421,7 @@ void PMNS_Deco::SetPureState(vectorC nu_in){
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability matrix for the first nflvi and nflvf states.
 ///
@@ -453,7 +452,7 @@ matrixD PMNS_Deco::ProbMatrix(int nflvi, int nflvf)
     ResetToFlavour(i);
     allstates[i] = fRho;
   }
-  
+
   // Propagate all states in parallel
   for(int i=0; i<int(fNuPaths.size()); i++){
 
@@ -464,15 +463,15 @@ matrixD PMNS_Deco::ProbMatrix(int nflvi, int nflvf)
     }
 
   }
-  
+
   // Get all probabilities
   for(int flvi=0; flvi<nflvi; flvi++){
   for(int flvj=0; flvj<nflvf; flvj++){
     probs[flvi][flvj] = abs(allstates[flvi][flvj][flvj]);
   }}
-  
+
   return probs;
-  
+
 }
 
 ////////////////////////////////////////////////////////////////////////

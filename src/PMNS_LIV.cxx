@@ -1,20 +1,20 @@
-///////////////////////////////////////////////////////////////////////////////                   
-/// class OscProb::PMNS_LIV                                                                   
-///                                                                                                     
-/// Implementation of neutrino oscillations in matter in a                                                
-/// three-neutrino framework with LIV as modelled by the SME.                                               
+///////////////////////////////////////////////////////////////////////////////
+/// class OscProb::PMNS_LIV
+///
+/// Implementation of neutrino oscillations in matter in a
+/// three-neutrino framework with LIV as modelled by the SME.
 /// The SME coefficients are included up to the 8th order,
-/// following the approach described in 
+/// following the approach described in
 /// https://doi.org/10.1103/PhysRevD.85.096005.
-///                                                                                                        
-/// This developement is part of the QGRANT project with                                                   
-/// ID: 101068013,                                                                                        
-/// founded by the HORIZON-MSCA-2021-PF-01-01 programme.                                               
-///                                                                                                     
-/// \author Nafis R. K. Chowdhury - nrkhanchowdhury\@km3net.de                                             
-/// \author Joao Coelho - jcoelho\@apc.in2p3.fr                                                           
-/// \author Alba Domi - alba.domi\@fau.de                       
-///////////////////////////////////////////////////////////////////////////////  
+///
+/// This developement is part of the QGRANT project with
+/// ID: 101068013,
+/// founded by the HORIZON-MSCA-2021-PF-01-01 programme.
+///
+/// \author Nafis R. K. Chowdhury - nrkhanchowdhury\@km3net.de
+/// \author Joao Coelho - jcoelho\@apc.in2p3.fr
+/// \author Alba Domi - alba.domi\@fau.de
+///////////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
 
@@ -24,8 +24,8 @@ using namespace OscProb;
 
 using namespace std;
 
-//...................................................................... 
-/// Constructor. 
+//.............................................................................
+/// Constructor.
 /// This class is restricted to 3 neutrino flavours.
 /// By default, all LIV coefficients are set to zero.
 ///
@@ -43,13 +43,13 @@ PMNS_LIV::PMNS_LIV() : PMNS_Fast()
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Destructor.
 ///
 PMNS_LIV::~PMNS_LIV(){}
 
-//......................................................................
+//.............................................................................
 /// Set any given aT parameter of a chosen dimension.
 ///
 /// Flavours are:\n
@@ -99,21 +99,21 @@ void PMNS_LIV::SetaT(int flvi, int flvj, int dim, double val, double phase){
 
 }
 
-//......................................................................                                  
-/// Set any given cT parameter of a chosen dimension.                         
-///                                                                                                       
-/// Flavours are:\n                                                                                            
-/// - 0 = nue, 1 = numu, 2 = nutau                                                                         
-///                                                                                                        
-/// Requires that flvi < flvj. Will notify you if input is wrong.                                           
-/// If flvi > flvj, will assume reverse order and swap flvi and flvj.                                      
-///                                                                                                         
-/// @param flvi  - First flavour index                                                                          
-/// @param flvj  - Second flavour index                                                                      
-/// @param dim   - Dimension of the coefficient: can be 4,6,8.      
-/// @param val   - Absolute value of the parameter                                                        
-/// @param phase - Complex phase of the parameter in radians                                         
-///                                                                    
+//.............................................................................
+/// Set any given cT parameter of a chosen dimension.
+///
+/// Flavours are:\n
+/// - 0 = nue, 1 = numu, 2 = nutau
+///
+/// Requires that flvi < flvj. Will notify you if input is wrong.
+/// If flvi > flvj, will assume reverse order and swap flvi and flvj.
+///
+/// @param flvi  - First flavour index
+/// @param flvj  - Second flavour index
+/// @param dim   - Dimension of the coefficient: can be 4,6,8.
+/// @param val   - Absolute value of the parameter
+/// @param phase - Complex phase of the parameter in radians
+///
 void PMNS_LIV::SetcT(int flvi, int flvj, int dim, double val, double phase){
 
   if(flvi > flvj){
@@ -149,9 +149,9 @@ void PMNS_LIV::SetcT(int flvi, int flvj, int dim, double val, double phase){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
-/// Get any given aT parameter of a chosen dimension.  
+/// Get any given aT parameter of a chosen dimension.
 ///
 /// Flavours are:\n
 /// - 0 = nue, 1 = numu, 2 = nutau
@@ -161,9 +161,11 @@ void PMNS_LIV::SetcT(int flvi, int flvj, int dim, double val, double phase){
 ///
 /// @param flvi  - The first flavour index
 /// @param flvj  - The second flavour index
-/// @param dim   - Dimension of the coefficient: can be 3,5,7.  
+/// @param dim   - Dimension of the coefficient: can be 3,5,7.
 ///
-complex<double> PMNS_LIV::GetaT(int flvi, int flvj, int dim){
+/// @return - The aT parameter value
+///
+complexD PMNS_LIV::GetaT(int flvi, int flvj, int dim){
 
   if(flvi > flvj){
     cerr << "WARNING: First argument should be smaller or equal to second argument" << endl
@@ -183,12 +185,12 @@ complex<double> PMNS_LIV::GetaT(int flvi, int flvj, int dim){
   }
 
   int pos = (dim-3)/2;
-  
+
   return faT[flvi][flvj][pos];
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get any given cT parameter of a chosen dimension.
 ///
@@ -200,7 +202,9 @@ complex<double> PMNS_LIV::GetaT(int flvi, int flvj, int dim){
 ///
 /// @param flvi  - The first flavour index
 /// @param flvj  - The second flavour index
-/// @param dim   - Dimension of the coefficient: can be 4,6,8. 
+/// @param dim   - Dimension of the coefficient: can be 4,6,8.
+///
+/// @return - The cT parameter value
 ///
 complex<double> PMNS_LIV::GetcT(int flvi, int flvj, int dim){
 
@@ -220,59 +224,84 @@ complex<double> PMNS_LIV::GetcT(int flvi, int flvj, int dim){
     cerr << "WARNING: Invalid cT coefficient dimension dim=" << dim << " not in  [4,6,8].\n";
     return zero;
   }
-  
+
   int pos = dim/2 - 2;
-  
+
   return fcT[flvi][flvj][pos];
 
 }
 
 
-//......................................................................
+//.............................................................................
 ///
-/// Build the full Hamiltonian in matter
-///
-/// Here we divide the mass squared matrix Hms by the 2E
-/// to obtain the vacuum Hamiltonian in eV. Then, the matter
-/// potential is added to each flavour pair.
+/// Build the full LIV Hamiltonian in matter
 ///
 void PMNS_LIV::UpdateHam()
 {
 
-  double lv = 2 * kGeV2eV*fEnergy;           // 2*E in eV
+  double lv = 2 * kGeV2eV*fEnergy; // 2*E in eV
 
-  double kr2GNe = kK2*M_SQRT2*kGf*fPath.density;
-  kr2GNe *=  fPath.zoa; // Matter potential in eV
-
-  // Finish build Hamiltonian in matter with dimension of eV
+  // Set the vacuum Hamiltonian
   for(int i=0;i<fNumNus;i++){
-    for(int j=i;j<fNumNus;j++){
-      complexD liv_term = 0;
-      for(int dim = 3; dim < 9; dim++){
-        complexD dim_term = std::pow(fEnergy, dim-3);
-        if(dim%2==1) dim_term *= (fIsNuBar ? -1. : 1.) * faT[i][j][(dim-3)/2];
-        else         dim_term *= (dim==4 ? -4/3. : -1.) * fcT[i][j][(dim-4)/2];
-        liv_term += dim_term;
-      }
-      
-      fHam[i][j] = fHms[i][j]/lv + kGeV2eV * liv_term;
+  for(int j=i;j<fNumNus;j++){
+      fHam[i][j] = fHms[i][j]/lv;
+  }}
 
-      if(fIsNuBar) fHam[i][j] = conj(fHam[i][j]);
-    }
-  }
-
+  // Add matter potential
+  double kr2GNe = kK2*M_SQRT2*kGf * fPath.density * fPath.zoa;
   if(!fIsNuBar) fHam[0][0] += kr2GNe;
   else          fHam[0][0] -= kr2GNe;
 
+
+  // Add LIV terms for all dimensions
+  double energy_pow = kGeV2eV;
+
+  for(int dim = 3; dim < 9; dim++){
+
+    // Increase energy power
+    if(dim>3) energy_pow *= fEnergy;
+
+    // Set parameter index
+    int coeff_idx = (dim-3)/2;
+
+    for(int i=0;i<fNumNus;i++){
+    for(int j=i;j<fNumNus;j++){
+
+      complexD liv_term = energy_pow;
+
+      if(dim%2==1){ // aT is CPT-odd
+        if(fIsNuBar) liv_term *= -faT[i][j][coeff_idx];
+        else         liv_term *=  faT[i][j][coeff_idx];
+      }
+      else { // cT is CPT-even
+        // Add 4/3 coefficient for backward compatibility
+        if(dim==4)   liv_term *= -4/3. * fcT[i][j][coeff_idx];
+        else         liv_term *= -fcT[i][j][coeff_idx];
+      }
+
+      fHam[i][j] += liv_term;
+
+    }}
+
+  }
+
+  // Conjugate Hamiltonian for antineutrinos
+  if(fIsNuBar){
+    for(int i=0;i<fNumNus;i++){
+    for(int j=i+1;j<fNumNus;j++){
+      fHam[i][j] = conj(fHam[i][j]);
+    }}
+  }
+
 }
 
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 //
 // Obsolete functions for backward compatibility...
 //
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
-//......................................................................
+//.............................................................................
 ///
 /// Set all LIV parameters at once.
 ///
@@ -321,7 +350,7 @@ void PMNS_LIV::SetLIV(double aT_ee,        double aT_mumu,       double aT_tauta
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set any given aT parameter with dimension 3.
 ///
@@ -343,7 +372,7 @@ void PMNS_LIV::SetaT(int flvi, int flvj, double val, double phase){
   SetaT(flvi, flvj, 3, val, phase);
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set any given cT parameter with dimension 4.
 ///
@@ -367,7 +396,7 @@ void PMNS_LIV::SetcT(int flvi, int flvj, double val, double phase){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set aT_ee parameter
 ///
@@ -375,7 +404,7 @@ void PMNS_LIV::SetcT(int flvi, int flvj, double val, double phase){
 ///
 void PMNS_LIV::SetaT_ee(double a){ SetaT(0,0, a, 0); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set aT_mumu parameter
 ///
@@ -383,7 +412,7 @@ void PMNS_LIV::SetaT_ee(double a){ SetaT(0,0, a, 0); }
 ///
 void PMNS_LIV::SetaT_mumu(double a){ SetaT(1,1, a, 0); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set aT_tautau parameter
 ///
@@ -391,7 +420,7 @@ void PMNS_LIV::SetaT_mumu(double a){ SetaT(1,1, a, 0); }
 ///
 void PMNS_LIV::SetaT_tautau(double a){ SetaT(2,2, a, 0); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set aT_emu parameter
 ///
@@ -400,7 +429,7 @@ void PMNS_LIV::SetaT_tautau(double a){ SetaT(2,2, a, 0); }
 ///
 void PMNS_LIV::SetaT_emu(double a, double phi){ SetaT(0,1, a, phi); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set aT_etau parameter
 ///
@@ -409,7 +438,7 @@ void PMNS_LIV::SetaT_emu(double a, double phi){ SetaT(0,1, a, phi); }
 ///
 void PMNS_LIV::SetaT_etau(double a, double phi){ SetaT(0,2, a, phi); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set aT_mutau parameter
 ///
@@ -418,7 +447,7 @@ void PMNS_LIV::SetaT_etau(double a, double phi){ SetaT(0,2, a, phi); }
 ///
 void PMNS_LIV::SetaT_mutau(double a, double phi){ SetaT(1,2, a, phi); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set cT_ee parameter
 ///
@@ -426,7 +455,7 @@ void PMNS_LIV::SetaT_mutau(double a, double phi){ SetaT(1,2, a, phi); }
 ///
 void PMNS_LIV::SetcT_ee(double a){ SetcT(0,0, a, 0); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set cT_mumu parameter
 ///
@@ -434,7 +463,7 @@ void PMNS_LIV::SetcT_ee(double a){ SetcT(0,0, a, 0); }
 ///
 void PMNS_LIV::SetcT_mumu(double a){ SetcT(1,1, a, 0); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set cT_tautau parameter
 ///
@@ -442,7 +471,7 @@ void PMNS_LIV::SetcT_mumu(double a){ SetcT(1,1, a, 0); }
 ///
 void PMNS_LIV::SetcT_tautau(double a){ SetcT(2,2, a, 0); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set cT_emu parameter
 ///
@@ -451,7 +480,7 @@ void PMNS_LIV::SetcT_tautau(double a){ SetcT(2,2, a, 0); }
 ///
 void PMNS_LIV::SetcT_emu(double a, double phi){ SetcT(0,1, a, phi); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set cT_etau parameter
 ///
@@ -460,7 +489,7 @@ void PMNS_LIV::SetcT_emu(double a, double phi){ SetcT(0,1, a, phi); }
 ///
 void PMNS_LIV::SetcT_etau(double a, double phi){ SetcT(0,2, a, phi); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set cT_mutau parameter
 ///
@@ -469,4 +498,4 @@ void PMNS_LIV::SetcT_etau(double a, double phi){ SetcT(0,2, a, phi); }
 ///
 void PMNS_LIV::SetcT_mutau(double a, double phi){ SetcT(1,2, a, phi); }
 
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////

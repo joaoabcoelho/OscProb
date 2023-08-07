@@ -13,12 +13,12 @@ using namespace std;
 
 using namespace OscProb;
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the coordinates of the detector:
 ///   radius in km, latitude in degrees, longitude in degrees
 ///
-/// @param rad - The distance from the detector to the Earth's center in km 
+/// @param rad - The distance from the detector to the Earth's center in km
 /// @param lat - The latitude of the detector in deg N (between -90 and 90)
 /// @param lon - The longitude of the detector in deg E (between 0 and 360)
 ///
@@ -45,7 +45,7 @@ void EarthModelBase::SetDetectorCoordinates(double rad, double lat, double lon)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the current neutrino path sequence
 ///
@@ -54,7 +54,7 @@ void EarthModelBase::SetDetectorCoordinates(double rad, double lat, double lon)
 ///
 vector<NuPath> EarthModelBase::GetNuPath(){ return fNuPath; }
 
-//......................................................................
+//.............................................................................
 ///
 /// Add a path segment to the sequence.
 ///
@@ -72,7 +72,7 @@ void EarthModelBase::AddPathSegment(double length, double density, double zoa, i
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the total baseline for a given cosTheta.
 ///
@@ -89,7 +89,7 @@ double EarthModelBase::GetTotalL(double cosT)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the cosTheta for a given total baseline.
 ///
@@ -111,7 +111,7 @@ double EarthModelBase::GetCosT(double L)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Merge similar paths to reduce number of steps
 ///
@@ -190,7 +190,7 @@ vector<NuPath> EarthModelBase::GetMergedPaths(double prec){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the boolean to tag whether to remove small paths when merging
 /// Small is defined as <1% of the total baseline

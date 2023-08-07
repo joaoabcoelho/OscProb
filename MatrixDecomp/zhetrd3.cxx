@@ -22,7 +22,7 @@
 #include "zhetrd3.h"
 
 // Macros
-#define SQR(x)      ((x)*(x))                        // x^2 
+#define SQR(x)      ((x)*(x))                        // x^2
 #define SQR_ABS(x)  (SQR(real(x)) + SQR(imag(x)))  // |x|^2
 
 
@@ -43,7 +43,7 @@ void zhetrd3(std::complex<double> A[3][3], std::complex<double> Q[3][3],
   std::complex<double> u[n], q[n];
   std::complex<double> omega, f;
   double K, h, g;
-  
+
   // Initialize Q to the identitity matrix
 #ifndef EVALS_ONLY
   for (int i=0; i < n; i++)
@@ -54,7 +54,7 @@ void zhetrd3(std::complex<double> A[3][3], std::complex<double> Q[3][3],
   }
 #endif
 
-  // Bring first row and column to the desired form 
+  // Bring first row and column to the desired form
   h = SQR_ABS(A[0][1]) + SQR_ABS(A[0][2]);
   if (real(A[0][1]) > 0)
     g = -sqrt(h);
@@ -64,7 +64,7 @@ void zhetrd3(std::complex<double> A[3][3], std::complex<double> Q[3][3],
   f    = g * A[0][1];
   u[1] = conj(A[0][1]) - g;
   u[2] = conj(A[0][2]);
-  
+
   omega = h - f;
   if (real(omega) > 0.0)
   {
@@ -80,11 +80,11 @@ void zhetrd3(std::complex<double> A[3][3], std::complex<double> Q[3][3],
 
     for (int i=1; i < n; i++)
       q[i] = q[i] - K * u[i];
-    
+
     d[0] = real(A[0][0]);
     d[1] = real(A[1][1]) - 2.0*real(q[1]*conj(u[1]));
     d[2] = real(A[2][2]) - 2.0*real(q[2]*conj(u[2]));
-    
+
     // Store inverse Householder transformation in Q
 #ifndef EVALS_ONLY
     for (int j=1; j < n; j++)

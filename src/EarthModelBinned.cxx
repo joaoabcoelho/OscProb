@@ -16,7 +16,7 @@ using namespace std;
 
 using namespace OscProb;
 
-//......................................................................
+//.............................................................................
 ///
 /// Update values of zenith angle and azimuthal angle for neutrino
 /// trajectory.
@@ -36,7 +36,7 @@ void TrajConstants::UpdateNuAngles(double cosTheta, double phi) {
   sinTcosA = sinT*cosA;
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Update detector position for neutrino trajectory calculations.
 ///
@@ -55,7 +55,7 @@ void TrajConstants::UpdateDetPos(double rDet, double DetLat, double DetLon) {
   rDetCosDetLat = DetRadius*cosDetLat;
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Recalculate constants that use combinations of detector position
 /// variables and neutrino direction angles.
@@ -76,7 +76,7 @@ void TrajConstants::Recalculate() {
 }
 
 
-//......................................................................
+//.............................................................................
 ///
 /// Constructor.
 ///
@@ -97,13 +97,13 @@ EarthModelBinned::EarthModelBinned(string filename)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Nothing to clean.
 ///
 EarthModelBinned::~EarthModelBinned(){}
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the set of Earth bins
 ///
@@ -111,7 +111,7 @@ EarthModelBinned::~EarthModelBinned(){}
 ///
 vector<EarthBin> EarthModelBinned::GetEarthBins(){ return fEarthBins; }
 
-//......................................................................
+//.............................................................................
 ///
 /// Clear the earth model information.
 ///
@@ -125,14 +125,14 @@ void EarthModelBinned::ClearModel()
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the coordinates of the detector:
 ///   radius in km, latitude in degrees, longitude in degrees
 /// Also, updates the detector-coordinate-dependent parts of the trajectory
 /// constants.
 ///
-/// @param rad - The distance from the detector to the Earth's center in km 
+/// @param rad - The distance from the detector to the Earth's center in km
 /// @param lat - The latitude of the detector in deg N (between -90 and 90)
 /// @param lon - The longitude of the detector in deg E (between 0 and 360)
 ///
@@ -144,7 +144,7 @@ void EarthModelBinned::SetDetPos(double rad, double lat, double lon)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Add a bin to the earth model.
 ///
@@ -163,7 +163,7 @@ void EarthModelBinned::AddBin(double radius_out, double radius_in, double latitu
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Load an earth model from a file.
 ///
@@ -286,12 +286,12 @@ void EarthModelBinned::LoadModel(string filename)
     return;
   }
 
-  cout << "\t...done (" << fEarthBins.size() << " bins: " << fnDepthBins 
-       << " depth, " << fnLatBins << " latitude, and " << fnLonBins 
+  cout << "\t...done (" << fEarthBins.size() << " bins: " << fnDepthBins
+       << " depth, " << fnLatBins << " latitude, and " << fnLonBins
        << " longitude)." << endl;
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the effective Z/A value for all bins with given region index.
 ///
@@ -325,7 +325,7 @@ void EarthModelBinned::SetRegionZoA(int index, double zoa)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the effective Z/A value for all bins in region specified by
 /// index, e.g. all outer-core layers.
@@ -358,7 +358,7 @@ double EarthModelBinned::GetRegionZoA(int index)
   return 0;
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Scale density by scaling factor for all bins in region specified by
 /// given index.
@@ -391,7 +391,7 @@ void EarthModelBinned::ScaleRegionDensity(int index, double factor)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Add a path segment to the sequence.
 ///
@@ -407,7 +407,7 @@ void EarthModelBinned::AddPath(double length, EarthBin bin)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Calculate the distance to the detector along a neutrino trajectory,
 /// specified by cosT and the azimuthal angle, at the edge of
@@ -473,7 +473,7 @@ double EarthModelBinned::DetDistForNextLatBin(int cur_index, LatBinInfo &L)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Calculate the distance to the detector at the edge of the current
 /// longitude bin along a neutrino trajectory specified by cosT and the
@@ -516,7 +516,7 @@ double EarthModelBinned::DetDistForNextLonBin(double prev_lon, LonBinInfo &L)
   else {
     if (0 > lon-L.min || L.max-lon < 0)
       return -1;
-  } 
+  }
 
   //Parts of the answer
   double cosNewLon = cos(lon);
@@ -535,7 +535,7 @@ double EarthModelBinned::DetDistForNextLonBin(double prev_lon, LonBinInfo &L)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Record all the path segments as the neutrino crosses into new latitude
 /// and longitude bins until it reaches the next depth bin.
@@ -596,7 +596,7 @@ void EarthModelBinned::RecordLatLonBinCrossings(double detDist_nextDbin, double 
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Find and return longitude bin index that contains longitude.
 ///
@@ -617,7 +617,7 @@ int EarthModelBinned::LonBinIndex(double longitude)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Fill the path sequence in a vector.
 ///
@@ -791,7 +791,7 @@ int EarthModelBinned::FillPath(double cosT, double phi)
          << "  Send the following message to rpestes@apc.in2p3.fr:" << endl << endl
          << "You were wrong about the denominator of x(long)... "
          << "Here are the values of the variables that broke it:" << endl
-         << "\tDetector Coordinates (r,lat,lon) = (" << fDetRadius << ", " 
+         << "\tDetector Coordinates (r,lat,lon) = (" << fDetRadius << ", "
          << fDetLat << ", " << fDetLon << ")" << endl
          << "\tcos(Zenith Angle) = " << cosT << endl
          << "\tAzimuthal Angle = " << phi << " deg" << endl

@@ -3,8 +3,7 @@
 
 void MakeTestSamples(){
 
-  vector<string> models = {"Fast", "Iter", "Sterile", "NSI", "Deco", "Decay",
-                           "LIV", "SNSI"};
+  vector<string> models = GetListOfModel();
 
   for(int i=0; i<models.size(); i++){
 
