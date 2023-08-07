@@ -199,7 +199,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   58</span> </div>
 <div class="line"><span class="lineno">   59</span>  <span class="comment">// Transform A to real tridiagonal form by the Householder method</span></div>
 <div class="line"><span class="lineno">   60</span>  <a class="code hl_function" href="zhetrd3_8cxx.html#a85715cc89e71719fe52cf16892aa1a1d">zhetrd3</a>(A, Q, w, e);</div>
-<div class="line"><span class="lineno">   61</span>  </div>
+<div class="line"><span class="lineno">   61</span> </div>
 <div class="line"><span class="lineno">   62</span>  <span class="comment">// Calculate eigensystem of the remaining real symmetric tridiagonal matrix</span></div>
 <div class="line"><span class="lineno">   63</span>  <span class="comment">// with the QL method</span></div>
 <div class="line"><span class="lineno">   64</span>  <span class="comment">//</span></div>
@@ -219,7 +219,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   78</span>      }</div>
 <div class="line"><span class="lineno">   79</span>      <span class="keywordflow">if</span> (m == l)</div>
 <div class="line"><span class="lineno">   80</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   81</span>      </div>
+<div class="line"><span class="lineno">   81</span> </div>
 <div class="line"><span class="lineno">   82</span>      <span class="keywordflow">if</span> (nIter++ &gt;= 30)</div>
 <div class="line"><span class="lineno">   83</span>        <span class="keywordflow">return</span> -1;</div>
 <div class="line"><span class="lineno">   84</span> </div>
@@ -251,7 +251,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  110</span>          e[i+1] = g * r;</div>
 <div class="line"><span class="lineno">  111</span>          s     *= (c = 1.0/r);</div>
 <div class="line"><span class="lineno">  112</span>        }</div>
-<div class="line"><span class="lineno">  113</span>        </div>
+<div class="line"><span class="lineno">  113</span> </div>
 <div class="line"><span class="lineno">  114</span>        g = w[i+1] - p;</div>
 <div class="line"><span class="lineno">  115</span>        r = (w[i] - g)*s + 2.0*c*b;</div>
 <div class="line"><span class="lineno">  116</span>        p = s * r;</div>
@@ -266,7 +266,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  125</span>          Q[k][i+1] = s*Q[k][i] + c*t;</div>
 <div class="line"><span class="lineno">  126</span>          Q[k][i]   = c*Q[k][i] - s*t;</div>
 <div class="line"><span class="lineno">  127</span>        }</div>
-<div class="line"><span class="lineno">  128</span><span class="preprocessor">#endif </span></div>
+<div class="line"><span class="lineno">  128</span><span class="preprocessor">#endif</span></div>
 <div class="line"><span class="lineno">  129</span>      }</div>
 <div class="line"><span class="lineno">  130</span>      w[l] -= p;</div>
 <div class="line"><span class="lineno">  131</span>      e[l]  = g;</div>

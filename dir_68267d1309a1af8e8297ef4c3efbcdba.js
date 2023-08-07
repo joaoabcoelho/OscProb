@@ -8,7 +8,7 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "NuPath.cxx", "NuPath_8cxx.html", null ],
     [ "PMNS_Base.cxx", "PMNS__Base_8cxx.html", null ],
     [ "PMNS_Decay.cxx", "PMNS__Decay_8cxx.html", null ],
-    [ "PMNS_Deco.cxx", "PMNS__Deco_8cxx.html", null ],
+    [ "PMNS_Deco.cxx", "PMNS__Deco_8cxx.html", "PMNS__Deco_8cxx" ],
     [ "PMNS_Fast.cxx", "PMNS__Fast_8cxx.html", null ],
     [ "PMNS_Iter.cxx", "PMNS__Iter_8cxx.html", null ],
     [ "PMNS_LIV.cxx", "PMNS__LIV_8cxx.html", null ],

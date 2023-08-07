@@ -8,11 +8,10 @@
   $
 \_form#5=19x13:$\Gamma_{21}$
 \_form#6=6x10:$\theta$
-\_form#7=321x16:$ 
-  \Gamma_{32} = \Gamma_{31} + \Gamma_{21} \cos^2\theta - 
-  \cos\theta \sqrt{\Gamma_{21} (4\Gamma_{31} - \Gamma_{21} (1 - \cos^2\theta))} 
+\_form#7=321x16:$
+  \Gamma_{32} = \Gamma_{31} + \Gamma_{21} \cos^2\theta -
+  \cos\theta \sqrt{\Gamma_{21} (4\Gamma_{31} - \Gamma_{21} (1 - \cos^2\theta))}
   $
-\_form#8=128x25:$ 
+\_form#8=128x25:$
   \Gamma_{ij} \rightarrow \Gamma_{ij} \times \left(\frac{E}{[1 \mbox{GeV}]}\right)^n
   $
-\_form#9=15x11:$A^{\dagger}$

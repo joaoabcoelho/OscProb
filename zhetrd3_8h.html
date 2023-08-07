@@ -147,7 +147,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   43</span>  std::complex&lt;double&gt; u[n], q[n];</div>
 <div class="line"><span class="lineno">   44</span>  std::complex&lt;double&gt; omega, f;</div>
 <div class="line"><span class="lineno">   45</span>  <span class="keywordtype">double</span> K, h, g;</div>
-<div class="line"><span class="lineno">   46</span>  </div>
+<div class="line"><span class="lineno">   46</span> </div>
 <div class="line"><span class="lineno">   47</span>  <span class="comment">// Initialize Q to the identitity matrix</span></div>
 <div class="line"><span class="lineno">   48</span><span class="preprocessor">#ifndef EVALS_ONLY</span></div>
 <div class="line"><span class="lineno">   49</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i &lt; n; i++)</div>
@@ -158,7 +158,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   54</span>  }</div>
 <div class="line"><span class="lineno">   55</span><span class="preprocessor">#endif</span></div>
 <div class="line"><span class="lineno">   56</span> </div>
-<div class="line"><span class="lineno">   57</span>  <span class="comment">// Bring first row and column to the desired form </span></div>
+<div class="line"><span class="lineno">   57</span>  <span class="comment">// Bring first row and column to the desired form</span></div>
 <div class="line"><span class="lineno">   58</span>  h = <a class="code hl_define" href="zhetrd3_8cxx.html#a3037777638f94ba01c4104dc03dfbf98">SQR_ABS</a>(A[0][1]) + <a class="code hl_define" href="zhetrd3_8cxx.html#a3037777638f94ba01c4104dc03dfbf98">SQR_ABS</a>(A[0][2]);</div>
 <div class="line"><span class="lineno">   59</span>  <span class="keywordflow">if</span> (real(A[0][1]) &gt; 0)</div>
 <div class="line"><span class="lineno">   60</span>    g = -sqrt(h);</div>
@@ -168,7 +168,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   64</span>  f    = g * A[0][1];</div>
 <div class="line"><span class="lineno">   65</span>  u[1] = conj(A[0][1]) - g;</div>
 <div class="line"><span class="lineno">   66</span>  u[2] = conj(A[0][2]);</div>
-<div class="line"><span class="lineno">   67</span>  </div>
+<div class="line"><span class="lineno">   67</span> </div>
 <div class="line"><span class="lineno">   68</span>  omega = h - f;</div>
 <div class="line"><span class="lineno">   69</span>  <span class="keywordflow">if</span> (real(omega) &gt; 0.0)</div>
 <div class="line"><span class="lineno">   70</span>  {</div>
@@ -184,11 +184,11 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   80</span> </div>
 <div class="line"><span class="lineno">   81</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=1; i &lt; n; i++)</div>
 <div class="line"><span class="lineno">   82</span>      q[i] = q[i] - K * u[i];</div>
-<div class="line"><span class="lineno">   83</span>    </div>
+<div class="line"><span class="lineno">   83</span> </div>
 <div class="line"><span class="lineno">   84</span>    d[0] = real(A[0][0]);</div>
 <div class="line"><span class="lineno">   85</span>    d[1] = real(A[1][1]) - 2.0*real(q[1]*conj(u[1]));</div>
 <div class="line"><span class="lineno">   86</span>    d[2] = real(A[2][2]) - 2.0*real(q[2]*conj(u[2]));</div>
-<div class="line"><span class="lineno">   87</span>    </div>
+<div class="line"><span class="lineno">   87</span> </div>
 <div class="line"><span class="lineno">   88</span>    <span class="comment">// Store inverse Householder transformation in Q</span></div>
 <div class="line"><span class="lineno">   89</span><span class="preprocessor">#ifndef EVALS_ONLY</span></div>
 <div class="line"><span class="lineno">   90</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=1; j &lt; n; j++)</div>

@@ -88,6 +88,8 @@ $(document).ready(function(){initNavTree('PMNS__Deco_8cxx.html',''); initResizab
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">PMNS_Deco.cxx File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -96,6 +98,74 @@ $(document).ready(function(){initNavTree('PMNS__Deco_8cxx.html',''); initResizab
 <code>#include &quot;<a class="el" href="PMNS__Deco_8h_source.html">PMNS_Deco.h</a>&quot;</code><br />
 </div>
 <p><a href="PMNS__Deco_8cxx_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a464c6078e2bcc4d428d3a889bb8315b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceOscProb.html#a2a006582e68eb670c6b33b3b19042068">vectorI</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PMNS__Deco_8cxx.html#a464c6078e2bcc4d428d3a889bb8315b3">sort3</a> (const <a class="el" href="namespaceOscProb.html#a93a204f5324b67ab69907f71b1d8f700">vectorD</a> &amp;x)</td></tr>
+<tr class="separator:a464c6078e2bcc4d428d3a889bb8315b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a464c6078e2bcc4d428d3a889bb8315b3" name="a464c6078e2bcc4d428d3a889bb8315b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a464c6078e2bcc4d428d3a889bb8315b3">&#9670;&nbsp;</a></span>sort3()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceOscProb.html#a2a006582e68eb670c6b33b3b19042068">vectorI</a> sort3 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespaceOscProb.html#a93a204f5324b67ab69907f71b1d8f700">vectorD</a> &amp;&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Simple index sorting of 3-vector </p>
+
+<p class="definition">Definition at line <a class="el" href="PMNS__Deco_8cxx_source.html#l00276">276</a> of file <a class="el" href="PMNS__Deco_8cxx_source.html">PMNS_Deco.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  276</span>                               {</div>
+<div class="line"><span class="lineno">  277</span> </div>
+<div class="line"><span class="lineno">  278</span>  <a class="code hl_typedef" href="namespaceOscProb.html#a2a006582e68eb670c6b33b3b19042068">vectorI</a> out(3, 0);</div>
+<div class="line"><span class="lineno">  279</span> </div>
+<div class="line"><span class="lineno">  280</span>  <span class="comment">// 1st element is smallest</span></div>
+<div class="line"><span class="lineno">  281</span>  <span class="keywordflow">if</span>(x[0]&lt;x[1] &amp;&amp; x[0]&lt;x[2]){</div>
+<div class="line"><span class="lineno">  282</span>    <span class="comment">// 3rd element is largest</span></div>
+<div class="line"><span class="lineno">  283</span>    <span class="keywordflow">if</span>(x[1]&lt;x[2]){</div>
+<div class="line"><span class="lineno">  284</span>      out[1] = 1;</div>
+<div class="line"><span class="lineno">  285</span>      out[2] = 2;</div>
+<div class="line"><span class="lineno">  286</span>    }</div>
+<div class="line"><span class="lineno">  287</span>    <span class="comment">// 2nd element is largest</span></div>
+<div class="line"><span class="lineno">  288</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  289</span>      out[1] = 2;</div>
+<div class="line"><span class="lineno">  290</span>      out[2] = 1;</div>
+<div class="line"><span class="lineno">  291</span>    }</div>
+<div class="line"><span class="lineno">  292</span>  }</div>
+<div class="line"><span class="lineno">  293</span>  <span class="comment">// 2nd element is smallest</span></div>
+<div class="line"><span class="lineno">  294</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span>(x[1]&lt;x[2]){</div>
+<div class="line"><span class="lineno">  295</span>    out[0] = 1;</div>
+<div class="line"><span class="lineno">  296</span>    <span class="comment">// 3rd element is largest</span></div>
+<div class="line"><span class="lineno">  297</span>    <span class="keywordflow">if</span>(x[0]&lt;x[2]) out[2] = 2;</div>
+<div class="line"><span class="lineno">  298</span>    <span class="comment">// 1st element is largest</span></div>
+<div class="line"><span class="lineno">  299</span>    <span class="keywordflow">else</span>          out[1] = 2;</div>
+<div class="line"><span class="lineno">  300</span>  }</div>
+<div class="line"><span class="lineno">  301</span>  <span class="comment">// 3rd element is smallest</span></div>
+<div class="line"><span class="lineno">  302</span>  <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  303</span>    out[0] = 2;</div>
+<div class="line"><span class="lineno">  304</span>    <span class="comment">// 2nd element is largest</span></div>
+<div class="line"><span class="lineno">  305</span>    <span class="keywordflow">if</span>(x[0]&lt;x[1]) out[2] = 1;</div>
+<div class="line"><span class="lineno">  306</span>    <span class="comment">// 1st element is largest</span></div>
+<div class="line"><span class="lineno">  307</span>    <span class="keywordflow">else</span>          out[1] = 1;</div>
+<div class="line"><span class="lineno">  308</span>  }</div>
+<div class="line"><span class="lineno">  309</span> </div>
+<div class="line"><span class="lineno">  310</span>  <span class="keywordflow">return</span> out;</div>
+<div class="line"><span class="lineno">  311</span> </div>
+<div class="line"><span class="lineno">  312</span>}</div>
+<div class="ttc" id="anamespaceOscProb_html_a2a006582e68eb670c6b33b3b19042068"><div class="ttname"><a href="namespaceOscProb.html#a2a006582e68eb670c6b33b3b19042068">OscProb::vectorI</a></div><div class="ttdeci">std::vector&lt; int &gt; vectorI</div><div class="ttdef"><b>Definition:</b> <a href="Definitions_8h_source.html#l00016">Definitions.h:16</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="PMNS__Deco_8cxx_source.html#l00320">OscProb::PMNS_Deco::PropagatePath()</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

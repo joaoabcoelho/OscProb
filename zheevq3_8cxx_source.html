@@ -116,7 +116,7 @@ $(document).ready(function(){initNavTree('zheevq3_8cxx_source.html',''); initRes
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &quot;<a class="code" href="zheevq3_8h.html">zheevq3.h</a>&quot;</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">// Macros</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="zheevq3_8cxx.html#aa7866fa5e4e0ee9b034e9dab6599a9cc">   26</a></span><span class="preprocessor">#define SQR(x)      ((x)*(x))                        </span><span class="comment">// x^2 </span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="zheevq3_8cxx.html#aa7866fa5e4e0ee9b034e9dab6599a9cc">   26</a></span><span class="preprocessor">#define SQR(x)      ((x)*(x))                        </span><span class="comment">// x^2</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="zheevq3_8cxx.html#a3037777638f94ba01c4104dc03dfbf98">   27</a></span><span class="preprocessor">#define SQR_ABS(x)  (SQR(real(x)) + SQR(imag(x)))  </span><span class="comment">// |x|^2</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
@@ -151,7 +151,7 @@ $(document).ready(function(){initNavTree('zheevq3_8cxx_source.html',''); initRes
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="comment">// Transform A to real tridiagonal form by the Householder method</span></div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <a class="code hl_function" href="zhetrd3_8cxx.html#a85715cc89e71719fe52cf16892aa1a1d">zhetrd3</a>(A, Q, w, e);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="comment">// Calculate eigensystem of the remaining real symmetric tridiagonal matrix</span></div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="comment">// with the QL method</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="comment">//</span></div>
@@ -171,7 +171,7 @@ $(document).ready(function(){initNavTree('zheevq3_8cxx_source.html',''); initRes
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      }</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      <span class="keywordflow">if</span> (m == l)</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>      </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      <span class="keywordflow">if</span> (nIter++ &gt;= 30)</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordflow">return</span> -1;</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
@@ -203,7 +203,7 @@ $(document).ready(function(){initNavTree('zheevq3_8cxx_source.html',''); initRes
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>          e[i+1] = g * r;</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>          s     *= (c = 1.0/r);</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        }</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        g = w[i+1] - p;</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        r = (w[i] - g)*s + 2.0*c*b;</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        p = s * r;</div>
@@ -218,7 +218,7 @@ $(document).ready(function(){initNavTree('zheevq3_8cxx_source.html',''); initRes
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>          Q[k][i+1] = s*Q[k][i] + c*t;</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>          Q[k][i]   = c*Q[k][i] - s*t;</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        }</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="preprocessor">#endif </span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>      }</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>      w[l] -= p;</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>      e[l]  = g;</div>

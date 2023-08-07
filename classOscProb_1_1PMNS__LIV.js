@@ -20,7 +20,7 @@ var classOscProb_1_1PMNS__LIV =
     [ "ConvertEtoLoE", "classOscProb_1_1PMNS__LIV.html#a1998ea292e904a83a7fdc2d8589c6535", null ],
     [ "FillCache", "classOscProb_1_1PMNS__LIV.html#a785c37fcea974628623c8881bb0fbbf9", null ],
     [ "GetAngle", "classOscProb_1_1PMNS__LIV.html#acee137091304c919642293ddf015bbc8", null ],
-    [ "GetaT", "classOscProb_1_1PMNS__LIV.html#a67e20e653c4457d06c03526a5b906ee8", null ],
+    [ "GetaT", "classOscProb_1_1PMNS__LIV.html#acd2657fb51b83f3504064b8965cfc807", null ],
     [ "GetcT", "classOscProb_1_1PMNS__LIV.html#a7e29c625594512067273841a82e6c978", null ],
     [ "GetDelta", "classOscProb_1_1PMNS__LIV.html#adb8dbc91d4286d2e7c8f768c59476241", null ],
     [ "GetDm", "classOscProb_1_1PMNS__LIV.html#ad26815ac5f4805d1259817e4936e5f8f", null ],

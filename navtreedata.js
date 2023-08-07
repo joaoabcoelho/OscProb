@@ -59,17 +59,17 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "Absorption_8cxx.html",
-"classOscProb_1_1PMNS__Base.html#a273d49f3c5390e7bce624c97c4da5677",
-"classOscProb_1_1PMNS__Decay.html#a468e587b88f994b61691dded271b9fe1",
-"classOscProb_1_1PMNS__Deco.html#a5539610ab44c510c204ae884fb8e2a0e",
+"classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e",
+"classOscProb_1_1PMNS__Decay.html#a414dd1d7792db6bc52abe9d963148500",
+"classOscProb_1_1PMNS__Deco.html#a4de96ac9b6d1e9b029ab877e57d211ad",
 "classOscProb_1_1PMNS__Fast.html#a6241325b1bd28cafa556daaecbe4ed62",
 "classOscProb_1_1PMNS__Iter.html#a6dc5cd010d2d70b2324745b4e53e9839",
-"classOscProb_1_1PMNS__LIV.html#a76dd5a761df8689c502b28ad0391f9e2",
+"classOscProb_1_1PMNS__LIV.html#a785c37fcea974628623c8881bb0fbbf9",
 "classOscProb_1_1PMNS__NSI.html#a6606074ad140684aff9f48ff0f4f943a",
 "classOscProb_1_1PMNS__SNSI.html#a4bef78cfcfc4e70b4ce79cdb8862c0a3",
 "classOscProb_1_1PMNS__Sterile.html#a3b2695af8c5850dd2bb8b5f928eed985",
-"colormod_8h.html#aa9acf0b79ca13d3e1aacbda4de57c85c",
-"structOscProb_1_1TrajConstants.html#aa4d40c9f867f99c00564e6f852d0dcac"
+"colormod_8h_source.html",
+"structOscProb_1_1TrajConstants.html#a913597a42222e54e0585c8ec0e9bebc5"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
