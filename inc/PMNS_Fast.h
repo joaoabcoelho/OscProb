@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 /// \class OscProb::PMNS_Fast
 ///
 /// \brief Implementation of oscillations of neutrinos in matter in a
@@ -11,7 +11,7 @@
 ///
 /// <pre>
 ///
-///......................................................................
+///............................................................................
 ///
 /// Int. J. Mod. Phys. C       VOLUME 19, NUMBER 03            MARCH 2008
 ///
@@ -23,46 +23,49 @@
 ///                    (Received 19 October 2007)
 ///
 ///                                523
-///......................................................................
+///............................................................................
 /// </pre>
 ///
 /// \author Joao Coelho - jcoelho\@apc.in2p3.fr
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 #ifndef PMNS_Fast_H
 #define PMNS_Fast_H
+
 #include "PMNS_Base.h"
 
 namespace OscProb {
 
   class PMNS_Fast : public PMNS_Base {
 
-  public:
+    public:
 
-    PMNS_Fast();          ///< Constructor
-    virtual ~PMNS_Fast(); ///< Destructor
+      PMNS_Fast();          ///< Constructor
+      virtual ~PMNS_Fast(); ///< Destructor
 
-    /// Set the all mixing parameters at once
-    virtual void SetMix(double th12, double th23, double th13, double deltacp);
+      /// Set the all mixing parameters at once
+      virtual void SetMix(double th12, double th23, double th13, double deltacp);
 
-    /// Set both mass-splittings at once
-    virtual void SetDeltaMsqrs(double dm21, double dm32);
+      /// Set both mass-splittings at once
+      virtual void SetDeltaMsqrs(double dm21, double dm32);
 
-  protected:
+    protected:
 
-    /// Build the full Hamiltonian
-    virtual void UpdateHam();
+      /// Build the full Hamiltonian
+      virtual void UpdateHam();
 
-    /// Solve the full Hamiltonian for eigenvectors and eigenvalues
-    virtual void SolveHam();
+      /// Solve the full Hamiltonian for eigenvectors and eigenvalues
+      virtual void SolveHam();
 
-    /// Set the eigensystem to the analytic solution of the vacuum Hamiltonian
-    virtual void SetVacuumEigensystem();
+      /// Set the eigensystem to the analytic solution of the vacuum Hamiltonian
+      virtual void SetVacuumEigensystem();
 
-    complexD fHam[3][3]; ///< The full hamiltonian
+      complexD fHam[3][3]; ///< The full hamiltonian
 
   };
 
 }
+
 #endif
-////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////

@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 //
 // Implementation of oscillations of neutrinos in matter in a
 // three-neutrino framework with NSI.
@@ -6,7 +6,7 @@
 // This  class inherits from the PMNS_Fast class
 //
 // jcoelho\@apc.in2p3.fr
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
 
@@ -17,7 +17,7 @@ using namespace OscProb;
 using namespace std;
 
 
-//......................................................................
+//.............................................................................
 ///
 /// Constructor. \sa PMNS_Base::PMNS_Base
 ///
@@ -30,13 +30,13 @@ PMNS_NSI::PMNS_NSI() : PMNS_Fast(), fEps()
   SetFermCoup(1,0,0);
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Nothing to clean.
 ///
 PMNS_NSI::~PMNS_NSI(){}
 
-//......................................................................
+//.............................................................................
 ///
 /// Set all NSI parameters at once.
 ///
@@ -68,7 +68,7 @@ void PMNS_NSI::SetNSI(double eps_ee,    double eps_emu,    double eps_etau,
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set any given NSI parameter.
 ///
@@ -115,7 +115,7 @@ void PMNS_NSI::SetEps(int flvi, int flvj, double val, double phase){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get any given NSI parameter.
 ///
@@ -147,7 +147,7 @@ complexD PMNS_NSI::GetEps(int flvi, int flvj){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set eps_ee parameter
 ///
@@ -158,7 +158,7 @@ complexD PMNS_NSI::GetEps(int flvi, int flvj){
 ///
 void PMNS_NSI::SetEps_ee(double a){ SetEps(0,0, a, 0); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set eps_mumu parameter
 ///
@@ -169,7 +169,7 @@ void PMNS_NSI::SetEps_ee(double a){ SetEps(0,0, a, 0); }
 ///
 void PMNS_NSI::SetEps_mumu(double a){ SetEps(1,1, a, 0); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set eps_tautau parameter
 ///
@@ -180,7 +180,7 @@ void PMNS_NSI::SetEps_mumu(double a){ SetEps(1,1, a, 0); }
 ///
 void PMNS_NSI::SetEps_tautau(double a){ SetEps(2,2, a, 0); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set eps_emu parameter
 ///
@@ -192,7 +192,7 @@ void PMNS_NSI::SetEps_tautau(double a){ SetEps(2,2, a, 0); }
 ///
 void PMNS_NSI::SetEps_emu  (double a, double phi){ SetEps(0,1, a, phi); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set eps_etau parameter
 ///
@@ -204,7 +204,7 @@ void PMNS_NSI::SetEps_emu  (double a, double phi){ SetEps(0,1, a, phi); }
 ///
 void PMNS_NSI::SetEps_etau  (double a, double phi){ SetEps(0,2, a, phi); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set eps_mutau parameter
 ///
@@ -216,7 +216,7 @@ void PMNS_NSI::SetEps_etau  (double a, double phi){ SetEps(0,2, a, phi); }
 ///
 void PMNS_NSI::SetEps_mutau  (double a, double phi){ SetEps(1,2, a, phi); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Build the full Hamiltonian in matter
 ///
@@ -248,7 +248,7 @@ void PMNS_NSI::UpdateHam()
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the NSI relative coupling to a given fermion.
 /// This factor represents what fraction of the fermion are seen
@@ -269,7 +269,7 @@ void PMNS_NSI::SetCoupByIndex(double c, int i){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the NSI relative coupling to electrons.
 /// This factor represents what fraction of the electrons are seen
@@ -279,7 +279,7 @@ void PMNS_NSI::SetCoupByIndex(double c, int i){
 ///
 void PMNS_NSI::SetElecCoup(double e){ SetCoupByIndex(e, 0); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the NSI relative coupling to u-quarks.
 /// This factor represents what fraction of the u-quarks are seen
@@ -289,7 +289,7 @@ void PMNS_NSI::SetElecCoup(double e){ SetCoupByIndex(e, 0); }
 ///
 void PMNS_NSI::SetUpCoup(double u){ SetCoupByIndex(u, 1); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the NSI relative coupling to d-quarks.
 /// This factor represents what fraction of the d-quarks are seen
@@ -299,7 +299,7 @@ void PMNS_NSI::SetUpCoup(double u){ SetCoupByIndex(u, 1); }
 ///
 void PMNS_NSI::SetDownCoup(double d){ SetCoupByIndex(d, 2); }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the NSI relative couplings to each fermion.
 /// These factors represent what fraction of each fermion are seen
@@ -318,25 +318,25 @@ void PMNS_NSI::SetFermCoup(double e, double u, double d)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the NSI relative coupling to electrons.
 ///
 double PMNS_NSI::GetElecCoup(){ return fNSIcoup[0]; }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the NSI relative coupling to u-quarks.
 ///
 double PMNS_NSI::GetUpCoup(){ return fNSIcoup[1]; }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the NSI relative coupling to d-quarks.
 ///
 double PMNS_NSI::GetDownCoup(){ return fNSIcoup[2]; }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the effective NSI Z/A dependence.
 ///
@@ -349,4 +349,4 @@ double PMNS_NSI::GetZoACoup()
 
 }
 
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////

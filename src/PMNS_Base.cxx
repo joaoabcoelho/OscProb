@@ -1,13 +1,13 @@
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 //
 // Base class for oscillations of neutrinos in matter in a
 // n-neutrino framework.
 //
-//......................................................................
+//.............................................................................
 //
 // jcoelho\@apc.in2p3.fr
 //
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
 #include <cassert>
@@ -30,7 +30,7 @@ const double PMNS_Base::kK2     = 1e-3 * kNA / pow(kKm2eV,3); // N_A * (hbar*c [
 const double PMNS_Base::kGf     = 1.1663787e-05;              // G_F/(hbar*c)^3 [GeV^-2]
 
 
-//......................................................................
+//.............................................................................
 ///
 /// Constructor.
 ///
@@ -68,13 +68,13 @@ fGotES(false), fBuiltHms(false), fMaxCache(1e6), fProbe(numNus)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Nothing to clean.
 ///
 PMNS_Base::~PMNS_Base(){}
 
-//......................................................................
+//.............................................................................
 ///
 /// Set vector sizes and initialize elements to zero.
 ///
@@ -96,7 +96,7 @@ void PMNS_Base::InitializeVectors()
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Turn on/off caching of eigensystems.
 /// This can save a lot of CPU time by avoiding recomputing eigensystems
@@ -111,7 +111,7 @@ void PMNS_Base::SetUseCache(bool u)
   fUseCache = u;
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Clear the cache
 ///
@@ -124,7 +124,7 @@ void PMNS_Base::ClearCache()
   fMixCache.reserve(512);
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set maximum number of cached eigensystems.
 /// Finding eigensystems can become slow and take up memory.
@@ -137,7 +137,7 @@ void PMNS_Base::SetMaxCache(int mc)
   fMaxCache = mc;
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Try to find a cached version of this eigensystem.
 ///
@@ -166,7 +166,7 @@ bool PMNS_Base::TryCache()
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// If using caching, save the eigensystem in memory
 ///
@@ -189,7 +189,7 @@ void PMNS_Base::FillCache()
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set standard oscillation parameters from PDG 2015.
 ///
@@ -217,7 +217,7 @@ void PMNS_Base::SetStdPars()
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set standard single path.
 ///
@@ -239,7 +239,7 @@ void PMNS_Base::SetStdPath(){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set neutrino energy in GeV.
 ///
@@ -258,7 +258,7 @@ void PMNS_Base::SetEnergy(double E)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set anti-neutrino flag.
 ///
@@ -277,7 +277,7 @@ void PMNS_Base::SetIsNuBar(bool isNuBar)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the neutrino energy in GeV.
 ///
@@ -287,7 +287,7 @@ double PMNS_Base::GetEnergy() {
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the anti-neutrino flag.
 ///
@@ -297,7 +297,7 @@ bool PMNS_Base::GetIsNuBar() {
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the path currentlyin use by the class.
 ///
@@ -319,7 +319,7 @@ void PMNS_Base::SetCurPath(NuPath p)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Clear the path vector.
 ///
@@ -329,7 +329,7 @@ void PMNS_Base::ClearPath(){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set vector of neutrino paths.
 /// @param paths - A sequence of neutrino paths
@@ -340,7 +340,7 @@ void PMNS_Base::SetPath(std::vector<NuPath> paths){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the vector of neutrino paths.
 ///
@@ -350,7 +350,7 @@ vector<NuPath> PMNS_Base::GetPath(){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Add a path to the sequence.
 /// @param p - A neutrino path segment
@@ -361,7 +361,7 @@ void PMNS_Base::AddPath(NuPath p){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Add a path to the sequence defining attributes directly.
 /// @param length  - The length of the path segment in km
@@ -375,7 +375,7 @@ void PMNS_Base::AddPath(double length, double density, double zoa, int layer){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set a single path.
 ///
@@ -390,7 +390,7 @@ void PMNS_Base::SetPath(NuPath p){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set a single path defining attributes directly.
 ///
@@ -407,7 +407,7 @@ void PMNS_Base::SetPath(double length, double density, double zoa, int layer){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set some single path attribute.
 ///
@@ -439,7 +439,7 @@ void PMNS_Base::SetAtt(double att, int idx){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the length for a single path.
 ///
@@ -454,7 +454,7 @@ void PMNS_Base::SetLength(double L){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set single path density.
 ///
@@ -469,7 +469,7 @@ void PMNS_Base::SetDensity(double rho){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set single path Z/A.
 ///
@@ -484,7 +484,7 @@ void PMNS_Base::SetZoA(double zoa){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set all values of a path attribute.
 ///
@@ -555,7 +555,7 @@ void PMNS_Base::SetAtt(vectorD att, int idx){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set multiple path lengths.
 ///
@@ -570,7 +570,7 @@ void PMNS_Base::SetLength(vectorD L){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set multiple path densities.
 ///
@@ -585,7 +585,7 @@ void PMNS_Base::SetDensity(vectorD rho){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set multiple path Z/A values.
 ///
@@ -600,7 +600,7 @@ void PMNS_Base::SetZoA(vectorD zoa){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set multiple path layer indices.
 ///
@@ -617,7 +617,7 @@ void PMNS_Base::SetLayers(vectorI lay){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the mixing angle theta_ij in radians.
 ///
@@ -653,7 +653,7 @@ void PMNS_Base::SetAngle(int i, int j, double th)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the mixing angle theta_ij in radians.
 ///
@@ -683,7 +683,7 @@ double PMNS_Base::GetAngle(int i, int j)
 }
 
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the CP phase delta_ij in radians.
 ///
@@ -723,7 +723,7 @@ void PMNS_Base::SetDelta(int i, int j, double delta)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the CP phase delta_ij in radians.
 ///
@@ -756,7 +756,7 @@ double PMNS_Base::GetDelta(int i, int j)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the mass-splitting dm_j1 = (m_j^2 - m_1^2) in eV^2
 ///
@@ -784,7 +784,7 @@ void PMNS_Base::SetDm(int j, double dm)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the mass-splitting dm_j1 = (m_j^2 - m_1^2) in eV^2
 ///
@@ -805,7 +805,7 @@ double PMNS_Base::GetDm(int j)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the indices of the sorted x vector
 ///
@@ -823,7 +823,7 @@ vectorI PMNS_Base::GetSortedIndices(const vectorD x){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the effective mass-splitting dm_j1 in matter in eV^2
 ///
@@ -855,7 +855,7 @@ double PMNS_Base::GetDmEff(int j)
 }
 
 
-//......................................................................
+//.............................................................................
 ///
 /// Rotate the neutrino state by the angle theta_ij and phase delta_ij.
 ///
@@ -885,7 +885,7 @@ void PMNS_Base::RotateState(int i, int j){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the neutrino mass eigenstate in vacuum
 ///
@@ -915,7 +915,7 @@ vectorC PMNS_Base::GetMassEigenstate(int mi){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Rotate the Hamiltonian by the angle theta_ij and phase delta_ij.
 ///
@@ -1048,7 +1048,7 @@ void PMNS_Base::RotateH(int i,int j, matrixC& Ham){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Build Hms = H*2E, where H is the Hamiltonian in vacuum on flavour basis
 /// and E is the neutrino energy in eV. Hms is effectively the matrix of
@@ -1089,7 +1089,7 @@ void PMNS_Base::BuildHms()
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Propagate the current neutrino state through a given path
 /// @param p - A neutrino path segment
@@ -1127,7 +1127,7 @@ void PMNS_Base::PropagatePath(NuPath p)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Propagate neutrino state through full path
 ///
@@ -1142,7 +1142,7 @@ void PMNS_Base::Propagate()
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Reset the neutrino state back to a pure flavour where it starts
 ///
@@ -1162,7 +1162,7 @@ void PMNS_Base::ResetToFlavour(int flv)
   }
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Compute oscillation probability of flavour flv from current state
 ///
@@ -1181,7 +1181,7 @@ double PMNS_Base::P(int flv)
   return norm(fNuState[flv]);
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Set the initial state from a pure state
 ///
@@ -1195,7 +1195,7 @@ void PMNS_Base::SetPureState(vectorC nu_in){
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability of flvi going to flvf.
 ///
@@ -1220,7 +1220,7 @@ double PMNS_Base::Prob(int flvi, int flvf)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability of nu_in going to flvf.
 ///
@@ -1245,7 +1245,7 @@ double PMNS_Base::Prob(vectorC nu_in, int flvf)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability of nu_in going to flvf for a given energy in GeV.
 ///
@@ -1269,7 +1269,7 @@ double PMNS_Base::Prob(vectorC nu_in, int flvf, double E)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability of flvi going to flvf for a given energy in GeV.
 ///
@@ -1293,7 +1293,7 @@ double PMNS_Base::Prob(int flvi, int flvf, double E)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability of nu_in going to flvf for a given
 /// energy in GeV and distance in km in a single path.
@@ -1325,7 +1325,7 @@ double PMNS_Base::Prob(vectorC nu_in, int flvf, double E, double L)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability of flvi going to flvf for a given
 /// energy in GeV and distance in km in a single path.
@@ -1357,7 +1357,7 @@ double PMNS_Base::Prob(int flvi, int flvf, double E, double L)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Get the vector of probabilities for current state
 ///
@@ -1375,7 +1375,7 @@ vectorD PMNS_Base::GetProbVector(){
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability of nu_in going to all flavours.
 ///
@@ -1394,7 +1394,7 @@ vectorD PMNS_Base::ProbVector(vectorC nu_in)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability of flvi going to all flavours.
 ///
@@ -1418,7 +1418,7 @@ vectorD PMNS_Base::ProbVector(int flvi)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability of nu_in going to all flavours
 /// for a given energy in GeV.
@@ -1437,7 +1437,7 @@ vectorD PMNS_Base::ProbVector(vectorC nu_in, double E)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability of flvi going to all flavours
 /// for a given energy in GeV.
@@ -1461,7 +1461,7 @@ vectorD PMNS_Base::ProbVector(int flvi, double E)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability of nu_in going to all flavours for a given
 /// energy in GeV and distance in km in a single path.
@@ -1487,7 +1487,7 @@ vectorD PMNS_Base::ProbVector(vectorC nu_in, double E, double L)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability of flvi going to all flavours for a given
 /// energy in GeV and distance in km in a single path.
@@ -1519,7 +1519,7 @@ vectorD PMNS_Base::ProbVector(int flvi, double E, double L)
 }
 
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability matrix for the first nflvi and nflvf states.
 ///
@@ -1572,7 +1572,7 @@ matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability matrix for the first nflvi and nflvf states
 /// for a given energy in GeV.
@@ -1597,7 +1597,7 @@ matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf, double E)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the probability matrix for the first nflvi and nflvf states
 /// for a given energy in GeV and distance in km in a single path.
@@ -1629,7 +1629,7 @@ matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf, double E, double L)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the average probability of flvi going to flvf
 /// over a bin of energy E with width dE.
@@ -1662,7 +1662,7 @@ double PMNS_Base::AvgProb(int flvi, int flvf, double E, double dE)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Convert a bin of energy into a bin of L/E
 ///
@@ -1699,7 +1699,7 @@ vectorD PMNS_Base::ConvertEtoLoE(double E, double dE){
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the average probability of nu_in going to flvf
 /// over a bin of energy E with width dE.
@@ -1741,7 +1741,7 @@ double PMNS_Base::AvgProb(vectorC nu_in, int flvf, double E, double dE)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the average probability of flvi going to flvf
 /// over a bin of L/E with width dLoE.
@@ -1776,7 +1776,7 @@ double PMNS_Base::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the average probability of nu_in going to flvf
 /// over a bin of L/E with width dLoE.
@@ -1848,7 +1848,7 @@ double PMNS_Base::AvgProbLoE(vectorC nu_in, int flvf, double LoE, double dLoE)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the average probability of flvi going to all flavours
 /// over a bin of L/E with width dLoE.
@@ -1875,7 +1875,7 @@ vectorD PMNS_Base::AvgProbVectorLoE(int flvi,
   return AvgProbVectorLoE(fNuState, LoE, dLoE);
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the average probability of nu_in going to all flavours
 /// over a bin of energy E with width dE.
@@ -1899,7 +1899,7 @@ vectorD PMNS_Base::AvgProbVector(int flvi, double E, double dE)
   return AvgProbVector(fNuState, E, dE);
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the average probability of nu_in going to all flavours
 /// over a bin of energy E with width dE.
@@ -1937,7 +1937,7 @@ vectorD PMNS_Base::AvgProbVector(vectorC nu_in, double E, double dE)
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the average probability of nu_in going to all flavours
 /// over a bin of L/E with width dLoE.
@@ -2013,7 +2013,7 @@ vectorD PMNS_Base::AvgProbVectorLoE(vectorC nu_in,
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the average probability matrix for nflvi and nflvf
 /// over a bin of energy E with width dE.
@@ -2053,7 +2053,7 @@ matrixD PMNS_Base::AvgProbMatrix(int nflvi, int nflvf,
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the average probability matrix for nflvi and nflvf
 /// over a bin of L/E with width dLoE.
@@ -2132,7 +2132,7 @@ matrixD PMNS_Base::AvgProbMatrixLoE(int nflvi, int nflvf,
 
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Set the precision for the AvgProb method
 ///
@@ -2147,7 +2147,7 @@ void PMNS_Base::SetAvgProbPrec(double prec){
   fAvgProbPrec = prec;
 }
 
-//.....................................................................
+//.............................................................................
 ///
 /// Compute the sample points for a bin of L/E with width dLoE
 ///

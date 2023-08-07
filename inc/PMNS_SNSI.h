@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 /// \class OscProb::PMNS_SNSI
 ///
 /// \brief Implementation of oscillations of neutrinos in matter in a
@@ -12,7 +12,7 @@
 /// \sa PMNS_NSI
 ///
 /// \author jcoelho\@apc.in2p3.fr and urahaman\@km3net.de
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 #ifndef PMNS_SNSI_H
 #define PMNS_SNSI_H
@@ -20,28 +20,31 @@
 #include "PMNS_NSI.h"
 
 namespace OscProb {
+
   class PMNS_SNSI : public PMNS_NSI {
 
-  public:
+    public:
 
-    PMNS_SNSI();          ///< Constructor
-    virtual ~PMNS_SNSI(); ///< Destructor
+      PMNS_SNSI();          ///< Constructor
+      virtual ~PMNS_SNSI(); ///< Destructor
 
-    virtual void SetLowestMass(double m); ///< Set lightest neutrino mass
-    virtual double GetLowestMass(); ///< Get lightest neutrino mass
+      virtual void SetLowestMass(double m); ///< Set lightest neutrino mass
+      virtual double GetLowestMass();       ///< Get lightest neutrino mass
 
-  protected:
+    protected:
 
-    /// Build the full Hamiltonian
-    virtual void UpdateHam();
-    virtual void BuildHms();
+      /// Build the full Hamiltonian
+      virtual void UpdateHam();
+      virtual void BuildHms();
 
-    virtual void FillCache(){} ///< Deactivate cache
+      virtual void FillCache(){} ///< Deactivate cache
 
-    double fM; ///< Lightest neutrino mass
+      double fM; ///< Lightest neutrino mass
 
   };
 
 }
+
 #endif
-////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////

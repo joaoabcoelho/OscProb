@@ -13,7 +13,7 @@ using namespace std;
 
 using namespace OscProb;
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the coordinates of the detector:
 ///   radius in km, latitude in degrees, longitude in degrees
@@ -45,7 +45,7 @@ void EarthModelBase::SetDetectorCoordinates(double rad, double lat, double lon)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the current neutrino path sequence
 ///
@@ -54,7 +54,7 @@ void EarthModelBase::SetDetectorCoordinates(double rad, double lat, double lon)
 ///
 vector<NuPath> EarthModelBase::GetNuPath(){ return fNuPath; }
 
-//......................................................................
+//.............................................................................
 ///
 /// Add a path segment to the sequence.
 ///
@@ -72,7 +72,7 @@ void EarthModelBase::AddPathSegment(double length, double density, double zoa, i
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the total baseline for a given cosTheta.
 ///
@@ -89,7 +89,7 @@ double EarthModelBase::GetTotalL(double cosT)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the cosTheta for a given total baseline.
 ///
@@ -111,7 +111,7 @@ double EarthModelBase::GetCosT(double L)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Merge similar paths to reduce number of steps
 ///
@@ -190,7 +190,7 @@ vector<NuPath> EarthModelBase::GetMergedPaths(double prec){
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the boolean to tag whether to remove small paths when merging
 /// Small is defined as <1% of the total baseline

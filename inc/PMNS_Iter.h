@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 /// \class OscProb::PMNS_Iter
 ///
 /// \brief Implementation of oscillations of neutrinos in matter in a
@@ -8,7 +8,7 @@
 ///
 /// <pre>
 ///
-///......................................................................
+///............................................................................
 ///
 ///                      Universe 6 (2020) no.1, 16
 ///
@@ -17,53 +17,56 @@
 ///
 ///            Mihai Horoi, Adam Zettel (Central Michigan U.)
 ///
-///......................................................................
+///............................................................................
 /// </pre>
 ///
 /// \author Joao Coelho - jcoelho\@apc.in2p3.fr
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 #ifndef PMNS_Iter_H
 #define PMNS_Iter_H
+
 #include "PMNS_Fast.h"
 
 namespace OscProb {
 
   class PMNS_Iter : public PMNS_Fast {
 
-  public:
+    public:
 
-    PMNS_Iter();          ///< Constructor
-    virtual ~PMNS_Iter(); ///< Destructor
+      PMNS_Iter();          ///< Constructor
+      virtual ~PMNS_Iter(); ///< Destructor
 
-    /// Set the iterative precision
-    virtual void SetPrec(double prec);
+      /// Set the iterative precision
+      virtual void SetPrec(double prec);
 
-  protected:
+    protected:
 
-    /// Just use the vacuum to start
-    virtual void SolveHam();
+      /// Just use the vacuum to start
+      virtual void SolveHam();
 
-    /// Propagate through matter part
-    virtual void PropMatter();
+      /// Propagate through matter part
+      virtual void PropMatter();
 
-    /// Set the matter propagation term
-    virtual void SetExpVL(NuPath p);
+      /// Set the matter propagation term
+      virtual void SetExpVL(NuPath p);
 
-    /// Reimplement propagation
-    virtual void PropagatePath(NuPath p);
+      /// Reimplement propagation
+      virtual void PropagatePath(NuPath p);
 
-    /// Set the main eigensystem to vacuum
-    virtual void SetVacuumEigensystem();
+      /// Set the main eigensystem to vacuum
+      virtual void SetVacuumEigensystem();
 
-    /// Iterative precision
-    double fPrec;
+      /// Iterative precision
+      double fPrec;
 
-    double fVL; ///< Matter potential
-    complexD fExpVL; ///< Matter phase shift
+      double fVL; ///< Matter potential
+      complexD fExpVL; ///< Matter phase shift
 
   };
 
 }
+
 #endif
-////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////

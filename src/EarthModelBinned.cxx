@@ -16,7 +16,7 @@ using namespace std;
 
 using namespace OscProb;
 
-//......................................................................
+//.............................................................................
 ///
 /// Update values of zenith angle and azimuthal angle for neutrino
 /// trajectory.
@@ -36,7 +36,7 @@ void TrajConstants::UpdateNuAngles(double cosTheta, double phi) {
   sinTcosA = sinT*cosA;
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Update detector position for neutrino trajectory calculations.
 ///
@@ -55,7 +55,7 @@ void TrajConstants::UpdateDetPos(double rDet, double DetLat, double DetLon) {
   rDetCosDetLat = DetRadius*cosDetLat;
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Recalculate constants that use combinations of detector position
 /// variables and neutrino direction angles.
@@ -76,7 +76,7 @@ void TrajConstants::Recalculate() {
 }
 
 
-//......................................................................
+//.............................................................................
 ///
 /// Constructor.
 ///
@@ -97,13 +97,13 @@ EarthModelBinned::EarthModelBinned(string filename)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Nothing to clean.
 ///
 EarthModelBinned::~EarthModelBinned(){}
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the set of Earth bins
 ///
@@ -111,7 +111,7 @@ EarthModelBinned::~EarthModelBinned(){}
 ///
 vector<EarthBin> EarthModelBinned::GetEarthBins(){ return fEarthBins; }
 
-//......................................................................
+//.............................................................................
 ///
 /// Clear the earth model information.
 ///
@@ -125,7 +125,7 @@ void EarthModelBinned::ClearModel()
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the coordinates of the detector:
 ///   radius in km, latitude in degrees, longitude in degrees
@@ -144,7 +144,7 @@ void EarthModelBinned::SetDetPos(double rad, double lat, double lon)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Add a bin to the earth model.
 ///
@@ -163,7 +163,7 @@ void EarthModelBinned::AddBin(double radius_out, double radius_in, double latitu
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Load an earth model from a file.
 ///
@@ -291,7 +291,7 @@ void EarthModelBinned::LoadModel(string filename)
        << " longitude)." << endl;
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Set the effective Z/A value for all bins with given region index.
 ///
@@ -325,7 +325,7 @@ void EarthModelBinned::SetRegionZoA(int index, double zoa)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Get the effective Z/A value for all bins in region specified by
 /// index, e.g. all outer-core layers.
@@ -358,7 +358,7 @@ double EarthModelBinned::GetRegionZoA(int index)
   return 0;
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Scale density by scaling factor for all bins in region specified by
 /// given index.
@@ -391,7 +391,7 @@ void EarthModelBinned::ScaleRegionDensity(int index, double factor)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Add a path segment to the sequence.
 ///
@@ -407,7 +407,7 @@ void EarthModelBinned::AddPath(double length, EarthBin bin)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Calculate the distance to the detector along a neutrino trajectory,
 /// specified by cosT and the azimuthal angle, at the edge of
@@ -473,7 +473,7 @@ double EarthModelBinned::DetDistForNextLatBin(int cur_index, LatBinInfo &L)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Calculate the distance to the detector at the edge of the current
 /// longitude bin along a neutrino trajectory specified by cosT and the
@@ -535,7 +535,7 @@ double EarthModelBinned::DetDistForNextLonBin(double prev_lon, LonBinInfo &L)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Record all the path segments as the neutrino crosses into new latitude
 /// and longitude bins until it reaches the next depth bin.
@@ -596,7 +596,7 @@ void EarthModelBinned::RecordLatLonBinCrossings(double detDist_nextDbin, double 
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Find and return longitude bin index that contains longitude.
 ///
@@ -617,7 +617,7 @@ int EarthModelBinned::LonBinIndex(double longitude)
 
 }
 
-//......................................................................
+//.............................................................................
 ///
 /// Fill the path sequence in a vector.
 ///
