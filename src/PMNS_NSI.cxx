@@ -55,7 +55,7 @@ PMNS_NSI::~PMNS_NSI(){}
 ///
 void PMNS_NSI::SetNSI(double eps_ee,    double eps_emu,    double eps_etau,
                        double eps_mumu,  double eps_mutau,  double eps_tautau,
-                       double delta_emu, double delta_etau, double delta_mutau) 
+                       double delta_emu, double delta_etau, double delta_mutau)
 {
 
   SetEps(0,0, eps_ee,     0);
@@ -81,7 +81,7 @@ void PMNS_NSI::SetNSI(double eps_ee,    double eps_emu,    double eps_etau,
 /// Requires that flvi < flvj. Will notify you if input is wrong.
 /// If flvi > flvj, will assume reverse order and swap flvi and flvj.
 ///
-/// @param flvi  - The first flavour index 
+/// @param flvi  - The first flavour index
 /// @param flvj  - The second flavour index
 /// @param val   - The absolute value of the parameter
 /// @param phase - The complex phase of the parameter in radians
@@ -101,18 +101,18 @@ void PMNS_NSI::SetEps(int flvi, int flvj, double val, double phase){
     return;
   }
 
-  complexD h = val;  
+  complexD h = val;
 
-  if(flvi != flvj) h *= complexD(cos(phase), sin(phase)); 
+  if(flvi != flvj) h *= complexD(cos(phase), sin(phase));
 
   bool isSame = (fEps[flvi][flvj] == h);
-  
+
   if(!isSame) ClearCache();
 
   fGotES *= isSame;
-  
+
   fEps[flvi][flvj] = h;
-  
+
 }
 
 //......................................................................
@@ -227,7 +227,7 @@ void PMNS_NSI::SetEps_mutau  (double a, double phi){ SetEps(1,2, a, phi); }
 void PMNS_NSI::UpdateHam()
 {
 
-  double lv = 2 * kGeV2eV*fEnergy;           // 2*E in eV 
+  double lv = 2 * kGeV2eV*fEnergy;           // 2*E in eV
 
   double kr2GNe   = kK2*M_SQRT2*kGf * fPath.density;
   double kr2GNnsi = kr2GNe;
@@ -242,7 +242,7 @@ void PMNS_NSI::UpdateHam()
       else          fHam[i][j] = conj(fHms[i][j]/lv - kr2GNnsi*fEps[i][j]);
     }
   }
-  
+
   if(!fIsNuBar) fHam[0][0] += kr2GNe;
   else          fHam[0][0] -= kr2GNe;
 
@@ -250,7 +250,7 @@ void PMNS_NSI::UpdateHam()
 
 //......................................................................
 ///
-/// Set the NSI relative coupling to a given fermion. 
+/// Set the NSI relative coupling to a given fermion.
 /// This factor represents what fraction of the fermion are seen
 /// by the interaction.
 ///
@@ -266,12 +266,12 @@ void PMNS_NSI::SetCoupByIndex(double c, int i){
   fGotES *= isSame;
 
   fNSIcoup[i] = c;
-  
+
 }
 
 //......................................................................
 ///
-/// Set the NSI relative coupling to electrons. 
+/// Set the NSI relative coupling to electrons.
 /// This factor represents what fraction of the electrons are seen
 /// by the interaction.
 ///
@@ -281,7 +281,7 @@ void PMNS_NSI::SetElecCoup(double e){ SetCoupByIndex(e, 0); }
 
 //......................................................................
 ///
-/// Set the NSI relative coupling to u-quarks. 
+/// Set the NSI relative coupling to u-quarks.
 /// This factor represents what fraction of the u-quarks are seen
 /// by the interaction.
 ///
@@ -291,7 +291,7 @@ void PMNS_NSI::SetUpCoup(double u){ SetCoupByIndex(u, 1); }
 
 //......................................................................
 ///
-/// Set the NSI relative coupling to d-quarks. 
+/// Set the NSI relative coupling to d-quarks.
 /// This factor represents what fraction of the d-quarks are seen
 /// by the interaction.
 ///
@@ -315,24 +315,24 @@ void PMNS_NSI::SetFermCoup(double e, double u, double d)
   SetElecCoup(e); // electron coupling
   SetUpCoup(u);   // u-quark coupling
   SetDownCoup(d); // d-quark coupling
-  
+
 }
 
 //......................................................................
 ///
-/// Get the NSI relative coupling to electrons. 
+/// Get the NSI relative coupling to electrons.
 ///
 double PMNS_NSI::GetElecCoup(){ return fNSIcoup[0]; }
 
 //......................................................................
 ///
-/// Get the NSI relative coupling to u-quarks. 
+/// Get the NSI relative coupling to u-quarks.
 ///
 double PMNS_NSI::GetUpCoup(){ return fNSIcoup[1]; }
 
 //......................................................................
 ///
-/// Get the NSI relative coupling to d-quarks. 
+/// Get the NSI relative coupling to d-quarks.
 ///
 double PMNS_NSI::GetDownCoup(){ return fNSIcoup[2]; }
 
@@ -345,7 +345,7 @@ double PMNS_NSI::GetZoACoup()
 
   return fNSIcoup[0] * fPath.zoa        // electrons: Z
        + fNSIcoup[1] * (1 + fPath.zoa)  // u-quarks:  A + Z
-       + fNSIcoup[2] * (2 - fPath.zoa); // d-quarks: 2A - Z 
+       + fNSIcoup[2] * (2 - fPath.zoa); // d-quarks: 2A - Z
 
 }
 

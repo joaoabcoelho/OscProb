@@ -61,11 +61,11 @@ fGotES(false), fBuiltHms(false), fMaxCache(1e6), fProbe(numNus)
   SetStdPars();        // Set PDG parameters
 
   ResetToFlavour(1);   // Numu by default
-  
+
   ClearCache(); // Clear cache to initialize it
-  
+
   SetAvgProbPrec(1e-4); // Set default AvgProb precision
-  
+
 }
 
 //......................................................................
@@ -108,7 +108,7 @@ void PMNS_Base::InitializeVectors()
 ///
 void PMNS_Base::SetUseCache(bool u)
 {
-  fUseCache = u; 
+  fUseCache = u;
 }
 
 //......................................................................
@@ -123,7 +123,7 @@ void PMNS_Base::ClearCache()
   fMixCache.max_load_factor(0.25);
   fMixCache.reserve(512);
 }
-        
+
 //......................................................................
 ///
 /// Set maximum number of cached eigensystems.
@@ -147,7 +147,7 @@ bool PMNS_Base::TryCache()
   if(fUseCache && !fMixCache.empty()){
 
     fProbe.SetVars(fEnergy, fPath, fIsNuBar);
-    
+
     unordered_set<EigenPoint>::iterator it = fMixCache.find(fProbe);
 
     if(it != fMixCache.end()){
@@ -161,7 +161,7 @@ bool PMNS_Base::TryCache()
     }
 
   }
-  
+
   return false;
 
 }
@@ -842,7 +842,7 @@ double PMNS_Base::GetDmEff(int j)
 
   // Solve the Hamiltonian to update eigenvalues
   SolveHam();
-  
+
   // Sort eigenvalues in same order as vacuum Dm^2
   vectorI dm_idx = GetSortedIndices(fDm);
   vectorD dm_idx_double(dm_idx.begin(), dm_idx.end());
@@ -865,12 +865,12 @@ void PMNS_Base::RotateState(int i, int j){
 
   // Do nothing if angle is zero
   if(fTheta[i][j]==0) return;
-  
+
   double sij = sin(fTheta[i][j]);
   double cij = cos(fTheta[i][j]);
-  
+
   complexD buffer;
-  
+
   if(i+1==j || fDelta[i][j]==0){
     buffer      = cij*fNuState[i] + sij*fNuState[j];
     fNuState[j] = cij*fNuState[j] - sij*fNuState[i];
@@ -882,7 +882,7 @@ void PMNS_Base::RotateState(int i, int j){
   }
 
   fNuState[i] = buffer;
-  
+
 }
 
 //......................................................................
@@ -902,7 +902,7 @@ vectorC PMNS_Base::GetMassEigenstate(int mi){
   vectorC oldState = fNuState;
 
   ResetToFlavour(mi);
-  
+
   for(int j=0; j<fNumNus; j++){
   for(int i=0; i<j; i++){
     RotateState(i,j);
@@ -910,9 +910,9 @@ vectorC PMNS_Base::GetMassEigenstate(int mi){
 
   vectorC newState = fNuState;
   fNuState = oldState;
-  
+
   return newState;
-  
+
 }
 
 //......................................................................
@@ -1065,7 +1065,7 @@ void PMNS_Base::BuildHms()
 
   // Check if anything changed
   if(fBuiltHms) return;
-  
+
   // Tag to recompute eigensystem
   fGotES = false;
 
@@ -1108,7 +1108,7 @@ void PMNS_Base::PropagatePath(NuPath p)
     double arg = fEval[i] * LengthIneV;
     fPhases[i] = complexD(cos(arg), -sin(arg));
   }
-  
+
   for(int i=0;i<fNumNus;i++){
     fBuffer[i] = 0;
     for(int j=0;j<fNumNus;j++){
@@ -1366,7 +1366,7 @@ double PMNS_Base::Prob(int flvi, int flvf, double E, double L)
 vectorD PMNS_Base::GetProbVector(){
 
   vectorD probs(fNumNus);
-  
+
   for(int i=0; i<probs.size(); i++){
     probs[i] = P(i);
   }
@@ -1391,7 +1391,7 @@ vectorD PMNS_Base::ProbVector(vectorC nu_in)
   Propagate();
 
   return GetProbVector();
-  
+
 }
 
 //.....................................................................
@@ -1432,7 +1432,7 @@ vectorD PMNS_Base::ProbVector(vectorC nu_in, double E)
 {
 
   SetEnergy(E);
-  
+
   return ProbVector(nu_in);
 
 }
@@ -1456,7 +1456,7 @@ vectorD PMNS_Base::ProbVector(int flvi, double E)
 {
 
   SetEnergy(E);
-  
+
   return ProbVector(flvi);
 
 }
@@ -1482,7 +1482,7 @@ vectorD PMNS_Base::ProbVector(vectorC nu_in, double E, double L)
 
   SetEnergy(E);
   SetLength(L);
-  
+
   return ProbVector(nu_in);
 
 }
@@ -1513,7 +1513,7 @@ vectorD PMNS_Base::ProbVector(int flvi, double E, double L)
 
   SetEnergy(E);
   SetLength(L);
-  
+
   return ProbVector(flvi);
 
 }
@@ -1550,7 +1550,7 @@ matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf)
     ResetToFlavour(i);
     allstates[i] = fNuState;
   }
-  
+
   // Propagate all states in parallel
   for(int i=0; i<int(fNuPaths.size()); i++){
 
@@ -1561,15 +1561,15 @@ matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf)
     }
 
   }
-  
+
   // Get all probabilities
   for(int flvi=0; flvi<nflvi; flvi++){
   for(int flvj=0; flvj<nflvf; flvj++){
     probs[flvi][flvj] = norm(allstates[flvi][flvj]);
   }}
-  
+
   return probs;
-  
+
 }
 
 //.....................................................................
@@ -1590,9 +1590,9 @@ matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf)
 ///
 matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf, double E)
 {
- 
+
  SetEnergy(E);
- 
+
  return ProbMatrix(nflvi, nflvf);
 
 }
@@ -1621,10 +1621,10 @@ matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf, double E)
 ///
 matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf, double E, double L)
 {
- 
+
  SetEnergy(E);
  SetLength(L);
- 
+
  return ProbMatrix(nflvi, nflvf);
 
 }
@@ -1678,7 +1678,7 @@ vectorD PMNS_Base::ConvertEtoLoE(double E, double dE){
   SetCurPath(AvgPath(fNuPaths));
 
   // Define L/E variables
-  vectorD LoEbin(2);  
+  vectorD LoEbin(2);
 
   // Set a minimum energy
   double minE = 0.1 * E;
@@ -1991,7 +1991,7 @@ vectorD PMNS_Base::AvgProbVectorLoE(vectorC nu_in,
 
     // Set (L/E)^-2 weights
     double w = 1./pow(samples[j],2);
-    
+
     vectorD sample_probs = ProbVector(nu_in, length / samples[j]);
 
     for(int i=0; i<fNumNus; i++){
@@ -2035,7 +2035,7 @@ vectorD PMNS_Base::AvgProbVectorLoE(vectorC nu_in,
 matrixD PMNS_Base::AvgProbMatrix(int nflvi, int nflvf,
                                  double E, double dE)
 {
-  
+
   matrixD probs(nflvi, vectorD(nflvf, 0));
 
   // Do nothing if energy is not positive
@@ -2108,7 +2108,7 @@ matrixD PMNS_Base::AvgProbMatrixLoE(int nflvi, int nflvf,
 
     // Set (L/E)^-2 weights
     double w = 1./pow(samples[j],2);
-    
+
     matrixD sample_probs = ProbMatrix(nflvi, nflvf, length / samples[j]);
 
     for(int flvi=0; flvi<nflvi; flvi++){

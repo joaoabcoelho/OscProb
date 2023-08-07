@@ -59,10 +59,10 @@ NuPath OscProb::AvgPath(std::vector<NuPath>& pv){
 
   // Get size of vector
   int np = pv.size();
-  
+
   // Start with the first path
   NuPath mergedPath;
-  
+
   // If vector is not empty, start on first path
   if(np>0) mergedPath = pv[0];
   else return mergedPath;

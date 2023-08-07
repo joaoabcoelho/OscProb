@@ -24,7 +24,7 @@
 #include "zheevq3.h"
 
 // Macros
-#define SQR(x)      ((x)*(x))                        // x^2 
+#define SQR(x)      ((x)*(x))                        // x^2
 #define SQR_ABS(x)  (SQR(real(x)) + SQR(imag(x)))  // |x|^2
 
 // ----------------------------------------------------------------------------
@@ -69,7 +69,7 @@ int zheevh3(std::complex<double> A[3][3], std::complex<double> Q[3][3], double w
 #ifndef EVALS_ONLY
 //  n0 = SQR(real(A[0][0])) + SQR_ABS(A[0][1]) + SQR_ABS(A[0][2]);
 //  n1 = SQR_ABS(A[0][1]) + SQR(real(A[1][1])) + SQR_ABS(A[1][2]);
-  
+
   t = fabs(w[0]);
   if ((u=fabs(w[1])) > t)
     t = u;
@@ -107,7 +107,7 @@ int zheevh3(std::complex<double> A[3][3], std::complex<double> Q[3][3], double w
     for (j=0; j < 3; j++)
       Q[j][0] = Q[j][0] * norm;
   }
-  
+
   // Calculate second eigenvector by the formula
   //   v[1] = conj( (A - w[1]).e1 x (A - w[1]).e2 )
   Q[0][1]  = Q[0][1] + A[0][2]*w[1];
@@ -122,7 +122,7 @@ int zheevh3(std::complex<double> A[3][3], std::complex<double> Q[3][3], double w
     for (j=0; j < 3; j++)
       Q[j][1] = Q[j][1] * norm;
   }
-  
+
   // Calculate third eigenvector according to
   //   v[2] = conj(v[0] x v[1])
   Q[0][2] = conj(Q[1][0]*Q[2][1] - Q[2][0]*Q[1][1]);

@@ -132,7 +132,7 @@ void EarthModelBinned::ClearModel()
 /// Also, updates the detector-coordinate-dependent parts of the trajectory
 /// constants.
 ///
-/// @param rad - The distance from the detector to the Earth's center in km 
+/// @param rad - The distance from the detector to the Earth's center in km
 /// @param lat - The latitude of the detector in deg N (between -90 and 90)
 /// @param lon - The longitude of the detector in deg E (between 0 and 360)
 ///
@@ -286,8 +286,8 @@ void EarthModelBinned::LoadModel(string filename)
     return;
   }
 
-  cout << "\t...done (" << fEarthBins.size() << " bins: " << fnDepthBins 
-       << " depth, " << fnLatBins << " latitude, and " << fnLonBins 
+  cout << "\t...done (" << fEarthBins.size() << " bins: " << fnDepthBins
+       << " depth, " << fnLatBins << " latitude, and " << fnLonBins
        << " longitude)." << endl;
 }
 
@@ -516,7 +516,7 @@ double EarthModelBinned::DetDistForNextLonBin(double prev_lon, LonBinInfo &L)
   else {
     if (0 > lon-L.min || L.max-lon < 0)
       return -1;
-  } 
+  }
 
   //Parts of the answer
   double cosNewLon = cos(lon);
@@ -791,7 +791,7 @@ int EarthModelBinned::FillPath(double cosT, double phi)
          << "  Send the following message to rpestes@apc.in2p3.fr:" << endl << endl
          << "You were wrong about the denominator of x(long)... "
          << "Here are the values of the variables that broke it:" << endl
-         << "\tDetector Coordinates (r,lat,lon) = (" << fDetRadius << ", " 
+         << "\tDetector Coordinates (r,lat,lon) = (" << fDetRadius << ", "
          << fDetLat << ", " << fDetLon << ")" << endl
          << "\tcos(Zenith Angle) = " << cosT << endl
          << "\tAzimuthal Angle = " << phi << " deg" << endl

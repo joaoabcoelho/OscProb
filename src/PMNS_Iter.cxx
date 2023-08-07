@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////
 //
 // Implementation of oscillations of neutrinos in matter in a
-// three-neutrino framework. 
+// three-neutrino framework.
 //
 // jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
@@ -97,10 +97,10 @@ void PMNS_Iter::PropagatePath(NuPath p)
 
   int nsplit = sqrt(dm * fVL / fPrec);
   nsplit++;
-  
+
   p.length /= nsplit;
   SetExpVL(p);
-  
+
   for(int i=0; i<nsplit; i++){
 
     PMNS_Base::PropagatePath(p);

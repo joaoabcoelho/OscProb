@@ -28,15 +28,15 @@ struct TimeIt {
 
 
 void IterTest(){
- 
+
   // Initialize your objects
   OscProb::PMNS_Fast pStd;
   OscProb::PMNS_Iter pItr;
-  
+
   pStd.SetUseCache();
-  
+
   pItr.SetPrec(0.05);
-  
+
   // Use a PremModel to make paths
   // through the earth
   OscProb::PremModel prem;
@@ -54,7 +54,7 @@ void IterTest(){
   // Set other quantities
   //pStd.SetPath(OscProb::NuPath(1300,2.5));
   //pItr.SetPath(OscProb::NuPath(1300,2.5));
-  
+
   int nbins = 500;
   vector<double> xbins = GetLogAxis(nbins, 0.5, 20);
   TH1D* hStd = new TH1D("","", nbins, &xbins[0]);
@@ -94,9 +94,9 @@ void IterTest(){
   TCanvas* c2 = new TCanvas();
 
   hItr->Add(hStd, -1);
-  
+
   hItr->Draw("curv");
-  
+
   SetTH1Margin();
   gPad->SetLogx();
 

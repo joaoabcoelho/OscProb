@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////
 //
 // Implementation of oscillations of neutrinos in matter in a
-// three-neutrino framework. 
+// three-neutrino framework.
 //
 // jcoelho\@apc.in2p3.fr
 ////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ PMNS_Fast::~PMNS_Fast(){}
 /// @param th13    - The value of the mixing angle theta_13
 /// @param deltacp - The value of the CP phase delta_13
 ///
-void PMNS_Fast::SetMix(double th12, double th23, double th13, double deltacp) 
+void PMNS_Fast::SetMix(double th12, double th23, double th13, double deltacp)
 {
 
   SetAngle(1,2, th12);
@@ -51,10 +51,10 @@ void PMNS_Fast::SetMix(double th12, double th23, double th13, double deltacp)
 /// These are Dm_21 and Dm_32 in eV^2.\n
 /// The corresponding Dm_31 is set in the class attributes.
 ///
-/// @param dm21 - The solar mass-splitting Dm_21 
-/// @param dm32 - The atmospheric mass-splitting Dm_32 
+/// @param dm21 - The solar mass-splitting Dm_21
+/// @param dm32 - The atmospheric mass-splitting Dm_32
 ///
-void PMNS_Fast::SetDeltaMsqrs(double dm21, double dm32) 
+void PMNS_Fast::SetDeltaMsqrs(double dm21, double dm32)
 {
 
   SetDm(2, dm21);
@@ -73,7 +73,7 @@ void PMNS_Fast::SetDeltaMsqrs(double dm21, double dm32)
 void PMNS_Fast::UpdateHam()
 {
 
-  double lv = 2 * kGeV2eV*fEnergy;     // 2E in eV 
+  double lv = 2 * kGeV2eV*fEnergy;     // 2E in eV
 
   double kr2GNe = kK2*M_SQRT2*kGf;
   kr2GNe *= fPath.density * fPath.zoa; // Matter potential in eV
@@ -111,7 +111,7 @@ void PMNS_Fast::SolveHam()
   // Build Hamiltonian
   BuildHms();
 
-  // Check if anything changed  
+  // Check if anything changed
   if(fGotES) return;
 
   // Try caching if activated
@@ -125,14 +125,14 @@ void PMNS_Fast::SolveHam()
   // Solve Hamiltonian for eigensystem using the GLoBES method
   zheevh3(fHam,fEvecGLoBES,fEvalGLoBES);
 
-  // Fill fEval and fEvec vectors from GLoBES arrays  
+  // Fill fEval and fEvec vectors from GLoBES arrays
   for(int i=0;i<fNumNus;i++){
     fEval[i] = fEvalGLoBES[i];
     for(int j=0;j<fNumNus;j++){
       fEvec[i][j] = fEvecGLoBES[i][j];
     }
   }
-  
+
   fGotES = true;
 
   // Fill cache if activated

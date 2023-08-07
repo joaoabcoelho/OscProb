@@ -13,7 +13,7 @@ namespace OscProb {
       virtual ~Absorption();
 
       virtual double Trans(double xsec);
-    
+
       virtual void SetPath(std::vector<NuPath> paths); ///< Set a path sequence
 
     protected:

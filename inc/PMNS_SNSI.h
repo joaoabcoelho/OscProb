@@ -2,11 +2,11 @@
 /// \class OscProb::PMNS_SNSI
 ///
 /// \brief Implementation of oscillations of neutrinos in matter in a
-///        three-neutrino framework with scalar NSI. 
+///        three-neutrino framework with scalar NSI.
 ///
 /// This class reimplements the PMNS_NSI class to a scalar NSI scenario.
 ///
-/// The matter potential is parametrized by epsilon parameters with 
+/// The matter potential is parametrized by epsilon parameters with
 /// dimensions of 1/mass^2 in MeV^-2.
 ///
 /// \sa PMNS_NSI
@@ -29,7 +29,7 @@ namespace OscProb {
 
     virtual void SetLowestMass(double m); ///< Set lightest neutrino mass
     virtual double GetLowestMass(); ///< Get lightest neutrino mass
-    
+
   protected:
 
     /// Build the full Hamiltonian

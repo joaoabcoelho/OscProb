@@ -46,7 +46,7 @@ void EigenPoint::SetVars(double e, NuPath p, bool n)
 
 //......................................................................
 ///
-/// Compute the combined energy-density parameter 
+/// Compute the combined energy-density parameter
 ///
 void EigenPoint::SetNE()
 {

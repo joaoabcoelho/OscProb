@@ -2,14 +2,14 @@
 /// \class OscProb::PMNS_NSI
 ///
 /// \brief Implementation of oscillations of neutrinos in matter in a
-///        three-neutrino framework with NSI. 
+///        three-neutrino framework with NSI.
 ///
 /// This class expands the PMNS_Fast class including a general
 /// matter potential matrix describing Non-Standard Interactions (NSI).
 ///
 /// The matter potential is parametrized by dimensionless quantities
 /// epsilon which quantify the intensity of the NSI with respect to the
-/// standard matter effects from coherent forward scattering with electrons. 
+/// standard matter effects from coherent forward scattering with electrons.
 ///
 /// \sa PMNS_Fast
 ///
@@ -35,7 +35,7 @@ namespace OscProb {
     /// Get any given NSI parameter
     virtual complexD GetEps(int flvi, int flvj);
 
-    /// Set the NSI parameters all at once    
+    /// Set the NSI parameters all at once
     void SetNSI(double eps_ee,      double eps_emu,      double eps_etau,
                 double eps_mumu,    double eps_mutau,    double eps_tautau,
                 double delta_emu=0, double delta_etau=0, double delta_mutau=0);
@@ -67,9 +67,9 @@ namespace OscProb {
 
     /// Build the full Hamiltonian
     virtual void UpdateHam();
-    
+
     complexD fEps[3][3]; ///< Stores each NSI parameter
-    
+
     double fNSIcoup[3]; ///< Relative NSI couplings
 
   };

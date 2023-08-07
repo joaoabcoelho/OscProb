@@ -35,7 +35,7 @@ const double PremModel::DET_TOL = 0.2; // Tolerance in km
 PremModel::PremModel(string filename) :
 fDetLayer(0)
 {
-  
+
   SetRemoveSmallPaths(false);
   SetDetPos(6368);
   LoadModel(filename);
@@ -138,7 +138,7 @@ void PremModel::AddDetLayer(){
 /// position to distinguish what parts of the earth are above
 /// and below the detector.
 ///
-/// @param rad - The distance from the detector to the Earth's center in km 
+/// @param rad - The distance from the detector to the Earth's center in km
 /// @param lat - The latitude of the detector in deg N (between -90 and 90)
 /// @param lon - The longitude of the detector in deg E (between 0 and 360)
 ///

@@ -110,7 +110,7 @@ void PMNS_Deco::SetGamma32(double val){
 
     cerr << "WARNING: Impossible to have Gamma32 = "        << val
          << " with current Gamma21 and theta parameters."   << endl
-         << "         Changing the value of cos(theta) to " << fGamma[0] 
+         << "         Changing the value of cos(theta) to " << fGamma[0]
          << endl;
 
     return;
@@ -122,7 +122,7 @@ void PMNS_Deco::SetGamma32(double val){
   if(arg < 0){
     arg = 0;
     fGamma[0] = sqrt(1 - 4*val/fGamma[1]);
-    cerr << "WARNING: Imaginary Gamma31 found. Changing the value of cos(theta) to " 
+    cerr << "WARNING: Imaginary Gamma31 found. Changing the value of cos(theta) to "
          << fGamma[0] << endl;
   }
 

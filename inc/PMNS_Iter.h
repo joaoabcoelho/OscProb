@@ -5,14 +5,14 @@
 ///        three-neutrino framework.
 ///
 /// Based on an approximate iterative model from:\n
-/// 
+///
 /// <pre>
-/// 
+///
 ///......................................................................
 ///
 ///                      Universe 6 (2020) no.1, 16
 ///
-///    Effects of Atomic-Scale Electron Density Profile and a Fast and 
+///    Effects of Atomic-Scale Electron Density Profile and a Fast and
 /// Efficient Iteration Algorithm for Matter Effect of Neutrino Oscillation
 ///
 ///            Mihai Horoi, Adam Zettel (Central Michigan U.)
@@ -35,33 +35,33 @@ namespace OscProb {
 
     PMNS_Iter();          ///< Constructor
     virtual ~PMNS_Iter(); ///< Destructor
-    
+
     /// Set the iterative precision
     virtual void SetPrec(double prec);
-    
+
   protected:
 
     /// Just use the vacuum to start
     virtual void SolveHam();
-    
+
     /// Propagate through matter part
     virtual void PropMatter();
 
     /// Set the matter propagation term
     virtual void SetExpVL(NuPath p);
-    
+
     /// Reimplement propagation
     virtual void PropagatePath(NuPath p);
-    
+
     /// Set the main eigensystem to vacuum
     virtual void SetVacuumEigensystem();
 
     /// Iterative precision
     double fPrec;
-    
+
     double fVL; ///< Matter potential
     complexD fExpVL; ///< Matter phase shift
-    
+
   };
 
 }

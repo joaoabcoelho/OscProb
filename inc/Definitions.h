@@ -21,7 +21,7 @@ namespace OscProb {
   typedef std::complex<double> complexD;
   typedef std::vector<complexD> vectorC;
   typedef std::vector<vectorC>  matrixC;
-  
+
 }
 
 #endif

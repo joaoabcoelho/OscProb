@@ -23,7 +23,7 @@
 #include "zheevq3.h"
 
 // Macros
-#define SQR(x)      ((x)*(x))                        // x^2 
+#define SQR(x)      ((x)*(x))                        // x^2
 #define SQR_ABS(x)  (SQR(real(x)) + SQR(imag(x)))  // |x|^2
 
 
@@ -58,7 +58,7 @@ int zheevq3(std::complex<double> A[3][3], std::complex<double> Q[3][3], double w
 
   // Transform A to real tridiagonal form by the Householder method
   zhetrd3(A, Q, w, e);
-  
+
   // Calculate eigensystem of the remaining real symmetric tridiagonal matrix
   // with the QL method
   //
@@ -78,7 +78,7 @@ int zheevq3(std::complex<double> A[3][3], std::complex<double> Q[3][3], double w
       }
       if (m == l)
         break;
-      
+
       if (nIter++ >= 30)
         return -1;
 
@@ -110,7 +110,7 @@ int zheevq3(std::complex<double> A[3][3], std::complex<double> Q[3][3], double w
           e[i+1] = g * r;
           s     *= (c = 1.0/r);
         }
-        
+
         g = w[i+1] - p;
         r = (w[i] - g)*s + 2.0*c*b;
         p = s * r;
@@ -125,7 +125,7 @@ int zheevq3(std::complex<double> A[3][3], std::complex<double> Q[3][3], double w
           Q[k][i+1] = s*Q[k][i] + c*t;
           Q[k][i]   = c*Q[k][i] - s*t;
         }
-#endif 
+#endif
       }
       w[l] -= p;
       e[l]  = g;

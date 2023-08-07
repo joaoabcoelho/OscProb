@@ -209,13 +209,13 @@ void DivideCanvas(TCanvas *c1, int col, int row){
 
 // Get a log-scale axis
 vector<double> GetLogAxis(int nbins, double xmin, double xmax){
-  
+
   vector<double> xbins(nbins+1);
 
   for(int i=0; i<=nbins; i++){
     xbins[i] = pow(10, log10(xmin) + i*(log10(xmax) - log10(xmin))/nbins);
   }
-  
+
   return xbins;
 
 }
@@ -225,17 +225,17 @@ void SetHist(TH1 *hist,int col=1,bool fill=false){
 
   hist->SetDirectory(0);
 
-  hist->SetLineColor(col);  
-  hist->SetLineWidth(4);  
-  hist->SetFillColor(fill*col);  
-  hist->SetMarkerColor(col);  
-  hist->SetMarkerSize(0);  
+  hist->SetLineColor(col);
+  hist->SetLineWidth(4);
+  hist->SetFillColor(fill*col);
+  hist->SetMarkerColor(col);
+  hist->SetMarkerSize(0);
   hist->GetXaxis()->CenterTitle();
   hist->GetYaxis()->CenterTitle();
   hist->GetZaxis()->CenterTitle();
   hist->SetTitleOffset(1.05,"XY");
   hist->SetTitleOffset(1.2,"Z");
-  hist->SetTitleSize(0.05,"XYZ"); 
+  hist->SetTitleSize(0.05,"XYZ");
   hist->SetLabelSize(0.04,"XYZ");
 
   return;
@@ -249,8 +249,8 @@ void SetStack(THStack *stack){
   stack->GetYaxis()->CenterTitle();
   stack->GetXaxis()->SetTitleOffset(1.05);
   stack->GetYaxis()->SetTitleOffset(1.05);
-  stack->GetXaxis()->SetTitleSize(0.05); 
-  stack->GetYaxis()->SetTitleSize(0.05); 
+  stack->GetXaxis()->SetTitleSize(0.05);
+  stack->GetYaxis()->SetTitleSize(0.05);
   stack->GetXaxis()->SetLabelSize(0.04);
   stack->GetYaxis()->SetLabelSize(0.04);
 
@@ -268,7 +268,7 @@ void SetHist(TH2 *hist){
   hist->GetZaxis()->CenterTitle();
   hist->SetTitleOffset(1.05,"XY");
   hist->SetTitleOffset(1.2,"Z");
-  hist->SetTitleSize(0.05,"XYZ"); 
+  hist->SetTitleSize(0.05,"XYZ");
   hist->SetLabelSize(0.04,"XYZ");
 /*
   hist->SetContour(2);
@@ -283,15 +283,15 @@ void SetHist(TH2 *hist){
 // Set nice graph style
 void SetGraph(TGraph *gr,int col=1){
 
-  gr->SetLineColor(col);  
-  gr->SetLineWidth(2);  
-  gr->SetMarkerColor(col);  
-  gr->SetMarkerStyle(20);  
+  gr->SetLineColor(col);
+  gr->SetLineWidth(2);
+  gr->SetMarkerColor(col);
+  gr->SetMarkerStyle(20);
   gr->GetXaxis()->CenterTitle();
   gr->GetYaxis()->CenterTitle();
   gr->GetXaxis()->SetTitleOffset(1);
   gr->GetYaxis()->SetTitleOffset(1);
-  gr->GetXaxis()->SetTitleSize(0.05); 
+  gr->GetXaxis()->SetTitleSize(0.05);
   gr->GetYaxis()->SetTitleSize(0.05);
   gr->GetXaxis()->SetLabelSize(0.05);
   gr->GetYaxis()->SetLabelSize(0.05);
@@ -377,7 +377,7 @@ void GetPoissonError(int n,double &eh,double &el){
   jimeu[22]= 27.76;  jimed[22]=17.35 ;
   jimeu[23]= 28.87;  jimed[23]=18.24 ;
   jimeu[24]= 29.97;  jimed[24]=19.14 ;
-  jimeu[25]= 31.07;  jimed[25]=20.03 ;  
+  jimeu[25]= 31.07;  jimed[25]=20.03 ;
   jimeu[26]= 32.16;  jimed[26]=20.93 ;
   jimeu[27]= 33.26;  jimed[27]=21.84 ;
   jimeu[28]= 34.35;  jimed[28]=22.74 ;
@@ -404,7 +404,7 @@ void GetPoissonError(int n,double &eh,double &el){
   jimeu[49]= 57.05;  jimed[49]=42.02;
   jimeu[50]= 58.12;  jimed[50]=42.95;
 
-  if(n<51){ 
+  if(n<51){
     eh = jimeu[n]-n;
     el = n-jimed[n];
   }
@@ -417,7 +417,7 @@ void GetPoissonError(int n,double &eh,double &el){
 
 }
 
-// Set TGraphAsymmErrors with poisson error bars 
+// Set TGraphAsymmErrors with poisson error bars
 void SetGraphErrors(TGraphAsymmErrors *gr){
 
   for(int i=0;i<gr->GetN();i++){
@@ -442,20 +442,20 @@ void SetGraphErrors(TGraphAsymmErrors *gr){
 int SetNicePalette(char* filename){
 
   ifstream ifs(filename);
-  
+
   double r, g, b;
-  
+
   vector<double> stops;
   vector<double> red;
   vector<double> green;
   vector<double> blue;
-  
+
   while(ifs >> r >> g >> b){
      red.push_back(double(r)/255);
      green.push_back(double(g)/255);
      blue.push_back(double(b)/255);
   }
-  
+
   int ncols = red.size();
   for(int i=0; i<ncols; i++){
     stops.push_back(double(i)/ncols);
@@ -474,12 +474,12 @@ int SetNicePalette(int ncols, int* cols){
   if(ncols<2) return 0;
 
   int NCont = 255;
-  
+
   vector<double> stops(ncols);
   vector<double> red(ncols);
   vector<double> green(ncols);
   vector<double> blue(ncols);
-  
+
   for(int i=0; i<ncols; i++){
     TColor* c = gROOT->GetColor(cols[i]);
     stops[i] = double(i)/(ncols-1);
@@ -487,7 +487,7 @@ int SetNicePalette(int ncols, int* cols){
     green[i] = c->GetGreen();
     blue[i] = c->GetBlue();
   }
-  
+
   int p = TColor::CreateGradientColorTable(ncols, &stops[0], &red[0], &green[0], &blue[0], NCont);
   gStyle->SetNumberContours(NCont);
 
@@ -576,7 +576,7 @@ int SetBlueRedPalette(){
 
   /*
   int cols[] = {kBlue, kWhite, kRed};
-  
+
   return SetNicePalette(3, cols);
   */
 
@@ -645,7 +645,7 @@ void ProgBar(int k, int numk, double perc = 5){
 double XtoNDC(double x){
 
   if(!gPad) return 0;
-  
+
   gPad->SetBatch(true);
   gPad->Update();
 

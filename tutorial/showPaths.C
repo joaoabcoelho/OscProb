@@ -36,27 +36,27 @@ void showPaths(){
   int ngr = lys.size();
 
   // Loop over layer boundaries
-  for(int j=0; j<ngr; j++){ 
-  
+  for(int j=0; j<ngr; j++){
+
     // Get cosT
     double cosT = lys[j];
-    
+
     // Set color from palette
     int col = p + 255*j/ngr;
-    
+
     // Set drawing option
     TString opt = "lp";
-    
+
     // If first, draw axes
     if(isFirst) opt = "a" + opt;
-    
+
     // Draw the two models
     DrawPath(cosT, opt, col,0);
     DrawPath(cosT, "lp", col,1);
-  
+
     // Tag as not first
     isFirst = false;
-  
+
   }
 
 }
@@ -73,10 +73,10 @@ void DrawPath(double cosT, TString opt, int col, int model){
 
   // Set the PREM model from a table
   OscProb::PremModel prem(filename);
-  
+
   // Fill the paths
   prem.FillPath(cosT);
-  
+
   // Get the lengths and densities
   vector<OscProb::NuPath> p;
   if(model==0) p = prem.GetNuPath();
@@ -84,19 +84,19 @@ void DrawPath(double cosT, TString opt, int col, int model){
 
   // Number of paths
   int nsteps = p.size();
-  
+
   // Create a TGraph to plot
   TGraph* gr = new TGraph(2*nsteps);
-  
+
   // Variables to keep track of path
   double sumL = 0;
 
   // Total length for normalizing
   double totL = prem.GetTotalL(cosT);
-  
+
   // Variable for setting text position
   double txtpos = 0;
-  
+
   // Loop over paths
   for(int i=0; i<nsteps; i++){
     // Set graph point in path start
@@ -104,11 +104,11 @@ void DrawPath(double cosT, TString opt, int col, int model){
     // Set graph point in path end
     sumL += p[i].length;
     gr->SetPoint(2*i+1, sumL/totL, p[i].density);
-    
+
     // Set text position in maximum point
     if(p[i].density > txtpos) txtpos = p[i].density;
   }
-  
+
   // Setup a nice TGraph
   SetGraph(gr,col);
 
@@ -117,29 +117,29 @@ void DrawPath(double cosT, TString opt, int col, int model){
    gr->SetLineStyle(7);
    gr->SetMarkerStyle(24);
   }
-  
+
   // Set the limits
   gr->GetYaxis()->SetRangeUser(-0.1,15);
   gr->GetXaxis()->SetLimits(0,1);
-  
+
   // Set the axis titles
   gr->SetTitle(";Path Fraction;Density (g/cm^{3})");
-  
+
   // Draw a clone
   gr->DrawClone(opt);
-  
+
   // Draw the cosT labels
   if(model){
-  
+
     // Get NDC from y value
     txtpos = YtoNDC(txtpos) + 0.02;
-    
+
     // Place text below for inner core boundary
     if(fabs(cosT+0.98) < 0.01) txtpos -= 0.09;
-  
+
     // Draw the label
     MiscText(0.43, txtpos, 0.05, TString::Format("cos#theta_{z} = %0.2f", cosT), col);
-    
+
   }
 
 }

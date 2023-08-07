@@ -18,7 +18,7 @@ using namespace OscProb;
 /// Set the coordinates of the detector:
 ///   radius in km, latitude in degrees, longitude in degrees
 ///
-/// @param rad - The distance from the detector to the Earth's center in km 
+/// @param rad - The distance from the detector to the Earth's center in km
 /// @param lat - The latitude of the detector in deg N (between -90 and 90)
 /// @param lon - The longitude of the detector in deg E (between 0 and 360)
 ///

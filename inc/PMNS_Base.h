@@ -27,10 +27,10 @@ namespace OscProb {
 
     PMNS_Base(int numNus = 3); ///< Constructor
     virtual ~PMNS_Base();      ///< Destructor
-    
+
 
     // Get the oscillation probability
-    virtual double Prob(vectorC nu_in, 
+    virtual double Prob(vectorC nu_in,
                         int flvf);           ///< Compute the probability of nu_in going to flvf
     virtual double Prob(vectorC nu_in,
                         int flvf, double E); ///< Compute the probability of nu_in going to flvf for energy E
@@ -66,33 +66,33 @@ namespace OscProb {
                                double E, double L);   ///< Compute the probability matrix for energy E and distance L
 
     // Get probability averaged over a bin
-    virtual double AvgProb(vectorC nu_in, 
+    virtual double AvgProb(vectorC nu_in,
                            int flvf, double E, double dE=0);        ///< Compute the average probability over a bin of energy
-    virtual double AvgProbLoE(vectorC nu_in, 
+    virtual double AvgProbLoE(vectorC nu_in,
                               int flvf, double LoE, double dLoE=0); ///< Compute the average probability over a bin of L/E
 
     // Get probability averaged over a bin
     virtual double AvgProb(int flvi, int flvf,
                            double E, double dE=0);        ///< Compute the average probability over a bin of energy
-    virtual double AvgProbLoE(int flvi, int flvf, 
+    virtual double AvgProbLoE(int flvi, int flvf,
                               double LoE, double dLoE=0); ///< Compute the average probability over a bin of L/E
 
     // Get probability vector averaged over a bin
-    virtual vectorD AvgProbVector(vectorC nu_in, 
+    virtual vectorD AvgProbVector(vectorC nu_in,
                                   double E, double dE=0);        ///< Compute the average probability vector over a bin of energy
-    virtual vectorD AvgProbVectorLoE(vectorC nu_in, 
+    virtual vectorD AvgProbVectorLoE(vectorC nu_in,
                                      double LoE, double dLoE=0); ///< Compute the average probability vector over a bin of L/E
 
     // Get probability vector averaged over a bin
     virtual vectorD AvgProbVector(int flvi,
                                   double E, double dE=0);        ///< Compute the average probability vector over a bin of energy
-    virtual vectorD AvgProbVectorLoE(int flvi, 
+    virtual vectorD AvgProbVectorLoE(int flvi,
                                      double LoE, double dLoE=0); ///< Compute the average probability vector over a bin of L/E
 
     // Get probability vector averaged over a bin
     virtual matrixD AvgProbMatrix(int nflvi, int nflvf,
                                   double E, double dE=0);        ///< Compute the average probability matrix over a bin of energy
-    virtual matrixD AvgProbMatrixLoE(int nflvi, int nflvf, 
+    virtual matrixD AvgProbMatrixLoE(int nflvi, int nflvf,
                                      double LoE, double dLoE=0); ///< Compute the average probability matrix over a bin of L/E
 
 
@@ -107,7 +107,7 @@ namespace OscProb {
     virtual double GetAngle(int i, int j); ///< Get the mixing angle theta_ij
     virtual double GetDelta(int i, int j); ///< Get the CP phase delta_ij
     virtual double GetDm(int j);           ///< Get the mass-splitting dm_j1 in eV^2
-    
+
     // Get the effective oscillation parameters
     virtual double GetDmEff(int j);        ///< Get the effective mass-splitting dm_j1 in eV^2
 
@@ -149,7 +149,7 @@ namespace OscProb {
 
     // Set a default neutrino path
     virtual void SetStdPath(); ///< Set standard neutrino path
-    
+
     // Get the neutrino path
     virtual std::vector<NuPath> GetPath(); ///< Get the neutrino path sequence
 
@@ -160,12 +160,12 @@ namespace OscProb {
     virtual void SetUseCache(bool u=true); ///< Set caching on/off
     virtual void ClearCache();             ///< Clear the cache
     virtual void SetMaxCache(int mc=1e6);  ///< Set max cache size
-    
+
     /// Set the AvgProb precision
     virtual void SetAvgProbPrec(double prec);
 
   protected:
-    
+
     // Some useful complex numbers
     static const complexD zero; ///< zero in complex
     static const complexD one;  ///< one in complex
@@ -240,7 +240,7 @@ namespace OscProb {
 
     double fEnergy;  ///< Neutrino energy
     bool   fIsNuBar; ///< Anti-neutrino flag
-    
+
     std::vector<NuPath> fNuPaths; ///< Vector of neutrino paths
     NuPath fPath;                 ///< Current neutrino path
 
@@ -250,12 +250,12 @@ namespace OscProb {
     bool   fUseCache;  ///< Flag for whether to use caching
     double fCachePrec; ///< Precision of cache matching
     int    fMaxCache;  ///< Maximum cache size
-    
+
     double fAvgProbPrec; ///< AvgProb precision
 
     std::unordered_set<EigenPoint> fMixCache; ///< Caching set of eigensystems
     EigenPoint fProbe;                       ///< EigenpPoint to try
-    
+
   };
 
   /// An index sorting comparator
@@ -266,9 +266,9 @@ namespace OscProb {
 
       /// Compare elements a and b of target vector
       bool operator()(int a, int b) const { return target[a] < target[b]; }
-    
+
     private:
-    
+
       /// Attribute to store the target vector
       const vectorD target;
 

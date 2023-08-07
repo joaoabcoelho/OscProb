@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////
 //
 // Implementation of oscillations of neutrinos with scalar NSI
-// three-neutrino framework. 
+// three-neutrino framework.
 //
 // jcoelho@apc.in2p3.fr and urahaman@km3net.de
 ////////////////////////////////////////////////////////////////////////
@@ -60,10 +60,10 @@ void PMNS_SNSI::BuildHms()
 
   // Check if anything changed
   if(fBuiltHms) return;
-  
+
   // Tag to recompute eigensystem
   fGotES = false;
- 
+
   // Start with m1 = 0
   double m1 = 0;
   // Make sure all masses are positive
@@ -87,7 +87,7 @@ void PMNS_SNSI::BuildHms()
       RotateH(i,j,fHms);
     }
   }
- 
+
   // Add back m1
   for(int i=0; i<fNumNus; i++){
     fHms[i][i] += m1;
