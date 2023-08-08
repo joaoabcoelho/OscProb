@@ -96,7 +96,7 @@ void PMNS_Iter::PropagatePath(NuPath p)
   dm *= kKm2eV * p.length / (2 * kGeV2eV * fEnergy);
 
   int nsplit = sqrt(0.065 * dm * fVL / fPrec);
-  if(nsplit){
+  if(nsplit>1){
     p.length /= nsplit;
     SetExpVL(p);
   }
