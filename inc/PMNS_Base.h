@@ -8,7 +8,8 @@
 /// for setting up an oscillation calculator. The method for solving the
 /// eigensystem for the Hamiltonian must be defined in the derived classes.
 ///
-/// \sa PMNS_Fast PMNS_NSI PMNS_Sterile
+/// \sa PMNS_Fast PMNS_NSI PMNS_Sterile PMNS_SNSI
+///     PMNS_Decay PMNS_Deco PMNS_LIV PMNS_Iter
 ///
 /// \author Joao Coelho - jcoelho\@apc.in2p3.fr
 ///////////////////////////////////////////////////////////////////////////////

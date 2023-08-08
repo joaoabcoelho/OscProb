@@ -4,7 +4,9 @@
 /// \brief Implementation of oscillations of neutrinos in matter in a
 ///        three-neutrino framework.
 ///
-/// Based on an approximate iterative model from:\n
+/// Based on an approximate iterative model from:
+///
+/// https://doi.org/10.3390/universe6010016
 ///
 /// <pre>
 ///

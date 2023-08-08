@@ -6,8 +6,9 @@
 ///
 /// Two optimizations are relevant:\n
 /// - The construction of the Hamiltonian avoids computing null terms\n
-/// - The eigensystem determination is based on the following reference:\n
+/// - The eigensystem determination is based on the following reference:
 ///
+/// https://doi.org/10.1142/S0129183108012303
 ///
 /// <pre>
 ///

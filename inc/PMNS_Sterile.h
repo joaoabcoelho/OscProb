@@ -10,7 +10,10 @@
 /// run a 2-neutrino model in principle, but an analytical solution
 /// would be feasible and more efficient in that case.
 ///
-/// The eigensystem solution is performed by Eigen, which makes it slower
+/// https://doi.org/10.1016/S0370-2693%2803%2900603-8
+///
+/// The eigensystem solution is performed by
+/// [Eigen](https://eigen.tuxfamily.org/), which makes it slower
 /// than the PMNS_Fast class, which only works for 3 neutrinos.
 ///
 /// \author jcoelho\@apc.in2p3.fr

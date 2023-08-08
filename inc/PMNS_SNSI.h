@@ -9,6 +9,8 @@
 /// The matter potential is parametrized by epsilon parameters with
 /// dimensions of 1/mass^2 in MeV^-2.
 ///
+/// Reference: https://doi.org/10.1103/PhysRevLett.122.211801
+///
 /// \sa PMNS_NSI
 ///
 /// \author jcoelho\@apc.in2p3.fr and urahaman\@km3net.de

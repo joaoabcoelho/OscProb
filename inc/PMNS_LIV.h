@@ -1,5 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// class OscProb::PMNS_LIV
+/// \class OscProb::PMNS_LIV
+///
+/// \brief Implements oscillations with LIV as modelled by SME
 ///
 /// Implementation of neutrino oscillations in matter in a
 /// three-neutrino framework with LIV as modelled by the SME.

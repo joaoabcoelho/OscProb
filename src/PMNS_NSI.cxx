@@ -227,7 +227,7 @@ void PMNS_NSI::SetEps_mutau  (double a, double phi){ SetEps(1,2, a, phi); }
 void PMNS_NSI::UpdateHam()
 {
 
-  double lv = 2 * kGeV2eV*fEnergy;           // 2*E in eV
+  double lv = 2 * kGeV2eV*fEnergy; // 2*E in eV
 
   double kr2GNe   = kK2*M_SQRT2*kGf * fPath.density;
   double kr2GNnsi = kr2GNe;

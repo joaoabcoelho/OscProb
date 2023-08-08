@@ -1,11 +1,21 @@
 ///////////////////////////////////////////////////////////////////////////////
 /// \class OscProb::PMNS_Decay
 ///
-/// \brief Implementation of neutrino decay of the third mass state
-///        \f$\nu_3\f$ with oscillations of neutrinos in matter in a
-///        three-neutrino framework.
+/// \brief Implementation of neutrino decay in a three-neutrino framework.
 ///
-/// \author Victor Carretero - vcarretero@km3net.de
+/// This class expands the PMNS_Fast class including the decay of the
+/// second and third mass state of the neutrino through a decay constant
+/// \f$\alpha_i=m_i/\tau_i\ (eV^2)\f$, where \f$m_i\f$ is the mass in the
+/// restframe and \f$tau_i\f$ is the lifetime in the restframe.
+///
+/// Reference: https://doi.org/10.1007/JHEP04(2023)090
+///
+/// Propagation is computed by exponentiating the Hamiltonian directly
+/// instead of solving the eigensystem. This is done with the
+/// [Eigen](https://eigen.tuxfamily.org/) library.
+///
+/// \author Victor Carretero - vcarretero\@km3net.de
+/// \author Joao Coelho - jcoelho\@apc.in2p3.fr
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifndef PMNS_Decay_H

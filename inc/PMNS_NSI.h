@@ -11,6 +11,8 @@
 /// epsilon which quantify the intensity of the NSI with respect to the
 /// standard matter effects from coherent forward scattering with electrons.
 ///
+/// Reference: https://doi.org/10.1088/0034-4885/76/4/044201
+///
 /// \sa PMNS_Fast
 ///
 /// \author jcoelho\@apc.in2p3.fr

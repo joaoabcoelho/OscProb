@@ -1,14 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///
 /// Implementation of oscillations of neutrinos in matter in a
-/// three-neutrino framework with Neutrino Decay in the 3rd state.
-///
-/// This class expands the PMNS_Fast class including the decay of the
-/// second and third mass state of the neutrino through a decay constant
-/// alpha_i=m_i/tau_i (eV^2), where m_i is the mass in the restframe and
-/// tau_i is the lifetime in the restframe.
-///
-/// Diagonalization of the matrix is done using the Eigen library.
+/// three-neutrino framework with decay.
 ///
 /// \author Victor Carretero - vcarretero\@km3net.de
 /// \author Joao Coelho - jcoelho\@apc.in2p3.fr

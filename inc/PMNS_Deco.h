@@ -10,6 +10,8 @@
 /// The model assumes a power law energy dependence of the decoherence
 /// parameters and that decoherence occurs in the effective mass basis.
 ///
+/// Reference: https://doi.org/10.1140/epjc/s10052-013-2434-6
+///
 /// \sa PMNS_Fast
 ///
 /// \author jcoelho\@apc.in2p3.fr
