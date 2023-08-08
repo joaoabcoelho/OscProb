@@ -3673,7 +3673,7 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   96</span>  dm *= <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a382ddd7b76ca89b43f22614a2ea7327b">kKm2eV</a> * p.<a class="code hl_variable" href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">length</a> / (2 * <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#ad36a0a6bf58d6ec093d3947784bd89e9">kGeV2eV</a> * <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a2800af6d436972f3e900867790c046b0">fEnergy</a>);</div>
 <div class="line"><span class="lineno">   97</span> </div>
 <div class="line"><span class="lineno">   98</span>  <span class="keywordtype">int</span> nsplit = sqrt(0.065 * dm * <a class="code hl_variable" href="classOscProb_1_1PMNS__Iter.html#aa40651843140811e531dacd6ce9721c0">fVL</a> / <a class="code hl_variable" href="classOscProb_1_1PMNS__Iter.html#a5a75316e1ec61004e90aff61b91bce6c">fPrec</a>);</div>
-<div class="line"><span class="lineno">   99</span>  <span class="keywordflow">if</span>(nsplit){</div>
+<div class="line"><span class="lineno">   99</span>  <span class="keywordflow">if</span>(nsplit&gt;1){</div>
 <div class="line"><span class="lineno">  100</span>    p.<a class="code hl_variable" href="structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557">length</a> /= nsplit;</div>
 <div class="line"><span class="lineno">  101</span>    <a class="code hl_function" href="classOscProb_1_1PMNS__Iter.html#a55dea4885aa184ee47c470e3a42ff945">SetExpVL</a>(p);</div>
 <div class="line"><span class="lineno">  102</span>  }</div>
