@@ -35,7 +35,7 @@ void IterTest(){
 
   pStd.SetUseCache();
 
-  pItr.SetPrec(0.05);
+  pItr.SetPrec(1e-3);
 
   // Use a PremModel to make paths
   // through the earth

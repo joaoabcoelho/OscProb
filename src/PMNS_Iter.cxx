@@ -16,7 +16,7 @@ using namespace OscProb;
 ///
 /// This class is restricted to 3 neutrino flavours.
 ///
-PMNS_Iter::PMNS_Iter() : PMNS_Fast(), fPrec(0.1) {}
+PMNS_Iter::PMNS_Iter() : PMNS_Fast(), fPrec(1e-3) {}
 
 //.............................................................................
 ///
@@ -95,11 +95,12 @@ void PMNS_Iter::PropagatePath(NuPath p)
   }
   dm *= kKm2eV * p.length / (2 * kGeV2eV * fEnergy);
 
-  int nsplit = sqrt(dm * fVL / fPrec);
-  nsplit++;
-
-  p.length /= nsplit;
-  SetExpVL(p);
+  int nsplit = sqrt(0.065 * dm * fVL / fPrec);
+  if(nsplit){
+    p.length /= nsplit;
+    SetExpVL(p);
+  }
+  else nsplit = 1;
 
   for(int i=0; i<nsplit; i++){
 

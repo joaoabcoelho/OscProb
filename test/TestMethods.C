@@ -103,7 +103,7 @@ bool TestNominal(string model, double &max_diff){
 
   if(model == "Iter"){
     prec = 1e-3;
-    static_cast<OscProb::PMNS_Iter*> (p)->SetPrec(prec);
+    static_cast<OscProb::PMNS_Iter*> (p)->SetPrec(0.5*prec);
   }
 
   SetTestPath(&p0);
