@@ -354,6 +354,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a848fc59ce966126dc6d6e6c32621ad6c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PMNS__LIV.html#a848fc59ce966126dc6d6e6c32621ad6c">UpdateHam</a> ()</td></tr>
 <tr class="memdesc:a848fc59ce966126dc6d6e6c32621ad6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build the full Hamiltonian.  <a href="classOscProb_1_1PMNS__LIV.html#a848fc59ce966126dc6d6e6c32621ad6c">More...</a><br /></td></tr>
 <tr class="separator:a848fc59ce966126dc6d6e6c32621ad6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d9da7cca6a1ad92b2b7a9d9c5f2c02e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PMNS__LIV.html#a8d9da7cca6a1ad92b2b7a9d9c5f2c02e">FillCache</a> ()</td></tr>
+<tr class="memdesc:a8d9da7cca6a1ad92b2b7a9d9c5f2c02e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate cache.  <a href="classOscProb_1_1PMNS__LIV.html#a8d9da7cca6a1ad92b2b7a9d9c5f2c02e">More...</a><br /></td></tr>
+<tr class="separator:a8d9da7cca6a1ad92b2b7a9d9c5f2c02e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a0828401591e88c60e0051fbfe02d5e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PMNS__Fast.html#a8a0828401591e88c60e0051fbfe02d5e">SolveHam</a> ()</td></tr>
 <tr class="memdesc:a8a0828401591e88c60e0051fbfe02d5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve the full Hamiltonian for eigenvectors and eigenvalues.  <a href="classOscProb_1_1PMNS__Fast.html#a8a0828401591e88c60e0051fbfe02d5e">More...</a><br /></td></tr>
 <tr class="separator:a8a0828401591e88c60e0051fbfe02d5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -366,9 +369,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:abe533da5f64bec1f4724ab7b58606b77"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PMNS__Base.html#abe533da5f64bec1f4724ab7b58606b77">TryCache</a> ()</td></tr>
 <tr class="memdesc:abe533da5f64bec1f4724ab7b58606b77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to find a cached eigensystem.  <a href="classOscProb_1_1PMNS__Base.html#abe533da5f64bec1f4724ab7b58606b77">More...</a><br /></td></tr>
 <tr class="separator:abe533da5f64bec1f4724ab7b58606b77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a785c37fcea974628623c8881bb0fbbf9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PMNS__Base.html#a785c37fcea974628623c8881bb0fbbf9">FillCache</a> ()</td></tr>
-<tr class="memdesc:a785c37fcea974628623c8881bb0fbbf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cache the current eigensystem.  <a href="classOscProb_1_1PMNS__Base.html#a785c37fcea974628623c8881bb0fbbf9">More...</a><br /></td></tr>
-<tr class="separator:a785c37fcea974628623c8881bb0fbbf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabfeac4ff7206324565272c57b8639d1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PMNS__Base.html#aabfeac4ff7206324565272c57b8639d1">SetCurPath</a> (<a class="el" href="structOscProb_1_1NuPath.html">NuPath</a> p)</td></tr>
 <tr class="memdesc:aabfeac4ff7206324565272c57b8639d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the path currently in use by the class.  <a href="classOscProb_1_1PMNS__Base.html#aabfeac4ff7206324565272c57b8639d1">More...</a><br /></td></tr>
 <tr class="separator:aabfeac4ff7206324565272c57b8639d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1819,8 +1819,8 @@ Alba Domi - alba.domi@fau.de </dd></dl>
 
 </div>
 </div>
-<a id="a785c37fcea974628623c8881bb0fbbf9" name="a785c37fcea974628623c8881bb0fbbf9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a785c37fcea974628623c8881bb0fbbf9">&#9670;&nbsp;</a></span>FillCache()</h2>
+<a id="a8d9da7cca6a1ad92b2b7a9d9c5f2c02e" name="a8d9da7cca6a1ad92b2b7a9d9c5f2c02e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d9da7cca6a1ad92b2b7a9d9c5f2c02e">&#9670;&nbsp;</a></span>FillCache()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1829,7 +1829,7 @@ Alba Domi - alba.domi@fau.de </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void PMNS_Base::FillCache </td>
+          <td class="memname">virtual void OscProb::PMNS_LIV::FillCache </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1837,46 +1837,14 @@ Alba Domi - alba.domi@fau.de </dd></dl>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >If using caching, save the eigensystem in memory </p>
 
-<p>Reimplemented in <a class="el" href="classOscProb_1_1PMNS__SNSI.html#adabef7c23a9ce14d45b91e0927d29c9e">OscProb::PMNS_SNSI</a>.</p>
+<p>Reimplemented from <a class="el" href="classOscProb_1_1PMNS__Base.html#a785c37fcea974628623c8881bb0fbbf9">OscProb::PMNS_Base</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="PMNS__Base_8cxx_source.html#l00173">173</a> of file <a class="el" href="PMNS__Base_8cxx_source.html">PMNS_Base.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  174</span>{</div>
-<div class="line"><span class="lineno">  175</span> </div>
-<div class="line"><span class="lineno">  176</span>  <span class="keywordflow">if</span>(<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#ad28c12ef897b5555eda509ea55c99107">fUseCache</a>){</div>
-<div class="line"><span class="lineno">  177</span>    <span class="keywordflow">if</span>(<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a375596aa6efe69f148f49289c3a449e7">fMixCache</a>.size()&gt;<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a74c13356eafec2490d8c3c19759ba7f0">fMaxCache</a>){</div>
-<div class="line"><span class="lineno">  178</span>      <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a375596aa6efe69f148f49289c3a449e7">fMixCache</a>.erase(<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a375596aa6efe69f148f49289c3a449e7">fMixCache</a>.begin());</div>
-<div class="line"><span class="lineno">  179</span>    }</div>
-<div class="line"><span class="lineno">  180</span>    <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#ab1fe4800ee3ae48df4fc942dce00e0d3">fProbe</a>.<a class="code hl_function" href="structOscProb_1_1EigenPoint.html#a2e293e0820715950ec8fb370e8cc9477">SetVars</a>(<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a2800af6d436972f3e900867790c046b0">fEnergy</a>, <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a8f8fb0cd89fb6e8eb0167eb2c752bbd0">fPath</a>, <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a0ebaeaefab36a3ff381c6293faedfdd6">fIsNuBar</a>);</div>
-<div class="line"><span class="lineno">  181</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i&lt;<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>; i++){</div>
-<div class="line"><span class="lineno">  182</span>      <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#ab1fe4800ee3ae48df4fc942dce00e0d3">fProbe</a>.<a class="code hl_variable" href="structOscProb_1_1EigenPoint.html#a16d527f5091d3c8786880e8b5e3971b5">fEval</a>[i] = <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a995c48ab99a0241038a3f198cff5c3d0">fEval</a>[i];</div>
-<div class="line"><span class="lineno">  183</span>      <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j=0; j&lt;<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>; j++){</div>
-<div class="line"><span class="lineno">  184</span>        <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#ab1fe4800ee3ae48df4fc942dce00e0d3">fProbe</a>.<a class="code hl_variable" href="structOscProb_1_1EigenPoint.html#adb28bf91d78359509bafef3c2236d041">fEvec</a>[i][j] = <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a81af6383769f5f27e9abc20a9b0acd24">fEvec</a>[i][j];</div>
-<div class="line"><span class="lineno">  185</span>      }</div>
-<div class="line"><span class="lineno">  186</span>    }</div>
-<div class="line"><span class="lineno">  187</span>    <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a375596aa6efe69f148f49289c3a449e7">fMixCache</a>.insert(<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#ab1fe4800ee3ae48df4fc942dce00e0d3">fProbe</a>);</div>
-<div class="line"><span class="lineno">  188</span>  }</div>
-<div class="line"><span class="lineno">  189</span> </div>
-<div class="line"><span class="lineno">  190</span>}</div>
-<div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a0ebaeaefab36a3ff381c6293faedfdd6"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a0ebaeaefab36a3ff381c6293faedfdd6">OscProb::PMNS_Base::fIsNuBar</a></div><div class="ttdeci">bool fIsNuBar</div><div class="ttdoc">Anti-neutrino flag.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00244">PMNS_Base.h:244</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a2800af6d436972f3e900867790c046b0"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a2800af6d436972f3e900867790c046b0">OscProb::PMNS_Base::fEnergy</a></div><div class="ttdeci">double fEnergy</div><div class="ttdoc">Neutrino energy.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00243">PMNS_Base.h:243</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a74c13356eafec2490d8c3c19759ba7f0"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a74c13356eafec2490d8c3c19759ba7f0">OscProb::PMNS_Base::fMaxCache</a></div><div class="ttdeci">int fMaxCache</div><div class="ttdoc">Maximum cache size.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00254">PMNS_Base.h:254</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a81af6383769f5f27e9abc20a9b0acd24"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a81af6383769f5f27e9abc20a9b0acd24">OscProb::PMNS_Base::fEvec</a></div><div class="ttdeci">matrixC fEvec</div><div class="ttdoc">Eigenvectors of the Hamiltonian.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00241">PMNS_Base.h:241</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a995c48ab99a0241038a3f198cff5c3d0"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a995c48ab99a0241038a3f198cff5c3d0">OscProb::PMNS_Base::fEval</a></div><div class="ttdeci">vectorD fEval</div><div class="ttdoc">Eigenvalues of the Hamiltonian.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00240">PMNS_Base.h:240</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_ab1fe4800ee3ae48df4fc942dce00e0d3"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#ab1fe4800ee3ae48df4fc942dce00e0d3">OscProb::PMNS_Base::fProbe</a></div><div class="ttdeci">EigenPoint fProbe</div><div class="ttdoc">EigenpPoint to try.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00259">PMNS_Base.h:259</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_ad28c12ef897b5555eda509ea55c99107"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#ad28c12ef897b5555eda509ea55c99107">OscProb::PMNS_Base::fUseCache</a></div><div class="ttdeci">bool fUseCache</div><div class="ttdoc">Flag for whether to use caching.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00252">PMNS_Base.h:252</a></div></div>
-<div class="ttc" id="astructOscProb_1_1EigenPoint_html_a16d527f5091d3c8786880e8b5e3971b5"><div class="ttname"><a href="structOscProb_1_1EigenPoint.html#a16d527f5091d3c8786880e8b5e3971b5">OscProb::EigenPoint::fEval</a></div><div class="ttdeci">vectorD fEval</div><div class="ttdoc">Eigenvalues to be cached.</div><div class="ttdef"><b>Definition:</b> <a href="EigenPoint_8h_source.html#l00038">EigenPoint.h:38</a></div></div>
-<div class="ttc" id="astructOscProb_1_1EigenPoint_html_a2e293e0820715950ec8fb370e8cc9477"><div class="ttname"><a href="structOscProb_1_1EigenPoint.html#a2e293e0820715950ec8fb370e8cc9477">OscProb::EigenPoint::SetVars</a></div><div class="ttdeci">void SetVars(double e=0, NuPath p=NuPath(0, 0), bool n=false)</div><div class="ttdoc">Set eigensystem parameters.</div><div class="ttdef"><b>Definition:</b> <a href="EigenPoint_8cxx_source.html#l00039">EigenPoint.cxx:39</a></div></div>
-<div class="ttc" id="astructOscProb_1_1EigenPoint_html_adb28bf91d78359509bafef3c2236d041"><div class="ttname"><a href="structOscProb_1_1EigenPoint.html#adb28bf91d78359509bafef3c2236d041">OscProb::EigenPoint::fEvec</a></div><div class="ttdeci">matrixC fEvec</div><div class="ttdoc">Eigenvectors to be cached.</div><div class="ttdef"><b>Definition:</b> <a href="EigenPoint_8h_source.html#l00039">EigenPoint.h:39</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="PMNS__Base_8h_source.html#l00243">OscProb::PMNS_Base::fEnergy</a>, <a class="el" href="EigenPoint_8h_source.html#l00038">OscProb::EigenPoint::fEval</a>, <a class="el" href="PMNS__Base_8h_source.html#l00240">OscProb::PMNS_Base::fEval</a>, <a class="el" href="EigenPoint_8h_source.html#l00039">OscProb::EigenPoint::fEvec</a>, <a class="el" href="PMNS__Base_8h_source.html#l00241">OscProb::PMNS_Base::fEvec</a>, <a class="el" href="PMNS__Base_8h_source.html#l00244">OscProb::PMNS_Base::fIsNuBar</a>, <a class="el" href="PMNS__Base_8h_source.html#l00254">OscProb::PMNS_Base::fMaxCache</a>, <a class="el" href="PMNS__Base_8h_source.html#l00258">OscProb::PMNS_Base::fMixCache</a>, <a class="el" href="PMNS__Base_8h_source.html#l00228">OscProb::PMNS_Base::fNumNus</a>, <a class="el" href="PMNS__Base_8h_source.html#l00247">OscProb::PMNS_Base::fPath</a>, <a class="el" href="PMNS__Base_8h_source.html#l00259">OscProb::PMNS_Base::fProbe</a>, <a class="el" href="PMNS__Base_8h_source.html#l00252">OscProb::PMNS_Base::fUseCache</a>, and <a class="el" href="EigenPoint_8cxx_source.html#l00039">OscProb::EigenPoint::SetVars()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="PMNS__Fast_8cxx_source.html#l00102">OscProb::PMNS_Fast::SolveHam()</a>, and <a class="el" href="PMNS__Sterile_8cxx_source.html#l00118">OscProb::PMNS_Sterile::SolveHam()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PMNS__LIV_8h_source.html#l00056">56</a> of file <a class="el" href="PMNS__LIV_8h_source.html">PMNS_LIV.h</a>.</p>
 
 </div>
 </div>
@@ -2029,9 +1997,9 @@ Alba Domi - alba.domi@fau.de </dd></dl>
 <div class="line"><span class="lineno">  190</span> </div>
 <div class="line"><span class="lineno">  191</span>}</div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a05e595848c2521dc795efa7645728b94"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a05e595848c2521dc795efa7645728b94">OscProb::PMNS_Base::zero</a></div><div class="ttdeci">static const complexD zero</div><div class="ttdoc">zero in complex</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00172">PMNS_Base.h:172</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PMNS__LIV_html_aff0031c9738e562901ed26cb5873bd06"><div class="ttname"><a href="classOscProb_1_1PMNS__LIV.html#aff0031c9738e562901ed26cb5873bd06">OscProb::PMNS_LIV::faT</a></div><div class="ttdeci">complexD faT[3][3][3]</div><div class="ttdoc">Stores each aT LIV parameter of dimension 3,5,7.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__LIV_8h_source.html#l00056">PMNS_LIV.h:56</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PMNS__LIV_html_aff0031c9738e562901ed26cb5873bd06"><div class="ttname"><a href="classOscProb_1_1PMNS__LIV.html#aff0031c9738e562901ed26cb5873bd06">OscProb::PMNS_LIV::faT</a></div><div class="ttdeci">complexD faT[3][3][3]</div><div class="ttdoc">Stores each aT LIV parameter of dimension 3,5,7.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__LIV_8h_source.html#l00058">PMNS_LIV.h:58</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PMNS__LIV_8h_source.html#l00056">faT</a>, <a class="el" href="PMNS__Base_8h_source.html#l00228">OscProb::PMNS_Base::fNumNus</a>, and <a class="el" href="PMNS__Base_8h_source.html#l00172">OscProb::PMNS_Base::zero</a>.</p>
+<p class="reference">References <a class="el" href="PMNS__LIV_8h_source.html#l00058">faT</a>, <a class="el" href="PMNS__Base_8h_source.html#l00228">OscProb::PMNS_Base::fNumNus</a>, and <a class="el" href="PMNS__Base_8h_source.html#l00172">OscProb::PMNS_Base::zero</a>.</p>
 
 </div>
 </div>
@@ -2115,9 +2083,9 @@ Alba Domi - alba.domi@fau.de </dd></dl>
 <div class="line"><span class="lineno">  230</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1PMNS__LIV.html#ac1892bbb2e4f08a87cf62073205a14f9">fcT</a>[flvi][flvj][pos];</div>
 <div class="line"><span class="lineno">  231</span> </div>
 <div class="line"><span class="lineno">  232</span>}</div>
-<div class="ttc" id="aclassOscProb_1_1PMNS__LIV_html_ac1892bbb2e4f08a87cf62073205a14f9"><div class="ttname"><a href="classOscProb_1_1PMNS__LIV.html#ac1892bbb2e4f08a87cf62073205a14f9">OscProb::PMNS_LIV::fcT</a></div><div class="ttdeci">complexD fcT[3][3][3]</div><div class="ttdoc">Stores each cT LIV parameter of dimension 4,6,8.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__LIV_8h_source.html#l00057">PMNS_LIV.h:57</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PMNS__LIV_html_ac1892bbb2e4f08a87cf62073205a14f9"><div class="ttname"><a href="classOscProb_1_1PMNS__LIV.html#ac1892bbb2e4f08a87cf62073205a14f9">OscProb::PMNS_LIV::fcT</a></div><div class="ttdeci">complexD fcT[3][3][3]</div><div class="ttdoc">Stores each cT LIV parameter of dimension 4,6,8.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__LIV_8h_source.html#l00059">PMNS_LIV.h:59</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PMNS__LIV_8h_source.html#l00057">fcT</a>, <a class="el" href="PMNS__Base_8h_source.html#l00228">OscProb::PMNS_Base::fNumNus</a>, and <a class="el" href="PMNS__Base_8h_source.html#l00172">OscProb::PMNS_Base::zero</a>.</p>
+<p class="reference">References <a class="el" href="PMNS__LIV_8h_source.html#l00059">fcT</a>, <a class="el" href="PMNS__Base_8h_source.html#l00228">OscProb::PMNS_Base::fNumNus</a>, and <a class="el" href="PMNS__Base_8h_source.html#l00172">OscProb::PMNS_Base::zero</a>.</p>
 
 </div>
 </div>
@@ -2295,7 +2263,9 @@ Alba Domi - alba.domi@fau.de </dd></dl>
 <div class="line"><span class="lineno">  853</span>  <span class="keywordflow">return</span> (<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a995c48ab99a0241038a3f198cff5c3d0">fEval</a>[ev_idx[dm_idx[j-1]]] - <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a995c48ab99a0241038a3f198cff5c3d0">fEval</a>[ev_idx[dm_idx[0]]]) * 2*<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a2800af6d436972f3e900867790c046b0">fEnergy</a> * <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#ad36a0a6bf58d6ec093d3947784bd89e9">kGeV2eV</a>;</div>
 <div class="line"><span class="lineno">  854</span> </div>
 <div class="line"><span class="lineno">  855</span>}</div>
+<div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a2800af6d436972f3e900867790c046b0"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a2800af6d436972f3e900867790c046b0">OscProb::PMNS_Base::fEnergy</a></div><div class="ttdeci">double fEnergy</div><div class="ttdoc">Neutrino energy.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00243">PMNS_Base.h:243</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a91f065cb9e910e0095e41462b4420b01"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a91f065cb9e910e0095e41462b4420b01">OscProb::PMNS_Base::SolveHam</a></div><div class="ttdeci">virtual void SolveHam()=0</div><div class="ttdoc">Solve the full Hamiltonian for eigenvectors and eigenvalues.</div></div>
+<div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a995c48ab99a0241038a3f198cff5c3d0"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a995c48ab99a0241038a3f198cff5c3d0">OscProb::PMNS_Base::fEval</a></div><div class="ttdeci">vectorD fEval</div><div class="ttdoc">Eigenvalues of the Hamiltonian.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00240">PMNS_Base.h:240</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_ad36a0a6bf58d6ec093d3947784bd89e9"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#ad36a0a6bf58d6ec093d3947784bd89e9">OscProb::PMNS_Base::kGeV2eV</a></div><div class="ttdeci">static const double kGeV2eV</div><div class="ttdoc">GeV to eV.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00178">PMNS_Base.h:178</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_af1fb40562abbdb8d193249ae628a630d"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#af1fb40562abbdb8d193249ae628a630d">OscProb::PMNS_Base::GetSortedIndices</a></div><div class="ttdeci">virtual std::vector&lt; int &gt; GetSortedIndices(const vectorD x)</div><div class="ttdoc">Get indices that sort a vector.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8cxx_source.html#l00816">PMNS_Base.cxx:816</a></div></div>
 <div class="ttc" id="anamespaceOscProb_html_a2a006582e68eb670c6b33b3b19042068"><div class="ttname"><a href="namespaceOscProb.html#a2a006582e68eb670c6b33b3b19042068">OscProb::vectorI</a></div><div class="ttdeci">std::vector&lt; int &gt; vectorI</div><div class="ttdef"><b>Definition:</b> <a href="Definitions_8h_source.html#l00016">Definitions.h:16</a></div></div>
@@ -2369,6 +2339,7 @@ Alba Domi - alba.domi@fau.de </dd></dl>
 <div class="line"><span class="lineno">  296</span>  <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a0ebaeaefab36a3ff381c6293faedfdd6">fIsNuBar</a>;</div>
 <div class="line"><span class="lineno">  297</span> </div>
 <div class="line"><span class="lineno">  298</span>}</div>
+<div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a0ebaeaefab36a3ff381c6293faedfdd6"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a0ebaeaefab36a3ff381c6293faedfdd6">OscProb::PMNS_Base::fIsNuBar</a></div><div class="ttdeci">bool fIsNuBar</div><div class="ttdoc">Anti-neutrino flag.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00244">PMNS_Base.h:244</a></div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="PMNS__Base_8h_source.html#l00244">OscProb::PMNS_Base::fIsNuBar</a>.</p>
 
@@ -2749,6 +2720,7 @@ Alba Domi - alba.domi@fau.de </dd></dl>
 <div class="line"><span class="lineno">   96</span> </div>
 <div class="line"><span class="lineno">   97</span>}</div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a6afb2a19f590e4c5c745902510a4f919"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a6afb2a19f590e4c5c745902510a4f919">OscProb::PMNS_Base::fBuffer</a></div><div class="ttdeci">vectorC fBuffer</div><div class="ttdoc">Buffer for neutrino state tranformations.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00238">PMNS_Base.h:238</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a81af6383769f5f27e9abc20a9b0acd24"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a81af6383769f5f27e9abc20a9b0acd24">OscProb::PMNS_Base::fEvec</a></div><div class="ttdeci">matrixC fEvec</div><div class="ttdoc">Eigenvectors of the Hamiltonian.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00241">PMNS_Base.h:241</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_aafed7b62c249ec811201cbcbc58e0866"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#aafed7b62c249ec811201cbcbc58e0866">OscProb::PMNS_Base::fPhases</a></div><div class="ttdeci">vectorC fPhases</div><div class="ttdoc">Buffer for oscillation phases.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00237">PMNS_Base.h:237</a></div></div>
 <div class="ttc" id="anamespaceOscProb_html_aeb338ac53fcdff178797945ff5e19137"><div class="ttname"><a href="namespaceOscProb.html#aeb338ac53fcdff178797945ff5e19137">OscProb::matrixC</a></div><div class="ttdeci">std::vector&lt; vectorC &gt; matrixC</div><div class="ttdef"><b>Definition:</b> <a href="Definitions_8h_source.html#l00023">Definitions.h:23</a></div></div>
 </div><!-- fragment -->
@@ -4478,7 +4450,7 @@ Alba Domi - alba.domi@fau.de </dd></dl>
 <div class="line"><span class="lineno">   99</span> </div>
 <div class="line"><span class="lineno">  100</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PMNS__Base_8cxx_source.html#l00118">OscProb::PMNS_Base::ClearCache()</a>, <a class="el" href="PMNS__LIV_8h_source.html#l00056">faT</a>, <a class="el" href="PMNS__Base_8h_source.html#l00250">OscProb::PMNS_Base::fGotES</a>, and <a class="el" href="PMNS__Base_8h_source.html#l00228">OscProb::PMNS_Base::fNumNus</a>.</p>
+<p class="reference">References <a class="el" href="PMNS__Base_8cxx_source.html#l00118">OscProb::PMNS_Base::ClearCache()</a>, <a class="el" href="PMNS__LIV_8h_source.html#l00058">faT</a>, <a class="el" href="PMNS__Base_8h_source.html#l00250">OscProb::PMNS_Base::fGotES</a>, and <a class="el" href="PMNS__Base_8h_source.html#l00228">OscProb::PMNS_Base::fNumNus</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="profile_2inc_2Utils_8h_source.html#l00088">GetLIV()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00032">PMNS_LIV()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00371">SetaT()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00405">SetaT_ee()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00430">SetaT_emu()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00439">SetaT_etau()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00413">SetaT_mumu()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00448">SetaT_mutau()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00421">SetaT_tautau()</a>, and <a class="el" href="PMNS__LIV_8cxx_source.html#l00327">SetLIV()</a>.</p>
 
@@ -5150,7 +5122,7 @@ Alba Domi - alba.domi@fau.de </dd></dl>
 <div class="line"><span class="lineno">  149</span> </div>
 <div class="line"><span class="lineno">  150</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PMNS__Base_8cxx_source.html#l00118">OscProb::PMNS_Base::ClearCache()</a>, <a class="el" href="PMNS__LIV_8h_source.html#l00057">fcT</a>, <a class="el" href="PMNS__Base_8h_source.html#l00250">OscProb::PMNS_Base::fGotES</a>, and <a class="el" href="PMNS__Base_8h_source.html#l00228">OscProb::PMNS_Base::fNumNus</a>.</p>
+<p class="reference">References <a class="el" href="PMNS__Base_8cxx_source.html#l00118">OscProb::PMNS_Base::ClearCache()</a>, <a class="el" href="PMNS__LIV_8h_source.html#l00059">fcT</a>, <a class="el" href="PMNS__Base_8h_source.html#l00250">OscProb::PMNS_Base::fGotES</a>, and <a class="el" href="PMNS__Base_8h_source.html#l00228">OscProb::PMNS_Base::fNumNus</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="profile_2inc_2Utils_8h_source.html#l00088">GetLIV()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00032">PMNS_LIV()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00393">SetcT()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00456">SetcT_ee()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00481">SetcT_emu()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00490">SetcT_etau()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00464">SetcT_mumu()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00499">SetcT_mutau()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00472">SetcT_tautau()</a>, and <a class="el" href="PMNS__LIV_8cxx_source.html#l00327">SetLIV()</a>.</p>
 
@@ -6197,6 +6169,7 @@ The corresponding Dm_31 is set in the class attributes.</p>
 <div class="fragment"><div class="line"><span class="lineno">  136</span>{</div>
 <div class="line"><span class="lineno">  137</span>  <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a74c13356eafec2490d8c3c19759ba7f0">fMaxCache</a> = mc;</div>
 <div class="line"><span class="lineno">  138</span>}</div>
+<div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a74c13356eafec2490d8c3c19759ba7f0"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a74c13356eafec2490d8c3c19759ba7f0">OscProb::PMNS_Base::fMaxCache</a></div><div class="ttdeci">int fMaxCache</div><div class="ttdoc">Maximum cache size.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00254">PMNS_Base.h:254</a></div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="PMNS__Base_8h_source.html#l00254">OscProb::PMNS_Base::fMaxCache</a>.</p>
 
@@ -6610,6 +6583,7 @@ The corresponding Dm_31 is set in the class attributes.</p>
 <div class="fragment"><div class="line"><span class="lineno">  110</span>{</div>
 <div class="line"><span class="lineno">  111</span>  <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#ad28c12ef897b5555eda509ea55c99107">fUseCache</a> = u;</div>
 <div class="line"><span class="lineno">  112</span>}</div>
+<div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_ad28c12ef897b5555eda509ea55c99107"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#ad28c12ef897b5555eda509ea55c99107">OscProb::PMNS_Base::fUseCache</a></div><div class="ttdeci">bool fUseCache</div><div class="ttdoc">Flag for whether to use caching.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00252">PMNS_Base.h:252</a></div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="PMNS__Base_8h_source.html#l00252">OscProb::PMNS_Base::fUseCache</a>.</p>
 
@@ -6894,6 +6868,8 @@ We should cite them accordingly </p>
 <div class="line"><span class="lineno">  165</span>  <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><span class="lineno">  166</span> </div>
 <div class="line"><span class="lineno">  167</span>}</div>
+<div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_ab1fe4800ee3ae48df4fc942dce00e0d3"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#ab1fe4800ee3ae48df4fc942dce00e0d3">OscProb::PMNS_Base::fProbe</a></div><div class="ttdeci">EigenPoint fProbe</div><div class="ttdoc">EigenpPoint to try.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00259">PMNS_Base.h:259</a></div></div>
+<div class="ttc" id="astructOscProb_1_1EigenPoint_html_a2e293e0820715950ec8fb370e8cc9477"><div class="ttname"><a href="structOscProb_1_1EigenPoint.html#a2e293e0820715950ec8fb370e8cc9477">OscProb::EigenPoint::SetVars</a></div><div class="ttdeci">void SetVars(double e=0, NuPath p=NuPath(0, 0), bool n=false)</div><div class="ttdoc">Set eigensystem parameters.</div><div class="ttdef"><b>Definition:</b> <a href="EigenPoint_8cxx_source.html#l00039">EigenPoint.cxx:39</a></div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="PMNS__Base_8h_source.html#l00243">OscProb::PMNS_Base::fEnergy</a>, <a class="el" href="PMNS__Base_8h_source.html#l00240">OscProb::PMNS_Base::fEval</a>, <a class="el" href="PMNS__Base_8h_source.html#l00241">OscProb::PMNS_Base::fEvec</a>, <a class="el" href="PMNS__Base_8h_source.html#l00244">OscProb::PMNS_Base::fIsNuBar</a>, <a class="el" href="PMNS__Base_8h_source.html#l00258">OscProb::PMNS_Base::fMixCache</a>, <a class="el" href="PMNS__Base_8h_source.html#l00228">OscProb::PMNS_Base::fNumNus</a>, <a class="el" href="PMNS__Base_8h_source.html#l00247">OscProb::PMNS_Base::fPath</a>, <a class="el" href="PMNS__Base_8h_source.html#l00259">OscProb::PMNS_Base::fProbe</a>, <a class="el" href="PMNS__Base_8h_source.html#l00252">OscProb::PMNS_Base::fUseCache</a>, and <a class="el" href="EigenPoint_8cxx_source.html#l00039">OscProb::EigenPoint::SetVars()</a>.</p>
 
@@ -6988,7 +6964,7 @@ We should cite them accordingly </p>
 <div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a326fc5016d7dd7ce05682c06cdcb6d94"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a326fc5016d7dd7ce05682c06cdcb6d94">OscProb::PMNS_Base::kK2</a></div><div class="ttdeci">static const double kK2</div><div class="ttdoc">mol/GeV^2/cm^3 to eV</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00177">PMNS_Base.h:177</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a7f26a3456128234b2ae6cc9141a6532f"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a7f26a3456128234b2ae6cc9141a6532f">OscProb::PMNS_Base::kGf</a></div><div class="ttdeci">static const double kGf</div><div class="ttdoc">G_F in units of GeV^-2.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00181">PMNS_Base.h:181</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="NuPath_8h_source.html#l00077">OscProb::NuPath::density</a>, <a class="el" href="PMNS__LIV_8h_source.html#l00056">faT</a>, <a class="el" href="PMNS__LIV_8h_source.html#l00057">fcT</a>, <a class="el" href="PMNS__Base_8h_source.html#l00243">OscProb::PMNS_Base::fEnergy</a>, <a class="el" href="PMNS__Fast_8h_source.html#l00064">OscProb::PMNS_Fast::fHam</a>, <a class="el" href="PMNS__Base_8h_source.html#l00235">OscProb::PMNS_Base::fHms</a>, <a class="el" href="PMNS__Base_8h_source.html#l00244">OscProb::PMNS_Base::fIsNuBar</a>, <a class="el" href="PMNS__Base_8h_source.html#l00228">OscProb::PMNS_Base::fNumNus</a>, <a class="el" href="PMNS__Base_8h_source.html#l00247">OscProb::PMNS_Base::fPath</a>, <a class="el" href="PMNS__Base_8h_source.html#l00178">OscProb::PMNS_Base::kGeV2eV</a>, <a class="el" href="PMNS__Base_8h_source.html#l00181">OscProb::PMNS_Base::kGf</a>, <a class="el" href="PMNS__Base_8h_source.html#l00177">OscProb::PMNS_Base::kK2</a>, and <a class="el" href="NuPath_8h_source.html#l00078">OscProb::NuPath::zoa</a>.</p>
+<p class="reference">References <a class="el" href="NuPath_8h_source.html#l00077">OscProb::NuPath::density</a>, <a class="el" href="PMNS__LIV_8h_source.html#l00058">faT</a>, <a class="el" href="PMNS__LIV_8h_source.html#l00059">fcT</a>, <a class="el" href="PMNS__Base_8h_source.html#l00243">OscProb::PMNS_Base::fEnergy</a>, <a class="el" href="PMNS__Fast_8h_source.html#l00064">OscProb::PMNS_Fast::fHam</a>, <a class="el" href="PMNS__Base_8h_source.html#l00235">OscProb::PMNS_Base::fHms</a>, <a class="el" href="PMNS__Base_8h_source.html#l00244">OscProb::PMNS_Base::fIsNuBar</a>, <a class="el" href="PMNS__Base_8h_source.html#l00228">OscProb::PMNS_Base::fNumNus</a>, <a class="el" href="PMNS__Base_8h_source.html#l00247">OscProb::PMNS_Base::fPath</a>, <a class="el" href="PMNS__Base_8h_source.html#l00178">OscProb::PMNS_Base::kGeV2eV</a>, <a class="el" href="PMNS__Base_8h_source.html#l00181">OscProb::PMNS_Base::kGf</a>, <a class="el" href="PMNS__Base_8h_source.html#l00177">OscProb::PMNS_Base::kK2</a>, and <a class="el" href="NuPath_8h_source.html#l00078">OscProb::NuPath::zoa</a>.</p>
 
 </div>
 </div>
@@ -7013,7 +6989,7 @@ We should cite them accordingly </p>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PMNS__LIV_8h_source.html#l00056">56</a> of file <a class="el" href="PMNS__LIV_8h_source.html">PMNS_LIV.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PMNS__LIV_8h_source.html#l00058">58</a> of file <a class="el" href="PMNS__LIV_8h_source.html">PMNS_LIV.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PMNS__LIV_8cxx_source.html#l00168">GetaT()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00067">SetaT()</a>, and <a class="el" href="PMNS__LIV_8cxx_source.html#l00239">UpdateHam()</a>.</p>
 
@@ -7141,7 +7117,7 @@ We should cite them accordingly </p>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PMNS__LIV_8h_source.html#l00057">57</a> of file <a class="el" href="PMNS__LIV_8h_source.html">PMNS_LIV.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PMNS__LIV_8h_source.html#l00059">59</a> of file <a class="el" href="PMNS__LIV_8h_source.html">PMNS_LIV.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PMNS__LIV_8cxx_source.html#l00209">GetcT()</a>, <a class="el" href="PMNS__LIV_8cxx_source.html#l00117">SetcT()</a>, and <a class="el" href="PMNS__LIV_8cxx_source.html#l00239">UpdateHam()</a>.</p>
 
