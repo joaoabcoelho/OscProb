@@ -55,11 +55,9 @@ void TimeTest(OscProb::PMNS_Base* p, string model, int max_length){
   // Chose an angle for the neutrino
   // and fill the paths with cosTheta
   // e.g. cosTheta = -1 (vertical up-going)
-  prem.FillPath(-1);
 
   // Give the path to the PMNS object
   // and get the probability
-  p->SetPath(prem.GetNuPath());
 
   // Define energy sample points
   int nbins = 100;
@@ -69,12 +67,16 @@ void TimeTest(OscProb::PMNS_Base* p, string model, int max_length){
   TimeIt time;
   for(int k=0; k<100 && time.time()<1; k++){
     p->ClearCache(); // Clear cache at each iteration
-    // Compute AvgProb for the energy range
-    for(int i=0; i<nbins; i++){
-      double energy = 0.5*(xbins[i] + xbins[i+1]);
-      double dE = xbins[i+1] - xbins[i];
-      p->AvgProb(1,0, energy, dE);
-      time.count++;
+    // Compute oscillogram
+    for(double cosZ=-0.95; cosZ<1; cosZ+=0.1){
+      prem.FillPath(cosZ);
+      p->SetPath(prem.GetNuPath());
+      for(int i=0; i<nbins; i++){
+        double energy = 0.5*(xbins[i] + xbins[i+1]);
+        double dE = xbins[i+1] - xbins[i];
+        p->AvgProb(1,0, energy, dE);
+        time.count++;
+      }
     }
   }
 

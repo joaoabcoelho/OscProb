@@ -35,11 +35,15 @@ void StressTest(OscProb::PMNS_Base* p, string model){
 
   for(int k=0; k<1; k++){
     p->ClearCache(); // Clear cache at each iteration
-    // Compute AvgProb for the energy range
-    for(int i=0; i<nbins; i++){
-      double energy = 0.5*(xbins[i] + xbins[i+1]);
-      double dE = xbins[i+1] - xbins[i];
-      p->AvgProb(1,0, energy, dE);
+    // Compute oscillogram
+    for(double cosZ=-0.95; cosZ<1; cosZ+=0.1){
+      prem.FillPath(cosZ);
+      p->SetPath(prem.GetNuPath());
+      for(int i=0; i<nbins; i++){
+        double energy = 0.5*(xbins[i] + xbins[i+1]);
+        double dE = xbins[i+1] - xbins[i];
+        p->AvgProb(1,0, energy, dE);
+      }
     }
   }
 
