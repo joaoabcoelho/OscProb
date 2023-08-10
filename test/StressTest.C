@@ -30,9 +30,9 @@ struct TimeIt {
     if(tpi<1){ tpi *= 1e3; scale = "ms"; }
     if(tpi<1){ tpi *= 1e3; scale = "µs"; }
     if(tpi<1){ tpi *= 1e3; scale = "ns"; }
-    cout << "Performance = "
-         << TString::Format(tpi>9.95 ? "%.0f" : "%.1f",tpi)
-         << " " << scale << "/iteration" << endl;
+    TString stpi = TString::Format(tpi>9.95 ? "%.0f" : "%.1f",tpi);
+    if(stpi.Length()<3) stpi = " " + stpi;
+    cout << "Performance = " << stpi << " " << scale << "/iteration" << endl;
   }
 
   // Member attributes
