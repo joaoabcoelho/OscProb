@@ -60,11 +60,12 @@ var searchData=
   ['fpower_57',['fPower',['../classOscProb_1_1PMNS__Deco.html#a19fdcdf9a8b2bd9677f72ca1fd77dc3e',1,'OscProb::PMNS_Deco']]],
   ['fprec_58',['fPrec',['../classOscProb_1_1PMNS__Iter.html#a5a75316e1ec61004e90aff61b91bce6c',1,'OscProb::PMNS_Iter']]],
   ['fpremlayers_59',['fPremLayers',['../classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb',1,'OscProb::PremModel']]],
-  ['fprobe_60',['fProbe',['../classOscProb_1_1PMNS__Base.html#ab1fe4800ee3ae48df4fc942dce00e0d3',1,'OscProb::PMNS_Base']]],
-  ['fradiusmax_61',['fRadiusMax',['../classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586',1,'OscProb::EarthModelBase']]],
-  ['fremovesmallpaths_62',['fRemoveSmallPaths',['../classOscProb_1_1EarthModelBase.html#a4176958be65c82a111e03c38aeadbe4e',1,'OscProb::EarthModelBase']]],
-  ['frho_63',['fRho',['../classOscProb_1_1PMNS__Deco.html#aa92ca0c433d7e56fa1ceb49441705a43',1,'OscProb::PMNS_Deco']]],
-  ['ftheta_64',['fTheta',['../classOscProb_1_1PMNS__Base.html#af9a8f07a1b5324011946491da63aaed1',1,'OscProb::PMNS_Base']]],
-  ['fusecache_65',['fUseCache',['../classOscProb_1_1PMNS__Base.html#ad28c12ef897b5555eda509ea55c99107',1,'OscProb::PMNS_Base']]],
-  ['fvl_66',['fVL',['../classOscProb_1_1PMNS__Iter.html#aa40651843140811e531dacd6ce9721c0',1,'OscProb::PMNS_Iter']]]
+  ['fprevenergy_60',['fPrevEnergy',['../classOscProb_1_1PMNS__Iter.html#ae3b20d413f29c4f20022c9b99da633c2',1,'OscProb::PMNS_Iter']]],
+  ['fprobe_61',['fProbe',['../classOscProb_1_1PMNS__Base.html#ab1fe4800ee3ae48df4fc942dce00e0d3',1,'OscProb::PMNS_Base']]],
+  ['fradiusmax_62',['fRadiusMax',['../classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586',1,'OscProb::EarthModelBase']]],
+  ['fremovesmallpaths_63',['fRemoveSmallPaths',['../classOscProb_1_1EarthModelBase.html#a4176958be65c82a111e03c38aeadbe4e',1,'OscProb::EarthModelBase']]],
+  ['frho_64',['fRho',['../classOscProb_1_1PMNS__Deco.html#aa92ca0c433d7e56fa1ceb49441705a43',1,'OscProb::PMNS_Deco']]],
+  ['ftheta_65',['fTheta',['../classOscProb_1_1PMNS__Base.html#af9a8f07a1b5324011946491da63aaed1',1,'OscProb::PMNS_Base']]],
+  ['fusecache_66',['fUseCache',['../classOscProb_1_1PMNS__Base.html#ad28c12ef897b5555eda509ea55c99107',1,'OscProb::PMNS_Base']]],
+  ['fvl_67',['fVL',['../classOscProb_1_1PMNS__Iter.html#aa40651843140811e531dacd6ce9721c0',1,'OscProb::PMNS_Iter']]]
 ];
