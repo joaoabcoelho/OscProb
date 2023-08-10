@@ -12,12 +12,12 @@ INCDIRS = -I$(PREFIX)/inc -Iinc -I$(PREFIX)/eigen
 SOURCE = $(wildcard src/*.cc)
 TARGET = $(patsubst %.cc,%,$(shell basename $(SOURCE)))
 
-$(BINDIR)/$(TARGET): $(SOURCE)
+$(BINDIR)/$(TARGET): $(SOURCE) $(PREFIX)/lib/libOscProb.so
 	@mkdir -p ${BINDIR}
 	@echo "Compiling ${TARGET} from ${SOURCE}..."
 	@$(CXX) -O3 -o $@ $< $(LDFLAGS) $(CXXFLAGS) $(INCDIRS)
 
-phony:
+phony: $(PREFIX)/lib/libOscProb.so
 
 clean:
 	@rm -f $(BINDIR)/*
