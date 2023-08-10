@@ -144,6 +144,8 @@ bool TestNominal(string model, double &max_diff){
           cerr << Color::FAILED << " Model PMNS_" << model
                << " comparison to nominal" << endl;
 
+          delete p;
+
           return false;
 
         }
@@ -159,12 +161,56 @@ bool TestNominal(string model, double &max_diff){
   return true;
 
 }
+//.............................................................................
+bool TestCache(string model){
+
+  double prec = 1e-12;
+
+  OscProb::PMNS_Base* p = GetModel(model);
+
+  // Set a path with Ne = 1 or 2
+  p->SetPath(1000,1);
+  p->AddPath(1000,2);
+
+  p->SetUseCache(true);
+
+  // This will cache Ne*E = 1 or 2;
+  p->Prob(1,1,1);
+
+  // This will use the Ne*E = 2 cache for Ne = 1
+  double prob1 = p->Prob(1,1,2);
+
+  // Now compute the same without caching
+  p->SetUseCache(false);
+  double prob0 = p->Prob(1,1,2);
+
+  delete p;
+
+  if(abs(prob0 - prob1) > prec){
+
+    cerr << "Found mismatch in caching Prob(1,1,2)" << endl
+         << "Difference is "
+         << "abs(" << prob0 << " - " << prob1 << ")"
+         << " = " << abs(prob0 - prob1)
+         << endl;
+
+    cerr << Color::FAILED << " Model PMNS_" << model
+         << " caching system" << endl;
+
+    return false;
+
+  }
+
+  return true;
+
+}
 
 //.............................................................................
 bool TestMethodsModel(OscProb::PMNS_Base* p, string model){
 
   double nom_max_diff;
   if(!TestNominal(model, nom_max_diff)) return false;
+  if(!TestCache(model)) return false;
 
   SetTestPath(p);
 
