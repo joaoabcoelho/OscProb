@@ -53,6 +53,8 @@ namespace OscProb {
       /// Build the full Hamiltonian
       virtual void UpdateHam();
 
+      virtual void FillCache(){} ///< Deactivate cache
+
       complexD faT[3][3][3]; ///< Stores each aT LIV parameter of dimension 3,5,7
       complexD fcT[3][3][3]; ///< Stores each cT LIV parameter of dimension 4,6,8
 
