@@ -29,6 +29,8 @@ struct TimeIt {
 
 void IterTest(){
 
+  SetNiceStyle();
+
   // Initialize your objects
   OscProb::PMNS_Fast pStd;
   OscProb::PMNS_Iter pItr;
