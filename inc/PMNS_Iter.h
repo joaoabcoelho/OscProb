@@ -56,14 +56,13 @@ namespace OscProb {
       /// Reimplement propagation
       virtual void PropagatePath(NuPath p);
 
-      /// Set the main eigensystem to vacuum
-      virtual void SetVacuumEigensystem();
-
       /// Iterative precision
       double fPrec;
 
       double fVL; ///< Matter potential
       complexD fExpVL; ///< Matter phase shift
+
+      double fPrevEnergy;
 
   };
 

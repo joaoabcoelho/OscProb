@@ -62,8 +62,23 @@ void PMNS_Iter::SolveHam()
 
   if(fGotES) return;
 
-  // Do vacuum oscillation in low density
-  SetVacuumEigensystem();
+  // Do vacuum oscillation
+  if(!fBuiltHms){
+
+    fPath.density = 0;
+    PMNS_Fast::SolveHam();
+    fBuiltHms = true;
+
+  }
+  else {
+
+    for(int i=1; i<fNumNus; i++){
+      fEval[i] *= fPrevEnergy / fEnergy;
+    }
+
+  }
+
+  fPrevEnergy = fEnergy;
 
   fGotES = true;
   return;
@@ -108,46 +123,6 @@ void PMNS_Iter::PropagatePath(NuPath p)
     PropMatter();
 
   }
-
-}
-
-//.............................................................................
-///
-/// Set the eigensystem to the analytic solution in vacuum.
-///
-/// We know the vacuum eigensystem, so just write it explicitly
-///
-void PMNS_Iter::SetVacuumEigensystem()
-{
-
-  if(!fBuiltHms){
-
-    double  s12, s23, s13, c12, c23, c13;
-    complexD idelta(0.0, fDelta[0][2]);
-    if(fIsNuBar) idelta = conj(idelta);
-
-    s12 = sin(fTheta[0][1]);  s23 = sin(fTheta[1][2]);  s13 = sin(fTheta[0][2]);
-    c12 = cos(fTheta[0][1]);  c23 = cos(fTheta[1][2]);  c13 = cos(fTheta[0][2]);
-
-    fEvec[0][0] =  c12*c13;
-    fEvec[0][1] =  s12*c13;
-    fEvec[0][2] =  s13*exp(-idelta);
-
-    fEvec[1][0] = -s12*c23-c12*s23*s13*exp(idelta);
-    fEvec[1][1] =  c12*c23-s12*s23*s13*exp(idelta);
-    fEvec[1][2] =  s23*c13;
-
-    fEvec[2][0] =  s12*s23-c12*c23*s13*exp(idelta);
-    fEvec[2][1] = -c12*s23-s12*c23*s13*exp(idelta);
-    fEvec[2][2] =  c23*c13;
-
-  }
-
-  fBuiltHms = true;
-
-  fEval[0] = 0;
-  fEval[1] = fDm[1] / (2 * kGeV2eV*fEnergy);
-  fEval[2] = fDm[2] / (2 * kGeV2eV*fEnergy);
 
 }
 
