@@ -24,6 +24,7 @@ struct TimeIt {
 
   // Print performance metric
   void Print(){
+    if(!count) count = 1;
     double tpi = time() / count;
     string scale = "s";
     if(tpi<1){ tpi *= 1e3; scale = "ms"; }
