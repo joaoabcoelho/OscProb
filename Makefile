@@ -43,7 +43,11 @@ PREMFILE = $(PREMDIR)/prem_default.txt
 PREM3DFILE = $(MODEL3DDIR)/earth_binned_default.txt
 PREMINC = $(CURDIR)/inc/prem_default.hpp
 
-all: $(Eigen_INCS) $(BUILDDIRS) $(PREMINC) $(TARGET_LIB)
+# Define list of submodules
+SUBMODULES = $(shell grep path .gitmodules | sed 's/.*= //')
+SUBMODULES := $(patsubst %,%/.git,$(SUBMODULES))
+
+all: $(SUBMODULES) $(BUILDDIRS) $(PREMINC) $(TARGET_LIB)
 
 $(TARGET_LIB): $(DICTIONARY) $(SOURCES) $(MATRIX)
 	@echo "  Building $(PACKAGE)..."
@@ -56,8 +60,8 @@ $(DICTIONARY): $(HEADERS) inc/LinkDef.h
 	@$(DICTEXE) -f $@ $(DICTFLAGS) $(INCDIRS) $^
 	@if [ -e $(DICTIONARY:%.cxx=%_rdict.pcm) ] ; then mkdir -p lib && mv $(DICTIONARY:%.cxx=%_rdict.pcm) $(TARGET_PCM) ; fi # ROOT 6
 
-$(Eigen_INCS):
-	@echo "  Eigen not found. Trying to initialize submodule..."
+$(SUBMODULES):
+	@echo "  $@ not found. Trying to initialize submodule..."
 	@echo "  git submodule update --init"
 	@git submodule update --init
 
