@@ -12,6 +12,9 @@
 #include <iostream>
 #include <cassert>
 #include <algorithm>
+
+#include <Eigen/Dense>
+
 #include "PMNS_Base.h"
 
 using namespace std;
@@ -2147,6 +2150,186 @@ void PMNS_Base::SetAvgProbPrec(double prec){
   fAvgProbPrec = prec;
 }
 
+vectorD IncrementSamples(double dLoE, vectorD effFreq, vectorD start, bool& success){
+
+  double prec = 1e-6;
+
+  int numDm = start.size() + 1;
+
+  Eigen::VectorXd samples(numDm);
+  Eigen::VectorXd freqs(numDm);
+
+  double p0 = 1;
+  for(int i=0; i<numDm-1; i++){
+    samples(i) = start[i];
+    freqs(i) = effFreq[i];
+    p0 *= cos(effFreq[i] * start[i]);
+  }
+  freqs(numDm-1) = effFreq[numDm-1];
+
+  // Compute oscillation argument sorted from lowest  to highest
+  double arg = effFreq[numDm-1] * dLoE/2;
+
+  // Compute new sample points around old samples
+  // This is based on a oscillatory quadrature rule
+  double sample = (1/sqrt(3)) * (dLoE/2);
+  if(arg!=0){
+    double sinc = sin(arg) / arg / p0;
+    if(abs(sinc)>1) sinc = sin(arg) / arg;
+    sample = acos(sinc) / effFreq[numDm-1];
+  }
+
+  samples(numDm-1) = sample;
+
+  if(samples.sum() > dLoE/2){
+    samples *= dLoE/2 / samples.sum() / sqrt(3);
+  }
+
+  Eigen::VectorXd s0 = samples;
+
+  //cout << LoE << " +/- "  << dLoE/2 << endl;
+  //cout << "s0 = " << s0.transpose() << endl;
+
+  int c = 0;
+  Eigen::VectorXd f(numDm), f0(numDm), ds(numDm), ds0(numDm),
+                  minf(numDm), minsamples(numDm);
+  Eigen::MatrixXd g(numDm, numDm);
+
+  ds0.setZero(numDm);
+
+  for(int i=0; i<100; i++){
+
+    c++;
+
+    for(int j=0; j<numDm; j++){
+
+      double w = effFreq[j];
+
+      double p = 1;
+      for(int k=0; k<numDm; k++){
+        p *= cos(w*samples[k]);
+      }
+
+      double arg = w*dLoE/2;
+      f(j) = p - sin(arg)/arg;
+
+      for(int k=0; k<numDm; k++){
+        g(j,k) = -w * tan(w*samples[k]) * p;
+      }
+
+    }
+
+    if(c==1){
+      f0 = f;
+      minf = f;
+      minsamples = samples;
+    }
+
+    if(f.norm() < minf.norm()){
+      minf = f;
+      minsamples = samples;
+    }
+
+    //cout << c << ":\nf = " << f.transpose() << endl;
+    //cout << "g = " << f.transpose() * g << endl;
+
+    if(f.norm() < prec || isnan(f.norm())) break;
+
+    //g = -g.inverse() * f;
+
+    //if(g.norm() > 0.1*samples.norm()){
+    //  g *= 0.1*samples.norm() / g.norm();
+    //}
+
+    ds = g.colPivHouseholderQr().solve(-f);
+
+    //ds = (g.transpose() * g + 1e-3*Eigen::MatrixXd::Identity(numDm,numDm)).inverse() * g.transpose() * f;
+    double ds_len = Eigen::VectorXd(ds.array() * freqs.array()).norm();
+    if(ds_len > 1 || isnan(ds_len)){
+      //cout << "Step " << ds_len << " too large" << endl;
+      //cout << "freqs: " << freqs.transpose() << endl;
+      ds = 1/pow(freqs(numDm-1),2) * (-g.transpose() * f + 1e-3*Eigen::VectorXd::Random(numDm));
+    }
+
+    //cout << "ds: " << ds.transpose() << endl;
+
+    ds += 0.5*ds0;
+    ds0 = ds;
+
+    //if(ds.norm() > 0.1*samples.norm()){
+
+    //  ds *= 0.1*samples.norm() / ds.norm();
+
+    //}
+
+    samples += ds;
+
+    samples = samples.cwiseAbs();
+
+    if(samples.sum() > dLoE/2){
+      samples *= dLoE/2 / samples.sum();
+    }
+    //cout << "s = " << samples.transpose() << endl;
+
+    if(isnan(samples.norm())) break;
+
+  }
+
+  f = minf;
+  samples = minsamples;
+
+  if(f.norm() > prec || isnan(f.norm())){
+    /*cout << "dLoE = " << dLoE
+         << " diverged: "
+         << f.norm() << " > "
+         << prec
+         << endl;*/
+    success = false;
+  }
+  else success = true;
+
+  //cout << "Done " << samples.size() << " freqs" << endl;
+
+  for(int i=0; i<numDm-1; i++){
+    start[i] = samples(i);
+  }
+  start.push_back(samples(numDm-1));
+
+  return start;
+
+}
+
+vectorD GetBinSamples(double dLoE, vectorD effFreq, bool& success, bool force){
+
+  vectorD start;
+
+  success = true;
+
+  while(start.size() < effFreq.size()){
+    start = IncrementSamples(dLoE, effFreq, start, success);
+    if(!success && !force) break;
+  }
+
+  vectorD allSamples(1, 0);
+
+  for(int i=0; i<start.size(); i++){
+
+    vectorD tmp;
+
+    for(int j=0; j<allSamples.size(); j++){
+      tmp.push_back(allSamples[j] - start[i]);
+      tmp.push_back(allSamples[j] + start[i]);
+    }
+
+    allSamples = tmp;
+
+  }
+
+  // Return all sample points
+  return allSamples;
+
+}
+
 //.............................................................................
 ///
 /// Compute the sample points for a bin of L/E with width dLoE
@@ -2166,92 +2349,84 @@ vectorD PMNS_Base::GetSamplePoints(double LoE, double dLoE)
   // Solve Hamiltonian to get eigenvalues
   SolveHam();
 
-  // Define conversion factor [km/GeV -> 1/(4 eV^2)]
-  const double k1267 = kKm2eV / (4 * kGeV2eV);
+  //int n_div = ceil(100*dLoE/LoE);
+  int n_div = ceil( 50 * pow(dLoE/LoE,1) / sqrt(fAvgProbPrec/1e-4) );
+  //n_div = 1;
 
-  // Get list of all effective Dm^2
-  vectorD effDm;
+  for(int t=0; t<10; t++){
 
-  for(int i=0; i<fNumNus-1; i++){
-    for(int j=i+1; j<fNumNus; j++){
-      effDm.push_back( 2 * kGeV2eV * fEnergy * fabs(fEval[j] - fEval[i]) );
+    // Get list of all effective Dm^2
+    vectorD effFreq;
+
+    for(int i=0; i<fNumNus-1; i++){
+      for(int j=i+1; j<fNumNus; j++){
+
+        double freq = fabs(fEval[j] - fEval[i]) * kKm2eV * fEnergy;
+
+        if(freq*dLoE<0.01*n_div) continue;
+
+        /*bool is_similar = false;
+        for(int k=0; k<effFreq.size(); k++){
+          if(abs(freq-effFreq[k]) < 0.1*effFreq[k]){
+            is_similar = true;
+            break;
+          }
+        }
+        if(is_similar) continue;*/
+
+        effFreq.push_back(freq);
+
+      }
     }
+
+    // Sort the effective Dm^2 list
+    sort(effFreq.begin(), effFreq.end());
+
+    vectorD tmp;
+
+    for(int i=0; i<effFreq.size(); i++){
+
+      if(tmp.size() && abs(tmp.back()-effFreq[i])<0.1*effFreq[i]){
+
+        tmp.back() = (tmp.back() + effFreq[i])/2;
+
+      }
+      else tmp.push_back(effFreq[i]);
+
+    }
+
+    effFreq = tmp;
+
+    vectorD binSamples;
+
+    bool success;
+    bool force = (t==7);
+
+    double bwdt = dLoE / n_div;
+    binSamples = GetBinSamples(bwdt, effFreq, success, force);
+
+    if(!success && !force){
+      n_div *= 2;
+      continue;
+    }
+
+    vectorD allSamples;
+
+    for(int i=0; i<n_div; i++){
+
+      double bctr = LoE - dLoE/2 + (i+0.5)*bwdt;
+
+      for(int j=0; j<binSamples.size(); j++){
+        allSamples.push_back(bctr + binSamples[j]);
+      }
+
+    }
+
+    return allSamples;
+
   }
 
-  int numDm = effDm.size();
-
-  // Sort the effective Dm^2 list
-  sort(effDm.begin(), effDm.end());
-
-  // Set a number of sub-divisions to achieve "good" accuracy
-  // This needs to be studied better
-  int n_div = ceil( 200 * pow(dLoE/LoE,0.8) / sqrt(fAvgProbPrec/1e-4) );
-  //int n_div = 1;
-
-  // A vector to store sample points
-  vectorD allSamples;
-
-  // Loop over sub-divisions
-  for(int k=0; k<n_div; k++){
-
-    // Define sub-division center and width
-    double bctr = LoE - dLoE/2 + (k+0.5)*dLoE/n_div;
-    double bwdt = dLoE/n_div;
-
-    // Make a vector of L/E sample values
-    // Initialized in the sub-division center
-    vectorD samples;
-    samples.push_back(bctr);
-
-    // Loop over all Dm^2 to average each frequency
-    // This will recursively sample points in smaller
-    // bins so that all relevant frequencies are used
-    for(int i=0; i<numDm; i++){
-
-      // Copy the list of sample L/E values
-      vectorD prev = samples;
-
-      // Redefine bin width to lie within full sub-division
-      double Width = 2*min(prev[0] - (bctr - bwdt/2), (bctr + bwdt/2) - prev[0]);
-
-      // Compute oscillation argument sorted from lowest  to highest
-      const double arg = k1267 * effDm[i] * Width;
-
-      // Skip small oscillation values.
-      // If it's the last one, lower the tolerance
-      if(i < numDm-1){
-        if(arg<0.9) continue;
-      }
-      else{
-        if(arg<0.1) continue;
-      }
-
-      // Reset samples to redefine them
-      samples.clear();
-
-      // Loop over previous samples
-      for(int j=0; j<int(prev.size()); j++){
-
-        // Compute new sample points around old samples
-        // This is based on a oscillatory quadrature rule
-        double sample = (1/sqrt(3)) * (Width/2);
-        if(arg!=0) sample = acos(sin(arg)/arg)/arg * (Width/2);
-
-        // Add samples above and below center
-        samples.push_back(prev[j]-sample);
-        samples.push_back(prev[j]+sample);
-
-      }
-
-    }// End of loop over Dm^2
-
-    // Add sub-division samples to the end of allSamples vector
-    allSamples.insert(allSamples.end(), samples.begin(), samples.end());
-
-  }// End of loop over sub-divisions
-
-  // Return all sample points
-  return allSamples;
+  return vectorD(1, LoE);
 
 }
 
