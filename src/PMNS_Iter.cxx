@@ -22,8 +22,7 @@ PMNS_Iter::PMNS_Iter() : PMNS_Fast(), fPrec(1e-3) {}
 ///
 /// Nothing to clean.
 ///
-PMNS_Iter::~PMNS_Iter(){}
-
+PMNS_Iter::~PMNS_Iter() {}
 
 //.............................................................................
 ///
@@ -31,27 +30,20 @@ PMNS_Iter::~PMNS_Iter(){}
 ///
 void PMNS_Iter::SetExpVL(NuPath p)
 {
-
-  double kr2GNe = kK2*M_SQRT2*kGf;
+  double kr2GNe = kK2 * M_SQRT2 * kGf;
   kr2GNe *= p.density * p.zoa; // Matter potential in eV
 
   fVL = kr2GNe * kKm2eV * p.length;
 
   fExpVL = complexD(cos(fVL), -sin(fVL));
-  if(fIsNuBar) fExpVL = conj(fExpVL);
-
+  if (fIsNuBar) fExpVL = conj(fExpVL);
 }
 
 //.............................................................................
 ///
 /// Propagate neutrino through matter component.
 ///
-void PMNS_Iter::PropMatter()
-{
-
-  fNuState[0] *= fExpVL;
-
-}
+void PMNS_Iter::PropMatter() { fNuState[0] *= fExpVL; }
 
 //.............................................................................
 ///
@@ -59,30 +51,22 @@ void PMNS_Iter::PropMatter()
 ///
 void PMNS_Iter::SolveHam()
 {
-
-  if(fGotES) return;
+  if (fGotES) return;
 
   // Do vacuum oscillation
-  if(!fBuiltHms){
-
+  if (!fBuiltHms) {
     fPath.density = 0;
     PMNS_Fast::SolveHam();
     fBuiltHms = true;
-
   }
   else {
-
-    for(int i=1; i<fNumNus; i++){
-      fEval[i] *= fPrevEnergy / fEnergy;
-    }
-
+    for (int i = 1; i < fNumNus; i++) { fEval[i] *= fPrevEnergy / fEnergy; }
   }
 
   fPrevEnergy = fEnergy;
 
   fGotES = true;
   return;
-
 }
 
 //.............................................................................
@@ -92,7 +76,7 @@ void PMNS_Iter::SolveHam()
 void PMNS_Iter::SetPrec(double prec)
 {
   fPrec = prec;
-  if(fPrec<=0) fPrec = 1e-3;
+  if (fPrec <= 0) fPrec = 1e-3;
 }
 
 //.............................................................................
@@ -101,29 +85,26 @@ void PMNS_Iter::SetPrec(double prec)
 ///
 void PMNS_Iter::PropagatePath(NuPath p)
 {
-
   SetExpVL(p);
 
   double dm = 0;
-  for(int i=0; i<fNumNus; i++){
-    if(dm<fabs(fDm[i])) dm = fabs(fDm[i]);
+  for (int i = 0; i < fNumNus; i++) {
+    if (dm < fabs(fDm[i])) dm = fabs(fDm[i]);
   }
   dm *= kKm2eV * p.length / (2 * kGeV2eV * fEnergy);
 
   int nsplit = sqrt(0.065 * dm * fVL / fPrec);
-  if(nsplit>1){
+  if (nsplit > 1) {
     p.length /= nsplit;
     SetExpVL(p);
   }
-  else nsplit = 1;
+  else
+    nsplit = 1;
 
-  for(int i=0; i<nsplit; i++){
-
+  for (int i = 0; i < nsplit; i++) {
     PMNS_Base::PropagatePath(p);
     PropMatter();
-
   }
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

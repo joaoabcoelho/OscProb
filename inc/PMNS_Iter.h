@@ -33,9 +33,7 @@
 namespace OscProb {
 
   class PMNS_Iter : public PMNS_Fast {
-
     public:
-
       PMNS_Iter();          ///< Constructor
       virtual ~PMNS_Iter(); ///< Destructor
 
@@ -43,7 +41,6 @@ namespace OscProb {
       virtual void SetPrec(double prec);
 
     protected:
-
       /// Just use the vacuum to start
       virtual void SolveHam();
 
@@ -59,14 +56,13 @@ namespace OscProb {
       /// Iterative precision
       double fPrec;
 
-      double fVL; ///< Matter potential
+      double   fVL;    ///< Matter potential
       complexD fExpVL; ///< Matter phase shift
 
       double fPrevEnergy;
-
   };
 
-}
+} // namespace OscProb
 
 #endif
 

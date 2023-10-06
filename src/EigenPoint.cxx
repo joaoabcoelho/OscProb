@@ -22,10 +22,10 @@ using namespace OscProb;
 /// @param p      - the neutrino path
 /// @param n      - nu-nubar flag
 ///
-EigenPoint::EigenPoint(int numNus, double e, NuPath p, bool n) :
-fEval(numNus,0), fEvec(numNus, vectorC(numNus,0))
+EigenPoint::EigenPoint(int numNus, double e, NuPath p, bool n)
+    : fEval(numNus, 0), fEvec(numNus, vectorC(numNus, 0))
 {
-  SetVars(e,p,n);
+  SetVars(e, p, n);
 }
 
 //.............................................................................
@@ -39,8 +39,8 @@ fEval(numNus,0), fEvec(numNus, vectorC(numNus,0))
 void EigenPoint::SetVars(double e, NuPath p, bool n)
 {
   fEnergy = e;
-  fPath = p;
-  fNubar = n;
+  fPath   = p;
+  fNubar  = n;
   SetNE();
 }
 
@@ -51,16 +51,17 @@ void EigenPoint::SetVars(double e, NuPath p, bool n)
 void EigenPoint::SetNE()
 {
   fNE = fEnergy * fPath.density * fPath.zoa;
-  if(fNE < 1e-12) fNE = 1e-12;
-  if(fNubar) fNE = -fNE;
+  if (fNE < 1e-12) fNE = 1e-12;
+  if (fNubar) fNE = -fNE;
 }
 
 //.............................................................................
 ///
 /// Comparison operator used for sorting into set
 ///
-bool EigenPoint::operator < (const EigenPoint &rhs) const {
-  if(fNE == rhs.fNE) return fPath.zoa < rhs.fPath.zoa;
+bool EigenPoint::operator<(const EigenPoint& rhs) const
+{
+  if (fNE == rhs.fNE) return fPath.zoa < rhs.fPath.zoa;
   return fNE < rhs.fNE;
 }
 
@@ -68,6 +69,7 @@ bool EigenPoint::operator < (const EigenPoint &rhs) const {
 ///
 /// Identity operator used for finding existing eigensystems
 ///
-bool EigenPoint::operator == (const EigenPoint &rhs) const {
+bool EigenPoint::operator==(const EigenPoint& rhs) const
+{
   return (fNE == rhs.fNE) && (fPath.zoa == rhs.fPath.zoa);
 }

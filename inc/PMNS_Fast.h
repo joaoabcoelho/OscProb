@@ -38,20 +38,18 @@
 namespace OscProb {
 
   class PMNS_Fast : public PMNS_Base {
-
     public:
-
       PMNS_Fast();          ///< Constructor
       virtual ~PMNS_Fast(); ///< Destructor
 
       /// Set the all mixing parameters at once
-      virtual void SetMix(double th12, double th23, double th13, double deltacp);
+      virtual void SetMix(double th12, double th23, double th13,
+                          double deltacp);
 
       /// Set both mass-splittings at once
       virtual void SetDeltaMsqrs(double dm21, double dm32);
 
     protected:
-
       /// Build the full Hamiltonian
       virtual void UpdateHam();
 
@@ -62,10 +60,9 @@ namespace OscProb {
       virtual void SetVacuumEigensystem();
 
       complexD fHam[3][3]; ///< The full hamiltonian
-
   };
 
-}
+} // namespace OscProb
 
 #endif
 

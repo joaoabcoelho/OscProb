@@ -19,22 +19,23 @@
 #ifndef EARTHMODELBASE_H
 #define EARTHMODELBASE_H
 
-#include "TObject.h"
 #include "NuPath.h"
+#include "TObject.h"
 
 namespace OscProb {
 
   class EarthModelBase : public TObject {
-
     public:
-
       ///
       /// Set the coordinates of the detector:
       ///   radius in km, latitude in degrees, longitude in degrees
       ///
       /// Not implemented in base class.
       ///
-      virtual void SetDetPos(double rad, double lat=0, double lon=0) = 0; ///< Set the detector position (rad = radius in km, lat/lon in deg)
+      virtual void SetDetPos(
+          double rad, double lat = 0,
+          double lon = 0) = 0; ///< Set the detector position (rad = radius in
+                               ///< km, lat/lon in deg)
 
       ///
       /// Construct the neutrino path through the Earth having
@@ -42,37 +43,47 @@ namespace OscProb {
       ///
       /// Not implemented in base class.
       ///
-      virtual int FillPath(double cosT, double phi) = 0; ///< Fill the path sequence in a vector (phi in degrees)
+      virtual int FillPath(double cosT,
+                           double phi) = 0; ///< Fill the path sequence in a
+                                            ///< vector (phi in degrees)
 
-      virtual std::vector<NuPath> GetNuPath(); ///< Get the current neutrino path sequence
+      virtual std::vector<NuPath> GetNuPath(); ///< Get the current neutrino
+                                               ///< path sequence
 
-      virtual std::vector<NuPath> GetMergedPaths(double prec = 0.25); ///< Get merged path sequence in a vector
+      virtual std::vector<NuPath> GetMergedPaths(
+          double prec = 0.25); ///< Get merged path sequence in a vector
 
-      virtual double GetTotalL(double cosT); ///< Get the total baseline for a given cosTheta
-      virtual double GetCosT(double L); ///< Get the cosTheta for a given total baseline
+      virtual double GetTotalL(
+          double cosT); ///< Get the total baseline for a given cosTheta
+      virtual double GetCosT(
+          double L); ///< Get the cosTheta for a given total baseline
 
-      virtual void SetRemoveSmallPaths(bool rp = true); ///< Set tag to remove small paths
+      virtual void SetRemoveSmallPaths(
+          bool rp = true); ///< Set tag to remove small paths
 
     protected:
+      virtual void SetDetectorCoordinates(
+          double rad, double lat,
+          double lon); ///< Set the coordinates of the detector (rad = radius in
+                       ///< km, lat/lon in deg)
 
-      virtual void SetDetectorCoordinates(double rad, double lat, double lon); ///< Set the coordinates of the detector (rad = radius in km, lat/lon in deg)
-
-      virtual void AddPathSegment(double length, double density, double zoa, int index);  ///< Add a path segment to the sequence
+      virtual void AddPathSegment(
+          double length, double density, double zoa,
+          int index); ///< Add a path segment to the sequence
 
       std::vector<NuPath> fNuPath; ///< The current neutrino path sequence
 
       double fRadiusMax; ///< Maximum radius in Earth model (in km)
       double fDetRadius; ///< The radius where the detector sits (in km)
-      double fDetLat; ///< The latitude (in rad) where the detector sits
-      double fDetLon; ///< The longitude (in rad) where the detector sits
+      double fDetLat;    ///< The latitude (in rad) where the detector sits
+      double fDetLon;    ///< The longitude (in rad) where the detector sits
 
       bool fRemoveSmallPaths; ///< Tag whether to merge small paths
 
       // Required for saving in ROOT files
       ClassDef(EarthModelBase, 1);
-
   };
 
-}
+} // namespace OscProb
 
 #endif

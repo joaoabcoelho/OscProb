@@ -5,10 +5,8 @@
 
 namespace OscProb {
 
-  class Absorption{
-
+  class Absorption {
     public:
-
       Absorption();
       virtual ~Absorption();
 
@@ -17,13 +15,11 @@ namespace OscProb {
       virtual void SetPath(std::vector<NuPath> paths); ///< Set a path sequence
 
     protected:
-
       std::vector<NuPath> fNuPaths; ///< Vector of neutrino paths
 
       static const double kU; ///< Atomic mass unit
-
   };
 
-}
+} // namespace OscProb
 
 #endif

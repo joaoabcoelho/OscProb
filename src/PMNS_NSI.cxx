@@ -16,7 +16,6 @@ using namespace OscProb;
 
 using namespace std;
 
-
 //.............................................................................
 ///
 /// Constructor. \sa PMNS_Base::PMNS_Base
@@ -26,15 +25,15 @@ using namespace std;
 PMNS_NSI::PMNS_NSI() : PMNS_Fast(), fEps()
 {
   SetStdPath();
-  SetNSI(0.,0.,0.,0.,0.,0.,0.,0.,0.);
-  SetFermCoup(1,0,0);
+  SetNSI(0., 0., 0., 0., 0., 0., 0., 0., 0.);
+  SetFermCoup(1, 0, 0);
 }
 
 //.............................................................................
 ///
 /// Nothing to clean.
 ///
-PMNS_NSI::~PMNS_NSI(){}
+PMNS_NSI::~PMNS_NSI() {}
 
 //.............................................................................
 ///
@@ -53,19 +52,17 @@ PMNS_NSI::~PMNS_NSI(){}
 /// @param delta_etau  - The phase of the complex parameter eps_etau in radians
 /// @param delta_mutau - The phase of the complex parameter eps_mutau in radians
 ///
-void PMNS_NSI::SetNSI(double eps_ee,    double eps_emu,    double eps_etau,
-                       double eps_mumu,  double eps_mutau,  double eps_tautau,
-                       double delta_emu, double delta_etau, double delta_mutau)
+void PMNS_NSI::SetNSI(double eps_ee, double eps_emu, double eps_etau,
+                      double eps_mumu, double eps_mutau, double eps_tautau,
+                      double delta_emu, double delta_etau, double delta_mutau)
 {
+  SetEps(0, 0, eps_ee, 0);
+  SetEps(1, 1, eps_mumu, 0);
+  SetEps(2, 2, eps_tautau, 0);
 
-  SetEps(0,0, eps_ee,     0);
-  SetEps(1,1, eps_mumu,   0);
-  SetEps(2,2, eps_tautau, 0);
-
-  SetEps(0,1, eps_emu,   delta_emu);
-  SetEps(0,2, eps_etau,  delta_etau);
-  SetEps(1,2, eps_mutau, delta_mutau);
-
+  SetEps(0, 1, eps_emu, delta_emu);
+  SetEps(0, 2, eps_etau, delta_etau);
+  SetEps(1, 2, eps_mutau, delta_mutau);
 }
 
 //.............................................................................
@@ -86,16 +83,18 @@ void PMNS_NSI::SetNSI(double eps_ee,    double eps_emu,    double eps_etau,
 /// @param val   - The absolute value of the parameter
 /// @param phase - The complex phase of the parameter in radians
 ///
-void PMNS_NSI::SetEps(int flvi, int flvj, double val, double phase){
-
-  if(flvi > flvj){
-    cerr << "WARNING: First argument should be smaller or equal to second argument" << endl
+void PMNS_NSI::SetEps(int flvi, int flvj, double val, double phase)
+{
+  if (flvi > flvj) {
+    cerr << "WARNING: First argument should be smaller or equal to second "
+            "argument"
+         << endl
          << "Setting reverse order (Eps_" << flvj << flvi << "). " << endl;
     int temp = flvi;
-    flvi = flvj;
-    flvj = temp;
+    flvi     = flvj;
+    flvj     = temp;
   }
-  if(flvi<0 || flvi>2 || flvj < flvi || flvj > 2){
+  if (flvi < 0 || flvi > 2 || flvj < flvi || flvj > 2) {
     cerr << "WARNING: Eps_" << flvi << flvj << " not valid for " << fNumNus
          << " neutrinos. Doing nothing." << endl;
     return;
@@ -103,16 +102,15 @@ void PMNS_NSI::SetEps(int flvi, int flvj, double val, double phase){
 
   complexD h = val;
 
-  if(flvi != flvj) h *= complexD(cos(phase), sin(phase));
+  if (flvi != flvj) h *= complexD(cos(phase), sin(phase));
 
   bool isSame = (fEps[flvi][flvj] == h);
 
-  if(!isSame) ClearCache();
+  if (!isSame) ClearCache();
 
   fGotES *= isSame;
 
   fEps[flvi][flvj] = h;
-
 }
 
 //.............................................................................
@@ -128,23 +126,24 @@ void PMNS_NSI::SetEps(int flvi, int flvj, double val, double phase){
 /// @param flvi  - The first flavour index
 /// @param flvj  - The second flavour index
 ///
-complexD PMNS_NSI::GetEps(int flvi, int flvj){
-
-  if(flvi > flvj){
-    cerr << "WARNING: First argument should be smaller or equal to second argument" << endl
+complexD PMNS_NSI::GetEps(int flvi, int flvj)
+{
+  if (flvi > flvj) {
+    cerr << "WARNING: First argument should be smaller or equal to second "
+            "argument"
+         << endl
          << "Setting reverse order (Eps_" << flvj << flvi << "). " << endl;
     int temp = flvi;
-    flvi = flvj;
-    flvj = temp;
+    flvi     = flvj;
+    flvj     = temp;
   }
-  if(flvi<0 || flvi>2 || flvj < flvi || flvj > 2){
+  if (flvi < 0 || flvi > 2 || flvj < flvi || flvj > 2) {
     cerr << "WARNING: Eps_" << flvi << flvj << " not valid for " << fNumNus
          << " neutrinos. Returning 0." << endl;
     return zero;
   }
 
   return fEps[flvi][flvj];
-
 }
 
 //.............................................................................
@@ -156,7 +155,7 @@ complexD PMNS_NSI::GetEps(int flvi, int flvj){
 ///
 /// @param a - The value of the real parameter eps_ee
 ///
-void PMNS_NSI::SetEps_ee(double a){ SetEps(0,0, a, 0); }
+void PMNS_NSI::SetEps_ee(double a) { SetEps(0, 0, a, 0); }
 
 //.............................................................................
 ///
@@ -167,7 +166,7 @@ void PMNS_NSI::SetEps_ee(double a){ SetEps(0,0, a, 0); }
 ///
 /// @param a - The value of the real parameter eps_mumu
 ///
-void PMNS_NSI::SetEps_mumu(double a){ SetEps(1,1, a, 0); }
+void PMNS_NSI::SetEps_mumu(double a) { SetEps(1, 1, a, 0); }
 
 //.............................................................................
 ///
@@ -178,7 +177,7 @@ void PMNS_NSI::SetEps_mumu(double a){ SetEps(1,1, a, 0); }
 ///
 /// @param a - The value of the real parameter eps_tautau
 ///
-void PMNS_NSI::SetEps_tautau(double a){ SetEps(2,2, a, 0); }
+void PMNS_NSI::SetEps_tautau(double a) { SetEps(2, 2, a, 0); }
 
 //.............................................................................
 ///
@@ -190,7 +189,7 @@ void PMNS_NSI::SetEps_tautau(double a){ SetEps(2,2, a, 0); }
 /// @param a   - The absolute value of the parameter eps_emu
 /// @param phi - The phase of the complex parameter eps_emu in radians
 ///
-void PMNS_NSI::SetEps_emu  (double a, double phi){ SetEps(0,1, a, phi); }
+void PMNS_NSI::SetEps_emu(double a, double phi) { SetEps(0, 1, a, phi); }
 
 //.............................................................................
 ///
@@ -202,7 +201,7 @@ void PMNS_NSI::SetEps_emu  (double a, double phi){ SetEps(0,1, a, phi); }
 /// @param a   - The absolute value of the parameter eps_etau
 /// @param phi - The phase of the complex parameter eps_etau in radians
 ///
-void PMNS_NSI::SetEps_etau  (double a, double phi){ SetEps(0,2, a, phi); }
+void PMNS_NSI::SetEps_etau(double a, double phi) { SetEps(0, 2, a, phi); }
 
 //.............................................................................
 ///
@@ -214,7 +213,7 @@ void PMNS_NSI::SetEps_etau  (double a, double phi){ SetEps(0,2, a, phi); }
 /// @param a   - The absolute value of the parameter eps_mutau
 /// @param phi - The phase of the complex parameter eps_mutau in radians
 ///
-void PMNS_NSI::SetEps_mutau  (double a, double phi){ SetEps(1,2, a, phi); }
+void PMNS_NSI::SetEps_mutau(double a, double phi) { SetEps(1, 2, a, phi); }
 
 //.............................................................................
 ///
@@ -226,26 +225,28 @@ void PMNS_NSI::SetEps_mutau  (double a, double phi){ SetEps(1,2, a, phi); }
 ///
 void PMNS_NSI::UpdateHam()
 {
+  double lv = 2 * kGeV2eV * fEnergy; // 2*E in eV
 
-  double lv = 2 * kGeV2eV*fEnergy; // 2*E in eV
-
-  double kr2GNe   = kK2*M_SQRT2*kGf * fPath.density;
+  double kr2GNe   = kK2 * M_SQRT2 * kGf * fPath.density;
   double kr2GNnsi = kr2GNe;
 
-  kr2GNe   *= fPath.zoa;    // Std matter potential in eV
+  kr2GNe *= fPath.zoa;      // Std matter potential in eV
   kr2GNnsi *= GetZoACoup(); // NSI matter potential in eV
 
   // Finish build Hamiltonian in matter with dimension of eV
-  for(int i=0;i<fNumNus;i++){
-    for(int j=i;j<fNumNus;j++){
-      if(!fIsNuBar) fHam[i][j] = fHms[i][j]/lv + kr2GNnsi*fEps[i][j];
-      else          fHam[i][j] = conj(fHms[i][j]/lv - kr2GNnsi*fEps[i][j]);
+  for (int i = 0; i < fNumNus; i++) {
+    for (int j = i; j < fNumNus; j++) {
+      if (!fIsNuBar)
+        fHam[i][j] = fHms[i][j] / lv + kr2GNnsi * fEps[i][j];
+      else
+        fHam[i][j] = conj(fHms[i][j] / lv - kr2GNnsi * fEps[i][j]);
     }
   }
 
-  if(!fIsNuBar) fHam[0][0] += kr2GNe;
-  else          fHam[0][0] -= kr2GNe;
-
+  if (!fIsNuBar)
+    fHam[0][0] += kr2GNe;
+  else
+    fHam[0][0] -= kr2GNe;
 }
 
 //.............................................................................
@@ -257,16 +258,15 @@ void PMNS_NSI::UpdateHam()
 /// @param c - fermion coupling strength
 /// @param i - fermion index (0,1,2) -> (e,u,d)
 ///
-void PMNS_NSI::SetCoupByIndex(double c, int i){
-
+void PMNS_NSI::SetCoupByIndex(double c, int i)
+{
   bool isSame = (fNSIcoup[i] == c);
 
-  if(!isSame) ClearCache();
+  if (!isSame) ClearCache();
 
   fGotES *= isSame;
 
   fNSIcoup[i] = c;
-
 }
 
 //.............................................................................
@@ -277,7 +277,7 @@ void PMNS_NSI::SetCoupByIndex(double c, int i){
 ///
 /// @param e - electron coupling strength
 ///
-void PMNS_NSI::SetElecCoup(double e){ SetCoupByIndex(e, 0); }
+void PMNS_NSI::SetElecCoup(double e) { SetCoupByIndex(e, 0); }
 
 //.............................................................................
 ///
@@ -287,7 +287,7 @@ void PMNS_NSI::SetElecCoup(double e){ SetCoupByIndex(e, 0); }
 ///
 /// @param u - u-quark coupling strength
 ///
-void PMNS_NSI::SetUpCoup(double u){ SetCoupByIndex(u, 1); }
+void PMNS_NSI::SetUpCoup(double u) { SetCoupByIndex(u, 1); }
 
 //.............................................................................
 ///
@@ -297,7 +297,7 @@ void PMNS_NSI::SetUpCoup(double u){ SetCoupByIndex(u, 1); }
 ///
 /// @param d - d-quark coupling strength
 ///
-void PMNS_NSI::SetDownCoup(double d){ SetCoupByIndex(d, 2); }
+void PMNS_NSI::SetDownCoup(double d) { SetCoupByIndex(d, 2); }
 
 //.............................................................................
 ///
@@ -311,30 +311,28 @@ void PMNS_NSI::SetDownCoup(double d){ SetCoupByIndex(d, 2); }
 ///
 void PMNS_NSI::SetFermCoup(double e, double u, double d)
 {
-
   SetElecCoup(e); // electron coupling
   SetUpCoup(u);   // u-quark coupling
   SetDownCoup(d); // d-quark coupling
-
 }
 
 //.............................................................................
 ///
 /// Get the NSI relative coupling to electrons.
 ///
-double PMNS_NSI::GetElecCoup(){ return fNSIcoup[0]; }
+double PMNS_NSI::GetElecCoup() { return fNSIcoup[0]; }
 
 //.............................................................................
 ///
 /// Get the NSI relative coupling to u-quarks.
 ///
-double PMNS_NSI::GetUpCoup(){ return fNSIcoup[1]; }
+double PMNS_NSI::GetUpCoup() { return fNSIcoup[1]; }
 
 //.............................................................................
 ///
 /// Get the NSI relative coupling to d-quarks.
 ///
-double PMNS_NSI::GetDownCoup(){ return fNSIcoup[2]; }
+double PMNS_NSI::GetDownCoup() { return fNSIcoup[2]; }
 
 //.............................................................................
 ///
@@ -342,11 +340,9 @@ double PMNS_NSI::GetDownCoup(){ return fNSIcoup[2]; }
 ///
 double PMNS_NSI::GetZoACoup()
 {
-
-  return fNSIcoup[0] * fPath.zoa        // electrons: Z
-       + fNSIcoup[1] * (1 + fPath.zoa)  // u-quarks:  A + Z
-       + fNSIcoup[2] * (2 - fPath.zoa); // d-quarks: 2A - Z
-
+  return fNSIcoup[0] * fPath.zoa          // electrons: Z
+         + fNSIcoup[1] * (1 + fPath.zoa)  // u-quarks:  A + Z
+         + fNSIcoup[2] * (2 - fPath.zoa); // d-quarks: 2A - Z
 }
 
 ///////////////////////////////////////////////////////////////////////////////

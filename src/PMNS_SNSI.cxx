@@ -16,16 +16,13 @@ using namespace OscProb;
 ///
 /// This class is restricted to 3 neutrino flavours.
 ///
-PMNS_SNSI::PMNS_SNSI() : PMNS_NSI()
-{
-  SetLowestMass(0);
-}
+PMNS_SNSI::PMNS_SNSI() : PMNS_NSI() { SetLowestMass(0); }
 
 //.............................................................................
 ///
 /// Nothing to clean.
 ///
-PMNS_SNSI::~PMNS_SNSI(){}
+PMNS_SNSI::~PMNS_SNSI() {}
 
 //.............................................................................
 ///
@@ -47,10 +44,7 @@ void PMNS_SNSI::SetLowestMass(double m)
 ///
 /// @return The lightest mass in eV
 ///
-double PMNS_SNSI::GetLowestMass()
-{
-  return fM;
-}
+double PMNS_SNSI::GetLowestMass() { return fM; }
 
 //.............................................................................
 ///
@@ -60,9 +54,8 @@ double PMNS_SNSI::GetLowestMass()
 ///
 void PMNS_SNSI::BuildHms()
 {
-
   // Check if anything changed
-  if(fBuiltHms) return;
+  if (fBuiltHms) return;
 
   // Tag to recompute eigensystem
   fGotES = false;
@@ -70,35 +63,28 @@ void PMNS_SNSI::BuildHms()
   // Start with m1 = 0
   double m1 = 0;
   // Make sure all masses are positive
-  for(int i=1; i<fNumNus; i++){
-    if(fDm[i] + m1*m1 < 0) m1 = sqrt(fabs(fDm[i]));
+  for (int i = 1; i < fNumNus; i++) {
+    if (fDm[i] + m1 * m1 < 0) m1 = sqrt(fabs(fDm[i]));
   }
   // Add minimum mass
   m1 += fM;
 
   // Build M - m1
   fHms[0][0] = 0;
-  for(int j=1; j<fNumNus; j++){
+  for (int j = 1; j < fNumNus; j++) {
     // Set mass difference m_j - m_1
-    fHms[j][j] = sqrt(fDm[j] + m1*m1) - m1;
+    fHms[j][j] = sqrt(fDm[j] + m1 * m1) - m1;
     // Reset off-diagonal elements
-    for(int i=0; i<j; i++){
-      fHms[i][j] = 0;
-    }
+    for (int i = 0; i < j; i++) { fHms[i][j] = 0; }
     // Rotate j neutrinos
-    for(int i=0; i<j; i++){
-      RotateH(i,j,fHms);
-    }
+    for (int i = 0; i < j; i++) { RotateH(i, j, fHms); }
   }
 
   // Add back m1
-  for(int i=0; i<fNumNus; i++){
-    fHms[i][i] += m1;
-  }
+  for (int i = 0; i < fNumNus; i++) { fHms[i][i] += m1; }
 
   // Tag as built
   fBuiltHms = true;
-
 }
 
 //.............................................................................
@@ -109,23 +95,20 @@ void PMNS_SNSI::BuildHms()
 ///
 void HermitianSquare(complexD (&A)[3][3])
 {
-
   complexD tmp[3][3];
-  for(int i=0; i<3; i++){
-  for(int j=i; j<3; j++){
-    tmp[i][j] = A[i][j];
-    if(i<j) tmp[j][i] = conj(A[i][j]);
-    A[i][j] = 0;
-  }}
+  for (int i = 0; i < 3; i++) {
+    for (int j = i; j < 3; j++) {
+      tmp[i][j] = A[i][j];
+      if (i < j) tmp[j][i] = conj(A[i][j]);
+      A[i][j] = 0;
+    }
+  }
 
-  for(int i=0; i<3; i++){
-  for(int j=i; j<3; j++){
-  for(int k=0; k<3; k++){
-
-    A[i][j] += tmp[i][k] * tmp[k][j];
-
-  }}}
-
+  for (int i = 0; i < 3; i++) {
+    for (int j = i; j < 3; j++) {
+      for (int k = 0; k < 3; k++) { A[i][j] += tmp[i][k] * tmp[k][j]; }
+    }
+  }
 }
 
 //.............................................................................
@@ -138,29 +121,29 @@ void HermitianSquare(complexD (&A)[3][3])
 ///
 void PMNS_SNSI::UpdateHam()
 {
-
-  double sqrtlv = sqrt(2 * kGeV2eV*fEnergy); // sqrt(2*E) in eV^1/2
+  double sqrtlv = sqrt(2 * kGeV2eV * fEnergy); // sqrt(2*E) in eV^1/2
 
   // Effective density of fermions in eV * MeV^2
   double nsiCoup = 1e6 * kK2 * fPath.density * GetZoACoup();
 
   // Add the dM matrix
-  for(int i=0; i<fNumNus; i++){
-  for(int j=i; j<fNumNus; j++){
-    fHam[i][j] = (fHms[i][j] + nsiCoup * fEps[i][j]) / sqrtlv;
-    if(fIsNuBar) fHam[i][j] = conj(fHam[i][j]);
-  }}
+  for (int i = 0; i < fNumNus; i++) {
+    for (int j = i; j < fNumNus; j++) {
+      fHam[i][j] = (fHms[i][j] + nsiCoup * fEps[i][j]) / sqrtlv;
+      if (fIsNuBar) fHam[i][j] = conj(fHam[i][j]);
+    }
+  }
 
   // Square fHam
   HermitianSquare(fHam);
 
   // Add matter potential in eV
-  double kr2GNe   = kK2*M_SQRT2*kGf * fPath.density * fPath.zoa;
+  double kr2GNe = kK2 * M_SQRT2 * kGf * fPath.density * fPath.zoa;
 
-  if(!fIsNuBar) fHam[0][0] += kr2GNe;
-  else          fHam[0][0] -= kr2GNe;
-
+  if (!fIsNuBar)
+    fHam[0][0] += kr2GNe;
+  else
+    fHam[0][0] -= kr2GNe;
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////

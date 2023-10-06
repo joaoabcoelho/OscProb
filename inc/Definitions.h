@@ -18,10 +18,10 @@ namespace OscProb {
   typedef std::vector<double>  vectorD;
   typedef std::vector<vectorD> matrixD;
 
-  typedef std::complex<double> complexD;
+  typedef std::complex<double>  complexD;
   typedef std::vector<complexD> vectorC;
   typedef std::vector<vectorC>  matrixC;
 
-}
+} // namespace OscProb
 
 #endif

@@ -25,9 +25,7 @@
 namespace OscProb {
 
   class PMNS_Deco : public PMNS_Fast {
-
     public:
-
       PMNS_Deco();          ///< Constructor
       virtual ~PMNS_Deco(); ///< Destructor
 
@@ -57,14 +55,17 @@ namespace OscProb {
       virtual matrixD ProbMatrix(int nflvi, int nflvf);
 
     protected:
-
       // Resetting and propagating
-      virtual void ResetToFlavour(int flv);     ///< Reset neutrino state to pure flavour flv
-      virtual void SetPureState(vectorC nu_in); ///< Set the density matrix from a pure state
+      virtual void ResetToFlavour(
+          int flv); ///< Reset neutrino state to pure flavour flv
+      virtual void SetPureState(
+          vectorC nu_in); ///< Set the density matrix from a pure state
 
-      virtual void PropagatePath(NuPath p); ///< Propagate neutrino through a single path
+      virtual void PropagatePath(
+          NuPath p); ///< Propagate neutrino through a single path
 
-      virtual double P(int flv); ///< Return the probability of final state in flavour flv
+      virtual double P(
+          int flv); ///< Return the probability of final state in flavour flv
 
       virtual void RotateState(bool to_mass); ///< Rotate rho to/from mass basis
 
@@ -74,10 +75,9 @@ namespace OscProb {
       matrixC fRho; ///< The neutrino density matrix state
 
       matrixC fMBuffer; ///< Some memory buffer for matrix operations
-
   };
 
-}
+} // namespace OscProb
 
 #endif
 

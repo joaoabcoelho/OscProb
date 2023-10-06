@@ -28,26 +28,24 @@
 namespace OscProb {
 
   class PMNS_Decay : public PMNS_Base {
-
     public:
-
       PMNS_Decay();          ///< Constructor
       virtual ~PMNS_Decay(); ///< Destructor
 
       /// Set the all mixing parameters at once
-      virtual void SetMix(double th12, double th23, double th13, double deltacp);
+      virtual void SetMix(double th12, double th23, double th13,
+                          double deltacp);
 
       /// Set both mass-splittings at once
       virtual void SetDeltaMsqrs(double dm21, double dm32);
 
-      virtual void SetAlpha3(double alpha3);
-      virtual void SetAlpha2(double alpha2);
+      virtual void   SetAlpha3(double alpha3);
+      virtual void   SetAlpha2(double alpha2);
       virtual double GetAlpha3();
       virtual double GetAlpha2();
-      virtual void SetIsNuBar(bool isNuBar);
+      virtual void   SetIsNuBar(bool isNuBar);
 
     protected:
-
       /// Build the Hms Hamiltonian
       virtual void BuildHms();
 
@@ -60,15 +58,13 @@ namespace OscProb {
       /// Propagation with Decay
       virtual void PropagatePath(NuPath p);
 
-
-      matrixC fHd;           ///< Decay hamiltonian
+      matrixC          fHd;  ///< Decay hamiltonian
       Eigen::Matrix3cd fHam; ///< Final hamiltonian
 
       vectorD fAlpha; ///< alpha parameters
-
   };
 
-}
+} // namespace OscProb
 
 #endif
 

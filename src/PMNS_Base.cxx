@@ -9,26 +9,26 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
-#include <cassert>
-#include <algorithm>
 #include "PMNS_Base.h"
+#include <algorithm>
+#include <cassert>
+#include <iostream>
 
 using namespace std;
 
 using namespace OscProb;
 
 // Some usefule complex numbers
-const complexD PMNS_Base::zero(0,0);
-const complexD PMNS_Base::one(1,0);
+const complexD PMNS_Base::zero(0, 0);
+const complexD PMNS_Base::one(1, 0);
 
 // Define some constants from PDG 2015
-const double PMNS_Base::kGeV2eV = 1.0e+09;                    // GeV to eV conversion
-const double PMNS_Base::kKm2eV  = 1.0 / 1.973269788e-10;      // (hbar.c [eV.km])^-1
-const double PMNS_Base::kNA     = 6.022140857e23;             // Avogadro constant (N_A)
-const double PMNS_Base::kK2     = 1e-3 * kNA / pow(kKm2eV,3); // N_A * (hbar*c [GeV.cm])^3 * kGeV2eV
-const double PMNS_Base::kGf     = 1.1663787e-05;              // G_F/(hbar*c)^3 [GeV^-2]
-
+const double PMNS_Base::kGeV2eV = 1.0e+09;               // GeV to eV conversion
+const double PMNS_Base::kKm2eV  = 1.0 / 1.973269788e-10; // (hbar.c [eV.km])^-1
+const double PMNS_Base::kNA     = 6.022140857e23; // Avogadro constant (N_A)
+const double PMNS_Base::kK2 =
+    1e-3 * kNA / pow(kKm2eV, 3); // N_A * (hbar*c [GeV.cm])^3 * kGeV2eV
+const double PMNS_Base::kGf = 1.1663787e-05; // G_F/(hbar*c)^3 [GeV^-2]
 
 //.............................................................................
 ///
@@ -44,35 +44,33 @@ const double PMNS_Base::kGf     = 1.1663787e-05;              // G_F/(hbar*c)^3 
 ///
 /// @param numNus - the number of neutrino flavours
 ///
-PMNS_Base::PMNS_Base(int numNus) :
-fGotES(false), fBuiltHms(false), fMaxCache(1e6), fProbe(numNus)
+PMNS_Base::PMNS_Base(int numNus)
+    : fGotES(false), fBuiltHms(false), fMaxCache(1e6), fProbe(numNus)
 {
+  SetUseCache(true); // Cache eigensystems
 
-  SetUseCache(true);   // Cache eigensystems
+  fNumNus = numNus; // Set the number of neutrinos
 
-  fNumNus = numNus;    // Set the number of neutrinos
-
-  SetStdPath();        // Set some default path
-  SetEnergy(2);        // Set default energy to 2 GeV
-  SetIsNuBar(false);   // Neutrino by default
+  SetStdPath();      // Set some default path
+  SetEnergy(2);      // Set default energy to 2 GeV
+  SetIsNuBar(false); // Neutrino by default
 
   InitializeVectors(); // Initialize all vectors
 
-  SetStdPars();        // Set PDG parameters
+  SetStdPars(); // Set PDG parameters
 
-  ResetToFlavour(1);   // Numu by default
+  ResetToFlavour(1); // Numu by default
 
   ClearCache(); // Clear cache to initialize it
 
   SetAvgProbPrec(1e-4); // Set default AvgProb precision
-
 }
 
 //.............................................................................
 ///
 /// Nothing to clean.
 ///
-PMNS_Base::~PMNS_Base(){}
+PMNS_Base::~PMNS_Base() {}
 
 //.............................................................................
 ///
@@ -80,20 +78,18 @@ PMNS_Base::~PMNS_Base(){}
 ///
 void PMNS_Base::InitializeVectors()
 {
-
   fDm    = vectorD(fNumNus, 0);
-  fTheta = matrixD(fNumNus, vectorD(fNumNus,0));
-  fDelta = matrixD(fNumNus, vectorD(fNumNus,0));
+  fTheta = matrixD(fNumNus, vectorD(fNumNus, 0));
+  fDelta = matrixD(fNumNus, vectorD(fNumNus, 0));
 
   fNuState = vectorC(fNumNus, zero);
-  fHms     = matrixC(fNumNus, vectorC(fNumNus,zero));
+  fHms     = matrixC(fNumNus, vectorC(fNumNus, zero));
 
   fPhases = vectorC(fNumNus, zero);
   fBuffer = vectorC(fNumNus, zero);
 
   fEval = vectorD(fNumNus, 0);
-  fEvec = matrixC(fNumNus, vectorC(fNumNus,zero));
-
+  fEvec = matrixC(fNumNus, vectorC(fNumNus, zero));
 }
 
 //.............................................................................
@@ -106,10 +102,7 @@ void PMNS_Base::InitializeVectors()
 ///
 /// @param u - flag to set caching on (default: true)
 ///
-void PMNS_Base::SetUseCache(bool u)
-{
-  fUseCache = u;
-}
+void PMNS_Base::SetUseCache(bool u) { fUseCache = u; }
 
 //.............................................................................
 ///
@@ -132,10 +125,7 @@ void PMNS_Base::ClearCache()
 ///
 /// @param mc - Max cache size (default: 1e6)
 ///
-void PMNS_Base::SetMaxCache(int mc)
-{
-  fMaxCache = mc;
-}
+void PMNS_Base::SetMaxCache(int mc) { fMaxCache = mc; }
 
 //.............................................................................
 ///
@@ -143,27 +133,21 @@ void PMNS_Base::SetMaxCache(int mc)
 ///
 bool PMNS_Base::TryCache()
 {
-
-  if(fUseCache && !fMixCache.empty()){
-
+  if (fUseCache && !fMixCache.empty()) {
     fProbe.SetVars(fEnergy, fPath, fIsNuBar);
 
     unordered_set<EigenPoint>::iterator it = fMixCache.find(fProbe);
 
-    if(it != fMixCache.end()){
-      for(int i=0; i<fNumNus; i++){
+    if (it != fMixCache.end()) {
+      for (int i = 0; i < fNumNus; i++) {
         fEval[i] = (*it).fEval[i] * (*it).fEnergy / fEnergy;
-        for(int j=0; j<fNumNus; j++){
-          fEvec[i][j] = (*it).fEvec[i][j];
-        }
+        for (int j = 0; j < fNumNus; j++) { fEvec[i][j] = (*it).fEvec[i][j]; }
       }
       return true;
     }
-
   }
 
   return false;
-
 }
 
 //.............................................................................
@@ -172,21 +156,15 @@ bool PMNS_Base::TryCache()
 ///
 void PMNS_Base::FillCache()
 {
-
-  if(fUseCache){
-    if(fMixCache.size()>fMaxCache){
-      fMixCache.erase(fMixCache.begin());
-    }
+  if (fUseCache) {
+    if (fMixCache.size() > fMaxCache) { fMixCache.erase(fMixCache.begin()); }
     fProbe.SetVars(fEnergy, fPath, fIsNuBar);
-    for(int i=0; i<fNumNus; i++){
+    for (int i = 0; i < fNumNus; i++) {
       fProbe.fEval[i] = fEval[i];
-      for(int j=0; j<fNumNus; j++){
-        fProbe.fEvec[i][j] = fEvec[i][j];
-      }
+      for (int j = 0; j < fNumNus; j++) { fProbe.fEvec[i][j] = fEvec[i][j]; }
     }
     fMixCache.insert(fProbe);
   }
-
 }
 
 //.............................................................................
@@ -198,23 +176,21 @@ void PMNS_Base::FillCache()
 ///
 void PMNS_Base::SetStdPars()
 {
-
-  if(fNumNus>2){
+  if (fNumNus > 2) {
     // PDG values for 3 neutrinos
     // Also applicable for 3+N neutrinos
-    SetAngle(1,2, asin(sqrt(0.304)));
-    SetAngle(1,3, asin(sqrt(0.0219)));
-    SetAngle(2,3, asin(sqrt(0.514)));
+    SetAngle(1, 2, asin(sqrt(0.304)));
+    SetAngle(1, 3, asin(sqrt(0.0219)));
+    SetAngle(2, 3, asin(sqrt(0.514)));
     SetDm(2, 7.53e-5);
     SetDm(3, 2.52e-3);
   }
-  else if(fNumNus==2){
+  else if (fNumNus == 2) {
     // Effective muon disappearance values
     // for two-flavour approximation
-    SetAngle(1,2, 0.788);
+    SetAngle(1, 2, 0.788);
     SetDm(2, 2.47e-3);
   }
-
 }
 
 //.............................................................................
@@ -226,8 +202,8 @@ void PMNS_Base::SetStdPars()
 /// Density is approximate from CRUST2.0 (~2.8 g/cm^3).
 /// Z/A is set to a round 0.5.
 ///
-void PMNS_Base::SetStdPath(){
-
+void PMNS_Base::SetStdPath()
+{
   NuPath p;
 
   p.length  = 1000; // 1000 km default
@@ -236,7 +212,6 @@ void PMNS_Base::SetStdPath(){
   p.layer   = 0;    // Single layer
 
   SetPath(p);
-
 }
 
 //.............................................................................
@@ -250,12 +225,10 @@ void PMNS_Base::SetStdPath(){
 ///
 void PMNS_Base::SetEnergy(double E)
 {
-
   // Check if value is actually changing
   fGotES *= (fEnergy == E);
 
   fEnergy = E;
-
 }
 
 //.............................................................................
@@ -269,33 +242,23 @@ void PMNS_Base::SetEnergy(double E)
 ///
 void PMNS_Base::SetIsNuBar(bool isNuBar)
 {
-
   // Check if value is actually changing
   fGotES *= (fIsNuBar == isNuBar);
 
   fIsNuBar = isNuBar;
-
 }
 
 //.............................................................................
 ///
 /// Get the neutrino energy in GeV.
 ///
-double PMNS_Base::GetEnergy() {
-
-  return fEnergy;
-
-}
+double PMNS_Base::GetEnergy() { return fEnergy; }
 
 //.............................................................................
 ///
 /// Get the anti-neutrino flag.
 ///
-bool PMNS_Base::GetIsNuBar() {
-
-  return fIsNuBar;
-
-}
+bool PMNS_Base::GetIsNuBar() { return fIsNuBar; }
 
 //.............................................................................
 ///
@@ -310,56 +273,38 @@ bool PMNS_Base::GetIsNuBar() {
 ///
 void PMNS_Base::SetCurPath(NuPath p)
 {
-
   // Check if relevant value are actually changing
   fGotES *= (fPath.density == p.density);
   fGotES *= (fPath.zoa == p.zoa);
 
   fPath = p;
-
 }
 
 //.............................................................................
 ///
 /// Clear the path vector.
 ///
-void PMNS_Base::ClearPath(){
-
-  fNuPaths.clear();
-
-}
+void PMNS_Base::ClearPath() { fNuPaths.clear(); }
 
 //.............................................................................
 ///
 /// Set vector of neutrino paths.
 /// @param paths - A sequence of neutrino paths
 ///
-void PMNS_Base::SetPath(std::vector<NuPath> paths){
-
-  fNuPaths=paths;
-
-}
+void PMNS_Base::SetPath(std::vector<NuPath> paths) { fNuPaths = paths; }
 
 //.............................................................................
 ///
 /// Get the vector of neutrino paths.
 ///
-vector<NuPath> PMNS_Base::GetPath(){
-
-  return fNuPaths;
-
-}
+vector<NuPath> PMNS_Base::GetPath() { return fNuPaths; }
 
 //.............................................................................
 ///
 /// Add a path to the sequence.
 /// @param p - A neutrino path segment
 ///
-void PMNS_Base::AddPath(NuPath p){
-
-  fNuPaths.push_back(p);
-
-}
+void PMNS_Base::AddPath(NuPath p) { fNuPaths.push_back(p); }
 
 //.............................................................................
 ///
@@ -369,10 +314,9 @@ void PMNS_Base::AddPath(NuPath p){
 /// @param zoa     - The effective Z/A of the path segment
 /// @param layer   - An index to identify the layer type (e.g. earth inner core)
 ///
-void PMNS_Base::AddPath(double length, double density, double zoa, int layer){
-
+void PMNS_Base::AddPath(double length, double density, double zoa, int layer)
+{
   AddPath(NuPath(length, density, zoa, layer));
-
 }
 
 //.............................................................................
@@ -383,11 +327,10 @@ void PMNS_Base::AddPath(double length, double density, double zoa, int layer){
 ///
 /// @param p - A neutrino path segment
 ///
-void PMNS_Base::SetPath(NuPath p){
-
+void PMNS_Base::SetPath(NuPath p)
+{
   ClearPath();
   AddPath(p);
-
 }
 
 //.............................................................................
@@ -401,10 +344,9 @@ void PMNS_Base::SetPath(NuPath p){
 /// @param zoa     - The effective Z/A of the path segment
 /// @param layer   - An index to identify the layer type (e.g. earth inner core)
 ///
-void PMNS_Base::SetPath(double length, double density, double zoa, int layer){
-
+void PMNS_Base::SetPath(double length, double density, double zoa, int layer)
+{
   SetPath(NuPath(length, density, zoa, layer));
-
 }
 
 //.............................................................................
@@ -419,24 +361,22 @@ void PMNS_Base::SetPath(double length, double density, double zoa, int layer){
 /// @param att - The value of the attribute
 /// @param idx - The index of the attribute (0,1,2,3) = (L, Rho, Z/A, Layer)
 ///
-void PMNS_Base::SetAtt(double att, int idx){
-
-  if(fNuPaths.size() != 1){
-
-    cerr << "WARNING: Clearing path vector and starting new single path." << endl
+void PMNS_Base::SetAtt(double att, int idx)
+{
+  if (fNuPaths.size() != 1) {
+    cerr << "WARNING: Clearing path vector and starting new single path."
+         << endl
          << "To avoid possible issues, use the SetPath function." << endl;
 
     SetStdPath();
-
   }
 
-  switch(idx){
-    case 0: fNuPaths[0].length  = att; break;
+  switch (idx) {
+    case 0: fNuPaths[0].length = att; break;
     case 1: fNuPaths[0].density = att; break;
-    case 2: fNuPaths[0].zoa     = att; break;
-    case 3: fNuPaths[0].layer   = att; break;
+    case 2: fNuPaths[0].zoa = att; break;
+    case 3: fNuPaths[0].layer = att; break;
   }
-
 }
 
 //.............................................................................
@@ -448,11 +388,7 @@ void PMNS_Base::SetAtt(double att, int idx){
 ///
 /// @param L - The length of the path segment in km
 ///
-void PMNS_Base::SetLength(double L){
-
-  SetAtt(L, 0);
-
-}
+void PMNS_Base::SetLength(double L) { SetAtt(L, 0); }
 
 //.............................................................................
 ///
@@ -463,11 +399,7 @@ void PMNS_Base::SetLength(double L){
 ///
 /// @param rho - The density of the path segment in g/cm^3
 ///
-void PMNS_Base::SetDensity(double rho){
-
-  SetAtt(rho, 1);
-
-}
+void PMNS_Base::SetDensity(double rho) { SetAtt(rho, 1); }
 
 //.............................................................................
 ///
@@ -478,11 +410,7 @@ void PMNS_Base::SetDensity(double rho){
 ///
 /// @param zoa - The effective Z/A of the path segment
 ///
-void PMNS_Base::SetZoA(double zoa){
-
-  SetAtt(zoa, 2);
-
-}
+void PMNS_Base::SetZoA(double zoa) { SetAtt(zoa, 2); }
 
 //.............................................................................
 ///
@@ -496,33 +424,28 @@ void PMNS_Base::SetZoA(double zoa){
 /// @param att - The values of the attribute
 /// @param idx - The index of the attribute (0,1,2,3) = (L, Rho, Z/A, Layer)
 ///
-void PMNS_Base::SetAtt(vectorD att, int idx){
-
+void PMNS_Base::SetAtt(vectorD att, int idx)
+{
   // Get the sizes of the attribute and
   // path sequence vectors
   int nA = att.size();
   int nP = fNuPaths.size();
 
   // If the vector sizes are equal, update this attribute
-  if(nA == nP){
-
-    for(int i=0; i<nP; i++){
-
-      switch(idx){
-        case 0: fNuPaths[i].length  = att[i]; break;
+  if (nA == nP) {
+    for (int i = 0; i < nP; i++) {
+      switch (idx) {
+        case 0: fNuPaths[i].length = att[i]; break;
         case 1: fNuPaths[i].density = att[i]; break;
-        case 2: fNuPaths[i].zoa     = att[i]; break;
-        case 3: fNuPaths[i].layer   = att[i]; break;
+        case 2: fNuPaths[i].zoa = att[i]; break;
+        case 3: fNuPaths[i].layer = att[i]; break;
       }
-
     }
-
   }
   // If the vector sizes differ, create a new path sequence
   // and set value for this attribute. Other attributes will
   // be taken from default single path.
-  else{
-
+  else {
     cerr << "WARNING: New vector size. Starting new path vector." << endl
          << "To avoid possible issues, use the SetPath function." << endl;
 
@@ -538,21 +461,17 @@ void PMNS_Base::SetAtt(vectorD att, int idx){
 
     // Set this particular attribute's value
     // and add the path segment to the sequence
-    for(int i=0; i<nA; i++){
-
-      switch(idx){
-        case 0: p.length  = att[i]; break;
+    for (int i = 0; i < nA; i++) {
+      switch (idx) {
+        case 0: p.length = att[i]; break;
         case 1: p.density = att[i]; break;
-        case 2: p.zoa     = att[i]; break;
-        case 3: p.layer   = att[i]; break;
+        case 2: p.zoa = att[i]; break;
+        case 3: p.layer = att[i]; break;
       }
 
       AddPath(p);
-
     }
-
   }
-
 }
 
 //.............................................................................
@@ -564,11 +483,7 @@ void PMNS_Base::SetAtt(vectorD att, int idx){
 ///
 /// @param L - The lengths of the path segments in km
 ///
-void PMNS_Base::SetLength(vectorD L){
-
-  SetAtt(L, 0);
-
-}
+void PMNS_Base::SetLength(vectorD L) { SetAtt(L, 0); }
 
 //.............................................................................
 ///
@@ -579,11 +494,7 @@ void PMNS_Base::SetLength(vectorD L){
 ///
 /// @param rho - The densities of the path segments in g/cm^3
 ///
-void PMNS_Base::SetDensity(vectorD rho){
-
-  SetAtt(rho, 1);
-
-}
+void PMNS_Base::SetDensity(vectorD rho) { SetAtt(rho, 1); }
 
 //.............................................................................
 ///
@@ -594,11 +505,7 @@ void PMNS_Base::SetDensity(vectorD rho){
 ///
 /// @param zoa - The effective Z/A of the path segments
 ///
-void PMNS_Base::SetZoA(vectorD zoa){
-
-  SetAtt(zoa, 2);
-
-}
+void PMNS_Base::SetZoA(vectorD zoa) { SetAtt(zoa, 2); }
 
 //.............................................................................
 ///
@@ -609,12 +516,11 @@ void PMNS_Base::SetZoA(vectorD zoa){
 ///
 /// @param lay - Indices to identify the layer types (e.g. earth inner core)
 ///
-void PMNS_Base::SetLayers(vectorI lay){
-
+void PMNS_Base::SetLayers(vectorI lay)
+{
   vectorD lay_double(lay.begin(), lay.end());
 
   SetAtt(lay_double, 3);
-
 }
 
 //.............................................................................
@@ -632,25 +538,24 @@ void PMNS_Base::SetLayers(vectorI lay){
 ///
 void PMNS_Base::SetAngle(int i, int j, double th)
 {
-
-  if(i>j){
-    cerr << "WARNING: First argument should be smaller than second argument" << endl
+  if (i > j) {
+    cerr << "WARNING: First argument should be smaller than second argument"
+         << endl
          << "         Setting reverse order (Theta" << j << i << "). " << endl;
     int temp = i;
-    i = j;
-    j = temp;
+    i        = j;
+    j        = temp;
   }
-  if(i<1 || i>fNumNus-1 || j<2 || j>fNumNus){
+  if (i < 1 || i > fNumNus - 1 || j < 2 || j > fNumNus) {
     cerr << "ERROR: Theta" << i << j << " not valid for " << fNumNus
          << " neutrinos. Doing nothing." << endl;
     return;
   }
 
   // Check if value is actually changing
-  fBuiltHms *= (fTheta[i-1][j-1] == th);
+  fBuiltHms *= (fTheta[i - 1][j - 1] == th);
 
-  fTheta[i-1][j-1] = th;
-
+  fTheta[i - 1][j - 1] = th;
 }
 
 //.............................................................................
@@ -664,24 +569,22 @@ void PMNS_Base::SetAngle(int i, int j, double th)
 ///
 double PMNS_Base::GetAngle(int i, int j)
 {
-
-  if(i>j){
-    cerr << "WARNING: First argument should be smaller than second argument" << endl
+  if (i > j) {
+    cerr << "WARNING: First argument should be smaller than second argument"
+         << endl
          << "         Setting reverse order (Theta" << j << i << "). " << endl;
     int temp = i;
-    i = j;
-    j = temp;
+    i        = j;
+    j        = temp;
   }
-  if(i<1 || i>fNumNus-1 || j<2 || j>fNumNus){
+  if (i < 1 || i > fNumNus - 1 || j < 2 || j > fNumNus) {
     cerr << "ERROR: Theta" << i << j << " not valid for " << fNumNus
          << " neutrinos. Returning zero." << endl;
     return 0;
   }
 
-  return fTheta[i-1][j-1];
-
+  return fTheta[i - 1][j - 1];
 }
-
 
 //.............................................................................
 ///
@@ -698,29 +601,29 @@ double PMNS_Base::GetAngle(int i, int j)
 ///
 void PMNS_Base::SetDelta(int i, int j, double delta)
 {
-
-  if(i>j){
-    cerr << "WARNING: First argument should be smaller than second argument" << endl
+  if (i > j) {
+    cerr << "WARNING: First argument should be smaller than second argument"
+         << endl
          << "         Setting reverse order (Delta" << j << i << "). " << endl;
     int temp = i;
-    i = j;
-    j = temp;
+    i        = j;
+    j        = temp;
   }
-  if(i<1 || i>fNumNus-1 || j<2 || j>fNumNus){
+  if (i < 1 || i > fNumNus - 1 || j < 2 || j > fNumNus) {
     cerr << "ERROR: Delta" << i << j << " not valid for " << fNumNus
          << " neutrinos. Doing nothing." << endl;
     return;
   }
-  if(i+1==j){
-    cerr << "WARNING: Rotation " << i << j << " is real. Doing nothing." << endl;
+  if (i + 1 == j) {
+    cerr << "WARNING: Rotation " << i << j << " is real. Doing nothing."
+         << endl;
     return;
   }
 
   // Check if value is actually changing
-  fBuiltHms *= (fDelta[i-1][j-1] == delta);
+  fBuiltHms *= (fDelta[i - 1][j - 1] == delta);
 
-  fDelta[i-1][j-1] = delta;
-
+  fDelta[i - 1][j - 1] = delta;
 }
 
 //.............................................................................
@@ -734,26 +637,26 @@ void PMNS_Base::SetDelta(int i, int j, double delta)
 ///
 double PMNS_Base::GetDelta(int i, int j)
 {
-
-  if(i>j){
-    cerr << "WARNING: First argument should be smaller than second argument" << endl
+  if (i > j) {
+    cerr << "WARNING: First argument should be smaller than second argument"
+         << endl
          << "         Setting reverse order (Delta" << j << i << "). " << endl;
     int temp = i;
-    i = j;
-    j = temp;
+    i        = j;
+    j        = temp;
   }
-  if(i<1 || i>fNumNus-1 || j<2 || j>fNumNus){
+  if (i < 1 || i > fNumNus - 1 || j < 2 || j > fNumNus) {
     cerr << "ERROR: Delta" << i << j << " not valid for " << fNumNus
          << " neutrinos. Returning zero." << endl;
     return 0;
   }
-  if(i+1==j){
-    cerr << "WARNING: Rotation " << i << j << " is real. Returning zero." << endl;
+  if (i + 1 == j) {
+    cerr << "WARNING: Rotation " << i << j << " is real. Returning zero."
+         << endl;
     return 0;
   }
 
-  return fDelta[i-1][j-1];
-
+  return fDelta[i - 1][j - 1];
 }
 
 //.............................................................................
@@ -770,18 +673,16 @@ double PMNS_Base::GetDelta(int i, int j)
 ///
 void PMNS_Base::SetDm(int j, double dm)
 {
-
-  if(j<2 || j>fNumNus){
+  if (j < 2 || j > fNumNus) {
     cerr << "ERROR: Dm" << j << "1 not valid for " << fNumNus
          << " neutrinos. Doing nothing." << endl;
     return;
   }
 
   // Check if value is actually changing
-  fBuiltHms *= (fDm[j-1] == dm);
+  fBuiltHms *= (fDm[j - 1] == dm);
 
-  fDm[j-1] = dm;
-
+  fDm[j - 1] = dm;
 }
 
 //.............................................................................
@@ -794,15 +695,13 @@ void PMNS_Base::SetDm(int j, double dm)
 ///
 double PMNS_Base::GetDm(int j)
 {
-
-  if(j<2 || j>fNumNus){
+  if (j < 2 || j > fNumNus) {
     cerr << "ERROR: Dm" << j << "1 not valid for " << fNumNus
          << " neutrinos. Returning zero." << endl;
     return 0;
   }
 
-  return fDm[j-1];
-
+  return fDm[j - 1];
 }
 
 //.............................................................................
@@ -813,14 +712,13 @@ double PMNS_Base::GetDm(int j)
 ///
 /// @return The vector of sorted indices
 ///
-vectorI PMNS_Base::GetSortedIndices(const vectorD x){
-
-  vectorI idx(x.size(),0);
-  for(int i=0; i<x.size(); i++) idx[i] = i;
+vectorI PMNS_Base::GetSortedIndices(const vectorD x)
+{
+  vectorI idx(x.size(), 0);
+  for (int i = 0; i < x.size(); i++) idx[i] = i;
   sort(idx.begin(), idx.end(), IdxCompare(x));
 
   return idx;
-
 }
 
 //.............................................................................
@@ -833,8 +731,7 @@ vectorI PMNS_Base::GetSortedIndices(const vectorD x){
 ///
 double PMNS_Base::GetDmEff(int j)
 {
-
-  if(j<2 || j>fNumNus){
+  if (j < 2 || j > fNumNus) {
     cerr << "ERROR: Dm_" << j << "1 not valid for " << fNumNus
          << " neutrinos. Returning zero." << endl;
     return 0;
@@ -846,14 +743,13 @@ double PMNS_Base::GetDmEff(int j)
   // Sort eigenvalues in same order as vacuum Dm^2
   vectorI dm_idx = GetSortedIndices(fDm);
   vectorD dm_idx_double(dm_idx.begin(), dm_idx.end());
-  dm_idx = GetSortedIndices(dm_idx_double);
+  dm_idx         = GetSortedIndices(dm_idx_double);
   vectorI ev_idx = GetSortedIndices(fEval);
 
   // Return difference in eigenvalues * 2E
-  return (fEval[ev_idx[dm_idx[j-1]]] - fEval[ev_idx[dm_idx[0]]]) * 2*fEnergy * kGeV2eV;
-
+  return (fEval[ev_idx[dm_idx[j - 1]]] - fEval[ev_idx[dm_idx[0]]]) * 2 *
+         fEnergy * kGeV2eV;
 }
-
 
 //.............................................................................
 ///
@@ -861,28 +757,27 @@ double PMNS_Base::GetDmEff(int j)
 ///
 /// @param i,j - the indices of the rotation ij
 ///
-void PMNS_Base::RotateState(int i, int j){
-
+void PMNS_Base::RotateState(int i, int j)
+{
   // Do nothing if angle is zero
-  if(fTheta[i][j]==0) return;
+  if (fTheta[i][j] == 0) return;
 
   double sij = sin(fTheta[i][j]);
   double cij = cos(fTheta[i][j]);
 
   complexD buffer;
 
-  if(i+1==j || fDelta[i][j]==0){
-    buffer      = cij*fNuState[i] + sij*fNuState[j];
-    fNuState[j] = cij*fNuState[j] - sij*fNuState[i];
+  if (i + 1 == j || fDelta[i][j] == 0) {
+    buffer      = cij * fNuState[i] + sij * fNuState[j];
+    fNuState[j] = cij * fNuState[j] - sij * fNuState[i];
   }
   else {
     complexD eij = complexD(cos(fDelta[i][j]), -sin(fDelta[i][j]));
-    buffer      = cij*fNuState[i] + sij*eij*fNuState[j];
-    fNuState[j] = cij*fNuState[j] - sij*conj(eij)*fNuState[i];
+    buffer       = cij * fNuState[i] + sij * eij * fNuState[j];
+    fNuState[j]  = cij * fNuState[j] - sij * conj(eij) * fNuState[i];
   }
 
   fNuState[i] = buffer;
-
 }
 
 //.............................................................................
@@ -897,22 +792,20 @@ void PMNS_Base::RotateState(int i, int j){
 ///
 /// @return The mass eigenstate
 ///
-vectorC PMNS_Base::GetMassEigenstate(int mi){
-
+vectorC PMNS_Base::GetMassEigenstate(int mi)
+{
   vectorC oldState = fNuState;
 
   ResetToFlavour(mi);
 
-  for(int j=0; j<fNumNus; j++){
-  for(int i=0; i<j; i++){
-    RotateState(i,j);
-  }}
+  for (int j = 0; j < fNumNus; j++) {
+    for (int i = 0; i < j; i++) { RotateState(i, j); }
+  }
 
   vectorC newState = fNuState;
-  fNuState = oldState;
+  fNuState         = oldState;
 
   return newState;
-
 }
 
 //.............................................................................
@@ -926,25 +819,25 @@ vectorC PMNS_Base::GetMassEigenstate(int mi){
 /// @param i,j - the indices of the rotation ij
 /// @param Ham - the Hamiltonian to be rotated
 ///
-void PMNS_Base::RotateH(int i,int j, matrixC& Ham){
-
+void PMNS_Base::RotateH(int i, int j, matrixC& Ham)
+{
   // Do nothing if angle is zero
-  if(fTheta[i][j]==0) return;
+  if (fTheta[i][j] == 0) return;
 
   double fSinBuffer = sin(fTheta[i][j]);
   double fCosBuffer = cos(fTheta[i][j]);
 
-  double  fHmsBufferD;
+  double   fHmsBufferD;
   complexD fHmsBufferC;
 
   // With Delta
-  if(i+1<j){
+  if (i + 1 < j) {
     complexD fExpBuffer = complexD(cos(fDelta[i][j]), -sin(fDelta[i][j]));
 
     // General case
-    if(i>0){
+    if (i > 0) {
       // Top columns
-      for(int k=0; k<i; k++){
+      for (int k = 0; k < i; k++) {
         fHmsBufferC = Ham[k][i];
 
         Ham[k][i] *= fCosBuffer;
@@ -955,7 +848,7 @@ void PMNS_Base::RotateH(int i,int j, matrixC& Ham){
       }
 
       // Middle row and column
-      for(int k=i+1; k<j; k++){
+      for (int k = i + 1; k < j; k++) {
         fHmsBufferC = Ham[k][j];
 
         Ham[k][j] *= fCosBuffer;
@@ -970,21 +863,24 @@ void PMNS_Base::RotateH(int i,int j, matrixC& Ham){
       fHmsBufferD = real(Ham[j][j]);
 
       Ham[i][i] *= fCosBuffer * fCosBuffer;
-      Ham[i][i] += 2 * fSinBuffer * fCosBuffer * real(Ham[i][j] * conj(fExpBuffer));
+      Ham[i][i] +=
+          2 * fSinBuffer * fCosBuffer * real(Ham[i][j] * conj(fExpBuffer));
       Ham[i][i] += fSinBuffer * Ham[j][j] * fSinBuffer;
 
       Ham[j][j] *= fCosBuffer * fCosBuffer;
       Ham[j][j] += fSinBuffer * fHmsBufferC * fSinBuffer;
-      Ham[j][j] -= 2 * fSinBuffer * fCosBuffer * real(Ham[i][j] * conj(fExpBuffer));
+      Ham[j][j] -=
+          2 * fSinBuffer * fCosBuffer * real(Ham[i][j] * conj(fExpBuffer));
 
-      Ham[i][j] -= 2 * fSinBuffer * real(Ham[i][j] * conj(fExpBuffer)) * fSinBuffer * fExpBuffer;
-      Ham[i][j] += fSinBuffer * fCosBuffer * (fHmsBufferD - fHmsBufferC) * fExpBuffer;
-
+      Ham[i][j] -= 2 * fSinBuffer * real(Ham[i][j] * conj(fExpBuffer)) *
+                   fSinBuffer * fExpBuffer;
+      Ham[i][j] +=
+          fSinBuffer * fCosBuffer * (fHmsBufferD - fHmsBufferC) * fExpBuffer;
     }
     // First rotation on j (No top columns)
-    else{
+    else {
       // Middle rows and columns
-      for(int k=i+1; k<j; k++){
+      for (int k = i + 1; k < j; k++) {
         Ham[k][j] = -conj(Ham[i][k]) * fSinBuffer * fExpBuffer;
 
         Ham[i][k] *= fCosBuffer;
@@ -993,7 +889,8 @@ void PMNS_Base::RotateH(int i,int j, matrixC& Ham){
       // Nodes ij
       fHmsBufferD = real(Ham[i][i]);
 
-      Ham[i][j] = fSinBuffer * fCosBuffer * (Ham[j][j] - fHmsBufferD) * fExpBuffer;
+      Ham[i][j] =
+          fSinBuffer * fCosBuffer * (Ham[j][j] - fHmsBufferD) * fExpBuffer;
 
       Ham[i][i] *= fCosBuffer * fCosBuffer;
       Ham[i][i] += fSinBuffer * Ham[j][j] * fSinBuffer;
@@ -1001,14 +898,13 @@ void PMNS_Base::RotateH(int i,int j, matrixC& Ham){
       Ham[j][j] *= fCosBuffer * fCosBuffer;
       Ham[j][j] += fSinBuffer * fHmsBufferD * fSinBuffer;
     }
-
   }
   // Without Delta (No middle rows or columns: j = i+1)
-  else{
+  else {
     // General case
-    if(i>0){
+    if (i > 0) {
       // Top columns
-      for(int k=0; k<i; k++){
+      for (int k = 0; k < i; k++) {
         fHmsBufferC = Ham[k][i];
 
         Ham[k][i] *= fCosBuffer;
@@ -1032,20 +928,16 @@ void PMNS_Base::RotateH(int i,int j, matrixC& Ham){
 
       Ham[i][j] -= 2 * fSinBuffer * real(Ham[i][j]) * fSinBuffer;
       Ham[i][j] += fSinBuffer * fCosBuffer * (fHmsBufferD - fHmsBufferC);
-
     }
     // First rotation (theta12)
-    else{
-
+    else {
       Ham[i][j] = fSinBuffer * fCosBuffer * Ham[j][j];
 
       Ham[i][i] = fSinBuffer * Ham[j][j] * fSinBuffer;
 
       Ham[j][j] *= fCosBuffer * fCosBuffer;
-
     }
   }
-
 }
 
 //.............................................................................
@@ -1062,31 +954,25 @@ void PMNS_Base::RotateH(int i,int j, matrixC& Ham){
 ///
 void PMNS_Base::BuildHms()
 {
-
   // Check if anything changed
-  if(fBuiltHms) return;
+  if (fBuiltHms) return;
 
   // Tag to recompute eigensystem
   fGotES = false;
 
-  for(int j=0; j<fNumNus; j++){
+  for (int j = 0; j < fNumNus; j++) {
     // Set mass splitting
     fHms[j][j] = fDm[j];
     // Reset off-diagonal elements
-    for(int i=0; i<j; i++){
-      fHms[i][j] = 0;
-    }
+    for (int i = 0; i < j; i++) { fHms[i][j] = 0; }
     // Rotate j neutrinos
-    for(int i=0; i<j; i++){
-      RotateH(i,j,fHms);
-    }
+    for (int i = 0; i < j; i++) { RotateH(i, j, fHms); }
   }
 
   ClearCache();
 
   // Tag as built
   fBuiltHms = true;
-
 }
 
 //.............................................................................
@@ -1096,7 +982,6 @@ void PMNS_Base::BuildHms()
 ///
 void PMNS_Base::PropagatePath(NuPath p)
 {
-
   // Set the neutrino path
   SetCurPath(p);
 
@@ -1104,27 +989,26 @@ void PMNS_Base::PropagatePath(NuPath p)
   SolveHam();
 
   double LengthIneV = kKm2eV * p.length;
-  for(int i=0; i<fNumNus; i++){
+  for (int i = 0; i < fNumNus; i++) {
     double arg = fEval[i] * LengthIneV;
     fPhases[i] = complexD(cos(arg), -sin(arg));
   }
 
-  for(int i=0;i<fNumNus;i++){
+  for (int i = 0; i < fNumNus; i++) {
     fBuffer[i] = 0;
-    for(int j=0;j<fNumNus;j++){
+    for (int j = 0; j < fNumNus; j++) {
       fBuffer[i] += conj(fEvec[j][i]) * fNuState[j];
     }
     fBuffer[i] *= fPhases[i];
   }
 
   // Propagate neutrino state
-  for(int i=0;i<fNumNus;i++){
+  for (int i = 0; i < fNumNus; i++) {
     fNuState[i] = 0;
-    for(int j=0;j<fNumNus;j++){
-      fNuState[i] +=  fEvec[i][j] * fBuffer[j];
+    for (int j = 0; j < fNumNus; j++) {
+      fNuState[i] += fEvec[i][j] * fBuffer[j];
     }
   }
-
 }
 
 //.............................................................................
@@ -1133,13 +1017,7 @@ void PMNS_Base::PropagatePath(NuPath p)
 ///
 void PMNS_Base::Propagate()
 {
-
-  for(int i=0; i<int(fNuPaths.size()); i++){
-
-    PropagatePath(fNuPaths[i]);
-
-  }
-
+  for (int i = 0; i < int(fNuPaths.size()); i++) { PropagatePath(fNuPaths[i]); }
 }
 
 //.............................................................................
@@ -1155,10 +1033,12 @@ void PMNS_Base::Propagate()
 ///
 void PMNS_Base::ResetToFlavour(int flv)
 {
-  assert(flv>=0 && flv<fNumNus);
-  for (int i=0; i<fNumNus; ++i){
-    if (i==flv) fNuState[i] = one;
-    else        fNuState[i] = zero;
+  assert(flv >= 0 && flv < fNumNus);
+  for (int i = 0; i < fNumNus; ++i) {
+    if (i == flv)
+      fNuState[i] = one;
+    else
+      fNuState[i] = zero;
   }
 }
 
@@ -1177,7 +1057,7 @@ void PMNS_Base::ResetToFlavour(int flv)
 ///
 double PMNS_Base::P(int flv)
 {
-  assert(flv>=0 && flv<fNumNus);
+  assert(flv >= 0 && flv < fNumNus);
   return norm(fNuState[flv]);
 }
 
@@ -1187,12 +1067,11 @@ double PMNS_Base::P(int flv)
 ///
 /// @param nu_in - The neutrino initial state in flavour basis.
 ///
-void PMNS_Base::SetPureState(vectorC nu_in){
-
+void PMNS_Base::SetPureState(vectorC nu_in)
+{
   assert(nu_in.size() == fNumNus);
 
   fNuState = nu_in;
-
 }
 
 //.............................................................................
@@ -1211,13 +1090,11 @@ void PMNS_Base::SetPureState(vectorC nu_in){
 ///
 double PMNS_Base::Prob(int flvi, int flvf)
 {
-
   ResetToFlavour(flvi);
 
   Propagate();
 
   return P(flvf);
-
 }
 
 //.............................................................................
@@ -1236,13 +1113,11 @@ double PMNS_Base::Prob(int flvi, int flvf)
 ///
 double PMNS_Base::Prob(vectorC nu_in, int flvf)
 {
-
   SetPureState(nu_in);
 
   Propagate();
 
   return P(flvf);
-
 }
 
 //.............................................................................
@@ -1262,11 +1137,9 @@ double PMNS_Base::Prob(vectorC nu_in, int flvf)
 ///
 double PMNS_Base::Prob(vectorC nu_in, int flvf, double E)
 {
-
   SetEnergy(E);
 
   return Prob(nu_in, flvf);
-
 }
 
 //.............................................................................
@@ -1286,11 +1159,9 @@ double PMNS_Base::Prob(vectorC nu_in, int flvf, double E)
 ///
 double PMNS_Base::Prob(int flvi, int flvf, double E)
 {
-
   SetEnergy(E);
 
   return Prob(flvi, flvf);
-
 }
 
 //.............................................................................
@@ -1317,12 +1188,10 @@ double PMNS_Base::Prob(int flvi, int flvf, double E)
 ///
 double PMNS_Base::Prob(vectorC nu_in, int flvf, double E, double L)
 {
-
   SetEnergy(E);
   SetLength(L);
 
   return Prob(nu_in, flvf);
-
 }
 
 //.............................................................................
@@ -1349,12 +1218,10 @@ double PMNS_Base::Prob(vectorC nu_in, int flvf, double E, double L)
 ///
 double PMNS_Base::Prob(int flvi, int flvf, double E, double L)
 {
-
   SetEnergy(E);
   SetLength(L);
 
   return Prob(flvi, flvf);
-
 }
 
 //.............................................................................
@@ -1363,16 +1230,13 @@ double PMNS_Base::Prob(int flvi, int flvf, double E, double L)
 ///
 /// @return Neutrino oscillation probabilities
 ///
-vectorD PMNS_Base::GetProbVector(){
-
+vectorD PMNS_Base::GetProbVector()
+{
   vectorD probs(fNumNus);
 
-  for(int i=0; i<probs.size(); i++){
-    probs[i] = P(i);
-  }
+  for (int i = 0; i < probs.size(); i++) { probs[i] = P(i); }
 
   return probs;
-
 }
 
 //.............................................................................
@@ -1385,13 +1249,11 @@ vectorD PMNS_Base::GetProbVector(){
 ///
 vectorD PMNS_Base::ProbVector(vectorC nu_in)
 {
-
   SetPureState(nu_in);
 
   Propagate();
 
   return GetProbVector();
-
 }
 
 //.............................................................................
@@ -1409,13 +1271,11 @@ vectorD PMNS_Base::ProbVector(vectorC nu_in)
 ///
 vectorD PMNS_Base::ProbVector(int flvi)
 {
-
   ResetToFlavour(flvi);
 
   Propagate();
 
   return GetProbVector();
-
 }
 
 //.............................................................................
@@ -1430,11 +1290,9 @@ vectorD PMNS_Base::ProbVector(int flvi)
 ///
 vectorD PMNS_Base::ProbVector(vectorC nu_in, double E)
 {
-
   SetEnergy(E);
 
   return ProbVector(nu_in);
-
 }
 
 //.............................................................................
@@ -1454,11 +1312,9 @@ vectorD PMNS_Base::ProbVector(vectorC nu_in, double E)
 ///
 vectorD PMNS_Base::ProbVector(int flvi, double E)
 {
-
   SetEnergy(E);
 
   return ProbVector(flvi);
-
 }
 
 //.............................................................................
@@ -1479,12 +1335,10 @@ vectorD PMNS_Base::ProbVector(int flvi, double E)
 ///
 vectorD PMNS_Base::ProbVector(vectorC nu_in, double E, double L)
 {
-
   SetEnergy(E);
   SetLength(L);
 
   return ProbVector(nu_in);
-
 }
 
 //.............................................................................
@@ -1510,14 +1364,11 @@ vectorD PMNS_Base::ProbVector(vectorC nu_in, double E, double L)
 ///
 vectorD PMNS_Base::ProbVector(int flvi, double E, double L)
 {
-
   SetEnergy(E);
   SetLength(L);
 
   return ProbVector(flvi);
-
 }
-
 
 //.............................................................................
 ///
@@ -1535,9 +1386,8 @@ vectorD PMNS_Base::ProbVector(int flvi, double E, double L)
 ///
 matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf)
 {
-
-  assert(nflvi<=fNumNus && nflvi>=0);
-  assert(nflvf<=fNumNus && nflvf>=0);
+  assert(nflvi <= fNumNus && nflvi >= 0);
+  assert(nflvf <= fNumNus && nflvf >= 0);
 
   // Output probabilities
   matrixD probs(nflvi, vectorD(nflvf));
@@ -1546,30 +1396,28 @@ matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf)
   matrixC allstates(nflvi, vectorC(fNumNus));
 
   // Reset all initial states
-  for(int i=0; i<nflvi; i++){
+  for (int i = 0; i < nflvi; i++) {
     ResetToFlavour(i);
     allstates[i] = fNuState;
   }
 
   // Propagate all states in parallel
-  for(int i=0; i<int(fNuPaths.size()); i++){
-
-    for(int flvi=0; flvi<nflvi; flvi++){
+  for (int i = 0; i < int(fNuPaths.size()); i++) {
+    for (int flvi = 0; flvi < nflvi; flvi++) {
       fNuState = allstates[flvi];
       PropagatePath(fNuPaths[i]);
       allstates[flvi] = fNuState;
     }
-
   }
 
   // Get all probabilities
-  for(int flvi=0; flvi<nflvi; flvi++){
-  for(int flvj=0; flvj<nflvf; flvj++){
-    probs[flvi][flvj] = norm(allstates[flvi][flvj]);
-  }}
+  for (int flvi = 0; flvi < nflvi; flvi++) {
+    for (int flvj = 0; flvj < nflvf; flvj++) {
+      probs[flvi][flvj] = norm(allstates[flvi][flvj]);
+    }
+  }
 
   return probs;
-
 }
 
 //.............................................................................
@@ -1590,11 +1438,9 @@ matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf)
 ///
 matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf, double E)
 {
+  SetEnergy(E);
 
- SetEnergy(E);
-
- return ProbMatrix(nflvi, nflvf);
-
+  return ProbMatrix(nflvi, nflvf);
 }
 
 //.............................................................................
@@ -1621,12 +1467,10 @@ matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf, double E)
 ///
 matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf, double E, double L)
 {
+  SetEnergy(E);
+  SetLength(L);
 
- SetEnergy(E);
- SetLength(L);
-
- return ProbMatrix(nflvi, nflvf);
-
+  return ProbMatrix(nflvi, nflvf);
 }
 
 //.............................................................................
@@ -1655,11 +1499,9 @@ matrixD PMNS_Base::ProbMatrix(int nflvi, int nflvf, double E, double L)
 ///
 double PMNS_Base::AvgProb(int flvi, int flvf, double E, double dE)
 {
-
   ResetToFlavour(flvi);
 
   return AvgProb(fNuState, flvf, E, dE);
-
 }
 
 //.............................................................................
@@ -1671,8 +1513,8 @@ double PMNS_Base::AvgProb(int flvi, int flvf, double E, double dE)
 ///
 /// @return The L/E bin center and width in km/GeV
 ///
-vectorD PMNS_Base::ConvertEtoLoE(double E, double dE){
-
+vectorD PMNS_Base::ConvertEtoLoE(double E, double dE)
+{
   // Make sure fPath is set
   // Use average if multiple paths
   SetCurPath(AvgPath(fNuPaths));
@@ -1685,18 +1527,18 @@ vectorD PMNS_Base::ConvertEtoLoE(double E, double dE){
 
   // Transform range to L/E
   // Full range if low edge > minE
-  if(E-dE/2 > minE){
-    LoEbin[0] = 0.5 * (fPath.length/(E-dE/2) + fPath.length/(E+dE/2));
-    LoEbin[1] = fPath.length/(E-dE/2) - fPath.length/(E+dE/2);
+  if (E - dE / 2 > minE) {
+    LoEbin[0] =
+        0.5 * (fPath.length / (E - dE / 2) + fPath.length / (E + dE / 2));
+    LoEbin[1] = fPath.length / (E - dE / 2) - fPath.length / (E + dE / 2);
   }
   // Else start at minE
-  else{
-    LoEbin[0] = 0.5 * (fPath.length/minE + fPath.length/(E+dE/2));
-    LoEbin[1] = fPath.length/minE - fPath.length/(E+dE/2);
+  else {
+    LoEbin[0] = 0.5 * (fPath.length / minE + fPath.length / (E + dE / 2));
+    LoEbin[1] = fPath.length / minE - fPath.length / (E + dE / 2);
   }
 
   return LoEbin;
-
 }
 
 //.............................................................................
@@ -1725,20 +1567,18 @@ vectorD PMNS_Base::ConvertEtoLoE(double E, double dE){
 ///
 double PMNS_Base::AvgProb(vectorC nu_in, int flvf, double E, double dE)
 {
-
   // Do nothing if energy is not positive
-  if(E<=0) return 0;
+  if (E <= 0) return 0;
 
-  if(fNuPaths.empty()) return 0;
+  if (fNuPaths.empty()) return 0;
 
   // Don't average zero width
-  if(dE<=0) return Prob(nu_in, flvf, E);
+  if (dE <= 0) return Prob(nu_in, flvf, E);
 
   vectorD LoEbin = ConvertEtoLoE(E, dE);
 
   // Compute average in LoE
   return AvgProbLoE(nu_in, flvf, LoEbin[0], LoEbin[1]);
-
 }
 
 //.............................................................................
@@ -1769,11 +1609,9 @@ double PMNS_Base::AvgProb(vectorC nu_in, int flvf, double E, double dE)
 ///
 double PMNS_Base::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
 {
-
   ResetToFlavour(flvi);
 
   return AvgProbLoE(fNuState, flvf, LoE, dLoE);
-
 }
 
 //.............................................................................
@@ -1804,48 +1642,44 @@ double PMNS_Base::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
 ///
 double PMNS_Base::AvgProbLoE(vectorC nu_in, int flvf, double LoE, double dLoE)
 {
-
   // Do nothing if L/E is not positive
-  if(LoE<=0) return 0;
+  if (LoE <= 0) return 0;
 
-  if(fNuPaths.empty()) return 0;
+  if (fNuPaths.empty()) return 0;
 
   // Make sure fPath is set
   // Use average if multiple paths
   SetCurPath(AvgPath(fNuPaths));
 
   // Set the energy at bin center
-  SetEnergy(fPath.length/LoE);
+  SetEnergy(fPath.length / LoE);
 
   // Don't average zero width
-  if(dLoE<=0) return Prob(nu_in, flvf);
+  if (dLoE <= 0) return Prob(nu_in, flvf);
 
   // Get sample points for this bin
   vectorD samples = GetSamplePoints(LoE, dLoE);
 
   // Variables to fill sample
   // probabilities and weights
-  double sumw = 0;
-  double prob = 0;
+  double sumw   = 0;
+  double prob   = 0;
   double length = fPath.length;
 
   // Loop over all sample points
-  for(int j=0; j<int(samples.size()); j++){
-
+  for (int j = 0; j < int(samples.size()); j++) {
     // Set (L/E)^-2 weights
-    double w = 1./pow(samples[j],2);
+    double w = 1. / pow(samples[j], 2);
 
     // Add weighted probability
     prob += w * Prob(nu_in, flvf, length / samples[j]);
 
     // Increment sum of weights
     sumw += w;
-
   }
 
   // Return weighted average of probabilities
   return prob / sumw;
-
 }
 
 //.............................................................................
@@ -1868,8 +1702,7 @@ double PMNS_Base::AvgProbLoE(vectorC nu_in, int flvf, double LoE, double dLoE)
 ///
 /// @return Average neutrino oscillation probabilities
 ///
-vectorD PMNS_Base::AvgProbVectorLoE(int flvi,
-                                    double LoE, double dLoE)
+vectorD PMNS_Base::AvgProbVectorLoE(int flvi, double LoE, double dLoE)
 {
   ResetToFlavour(flvi);
   return AvgProbVectorLoE(fNuState, LoE, dLoE);
@@ -1919,22 +1752,20 @@ vectorD PMNS_Base::AvgProbVector(int flvi, double E, double dE)
 ///
 vectorD PMNS_Base::AvgProbVector(vectorC nu_in, double E, double dE)
 {
-
   vectorD probs(fNumNus, 0);
 
   // Do nothing if energy is not positive
-  if(E<=0) return probs;
+  if (E <= 0) return probs;
 
-  if(fNuPaths.empty()) return probs;
+  if (fNuPaths.empty()) return probs;
 
   // Don't average zero width
-  if(dE<=0) return ProbVector(nu_in, E);
+  if (dE <= 0) return ProbVector(nu_in, E);
 
   vectorD LoEbin = ConvertEtoLoE(E, dE);
 
   // Compute average in LoE
   return AvgProbVectorLoE(nu_in, LoEbin[0], LoEbin[1]);
-
 }
 
 //.............................................................................
@@ -1957,60 +1788,55 @@ vectorD PMNS_Base::AvgProbVector(vectorC nu_in, double E, double dE)
 ///
 /// @return Average neutrino oscillation probabilities
 ///
-vectorD PMNS_Base::AvgProbVectorLoE(vectorC nu_in,
-                                    double LoE, double dLoE)
+vectorD PMNS_Base::AvgProbVectorLoE(vectorC nu_in, double LoE, double dLoE)
 {
-
   vectorD probs(fNumNus, 0);
 
   // Do nothing if L/E is not positive
-  if(LoE<=0) return probs;
+  if (LoE <= 0) return probs;
 
-  if(fNuPaths.empty()) return probs;
+  if (fNuPaths.empty()) return probs;
 
   // Make sure fPath is set
   // Use average if multiple paths
   SetCurPath(AvgPath(fNuPaths));
 
   // Set the energy at bin center
-  SetEnergy(fPath.length/LoE);
+  SetEnergy(fPath.length / LoE);
 
   // Don't average zero width
-  if(dLoE<=0) return ProbVector(nu_in);
+  if (dLoE <= 0) return ProbVector(nu_in);
 
   // Get sample points for this bin
   vectorD samples = GetSamplePoints(LoE, dLoE);
 
   // Variables to fill sample
   // probabilities and weights
-  double sumw = 0;
+  double sumw   = 0;
   double length = fPath.length;
 
   // Loop over all sample points
-  for(int j=0; j<int(samples.size()); j++){
-
+  for (int j = 0; j < int(samples.size()); j++) {
     // Set (L/E)^-2 weights
-    double w = 1./pow(samples[j],2);
+    double w = 1. / pow(samples[j], 2);
 
     vectorD sample_probs = ProbVector(nu_in, length / samples[j]);
 
-    for(int i=0; i<fNumNus; i++){
+    for (int i = 0; i < fNumNus; i++) {
       // Add weighted probability
       probs[i] += w * sample_probs[i];
     }
     // Increment sum of weights
     sumw += w;
-
   }
 
-  for(int i=0; i<fNumNus; i++){
+  for (int i = 0; i < fNumNus; i++) {
     // Divide by total sampling weight
     probs[i] /= sumw;
   }
 
   // Return weighted average of probabilities
   return probs;
-
 }
 
 //.............................................................................
@@ -2032,25 +1858,22 @@ vectorD PMNS_Base::AvgProbVectorLoE(vectorC nu_in,
 ///
 /// @return Average neutrino oscillation probabilities
 ///
-matrixD PMNS_Base::AvgProbMatrix(int nflvi, int nflvf,
-                                 double E, double dE)
+matrixD PMNS_Base::AvgProbMatrix(int nflvi, int nflvf, double E, double dE)
 {
-
   matrixD probs(nflvi, vectorD(nflvf, 0));
 
   // Do nothing if energy is not positive
-  if(E<=0) return probs;
+  if (E <= 0) return probs;
 
-  if(fNuPaths.empty()) return probs;
+  if (fNuPaths.empty()) return probs;
 
   // Don't average zero width
-  if(dE<=0) return ProbMatrix(nflvi, nflvf, E);
+  if (dE <= 0) return ProbMatrix(nflvi, nflvf, E);
 
   vectorD LoEbin = ConvertEtoLoE(E, dE);
 
   // Compute average in LoE
   return AvgProbMatrixLoE(nflvi, nflvf, LoEbin[0], LoEbin[1]);
-
 }
 
 //.............................................................................
@@ -2074,62 +1897,60 @@ matrixD PMNS_Base::AvgProbMatrix(int nflvi, int nflvf,
 ///
 /// @return Average neutrino oscillation probabilities
 ///
-matrixD PMNS_Base::AvgProbMatrixLoE(int nflvi, int nflvf,
-                                    double LoE, double dLoE)
+matrixD PMNS_Base::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE,
+                                    double dLoE)
 {
-
   matrixD probs(nflvi, vectorD(nflvf, 0));
 
   // Do nothing if L/E is not positive
-  if(LoE<=0) return probs;
+  if (LoE <= 0) return probs;
 
-  if(fNuPaths.empty()) return probs;
+  if (fNuPaths.empty()) return probs;
 
   // Make sure fPath is set
   // Use average if multiple paths
   SetCurPath(AvgPath(fNuPaths));
 
   // Set the energy at bin center
-  SetEnergy(fPath.length/LoE);
+  SetEnergy(fPath.length / LoE);
 
   // Don't average zero width
-  if(dLoE<=0) return ProbMatrix(nflvi, nflvf);
+  if (dLoE <= 0) return ProbMatrix(nflvi, nflvf);
 
   // Get sample points for this bin
   vectorD samples = GetSamplePoints(LoE, dLoE);
 
   // Variables to fill sample
   // probabilities and weights
-  double sumw = 0;
+  double sumw   = 0;
   double length = fPath.length;
 
   // Loop over all sample points
-  for(int j=0; j<int(samples.size()); j++){
-
+  for (int j = 0; j < int(samples.size()); j++) {
     // Set (L/E)^-2 weights
-    double w = 1./pow(samples[j],2);
+    double w = 1. / pow(samples[j], 2);
 
     matrixD sample_probs = ProbMatrix(nflvi, nflvf, length / samples[j]);
 
-    for(int flvi=0; flvi<nflvi; flvi++){
-    for(int flvf=0; flvf<nflvf; flvf++){
-      // Add weighted probability
-      probs[flvi][flvf] += w * sample_probs[flvi][flvf];
-    }}
+    for (int flvi = 0; flvi < nflvi; flvi++) {
+      for (int flvf = 0; flvf < nflvf; flvf++) {
+        // Add weighted probability
+        probs[flvi][flvf] += w * sample_probs[flvi][flvf];
+      }
+    }
     // Increment sum of weights
     sumw += w;
-
   }
 
-  for(int flvi=0; flvi<nflvi; flvi++){
-  for(int flvf=0; flvf<nflvf; flvf++){
-    // Divide by total sampling weight
-    probs[flvi][flvf] /= sumw;
-  }}
+  for (int flvi = 0; flvi < nflvi; flvi++) {
+    for (int flvf = 0; flvf < nflvf; flvf++) {
+      // Divide by total sampling weight
+      probs[flvi][flvf] /= sumw;
+    }
+  }
 
   // Return weighted average of probabilities
   return probs;
-
 }
 
 //.............................................................................
@@ -2138,8 +1959,9 @@ matrixD PMNS_Base::AvgProbMatrixLoE(int nflvi, int nflvf,
 ///
 /// @param prec - AvgProb precision
 ///
-void PMNS_Base::SetAvgProbPrec(double prec){
-  if(prec<1e-8){
+void PMNS_Base::SetAvgProbPrec(double prec)
+{
+  if (prec < 1e-8) {
     cerr << "WARNING: Cannot set AvgProb precision lower that 1e-8."
          << "Setting to 1e-8." << endl;
     prec = 1e-8;
@@ -2162,7 +1984,6 @@ void PMNS_Base::SetAvgProbPrec(double prec){
 ///
 vectorD PMNS_Base::GetSamplePoints(double LoE, double dLoE)
 {
-
   // Solve Hamiltonian to get eigenvalues
   SolveHam();
 
@@ -2172,9 +1993,9 @@ vectorD PMNS_Base::GetSamplePoints(double LoE, double dLoE)
   // Get list of all effective Dm^2
   vectorD effDm;
 
-  for(int i=0; i<fNumNus-1; i++){
-    for(int j=i+1; j<fNumNus; j++){
-      effDm.push_back( 2 * kGeV2eV * fEnergy * fabs(fEval[j] - fEval[i]) );
+  for (int i = 0; i < fNumNus - 1; i++) {
+    for (int j = i + 1; j < fNumNus; j++) {
+      effDm.push_back(2 * kGeV2eV * fEnergy * fabs(fEval[j] - fEval[i]));
     }
   }
 
@@ -2185,18 +2006,17 @@ vectorD PMNS_Base::GetSamplePoints(double LoE, double dLoE)
 
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
-  int n_div = ceil( 200 * pow(dLoE/LoE,0.8) / sqrt(fAvgProbPrec/1e-4) );
-  //int n_div = 1;
+  int n_div = ceil(200 * pow(dLoE / LoE, 0.8) / sqrt(fAvgProbPrec / 1e-4));
+  // int n_div = 1;
 
   // A vector to store sample points
   vectorD allSamples;
 
   // Loop over sub-divisions
-  for(int k=0; k<n_div; k++){
-
+  for (int k = 0; k < n_div; k++) {
     // Define sub-division center and width
-    double bctr = LoE - dLoE/2 + (k+0.5)*dLoE/n_div;
-    double bwdt = dLoE/n_div;
+    double bctr = LoE - dLoE / 2 + (k + 0.5) * dLoE / n_div;
+    double bwdt = dLoE / n_div;
 
     // Make a vector of L/E sample values
     // Initialized in the sub-division center
@@ -2206,53 +2026,50 @@ vectorD PMNS_Base::GetSamplePoints(double LoE, double dLoE)
     // Loop over all Dm^2 to average each frequency
     // This will recursively sample points in smaller
     // bins so that all relevant frequencies are used
-    for(int i=0; i<numDm; i++){
-
+    for (int i = 0; i < numDm; i++) {
       // Copy the list of sample L/E values
       vectorD prev = samples;
 
       // Redefine bin width to lie within full sub-division
-      double Width = 2*min(prev[0] - (bctr - bwdt/2), (bctr + bwdt/2) - prev[0]);
+      double Width =
+          2 * min(prev[0] - (bctr - bwdt / 2), (bctr + bwdt / 2) - prev[0]);
 
       // Compute oscillation argument sorted from lowest  to highest
       const double arg = k1267 * effDm[i] * Width;
 
       // Skip small oscillation values.
       // If it's the last one, lower the tolerance
-      if(i < numDm-1){
-        if(arg<0.9) continue;
+      if (i < numDm - 1) {
+        if (arg < 0.9) continue;
       }
-      else{
-        if(arg<0.1) continue;
+      else {
+        if (arg < 0.1) continue;
       }
 
       // Reset samples to redefine them
       samples.clear();
 
       // Loop over previous samples
-      for(int j=0; j<int(prev.size()); j++){
-
+      for (int j = 0; j < int(prev.size()); j++) {
         // Compute new sample points around old samples
         // This is based on a oscillatory quadrature rule
-        double sample = (1/sqrt(3)) * (Width/2);
-        if(arg!=0) sample = acos(sin(arg)/arg)/arg * (Width/2);
+        double sample = (1 / sqrt(3)) * (Width / 2);
+        if (arg != 0) sample = acos(sin(arg) / arg) / arg * (Width / 2);
 
         // Add samples above and below center
-        samples.push_back(prev[j]-sample);
-        samples.push_back(prev[j]+sample);
-
+        samples.push_back(prev[j] - sample);
+        samples.push_back(prev[j] + sample);
       }
 
-    }// End of loop over Dm^2
+    } // End of loop over Dm^2
 
     // Add sub-division samples to the end of allSamples vector
     allSamples.insert(allSamples.end(), samples.begin(), samples.end());
 
-  }// End of loop over sub-divisions
+  } // End of loop over sub-divisions
 
   // Return all sample points
   return allSamples;
-
 }
 
 ////////////////////////////////////////////////////////////////////////

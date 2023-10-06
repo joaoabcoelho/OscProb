@@ -77,207 +77,253 @@
 
 namespace OscProb {
 
-  struct TrajConstants
-  {
-    ///
-    /// \brief Constructor.
-    ///
-    /// Constructor.
-    ///
-    /// By default, it sets cosT, Az, latD, and lonD equal to 0, and it uses
-    /// 6368km for rD.
-    ///
-    /// @param cosT - Cosine of the zenith angle for the neutrino trajectory
-    /// @param phi - The azimuthal angle for the neutrino trajectory (in rad)
-    /// @param DetLat - The latitude of the detector (in rad)
-    /// @param DetLon - The longitude of the detector (in rad)
-    /// @param rDet - The distance from the center of the Earth to the detector (in km)
-    ///
-    TrajConstants(double cosT=0, double phi=0, double DetLat=0, double DetLon=0, double rDet=6368) {
-      UpdateNuAngles(cosT, phi);
-      UpdateDetPos(DetLat, DetLon, rDet);
-    }
+  struct TrajConstants {
+      ///
+      /// \brief Constructor.
+      ///
+      /// Constructor.
+      ///
+      /// By default, it sets cosT, Az, latD, and lonD equal to 0, and it uses
+      /// 6368km for rD.
+      ///
+      /// @param cosT - Cosine of the zenith angle for the neutrino trajectory
+      /// @param phi - The azimuthal angle for the neutrino trajectory (in rad)
+      /// @param DetLat - The latitude of the detector (in rad)
+      /// @param DetLon - The longitude of the detector (in rad)
+      /// @param rDet - The distance from the center of the Earth to the
+      /// detector (in km)
+      ///
+      TrajConstants(double cosT = 0, double phi = 0, double DetLat = 0,
+                    double DetLon = 0, double rDet = 6368)
+      {
+        UpdateNuAngles(cosT, phi);
+        UpdateDetPos(DetLat, DetLon, rDet);
+      }
 
-    void UpdateNuAngles(double cosTheta, double phi); ///< Update values of zenith angle and azimuthal angle for neutrino trajectory
-    void UpdateDetPos(double rDet, double DetLat, double DetLon); ///< Update detector position for neutrino trajectory calculations
-    void Recalculate(); ///< Calculate constants that use combinations of detector position variables and neutrino direction angles
+      void UpdateNuAngles(
+          double cosTheta,
+          double phi); ///< Update values of zenith angle and azimuthal angle
+                       ///< for neutrino trajectory
+      void UpdateDetPos(double rDet, double DetLat,
+                        double DetLon); ///< Update detector position for
+                                        ///< neutrino trajectory calculations
+      void Recalculate(); ///< Calculate constants that use combinations of
+                          ///< detector position variables and neutrino
+                          ///< direction angles
 
-    //Variables defining trajectory
-    double cosT; ///< cosT
-    double cosA; ///< cos(phi)
-    double sinA; ///< sin(phi)
-    double sinDetLat; ///< sin(DetLat)
-    double cosDetLon; ///< cos(DetLon)
-    double sinDetLon; ///< sin(DetLon)
-    double DetRadius; ///< rDet
+      // Variables defining trajectory
+      double cosT;      ///< cosT
+      double cosA;      ///< cos(phi)
+      double sinA;      ///< sin(phi)
+      double sinDetLat; ///< sin(DetLat)
+      double cosDetLon; ///< cos(DetLon)
+      double sinDetLon; ///< sin(DetLon)
+      double DetRadius; ///< rDet
 
-    //Derived Variables Calculated by UpdateNuAngles()
-    double sinSqT; ///< sin^2(T) = 1 - (cosT)^2
-    double sinT; ///< sin(T) = sqrt(sinSqT)
-    double sinTsinA; ///< sin(T)*sin(phi)
-    double sinTcosA; ///< sin(T)*cos(phi)
+      // Derived Variables Calculated by UpdateNuAngles()
+      double sinSqT;   ///< sin^2(T) = 1 - (cosT)^2
+      double sinT;     ///< sin(T) = sqrt(sinSqT)
+      double sinTsinA; ///< sin(T)*sin(phi)
+      double sinTcosA; ///< sin(T)*cos(phi)
 
-    //Derived Variables Calculated by UpdateDetPos()
-    double cosDetLat; ///< cos(DetLat)
-    double rDetSinDetLat; ///< rDet*sin(DetLat)
-    double rDetCosDetLat; ///< rDet*cos(DetLat)
+      // Derived Variables Calculated by UpdateDetPos()
+      double cosDetLat;     ///< cos(DetLat)
+      double rDetSinDetLat; ///< rDet*sin(DetLat)
+      double rDetCosDetLat; ///< rDet*cos(DetLat)
 
-    //Derived Variables Calculated by Recalculate()
-    double sinTsinAsinDetLon; ///< sin(T)*sin(phi)*sin(DetLon)
-    double sinTsinAcosDetLon; ///< sin(T)*sin(phi)*cos(DetLon)
-    double cosTcosDetLat; ///< cosT*cos(DetLat)
-    double rDetCosT; ///< rDet*cosT
-    double rDetSinT; ///< rDet*sin(T)
-    double rDetCosAcosDetLat; ///< rDet*cos(phi)*cos(DetLat)
-    double alpha; ///< sin(T)*cos(phi)*sin(DetLat)-cosT*cos(DetLat)
-    double beta; ///< sin(T)*sin(DetLat)-cos(phi)*cosT*cos(DetLat)
-    double gamma; ///< sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)
-    double gammaSq; ///< [sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)]^2
-    double rDetGammaSinDetLat; ///< rDet*sin(DetLat)*[sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)]
-    double maxSinSqLat; ///< 1 - [sin(phi)*cos(DetLat)]^2
-
+      // Derived Variables Calculated by Recalculate()
+      double sinTsinAsinDetLon; ///< sin(T)*sin(phi)*sin(DetLon)
+      double sinTsinAcosDetLon; ///< sin(T)*sin(phi)*cos(DetLon)
+      double cosTcosDetLat;     ///< cosT*cos(DetLat)
+      double rDetCosT;          ///< rDet*cosT
+      double rDetSinT;          ///< rDet*sin(T)
+      double rDetCosAcosDetLat; ///< rDet*cos(phi)*cos(DetLat)
+      double alpha;   ///< sin(T)*cos(phi)*sin(DetLat)-cosT*cos(DetLat)
+      double beta;    ///< sin(T)*sin(DetLat)-cos(phi)*cosT*cos(DetLat)
+      double gamma;   ///< sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)
+      double gammaSq; ///< [sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)]^2
+      double
+             rDetGammaSinDetLat; ///< rDet*sin(DetLat)*[sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)]
+      double maxSinSqLat; ///< 1 - [sin(phi)*cos(DetLat)]^2
   };
 
-  struct EarthBin
-  {
+  struct EarthBin {
+      ///
+      /// \brief Constructor.
+      ///
+      /// Constructor.
+      ///
+      /// By default it creates a bin of zero radius, zero latitude, zero
+      /// longitude, and zero density. The effective Z/A value is set to 0.5 by
+      /// default.
+      ///
+      /// The properties of the layer can be given directly in the construction.
+      ///
+      /// @param r_out  - The outer radius of the bin in km
+      /// @param r_in  - The inner radius of the bin in km
+      /// @param lat - Latitude of bin center in deg
+      /// @param lon - Longitude of bin center in deg
+      /// @param den  - The density of the matter in the bin in g/cm^3
+      /// @param z  - The effective Z/A value of the matter in the bin
+      /// @param n - Region index
+      ///
+      EarthBin(double r_out = 0, double r_in = 0, double lat = 0,
+               double lon = 0, double den = 0, double z = 0.5, int n = 0)
+      {
+        SetBin(r_out, r_in, lat, lon, den, z, n);
+      }
 
-    ///
-    /// \brief Constructor.
-    ///
-    /// Constructor.
-    ///
-    /// By default it creates a bin of zero radius, zero latitude, zero longitude, and zero density.
-    /// The effective Z/A value is set to 0.5 by default.
-    ///
-    /// The properties of the layer can be given directly in the construction.
-    ///
-    /// @param r_out  - The outer radius of the bin in km
-    /// @param r_in  - The inner radius of the bin in km
-    /// @param lat - Latitude of bin center in deg
-    /// @param lon - Longitude of bin center in deg
-    /// @param den  - The density of the matter in the bin in g/cm^3
-    /// @param z  - The effective Z/A value of the matter in the bin
-    /// @param n - Region index
-    ///
-    EarthBin(double r_out=0, double r_in=0, double lat=0, double lon=0, double den=0, double z=0.5, int n=0){
-      SetBin(r_out, r_in, lat, lon, den, z, n);
-    }
+      ///
+      /// \brief Set the properties of the bin.
+      ///
+      /// Set the properties of the bin.
+      ///
+      /// By default it creates a bin of zero radius, zero latitude, zero
+      /// longitude, and zero density. The effective Z/A value is set to 0.5 by
+      /// default.
+      ///
+      /// @param r_out  - The outer radius of the bin in km
+      /// @param r_in  - The inner radius of the bin in km
+      /// @param lat - Latitude of bin center in deg
+      /// @param lon - Longitude of bin center in deg
+      /// @param den  - The density of the matter in the bin in g/cm^3
+      /// @param z  - The effective Z/A value of the matter in the bin
+      /// @param n - Region index
+      ///
+      void SetBin(double r_out = 0, double r_in = 0, double lat = 0,
+                  double lon = 0, double den = 0, double z = 0.5, int n = 0)
+      {
+        radius_out = r_out;
+        radius_in  = r_in;
+        latitude   = lat * M_PI / 180.0; // convert to radians
+        longitude  = lon * M_PI / 180.0; // convert to radians
+        density    = den;
+        zoa        = z;
+        index      = n;
+      }
 
-    ///
-    /// \brief Set the properties of the bin.
-    ///
-    /// Set the properties of the bin.
-    ///
-    /// By default it creates a bin of zero radius, zero latitude, zero longitude, and zero density.
-    /// The effective Z/A value is set to 0.5 by default.
-    ///
-    /// @param r_out  - The outer radius of the bin in km
-    /// @param r_in  - The inner radius of the bin in km
-    /// @param lat - Latitude of bin center in deg
-    /// @param lon - Longitude of bin center in deg
-    /// @param den  - The density of the matter in the bin in g/cm^3
-    /// @param z  - The effective Z/A value of the matter in the bin
-    /// @param n - Region index
-    ///
-    void SetBin(double r_out=0, double r_in=0, double lat=0, double lon=0, double den=0, double z=0.5, int n=0){
-      radius_out = r_out;
-      radius_in = r_in;
-      latitude = lat*M_PI/180.0; //convert to radians
-      longitude = lon*M_PI/180.0; //convert to radians
-      density = den;
-      zoa = z;
-      index = n;
-    }
-
-    double radius_out;  ///< The outer radius of the bin in km
-    double radius_in;  ///< The inner radius of the bin in km
-    double latitude; ///< The latitude of the bin center in radians
-    double longitude; ///< The longitude of the bin center in radians
-    double density; ///< The density of the matter in the bin in g/cm^3
-    double zoa;     ///< The effective Z/A value of the matter in the bin
-    int index;      ///< Region index
-
+      double radius_out; ///< The outer radius of the bin in km
+      double radius_in;  ///< The inner radius of the bin in km
+      double latitude;   ///< The latitude of the bin center in radians
+      double longitude;  ///< The longitude of the bin center in radians
+      double density;    ///< The density of the matter in the bin in g/cm^3
+      double zoa;        ///< The effective Z/A value of the matter in the bin
+      int    index;      ///< Region index
   };
 
   class EarthModelBinned : public EarthModelBase {
-
     public:
+      EarthModelBinned(std::string filename = ""); ///< Constructor
+      virtual ~EarthModelBinned();                 ///< Destructor
 
-      EarthModelBinned(std::string filename=""); ///< Constructor
-      virtual ~EarthModelBinned();          ///< Destructor
+      void SetDetPos(double rad, double lat = 0,
+                     double lon = 0); ///< Set the detector position (rad =
+                                      ///< radius in km, lat/lon in deg)
 
-      void SetDetPos(double rad, double lat=0, double lon=0); ///< Set the detector position (rad = radius in km, lat/lon in deg)
+      int FillPath(double cosT, double phi = 0); ///< Fill the path sequence in
+                                                 ///< a vector (phi in degrees)
 
-      int FillPath(double cosT, double phi=0); ///< Fill the path sequence in a vector (phi in degrees)
+      virtual void LoadModel(
+          std::string filename); ///< Load an earth model from a file
 
-      virtual void LoadModel(std::string filename); ///< Load an earth model from a file
+      virtual std::vector<EarthBin> GetEarthBins(); ///< Get the set of earth
+                                                    ///< layers
 
-      virtual std::vector<EarthBin> GetEarthBins(); ///< Get the set of earth layers
-
-      virtual void SetRegionZoA(int index, double zoa); ///< Set Z/A of all bins with specified region index
-      virtual double GetRegionZoA(int index); ///< Get Z/A of all bins with specified region index
-      virtual void ScaleRegionDensity(int index, double scalingfactor); ///< Set Z/A of all bins with specified region index
+      virtual void SetRegionZoA(
+          int    index,
+          double zoa); ///< Set Z/A of all bins with specified region index
+      virtual double GetRegionZoA(
+          int index); ///< Get Z/A of all bins with specified region index
+      virtual void ScaleRegionDensity(
+          int index, double scalingfactor); ///< Set Z/A of all bins with
+                                            ///< specified region index
 
     protected:
-
-      struct LatBinInfo
-      {
-        int bin; ///< Index of current latitude bin
-        int nextBin; ///< Index of next latitude bin
-        double detDist_nextBin; ///< Distance along the neutrino trajectory from the edge of next latitude bin to the detector
-        int sign; ///< Indicates whether latitude is increasing or decreasing with respect to decreasing distance from the detector (+1 => inc, -1 => dec)
-        double dLat; ///< Change in lat from bin center to next bin (excludes direction; 0 if no more than 1 lat bin change)
-        int maxreached; ///< Indicates whether the latitude function transition is still to come (0 => yes, 1 => no)
+      struct LatBinInfo {
+          int    bin;             ///< Index of current latitude bin
+          int    nextBin;         ///< Index of next latitude bin
+          double detDist_nextBin; ///< Distance along the neutrino trajectory
+                                  ///< from the edge of next latitude bin to the
+                                  ///< detector
+          int sign; ///< Indicates whether latitude is increasing or decreasing
+                    ///< with respect to decreasing distance from the detector
+                    ///< (+1 => inc, -1 => dec)
+          double dLat; ///< Change in lat from bin center to next bin (excludes
+                       ///< direction; 0 if no more than 1 lat bin change)
+          int maxreached; ///< Indicates whether the latitude function
+                          ///< transition is still to come (0 => yes, 1 => no)
       };
 
-      struct LonBinInfo
-      {
-        int bin; ///< Index of current longitude bin
-        int nextBin; ///< Index of next longitude bin
-        double detDist_nextBin; ///< Distance along the neutrino trajectory from the edge of next longitude bin to the detector
-        double dLon; ///< Change in lon from bin center to next bin (includes direction; 0 if no more than 1 lon bin change)
-        double min; ///< "Minimum" longitude
-        double max; ///< "Maximum" longitude
-        int error = 0; ///< Indicates if an error has been detected (0 => no, -1 => yes)
-        std::string err_message; ///< Part of error message specific to piece of path
+      struct LonBinInfo {
+          int    bin;             ///< Index of current longitude bin
+          int    nextBin;         ///< Index of next longitude bin
+          double detDist_nextBin; ///< Distance along the neutrino trajectory
+                                  ///< from the edge of next longitude bin to
+                                  ///< the detector
+          double dLon; ///< Change in lon from bin center to next bin (includes
+                       ///< direction; 0 if no more than 1 lon bin change)
+          double min;  ///< "Minimum" longitude
+          double max;  ///< "Maximum" longitude
+          int error = 0; ///< Indicates if an error has been detected (0 => no,
+                         ///< -1 => yes)
+          std::string
+              err_message; ///< Part of error message specific to piece of path
       };
 
       virtual void ClearModel(); ///< Clear the earth model information
 
-      virtual void AddBin(double radius_out, double radius_in, double latitude, double longitude, double density, double zoa, double layer); ///< Add a bin to the model (angles in degrees)
+      virtual void AddBin(
+          double radius_out, double radius_in, double latitude,
+          double longitude, double density, double zoa,
+          double layer); ///< Add a bin to the model (angles in degrees)
 
-      virtual void AddPath(double length, EarthBin bin);  ///< Add a path segment to the sequence
+      virtual void AddPath(
+          double length, EarthBin bin); ///< Add a path segment to the sequence
 
-      virtual double DetDistForNextLatBin(int cur_index, LatBinInfo &L); ///< Calculate the detector distance at the edge of the current lat bin along the neutrino's trajectory
+      virtual double DetDistForNextLatBin(
+          int cur_index,
+          LatBinInfo&
+              L); ///< Calculate the detector distance at the edge of the
+                  ///< current lat bin along the neutrino's trajectory
 
-      virtual double DetDistForNextLonBin(double prev_lon, LonBinInfo &L); ///< Calculate the detector distance at the edge of the current lon bin along the neutrino's trajectory and increment L.bin
+      virtual double DetDistForNextLonBin(
+          double      prev_lon,
+          LonBinInfo& L); ///< Calculate the detector distance at the edge of
+                          ///< the current lon bin along the neutrino's
+                          ///< trajectory and increment L.bin
 
-      virtual void RecordLatLonBinCrossings(double detDist_nextDbin, double &DetDist, int &index, LatBinInfo &latI, LonBinInfo &lonI); ///< Record path segments for each latitude/longitude bin crossed before reaching detDist_nextDbin
+      virtual void RecordLatLonBinCrossings(
+          double detDist_nextDbin, double& DetDist, int& index,
+          LatBinInfo& latI,
+          LonBinInfo&
+              lonI); ///< Record path segments for each latitude/longitude bin
+                     ///< crossed before reaching detDist_nextDbin
 
-      virtual int LonBinIndex(double longitude); ///< Find lon bin index containing longitude
+      virtual int LonBinIndex(
+          double longitude); ///< Find lon bin index containing longitude
 
       TrajConstants fC; ///< Useful constants for the trajectory
 
-      std::vector<EarthBin> fEarthBins; ///< The bins in the earth model
-      int fnDepthBins; ///< Total number of depth bins
-      int fnLonBins; ///< Total number of longitude bins
-      int fnLatBins; ///< Total number of latitude bins
-      double fInvLonBinWidth; ///< 1/binwidth for each longitude bin
-      double fInvLatBinWidth; ///< 1/binwidth for each latitude bin
-      double fHalfLonBinWidth; ///< Half-width of each longitude bin
-      double fHalfLatBinWidth; ///< Half-width of each latitude bin
+      std::vector<EarthBin> fEarthBins;  ///< The bins in the earth model
+      int                   fnDepthBins; ///< Total number of depth bins
+      int                   fnLonBins;   ///< Total number of longitude bins
+      int                   fnLatBins;   ///< Total number of latitude bins
+      double fInvLonBinWidth;            ///< 1/binwidth for each longitude bin
+      double fInvLatBinWidth;            ///< 1/binwidth for each latitude bin
+      double fHalfLonBinWidth;           ///< Half-width of each longitude bin
+      double fHalfLatBinWidth;           ///< Half-width of each latitude bin
 
       int fmaxRegIndex; ///< Largest region index in model
 
-      //For Latitude Calculation Error Message
-      std::string fErrorMessage_LonInfo; ///< Part of error message containing the longitude information
+      // For Latitude Calculation Error Message
+      std::string fErrorMessage_LonInfo; ///< Part of error message containing
+                                         ///< the longitude information
       int fLonError;
 
       // Required for saving in ROOT files
       ClassDef(EarthModelBinned, 1);
-
   };
 
-}
+} // namespace OscProb
 
 #endif

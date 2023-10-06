@@ -6,8 +6,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <cmath>
-#include <iostream>
 #include <fstream>
+#include <iostream>
 
 #include "PremModel.h"
 #include "prem_default.hpp"
@@ -32,22 +32,18 @@ const double PremModel::DET_TOL = 0.2; // Tolerance in km
 ///
 /// @param filename - The txt file containing a table of earth layers
 ///
-PremModel::PremModel(string filename) :
-fDetLayer(0)
+PremModel::PremModel(string filename) : fDetLayer(0)
 {
-
   SetRemoveSmallPaths(false);
   SetDetPos(6368);
   LoadModel(filename);
-
 }
 
 //.............................................................................
 ///
 /// Nothing to clean.
 ///
-PremModel::~PremModel(){}
-
+PremModel::~PremModel() {}
 
 //.............................................................................
 ///
@@ -55,21 +51,18 @@ PremModel::~PremModel(){}
 /// This is used in particular to remove previously added
 /// detector layers.
 ///
-void PremModel::CleanIdentical(){
-
+void PremModel::CleanIdentical()
+{
   int i = 0;
 
-  while(i < int(fPremLayers.size()) - 1){
-
-    if(fPremLayers[i] == fPremLayers[i+1]){
-      fPremLayers.erase(fPremLayers.begin()+i);
+  while (i < int(fPremLayers.size()) - 1) {
+    if (fPremLayers[i] == fPremLayers[i + 1]) {
+      fPremLayers.erase(fPremLayers.begin() + i);
       continue;
     }
 
     i++;
-
   }
-
 }
 
 //.............................................................................
@@ -77,14 +70,13 @@ void PremModel::CleanIdentical(){
 /// Add a detector layer at the detector position if needed.
 /// If not, set the detector layer to an existing boundary.
 ///
-void PremModel::AddDetLayer(){
-
+void PremModel::AddDetLayer()
+{
   CleanIdentical();
 
-  fDetLayer = fPremLayers.size()-1;
+  fDetLayer = fPremLayers.size() - 1;
 
-  if(fPremLayers.size() && fDetRadius > fPremLayers.back().radius){
-
+  if (fPremLayers.size() && fDetRadius > fPremLayers.back().radius) {
     cerr << "WARNING: Detector must be inside Earth model." << endl
          << "WARNING: Adjusting detector radius from " << fDetRadius
          << " km to " << fPremLayers.back().radius << " km." << endl;
@@ -92,38 +84,32 @@ void PremModel::AddDetLayer(){
     fDetRadius = fPremLayers.back().radius;
 
     return;
-
   }
 
-  for(int i=0; i<fPremLayers.size(); i++){
-
+  for (int i = 0; i < fPremLayers.size(); i++) {
     double radius = fPremLayers[i].radius;
 
     // See if we passed the detector and decide whether
     // to create a special layer for it
-    if(radius > fDetRadius - DET_TOL){
-
+    if (radius > fDetRadius - DET_TOL) {
       fDetLayer = i;
 
       // If detector is not near boundary, add a special layer
-      if(radius > fDetRadius + DET_TOL){
+      if (radius > fDetRadius + DET_TOL) {
         PremLayer det_layer = fPremLayers[i];
-        det_layer.radius = fDetRadius;
-        fPremLayers.insert(fPremLayers.begin()+fDetLayer, det_layer);
+        det_layer.radius    = fDetRadius;
+        fPremLayers.insert(fPremLayers.begin() + fDetLayer, det_layer);
       }
-      else if(radius != fDetRadius) {
-        //update detector radius
+      else if (radius != fDetRadius) {
+        // update detector radius
         cerr << "WARNING: Adjusting detector radius from " << fDetRadius
              << " km to " << radius << " km." << endl;
         fDetRadius = radius;
       }
 
       break;
-
     }
-
   }
-
 }
 
 //.............................................................................
@@ -144,11 +130,9 @@ void PremModel::AddDetLayer(){
 ///
 void PremModel::SetDetPos(double rad, double lat, double lon)
 {
-
   SetDetectorCoordinates(rad, lat, lon);
 
-  if(fPremLayers.size()) AddDetLayer();
-
+  if (fPremLayers.size()) AddDetLayer();
 }
 
 //.............................................................................
@@ -158,7 +142,7 @@ void PremModel::SetDetPos(double rad, double lat, double lon)
 /// This returns the set of PremLayer's for this earth model
 /// and detector position.
 ///
-vector<PremLayer> PremModel::GetPremLayers(){ return fPremLayers; }
+vector<PremLayer> PremModel::GetPremLayers() { return fPremLayers; }
 
 //.............................................................................
 ///
@@ -166,10 +150,8 @@ vector<PremLayer> PremModel::GetPremLayers(){ return fPremLayers; }
 ///
 void PremModel::ClearModel()
 {
-
   fDetLayer = 0;
   fPremLayers.clear();
-
 }
 
 //.............................................................................
@@ -179,14 +161,13 @@ void PremModel::ClearModel()
 /// @param radius  - The outer radius of the layer in km
 /// @param density - The density of the layer in g/cm^3
 /// @param zoa     - The effective Z/A value of the layer
-/// @param layer   - An index to identify the matter type (e.g. earth inner core)
+/// @param layer   - An index to identify the matter type (e.g. earth inner
+/// core)
 ///
-void PremModel::AddLayer(double radius, double density,
-                         double zoa,    double layer)
+void PremModel::AddLayer(double radius, double density, double zoa,
+                         double layer)
 {
-
-  fPremLayers.push_back( PremLayer(radius, density, zoa, layer) );
-
+  fPremLayers.push_back(PremLayer(radius, density, zoa, layer));
 }
 
 //.............................................................................
@@ -199,20 +180,17 @@ void PremModel::AddLayer(double radius, double density,
 ///
 void PremModel::LoadModel(string filename)
 {
-
   // Clear the current model
   ClearModel();
 
   // Use default if no file provided
-  if(filename == ""){
-    filename = PREM_DEFAULT;
-  }
+  if (filename == "") { filename = PREM_DEFAULT; }
 
   // Open the file
   ifstream fin;
   fin.open(filename.c_str());
 
-  if(!fin){
+  if (!fin) {
     cerr << "ERROR: File " << filename << " not found!" << endl;
     return;
   }
@@ -224,25 +202,24 @@ void PremModel::LoadModel(string filename)
   double rprev = 0;
 
   // Loop over table rows
-  while(fin >> radius >> density >> zoa >> layer){
-
+  while (fin >> radius >> density >> zoa >> layer) {
     // Radii must be ordered in model file
-    if(radius <= rprev){
-      cerr << "ERROR: Radii are not sorted in increasing order in the model file" << endl;
+    if (radius <= rprev) {
+      cerr
+          << "ERROR: Radii are not sorted in increasing order in the model file"
+          << endl;
       ClearModel();
       return;
     }
 
     // Add this layer to the model
     AddLayer(radius, density, zoa, layer);
-
   }
 
   AddDetLayer();
 
-  //Set the maximum radius in the model
+  // Set the maximum radius in the model
   fRadiusMax = fPremLayers.back().radius;
-
 }
 
 //.............................................................................
@@ -257,19 +234,15 @@ void PremModel::LoadModel(string filename)
 ///
 void PremModel::SetLayerZoA(int layer, double zoa)
 {
-
   int nlayers = fPremLayers.size();
 
   // Loop over all layers and change the ones
   // with the given index
-  for(int i=0; i<nlayers; i++){
-
-    if(fPremLayers[i].layer != layer) continue;
+  for (int i = 0; i < nlayers; i++) {
+    if (fPremLayers[i].layer != layer) continue;
 
     fPremLayers[i].zoa = zoa;
-
   }
-
 }
 
 //.............................................................................
@@ -282,21 +255,20 @@ void PremModel::SetLayerZoA(int layer, double zoa)
 ///
 double PremModel::GetLayerZoA(int layer)
 {
-
   int nlayers = fPremLayers.size();
 
   // This check assumes the layer types are in increasing order
-  if(layer > fPremLayers.back().layer){
+  if (layer > fPremLayers.back().layer) {
     cerr << "ERROR: Not that many layer types. Returning 0" << endl;
     return 0;
   }
 
-  for(int i=0; i<nlayers; i++){
+  for (int i = 0; i < nlayers; i++) {
+    if (fPremLayers[i].layer != layer)
+      continue;
 
-    if(fPremLayers[i].layer != layer) continue;
-
-    else return fPremLayers[i].zoa;
-
+    else
+      return fPremLayers[i].zoa;
   }
 
   // End of vector reached without finding input type
@@ -315,30 +287,30 @@ double PremModel::GetLayerZoA(int layer)
 ///
 void PremModel::SetTopLayerSize(double thick)
 {
-
-  if(thick <= 0){
+  if (thick <= 0) {
     cerr << "WARNING: Layer thickness should be positive. Do nothing." << endl;
     return;
   }
 
   int nlayers = fPremLayers.size();
 
-  if(nlayers < 1){
+  if (nlayers < 1) {
     cerr << "WARNING: PremModel has no layers. Do nothing." << endl;
     return;
   }
 
   double bottomRadius;
-  if(nlayers>1) bottomRadius = fPremLayers[nlayers-2].radius;
-  else          bottomRadius = 0;
+  if (nlayers > 1)
+    bottomRadius = fPremLayers[nlayers - 2].radius;
+  else
+    bottomRadius = 0;
 
   double topRadius = bottomRadius + thick;
 
-  fPremLayers[nlayers-1].radius = topRadius;
+  fPremLayers[nlayers - 1].radius = topRadius;
 
-  //Update max radius
+  // Update max radius
   fRadiusMax = fPremLayers.back().radius;
-
 }
 
 //.............................................................................
@@ -352,9 +324,7 @@ void PremModel::SetTopLayerSize(double thick)
 ///
 void PremModel::AddPath(double length, PremLayer pl)
 {
-
   AddPathSegment(length, pl.density, pl.zoa, pl.layer);
-
 }
 
 //.............................................................................
@@ -370,57 +340,56 @@ void PremModel::AddPath(double length, PremLayer pl)
 /// the function GetNuPath.
 ///
 /// @param cosT - The cosine of the zenith angle of the neutrino direction
-/// @param phi - The azimuthal angle of the neutrino direction (default = 0; not used)
+/// @param phi - The azimuthal angle of the neutrino direction (default = 0; not
+/// used)
 /// @return The number of path segments in the sequence
 ///
 int PremModel::FillPath(double cosT, double phi)
 {
-
   // Clear current path sequence
   fNuPath.clear();
 
   // Do nothing if cosine is unphysical
-  if(fabs(cosT) > 1) return 0;
+  if (fabs(cosT) > 1) return 0;
 
   // Define the minimum path radius
-  double minR = fDetRadius * sqrt(1 - cosT*cosT);
-  double minRsq = minR*minR;
+  double minR   = fDetRadius * sqrt(1 - cosT * cosT);
+  double minRsq = minR * minR;
 
   // Set the top layer index
   int toplayer = fPremLayers.size() - 1;
 
   // Find the inner-most crossed layer
   int minlayer = 0;
-  while(fPremLayers[minlayer].radius < minR) minlayer++;
+  while (fPremLayers[minlayer].radius < minR) minlayer++;
 
   // Compute the number of path segments needed
   int nsteps = toplayer - fDetLayer;
-  if(cosT < 0) nsteps += 2*(fDetLayer - minlayer) + 1;
+  if (cosT < 0) nsteps += 2 * (fDetLayer - minlayer) + 1;
 
   // Start at the top layer and go down
   int layer = toplayer;
-  int dl = -1;
+  int dl    = -1;
 
   // Loop over all path segments
-  for(int i=0; i<nsteps; i++){
-
+  for (int i = 0; i < nsteps; i++) {
     // Get square of the path length between this layer's
     // outer radius and  inner-most radius
-    double L1 = pow(fPremLayers[layer].radius,2) - minRsq;
+    double L1 = pow(fPremLayers[layer].radius, 2) - minRsq;
 
     // If L1 is negative, outer radius is not crossed.
     // This only happens if detector is at the top layer and the
     // neutrino is coming from above.
-    if(L1 < 0) return true;
+    if (L1 < 0) return true;
 
     // Get square of the path length between this layer's
     // inner radius and  inner-most radius
     double L2 = -minRsq;
-    if(layer>0) L2 += pow(fPremLayers[layer-1].radius,2);
+    if (layer > 0) L2 += pow(fPremLayers[layer - 1].radius, 2);
 
     // If L2 is negative, inner radius is not crossed,
     // so set this as the minimum layer.
-    bool ismin = (L2<=0 && cosT < 0);
+    bool ismin = (L2 <= 0 && cosT < 0);
 
     // Store the path segment length
     double dL;
@@ -428,26 +397,27 @@ int PremModel::FillPath(double cosT, double phi)
     // If it's the minimum layer, connect two outer radius
     // crossing points. If not, compute difference between
     // inner and outer radius crossings.
-    if(ismin)      dL = 2 * sqrt(L1);
-    else if(L2>=0) dL = sqrt(L1) - sqrt(L2);
-    else           dL = sqrt(L1); // This should never actually happen,
-                                  // but protect in case L2 is slightly
-                                  // negative when it should be zero.
-                                  // e.g. arriving at the detector from above.
+    if (ismin)
+      dL = 2 * sqrt(L1);
+    else if (L2 >= 0)
+      dL = sqrt(L1) - sqrt(L2);
+    else
+      dL = sqrt(L1); // This should never actually happen,
+                     // but protect in case L2 is slightly
+                     // negative when it should be zero.
+                     // e.g. arriving at the detector from above.
 
     // Add this path segment to the sequence
     AddPath(dL, fPremLayers[layer]);
 
     // If we reached the inner-most layer,
     // start moving up again.
-    if(ismin) dl = 1;
+    if (ismin) dl = 1;
 
     // Move to next layer
     layer += dl;
-
   }
 
   // Return the number of path segments
   return fNuPath.size();
-
 }

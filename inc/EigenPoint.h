@@ -18,40 +18,38 @@
 namespace OscProb {
 
   struct EigenPoint {
+      /// Constructor
+      EigenPoint(int numNus = 3, double e = 0, NuPath p = NuPath(0, 0),
+                 bool n = false);
 
-    /// Constructor
-    EigenPoint(int numNus=3, double e = 0, NuPath p = NuPath(0,0), bool n=false);
+      /// Set eigensystem parameters
+      void SetVars(double e = 0, NuPath p = NuPath(0, 0), bool n = false);
 
-    /// Set eigensystem parameters
-    void SetVars(double e = 0, NuPath p = NuPath(0,0), bool n=false);
+      double fEnergy; ///< Neutrino energy
+      NuPath fPath;   ///< Neutrino path
+      bool   fNubar;  ///< Nu-Nubar flag
+      double fNE;     ///< Energy-density
 
-    double fEnergy; ///< Neutrino energy
-    NuPath fPath;   ///< Neutrino path
-    bool fNubar;    ///< Nu-Nubar flag
-    double fNE;     ///< Energy-density
+      void SetNE(); ///< Set energy-density
 
-    void SetNE(); ///< Set energy-density
+      bool operator<(const EigenPoint& rhs) const;  ///< Comparison operator
+      bool operator==(const EigenPoint& rhs) const; ///< Identity operator
 
-    bool operator < (const EigenPoint &rhs) const;  ///< Comparison operator
-    bool operator == (const EigenPoint &rhs) const; ///< Identity operator
-
-    vectorD fEval;  ///< Eigenvalues to be cached
-    matrixC fEvec;  ///< Eigenvectors to be cached
-
+      vectorD fEval; ///< Eigenvalues to be cached
+      matrixC fEvec; ///< Eigenvectors to be cached
   };
 
-}
+} // namespace OscProb
 
 namespace std {
 
-  template <>
-  struct hash<OscProb::EigenPoint> {
-    auto operator()(const OscProb::EigenPoint &ep) const -> size_t {
-      return hash<double>()(ep.fNE) ^ hash<double>()(ep.fPath.zoa);
-    }
+  template <> struct hash<OscProb::EigenPoint> {
+      auto operator()(const OscProb::EigenPoint& ep) const -> size_t
+      {
+        return hash<double>()(ep.fNE) ^ hash<double>()(ep.fPath.zoa);
+      }
   };
 
-}
+} // namespace std
 
 #endif
-

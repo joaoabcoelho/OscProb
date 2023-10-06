@@ -29,13 +29,10 @@
 namespace OscProb {
 
   class PMNS_Sterile : public PMNS_Base {
-
     public:
-
       PMNS_Sterile(int numNus); ///< Constructor
 
     protected:
-
       /// Build the full Hamiltonian
       virtual void UpdateHam();
 
@@ -43,14 +40,12 @@ namespace OscProb {
       virtual void SolveHam();
 
       /// Specialized solver for NxN matrices
-      template <typename T>
-      void SolveEigenSystem();
+      template <typename T> void SolveEigenSystem();
 
       Eigen::MatrixXcd fHam; ///< The full Hamiltonian
-
   };
 
-}
+} // namespace OscProb
 
 #endif
 

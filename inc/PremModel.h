@@ -31,50 +31,56 @@
 namespace OscProb {
 
   class PremModel : public EarthModelBase {
-
     public:
+      PremModel(std::string filename = ""); ///< Constructor
+      virtual ~PremModel();                 ///< Destructor
 
-      PremModel(std::string filename=""); ///< Constructor
-      virtual ~PremModel();               ///< Destructor
+      void SetDetPos(double rad, double lat = 0,
+                     double lon = 0); ///< Set the detector position (rad =
+                                      ///< radius in km, lat/lon in deg)
 
-      void SetDetPos(double rad, double lat=0, double lon=0); ///< Set the detector position (rad = radius in km, lat/lon in deg)
+      int FillPath(double cosT,
+                   double phi = 0); ///< Fill the path sequence in a vector
 
-      int FillPath(double cosT, double phi=0); ///< Fill the path sequence in a vector
+      virtual void LoadModel(
+          std::string filename); ///< Load an earth model from a file
 
-      virtual void LoadModel(std::string filename); ///< Load an earth model from a file
+      virtual std::vector<PremLayer> GetPremLayers(); ///< Get the set of earth
+                                                      ///< layers
 
-      virtual std::vector<PremLayer> GetPremLayers();  ///< Get the set of earth layers
+      virtual void SetLayerZoA(
+          int layer, double zoa); ///< Set Z/A of all layers of a given type
+      virtual double GetLayerZoA(
+          int layer); ///< Get Z/A of all layers of a given type
 
-      virtual void SetLayerZoA(int layer, double zoa); ///< Set Z/A of all layers of a given type
-      virtual double GetLayerZoA(int layer);           ///< Get Z/A of all layers of a given type
-
-      virtual void SetTopLayerSize(double thick);      ///< Set the outermost layer thickness in km
+      virtual void SetTopLayerSize(
+          double thick); ///< Set the outermost layer thickness in km
 
     protected:
-
       virtual void ClearModel(); ///< Clear the earth model information
 
-      virtual void AddLayer(double radius, double density,
-                            double zoa,    double layer); ///< Add a layer to the model
+      virtual void AddLayer(double radius, double density, double zoa,
+                            double layer); ///< Add a layer to the model
 
-      virtual void AddPath(double length, PremLayer pl);  ///< Add a path segment to the sequence
+      virtual void AddPath(
+          double length, PremLayer pl); ///< Add a path segment to the sequence
 
       virtual void AddDetLayer();    ///< Add the detector layer
       virtual void CleanIdentical(); ///< Clear identical consecutive layers
 
       std::vector<PremLayer> fPremLayers; ///< The layers in the earth model
 
-      int fDetLayer;  ///< The layer index of the detector
+      int fDetLayer; ///< The layer index of the detector
 
       std::string fFilename; ///< The input filename
 
-      static const double DET_TOL; ///< The detector position tolerance near boundaries
+      static const double
+          DET_TOL; ///< The detector position tolerance near boundaries
 
       // Required for saving in ROOT files
       ClassDef(PremModel, 1);
-
   };
 
-}
+} // namespace OscProb
 
 #endif
