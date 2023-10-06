@@ -133,7 +133,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00141">141</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00150">150</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8cfed4a828764e1922a14633e6d92ae6" name="a8cfed4a828764e1922a14633e6d92ae6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8cfed4a828764e1922a14633e6d92ae6">&#9670;&nbsp;</a></span>EarthBin()</h2>
@@ -214,13 +214,13 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00162">162</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  162</span>                                                                                                            {</div>
-<div class="line"><span class="lineno">  163</span>      <a class="code hl_function" href="structOscProb_1_1EarthBin.html#af074fa67904d242f01fcf5bb3785a1a9">SetBin</a>(r_out, r_in, lat, lon, den, z, n);</div>
-<div class="line"><span class="lineno">  164</span>    }</div>
-<div class="ttc" id="astructOscProb_1_1EarthBin_html_af074fa67904d242f01fcf5bb3785a1a9"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#af074fa67904d242f01fcf5bb3785a1a9">OscProb::EarthBin::SetBin</a></div><div class="ttdeci">void SetBin(double r_out=0, double r_in=0, double lat=0, double lon=0, double den=0, double z=0.5, int n=0)</div><div class="ttdoc">Set the properties of the bin.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00182">EarthModelBinned.h:182</a></div></div>
+<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00170">170</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  172</span>      {</div>
+<div class="line"><span class="lineno">  173</span>        <a class="code hl_function" href="structOscProb_1_1EarthBin.html#af074fa67904d242f01fcf5bb3785a1a9">SetBin</a>(r_out, r_in, lat, lon, den, z, n);</div>
+<div class="line"><span class="lineno">  174</span>      }</div>
+<div class="ttc" id="astructOscProb_1_1EarthBin_html_af074fa67904d242f01fcf5bb3785a1a9"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#af074fa67904d242f01fcf5bb3785a1a9">OscProb::EarthBin::SetBin</a></div><div class="ttdeci">void SetBin(double r_out=0, double r_in=0, double lat=0, double lon=0, double den=0, double z=0.5, int n=0)</div><div class="ttdoc">Set the properties of the bin.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00193">EarthModelBinned.h:193</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="EarthModelBinned_8h_source.html#l00182">SetBin()</a>.</p>
+<p class="reference">References <a class="el" href="EarthModelBinned_8h_source.html#l00193">SetBin()</a>.</p>
 
 </div>
 </div>
@@ -303,27 +303,27 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00182">182</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  182</span>                                                                                                               {</div>
-<div class="line"><span class="lineno">  183</span>      <a class="code hl_variable" href="structOscProb_1_1EarthBin.html#aba8447e497833f20ea3fa87fd78d7988">radius_out</a> = r_out;</div>
-<div class="line"><span class="lineno">  184</span>      <a class="code hl_variable" href="structOscProb_1_1EarthBin.html#a05806de65304ceb88fc6e94c67ce8900">radius_in</a> = r_in;</div>
-<div class="line"><span class="lineno">  185</span>      <a class="code hl_variable" href="structOscProb_1_1EarthBin.html#a20edd55a94ecd137eb658eb6879c6ad2">latitude</a> = lat*M_PI/180.0; <span class="comment">//convert to radians</span></div>
-<div class="line"><span class="lineno">  186</span>      <a class="code hl_variable" href="structOscProb_1_1EarthBin.html#a3852c6c51cfd99c47d54a58aeaa7632b">longitude</a> = lon*M_PI/180.0; <span class="comment">//convert to radians</span></div>
-<div class="line"><span class="lineno">  187</span>      <a class="code hl_variable" href="structOscProb_1_1EarthBin.html#af70ecdf5f9255dcefd4427a48fcbbbaf">density</a> = den;</div>
-<div class="line"><span class="lineno">  188</span>      <a class="code hl_variable" href="structOscProb_1_1EarthBin.html#a84de9cf6e5c25280a80fb0cb59dd2cd3">zoa</a> = z;</div>
-<div class="line"><span class="lineno">  189</span>      <a class="code hl_variable" href="structOscProb_1_1EarthBin.html#ac93310c7dde51855e5d3dd869322ba94">index</a> = n;</div>
-<div class="line"><span class="lineno">  190</span>    }</div>
-<div class="ttc" id="astructOscProb_1_1EarthBin_html_a05806de65304ceb88fc6e94c67ce8900"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#a05806de65304ceb88fc6e94c67ce8900">OscProb::EarthBin::radius_in</a></div><div class="ttdeci">double radius_in</div><div class="ttdoc">The inner radius of the bin in km.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00193">EarthModelBinned.h:193</a></div></div>
-<div class="ttc" id="astructOscProb_1_1EarthBin_html_a20edd55a94ecd137eb658eb6879c6ad2"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#a20edd55a94ecd137eb658eb6879c6ad2">OscProb::EarthBin::latitude</a></div><div class="ttdeci">double latitude</div><div class="ttdoc">The latitude of the bin center in radians.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00194">EarthModelBinned.h:194</a></div></div>
-<div class="ttc" id="astructOscProb_1_1EarthBin_html_a3852c6c51cfd99c47d54a58aeaa7632b"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#a3852c6c51cfd99c47d54a58aeaa7632b">OscProb::EarthBin::longitude</a></div><div class="ttdeci">double longitude</div><div class="ttdoc">The longitude of the bin center in radians.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00195">EarthModelBinned.h:195</a></div></div>
-<div class="ttc" id="astructOscProb_1_1EarthBin_html_a84de9cf6e5c25280a80fb0cb59dd2cd3"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#a84de9cf6e5c25280a80fb0cb59dd2cd3">OscProb::EarthBin::zoa</a></div><div class="ttdeci">double zoa</div><div class="ttdoc">The effective Z/A value of the matter in the bin.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00197">EarthModelBinned.h:197</a></div></div>
-<div class="ttc" id="astructOscProb_1_1EarthBin_html_aba8447e497833f20ea3fa87fd78d7988"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#aba8447e497833f20ea3fa87fd78d7988">OscProb::EarthBin::radius_out</a></div><div class="ttdeci">double radius_out</div><div class="ttdoc">The outer radius of the bin in km.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00192">EarthModelBinned.h:192</a></div></div>
-<div class="ttc" id="astructOscProb_1_1EarthBin_html_ac93310c7dde51855e5d3dd869322ba94"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#ac93310c7dde51855e5d3dd869322ba94">OscProb::EarthBin::index</a></div><div class="ttdeci">int index</div><div class="ttdoc">Region index.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00198">EarthModelBinned.h:198</a></div></div>
-<div class="ttc" id="astructOscProb_1_1EarthBin_html_af70ecdf5f9255dcefd4427a48fcbbbaf"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#af70ecdf5f9255dcefd4427a48fcbbbaf">OscProb::EarthBin::density</a></div><div class="ttdeci">double density</div><div class="ttdoc">The density of the matter in the bin in g/cm^3.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00196">EarthModelBinned.h:196</a></div></div>
+<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00193">193</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  195</span>      {</div>
+<div class="line"><span class="lineno">  196</span>        <a class="code hl_variable" href="structOscProb_1_1EarthBin.html#aba8447e497833f20ea3fa87fd78d7988">radius_out</a> = r_out;</div>
+<div class="line"><span class="lineno">  197</span>        <a class="code hl_variable" href="structOscProb_1_1EarthBin.html#a05806de65304ceb88fc6e94c67ce8900">radius_in</a>  = r_in;</div>
+<div class="line"><span class="lineno">  198</span>        <a class="code hl_variable" href="structOscProb_1_1EarthBin.html#a20edd55a94ecd137eb658eb6879c6ad2">latitude</a>   = lat * M_PI / 180.0; <span class="comment">// convert to radians</span></div>
+<div class="line"><span class="lineno">  199</span>        <a class="code hl_variable" href="structOscProb_1_1EarthBin.html#a3852c6c51cfd99c47d54a58aeaa7632b">longitude</a>  = lon * M_PI / 180.0; <span class="comment">// convert to radians</span></div>
+<div class="line"><span class="lineno">  200</span>        <a class="code hl_variable" href="structOscProb_1_1EarthBin.html#af70ecdf5f9255dcefd4427a48fcbbbaf">density</a>    = den;</div>
+<div class="line"><span class="lineno">  201</span>        <a class="code hl_variable" href="structOscProb_1_1EarthBin.html#a84de9cf6e5c25280a80fb0cb59dd2cd3">zoa</a>        = z;</div>
+<div class="line"><span class="lineno">  202</span>        <a class="code hl_variable" href="structOscProb_1_1EarthBin.html#ac93310c7dde51855e5d3dd869322ba94">index</a>      = n;</div>
+<div class="line"><span class="lineno">  203</span>      }</div>
+<div class="ttc" id="astructOscProb_1_1EarthBin_html_a05806de65304ceb88fc6e94c67ce8900"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#a05806de65304ceb88fc6e94c67ce8900">OscProb::EarthBin::radius_in</a></div><div class="ttdeci">double radius_in</div><div class="ttdoc">The inner radius of the bin in km.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00206">EarthModelBinned.h:206</a></div></div>
+<div class="ttc" id="astructOscProb_1_1EarthBin_html_a20edd55a94ecd137eb658eb6879c6ad2"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#a20edd55a94ecd137eb658eb6879c6ad2">OscProb::EarthBin::latitude</a></div><div class="ttdeci">double latitude</div><div class="ttdoc">The latitude of the bin center in radians.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00207">EarthModelBinned.h:207</a></div></div>
+<div class="ttc" id="astructOscProb_1_1EarthBin_html_a3852c6c51cfd99c47d54a58aeaa7632b"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#a3852c6c51cfd99c47d54a58aeaa7632b">OscProb::EarthBin::longitude</a></div><div class="ttdeci">double longitude</div><div class="ttdoc">The longitude of the bin center in radians.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00208">EarthModelBinned.h:208</a></div></div>
+<div class="ttc" id="astructOscProb_1_1EarthBin_html_a84de9cf6e5c25280a80fb0cb59dd2cd3"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#a84de9cf6e5c25280a80fb0cb59dd2cd3">OscProb::EarthBin::zoa</a></div><div class="ttdeci">double zoa</div><div class="ttdoc">The effective Z/A value of the matter in the bin.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00210">EarthModelBinned.h:210</a></div></div>
+<div class="ttc" id="astructOscProb_1_1EarthBin_html_aba8447e497833f20ea3fa87fd78d7988"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#aba8447e497833f20ea3fa87fd78d7988">OscProb::EarthBin::radius_out</a></div><div class="ttdeci">double radius_out</div><div class="ttdoc">The outer radius of the bin in km.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00205">EarthModelBinned.h:205</a></div></div>
+<div class="ttc" id="astructOscProb_1_1EarthBin_html_ac93310c7dde51855e5d3dd869322ba94"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#ac93310c7dde51855e5d3dd869322ba94">OscProb::EarthBin::index</a></div><div class="ttdeci">int index</div><div class="ttdoc">Region index.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00211">EarthModelBinned.h:211</a></div></div>
+<div class="ttc" id="astructOscProb_1_1EarthBin_html_af70ecdf5f9255dcefd4427a48fcbbbaf"><div class="ttname"><a href="structOscProb_1_1EarthBin.html#af70ecdf5f9255dcefd4427a48fcbbbaf">OscProb::EarthBin::density</a></div><div class="ttdeci">double density</div><div class="ttdoc">The density of the matter in the bin in g/cm^3.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBinned_8h_source.html#l00209">EarthModelBinned.h:209</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="EarthModelBinned_8h_source.html#l00196">density</a>, <a class="el" href="EarthModelBinned_8h_source.html#l00198">index</a>, <a class="el" href="EarthModelBinned_8h_source.html#l00194">latitude</a>, <a class="el" href="EarthModelBinned_8h_source.html#l00195">longitude</a>, <a class="el" href="EarthModelBinned_8h_source.html#l00193">radius_in</a>, <a class="el" href="EarthModelBinned_8h_source.html#l00192">radius_out</a>, and <a class="el" href="EarthModelBinned_8h_source.html#l00197">zoa</a>.</p>
+<p class="reference">References <a class="el" href="EarthModelBinned_8h_source.html#l00209">density</a>, <a class="el" href="EarthModelBinned_8h_source.html#l00211">index</a>, <a class="el" href="EarthModelBinned_8h_source.html#l00207">latitude</a>, <a class="el" href="EarthModelBinned_8h_source.html#l00208">longitude</a>, <a class="el" href="EarthModelBinned_8h_source.html#l00206">radius_in</a>, <a class="el" href="EarthModelBinned_8h_source.html#l00205">radius_out</a>, and <a class="el" href="EarthModelBinned_8h_source.html#l00210">zoa</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8h_source.html#l00162">EarthBin()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8h_source.html#l00170">EarthBin()</a>.</p>
 
 </div>
 </div>
@@ -340,9 +340,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00196">196</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00209">209</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00403">OscProb::EarthModelBinned::AddPath()</a>, and <a class="el" href="EarthModelBinned_8h_source.html#l00182">SetBin()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00401">OscProb::EarthModelBinned::AddPath()</a>, and <a class="el" href="EarthModelBinned_8h_source.html#l00193">SetBin()</a>.</p>
 
 </div>
 </div>
@@ -358,9 +358,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00198">198</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00211">211</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00403">OscProb::EarthModelBinned::AddPath()</a>, and <a class="el" href="EarthModelBinned_8h_source.html#l00182">SetBin()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00401">OscProb::EarthModelBinned::AddPath()</a>, and <a class="el" href="EarthModelBinned_8h_source.html#l00193">SetBin()</a>.</p>
 
 </div>
 </div>
@@ -376,9 +376,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00194">194</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00207">207</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8h_source.html#l00182">SetBin()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8h_source.html#l00193">SetBin()</a>.</p>
 
 </div>
 </div>
@@ -394,9 +394,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00195">195</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00208">208</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8h_source.html#l00182">SetBin()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8h_source.html#l00193">SetBin()</a>.</p>
 
 </div>
 </div>
@@ -412,9 +412,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00193">193</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00206">206</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8h_source.html#l00182">SetBin()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8h_source.html#l00193">SetBin()</a>.</p>
 
 </div>
 </div>
@@ -430,9 +430,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00192">192</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00205">205</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8h_source.html#l00182">SetBin()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8h_source.html#l00193">SetBin()</a>.</p>
 
 </div>
 </div>
@@ -448,9 +448,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00197">197</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00210">210</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00403">OscProb::EarthModelBinned::AddPath()</a>, and <a class="el" href="EarthModelBinned_8h_source.html#l00182">SetBin()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00401">OscProb::EarthModelBinned::AddPath()</a>, and <a class="el" href="EarthModelBinned_8h_source.html#l00193">SetBin()</a>.</p>
 
 </div>
 </div>
