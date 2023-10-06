@@ -35,6 +35,9 @@ PMNS_SNSI::~PMNS_SNSI(){}
 ///
 void PMNS_SNSI::SetLowestMass(double m)
 {
+  // Check if value is actually changing
+  fBuiltHms *= (fM == m);
+
   fM = m;
 }
 
