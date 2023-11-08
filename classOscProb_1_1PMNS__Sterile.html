@@ -438,11 +438,12 @@ Static Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >This class implements neutrino oscillations for any number of neutrino falvours. The extra flavours above 3 are treated as sterile neutrinos, i.e. it implements a 3+N model. One can also run a 2-neutrino model in principle, but an analytical solution would be feasible and more efficient in that case.</p>
-<p ><a href="https://doi.org/10.1016/S0370-2693%2803%2900603-8">https://doi.org/10.1016/S0370-2693%2803%2900603-8</a></p>
+<p >Reference: <a href="https://doi.org/10.1007/JHEP12(2013)014">https://doi.org/10.1007/JHEP12(2013)014</a></p>
+<p >The extended mixing matrix follows the recommendations from: <a href="https://doi.org/10.1016/0370-2693(86)91268-2">https://doi.org/10.1016/0370-2693(86)91268-2</a></p>
 <p >The eigensystem solution is performed by <a href="https://eigen.tuxfamily.org/">Eigen</a>, which makes it slower than the <a class="el" href="classOscProb_1_1PMNS__Fast.html" title="Implementation of oscillations of neutrinos in matter in a three-neutrino framework.">PMNS_Fast</a> class, which only works for 3 neutrinos.</p>
 <dl class="section author"><dt>Author</dt><dd>jcoelho@apc.in2p3.fr </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00031">31</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00034">34</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a907872deb666cebdbb07ff7a7d9c26d0" name="a907872deb666cebdbb07ff7a7d9c26d0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a907872deb666cebdbb07ff7a7d9c26d0">&#9670;&nbsp;</a></span>PMNS_Sterile()</h2>
@@ -473,7 +474,7 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   35</span>{</div>
 <div class="line"><span class="lineno">   36</span>}</div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_aa53e83b03a9cf4bdfa0a07136bd17a79"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#aa53e83b03a9cf4bdfa0a07136bd17a79">OscProb::PMNS_Base::PMNS_Base</a></div><div class="ttdeci">PMNS_Base(int numNus=3)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8cxx_source.html#l00047">PMNS_Base.cxx:47</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PMNS__Sterile_html_a6610e07c0a7a53d50f7cc680df361fec"><div class="ttname"><a href="classOscProb_1_1PMNS__Sterile.html#a6610e07c0a7a53d50f7cc680df361fec">OscProb::PMNS_Sterile::fHam</a></div><div class="ttdeci">Eigen::MatrixXcd fHam</div><div class="ttdoc">The full Hamiltonian.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Sterile_8h_source.html#l00045">PMNS_Sterile.h:45</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PMNS__Sterile_html_a6610e07c0a7a53d50f7cc680df361fec"><div class="ttname"><a href="classOscProb_1_1PMNS__Sterile.html#a6610e07c0a7a53d50f7cc680df361fec">OscProb::PMNS_Sterile::fHam</a></div><div class="ttdeci">Eigen::MatrixXcd fHam</div><div class="ttdoc">The full Hamiltonian.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Sterile_8h_source.html#l00048">PMNS_Sterile.h:48</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -5105,7 +5106,7 @@ This will implement faster methods for N&lt;5 </p>
 <div class="line"><span class="lineno">  105</span>  }</div>
 <div class="line"><span class="lineno">  106</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PMNS__Base_8h_source.html#l00289">OscProb::PMNS_Base::fEval</a>, <a class="el" href="PMNS__Base_8h_source.html#l00290">OscProb::PMNS_Base::fEvec</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00045">fHam</a>, and <a class="el" href="PMNS__Base_8h_source.html#l00277">OscProb::PMNS_Base::fNumNus</a>.</p>
+<p class="reference">References <a class="el" href="PMNS__Base_8h_source.html#l00289">OscProb::PMNS_Base::fEval</a>, <a class="el" href="PMNS__Base_8h_source.html#l00290">OscProb::PMNS_Base::fEvec</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00048">fHam</a>, and <a class="el" href="PMNS__Base_8h_source.html#l00277">OscProb::PMNS_Base::fNumNus</a>.</p>
 
 </div>
 </div>
@@ -5294,7 +5295,7 @@ This will implement faster methods for N&lt;5 </p>
 <div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a326fc5016d7dd7ce05682c06cdcb6d94"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a326fc5016d7dd7ce05682c06cdcb6d94">OscProb::PMNS_Base::kK2</a></div><div class="ttdeci">static const double kK2</div><div class="ttdoc">mol/GeV^2/cm^3 to eV</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00216">PMNS_Base.h:216</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a7f26a3456128234b2ae6cc9141a6532f"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a7f26a3456128234b2ae6cc9141a6532f">OscProb::PMNS_Base::kGf</a></div><div class="ttdeci">static const double kGf</div><div class="ttdoc">G_F in units of GeV^-2.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00220">PMNS_Base.h:220</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="NuPath_8h_source.html#l00079">OscProb::NuPath::density</a>, <a class="el" href="PMNS__Base_8h_source.html#l00292">OscProb::PMNS_Base::fEnergy</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00045">fHam</a>, <a class="el" href="PMNS__Base_8h_source.html#l00284">OscProb::PMNS_Base::fHms</a>, <a class="el" href="PMNS__Base_8h_source.html#l00293">OscProb::PMNS_Base::fIsNuBar</a>, <a class="el" href="PMNS__Base_8h_source.html#l00277">OscProb::PMNS_Base::fNumNus</a>, <a class="el" href="PMNS__Base_8h_source.html#l00296">OscProb::PMNS_Base::fPath</a>, <a class="el" href="PMNS__Base_8h_source.html#l00217">OscProb::PMNS_Base::kGeV2eV</a>, <a class="el" href="PMNS__Base_8h_source.html#l00220">OscProb::PMNS_Base::kGf</a>, <a class="el" href="PMNS__Base_8h_source.html#l00216">OscProb::PMNS_Base::kK2</a>, and <a class="el" href="NuPath_8h_source.html#l00080">OscProb::NuPath::zoa</a>.</p>
+<p class="reference">References <a class="el" href="NuPath_8h_source.html#l00079">OscProb::NuPath::density</a>, <a class="el" href="PMNS__Base_8h_source.html#l00292">OscProb::PMNS_Base::fEnergy</a>, <a class="el" href="PMNS__Sterile_8h_source.html#l00048">fHam</a>, <a class="el" href="PMNS__Base_8h_source.html#l00284">OscProb::PMNS_Base::fHms</a>, <a class="el" href="PMNS__Base_8h_source.html#l00293">OscProb::PMNS_Base::fIsNuBar</a>, <a class="el" href="PMNS__Base_8h_source.html#l00277">OscProb::PMNS_Base::fNumNus</a>, <a class="el" href="PMNS__Base_8h_source.html#l00296">OscProb::PMNS_Base::fPath</a>, <a class="el" href="PMNS__Base_8h_source.html#l00217">OscProb::PMNS_Base::kGeV2eV</a>, <a class="el" href="PMNS__Base_8h_source.html#l00220">OscProb::PMNS_Base::kGf</a>, <a class="el" href="PMNS__Base_8h_source.html#l00216">OscProb::PMNS_Base::kK2</a>, and <a class="el" href="NuPath_8h_source.html#l00080">OscProb::NuPath::zoa</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PMNS__Sterile_8cxx_source.html#l00120">SolveHam()</a>.</p>
 
@@ -5579,7 +5580,7 @@ This will implement faster methods for N&lt;5 </p>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00045">45</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PMNS__Sterile_8h_source.html#l00048">48</a> of file <a class="el" href="PMNS__Sterile_8h_source.html">PMNS_Sterile.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PMNS__Sterile_8cxx_source.html#l00093">SolveEigenSystem()</a>, and <a class="el" href="PMNS__Sterile_8cxx_source.html#l00046">UpdateHam()</a>.</p>
 
