@@ -1606,7 +1606,7 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   73</span>  <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a62af840aa5b50fbe18bf90b3233a3ede">fHms</a>[0][0] = 0;</div>
 <div class="line"><span class="lineno">   74</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 1; j &lt; <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a24bb74bed63569dfe88b18fa6a08060e">fNumNus</a>; j++) {</div>
 <div class="line"><span class="lineno">   75</span>    <span class="comment">// Set mass difference m_j - m_1</span></div>
-<div class="line"><span class="lineno">   76</span>    <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a62af840aa5b50fbe18bf90b3233a3ede">fHms</a>[j][j] = sqrt(<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#ab31a5ae71f2e52e3334e8898dbc029fa">fDm</a>[j] + m1 * m1) - m1;</div>
+<div class="line"><span class="lineno">   76</span>    <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a62af840aa5b50fbe18bf90b3233a3ede">fHms</a>[j][j] = sqrt(fabs(<a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#ab31a5ae71f2e52e3334e8898dbc029fa">fDm</a>[j] + m1 * m1)) - m1;</div>
 <div class="line"><span class="lineno">   77</span>    <span class="comment">// Reset off-diagonal elements</span></div>
 <div class="line"><span class="lineno">   78</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; j; i++) { <a class="code hl_variable" href="classOscProb_1_1PMNS__Base.html#a62af840aa5b50fbe18bf90b3233a3ede">fHms</a>[i][j] = 0; }</div>
 <div class="line"><span class="lineno">   79</span>    <span class="comment">// Rotate j neutrinos</span></div>
