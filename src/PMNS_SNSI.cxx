@@ -73,7 +73,7 @@ void PMNS_SNSI::BuildHms()
   fHms[0][0] = 0;
   for (int j = 1; j < fNumNus; j++) {
     // Set mass difference m_j - m_1
-    fHms[j][j] = sqrt(fDm[j] + m1 * m1) - m1;
+    fHms[j][j] = sqrt(fabs(fDm[j] + m1 * m1)) - m1;
     // Reset off-diagonal elements
     for (int i = 0; i < j; i++) { fHms[i][j] = 0; }
     // Rotate j neutrinos
