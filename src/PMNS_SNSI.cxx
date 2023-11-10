@@ -60,14 +60,12 @@ void PMNS_SNSI::BuildHms()
   // Tag to recompute eigensystem
   fGotES = false;
 
-  // Start with m1 = 0
-  double m1 = 0;
-  // Make sure all masses are positive
+  // Start with m1 = fM
+  double m1 = fM;
+  // Make sure all masses are larger than fM
   for (int i = 1; i < fNumNus; i++) {
-    if (fDm[i] + m1 * m1 < 0) m1 = sqrt(fabs(fDm[i]));
+    if (fDm[i] + m1 * m1 < fM * fM) m1 = sqrt(fabs(fM * fM - fDm[i]));
   }
-  // Add minimum mass
-  m1 += fM;
 
   // Build M - m1
   fHms[0][0] = 0;
