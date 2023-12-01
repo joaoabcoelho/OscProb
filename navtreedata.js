@@ -68,7 +68,7 @@ var NAVTREEINDEX =
 "classOscProb_1_1PMNS__NSI.html#a63733b246e6d2e609ce3de7a65ba5b9f",
 "classOscProb_1_1PMNS__SNSI.html#a4a3fcca124362cdedaf53cd4ac40f8e7",
 "classOscProb_1_1PMNS__Sterile.html#a382ddd7b76ca89b43f22614a2ea7327b",
-"colormod_8h.html#a2abc6d09417967bb8bb5d924c2a43e16",
+"colormod_8h.html#a20a7b04657c1d83fae5d54514d3f1622abe34efdb5a71e6c08dbd73b2b048594e",
 "structOscProb_1_1TrajConstants.html#a8e200fae669fd9bcdbd412c5612bdd6e"
 ];
 

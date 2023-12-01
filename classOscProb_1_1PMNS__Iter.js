@@ -65,7 +65,7 @@ var classOscProb_1_1PMNS__Iter =
     [ "SetDm", "classOscProb_1_1PMNS__Iter.html#a492243b22fb1b783cd2943f507cff970", null ],
     [ "SetEnergy", "classOscProb_1_1PMNS__Iter.html#a95b3b0d0cab5e6a54b5ef99587f837c0", null ],
     [ "SetExpVL", "classOscProb_1_1PMNS__Iter.html#a55dea4885aa184ee47c470e3a42ff945", null ],
-    [ "SetIsNuBar", "classOscProb_1_1PMNS__Iter.html#a717e0348cf762f3961854e332a9b52e0", null ],
+    [ "SetIsNuBar", "classOscProb_1_1PMNS__Iter.html#aa66e26d0fd562c44a01db0a043dc581a", null ],
     [ "SetLayers", "classOscProb_1_1PMNS__Iter.html#a904e580edf89fb98bf9a6397739b4ebe", null ],
     [ "SetLength", "classOscProb_1_1PMNS__Iter.html#a6241325b1bd28cafa556daaecbe4ed62", null ],
     [ "SetLength", "classOscProb_1_1PMNS__Iter.html#a6606074ad140684aff9f48ff0f4f943a", null ],

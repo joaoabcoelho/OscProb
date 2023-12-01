@@ -12,5 +12,6 @@ var Utils_8h =
     [ "GetSNSI", "Utils_8h.html#ab2c8b7b18746f234083fa3b370242650", null ],
     [ "GetSterile", "Utils_8h.html#a3ca82e4ad574189d41bdd72ad54bb82c", null ],
     [ "SaveTestFile", "Utils_8h.html#aab1f4fea28da49a4ba323ee630a7de81", null ],
+    [ "SetNominalPars", "Utils_8h.html#a4fddcd0f00e8b82872119537a730137b", null ],
     [ "SetTestPath", "Utils_8h.html#a94e82aa0b1c44cba3f5bfa5cfbd252c6", null ]
 ];
