@@ -4,16 +4,33 @@
 #include "../tutorial/SetNiceStyle.C"
 
 //.............................................................................
+void SetNominalPars(OscProb::PMNS_Base* p){
+
+  // Set to NuFIT 5.2 values (NO w/ SK)
+  p->SetDm(2, 7.41e-5);
+  p->SetDm(3, 2.507e-3);
+  p->SetAngle(1,2, asin(sqrt(0.303)));
+  p->SetAngle(1,3, asin(sqrt(0.02225)));
+  p->SetAngle(2,3, asin(sqrt(0.451)));
+  p->SetDelta(1,3, 232 * TMath::DegToRad());
+
+}
+
+//.............................................................................
 OscProb::PMNS_Fast* GetFast(bool is_nominal){
 
-  return new OscProb::PMNS_Fast();
+  OscProb::PMNS_Fast* p = new OscProb::PMNS_Fast();
+  SetNominalPars(p);
+  return p;
 
 }
 
 //.............................................................................
 OscProb::PMNS_Iter* GetIter(bool is_nominal){
 
-  return new OscProb::PMNS_Iter();
+  OscProb::PMNS_Iter* p = new OscProb::PMNS_Iter();
+  SetNominalPars(p);
+  return p;
 
 }
 
@@ -21,6 +38,7 @@ OscProb::PMNS_Iter* GetIter(bool is_nominal){
 OscProb::PMNS_Deco* GetDeco(bool is_nominal){
 
   OscProb::PMNS_Deco* p = new OscProb::PMNS_Deco();
+  SetNominalPars(p);
   if(!is_nominal){
     p->SetGamma(2, 1e-23);
     p->SetGamma(3, 1e-22);
@@ -34,6 +52,7 @@ OscProb::PMNS_Deco* GetDeco(bool is_nominal){
 OscProb::PMNS_Sterile* GetSterile(bool is_nominal){
 
   OscProb::PMNS_Sterile* p = new OscProb::PMNS_Sterile(4);
+  SetNominalPars(p);
   if(!is_nominal){
     p->SetDm(4, 0.1);
     p->SetAngle(1,4, 0.1);
@@ -49,6 +68,7 @@ OscProb::PMNS_Sterile* GetSterile(bool is_nominal){
 OscProb::PMNS_Decay* GetDecay(bool is_nominal){
 
   OscProb::PMNS_Decay* p = new OscProb::PMNS_Decay();
+  SetNominalPars(p);
   if(!is_nominal){
     p->SetAlpha3(1e-4);
   }
@@ -61,6 +81,7 @@ OscProb::PMNS_Decay* GetDecay(bool is_nominal){
 OscProb::PMNS_NSI* GetNSI(bool is_nominal){
 
   OscProb::PMNS_NSI* p = new OscProb::PMNS_NSI();
+  SetNominalPars(p);
   if(!is_nominal){
     p->SetEps(0,0, 0.1, 0);
     p->SetEps(0,1, 0.2, 0);
@@ -78,6 +99,7 @@ OscProb::PMNS_NSI* GetNSI(bool is_nominal){
 OscProb::PMNS_SNSI* GetSNSI(bool is_nominal){
 
   OscProb::PMNS_SNSI* p = new OscProb::PMNS_SNSI();
+  SetNominalPars(p);
   if(!is_nominal){
     p->SetEps(0,0, 0.1, 0);
     p->SetEps(0,1, 0.2, 0);
@@ -95,6 +117,7 @@ OscProb::PMNS_SNSI* GetSNSI(bool is_nominal){
 OscProb::PMNS_LIV* GetLIV(bool is_nominal){
 
   OscProb::PMNS_LIV* p = new OscProb::PMNS_LIV();
+  SetNominalPars(p);
   if(!is_nominal){
     p->SetaT(0,0, 0.1e-22, 0);
     p->SetaT(0,1, 0.2e-22, 0);
