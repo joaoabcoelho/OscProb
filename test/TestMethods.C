@@ -98,7 +98,7 @@ bool TestNominal(string model, double &max_diff){
 
   if(model == "Fast") return true;
 
-  OscProb::PMNS_Fast p0;
+  OscProb::PMNS_Base* p0 = GetModel("Fast");
   OscProb::PMNS_Base* p = GetModel(model, true);
 
   if(model == "Iter"){
@@ -106,7 +106,7 @@ bool TestNominal(string model, double &max_diff){
     static_cast<OscProb::PMNS_Iter*> (p)->SetPrec(0.5*prec);
   }
 
-  SetTestPath(&p0);
+  SetTestPath(p0);
   SetTestPath(p);
 
   int nbins = 100;
@@ -114,7 +114,7 @@ bool TestNominal(string model, double &max_diff){
   for(int isnb=0; isnb<2; isnb++){
 
     p->SetIsNuBar(isnb);
-    p0.SetIsNuBar(isnb);
+    p0->SetIsNuBar(isnb);
 
     for(int i=0; i<=nbins; i++){
 
@@ -123,7 +123,7 @@ bool TestNominal(string model, double &max_diff){
       for(int flvi=0; flvi<3; flvi++){
       for(int flvf=0; flvf<3; flvf++){
 
-        double nom_prob = p0.Prob(flvi, flvf, energy);
+        double nom_prob = p0->Prob(flvi, flvf, energy);
         double alt_prob = p->Prob(flvi, flvf, energy);
 
         if(abs(nom_prob - alt_prob) > max_diff){
@@ -156,7 +156,7 @@ bool TestNominal(string model, double &max_diff){
 
   }
 
-  delete p;
+  delete p, p0;
 
   return true;
 

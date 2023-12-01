@@ -691,8 +691,8 @@ int EarthModelBinned::FillPath(double cosT, double phi)
   }
   // Condition calculation for incr./decr. Longitude (with decr. x)
   loninfo.dLon =
-      fHalfLonBinWidth; // change in lon from bin center to next bin (includes
-                        // direction; 0 if no more than 1 lon bin change)
+      fHalfLonBinWidth;   // change in lon from bin center to next bin (includes
+                          // direction; 0 if no more than 1 lon bin change)
   loninfo.min = init_lon; // initial lon if lon is inc.
   loninfo.max = fDetLon;  // detector lon if lon is inc.
   if (fC.sinA < 0) {

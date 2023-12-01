@@ -63,9 +63,9 @@ void PMNS_Sterile::UpdateHam()
     for (int j = i + 1; j < fNumNus; j++) {
       // Obs: fHam is lower tirangular while fHms is upper triangular
       if (!fIsNuBar)
-        fHam(j, i) = fHms[i][j] / lv;
-      else
         fHam(j, i) = conj(fHms[i][j]) / lv;
+      else
+        fHam(j, i) = fHms[i][j] / lv;
     }
 
     // Subtract NC coherent forward scattering from sterile neutrinos.
