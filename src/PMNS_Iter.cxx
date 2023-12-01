@@ -70,13 +70,13 @@ void PMNS_Iter::SolveHam()
   // Do vacuum oscillation
   if (!fBuiltHms) {
     PMNS_Fast::SetVacuumEigensystem();
-    fBuiltHms = true;
-    fGotES = true;
+    fBuiltHms   = true;
+    fGotES      = true;
     fPrevEnergy = fEnergy;
     return;
   }
 
-  if(fGotES) return;
+  if (fGotES) return;
 
   for (int i = 1; i < fNumNus; i++) { fEval[i] *= fPrevEnergy / fEnergy; }
 
