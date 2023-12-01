@@ -26,6 +26,22 @@ PMNS_Iter::~PMNS_Iter() {}
 
 //.............................................................................
 ///
+/// Set anti-neutrino flag.
+///
+/// Reimplemented to require Hamiltonian change for Iter class.
+///
+/// @param isNuBar - Set to true for anti-neutrino and false for neutrino.
+///
+void PMNS_Iter::SetIsNuBar(bool isNuBar)
+{
+  // Check if value is actually changing
+  fBuiltHms *= (fIsNuBar == isNuBar);
+
+  fIsNuBar = isNuBar;
+}
+
+//.............................................................................
+///
 /// Propagate neutrino through matter component.
 ///
 void PMNS_Iter::SetExpVL(NuPath p)
@@ -51,17 +67,18 @@ void PMNS_Iter::PropMatter() { fNuState[0] *= fExpVL; }
 ///
 void PMNS_Iter::SolveHam()
 {
-  if (fGotES) return;
-
   // Do vacuum oscillation
   if (!fBuiltHms) {
-    fPath.density = 0;
-    PMNS_Fast::SolveHam();
+    PMNS_Fast::SetVacuumEigensystem();
     fBuiltHms = true;
+    fGotES = true;
+    fPrevEnergy = fEnergy;
+    return;
   }
-  else {
-    for (int i = 1; i < fNumNus; i++) { fEval[i] *= fPrevEnergy / fEnergy; }
-  }
+
+  if(fGotES) return;
+
+  for (int i = 1; i < fNumNus; i++) { fEval[i] *= fPrevEnergy / fEnergy; }
 
   fPrevEnergy = fEnergy;
 

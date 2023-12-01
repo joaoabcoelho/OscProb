@@ -40,6 +40,8 @@ namespace OscProb {
       /// Set the iterative precision
       virtual void SetPrec(double prec);
 
+      virtual void SetIsNuBar(bool isNuBar); ///< Set the anti-neutrino flag
+
     protected:
       /// Just use the vacuum to start
       virtual void SolveHam();
