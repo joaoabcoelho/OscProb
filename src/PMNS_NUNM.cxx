@@ -13,6 +13,7 @@
 #include <iostream>
 #include "PMNS_NUNM.h"
 #include <Eigen/Eigenvalues>
+#include <Eigen/Dense>
 #include "Definitions.h"
 
 using namespace OscProb;
@@ -22,13 +23,16 @@ using namespace std;
 ///
 /// Constructor. \sa PMNS_Base::PMNS_Base
 ///
-/// This class is restricted to 3 neutrino flavours.
+/// scale 0 is low-scale NUNM model
+/// scale 1 is high-scale NUNM model
 ///
-PMNS_NUNM::PMNS_NUNM() : PMNS_Fast(), fAlpha()
+PMNS_NUNM::PMNS_NUNM(int scale) : PMNS_Fast()
 {
+  fscale = scale;
   SetStdPath();
   SetNUNM(0., 0., 0., 0., 0., 0.);
   SetFracVnc(1.0);
+  InitMatrix();
 }
 
 //.............................................................................
@@ -44,15 +48,12 @@ PMNS_NUNM::~PMNS_NUNM() {}
 /// This will check if value is changing to k11p track of whether
 /// the eigensystem n11ds to be recomputed.
 ///
-/// @param alpha_11      - The real parameter eps_11
-/// @param alpha_21     - The absolute value of the complex parameter eps_12
-/// @param alpha_31    - The absolute value of the complex parameter eps_etau
-/// @param alpha_22    - The real parameter eps_22
-/// @param alpha_32   - The absolute value of the complex parameter eps_mutau
-/// @param alpha_33  - The real parameter eps_33
-/// @param delta_12   - The phase of the complex parameter alpha_21 in radians
-/// @param delta_etau  - The phase of the complex parameter alpha_31 in radians
-/// @param delta_mutau - The phase of the complex parameter alpha_32 in radians
+/// @param alpha_11      - The real parameter alpha_11
+/// @param alpha_21     - The absolute value of the complex parameter alpha_21
+/// @param alpha_31    - The absolute value of the complex parameter alpha_31
+/// @param alpha_22    - The real parameter alpha_22
+/// @param alpha_32   - The absolute value of the complex parameter alpha_32
+/// @param alpha_33  - The real parameter alpha_33
 ///
 void PMNS_NUNM::SetNUNM(double alpha_11, double alpha_21, double alpha_31,
                       double alpha_22, double alpha_32, double alpha_33)
@@ -66,7 +67,15 @@ void PMNS_NUNM::SetNUNM(double alpha_11, double alpha_21, double alpha_31,
   SetAlpha(2, 1, alpha_32, 0);
   
   //upper part fixed to zero from https://arxiv.org/pdf/2309.16942.pdf  
+}
 
+void PMNS_NUNM::InitMatrix()
+{
+  Ham.setZero();
+  V.setZero();
+  Evec0.setZero();
+  Evec.setZero();
+  EvecA.setZero();
 }
 
 
@@ -103,17 +112,17 @@ void PMNS_NUNM::SetAlpha(int i, int j, double val, double phase)
   }
 
   complexD h = val;
+  
+  if (i == j) { h = 1. + val;}
+  else { h *= complexD(cos(phase), sin(phase));}
 
-  if (i != j) h *= complexD(cos(phase), sin(phase));
-
-  bool isSame = (fAlpha[i][j] == h);
+  bool isSame = (Alpha(i,j) == h);
 
   if (!isSame) ClearCache();
 
   fGotES *= isSame;
-  fBuiltHms *= isSame;
 
-  fAlpha[i][j] = h;
+  Alpha(i,j) = h;
 }
 
 //.............................................................................
@@ -146,15 +155,15 @@ complexD PMNS_NUNM::GetAlpha(int i, int j)
     return zero;
   }
 
-  return fAlpha[i][j];
+  return Alpha(i,j);
 }
 
 //.............................................................................
 ///
 /// Set alpha_11 parameter
 ///
-/// This will check if value is changing to k11p track of whether
-/// the eigensystem n11ds to be recomputed.
+/// This will check if value is changing to keep track of whether
+/// the eigensystem needs to be recomputed.
 ///
 /// @param a - The value of the real parameter alpha_11
 ///
@@ -164,8 +173,8 @@ void PMNS_NUNM::SetAlpha_11(double a) { SetAlpha(0, 0, a, 0); }
 ///
 /// Set alpha_22 parameter
 ///
-/// This will check if value is changing to k11p track of whether
-/// the eigensystem n11ds to be recomputed.
+/// This will check if value is changing to keep track of whether
+/// the eigensystem needs to be recomputed.
 ///
 /// @param a - The value of the real parameter alpha_22
 ///
@@ -175,8 +184,8 @@ void PMNS_NUNM::SetAlpha_22(double a) { SetAlpha(1, 1, a, 0); }
 ///
 /// Set alpha_33 parameter
 ///
-/// This will check if value is changing to k11p track of whether
-/// the eigensystem n11ds to be recomputed.
+/// This will check if value is changing to keep track of whether
+/// the eigensystem needs to be recomputed.
 ///
 /// @param a - The value of the real parameter alpha_33
 ///
@@ -186,8 +195,8 @@ void PMNS_NUNM::SetAlpha_33(double a) { SetAlpha(2, 2, a, 0); }
 ///
 /// Set alpha_21 parameter
 ///
-/// This will check if value is changing to k11p track of whether
-/// the eigensystem n11ds to be recomputed.
+/// This will check if value is changing to keep track of whether
+/// the eigensystem needs to be recomputed.
 ///
 /// @param a   - The absolute value of the parameter alpha_21
 /// @param phi - The phase of the complex parameter alpha_21 in radians
@@ -198,8 +207,8 @@ void PMNS_NUNM::SetAlpha_21(double a, double phi) { SetAlpha(1, 0, a, phi); }
 ///
 /// Set alpha_31 parameter
 ///
-/// This will check if value is changing to k11p track of whether
-/// the eigensystem n11ds to be recomputed.
+/// This will check if value is changing to keep track of whether
+/// the eigensystem needs to be recomputed.
 ///
 /// @param a   - The absolute value of the parameter alpha_31
 /// @param phi - The phase of the complex parameter alpha_31 in radians
@@ -210,8 +219,8 @@ void PMNS_NUNM::SetAlpha_31(double a, double phi) { SetAlpha(2, 0, a, phi); }
 ///
 /// Set alpha_32 parameter
 ///
-/// This will check if value is changing to k11p track of whether
-/// the eigensystem n11ds to be recomputed.
+/// This will check if value is changing to keep track of whether
+/// the eigensystem needs to be recomputed.
 ///
 /// @param a   - The absolute value of the parameter alpha_32
 /// @param phi - The phase of the complex parameter alpha_32 in radians
@@ -224,8 +233,8 @@ void PMNS_NUNM::SetAlpha_32(double a, double phi) { SetAlpha(2, 1, a, phi); }
 /// This factor represents what fraction of the neutron matter potentiel 
 /// is included in the NUNM model
 ///
-/// @param f - 0 if no neutron matter potential 
-///        f - 1 if neutron matter potential included
+/// @param f -> 0 no neutron matter potential 
+/// @param f -> 1 std neutron matter potential 
 ///
 void PMNS_NUNM::SetFracVnc(double f)
 {
@@ -241,124 +250,77 @@ void PMNS_NUNM::SetFracVnc(double f)
 
 //.............................................................................
 ///
-/// Rotate H = U*Ham*U~ --> A*H*A~ where Hms is the mass split matrix 
-/// A = I+fAlpha , fAlpha represents the non unitarity coefficients 
-/// from https://arxiv.org/pdf/2309.16942.pdf
-/// 
-/// This is a hermitian matrix, so only the
-/// upper triangular part is filled in order to reduce computing ressourses
-/// for the moment all alpha_ij can be non zero at the same time 
+/// Propagate neutrino state through full path
+/// Non unitarity implies to apply the Alpha transformation
+/// to the neutrino state after propagation
 ///
-
-void PMNS_NUNM::transfoNUNM( matrixC& Ham)
+///
+void PMNS_NUNM::Propagate()
 {
-  matrixC HamBuffer = Ham;
-  for (int i = 0; i < fNumNus; i++) { // diag elements
-    //cerr << "Hms rotating ------> fushh : "<< endl;
-    Ham[i][i] = HamBuffer[i][i] * (fAlpha[i][i]*fAlpha[i][i] + 2.*fAlpha[i][i] + 1.);
-    /*cerr << "Ham after diag. " << i <<  "th rotation ------> fushh : "<< endl;
-    cerr << Ham[0][0] << " " << Ham[0][1]<< " "<< Ham[0][2] << endl;
-    cerr << Ham[1][0] << " " << Ham[1][1]<< " "<< Ham[1][2] << endl;
-    cerr << Ham[2][0] << " " << Ham[2][1]<< " "<< Ham[2][2] << endl;
-    */
-    if (i > 0){
-	Ham[i][i] += HamBuffer[0][0] * conj(fAlpha[i][0]) * fAlpha[i][0];
-	Ham[i][i] += HamBuffer[0][i] * fAlpha[i][0] * ( 1. + fAlpha[i][i] );  
-        Ham[i][i] += conj(HamBuffer[0][i]) * conj(fAlpha[i][0]) * ( 1. + fAlpha[i][i] );
-	if (i > 1){
-	    Ham[i][i] += HamBuffer[i-2][i-1] * conj(fAlpha[i][i-1]) * fAlpha[i][i-2];
-	    Ham[i][i] += HamBuffer[i-1][i-1] * conj(fAlpha[i][i-1]) * fAlpha[i][i-1];
-	    Ham[i][i] += HamBuffer[i-1][i] * fAlpha[i][i-1] * ( 1. + fAlpha[i][i] );
-	    Ham[i][i] += conj(HamBuffer[0][i-1]) * conj(fAlpha[i][0]) * fAlpha[i][i-1];
-	    Ham[i][i] += conj(HamBuffer[i-1][i]) * conj(fAlpha[i][1]) * ( 1. + fAlpha[i][i] );
-	}
-    }
-    for (int j = i+1; j < fNumNus; j++) { // tp off diag elements
-	Ham[i][j] = HamBuffer[i][j] * (1. + fAlpha[j][j]);
-	Ham[i][j] += HamBuffer[i][i] * (conj(fAlpha[j][i]) * fAlpha[i][i] + conj(fAlpha[j][i]));
-	Ham[i][j] += HamBuffer[i][j] * (1. + fAlpha[j][j]) * fAlpha[i][i];
-	if (j > 1){
-	  if (i > 0){
-	    Ham[i][j] += HamBuffer[i-1][j-1] * fAlpha[i][j-2] * conj(fAlpha[j][j-1]);
-	    Ham[i][j] += HamBuffer[i-1][j] * (1. + fAlpha[j][j]) * fAlpha[i][j-2];
-	    Ham[i][j] += HamBuffer[i-1][i-1] * fAlpha[i][j-2] * conj(fAlpha[j][j-2]);
-	    Ham[i][j] += conj(HamBuffer[0][i]) * conj(fAlpha[j][0]) * ( 1. + fAlpha[i][i] );
-	  }
-	  else{
-	    Ham[i][j] += HamBuffer[i][j-1] * (1. + fAlpha[i][i]) * conj(fAlpha[j][j-1]);
-	  }
-    	/*cerr << "Ham after off " << i << ", " << j <<  "th rotation ------> fushh : "<< endl;
-    	cerr << Ham[0][0] << " " << Ham[0][1]<< " "<< Ham[0][2] << endl;
-    	cerr << Ham[1][0] << " " << Ham[1][1]<< " "<< Ham[1][2] << endl;
-    	cerr << Ham[2][0] << " " << Ham[2][1]<< " "<< Ham[2][2] << endl;
-	*/
-	}
-    }
+  for (int i = 0; i < int(fNuPaths.size()); i++) { 
+    bool isLast = ( i == int(fNuPaths.size() - 1 ) );
+    bool isFirst = ( i == 0);
+    PropagatePath(fNuPaths[i], isFirst, isLast); 
   }
-}   
-
+}
 
 //.............................................................................
 ///
-/// Build Hms = H*2E, where H is the Hamiltonian in vacuum on flavour basis
-/// and E is the neutrino energy in eV. Hms is effectively the matrix of
-/// masses squared.
+/// Propagate the current neutrino state through a given path
+/// @param p - A neutrino path segment
+/// apply Alpha X Alpha~ transformation to get the probability
 ///
-/// This is a hermitian matrix, so only the
-/// upper triangular part needs to be filled
-/// + because U rotation is unitary matrices
-///
-/// The construction of the Hamiltonian avoids computing terms that
-/// are simply zero. This has a big impact in the computation time.
-///
+void PMNS_NUNM::PropagatePath(NuPath p, bool isFirst, bool isLast)
+{
+  // Set the neutrino path
+  SetCurPath(p);
 
-/*
-void PMNS_NUNM::BuildHms()
-{ 
-  // Check if anything changed
-  if (fBuiltHms) return;
-  
-  // Tag to recompute eigensystem
-  fGotES = false;
-   
-  cerr << "Hms before rot. : "<< endl;
-  cerr << fHms[0][0] << " " << fHms[0][1]<< " "<< fHms[0][2] << endl;
-  cerr << fHms[1][0] << " " << fHms[1][1]<< " "<< fHms[1][2] << endl;
-  cerr << fHms[2][0] << " " << fHms[2][1]<< " "<< fHms[2][2] << endl;
-  
-  for (int j = 0; j < fNumNus; j++) {
-    // Set mass splitting
-    fHms[j][j] = fDm[j];
-    // Reset off-diagonal elements
-    for (int i = 0; i < j; i++) { fHms[i][j] = 0; } 
-    // Rotate j neutrinos
-    for (int i = 0; i < j; i++) { RotateH(i, j, fHms);} 
+  if (fscale == 1){ // normalise mixing matrix in high scale scenario to ensure completeness
+    Eigen::Matrix<std::complex<double>, 3, 3> X = Alpha * Alpha.adjoint(); // M * conjugate transpose of M 
+    for (int i = 0; i < 3; ++i) {
+      for (int j = 0; j < 3; ++j) {
+        Alpha(i, j) *= 1 / std::sqrt(X(i, i).real()); // Scale by the inverse square root of the diagonal elements of X
+      }
+    }
   }
   
-  cerr << "Hms before rotation alpha : " << endl;
-  cerr << fHms[0][0] << " " << fHms[0][1]<< " "<< fHms[0][2] << endl;
-  cerr << fHms[1][0] << " " << fHms[1][1]<< " "<< fHms[1][2] << endl;
-  cerr << fHms[2][0] << " " << fHms[2][1]<< " "<< fHms[2][2] << endl;
+  // Solve for eigensystem
+  SolveHam();
   
-  //RotateHalpha(fHms);
+  for (int i = 0; i < 3; ++i) {
+    for (int j = 0; j < 3; ++j) {
+	Evec0(i, j) = fEvec[i][j]; //
+    }
+  }
   
-  cerr << "fAlpha : " << endl;
-  cerr << fAlpha[0][0] << " " << fAlpha[0][1]<< " "<< fAlpha[0][2] << endl;
-  cerr << fAlpha[1][0] << " " << fAlpha[1][1]<< " "<< fAlpha[1][2] << endl;
-  cerr << fAlpha[2][0] << " " << fAlpha[2][1]<< " "<< fAlpha[2][2] << endl;
+  if (isFirst) { EvecA = Evec0.adjoint() * Alpha.adjoint(); }
+  else{ EvecA = Evec0.adjoint();}
   
-  cerr << "Hms after rotation alpha : " << endl;
-  cerr << fHms[0][0] << " " << fHms[0][1]<< " "<< fHms[0][2] << endl;
-  cerr << fHms[1][0] << " " << fHms[1][1]<< " "<< fHms[1][2] << endl;
-  cerr << fHms[2][0] << " " << fHms[2][1]<< " "<< fHms[2][2] << endl;
+  if (isLast) { Evec = Alpha * Evec0; }
+  else{ Evec = Evec0 ;}
   
+  double LengthIneV = kKm2eV * p.length;
+  for (int i = 0; i < fNumNus; i++) {
+    double arg = fEval[i] * LengthIneV;
+    fPhases[i] = complexD(cos(arg), -sin(arg));
+  }
+  
+  for (int i = 0; i < fNumNus; i++) {
+    fBuffer[i] = 0;
+    for (int j = 0; j < fNumNus; j++) {
+      fBuffer[i] += EvecA(i,j) * fNuState[j];
+    }
+    fBuffer[i] *= fPhases[i];
+  }
 
-  ClearCache();
-  
-  // Tag as built
-  fBuiltHms = true;
+  // Propagate neutrino state
+  for (int i = 0; i < fNumNus; i++) {
+    fNuState[i] = 0;
+    for (int j = 0; j < fNumNus; j++) {
+      fNuState[i] += Evec(i,j) * fBuffer[j];
+    }
+  }
 }
-*/
 
 
 //.............................................................................
@@ -368,6 +330,18 @@ void PMNS_NUNM::BuildHms()
 /// Here we divide the mass squared matrix Hms by the 2E
 /// to obtain the vacuum Hamiltonian in eV. Then, the matter
 /// potential is added to the electron and NC components.
+///
+/// the neutron matter effect is added to the diag of V
+/// depending on the scenario the writting of the Hamiltonian
+/// in the tilde basis is different
+///
+/// solving the sytem in the tilde basis: H = U·Dm·U~ + Alpha~·V·Alpha
+/// in high scale scenario : H = U·Dm·U~ + Alpha^(-1)·V·Alpha~^(-1)
+/// inspired from https://arxiv.org/pdf/2301.12960.pdf and
+/// tilde basis in eq B5. https://cds.cern.ch/record/1032544/files/PhysRevD.76.093005.pdf
+///
+///
+///
 void PMNS_NUNM::UpdateHam()
 { 
   double rho = fPath.density;
@@ -377,76 +351,30 @@ void PMNS_NUNM::UpdateHam()
   
   double kr2GNe = kK2 * M_SQRT2 * kGf * rho * zoa ; // Electron matter potential in eV
   double kr2GNn = kK2 * M_SQRT2 * kGf * rho * (1. - zoa) / 2. * fracVnc ; // Neutron matter potential in eV
-
-  vectorD vMat = vectorD(fNumNus, 0);
-  Ham = matrixC(fNumNus, vectorC(fNumNus, 0));
-
-  // Finish build Hamiltonian in matter with dimension of eV
-  for (int i = 0; i < fNumNus; i++) { 
-    for (int j = i; j < fNumNus; j++) {
-      if (!fIsNuBar) 
-        Ham[i][j] = fHms[i][j] / lv;
-      else
-        Ham[i][j] = conj(fHms[i][j]) / lv;
-    }
   
-    if (!fIsNuBar) 
-      vMat[i] -= kr2GNn; // Not written like sterile case because non unitary PMN
-    else
-      vMat[i] += kr2GNn;
+  // Finish build Hamiltonian in matter with dimension of eV
+  
+  for (int i = 0; i < fNumNus; i++) { 
+      if (!fIsNuBar){ V(i,i) = -1. * kr2GNn;}
+      else { V(i,i) = kr2GNn;}
+      for (int j = 0; j < fNumNus; j++) {
+        if (!fIsNuBar) Ham(i,j) = fHms[i][j] / lv;
+        else Ham(i,j) = conj(fHms[i][j]) / lv;
+      }
   }
   
-  if (!fIsNuBar)
-    vMat[0] += kr2GNe;
-  else
-    vMat[0] -= kr2GNe;
+  if (!fIsNuBar){V(0,0) += kr2GNe;}
+  else {V(0,0) -= kr2GNe;}
 
-  
-  /*
-  cerr << "fHam before alpha(+) matter pot. rotation  : "<< endl;
-  cerr << Ham[0][0] << " " << Ham[0][1]<< " "<< Ham[0][2] << endl;
-  cerr << Ham[1][0] << " " << Ham[1][1]<< " "<< Ham[1][2] << endl;
-  cerr << Ham[2][0] << " " << Ham[2][1]<< " "<< Ham[2][2] << endl;
-  
-  cerr << "fMat  : "<< endl;
-  cerr << vMat[0] << " " << vMat[1]<< " "<< vMat[2] << endl;
-  */
-  // Add to Flavour Ham after rotation of matter potential Alpha(+) x fMat x Alpha
-  Ham[0][0] += vMat[2] * fAlpha[2][0] * conj(fAlpha[2][0]); 
-  Ham[0][1] += vMat[2] * fAlpha[2][1] * conj(fAlpha[2][0]);
-  for (int i = 0; i < fNumNus; i++) { // diag elements
-    //cerr << "fMat[i][i] first " << fMat[i] * (fAlpha[i][i]*fAlpha[i][i] + 2.*fAlpha[i][i] + 1.) << endl;
-    //cerr << "fMat[i][i] first " << fHam[2][2] << endl;
-    Ham[i][i] += vMat[i] * (fAlpha[i][i]*fAlpha[i][i] + 2.*fAlpha[i][i] + 1.);
-    //cerr << "fMat[i][i] after " << fHam[2][2] << endl;
-    if (i<2) Ham[i][i] +=  vMat[i+1] *fAlpha[i+1][i] * conj(fAlpha[i+1][i]);
-    for (int j = i+1; j < fNumNus; j++) {
-	    Ham[i][j] += vMat[j] * (1. + fAlpha[j][j]) * conj(fAlpha[j][i]);
-    }
-  } // Ham. now has to be computed with all elements
-
-  /*
-  cerr << "fHam before new alpha full ham rotation  : "<< endl;
-  cerr << Ham[0][0] << " " << Ham[0][1]<< " "<< Ham[0][2] << endl;
-  cerr << Ham[1][0] << " " << Ham[1][1]<< " "<< Ham[1][2] << endl;
-  cerr << Ham[2][0] << " " << Ham[2][1]<< " "<< Ham[2][2] << endl;
-  */
-  transfoNUNM(Ham); // Ham. has to be computed with all elements of Ham. not only up triangular part because alpha non-unitary matrix
+  if (fscale == 0){ Ham += Alpha.adjoint()*V*Alpha ;} // low scale scenario with mixing matrix part of larger unitary matrix 
+  else if (fscale == 1){ Ham += Alpha.inverse()*V*(Alpha.adjoint()).inverse();} // high scale scenario with non unitary mixing matrix
 
   for (int i = 0; i < fNumNus; i++) {
-    for (int j = i; j < fNumNus; j++) {
-	fHam[i][j] = Ham[i][j];
+    for (int j = 0; j < fNumNus; j++) {
+	fHam[i][j] = Ham(i,j);
     }
-  //  for (int j = 0; j < i; j++) {
-  //	fHam[i][j] = conj(Ham[j][i]);
-  //  }
   }
-  /*  
-  cerr << "Ham after matter added  : "<< endl;
-  cerr << fHam[0][0] << " " << fHam[0][1]<< " "<< fHam[0][2] << endl;
-  cerr << fHam[1][0] << " " << fHam[1][1]<< " "<< fHam[1][2] << endl;
-  cerr << fHam[2][0] << " " << fHam[2][1]<< " "<< fHam[2][2] << endl;
-  */
+  
 }
 
 

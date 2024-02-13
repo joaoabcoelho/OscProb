@@ -2,37 +2,37 @@
 /// \class OscProb::PMNS_NUNM
 ///
 /// \brief Implementation of oscillations of neutrinos in matter in a
-///        three-neutrino framework with NUNM.
+///        three-neutrino framework with Non unitary Neutrino Mixing (NUNM).
 ///
-/// This class expands the PMNS_Fast class including a general
-/// matter potential matrix describing Non-Standard Interactions (NUNM).
+/// This class expands the PMNS_Fast class including a general NU mixing matrix
+/// 
 ///
 /// The non unitarity effect is parametrized by dimensionless quantities
-/// alpha which quantify the intensity of the NUNM with respect to the
+/// alpha which quantify the deviation from unitarity with respect to the
 /// standard mixing
 ///
-/// Reference: https://arxiv.org/pdf/2309.16942.pdf
+/// Reference: https://arxiv.org/pdf/2111.00329.pdf
 ///
 /// \sa PMNS_Fast
 /// 
 /// \author cerisy@cppm.in2p3.fr
-/// \author jcoelho\@apc.in2p3.fr
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifndef PMNS_NUNM_H
 #define PMNS_NUNM_H
 
+#include <Eigen/Dense>
 #include "PMNS_Fast.h"
 
 namespace OscProb {
 
   class PMNS_NUNM : public PMNS_Fast {
     public:
-      PMNS_NUNM();          ///< Constructor
+      PMNS_NUNM(int scale = 0);          ///< Constructor
       virtual ~PMNS_NUNM(); ///< Destructor
 
       /// Set any given NUNM parameter
-      virtual void SetAlpha(int i, int j, double val, double phase);
+      virtual void SetAlpha(int i, int j, double val, double phase); // i, j between 0 and 2
 
       /// Get any given NUNM parameter
       virtual complexD GetAlpha(int i, int j);
@@ -55,13 +55,19 @@ namespace OscProb {
       virtual void SetFracVnc(double f);
 
     protected:
-      /// Build the full Hamiltonian
+      int fscale;
       virtual void UpdateHam();
-      //virtual void BuildHms();
-      virtual void transfoNUNM(matrixC& Ham);
-      complexD fAlpha[3][3]; ///< Stores each NUNM parameter
-      matrixC Ham;
-      double fracVnc;
+      virtual void Propagate();
+      virtual void PropagatePath(NuPath p, bool isFirst, bool isLast);
+      //virtual void getBar(Eigen::Matrix3cd& M); // apply normalisation to a matrix
+      double fracVnc; // set fraction of matter potential affecting NC
+      void InitMatrix();
+      Eigen::Matrix<std::complex<double>, 3, 3> Alpha;
+      Eigen::Matrix<std::complex<double>, 3, 3> V;
+      Eigen::Matrix<std::complex<double>, 3, 3> Ham;
+      Eigen::Matrix<std::complex<double>, 3, 3> Evec0;
+      Eigen::Matrix<std::complex<double>, 3, 3> Evec;
+      Eigen::Matrix<std::complex<double>, 3, 3> EvecA;
   };
 
 } // namespace OscProb

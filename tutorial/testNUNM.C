@@ -17,7 +17,11 @@ void testNUNM(){
   
   OscProb::PremModel prem;
   prem.FillPath(-1);
-
+  
+  myPMNS.SetEnergy(25.0);
+  myNUNM.SetEnergy(25.0);
+  mySterile.SetEnergy(25.0);
+  
   int fNumNus = 3;
   // Set oscillation paramaters
   // By default, they are set to
@@ -33,7 +37,6 @@ void testNUNM(){
 
   // Set other quantities
   //myPMNS.SetDensity(2.5); // Set the matter density in g/cm^3
-  
   myPMNS.SetPath(prem.GetNuPath());
   myNUNM.SetPath(prem.GetNuPath());
   mySterile.SetPath(prem.GetNuPath());
@@ -67,9 +70,9 @@ void testNUNM(){
   elapsed = end - start;
   cerr << "elapsed time: " << elapsed.count() << " ms\n"<< endl;
 
-  cerr << " ----------------------------- Sterile 0.1 Nm = 0 ----------------------------- " << endl;
-  mySterile.SetAngle(1, 4, 10./180.*3.14159);  
-  mySterile.SetDm(4, 10.0);
+  cerr << " ----------------------------- Sterile4 10°  ----------------------------- " << endl;
+  mySterile.SetAngle(1, 4, 10/180.*3.14159);  
+  mySterile.SetDm(4, 100.0);
   start = std::chrono::high_resolution_clock::now();
   for (int i = 0; i < fNumNus; i++) {
     for (int j = 0; j < fNumNus; j++) {
@@ -80,7 +83,6 @@ void testNUNM(){
   end = std::chrono::high_resolution_clock::now();
   elapsed = end - start;
   cerr << "elapsed time: " << elapsed.count() << " ms\n"<< endl;
-
   
   cerr << " ----------------------------- NUNM alpha = 0 fracVnc = 0 ----------------------------- " << endl;
   myNUNM.SetFracVnc(0.);
@@ -93,8 +95,6 @@ void testNUNM(){
   end = std::chrono::high_resolution_clock::now();
   elapsed = end - start;
   cerr << "elapsed time: " << elapsed.count() << " ms\n"<< endl;
-  
-
   
   cerr << " ----------------------------- NUNM alpha = 0 fracVnc = 1 ----------------------------- " << endl;
   myNUNM.SetFracVnc(1.);
@@ -109,6 +109,7 @@ void testNUNM(){
   elapsed = end - start;
   cerr << "elapsed time: " << elapsed.count() << " ms\n"<< endl;
   
+  /*
   cerr << " ----------------------------- NUNM one alpha =! 0 fracVnc = 1 ----------------------------- " << endl;
   myNUNM.SetFracVnc(1.);
   for (int i = 0; i < fNumNus; i++) {
@@ -127,7 +128,9 @@ void testNUNM(){
 		  myNUNM.SetAlpha(i, j, 0, 0 );
 	  }		
   }
-  
+  */
+
+  /*  
   cerr << " ----------------------------- NUNM one alpha =! 0 fracVnc = 0 ----------------------------- " << endl;
   myNUNM.SetFracVnc(0.);
   for (int i = 0; i < fNumNus; i++) {
@@ -146,17 +149,17 @@ void testNUNM(){
 		  myNUNM.SetAlpha(i, j, 0, 0 );
           }
   }
+  */
+
+  //myNUNM.SetAlpha(0, 0, 1, 0 );
+  //myNUNM.SetAlpha(1, 1, 1, 0 );
+  //myNUNM.SetAlpha(2, 2, 0.173648, 0 );
+  //myNUNM.SetAlpha(1, 0, 1, 0 );
+  //myNUNM.SetAlpha(2, 0, 1, 0 );
+  myNUNM.SetAlpha(2, 1, 0.173648, 0 );
   
-  
-  myNUNM.SetAlpha(0, 0, 1, 0 );
-  myNUNM.SetAlpha(1, 1, 1, 0 );
-  myNUNM.SetAlpha(2, 2, 1, 0 );
-  myNUNM.SetAlpha(1, 0, 1, 0 );
-  myNUNM.SetAlpha(2, 0, 1, 0 );
-  myNUNM.SetAlpha(2, 1, 1, 0 );
-  
-  cerr << " ----------------------------- NUNM alphaX = 1 fracVnc = 1 ----------------------------- " << endl;
-  myNUNM.SetFracVnc(1.);
+  cerr << " ----------------------------- NUNM alpha32 = 0.17 fracVnc = 0 ----------------------------- " << endl;
+  myNUNM.SetFracVnc(0.);
   //myNUNM.Prob(0,0);// commented
   start = std::chrono::high_resolution_clock::now();  
                 for (int i = 0; i < fNumNus; i++) {
@@ -164,12 +167,25 @@ void testNUNM(){
                                   cerr << "P( "<< i << "-->" << j <<" ) = " << myNUNM.Prob(i,j) << endl;
                           }
 			  cerr << "sum_x P( " << i << " --> x ) = " << myNUNM.Prob(i,0)+ myNUNM.Prob(i,1)+ myNUNM.Prob(i,2) << endl;
-                  }
+                }
   end = std::chrono::high_resolution_clock::now();
   elapsed = end - start;
   cerr << "elapsed time: " << elapsed.count() << " ms\n"<< endl;
   
-  
+  cerr << " ----------------------------- NUNM alpha33 = 0.17 fracVnc = 1 ----------------------------- " << endl;
+  myNUNM.SetFracVnc(1.);
+  //myNUNM.Prob(0,0);// commented
+  start = std::chrono::high_resolution_clock::now();
+                for (int i = 0; i < fNumNus; i++) {
+                          for (int j = 0; j < fNumNus; j++) {
+                                  cerr << "P( "<< i << "-->" << j <<" ) = " << myNUNM.Prob(i,j) << endl;
+                          }
+                          cerr << "sum_x P( " << i << " --> x ) = " << myNUNM.Prob(i,0)+ myNUNM.Prob(i,1)+ myNUNM.Prob(i,2) << endl;
+                }
+  end = std::chrono::high_resolution_clock::now();
+  elapsed = end - start;
+  cerr << "elapsed time: " << elapsed.count() << " ms\n"<< endl;
+
   // Set 3 paths in order
   //myPMNS.SetPath(1000, 2.50); // Set initial path with L = 1000 km and rho = 2.50 g/cm^3
   //myPMNS.AddPath(2000, 4.25); // Add a second path with L = 2000 km and rho = 4.25 g/cm^3
