@@ -153,12 +153,30 @@ OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
 }
 
 //.............................................................................
+OscProb::PMNS_NUNM* GetNUNM(bool is_nominal){
+
+  OscProb::PMNS_NUNM* p = new OscProb::PMNS_NUNM(0);
+  SetNominalPars(p);
+  if(!is_nominal){
+    p->SetAlpha(0,0, 0.1, 0);
+    p->SetAlpha(1,0, 0.2, 0);
+    p->SetAlpha(2,0, 0.3, 0);
+    p->SetAlpha(1,1, 0.4, 0);
+    p->SetAlpha(2,1, 0.5, 0);
+    p->SetAlpha(2,2, 0.6, 0);
+  }
+
+  return p;
+
+}
+
+//.............................................................................
 vector<string> GetListOfModels(){
 
   //return {"Decay"};
 
   return {"Fast", "Iter", "Sterile", "NSI",
-          "Deco", "Decay", "LIV", "SNSI"};
+          "Deco", "Decay", "LIV", "SNSI", "NUNM"};
 
 }
 

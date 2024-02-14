@@ -62,6 +62,7 @@ namespace OscProb {
       //virtual void getBar(Eigen::Matrix3cd& M); // apply normalisation to a matrix
       double fracVnc; // set fraction of matter potential affecting NC
       void InitMatrix();
+      Eigen::Matrix<std::complex<double>, 3, 3> X;
       Eigen::Matrix<std::complex<double>, 3, 3> Alpha;
       Eigen::Matrix<std::complex<double>, 3, 3> V;
       Eigen::Matrix<std::complex<double>, 3, 3> Ham;

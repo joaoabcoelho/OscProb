@@ -274,11 +274,10 @@ void PMNS_NUNM::PropagatePath(NuPath p, bool isFirst, bool isLast)
 {
   // Set the neutrino path
   SetCurPath(p);
-
+  X = Alpha * Alpha.adjoint();
   if (fscale == 1){ // normalise mixing matrix in high scale scenario to ensure completeness
-    Eigen::Matrix<std::complex<double>, 3, 3> X = Alpha * Alpha.adjoint(); // M * conjugate transpose of M 
     for (int i = 0; i < 3; ++i) {
-      for (int j = 0; j < 3; ++j) {
+      for (int j = 0; j < i+1; ++j) {
         Alpha(i, j) *= 1 / std::sqrt(X(i, i).real()); // Scale by the inverse square root of the diagonal elements of X
       }
     }
