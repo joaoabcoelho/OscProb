@@ -138,21 +138,6 @@ OscProb::PMNS_LIV* GetLIV(bool is_nominal){
 }
 
 //.............................................................................
-OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
-
-  if(model == "Iter")    return GetIter(is_nominal);
-  if(model == "Deco")    return GetDeco(is_nominal);
-  if(model == "Sterile") return GetSterile(is_nominal);
-  if(model == "Decay")   return GetDecay(is_nominal);
-  if(model == "NSI")     return GetNSI(is_nominal);
-  if(model == "LIV")     return GetLIV(is_nominal);
-  if(model == "SNSI")    return GetSNSI(is_nominal);
-
-  return GetFast(is_nominal);
-
-}
-
-//.............................................................................
 OscProb::PMNS_NUNM* GetNUNM(bool is_nominal){
 
   OscProb::PMNS_NUNM* p = new OscProb::PMNS_NUNM(0);
@@ -171,12 +156,29 @@ OscProb::PMNS_NUNM* GetNUNM(bool is_nominal){
 }
 
 //.............................................................................
+OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
+
+  if(model == "Iter")    return GetIter(is_nominal);
+  if(model == "Deco")    return GetDeco(is_nominal);
+  if(model == "Sterile") return GetSterile(is_nominal);
+  if(model == "Decay")   return GetDecay(is_nominal);
+  if(model == "NSI")     return GetNSI(is_nominal);
+  if(model == "LIV")     return GetLIV(is_nominal);
+  if(model == "SNSI")    return GetSNSI(is_nominal);
+  if(model == "NUNM")    return GetNUNM(is_nominal);
+
+  return GetFast(is_nominal);
+
+}
+
+//.............................................................................
 vector<string> GetListOfModels(){
 
-  //return {"Decay"};
+  return {"NUNM"};
 
   return {"Fast", "Iter", "Sterile", "NSI",
-          "Deco", "Decay", "LIV", "SNSI", "NUNM"};
+          "Deco", "Decay", "LIV", "SNSI",
+          "NUNM"};
 
 }
 
