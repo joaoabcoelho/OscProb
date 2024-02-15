@@ -271,18 +271,12 @@ void PMNS_NUNM::PropagatePath(NuPath p)
   
   for (int i = 0; i < 3; ++i) {
     for (int j = 0; j < 3; ++j) {
-	Evec0(i, j) = fEvec[i][j]; //
+	Evec0(i, j) = fEvec[i][j]; 
     }
   }
   
-  //vecA = Evec0.adjoint() * Alpha.inverse();
   Evec = Alpha * Evec0;
   EvecA = Evec.inverse();
-  //if (isFirst) { EvecA = Evec0.adjoint() * Alpha.adjoint(); }
-  //else{ EvecA = Evec0.adjoint();}
-  
-  //if (isLast) { Evec = Alpha * Evec0; }
-  //else{ Evec = Evec0 ;}
   
   double LengthIneV = kKm2eV * p.length;
   for (int i = 0; i < fNumNus; i++) {
