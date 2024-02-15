@@ -177,7 +177,8 @@ vector<string> GetListOfModels(){
   //return {"Decay"};
 
   return {"Fast", "Iter", "Sterile", "NSI",
-          "Deco", "Decay", "LIV", "SNSI", "NUNM"};
+          "Deco", "Decay", "LIV", "SNSI",
+          "NUNM"};
 
 }
 
