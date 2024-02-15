@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['max_0',['max',['../structOscProb_1_1EarthModelBinned_1_1LonBinInfo.html#a89ff7f364089bb4b60a4eb1c166c8764',1,'OscProb::EarthModelBinned::LonBinInfo']]],
-  ['maxreached_1',['maxreached',['../structOscProb_1_1EarthModelBinned_1_1LatBinInfo.html#a6bd5aa2bda961842466e02e45da29599',1,'OscProb::EarthModelBinned::LatBinInfo']]],
-  ['maxsinsqlat_2',['maxSinSqLat',['../structOscProb_1_1TrajConstants.html#a9d3d75a4790e16793f5ad6213ae556f5',1,'OscProb::TrajConstants']]],
-  ['min_3',['min',['../structOscProb_1_1EarthModelBinned_1_1LonBinInfo.html#a789e8183825c615b134dad0aa697a7cc',1,'OscProb::EarthModelBinned::LonBinInfo']]]
+  ['latitude_0',['latitude',['../structOscProb_1_1EarthBin.html#a20edd55a94ecd137eb658eb6879c6ad2',1,'OscProb::EarthBin']]],
+  ['layer_1',['layer',['../structOscProb_1_1NuPath.html#a442b160899e554ad1d800989510d5309',1,'OscProb::NuPath::layer()'],['../structOscProb_1_1PremLayer.html#aca8d7df68e6f982155b68b7e6a7ef389',1,'OscProb::PremLayer::layer()']]],
+  ['length_2',['length',['../structOscProb_1_1NuPath.html#af22660894b6e25cf835500381b155557',1,'OscProb::NuPath']]],
+  ['longitude_3',['longitude',['../structOscProb_1_1EarthBin.html#a3852c6c51cfd99c47d54a58aeaa7632b',1,'OscProb::EarthBin']]]
 ];

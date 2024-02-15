@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['one_0',['one',['../classOscProb_1_1PMNS__Base.html#a7d1d0bbcab30a1fd8c368c40134c51ff',1,'OscProb::PMNS_Base']]]
+  ['nextbin_0',['nextBin',['../structOscProb_1_1EarthModelBinned_1_1LatBinInfo.html#a2a5f8f4848bd4aa254bdbc80b90ea597',1,'OscProb::EarthModelBinned::LatBinInfo::nextBin()'],['../structOscProb_1_1EarthModelBinned_1_1LonBinInfo.html#a03b6a6d7f8717171bdcd5366d00f68ab',1,'OscProb::EarthModelBinned::LonBinInfo::nextBin()']]]
 ];

@@ -231,158 +231,179 @@ $(document).ready(function(){initNavTree('Utils_8h_source.html',''); initResizab
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>}</div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment">//.............................................................................</span></div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="Utils_8h.html#a8c065748e8cb1ef6936817ac6c3bd3df">  141</a></span><a class="code hl_class" href="classOscProb_1_1PMNS__Base.html">OscProb::PMNS_Base</a>* <a class="code hl_function" href="profile_2inc_2Utils_8h.html#a322c02b607b7ea3d0c21b3d82e69e999">GetModel</a>(<span class="keywordtype">string</span> model, <span class="keywordtype">bool</span> is_nominal = <span class="keyword">false</span>){</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno"><a class="line" href="Utils_8h.html#a05bbfaf7a6b81b476c84a227126eb34e">  141</a></span><a class="code hl_class" href="classOscProb_1_1PMNS__NUNM.html">OscProb::PMNS_NUNM</a>* <a class="code hl_function" href="Utils_8h.html#a05bbfaf7a6b81b476c84a227126eb34e">GetNUNM</a>(<span class="keywordtype">bool</span> is_nominal){</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  <span class="keywordflow">if</span>(model == <span class="stringliteral">&quot;Iter&quot;</span>)    <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#a1a62c7658a307756524b541cd0e79419">GetIter</a>(is_nominal);</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  <span class="keywordflow">if</span>(model == <span class="stringliteral">&quot;Deco&quot;</span>)    <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#a16d6e17a182f1408277a41db1093a69f">GetDeco</a>(is_nominal);</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <span class="keywordflow">if</span>(model == <span class="stringliteral">&quot;Sterile&quot;</span>) <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#a4e382fab638d5195abdf8c15304c1241">GetSterile</a>(is_nominal);</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  <span class="keywordflow">if</span>(model == <span class="stringliteral">&quot;Decay&quot;</span>)   <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#a2966253022e686d05c4b5b1f4f8bb046">GetDecay</a>(is_nominal);</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  <span class="keywordflow">if</span>(model == <span class="stringliteral">&quot;NSI&quot;</span>)     <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#a5fd4172f035e79190c2620196b81acae">GetNSI</a>(is_nominal);</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  <span class="keywordflow">if</span>(model == <span class="stringliteral">&quot;LIV&quot;</span>)     <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#a20ca1e05bc6cb0be4e4707dc4dd0614d">GetLIV</a>(is_nominal);</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  <span class="keywordflow">if</span>(model == <span class="stringliteral">&quot;SNSI&quot;</span>)    <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#ae6f3e0a3a3c8bef9f2ac21153e796e7b">GetSNSI</a>(is_nominal);</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#af074eed4ac0313a0496d6e0491acc9a0">GetFast</a>(is_nominal);</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>}</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="comment">//.............................................................................</span></div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="Utils_8h.html#a4f5847ce05018e2eb7cf0565e0915656">  156</a></span>vector&lt;string&gt; <a class="code hl_function" href="Utils_8h.html#a4f5847ce05018e2eb7cf0565e0915656">GetListOfModels</a>(){</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  <a class="code hl_class" href="classOscProb_1_1PMNS__NUNM.html">OscProb::PMNS_NUNM</a>* p = <span class="keyword">new</span> <a class="code hl_class" href="classOscProb_1_1PMNS__NUNM.html">OscProb::PMNS_NUNM</a>(0);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  <a class="code hl_function" href="Utils_8h.html#a4fddcd0f00e8b82872119537a730137b">SetNominalPars</a>(p);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <span class="keywordflow">if</span>(!is_nominal){</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__NUNM.html#a219c7b8d335d41827149ef340e07c182">SetAlpha</a>(0,0, 0.1, 0);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__NUNM.html#a219c7b8d335d41827149ef340e07c182">SetAlpha</a>(1,0, 0.2, 0);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__NUNM.html#a219c7b8d335d41827149ef340e07c182">SetAlpha</a>(2,0, 0.3, 0);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__NUNM.html#a219c7b8d335d41827149ef340e07c182">SetAlpha</a>(1,1, 0.4, 0);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__NUNM.html#a219c7b8d335d41827149ef340e07c182">SetAlpha</a>(2,1, 0.5, 0);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__NUNM.html#a219c7b8d335d41827149ef340e07c182">SetAlpha</a>(2,2, 0.6, 0);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  }</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  <span class="keywordflow">return</span> p;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>}</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  <span class="comment">//return {&quot;Decay&quot;};</span></div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  <span class="keywordflow">return</span> {<span class="stringliteral">&quot;Fast&quot;</span>, <span class="stringliteral">&quot;Iter&quot;</span>, <span class="stringliteral">&quot;Sterile&quot;</span>, <span class="stringliteral">&quot;NSI&quot;</span>,</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>          <span class="stringliteral">&quot;Deco&quot;</span>, <span class="stringliteral">&quot;Decay&quot;</span>, <span class="stringliteral">&quot;LIV&quot;</span>, <span class="stringliteral">&quot;SNSI&quot;</span>};</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>}</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment">//.............................................................................</span></div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="Utils_8h.html#a94e82aa0b1c44cba3f5bfa5cfbd252c6">  166</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="Utils_8h.html#a94e82aa0b1c44cba3f5bfa5cfbd252c6">SetTestPath</a>(<a class="code hl_class" href="classOscProb_1_1PMNS__Base.html">OscProb::PMNS_Base</a>* p){</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__Base.html#ab4b978fb895abd3cfad07440bae1d34b">SetPath</a>(1000, 2);</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>  p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__Base.html#a91f81e5f12d3a5dff74686d4cbc1292c">AddPath</a>(1000, 4);</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__Base.html#a91f81e5f12d3a5dff74686d4cbc1292c">AddPath</a>(1000, 2);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment">//.............................................................................</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="Utils_8h.html#a8c065748e8cb1ef6936817ac6c3bd3df">  159</a></span><a class="code hl_class" href="classOscProb_1_1PMNS__Base.html">OscProb::PMNS_Base</a>* <a class="code hl_function" href="profile_2inc_2Utils_8h.html#a322c02b607b7ea3d0c21b3d82e69e999">GetModel</a>(<span class="keywordtype">string</span> model, <span class="keywordtype">bool</span> is_nominal = <span class="keyword">false</span>){</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  <span class="keywordflow">if</span>(model == <span class="stringliteral">&quot;Iter&quot;</span>)    <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#a1a62c7658a307756524b541cd0e79419">GetIter</a>(is_nominal);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  <span class="keywordflow">if</span>(model == <span class="stringliteral">&quot;Deco&quot;</span>)    <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#a16d6e17a182f1408277a41db1093a69f">GetDeco</a>(is_nominal);</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  <span class="keywordflow">if</span>(model == <span class="stringliteral">&quot;Sterile&quot;</span>) <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#a4e382fab638d5195abdf8c15304c1241">GetSterile</a>(is_nominal);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  <span class="keywordflow">if</span>(model == <span class="stringliteral">&quot;Decay&quot;</span>)   <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#a2966253022e686d05c4b5b1f4f8bb046">GetDecay</a>(is_nominal);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  <span class="keywordflow">if</span>(model == <span class="stringliteral">&quot;NSI&quot;</span>)     <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#a5fd4172f035e79190c2620196b81acae">GetNSI</a>(is_nominal);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>  <span class="keywordflow">if</span>(model == <span class="stringliteral">&quot;LIV&quot;</span>)     <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#a20ca1e05bc6cb0be4e4707dc4dd0614d">GetLIV</a>(is_nominal);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  <span class="keywordflow">if</span>(model == <span class="stringliteral">&quot;SNSI&quot;</span>)    <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#ae6f3e0a3a3c8bef9f2ac21153e796e7b">GetSNSI</a>(is_nominal);</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <span class="keywordflow">if</span>(model == <span class="stringliteral">&quot;NUNM&quot;</span>)    <span class="keywordflow">return</span> <a class="code hl_function" href="Utils_8h.html#a05bbfaf7a6b81b476c84a227126eb34e">GetNUNM</a>(is_nominal);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="profile_2inc_2Utils_8h.html#af074eed4ac0313a0496d6e0491acc9a0">GetFast</a>(is_nominal);</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>}</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment">//.............................................................................</span></div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno"><a class="line" href="Utils_8h.html#aab1f4fea28da49a4ba323ee630a7de81">  175</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="Utils_8h.html#aab1f4fea28da49a4ba323ee630a7de81">SaveTestFile</a>(<a class="code hl_class" href="classOscProb_1_1PMNS__Base.html">OscProb::PMNS_Base</a>* p, TString filename){</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno"><a class="line" href="Utils_8h.html#a4f5847ce05018e2eb7cf0565e0915656">  175</a></span>vector&lt;string&gt; <a class="code hl_function" href="Utils_8h.html#a4f5847ce05018e2eb7cf0565e0915656">GetListOfModels</a>(){</div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  <a class="code hl_function" href="Utils_8h.html#a94e82aa0b1c44cba3f5bfa5cfbd252c6">SetTestPath</a>(p);</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  <span class="comment">//return {&quot;Decay&quot;};</span></div>
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  <span class="keywordtype">int</span> nbins = 100;</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  vector&lt;double&gt; xbins = GetLogAxis(nbins, 0.1, 10);</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>  TH1D* h = 0;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  <span class="keywordflow">return</span> {<span class="stringliteral">&quot;Fast&quot;</span>, <span class="stringliteral">&quot;Iter&quot;</span>, <span class="stringliteral">&quot;Sterile&quot;</span>, <span class="stringliteral">&quot;NSI&quot;</span>,</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>          <span class="stringliteral">&quot;Deco&quot;</span>, <span class="stringliteral">&quot;Decay&quot;</span>, <span class="stringliteral">&quot;LIV&quot;</span>, <span class="stringliteral">&quot;SNSI&quot;</span>,</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>          <span class="stringliteral">&quot;NUNM&quot;</span>};</div>
 <div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  TFile* f = <span class="keyword">new</span> TFile(<span class="stringliteral">&quot;data/&quot;</span>+filename, <span class="stringliteral">&quot;recreate&quot;</span>);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>}</div>
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> flvi=0; flvi&lt;3; flvi++){</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> flvf=0; flvf&lt;3; flvf++){</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> isnb=0; isnb&lt;2; isnb++){</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__Base.html#a717e0348cf762f3961854e332a9b52e0">SetIsNuBar</a>(isnb);</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    TString hname = TString::Format(<span class="stringliteral">&quot;h%d%d%d&quot;</span>,flvi,flvf,isnb);</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    h = <span class="keyword">new</span> TH1D(hname, <span class="stringliteral">&quot;&quot;</span>, nbins, &amp;xbins[0]);</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=1; i&lt;=nbins; i++){</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>      <span class="keywordtype">double</span> energy = h-&gt;GetBinCenter(i);</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>      <span class="keywordtype">double</span> dE = h-&gt;GetBinWidth(i);</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>      h-&gt;SetBinContent(i, p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__Base.html#a72cd5d08922bf074dadc3eb9b32da67a">AvgProb</a>(flvi, flvf, energy, dE));</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    }</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    h-&gt;Write();</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <span class="keyword">delete</span> h;</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>  }}}</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>  f-&gt;Close();</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  cout &lt;&lt; <span class="stringliteral">&quot;Saved new test file: data/&quot;</span> + filename &lt;&lt; endl;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment">//.............................................................................</span></div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno"><a class="line" href="Utils_8h.html#a94e82aa0b1c44cba3f5bfa5cfbd252c6">  186</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="Utils_8h.html#a94e82aa0b1c44cba3f5bfa5cfbd252c6">SetTestPath</a>(<a class="code hl_class" href="classOscProb_1_1PMNS__Base.html">OscProb::PMNS_Base</a>* p){</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>  p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__Base.html#ab4b978fb895abd3cfad07440bae1d34b">SetPath</a>(1000, 2);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__Base.html#a91f81e5f12d3a5dff74686d4cbc1292c">AddPath</a>(1000, 4);</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__Base.html#a91f81e5f12d3a5dff74686d4cbc1292c">AddPath</a>(1000, 2);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>}</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment">//.............................................................................</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="Utils_8h.html#aab1f4fea28da49a4ba323ee630a7de81">  195</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="Utils_8h.html#aab1f4fea28da49a4ba323ee630a7de81">SaveTestFile</a>(<a class="code hl_class" href="classOscProb_1_1PMNS__Base.html">OscProb::PMNS_Base</a>* p, TString filename){</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>  <a class="code hl_function" href="Utils_8h.html#a94e82aa0b1c44cba3f5bfa5cfbd252c6">SetTestPath</a>(p);</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>  <span class="keywordtype">int</span> nbins = 100;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>  vector&lt;double&gt; xbins = GetLogAxis(nbins, 0.1, 10);</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  TH1D* h = 0;</div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>}</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>  TFile* f = <span class="keyword">new</span> TFile(<span class="stringliteral">&quot;data/&quot;</span>+filename, <span class="stringliteral">&quot;recreate&quot;</span>);</div>
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment">//.............................................................................</span></div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno"><a class="line" href="Utils_8h.html#acbcd71299f08b59f8029ffab1bb24466">  206</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="Utils_8h.html#acbcd71299f08b59f8029ffab1bb24466">CheckProb</a>(<a class="code hl_class" href="classOscProb_1_1PMNS__Base.html">OscProb::PMNS_Base</a>* p, TString filename){</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  <a class="code hl_function" href="Utils_8h.html#a94e82aa0b1c44cba3f5bfa5cfbd252c6">SetTestPath</a>(p);</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  TFile* f = <span class="keyword">new</span> TFile(<span class="stringliteral">&quot;data/&quot;</span>+filename, <span class="stringliteral">&quot;read&quot;</span>);</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  <span class="keywordtype">int</span> ntests = 0;</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <span class="keywordtype">int</span> fails = 0;</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  TCanvas* c1 = 0;</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  TH1D* h0 = 0;</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  TH1D* h = 0;</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> flvi=0; flvi&lt;3; flvi++){</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> flvf=0; flvf&lt;3; flvf++){</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> isnb=0; isnb&lt;2; isnb++){</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__Base.html#a717e0348cf762f3961854e332a9b52e0">SetIsNuBar</a>(isnb);</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    TString hname = TString::Format(<span class="stringliteral">&quot;h%d%d%d&quot;</span>,flvi,flvf,isnb);</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    h0 = (TH1D*)f-&gt;Get(hname);</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    h = (TH1D*)h0-&gt;Clone();</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordtype">bool</span> plot = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=1; i&lt;=h0-&gt;GetNbinsX(); i++){</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>      <span class="keywordtype">double</span> energy = h-&gt;GetBinCenter(i);</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>      <span class="keywordtype">double</span> dE = h-&gt;GetBinWidth(i);</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>      <span class="keywordtype">double</span> p0 = h0-&gt;GetBinContent(i);</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>      <span class="keywordtype">double</span> p1 = p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__Base.html#a72cd5d08922bf074dadc3eb9b32da67a">AvgProb</a>(flvi, flvf, energy, dE);</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>      ntests++;</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>      <span class="keywordflow">if</span>(abs(p0-p1)&gt;1e-12){</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        plot = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        fails++;</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>      }</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>      h-&gt;SetBinContent(i, p1);</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    }</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    <span class="keywordflow">if</span>(plot){</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>      c1 = <span class="keyword">new</span> TCanvas();</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>      c1-&gt;Divide(1,2);</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>      c1-&gt;cd(1);</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>      SetHist(h0, kBlue);</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>      SetHist(h, kRed);</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>      TString nu_lab = isnb ? <span class="stringliteral">&quot;#bar{#nu}&quot;</span> : <span class="stringliteral">&quot;#nu&quot;</span>;</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>      TString flv_lab[3] = {<span class="stringliteral">&quot;e&quot;</span>,<span class="stringliteral">&quot;#mu&quot;</span>,<span class="stringliteral">&quot;#tau&quot;</span>};</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>      TString ylab = <span class="stringliteral">&quot;P(&quot;</span> + nu_lab + <span class="stringliteral">&quot;_{&quot;</span> + flv_lab[flvi] +</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>                     <span class="stringliteral">&quot;}#rightarrow&quot;</span> + nu_lab + <span class="stringliteral">&quot;_{&quot;</span> + flv_lab[flvf] + <span class="stringliteral">&quot;})&quot;</span>;</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>      h0-&gt;SetTitle(<span class="stringliteral">&quot;;Energy [GeV];&quot;</span>+ylab+<span class="stringliteral">&quot;;&quot;</span>);</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>      h-&gt;SetLineStyle(7);</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>      <span class="keywordtype">double</span> ymax = max(h-&gt;GetMaximum(),</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>                        h0-&gt;GetMaximum());</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>      <span class="keywordtype">double</span> ymin = min(h-&gt;GetMinimum(),</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>                        h0-&gt;GetMinimum());</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>      h0-&gt;GetYaxis()-&gt;SetRangeUser(ymin, ymax);</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>      h0-&gt;DrawCopy(<span class="stringliteral">&quot;hist&quot;</span>);</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>      h-&gt;DrawCopy(<span class="stringliteral">&quot;hist same&quot;</span>);</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>      SetTH1Margin();</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>      gPad-&gt;SetLogx();</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>      c1-&gt;cd(2);</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>      h-&gt;SetTitle(<span class="stringliteral">&quot;;Energy [GeV];#Delta&quot;</span>+ylab+<span class="stringliteral">&quot;;&quot;</span>);</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>      h-&gt;Add(h0,-1);</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>      h-&gt;SetLineStyle(1);</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>      h-&gt;DrawCopy(<span class="stringliteral">&quot;hist&quot;</span>);</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>      SetTH1Margin();</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>      gPad-&gt;SetLogx();</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>      MiscText(0.55,0.8,0.1,filename,kGray,1);</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>      c1-&gt;DrawClone();</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>      TString pngfile = filename;</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>      pngfile.ReplaceAll(<span class="stringliteral">&quot;.root&quot;</span>,<span class="stringliteral">&quot;.png&quot;</span>);</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>      c1-&gt;SaveAs(<span class="stringliteral">&quot;plots/Failed_&quot;</span>+hname+<span class="stringliteral">&quot;_&quot;</span>+pngfile);</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>      <span class="keyword">delete</span> c1;</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    }</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    <span class="keyword">delete</span> h0, h;</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>  }}}</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>  <span class="keywordflow">if</span>(fails&gt;0){</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    printf((<a class="code hl_variable" href="namespaceColor.html#aa9acf0b79ca13d3e1aacbda4de57c85c">Color::FAILED</a> + <span class="stringliteral">&quot; Found %d differences in %d tests (%.3g%%) in %s\n&quot;</span>).c_str(),</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>            fails, ntests, 100.*fails/ntests, filename.Data());</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>  }</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    cout &lt;&lt; <a class="code hl_variable" href="namespaceColor.html#a2abc6d09417967bb8bb5d924c2a43e16">Color::PASSED</a> &lt;&lt; <span class="stringliteral">&quot; No differences found in &quot;</span> &lt;&lt; filename &lt;&lt; endl;</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>  }</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>  <span class="keywordflow">return</span> fails;</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>}</div>
-<div class="ttc" id="aUtils_8h_html_a4f5847ce05018e2eb7cf0565e0915656"><div class="ttname"><a href="Utils_8h.html#a4f5847ce05018e2eb7cf0565e0915656">GetListOfModels</a></div><div class="ttdeci">vector&lt; string &gt; GetListOfModels()</div><div class="ttdef"><b>Definition:</b> <a href="Utils_8h_source.html#l00156">Utils.h:156</a></div></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> flvi=0; flvi&lt;3; flvi++){</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> flvf=0; flvf&lt;3; flvf++){</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> isnb=0; isnb&lt;2; isnb++){</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__Base.html#a717e0348cf762f3961854e332a9b52e0">SetIsNuBar</a>(isnb);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    TString hname = TString::Format(<span class="stringliteral">&quot;h%d%d%d&quot;</span>,flvi,flvf,isnb);</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    h = <span class="keyword">new</span> TH1D(hname, <span class="stringliteral">&quot;&quot;</span>, nbins, &amp;xbins[0]);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=1; i&lt;=nbins; i++){</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>      <span class="keywordtype">double</span> energy = h-&gt;GetBinCenter(i);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>      <span class="keywordtype">double</span> dE = h-&gt;GetBinWidth(i);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>      h-&gt;SetBinContent(i, p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__Base.html#a72cd5d08922bf074dadc3eb9b32da67a">AvgProb</a>(flvi, flvf, energy, dE));</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    }</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    h-&gt;Write();</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keyword">delete</span> h;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>  }}}</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>  f-&gt;Close();</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>  cout &lt;&lt; <span class="stringliteral">&quot;Saved new test file: data/&quot;</span> + filename &lt;&lt; endl;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>}</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="comment">//.............................................................................</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno"><a class="line" href="Utils_8h.html#acbcd71299f08b59f8029ffab1bb24466">  226</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="Utils_8h.html#acbcd71299f08b59f8029ffab1bb24466">CheckProb</a>(<a class="code hl_class" href="classOscProb_1_1PMNS__Base.html">OscProb::PMNS_Base</a>* p, TString filename){</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  <a class="code hl_function" href="Utils_8h.html#a94e82aa0b1c44cba3f5bfa5cfbd252c6">SetTestPath</a>(p);</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>  TFile* f = <span class="keyword">new</span> TFile(<span class="stringliteral">&quot;data/&quot;</span>+filename, <span class="stringliteral">&quot;read&quot;</span>);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>  <span class="keywordtype">int</span> ntests = 0;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  <span class="keywordtype">int</span> fails = 0;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span> </div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>  TCanvas* c1 = 0;</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>  TH1D* h0 = 0;</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>  TH1D* h = 0;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> flvi=0; flvi&lt;3; flvi++){</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> flvf=0; flvf&lt;3; flvf++){</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>  <span class="keywordflow">for</span>(<span class="keywordtype">int</span> isnb=0; isnb&lt;2; isnb++){</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__Base.html#a717e0348cf762f3961854e332a9b52e0">SetIsNuBar</a>(isnb);</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    TString hname = TString::Format(<span class="stringliteral">&quot;h%d%d%d&quot;</span>,flvi,flvf,isnb);</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    h0 = (TH1D*)f-&gt;Get(hname);</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    h = (TH1D*)h0-&gt;Clone();</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    <span class="keywordtype">bool</span> plot = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=1; i&lt;=h0-&gt;GetNbinsX(); i++){</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>      <span class="keywordtype">double</span> energy = h-&gt;GetBinCenter(i);</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>      <span class="keywordtype">double</span> dE = h-&gt;GetBinWidth(i);</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>      <span class="keywordtype">double</span> p0 = h0-&gt;GetBinContent(i);</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>      <span class="keywordtype">double</span> p1 = p-&gt;<a class="code hl_function" href="classOscProb_1_1PMNS__Base.html#a72cd5d08922bf074dadc3eb9b32da67a">AvgProb</a>(flvi, flvf, energy, dE);</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>      ntests++;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>      <span class="keywordflow">if</span>(abs(p0-p1)&gt;1e-12){</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        plot = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        fails++;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>      }</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>      h-&gt;SetBinContent(i, p1);</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    }</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <span class="keywordflow">if</span>(plot){</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>      c1 = <span class="keyword">new</span> TCanvas();</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>      c1-&gt;Divide(1,2);</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>      c1-&gt;cd(1);</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>      SetHist(h0, kBlue);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>      SetHist(h, kRed);</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>      TString nu_lab = isnb ? <span class="stringliteral">&quot;#bar{#nu}&quot;</span> : <span class="stringliteral">&quot;#nu&quot;</span>;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>      TString flv_lab[3] = {<span class="stringliteral">&quot;e&quot;</span>,<span class="stringliteral">&quot;#mu&quot;</span>,<span class="stringliteral">&quot;#tau&quot;</span>};</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>      TString ylab = <span class="stringliteral">&quot;P(&quot;</span> + nu_lab + <span class="stringliteral">&quot;_{&quot;</span> + flv_lab[flvi] +</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                     <span class="stringliteral">&quot;}#rightarrow&quot;</span> + nu_lab + <span class="stringliteral">&quot;_{&quot;</span> + flv_lab[flvf] + <span class="stringliteral">&quot;})&quot;</span>;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>      h0-&gt;SetTitle(<span class="stringliteral">&quot;;Energy [GeV];&quot;</span>+ylab+<span class="stringliteral">&quot;;&quot;</span>);</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>      h-&gt;SetLineStyle(7);</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>      <span class="keywordtype">double</span> ymax = max(h-&gt;GetMaximum(),</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>                        h0-&gt;GetMaximum());</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>      <span class="keywordtype">double</span> ymin = min(h-&gt;GetMinimum(),</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>                        h0-&gt;GetMinimum());</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>      h0-&gt;GetYaxis()-&gt;SetRangeUser(ymin, ymax);</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>      h0-&gt;DrawCopy(<span class="stringliteral">&quot;hist&quot;</span>);</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>      h-&gt;DrawCopy(<span class="stringliteral">&quot;hist same&quot;</span>);</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>      SetTH1Margin();</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>      gPad-&gt;SetLogx();</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>      c1-&gt;cd(2);</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>      h-&gt;SetTitle(<span class="stringliteral">&quot;;Energy [GeV];#Delta&quot;</span>+ylab+<span class="stringliteral">&quot;;&quot;</span>);</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>      h-&gt;Add(h0,-1);</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>      h-&gt;SetLineStyle(1);</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>      h-&gt;DrawCopy(<span class="stringliteral">&quot;hist&quot;</span>);</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>      SetTH1Margin();</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>      gPad-&gt;SetLogx();</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>      MiscText(0.55,0.8,0.1,filename,kGray,1);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>      c1-&gt;DrawClone();</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>      TString pngfile = filename;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>      pngfile.ReplaceAll(<span class="stringliteral">&quot;.root&quot;</span>,<span class="stringliteral">&quot;.png&quot;</span>);</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>      c1-&gt;SaveAs(<span class="stringliteral">&quot;plots/Failed_&quot;</span>+hname+<span class="stringliteral">&quot;_&quot;</span>+pngfile);</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>      <span class="keyword">delete</span> c1;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    }</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    <span class="keyword">delete</span> h0, h;</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>  }}}</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>  <span class="keywordflow">if</span>(fails&gt;0){</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    printf((<a class="code hl_variable" href="namespaceColor.html#aa9acf0b79ca13d3e1aacbda4de57c85c">Color::FAILED</a> + <span class="stringliteral">&quot; Found %d differences in %d tests (%.3g%%) in %s\n&quot;</span>).c_str(),</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>            fails, ntests, 100.*fails/ntests, filename.Data());</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>  }</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    cout &lt;&lt; <a class="code hl_variable" href="namespaceColor.html#a2abc6d09417967bb8bb5d924c2a43e16">Color::PASSED</a> &lt;&lt; <span class="stringliteral">&quot; No differences found in &quot;</span> &lt;&lt; filename &lt;&lt; endl;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>  }</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  <span class="keywordflow">return</span> fails;</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>}</div>
+<div class="ttc" id="aUtils_8h_html_a05bbfaf7a6b81b476c84a227126eb34e"><div class="ttname"><a href="Utils_8h.html#a05bbfaf7a6b81b476c84a227126eb34e">GetNUNM</a></div><div class="ttdeci">OscProb::PMNS_NUNM * GetNUNM(bool is_nominal)</div><div class="ttdef"><b>Definition:</b> <a href="Utils_8h_source.html#l00141">Utils.h:141</a></div></div>
+<div class="ttc" id="aUtils_8h_html_a4f5847ce05018e2eb7cf0565e0915656"><div class="ttname"><a href="Utils_8h.html#a4f5847ce05018e2eb7cf0565e0915656">GetListOfModels</a></div><div class="ttdeci">vector&lt; string &gt; GetListOfModels()</div><div class="ttdef"><b>Definition:</b> <a href="Utils_8h_source.html#l00175">Utils.h:175</a></div></div>
 <div class="ttc" id="aUtils_8h_html_a4fddcd0f00e8b82872119537a730137b"><div class="ttname"><a href="Utils_8h.html#a4fddcd0f00e8b82872119537a730137b">SetNominalPars</a></div><div class="ttdeci">void SetNominalPars(OscProb::PMNS_Base *p)</div><div class="ttdef"><b>Definition:</b> <a href="Utils_8h_source.html#l00007">Utils.h:7</a></div></div>
-<div class="ttc" id="aUtils_8h_html_a94e82aa0b1c44cba3f5bfa5cfbd252c6"><div class="ttname"><a href="Utils_8h.html#a94e82aa0b1c44cba3f5bfa5cfbd252c6">SetTestPath</a></div><div class="ttdeci">void SetTestPath(OscProb::PMNS_Base *p)</div><div class="ttdef"><b>Definition:</b> <a href="Utils_8h_source.html#l00166">Utils.h:166</a></div></div>
-<div class="ttc" id="aUtils_8h_html_aab1f4fea28da49a4ba323ee630a7de81"><div class="ttname"><a href="Utils_8h.html#aab1f4fea28da49a4ba323ee630a7de81">SaveTestFile</a></div><div class="ttdeci">void SaveTestFile(OscProb::PMNS_Base *p, TString filename)</div><div class="ttdef"><b>Definition:</b> <a href="Utils_8h_source.html#l00175">Utils.h:175</a></div></div>
-<div class="ttc" id="aUtils_8h_html_acbcd71299f08b59f8029ffab1bb24466"><div class="ttname"><a href="Utils_8h.html#acbcd71299f08b59f8029ffab1bb24466">CheckProb</a></div><div class="ttdeci">int CheckProb(OscProb::PMNS_Base *p, TString filename)</div><div class="ttdef"><b>Definition:</b> <a href="Utils_8h_source.html#l00206">Utils.h:206</a></div></div>
+<div class="ttc" id="aUtils_8h_html_a94e82aa0b1c44cba3f5bfa5cfbd252c6"><div class="ttname"><a href="Utils_8h.html#a94e82aa0b1c44cba3f5bfa5cfbd252c6">SetTestPath</a></div><div class="ttdeci">void SetTestPath(OscProb::PMNS_Base *p)</div><div class="ttdef"><b>Definition:</b> <a href="Utils_8h_source.html#l00186">Utils.h:186</a></div></div>
+<div class="ttc" id="aUtils_8h_html_aab1f4fea28da49a4ba323ee630a7de81"><div class="ttname"><a href="Utils_8h.html#aab1f4fea28da49a4ba323ee630a7de81">SaveTestFile</a></div><div class="ttdeci">void SaveTestFile(OscProb::PMNS_Base *p, TString filename)</div><div class="ttdef"><b>Definition:</b> <a href="Utils_8h_source.html#l00195">Utils.h:195</a></div></div>
+<div class="ttc" id="aUtils_8h_html_acbcd71299f08b59f8029ffab1bb24466"><div class="ttname"><a href="Utils_8h.html#acbcd71299f08b59f8029ffab1bb24466">CheckProb</a></div><div class="ttdeci">int CheckProb(OscProb::PMNS_Base *p, TString filename)</div><div class="ttdef"><b>Definition:</b> <a href="Utils_8h_source.html#l00226">Utils.h:226</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__Base_html"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html">OscProb::PMNS_Base</a></div><div class="ttdoc">Base class implementing general functions for computing neutrino oscillations.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8h_source.html#l00026">PMNS_Base.h:26</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a492243b22fb1b783cd2943f507cff970"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a492243b22fb1b783cd2943f507cff970">OscProb::PMNS_Base::SetDm</a></div><div class="ttdeci">virtual void SetDm(int j, double dm)</div><div class="ttdoc">Set the mass-splitting dm_j1 in eV^2.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8cxx_source.html#l00674">PMNS_Base.cxx:674</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__Base_html_a4bef78cfcfc4e70b4ce79cdb8862c0a3"><div class="ttname"><a href="classOscProb_1_1PMNS__Base.html#a4bef78cfcfc4e70b4ce79cdb8862c0a3">OscProb::PMNS_Base::SetDelta</a></div><div class="ttdeci">virtual void SetDelta(int i, int j, double delta)</div><div class="ttdoc">Set the CP phase delta_ij.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Base_8cxx_source.html#l00602">PMNS_Base.cxx:602</a></div></div>
@@ -402,6 +423,8 @@ $(document).ready(function(){initNavTree('Utils_8h_source.html',''); initResizab
 <div class="ttc" id="aclassOscProb_1_1PMNS__LIV_html_aed4cfc40058c6a3cb9b23d887bb042c9"><div class="ttname"><a href="classOscProb_1_1PMNS__LIV.html#aed4cfc40058c6a3cb9b23d887bb042c9">OscProb::PMNS_LIV::SetcT</a></div><div class="ttdeci">virtual void SetcT(int flvi, int flvj, int dim, double val, double phase)</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__LIV_8cxx_source.html#l00119">PMNS_LIV.cxx:119</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__NSI_html"><div class="ttname"><a href="classOscProb_1_1PMNS__NSI.html">OscProb::PMNS_NSI</a></div><div class="ttdoc">Implementation of oscillations of neutrinos in matter in a three-neutrino framework with NSI.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__NSI_8h_source.html#l00028">PMNS_NSI.h:28</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__NSI_html_a87c508149ea36b6de493a6817247a0ea"><div class="ttname"><a href="classOscProb_1_1PMNS__NSI.html#a87c508149ea36b6de493a6817247a0ea">OscProb::PMNS_NSI::SetEps</a></div><div class="ttdeci">virtual void SetEps(int flvi, int flvj, double val, double phase)</div><div class="ttdoc">Set any given NSI parameter.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__NSI_8cxx_source.html#l00086">PMNS_NSI.cxx:86</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PMNS__NUNM_html"><div class="ttname"><a href="classOscProb_1_1PMNS__NUNM.html">OscProb::PMNS_NUNM</a></div><div class="ttdoc">Implementation of oscillations of neutrinos in matter in a three-neutrino framework with Non unitary ...</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__NUNM_8h_source.html#l00030">PMNS_NUNM.h:30</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PMNS__NUNM_html_a219c7b8d335d41827149ef340e07c182"><div class="ttname"><a href="classOscProb_1_1PMNS__NUNM.html#a219c7b8d335d41827149ef340e07c182">OscProb::PMNS_NUNM::SetAlpha</a></div><div class="ttdeci">virtual void SetAlpha(int i, int j, double val, double phase)</div><div class="ttdoc">Set any given NUNM parameter.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__NUNM_8cxx_source.html#l00096">PMNS_NUNM.cxx:96</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__SNSI_html"><div class="ttname"><a href="classOscProb_1_1PMNS__SNSI.html">OscProb::PMNS_SNSI</a></div><div class="ttdoc">Implementation of oscillations of neutrinos in matter in a three-neutrino framework with scalar NSI.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__SNSI_8h_source.html#l00026">PMNS_SNSI.h:26</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PMNS__Sterile_html"><div class="ttname"><a href="classOscProb_1_1PMNS__Sterile.html">OscProb::PMNS_Sterile</a></div><div class="ttdoc">Implementation of oscillations of neutrinos in matter in a N-neutrino framework.</div><div class="ttdef"><b>Definition:</b> <a href="PMNS__Sterile_8h_source.html#l00034">PMNS_Sterile.h:34</a></div></div>
 <div class="ttc" id="acolormod_8h_html"><div class="ttname"><a href="colormod_8h.html">colormod.h</a></div></div>

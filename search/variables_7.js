@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['index_0',['index',['../structOscProb_1_1EarthBin.html#ac93310c7dde51855e5d3dd869322ba94',1,'OscProb::EarthBin']]]
+  ['ham_0',['Ham',['../classOscProb_1_1PMNS__NUNM.html#a5fcf91016215b5d47f69e8f911c0c27d',1,'OscProb::PMNS_NUNM']]]
 ];
