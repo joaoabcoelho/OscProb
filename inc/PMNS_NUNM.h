@@ -23,6 +23,7 @@
 
 #include <Eigen/Dense>
 #include "PMNS_Fast.h"
+#include "Definitions.h"
 
 namespace OscProb {
 
@@ -54,11 +55,14 @@ namespace OscProb {
                                 double phi); ///< Set alpha_32 parameter
       virtual void SetFracVnc(double f);
 
+      //virtual matrixD ProbMatrix(int nflvi, int nflvf);
+    
     protected:
       int fscale;
       virtual void UpdateHam();
-      virtual void Propagate();
-      virtual void PropagatePath(NuPath p, bool isFirst, bool isLast);
+      //virtual matrixD ProbMatrix(int nflvi, int nflvf);
+      //virtual void Propagate();
+      virtual void PropagatePath(NuPath p);
       //virtual void getBar(Eigen::Matrix3cd& M); // apply normalisation to a matrix
       double fracVnc; // set fraction of matter potential affecting NC
       void InitMatrix();

@@ -247,30 +247,13 @@ void PMNS_NUNM::SetFracVnc(double f)
   fracVnc = f;
 }
 
-
-//.............................................................................
-///
-/// Propagate neutrino state through full path
-/// Non unitarity implies to apply the Alpha transformation
-/// to the neutrino state after propagation
-///
-///
-void PMNS_NUNM::Propagate()
-{
-  for (int i = 0; i < int(fNuPaths.size()); i++) { 
-    bool isLast = ( i == int(fNuPaths.size() - 1 ) );
-    bool isFirst = ( i == 0);
-    PropagatePath(fNuPaths[i], isFirst, isLast); 
-  }
-}
-
 //.............................................................................
 ///
 /// Propagate the current neutrino state through a given path
 /// @param p - A neutrino path segment
 /// apply Alpha X Alpha~ transformation to get the probability
 ///
-void PMNS_NUNM::PropagatePath(NuPath p, bool isFirst, bool isLast)
+void PMNS_NUNM::PropagatePath(NuPath p)
 {
   // Set the neutrino path
   SetCurPath(p);
@@ -292,11 +275,14 @@ void PMNS_NUNM::PropagatePath(NuPath p, bool isFirst, bool isLast)
     }
   }
   
-  if (isFirst) { EvecA = Evec0.adjoint() * Alpha.adjoint(); }
-  else{ EvecA = Evec0.adjoint();}
+  //vecA = Evec0.adjoint() * Alpha.inverse();
+  Evec = Alpha * Evec0;
+  EvecA = Evec.inverse();
+  //if (isFirst) { EvecA = Evec0.adjoint() * Alpha.adjoint(); }
+  //else{ EvecA = Evec0.adjoint();}
   
-  if (isLast) { Evec = Alpha * Evec0; }
-  else{ Evec = Evec0 ;}
+  //if (isLast) { Evec = Alpha * Evec0; }
+  //else{ Evec = Evec0 ;}
   
   double LengthIneV = kKm2eV * p.length;
   for (int i = 0; i < fNumNus; i++) {
@@ -320,7 +306,6 @@ void PMNS_NUNM::PropagatePath(NuPath p, bool isFirst, bool isLast)
     }
   }
 }
-
 
 //.............................................................................
 ///
