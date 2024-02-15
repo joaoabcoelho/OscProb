@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Implementation of Non Unitarity neutrino Mixing (NUNM) of neutrinos in matter in a
-// three-neutrino framework.
+// Implementation of Non Unitarity neutrino Mixing (NUNM) of neutrinos in matter
+// in a three-neutrino framework.
 //
 // This  class inherits from the PMNS_Fast class.
 //
@@ -10,11 +10,11 @@
 // jcoelho\@apc.in2p3.fr
 ///////////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
 #include "PMNS_NUNM.h"
-#include <Eigen/Eigenvalues>
-#include <Eigen/Dense>
 #include "Definitions.h"
+#include <Eigen/Dense>
+#include <Eigen/Eigenvalues>
+#include <iostream>
 
 using namespace OscProb;
 using namespace std;
@@ -56,7 +56,7 @@ PMNS_NUNM::~PMNS_NUNM() {}
 /// @param alpha_33  - The real parameter alpha_33
 ///
 void PMNS_NUNM::SetNUNM(double alpha_11, double alpha_21, double alpha_31,
-                      double alpha_22, double alpha_32, double alpha_33)
+                        double alpha_22, double alpha_32, double alpha_33)
 {
   SetAlpha(0, 0, alpha_11, 0);
   SetAlpha(1, 1, alpha_22, 0);
@@ -65,8 +65,8 @@ void PMNS_NUNM::SetNUNM(double alpha_11, double alpha_21, double alpha_31,
   SetAlpha(1, 0, alpha_21, 0);
   SetAlpha(2, 0, alpha_31, 0);
   SetAlpha(2, 1, alpha_32, 0);
-  
-  //upper part fixed to zero from https://arxiv.org/pdf/2309.16942.pdf  
+
+  // upper part fixed to zero from https://arxiv.org/pdf/2309.16942.pdf
 }
 
 void PMNS_NUNM::InitMatrix()
@@ -78,13 +78,12 @@ void PMNS_NUNM::InitMatrix()
   EvecA.setZero();
 }
 
-
 //.............................................................................
 ///
 /// Get any given NUNM parameter.
 ///
 /// Indexes are:\n
-/// - 0, 1, 2 
+/// - 0, 1, 2
 ///
 /// Requires that i > j. Will notify you if input is wrong.
 /// If i > j, will assume reverse order and swap i and j.
@@ -102,8 +101,8 @@ void PMNS_NUNM::SetAlpha(int i, int j, double val, double phase)
          << endl
          << "Setting reverse order (Alpha_" << j << i << "). " << endl;
     int temp = i;
-    i     = j;
-    j     = temp;
+    i        = j;
+    j        = temp;
   }
   if (i < 0 || i > 2 || j > i || j > 2) {
     cerr << "WARNING: Alpha_" << i << j << " not valid for " << fNumNus
@@ -112,17 +111,19 @@ void PMNS_NUNM::SetAlpha(int i, int j, double val, double phase)
   }
 
   complexD h = val;
-  
-  if (i == j) { h = 1. + val;}
-  else { h *= complexD(cos(phase), sin(phase));}
 
-  bool isSame = (Alpha(i,j) == h);
+  if (i == j) { h = 1. + val; }
+  else {
+    h *= complexD(cos(phase), sin(phase));
+  }
+
+  bool isSame = (Alpha(i, j) == h);
 
   if (!isSame) ClearCache();
 
   fGotES *= isSame;
 
-  Alpha(i,j) = h;
+  Alpha(i, j) = h;
 }
 
 //.............................................................................
@@ -130,7 +131,7 @@ void PMNS_NUNM::SetAlpha(int i, int j, double val, double phase)
 /// Get any given NUNM parameter.
 ///
 /// Indexes are:\n
-/// - 0, 1, 2 
+/// - 0, 1, 2
 ///
 /// Requires that i > j. Will notify you if input is wrong.
 /// If i > j, will assume reverse order and swap i and j.
@@ -146,8 +147,8 @@ complexD PMNS_NUNM::GetAlpha(int i, int j)
          << endl
          << "Setting reverse order (Alpha_" << j << i << "). " << endl;
     int temp = i;
-    i     = j;
-    j     = temp;
+    i        = j;
+    j        = temp;
   }
   if (i < 0 || i > 2 || j < i || j > 2) {
     cerr << "WARNING: Eps_" << i << j << " not valid for " << fNumNus
@@ -155,7 +156,7 @@ complexD PMNS_NUNM::GetAlpha(int i, int j)
     return zero;
   }
 
-  return Alpha(i,j);
+  return Alpha(i, j);
 }
 
 //.............................................................................
@@ -230,11 +231,11 @@ void PMNS_NUNM::SetAlpha_32(double a, double phi) { SetAlpha(2, 1, a, phi); }
 //.............................................................................
 ///
 /// Allows to disable the neutron induced matter effects
-/// This factor represents what fraction of the neutron matter potentiel 
+/// This factor represents what fraction of the neutron matter potentiel
 /// is included in the NUNM model
 ///
-/// @param f -> 0 no neutron matter potential 
-/// @param f -> 1 std neutron matter potential 
+/// @param f -> 0 no neutron matter potential
+/// @param f -> 1 std neutron matter potential
 ///
 void PMNS_NUNM::SetFracVnc(double f)
 {
@@ -258,36 +259,37 @@ void PMNS_NUNM::PropagatePath(NuPath p)
   // Set the neutrino path
   SetCurPath(p);
   X = Alpha * Alpha.adjoint();
-  if (fscale == 1){ // normalise mixing matrix in high scale scenario to ensure completeness
+  if (fscale == 1) { // normalise mixing matrix in high scale scenario to ensure
+                     // completeness
     for (int i = 0; i < 3; ++i) {
-      for (int j = 0; j < i+1; ++j) {
-        Alpha(i, j) *= 1 / std::sqrt(X(i, i).real()); // Scale by the inverse square root of the diagonal elements of X
+      for (int j = 0; j < i + 1; ++j) {
+        Alpha(i, j) *=
+            1 / std::sqrt(X(i, i).real()); // Scale by the inverse square root
+                                           // of the diagonal elements of X
       }
     }
   }
-  
+
   // Solve for eigensystem
   SolveHam();
-  
+
   for (int i = 0; i < 3; ++i) {
-    for (int j = 0; j < 3; ++j) {
-	Evec0(i, j) = fEvec[i][j]; 
-    }
+    for (int j = 0; j < 3; ++j) { Evec0(i, j) = fEvec[i][j]; }
   }
-  
-  Evec = Alpha * Evec0;
+
+  Evec  = Alpha * Evec0;
   EvecA = Evec.inverse();
-  
+
   double LengthIneV = kKm2eV * p.length;
   for (int i = 0; i < fNumNus; i++) {
     double arg = fEval[i] * LengthIneV;
     fPhases[i] = complexD(cos(arg), -sin(arg));
   }
-  
+
   for (int i = 0; i < fNumNus; i++) {
     fBuffer[i] = 0;
     for (int j = 0; j < fNumNus; j++) {
-      fBuffer[i] += EvecA(i,j) * fNuState[j];
+      fBuffer[i] += EvecA(i, j) * fNuState[j];
     }
     fBuffer[i] *= fPhases[i];
   }
@@ -296,7 +298,7 @@ void PMNS_NUNM::PropagatePath(NuPath p)
   for (int i = 0; i < fNumNus; i++) {
     fNuState[i] = 0;
     for (int j = 0; j < fNumNus; j++) {
-      fNuState[i] += Evec(i,j) * fBuffer[j];
+      fNuState[i] += Evec(i, j) * fBuffer[j];
     }
   }
 }
@@ -316,43 +318,51 @@ void PMNS_NUNM::PropagatePath(NuPath p)
 /// solving the sytem in the tilde basis: H = U·Dm·U~ + Alpha~·V·Alpha
 /// in high scale scenario : H = U·Dm·U~ + Alpha^(-1)·V·Alpha~^(-1)
 /// inspired from https://arxiv.org/pdf/2301.12960.pdf and
-/// tilde basis in eq B5. https://cds.cern.ch/record/1032544/files/PhysRevD.76.093005.pdf
+/// tilde basis in eq B5.
+/// https://cds.cern.ch/record/1032544/files/PhysRevD.76.093005.pdf
 ///
 ///
 ///
 void PMNS_NUNM::UpdateHam()
-{ 
+{
   double rho = fPath.density;
   double zoa = fPath.zoa;
 
   double lv = 2 * kGeV2eV * fEnergy; // 2*E in eV
-  
-  double kr2GNe = kK2 * M_SQRT2 * kGf * rho * zoa ; // Electron matter potential in eV
-  double kr2GNn = kK2 * M_SQRT2 * kGf * rho * (1. - zoa) / 2. * fracVnc ; // Neutron matter potential in eV
-  
-  // Finish build Hamiltonian in matter with dimension of eV
-  
-  for (int i = 0; i < fNumNus; i++) { 
-      if (!fIsNuBar){ V(i,i) = -1. * kr2GNn;}
-      else { V(i,i) = kr2GNn;}
-      for (int j = 0; j < fNumNus; j++) {
-        if (!fIsNuBar) Ham(i,j) = fHms[i][j] / lv;
-        else Ham(i,j) = conj(fHms[i][j]) / lv;
-      }
-  }
-  
-  if (!fIsNuBar){V(0,0) += kr2GNe;}
-  else {V(0,0) -= kr2GNe;}
 
-  if (fscale == 0){ Ham += Alpha.adjoint()*V*Alpha ;} // low scale scenario with mixing matrix part of larger unitary matrix 
-  else if (fscale == 1){ Ham += Alpha.inverse()*V*(Alpha.adjoint()).inverse();} // high scale scenario with non unitary mixing matrix
+  double kr2GNe =
+      kK2 * M_SQRT2 * kGf * rho * zoa; // Electron matter potential in eV
+  double kr2GNn = kK2 * M_SQRT2 * kGf * rho * (1. - zoa) / 2. *
+                  fracVnc; // Neutron matter potential in eV
+
+  // Finish build Hamiltonian in matter with dimension of eV
 
   for (int i = 0; i < fNumNus; i++) {
+    if (!fIsNuBar) { V(i, i) = -1. * kr2GNn; }
+    else {
+      V(i, i) = kr2GNn;
+    }
     for (int j = 0; j < fNumNus; j++) {
-	fHam[i][j] = Ham(i,j);
+      if (!fIsNuBar)
+        Ham(i, j) = fHms[i][j] / lv;
+      else
+        Ham(i, j) = conj(fHms[i][j]) / lv;
     }
   }
-  
+
+  if (!fIsNuBar) { V(0, 0) += kr2GNe; }
+  else {
+    V(0, 0) -= kr2GNe;
+  }
+
+  if (fscale == 0) {
+    Ham += Alpha.adjoint() * V * Alpha;
+  } // low scale scenario with mixing matrix part of larger unitary matrix
+  else if (fscale == 1) {
+    Ham += Alpha.inverse() * V * (Alpha.adjoint()).inverse();
+  } // high scale scenario with non unitary mixing matrix
+
+  for (int i = 0; i < fNumNus; i++) {
+    for (int j = 0; j < fNumNus; j++) { fHam[i][j] = Ham(i, j); }
+  }
 }
-
-
