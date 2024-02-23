@@ -65,11 +65,11 @@ namespace OscProb {
       vectorC      ApplyAlphaDagger(vectorC fState);
       vectorC      ApplyAlpha(vectorC fState);
       void         InitMatrix();
-      
-      int          fscale;
-      double       fracVnc; // set fraction of matter potential affecting NC
-      vectorC      fNuStateBuffer;
-      
+
+      int     fscale;
+      double  fracVnc; // set fraction of matter potential affecting NC
+      vectorC fNuStateBuffer;
+
       Eigen::Matrix<std::complex<double>, 3, 3> X;
       Eigen::Matrix<std::complex<double>, 3, 3> Alpha;
       Eigen::Matrix<std::complex<double>, 3, 3> V;
