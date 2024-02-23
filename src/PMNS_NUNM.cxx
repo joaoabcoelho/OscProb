@@ -273,10 +273,10 @@ matrixD PMNS_NUNM::ProbMatrix(int nflvi, int nflvf)
   // Reset all initial states
   for (int j = 0; j < nflvi; j++) {
     ResetToFlavour(j);
-    fNuState = ApplyAlphaDagger(fNuState);
+    fNuState     = ApplyAlphaDagger(fNuState);
     allstates[j] = fNuState;
   }
-  
+
   // Propagate all states in parallel
   for (int i = 0; i < int(fNuPaths.size()); i++) {
     for (int flvi = 0; flvi < nflvi; flvi++) {
@@ -305,10 +305,13 @@ matrixD PMNS_NUNM::ProbMatrix(int nflvi, int nflvf)
 vectorC PMNS_NUNM::ApplyAlphaDagger(vectorC fState)
 {
   fNuStateBuffer = fState;
-  for (int i = 0; i < fNumNus; ++i) { fState[i] = conj(Alpha(0,i)) * fNuStateBuffer[0] + conj(Alpha(1,i)) * fNuStateBuffer[1] + conj(Alpha(2,i)) * fNuStateBuffer[2] ; }
+  for (int i = 0; i < fNumNus; ++i) {
+    fState[i] = conj(Alpha(0, i)) * fNuStateBuffer[0] +
+                conj(Alpha(1, i)) * fNuStateBuffer[1] +
+                conj(Alpha(2, i)) * fNuStateBuffer[2];
+  }
   return fState;
 }
-
 
 //.............................................................................
 ///
@@ -318,11 +321,13 @@ vectorC PMNS_NUNM::ApplyAlphaDagger(vectorC fState)
 vectorC PMNS_NUNM::ApplyAlpha(vectorC fState)
 {
   fNuStateBuffer = fState;
-  for (int i = 0; i < 3; ++i) { fState[i] = Alpha(i,0) * fNuStateBuffer[0] + Alpha(i,1) * fNuStateBuffer[1] + Alpha(i,2) * fNuStateBuffer[2] ; }
+  for (int i = 0; i < 3; ++i) {
+    fState[i] = Alpha(i, 0) * fNuStateBuffer[0] +
+                Alpha(i, 1) * fNuStateBuffer[1] +
+                Alpha(i, 2) * fNuStateBuffer[2];
+  }
   return fState;
 }
-
-
 
 //.............................................................................
 ///
@@ -335,7 +340,6 @@ void PMNS_NUNM::Propagate()
   fNuState = ApplyAlpha(fNuState);
 }
 
-
 //.............................................................................
 ///
 /// Propagate the current neutrino state through a given path
@@ -345,8 +349,8 @@ void PMNS_NUNM::Propagate()
 ///
 void PMNS_NUNM::PropagatePath(NuPath p)
 {
-  if (fscale == 1) {// test <------ // normalise mixing matrix in high scale scenario to ensure
-                     // completeness
+  if (fscale == 1) { // test <------ // normalise mixing matrix in high scale
+                     // scenario to ensure completeness
     X = Alpha * Alpha.adjoint();
     for (int i = 0; i < 3; ++i) {
       for (int j = 0; j < i + 1; ++j) {
