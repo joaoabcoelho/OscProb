@@ -59,15 +59,17 @@ namespace OscProb {
       virtual matrixD ProbMatrix(int nflvi, int nflvf);
 
     protected:
-      int          fscale;
       virtual void UpdateHam();
       virtual void Propagate();
       virtual void PropagatePath(NuPath p);
-      double       fracVnc; // set fraction of matter potential affecting NC
       vectorC      ApplyAlphaDagger(vectorC fState);
       vectorC      ApplyAlpha(vectorC fState);
       void         InitMatrix();
+      
+      int          fscale;
+      double       fracVnc; // set fraction of matter potential affecting NC
       vectorC      fNuStateBuffer;
+      
       Eigen::Matrix<std::complex<double>, 3, 3> X;
       Eigen::Matrix<std::complex<double>, 3, 3> Alpha;
       Eigen::Matrix<std::complex<double>, 3, 3> V;
