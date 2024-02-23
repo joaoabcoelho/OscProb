@@ -228,11 +228,13 @@ void PMNS_NUNM::SetAlpha_32(double a, double phi) { SetAlpha(2, 1, a, phi); }
 //.............................................................................
 ///
 /// Allows to disable the neutron induced matter effects
-/// This factor represents what fraction of the neutron matter potentiel
-/// is included in the NUNM model
+/// This factor represents what fraction of the neutron matter potential
+/// is included in the NUNM model.
 ///
-/// @param f -> 0 no neutron matter potential
-/// @param f -> 1 std neutron matter potential
+/// f = 0: no neutron matter potential)
+/// f = 1: std neutron matter potential
+///
+/// @param f - neutron matter potential fraction
 ///
 void PMNS_NUNM::SetFracVnc(double f)
 {
