@@ -49,27 +49,31 @@ namespace OscProb {
       virtual void SetAlpha_33(double a); ///< Set alpha_33 parameter
 
       // Set the off-diagonal complex NUNM parameters
-      virtual void SetAlpha_21(double a,
-                               double phi); ///< Set alpha_21 parameter
-      virtual void SetAlpha_31(double a,
-                               double phi); ///< Set alpha_31 parameter
-      virtual void SetAlpha_32(double a,
-                               double phi); ///< Set alpha_32 parameter
-      virtual void SetFracVnc(double f);
+      virtual void    SetAlpha_21(double a,
+                                  double phi); ///< Set alpha_21 parameter
+      virtual void    SetAlpha_31(double a,
+                                  double phi); ///< Set alpha_31 parameter
+      virtual void    SetAlpha_32(double a,
+                                  double phi); ///< Set alpha_32 parameter
+      virtual void    SetFracVnc(double f);
+      virtual matrixD ProbMatrix(int nflvi, int nflvf);
 
     protected:
-      int          fscale;
       virtual void UpdateHam();
+      virtual void Propagate();
       virtual void PropagatePath(NuPath p);
-      double       fracVnc; // set fraction of matter potential affecting NC
+      vectorC      ApplyAlphaDagger(vectorC fState);
+      vectorC      ApplyAlpha(vectorC fState);
       void         InitMatrix();
+
+      int     fscale;
+      double  fracVnc; // set fraction of matter potential affecting NC
+      vectorC fNuStateBuffer;
+
       Eigen::Matrix<std::complex<double>, 3, 3> X;
       Eigen::Matrix<std::complex<double>, 3, 3> Alpha;
       Eigen::Matrix<std::complex<double>, 3, 3> V;
       Eigen::Matrix<std::complex<double>, 3, 3> Ham;
-      Eigen::Matrix<std::complex<double>, 3, 3> Evec0;
-      Eigen::Matrix<std::complex<double>, 3, 3> Evec;
-      Eigen::Matrix<std::complex<double>, 3, 3> EvecA;
   };
 
 } // namespace OscProb

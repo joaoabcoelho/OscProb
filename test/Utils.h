@@ -143,12 +143,12 @@ OscProb::PMNS_NUNM* GetNUNM(bool is_nominal){
   OscProb::PMNS_NUNM* p = new OscProb::PMNS_NUNM(0);
   SetNominalPars(p);
   if(!is_nominal){
-    p->SetAlpha(0,0, 0.1, 0);
-    p->SetAlpha(1,0, 0.2, 0);
-    p->SetAlpha(2,0, 0.3, 0);
-    p->SetAlpha(1,1, 0.4, 0);
-    p->SetAlpha(2,1, 0.5, 0);
-    p->SetAlpha(2,2, 0.6, 0);
+    p->SetAlpha(0,0, 0.05, 0);
+    p->SetAlpha(1,0, 0.06, 0);
+    p->SetAlpha(2,0, 0.07, 0);
+    p->SetAlpha(1,1, 0.08, 0);
+    p->SetAlpha(2,1, 0.09, 0);
+    p->SetAlpha(2,2, 0.1, 0);
   }
 
   return p;
