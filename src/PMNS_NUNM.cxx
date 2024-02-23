@@ -359,7 +359,6 @@ void PMNS_NUNM::PropagatePath(NuPath p)
   PMNS_Base::PropagatePath(p);
 }
 
-
 //.............................................................................
 ///
 /// Build the full Hamiltonian in matter --> from sterile
