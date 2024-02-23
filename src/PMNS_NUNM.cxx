@@ -73,9 +73,6 @@ void PMNS_NUNM::InitMatrix()
 {
   Ham.setZero();
   V.setZero();
-  Evec0.setZero();
-  Evec.setZero();
-  EvecA.setZero();
 }
 
 //.............................................................................
@@ -250,17 +247,107 @@ void PMNS_NUNM::SetFracVnc(double f)
 
 //.............................................................................
 ///
+/// Compute the probability matrix for the first nflvi and nflvf states.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+/// @param nflvi - The number of initial flavours in the matrix.
+/// @param nflvf - The number of final flavours in the matrix.
+///
+/// @return Neutrino oscillation probabilities
+///
+matrixD PMNS_NUNM::ProbMatrix(int nflvi, int nflvf)
+{
+  assert(nflvi <= fNumNus && nflvi >= 0);
+  assert(nflvf <= fNumNus && nflvf >= 0);
+
+  // Output probabilities
+  matrixD probs(nflvi, vectorD(nflvf));
+
+  // List of states
+  matrixC allstates(nflvi, vectorC(fNumNus));
+
+  // Reset all initial states
+  for (int j = 0; j < nflvi; j++) {
+    ResetToFlavour(j);
+    fNuState = ApplyAlphaDagger(fNuState);
+    allstates[j] = fNuState;
+  }
+  
+  // Propagate all states in parallel
+  for (int i = 0; i < int(fNuPaths.size()); i++) {
+    for (int flvi = 0; flvi < nflvi; flvi++) {
+      fNuState = allstates[flvi];
+      PropagatePath(fNuPaths[i]);
+      allstates[flvi] = fNuState;
+    }
+  }
+
+  // Get all probabilities
+  for (int flvi = 0; flvi < nflvi; flvi++) {
+    allstates[flvi] = ApplyAlpha(allstates[flvi]);
+    for (int flvj = 0; flvj < nflvf; flvj++) {
+      probs[flvi][flvj] = norm(allstates[flvi][flvj]);
+    }
+  }
+
+  return probs;
+}
+
+//.............................................................................
+///
+/// Apply Alpha dagger for calculation of probability before propagation
+/// P = | A * exp(-iHL) * A+ |^2
+///
+vectorC PMNS_NUNM::ApplyAlphaDagger(vectorC fState)
+{
+  fNuStateBuffer = fState;
+  for (int i = 0; i < fNumNus; ++i) { fState[i] = conj(Alpha(0,i)) * fNuStateBuffer[0] + conj(Alpha(1,i)) * fNuStateBuffer[1] + conj(Alpha(2,i)) * fNuStateBuffer[2] ; }
+  return fState;
+}
+
+
+//.............................................................................
+///
+/// Apply Alpha for calculation of probability after propagation
+/// P = | A * exp(-iHL) * A+ |^2
+///
+vectorC PMNS_NUNM::ApplyAlpha(vectorC fState)
+{
+  fNuStateBuffer = fState;
+  for (int i = 0; i < 3; ++i) { fState[i] = Alpha(i,0) * fNuStateBuffer[0] + Alpha(i,1) * fNuStateBuffer[1] + Alpha(i,2) * fNuStateBuffer[2] ; }
+  return fState;
+}
+
+
+
+//.............................................................................
+///
+/// Propagate neutrino state through full path
+///
+void PMNS_NUNM::Propagate()
+{
+  fNuState = ApplyAlphaDagger(fNuState);
+  PMNS_Base::Propagate();
+  fNuState = ApplyAlpha(fNuState);
+}
+
+
+//.............................................................................
+///
 /// Propagate the current neutrino state through a given path
 /// @param p - A neutrino path segment
 /// apply Alpha X Alpha~ transformation to get the probability
+/// apply norm to Alpha in high scale scenario
 ///
 void PMNS_NUNM::PropagatePath(NuPath p)
 {
-  // Set the neutrino path
-  SetCurPath(p);
-  X = Alpha * Alpha.adjoint();
-  if (fscale == 1) { // normalise mixing matrix in high scale scenario to ensure
+  if (fscale == 1) {// test <------ // normalise mixing matrix in high scale scenario to ensure
                      // completeness
+    X = Alpha * Alpha.adjoint();
     for (int i = 0; i < 3; ++i) {
       for (int j = 0; j < i + 1; ++j) {
         Alpha(i, j) *=
@@ -269,39 +356,9 @@ void PMNS_NUNM::PropagatePath(NuPath p)
       }
     }
   }
-
-  // Solve for eigensystem
-  SolveHam();
-
-  for (int i = 0; i < 3; ++i) {
-    for (int j = 0; j < 3; ++j) { Evec0(i, j) = fEvec[i][j]; }
-  }
-
-  Evec  = Alpha * Evec0;
-  EvecA = Evec.inverse();
-
-  double LengthIneV = kKm2eV * p.length;
-  for (int i = 0; i < fNumNus; i++) {
-    double arg = fEval[i] * LengthIneV;
-    fPhases[i] = complexD(cos(arg), -sin(arg));
-  }
-
-  for (int i = 0; i < fNumNus; i++) {
-    fBuffer[i] = 0;
-    for (int j = 0; j < fNumNus; j++) {
-      fBuffer[i] += EvecA(i, j) * fNuState[j];
-    }
-    fBuffer[i] *= fPhases[i];
-  }
-
-  // Propagate neutrino state
-  for (int i = 0; i < fNumNus; i++) {
-    fNuState[i] = 0;
-    for (int j = 0; j < fNumNus; j++) {
-      fNuState[i] += Evec(i, j) * fBuffer[j];
-    }
-  }
+  PMNS_Base::PropagatePath(p);
 }
+
 
 //.............................................................................
 ///
