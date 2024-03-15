@@ -17,6 +17,7 @@ Available classes are:
 - **PMNS_Deco:** Oscillations with 3 flavours including a simple decoherence model
 - **PMNS_LIV:** Oscillations with 3 flavours including Lorentz Invariance Violations
 - **PMNS_Decay:** Oscillations with 3 flavours including neutrino decays
+- **PMNS_NUNM:** Oscillations with 3 flavours including non-unitary neutrino mixing
 - **Absorption:** Computes absorption probabilities for high-energy neutrinos
 
 A few example macros on how to use OscProb are available in a [tutorial](tutorial) directory.
