@@ -5,8 +5,8 @@
 //
 // This  class inherits from the PMNS_Fast class
 //
-// This developement is part of the QGRANT project with                                   
-// ID: 101068013,                                                                           
+// This developement is part of the QGRANT project with                             
+// ID: 101068013,                                                                   
 // founded by the HORIZON-MSCA-2021-PF-01-01 programme. 
 //
 // \author Joao Coelho - jcoelho\@apc.in2p3.fr                                           
@@ -22,6 +22,7 @@
 
 #include <Eigen/Eigenvalues>
 
+#include "MatrixDecomp/zheevh3.h"
 #include "PMNS_GQD.h"
 
 using namespace OscProb;

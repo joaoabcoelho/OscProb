@@ -27,7 +27,6 @@
 #ifndef PMNS_GQD_H
 #define PMNS_GQD_H
 
-#include "MatrixDecomp/zheevh3.h"
 #include "PMNS_Fast.h"
 
 #include <Eigen/Core>
