@@ -107,7 +107,7 @@ void PMNS_OQS::SetHeff(NuPath p){
 void PMNS_OQS::SetHGM()
 {
 
-  double k = 1./2.;
+  double k = 1.;
 
   fHGM[1][2] =  k * (real(fHeff[0][0]) - real(fHeff[1][1]));
   fHGM[1][3] =  2. * k * imag(fHeff[0][1]);
@@ -200,7 +200,6 @@ template <typename T> void PMNS_OQS::SolveEigenSystem()
 
 }
 
-
 void PMNS_OQS::Diagonalise()
 {
 
@@ -218,34 +217,42 @@ void PMNS_OQS::ChangeBaseToGM()
 {
   
   cout << "fRho inside BaseToGM: \n" << fRho[0][0] << " " << fRho[0][1] << " " << fRho[0][2] << " \n" << fRho[1][0] << " " << fRho[1][1] << " " << fRho[1][2]
-       << "\n " << fRho[2][0] << " " << fRho[2][1] << " " << fRho[2][2] << endl;
+       << " \n" << fRho[2][0] << " " << fRho[2][1] << " " << fRho[2][2] << endl;
 
   fR[0] = (fRho[0][0] + fRho[1][1] + fRho[2][2]) / sqrt(6.);
   fR[1] = (fRho[0][1] + fRho[1][0]) / 2.;
   fR[2] = (fRho[0][1] - fRho[1][0]) * complexD(0.0,1.0) / 2.;
   fR[3] = (fRho[0][0] - fRho[1][1]) / 2.;
-  fR[4] = fRho[0][2];
+  fR[4] =  fRho[0][2];
   fR[5] = 0;
-  fR[6] = fRho[1][2];
+  fR[6] =  fRho[1][2];
   fR[7] = 0;
   fR[8] = (fRho[0][0] + fRho[1][1] - 2.*fRho[2][2]) / (2.*sqrt(3.));
 
-  cout << "Rmu " << fR[0] << " " << fR[1] << " " << fR[2] << endl;  
+  cout << "Rmu:\n";
+
+  for(int i=0; i<9; i++){
+    cout << fR[i] << " " << endl; 
+  }
+
 }
 
 
 // pensa se fare rho o nuova variabile rho(t)
 void PMNS_OQS::ChangeBaseToSU3()
 {
-  fRho[0][0] = sqrt(2./3.) * fRt[0] + fRt[3] + fRt[8] / sqrt(3.);
-  fRho[0][1] = fRt[1] - complexD(0.0,1.0) * fRt[2];
-  fRho[0][2] = fRt[4] - complexD(0.0,1.0) * fRt[5];
-  fRho[1][0] = fRt[1] + complexD(0.0,1.0) * fRt[2];
-  fRho[1][1] = sqrt(2./3.) * fRt[0] - fRt[3] + fRt[8] / sqrt(3.);
-  fRho[1][2] = fRt[6] - complexD(0.0,1.0) * fRt[7];
-  fRho[2][0] = fRt[4] + complexD(0.0,1.0) * fRt[5];
-  fRho[2][1] = fRt[6] + complexD(0.0,1.0) * fRt[7];
-  fRho[2][2] = 1. / sqrt(3.) * (sqrt(2.)*fRt[0] - 2.*fRt[8]);
+
+  double k = 1.;
+  
+  fRho[0][0] = k * (sqrt(2./3.) * fRt[0] + fRt[3] + fRt[8] / sqrt(3.));
+  fRho[0][1] = k * (fRt[1] - complexD(0.0,1.0) * fRt[2]);
+  fRho[0][2] = k * (fRt[4] - complexD(0.0,1.0) * fRt[5]);
+  fRho[1][0] = k * (fRt[1] + complexD(0.0,1.0) * fRt[2]);
+  fRho[1][1] = k * (sqrt(2./3.) * fRt[0] - fRt[3] + fRt[8] / sqrt(3.));
+  fRho[1][2] = k * (fRt[6] - complexD(0.0,1.0) * fRt[7]);
+  fRho[2][0] = k * (fRt[4] + complexD(0.0,1.0) * fRt[5]);
+  fRho[2][1] = k * (fRt[6] + complexD(0.0,1.0) * fRt[7]);
+  fRho[2][2] = k * (1. / sqrt(3.) * (sqrt(2.)*fRt[0] - 2.*fRt[8]));
 
   cout << "BaseToSU3: \n" << fRho[0][0] << " " << fRho[0][1] << " " << fRho[0][2] 
        << "\n" << fRho[1][0] << " " << fRho[1][1] << " " << fRho[1][2]
@@ -263,6 +270,9 @@ void PMNS_OQS::ChangeBaseToSU3()
 ///
 void PMNS_OQS::PropagatePath(NuPath p)
 {
+
+  cout << "BEGIN OF PROPAGATEPATH: fRho = diag(" << fRho[0][0] << ", " << fRho[1][1] << ", " << fRho[2][2] << ")\n";
+
   SetHeff(p);
 
   SetHGM();
@@ -310,7 +320,6 @@ void PMNS_OQS::PropagatePath(NuPath p)
     cout << endl;
   }
 
-  
   matrixC mult(9, vectorC(9, 0));
   matrixC diag(9, vectorC(9, 0));
 
@@ -341,27 +350,65 @@ void PMNS_OQS::PropagatePath(NuPath p)
     cout << endl;
   }
 
-  
   ChangeBaseToGM();
 
+  matrixC mult2(9, vectorC(9, 0));
   
   // Convert path length to eV
   double lengthIneV = kKm2eV * p.length;
 
+
+  for(int i = 0; i < 9; ++i){
+    for(int j = 0; j < 9; ++j){
+      mult2[i][j] = 0;
+      for(int k = 0; k < 9; ++k){
+	mult2[i][j] += fEvec[i][k] * fMEvecInv(k, j);
+      }
+    }
+  }
+  
+
+  for(int i = 0; i < 9; ++i){
+    for(int k = 0; k < 9; ++k){
+      mult2[i][k] *= exp(fEval[k] * lengthIneV);
+    }
+  }
+
+
+  for(int i = 0; i < 9; ++i){
+    fRt[i] = 0;
+    for(int j = 0; j < 9; ++j){
+
+      fRt[i] += mult2[i][j] * fR[j];
+      
+    }
+
+    cout << "fRt[" << i << "] = " << fRt[i] << endl; 
+  }
+
+
+
+  /*
   for(int i = 0; i < 9; ++i){
 
     fRt[i] = 0;
     
-    for(int k = 0; k < 9; ++k){
-      for(int j = 0; j < 9; ++j){
-  
-       	fRt[i] += exp(fEval[k] * lengthIneV) * fEvec[i][k] * fMEvecInv(k, j) * fR[j];  
+    for(int j = 0; j < 9; ++j){
+      for(int k = 0; k < 9; ++k){
+
+	//	cout << "EVEC INV = " << fMEvecInv(k, j) << " Rj = " << fR[j] << " MULT = " << fMEvecInv(k, j) * fR[j] << endl; 
+
+	
+	//	fRt[i] += exp(fEval[k] * lengthIneV) * fEvec[i][k]; // * fMEvecInv(k, j) * fR[j];
+
       }
+      
+      //      cout << "EVAL = " << fEval[k] << " exp = " << exp(fEval[k] * lengthIneV) << " evecik = " << fEvec[i][k] << endl;
     }
-
+    
     cout << "fRt[" << i << "] = " << fRt[i] << endl;
-
-  }
+    
+  }*/
   
   ChangeBaseToSU3();
   
@@ -382,6 +429,7 @@ void PMNS_OQS::PropagatePath(NuPath p)
 ///
 void PMNS_OQS::ResetToFlavour(int flv)
 {
+ 
   PMNS_Base::ResetToFlavour(flv);
 
   assert(flv >= 0 && flv < fNumNus);
@@ -394,8 +442,34 @@ void PMNS_OQS::ResetToFlavour(int flv)
         fRho[i][j] = zero;
     }
   }
-
+  
 }
+
+
+double PMNS_OQS::Prob(int flvi, int flvf)
+{
+  ResetToFlavour(flvi);
+
+  cout << "inside PROB: nupaths size = " << int(fNuPaths.size()) << endl;
+  
+  for (int i = 0; i < int(fNuPaths.size()); i++) { PropagatePath(fNuPaths[i]); }
+
+  return P(flvf);
+}
+
+
+double PMNS_OQS::Prob(int flvi, int flvf, double E)
+{
+
+  fGotES *= (fEnergy == E);
+
+  fEnergy = E;
+
+  cout << "ENERGY ==== " << fEnergy << endl;
+  
+  return Prob(flvi, flvf);
+}
+
 
 //.............................................................................
 ///
@@ -414,6 +488,9 @@ double PMNS_OQS::P(int flv)
 {
   assert(flv >= 0 && flv < fNumNus);
 
+  cout << "inside P, fRho[" << flv << "][" << flv << "] = " << fRho[flv][flv] << endl;
+
+  
   return sqrt(fRho[flv][flv].real()*fRho[flv][flv].real() +
 	      fRho[flv][flv].imag()*fRho[flv][flv].imag());
 }
@@ -433,7 +510,57 @@ void PMNS_OQS::SetPureState(vectorC nu_in)
       fRho[i][j] = conj(nu_in[i]) * nu_in[j];
     }
   }
+  
 }
 
+//.............................................................................
+///
+/// Compute the probability matrix for the first nflvi and nflvf states.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+/// @param nflvi - The number of initial flavours in the matrix.
+/// @param nflvf - The number of final flavours in the matrix.
+///
+/// @return Neutrino oscillation probabilities
+///
+matrixD PMNS_OQS::ProbMatrix(int nflvi, int nflvf)
+{
+  assert(nflvi <= fNumNus && nflvi >= 0);
+  assert(nflvf <= fNumNus && nflvf >= 0);
+
+  // Output probabilities
+  matrixD probs(nflvi, vectorD(nflvf));
+
+  // List of states
+  vector<matrixC> allstates(nflvi, matrixC(fNumNus, vectorC(fNumNus)));
+
+  // Reset all initial states
+  for (int i = 0; i < nflvi; i++) {
+    ResetToFlavour(i);
+    allstates[i] = fRho;
+  }
+
+  // Propagate all states in parallel
+  for (int i = 0; i < int(fNuPaths.size()); i++) {
+    for (int flvi = 0; flvi < nflvi; flvi++) {
+      fRho = allstates[flvi];
+      PropagatePath(fNuPaths[i]);
+      allstates[flvi] = fRho;
+    }
+  }
+
+  // Get all probabilities
+  for (int flvi = 0; flvi < nflvi; flvi++) {
+    for (int flvj = 0; flvj < nflvf; flvj++) {
+      probs[flvi][flvj] = abs(allstates[flvi][flvj][flvj]);
+    }
+  }
+
+  return probs;
+}
 
 ////////////////////////////////////////////////////////////////////////

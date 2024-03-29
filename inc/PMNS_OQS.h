@@ -16,6 +16,12 @@ namespace OscProb {
     /// Compute the probability matrix
     virtual void SetPhi(int i, double val);
     virtual void SetDissipatorElement(int i, int j, double val);
+
+    /// Compute the probability matrix
+    using PMNS_Base::ProbMatrix;
+    virtual matrixD ProbMatrix(int nflvi, int nflvf);
+    virtual double Prob(int flvi, int flvf); 
+    virtual double Prob(int flvi, int flvf, double energy); 
     
     protected:
     
