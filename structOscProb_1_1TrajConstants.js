@@ -15,7 +15,6 @@ var structOscProb_1_1TrajConstants =
     [ "gamma", "structOscProb_1_1TrajConstants.html#a95c2627a62e52941931e381e2c967479", null ],
     [ "gammaSq", "structOscProb_1_1TrajConstants.html#a2ec711472cf7ecdd50afebc1c86d6568", null ],
     [ "maxSinSqLat", "structOscProb_1_1TrajConstants.html#a9d3d75a4790e16793f5ad6213ae556f5", null ],
-    [ "rDetCosAcosDetLat", "structOscProb_1_1TrajConstants.html#aa10a34a042a86548c7b7164d2a5153c1", null ],
     [ "rDetCosDetLat", "structOscProb_1_1TrajConstants.html#aac095b1d3d8eb15ce9c3c100349063a2", null ],
     [ "rDetCosT", "structOscProb_1_1TrajConstants.html#a7381db6a7bd21b1d654bf86ecc071267", null ],
     [ "rDetGammaSinDetLat", "structOscProb_1_1TrajConstants.html#a7d12fa3695e0e8a68bad8bafc050d56a", null ],
@@ -29,5 +28,6 @@ var structOscProb_1_1TrajConstants =
     [ "sinTcosA", "structOscProb_1_1TrajConstants.html#a53769a1e4a973ade88e0a2e0285eb018", null ],
     [ "sinTsinA", "structOscProb_1_1TrajConstants.html#a029de58b21f6ef6a52861f963bf0c030", null ],
     [ "sinTsinAcosDetLon", "structOscProb_1_1TrajConstants.html#ac0c5f8ad095f9f55a2a1f94af7402757", null ],
-    [ "sinTsinAsinDetLon", "structOscProb_1_1TrajConstants.html#a913597a42222e54e0585c8ec0e9bebc5", null ]
+    [ "sinTsinAsinDetLon", "structOscProb_1_1TrajConstants.html#a913597a42222e54e0585c8ec0e9bebc5", null ],
+    [ "xlatextreme", "structOscProb_1_1TrajConstants.html#a4915b889e8c3934d96be90c753ccec50", null ]
 ];

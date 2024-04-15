@@ -114,8 +114,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a6d9d2c61cb4c117ea1173fd008f95eee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff42542e2eb556de65d7797a1b83844d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOscProb_1_1EarthModelBinned_1_1LatBinInfo.html#aff42542e2eb556de65d7797a1b83844d">dLat</a></td></tr>
 <tr class="separator:aff42542e2eb556de65d7797a1b83844d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bd5aa2bda961842466e02e45da29599"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOscProb_1_1EarthModelBinned_1_1LatBinInfo.html#a6bd5aa2bda961842466e02e45da29599">maxreached</a></td></tr>
-<tr class="separator:a6bd5aa2bda961842466e02e45da29599"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee06245332a9fecc1752fd514ca7f146"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structOscProb_1_1EarthModelBinned_1_1LatBinInfo.html#aee06245332a9fecc1752fd514ca7f146">maxreached</a></td></tr>
+<tr class="separator:aee06245332a9fecc1752fd514ca7f146"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>rpestes@apc.in2p3.fr </dd></dl>
@@ -136,7 +136,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00243">243</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00628">OscProb::EarthModelBinned::FillPath()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00548">OscProb::EarthModelBinned::RecordLatLonBinCrossings()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00652">OscProb::EarthModelBinned::FillPath()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00559">OscProb::EarthModelBinned::RecordLatLonBinCrossings()</a>.</p>
 
 </div>
 </div>
@@ -151,11 +151,11 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Distance along the neutrino trajectory from the edge of next latitude bin to the detector </p>
+<p >Distance from the detector to the edge of the next latitude bin along the neutrino trajectory (&lt;0 =&gt; neutrino will not reach next latitude bin before arriving at detector) </p>
 
 <p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00245">245</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00628">OscProb::EarthModelBinned::FillPath()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00548">OscProb::EarthModelBinned::RecordLatLonBinCrossings()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00652">OscProb::EarthModelBinned::FillPath()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00559">OscProb::EarthModelBinned::RecordLatLonBinCrossings()</a>.</p>
 
 </div>
 </div>
@@ -170,30 +170,30 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Change in lat from bin center to next bin (excludes direction; 0 if no more than 1 lat bin change) </p>
+<p >Change in lat from bin center to edge of next bin (excludes direction; 0 if no more than 1 lat bin change happens along entire neutrino trajectory) </p>
 
-<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00251">251</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00255">255</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00420">OscProb::EarthModelBinned::DetDistForNextLatBin()</a>, <a class="el" href="EarthModelBinned_8cxx_source.html#l00628">OscProb::EarthModelBinned::FillPath()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00548">OscProb::EarthModelBinned::RecordLatLonBinCrossings()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00429">OscProb::EarthModelBinned::DetDistForNextLatBin()</a>, <a class="el" href="EarthModelBinned_8cxx_source.html#l00652">OscProb::EarthModelBinned::FillPath()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00559">OscProb::EarthModelBinned::RecordLatLonBinCrossings()</a>.</p>
 
 </div>
 </div>
-<a id="a6bd5aa2bda961842466e02e45da29599" name="a6bd5aa2bda961842466e02e45da29599"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6bd5aa2bda961842466e02e45da29599">&#9670;&nbsp;</a></span>maxreached</h2>
+<a id="aee06245332a9fecc1752fd514ca7f146" name="aee06245332a9fecc1752fd514ca7f146"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee06245332a9fecc1752fd514ca7f146">&#9670;&nbsp;</a></span>maxreached</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int OscProb::EarthModelBinned::LatBinInfo::maxreached</td>
+          <td class="memname">bool OscProb::EarthModelBinned::LatBinInfo::maxreached</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Indicates whether the latitude function transition is still to come (0 =&gt; yes, 1 =&gt; no) </p>
+<p >Indicates whether the latitude function transition has happened, yet (false =&gt; no, true =&gt; yes) </p>
 
-<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00253">253</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00259">259</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00420">OscProb::EarthModelBinned::DetDistForNextLatBin()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00628">OscProb::EarthModelBinned::FillPath()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00429">OscProb::EarthModelBinned::DetDistForNextLatBin()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00652">OscProb::EarthModelBinned::FillPath()</a>.</p>
 
 </div>
 </div>
@@ -211,7 +211,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00244">244</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00628">OscProb::EarthModelBinned::FillPath()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00548">OscProb::EarthModelBinned::RecordLatLonBinCrossings()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00652">OscProb::EarthModelBinned::FillPath()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00559">OscProb::EarthModelBinned::RecordLatLonBinCrossings()</a>.</p>
 
 </div>
 </div>
@@ -226,11 +226,11 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Indicates whether latitude is increasing or decreasing with respect to decreasing distance from the detector (+1 =&gt; inc, -1 =&gt; dec) </p>
+<p >Indicates whether latitude is increasing or decreasing with respect to decreasing distance from the detector along trajectory (+1 =&gt; increasing, -1 =&gt; decreasing) </p>
 
-<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00248">248</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EarthModelBinned_8h_source.html#l00251">251</a> of file <a class="el" href="EarthModelBinned_8h_source.html">EarthModelBinned.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00420">OscProb::EarthModelBinned::DetDistForNextLatBin()</a>, <a class="el" href="EarthModelBinned_8cxx_source.html#l00628">OscProb::EarthModelBinned::FillPath()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00548">OscProb::EarthModelBinned::RecordLatLonBinCrossings()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="EarthModelBinned_8cxx_source.html#l00429">OscProb::EarthModelBinned::DetDistForNextLatBin()</a>, <a class="el" href="EarthModelBinned_8cxx_source.html#l00652">OscProb::EarthModelBinned::FillPath()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00559">OscProb::EarthModelBinned::RecordLatLonBinCrossings()</a>.</p>
 
 </div>
 </div>
