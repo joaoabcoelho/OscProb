@@ -3,10 +3,10 @@
 // Implementation of oscillations of neutrinos in matter in a
 // three-neutrino framework with gravitationally induced decoherence.
 //
-// This  class inherits from the PMNS_Fast class
+// This  class inherits from the PMNS_Base class
 //
-// This developement is part of the QGRANT project with                             
-// ID: 101068013,                                                                   
+// This developement is part of the QGRANT project with                           
+// ID: 101068013,                                                                 
 // founded by the HORIZON-MSCA-2021-PF-01-01 programme. 
 //
 // \author Joao Coelho - jcoelho\@apc.in2p3.fr                                           
@@ -38,8 +38,9 @@ double hbar = 6.582119569e-16; // eV*s
 /// This class is restricted to 3 neutrino flavours.
 ///
 PMNS_GQD::PMNS_GQD()
-  : PMNS_Fast(), fRho(3, vectorC(3, 0)), fMBuffer(3, vectorC(3, 0))
+  : PMNS_Base(), fRho(3, vectorC(3, 0)), fMBuffer(3, vectorC(3, 0))
 {
+  SetUseCache(false);
   SetStdPath();
   SetEta(0);
   SetTemperature(0);
@@ -168,7 +169,7 @@ void PMNS_GQD::BuildHms()
 
   RotateHam(false, fHms);
     
-  ClearCache();
+  //  if (!isSame) ClearCache();
 
   // Tag as built                                                                        
   fBuiltHms = true;
@@ -239,13 +240,37 @@ void PMNS_GQD::RotateHam(bool to_mass, matrixC& Ham)
   }
 }
 
+void PMNS_GQD::UpdateHam()
+{
+  double lv = 2 * kGeV2eV * fEnergy; // 2E in eV
+
+  double kr2GNe = kK2 * M_SQRT2 * kGf;
+  kr2GNe *= fPath.density * fPath.zoa; // Matter potential in eV
+
+  // Finish building Hamiltonian in matter with dimension of eV
+  for (int i = 0; i < fNumNus; i++) {
+    fHam[i][i] = fHms[i][i] / lv;
+    for (int j = i + 1; j < fNumNus; j++) {
+      if (!fIsNuBar)
+        fHam[i][j] = fHms[i][j] / lv;
+      else
+        fHam[i][j] = conj(fHms[i][j]) / lv;
+    }
+  }
+  if (!fIsNuBar)
+    fHam[0][0] += kr2GNe;
+  else
+    fHam[0][0] -= kr2GNe;
+}
+
+
 //.............................................................................          
-///                                                                                        
-/// Solve the full Hamiltonian for eigenvectors and eigenvalues.                             
-///                                                                                           
-/// This is using a method from the GLoBES software available at                               
-/// http://www.mpi-hd.mpg.de/personalhomes/globes/3x3/ \n                                    
-/// We should cite them accordingly                                                         
+///                                                                                
+/// Solve the full Hamiltonian for eigenvectors and eigenvalues.                   
+///                                                                                  
+/// This is using a method from the GLoBES software available at                     
+/// http://www.mpi-hd.mpg.de/personalhomes/globes/3x3/ \n                           
+/// We should cite them accordingly                                                 
 ///   
 void PMNS_GQD::SolveHam()
 {

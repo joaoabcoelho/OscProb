@@ -4,7 +4,7 @@
 /// \brief Implementation of oscillations of neutrinos in matter in a
 ///        three-neutrino framework with gravitationally induced decoherence.
 ///
-/// This class expands the PMNS_Fast class including a effects from
+/// This class expands the PMNS_Base class including a effects from
 /// decoherence in an increasing entropy and energy conserving model.
 ///
 /// The quantum mechanical model assumes a neutrino coupling, eta,
@@ -18,7 +18,7 @@
 ///
 /// Reference: https://doi.org/10.48550/arXiv.2403.03106
 ///
-/// \sa PMNS_Fast
+/// \sa PMNS_Base
 ///
 /// \author Joao Coelho - jcoelho\@apc.in2p3.fr
 /// \author Alba Domi - alba.domi\@fau.de
@@ -27,13 +27,13 @@
 #ifndef PMNS_GQD_H
 #define PMNS_GQD_H
 
-#include "PMNS_Fast.h"
+#include "PMNS_Base.h"
 
 #include <Eigen/Core>
 
 namespace OscProb {
 
-  class PMNS_GQD : public PMNS_Fast {
+  class PMNS_GQD : public PMNS_Base {
   public:
     PMNS_GQD();          ///< Constructor
     virtual ~PMNS_GQD(); ///< Destructor
@@ -58,8 +58,9 @@ namespace OscProb {
     virtual void SetPureState(vectorC nu_in); ///< Set the density matrix from a pure state
     virtual void SetVacuumEigensystem();
     virtual void BuildHms();
-    virtual void SolveHam();
+    virtual void UpdateHam();
     virtual void RotateHam(bool to_mass, matrixC& Ham);
+    virtual void SolveHam();
     
     template <typename T> void SolveEigenSystem();
     
@@ -72,6 +73,8 @@ namespace OscProb {
     double fEta; ///< The neutrino coupling with the environment in [s]
     double fT; /// The temperature of the thermal gravitational waves environment in [K]
     double fOmega; ///< The cutoff frequency in [Hz]
+
+    complexD fHam[3][3]; ///< The full hamiltonian
     
     Eigen::Matrix3cd fHmatter;
     
