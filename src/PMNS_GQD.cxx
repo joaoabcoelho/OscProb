@@ -40,7 +40,6 @@ double hbar = 6.582119569e-16; // eV*s
 PMNS_GQD::PMNS_GQD()
   : PMNS_Base(), fRho(3, vectorC(3, 0)), fMBuffer(3, vectorC(3, 0))
 {
-  SetUseCache(false);
   SetStdPath();
   SetEta(0);
   SetTemperature(0);
@@ -169,8 +168,6 @@ void PMNS_GQD::BuildHms()
 
   RotateHam(false, fHms);
     
-  //  if (!isSame) ClearCache();
-
   // Tag as built                                                                        
   fBuiltHms = true;
 }
@@ -286,9 +283,6 @@ void PMNS_GQD::SolveHam()
   // Check if anything changed                                                       
   if (fGotES) return;
 
-  // Try caching if activated                                                        
-  if (TryCache()) return;
-
   UpdateHam();
   
   double   fEvalGLoBES[3];
@@ -307,9 +301,6 @@ void PMNS_GQD::SolveHam()
   
   // Mark eigensystem as solved      
   fGotES = true;
-
-  // Fill cache if activated                                              
-  FillCache();
 }
 
 //.............................................................................

@@ -53,7 +53,7 @@ namespace OscProb {
     
   protected:
     
-    // Resetting and propagating
+    virtual void FillCache() {} ///< Deactivate cache
     virtual void ResetToFlavour(int flv); ///< Reset neutrino state to pure flavour flv
     virtual void SetPureState(vectorC nu_in); ///< Set the density matrix from a pure state
     virtual void SetVacuumEigensystem();
