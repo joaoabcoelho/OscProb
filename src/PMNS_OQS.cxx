@@ -52,16 +52,15 @@ void PMNS_OQS::SetHeff(NuPath p){
   // Set the neutrino path                    
   SetCurPath(p);
   
-  double rho = fPath.density;
-  double zoa = fPath.zoa;
-  
-  double kr2GNe = kK2 * M_SQRT2 * kGf * rho * zoa; // Electron matter potential in eV
-  
+  double kr2GNe = kK2 * M_SQRT2 * kGf;
+  kr2GNe *= fPath.density * fPath.zoa; // Matter potential in eV    
+
+  /*
   if(fIsNuBar == 0){
     Ve = kr2GNe*2.;
   } else {
     Ve = -kr2GNe*2.;
-  }
+    }*/
 
   double s12 = sin(fTheta[0][1]);
   double s13 = sin(fTheta[0][2]);
@@ -78,9 +77,24 @@ void PMNS_OQS::SetHeff(NuPath p){
   complexD iphi1(0.0, fPhi[0]);
   complexD iphi2(0.0, fPhi[1]);
 
+  double lv = 2. * kGeV2eV * fEnergy; // 2E in eV   
+  
   fHeff[0][0] = c12*c12 * c13*c13 * Ve;
+  fHeff[0][1] = c12 * c13*c13 * s12 * Ve;
+  fHeff[0][2] = c12 * c13 * s13 * Ve;
+
+  fHeff[1][0] = c12 * c13*c13 * s12 * Ve;
+  fHeff[1][1] = c13*c13 * s12*s12 * Ve;
+  fHeff[1][2] = c13 * s12 * s13 * Ve;
+
+  fHeff[2][0] = c12 * c13 * s13 * Ve;
+  fHeff[2][1] = c13 * s12 * s13 * Ve;
+  fHeff[2][2] = s13*s13 * Ve;  
+
+
+  /*fHeff[0][0] = c12*c12 * c13*c13 * Ve;
   fHeff[0][1] = c12 * c13*c13 * exp(iphi1) * s12 * Ve;
-  fHeff[0][2] = c12 * c13 * exp(-idelta + iphi2) * s13 * Ve;
+  fHeff[0][2] = c12 * c13 * exp(iphi2 - idelta) * s13 * Ve;
 
   fHeff[1][0] = c12 * c13*c13 * exp(-iphi1) * s12 * Ve;
   fHeff[1][1] = c13*c13 * s12*s12 * Ve;
@@ -89,11 +103,18 @@ void PMNS_OQS::SetHeff(NuPath p){
   fHeff[2][0] = c12 * c13 * exp(idelta - iphi2) * s13 * Ve;
   fHeff[2][1] = c13 * exp(idelta + iphi1 - iphi2) * s12 * s13 * Ve;
   fHeff[2][2] = s13*s13 * Ve;  
-
+  */
+  
   // add mass terms
-  fHeff[1][1] += fDm[1] / (2 * kGeV2eV * fEnergy);
-  fHeff[2][2] += fDm[2] / (2 * kGeV2eV * fEnergy);
+  fHeff[1][1] += fDm[1];
+  fHeff[2][2] += fDm[2];
 
+  for (int i = 0; i < fNumNus; i++) {
+    for (int j = 0; j < fNumNus; j++) {
+      fHeff[i][j] = fHeff[i][j] / lv;
+    }
+  }
+  
   cout << "HEFF\n";
 
   cout << fHeff[0][0] << " " << fHeff[0][1] << " " << fHeff[0][2] << endl;
