@@ -47,20 +47,20 @@ void PMNS_OQS::InitializeVectors()
 // set Heff in vacuum-mass basis
 void PMNS_OQS::SetHeff(NuPath p){
 
-  double Ve = 0;
-  
   // Set the neutrino path                    
   SetCurPath(p);
   
   double kr2GNe = kK2 * M_SQRT2 * kGf;
   kr2GNe *= fPath.density * fPath.zoa; // Matter potential in eV    
 
-  /*
-  if(fIsNuBar == 0){
-    Ve = kr2GNe*2.;
-  } else {
-    Ve = -kr2GNe*2.;
-    }*/
+  double Ve = 0;
+
+  if (!fIsNuBar)
+    Ve = kr2GNe;
+  else
+    Ve = -kr2GNe;
+
+  cout << "@@@@@@@@@@ Ve = " << Ve << endl;
 
   double s12 = sin(fTheta[0][1]);
   double s13 = sin(fTheta[0][2]);
@@ -77,8 +77,6 @@ void PMNS_OQS::SetHeff(NuPath p){
   complexD iphi1(0.0, fPhi[0]);
   complexD iphi2(0.0, fPhi[1]);
 
-  double lv = 2. * kGeV2eV * fEnergy; // 2E in eV   
-  
   fHeff[0][0] = c12*c12 * c13*c13 * Ve;
   fHeff[0][1] = c12 * c13*c13 * s12 * Ve;
   fHeff[0][2] = c12 * c13 * s13 * Ve;
@@ -105,16 +103,12 @@ void PMNS_OQS::SetHeff(NuPath p){
   fHeff[2][2] = s13*s13 * Ve;  
   */
   
-  // add mass terms
-  fHeff[1][1] += fDm[1];
-  fHeff[2][2] += fDm[2];
-
-  for (int i = 0; i < fNumNus; i++) {
-    for (int j = 0; j < fNumNus; j++) {
-      fHeff[i][j] = fHeff[i][j] / lv;
-    }
-  }
+  double lv = 2. * kGeV2eV * fEnergy; // 2E in eV   
   
+  // add mass terms
+  fHeff[1][1] += fDm[1] / lv;
+  fHeff[2][2] += fDm[2] / lv;
+
   cout << "HEFF\n";
 
   cout << fHeff[0][0] << " " << fHeff[0][1] << " " << fHeff[0][2] << endl;
