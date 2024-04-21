@@ -78,19 +78,6 @@ void PMNS_OQS::SetHeff(NuPath p){
   complexD iphi2(0.0, fPhi[1]);
 
   fHeff[0][0] = c12*c12 * c13*c13 * Ve;
-  fHeff[0][1] = c12 * c13*c13 * s12 * Ve;
-  fHeff[0][2] = c12 * c13 * s13 * Ve;
-
-  fHeff[1][0] = c12 * c13*c13 * s12 * Ve;
-  fHeff[1][1] = c13*c13 * s12*s12 * Ve;
-  fHeff[1][2] = c13 * s12 * s13 * Ve;
-
-  fHeff[2][0] = c12 * c13 * s13 * Ve;
-  fHeff[2][1] = c13 * s12 * s13 * Ve;
-  fHeff[2][2] = s13*s13 * Ve;  
-
-
-  /*fHeff[0][0] = c12*c12 * c13*c13 * Ve;
   fHeff[0][1] = c12 * c13*c13 * exp(iphi1) * s12 * Ve;
   fHeff[0][2] = c12 * c13 * exp(iphi2 - idelta) * s13 * Ve;
 
@@ -101,7 +88,7 @@ void PMNS_OQS::SetHeff(NuPath p){
   fHeff[2][0] = c12 * c13 * exp(idelta - iphi2) * s13 * Ve;
   fHeff[2][1] = c13 * exp(idelta + iphi1 - iphi2) * s12 * s13 * Ve;
   fHeff[2][2] = s13*s13 * Ve;  
-  */
+  
   
   double lv = 2. * kGeV2eV * fEnergy; // 2E in eV   
   
