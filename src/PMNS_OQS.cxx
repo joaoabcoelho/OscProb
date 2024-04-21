@@ -40,7 +40,6 @@ void PMNS_OQS::InitializeVectors()
   SetPhi(2, 0);
 
   fEval = vectorC(9, 0);
-  fEvec = matrixC(9, vectorC(9, (0, 0)));
 }
 
 
@@ -180,7 +179,7 @@ template <typename T> void PMNS_OQS::SolveEigenSystem()
   for (int i = 0; i < 9; i++) {
     fEval[i] = eigensolver.eigenvalues()(i);
     for (int j = 0; j < 9; j++) {
-      fEvec[i][j] = eigensolver.eigenvectors()(i, j);
+      fMEvec(i, j) = eigensolver.eigenvectors()(i, j);
     }
   }
 }
@@ -198,12 +197,12 @@ void PMNS_OQS::Diagonalise()
 }
 
 
-//.............................................................................                      
-///                                                                                                     
-/// Rotate the density matrix to or from the mass basis                                                 
-///                                                                                                     
-/// @param to_mass - true if to mass basis                                                              
-///                                                                                                     
+//.............................................................................          
+///                                                                                         
+/// Rotate the density matrix to or from the mass basis                                 
+///                                                                                       
+/// @param to_mass - true if to mass basis                                                
+///                                                               
 void PMNS_OQS::RotateState(bool to_mass)
 {
 
@@ -251,7 +250,7 @@ void PMNS_OQS::RotateState(bool to_mass)
     }
    }
   
-  // rho = U^\dagger . buffer = U^\dagger . rho . U                                                     
+  // rho = U^\dagger . buffer = U^\dagger . rho . U                             
   // Final matrix is Hermitian, so copy upper to lower triangle
 
   for (int i = 0; i < 3; i++) {
@@ -284,8 +283,6 @@ void PMNS_OQS::ChangeBaseToGM()
 
 }
 
-
-// pensa se fare rho o nuova variabile rho(t)
 void PMNS_OQS::ChangeBaseToSU3()
 {
 
@@ -318,12 +315,6 @@ void PMNS_OQS::PropagatePath(NuPath p)
   // Solve for eigensystem
   Diagonalise();
 
-  for(int i = 0; i < 9; ++i){
-    for(int j = 0; j < 9; ++j){
-      fMEvec(i, j) = fEvec[i][j];
-    }
-  }
-
   Eigen::MatrixXcd fMEvecInv = fMEvec.inverse();
 
   matrixC mult(9, vectorC(9, 0));
@@ -343,7 +334,7 @@ void PMNS_OQS::PropagatePath(NuPath p)
     fRt[i] = 0;
     for(int j = 0; j < 9; ++j){
       for(int k = 0; k < 9; ++k){
-	fRt[i] += exp(fEval[k] * lengthIneV) * fEvec[i][k] * fMEvecInv(k, j) * fR[j];
+	fRt[i] += exp(fEval[k] * lengthIneV) * fMEvec(i, k) * fMEvecInv(k, j) * fR[j];
       }
     }
   }
@@ -434,13 +425,12 @@ double PMNS_OQS::P(int flv)
 void PMNS_OQS::SetPureState(vectorC nu_in)
 {
   assert(nu_in.size() == fNumNus);
-
+  
   for (int i = 0; i < fNumNus; i++) {
     for (int j = 0; j < fNumNus; j++) {
       fRho[i][j] = conj(nu_in[i]) * nu_in[j];
     }
-  }
-  
+  }  
 }
 
 //.............................................................................
