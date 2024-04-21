@@ -60,8 +60,6 @@ void PMNS_OQS::SetHeff(NuPath p){
   else
     Ve = -kr2GNe;
 
-  cout << "@@@@@@@@@@ Ve = " << Ve << endl;
-
   double s12 = sin(fTheta[0][1]);
   double s13 = sin(fTheta[0][2]);
   double s23 = sin(fTheta[1][2]);
@@ -95,12 +93,6 @@ void PMNS_OQS::SetHeff(NuPath p){
   // add mass terms
   fHeff[1][1] += fDm[1] / lv;
   fHeff[2][2] += fDm[2] / lv;
-
-  cout << "HEFF\n";
-
-  cout << fHeff[0][0] << " " << fHeff[0][1] << " " << fHeff[0][2] << endl;
-  cout << fHeff[1][0] << " " << fHeff[1][1] << " " << fHeff[1][2] << endl;
-  cout << fHeff[2][0] << " " << fHeff[2][1] << " " << fHeff[2][2] << endl;
 
 }
 
@@ -174,15 +166,10 @@ void PMNS_OQS::SetPhi(int i, double val)
 template <typename T> void PMNS_OQS::SolveEigenSystem()
 {
 
-  cout << "M to diagonalize: \n";
-
   for(int i = 0; i < 9; ++i){
     for(int j = 0; j < 9; ++j){
       fMd(i, j) = fM[i][j];
-
-      cout << fMd(i,j) << " "; 
     }
-    cout << "\n";
   }
   
   Eigen::Ref<T> M(fMd);
@@ -283,10 +270,6 @@ void PMNS_OQS::RotateState(bool to_mass)
 
 void PMNS_OQS::ChangeBaseToGM()
 {
-  
-  cout << "fRho inside BaseToGM: \n" << fRho[0][0] << " " << fRho[0][1] << " " << fRho[0][2] << " \n" << fRho[1][0] << " " << fRho[1][1] << " " << fRho[1][2]
-       << " \n" << fRho[2][0] << " " << fRho[2][1] << " " << fRho[2][2] << endl;
-
   fR[0] = (fRho[0][0] + fRho[1][1] + fRho[2][2]) / sqrt(6.);
   fR[1] =  real(fRho[0][1]);
   fR[2] = -imag(fRho[0][1]);
@@ -298,12 +281,6 @@ void PMNS_OQS::ChangeBaseToGM()
   fR[7] = -imag(fRho[1][2]);
   //  fR[7] =  0;
   fR[8] = (fRho[0][0] + fRho[1][1] - 2.*fRho[2][2]) / (2. * sqrt(3.));
-
-  cout << "Rmu:\n";
-
-  for(int i=0; i<9; i++){
-    cout << fR[i] << " " << endl; 
-  }
 
 }
 
@@ -321,12 +298,6 @@ void PMNS_OQS::ChangeBaseToSU3()
   fRho[2][0] = (fRt[4] + complexD(0.0,1.0) * fRt[5]);
   fRho[2][1] = (fRt[6] + complexD(0.0,1.0) * fRt[7]);
   fRho[2][2] = (1. / sqrt(3.) * (sqrt(2.)*fRt[0] - 2.*fRt[8]));
-
-  cout << "BaseToSU3: \n" << fRho[0][0] << " " << fRho[0][1] << " " << fRho[0][2] 
-       << "\n" << fRho[1][0] << " " << fRho[1][1] << " " << fRho[1][2]
-       << "\n" << fRho[2][0] << " " << fRho[2][1] << " " << fRho[2][2] << endl;	
-
-  cout << "ABS: " << abs(fRho[0][0]) << " " << abs(fRho[1][1]) << " " << abs(fRho[2][2]) << endl;
   
 }
 
@@ -338,9 +309,6 @@ void PMNS_OQS::ChangeBaseToSU3()
 ///
 void PMNS_OQS::PropagatePath(NuPath p)
 {
-
-  cout << "BEGIN OF PROPAGATEPATH: fRho = diag(" << fRho[0][0] << ", " << fRho[1][1] << ", " << fRho[2][2] << ")\n";
-
   SetHeff(p);
 
   SetHGM();
@@ -350,83 +318,18 @@ void PMNS_OQS::PropagatePath(NuPath p)
   // Solve for eigensystem
   Diagonalise();
 
-  cout << "MATRIX WITH EIGENVECTORS: \n";
-
   for(int i = 0; i < 9; ++i){
     for(int j = 0; j < 9; ++j){
       fMEvec(i, j) = fEvec[i][j];
-
-      cout << fEvec[i][j] << " ";
     }
-    cout << endl;
   }
 
-  cout << "EIGENVALUES: \n";
-  //  for(int i = 0; i < 9; ++i){
-  for(int i = 0; i < 9; ++i){
-    cout << fEval[i] << " ";
-  }
-  cout << endl;
-  
   Eigen::MatrixXcd fMEvecInv = fMEvec.inverse();
-
-  cout << "EVEC \n";
-
-  for(int i = 0; i < 9; ++i){
-    for(int j = 0; j < 9; ++j){
-      cout << fMEvec(i, j) << "";
-    }
-    cout << endl;
-  }
-
-  cout << "EVEC INVERSE \n";
-
-  for(int i = 0; i < 9; ++i){
-    for(int j = 0; j < 9; ++j){
-      cout << fMEvecInv(i, j) << "";
-    }
-    cout << endl;
-  }
 
   matrixC mult(9, vectorC(9, 0));
   matrixC diag(9, vectorC(9, 0));
 
-  // Multiplying matrix a and b and storing in array mult.
-  for(int i = 0; i < 9; ++i){
-    for(int j = 0; j < 9; ++j){
-      mult[i][j] = 0;
-      for(int k = 0; k < 9; ++k){
-	mult[i][j] += fMd(i, k) * fMEvec(k, j);
-      }
-    }
-  }
-
-  for(int i = 0; i < 9; ++i){
-    for(int j = 0; j < 9; ++j){
-      diag[i][j] = 0;
-      for(int k = 0; k < 9; ++k){
-	diag[i][j] += fMEvecInv(i, k) * mult[k][j];
-      }
-    }
-  }
-
-  cout << "TESTARE D-1 x M x D: DEVE VENIRE DIAGONALE \n";
-  for(int i = 0; i < 9; ++i){
-    for(int j = 0; j < 9; ++j){
-      cout << diag[i][j] << " ";
-    }
-    cout << endl;
-  }
-
   RotateState(true);
-
-  cout << "RHO to MASS:\n";
-  for(int i = 0; i < 3; ++i){
-    for(int j = 0; j < 3; ++j){
-      cout << fRho[i][j] << " ";
-    }
-    cout << endl;
-  }
 
   ChangeBaseToGM();
 
@@ -443,22 +346,11 @@ void PMNS_OQS::PropagatePath(NuPath p)
 	fRt[i] += exp(fEval[k] * lengthIneV) * fEvec[i][k] * fMEvecInv(k, j) * fR[j];
       }
     }
-    cout << "fRt[" << i << "] = " << fRt[i] << endl;
   }
     
   ChangeBaseToSU3();
   
   RotateState(false); // go back to flavour basis
-
-  cout << "RHO to FLAVOUR:\n";
-  for(int i = 0; i < 3; ++i){
-    for(int j = 0; j < 3; ++j){
-      cout << fRho[i][j] << " ";
-    }
-    cout << endl;
-  }
-  
-  cout << "\n fine di propagatepath() \n";
 }
 
 
@@ -496,8 +388,6 @@ double PMNS_OQS::Prob(int flvi, int flvf)
 {
   ResetToFlavour(flvi);
 
-  cout << "inside PROB: nupaths size = " << int(fNuPaths.size()) << endl;
-  
   for (int i = 0; i < int(fNuPaths.size()); i++) { PropagatePath(fNuPaths[i]); }
 
   return P(flvf);
@@ -506,12 +396,9 @@ double PMNS_OQS::Prob(int flvi, int flvf)
 
 double PMNS_OQS::Prob(int flvi, int flvf, double E)
 {
-
   fGotES *= (fEnergy == E);
-
+  
   fEnergy = E;
-
-  cout << "ENERGY ==== " << fEnergy << endl;
   
   return Prob(flvi, flvf);
 }
@@ -533,9 +420,6 @@ double PMNS_OQS::Prob(int flvi, int flvf, double E)
 double PMNS_OQS::P(int flv)
 {
   assert(flv >= 0 && flv < fNumNus);
-
-  cout << "inside P, fRho[" << flv << "][" << flv << "] = " << fRho[flv][flv] << endl;
-
   
   return sqrt(fRho[flv][flv].real()*fRho[flv][flv].real() +
 	      fRho[flv][flv].imag()*fRho[flv][flv].imag());
