@@ -69,11 +69,13 @@ void PMNS_OQS::SetHeff(NuPath p){
   double c23 = cos(fTheta[1][2]);
 
   complexD idelta(0.0, fDelta[0][2]);
+  complexD iphi1( 0.0, fPhi[0]);
+  complexD iphi2( 0.0, fPhi[1]);
   if (fIsNuBar){
     idelta = conj(idelta);
+    iphi1  = conj(iphi1);
+    iphi2  = conj(iphi2);
   }
-  complexD iphi1(0.0, fPhi[0]);
-  complexD iphi2(0.0, fPhi[1]);
 
   fHeff[0][0] = c12*c12 * c13*c13 * Ve;
   fHeff[0][1] = c12 * c13*c13 * exp(iphi1) * s12 * Ve;
