@@ -10,6 +10,7 @@
 using namespace std;
 using namespace OscProb;
 
+
 //.............................................................................
 ///
 /// Constructor. \sa PMNS_Base::PMNS_Base
@@ -141,8 +142,11 @@ void PMNS_OQS::SetHGM()
 
 void PMNS_OQS::SetDissipatorElement(int i, int j, double val)
 {
+  //  fD[i][j] = -abs(val);
   fD[i][j] = val;
-  fD[j][i] = conj(fD[i][j]);
+
+  if(i==j) fD[i][j] = -abs(val);  // required to satisfy Tr(rho) = 1
+//  if(i != j) fD[j][i] = conj(fD[i][j]);
 }
 
 
