@@ -36,6 +36,11 @@ PMNS_LIVS::PMNS_LIVS() : PMNS_Fast()
   N[1] = 0;
   N[2] = 0;
 
+  
+  zenith = 0;
+  azimuth = 0;
+  chi = 0;
+  
   omega = 2*M_PI/23.933;
   T = 0; 
   
@@ -198,7 +203,12 @@ double PMNS_LIVS::GetcT(int flvi, int flvj)
 
 
 
-void PMNS_LIVS::SetNeutrinoDirection(double zenith, double azimuth, double chi){
+void PMNS_LIVS::SetNeutrinoDirection(double zen, double az, double ch){
+
+  zenith = zen;
+  azimuth = az;
+  chi = ch;
+  
   N[0] = cos(chi)*sin(zenith)*cos(azimuth) + sin(chi)*cos(zenith);
   N[1] = sin(zenith)*sin(azimuth);
   N[3] = -sin(chi)*sin(zenith)*cos(azimuth) + cos(chi)*cos(zenith);
@@ -252,24 +262,27 @@ void PMNS_LIVS::UpdateHam()
   else
     fHam[0][0] -= kr2GNe;
 
-
-  double R = sqrt(N[0]*N[0] + N[1]*N[1]);
   double phi_orientation = atan(N[1]/N[0]);
 
   omega = 2*M_PI/23.933;
+
+  double alpha = azimuth - M_PI;
   
   for (int i = 0; i < fNumNus; i++) {
     for (int j = i; j < fNumNus; j++) {
 
-      double liv_term = (N[1]*sin(omega*T-phi_orientation) - N[0]*cos(omega*T-phi_orientation));
+      //      double liv_term = (N[1]*sin(omega*T-phi_orientation)*sin(omega*alpha/15.-phi_orientation) - N[0]*cos(omega*T-phi_orientation)*cos(omega*alpha/15.-phi_orientation));
+      //      double liv_term = (N[1]*sin(omega*T)*sin(omega*alpha/15.-phi_orientation) - N[0]*cos(omega*T)*cos(omega*alpha/15.-phi_orientation));
+      //      double liv_term = (N[1]*sin(omega*T + omega*alpha/15.-phi_orientation) - N[0]*cos(omega*T + omega*alpha/15.-phi_orientation));
+      double liv_term = (N[1]*sin(omega*T + omega*alpha/15.) - N[0]*cos(omega*T + omega*alpha/15.));
 
+      cout << "omega T " << omega*T << " omega alpha " << omega*alpha/15. << " phi " << phi_orientation << endl;
+      
       if (fIsNuBar)
 	liv_term *= -faT[i][j]*kGeV2eV;
       else
 	liv_term *= faT[i][j]*kGeV2eV;
 
-      cout << "liv_term " << liv_term << ", ham " << fHam[i][j] << endl;
-      
       fHam[i][j] += liv_term;
     }
   }

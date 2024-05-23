@@ -59,8 +59,13 @@ namespace OscProb {
 
     double N[3]; ///< neutrino directional factors NX,NY,NZ
 
+    double zenith;
+    double azimuth;
+    double chi;
+    
     double omega; // 25 h 56 min
     double T; // hours
+    
     
   };
 
