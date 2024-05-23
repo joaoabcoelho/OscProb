@@ -276,8 +276,6 @@ void PMNS_LIVS::UpdateHam()
       //      double liv_term = (N[1]*sin(omega*T + omega*alpha/15.-phi_orientation) - N[0]*cos(omega*T + omega*alpha/15.-phi_orientation));
       double liv_term = (N[1]*sin(omega*T + omega*alpha/15.) - N[0]*cos(omega*T + omega*alpha/15.));
 
-      cout << "omega T " << omega*T << " omega alpha " << omega*alpha/15. << " phi " << phi_orientation << endl;
-      
       if (fIsNuBar)
 	liv_term *= -faT[i][j]*kGeV2eV;
       else
