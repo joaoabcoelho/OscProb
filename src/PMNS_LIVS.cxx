@@ -271,10 +271,7 @@ void PMNS_LIVS::UpdateHam()
   for (int i = 0; i < fNumNus; i++) {
     for (int j = i; j < fNumNus; j++) {
 
-      //      double liv_term = (N[1]*sin(omega*T-phi_orientation)*sin(omega*alpha/15.-phi_orientation) - N[0]*cos(omega*T-phi_orientation)*cos(omega*alpha/15.-phi_orientation));
-      //      double liv_term = (N[1]*sin(omega*T)*sin(omega*alpha/15.-phi_orientation) - N[0]*cos(omega*T)*cos(omega*alpha/15.-phi_orientation));
-      //      double liv_term = (N[1]*sin(omega*T + omega*alpha/15.-phi_orientation) - N[0]*cos(omega*T + omega*alpha/15.-phi_orientation));
-      double liv_term = (N[1]*sin(omega*T + omega*alpha/15.) - N[0]*cos(omega*T + omega*alpha/15.));
+      double liv_term = (N[1]*sin(omega*T) - N[0]*cos(omega*T));
 
       if (fIsNuBar)
 	liv_term *= -faT[i][j]*kGeV2eV;
