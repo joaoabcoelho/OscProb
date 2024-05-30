@@ -47,8 +47,12 @@ PMNS_LIVS::PMNS_LIVS() : PMNS_Fast()
   
   for (int flvi = 0; flvi < 3; flvi++) {
     for (int flvj = flvi; flvj < 3; flvj++) {
-      SetaT(flvi, flvj, 0);
-      SetcT(flvi, flvj, 0);
+      for (int coord1 = 0; coord1 < 3; coord1++) {
+	SetA(flvi, flvj, coord1, 0);
+	for (int coord2 = 0; coord2 < 3; coord2++) {
+	  SetC(flvi, flvj, coord1, coord2, 0);
+	}
+      }
     }
   }
 }
@@ -74,7 +78,7 @@ PMNS_LIVS::~PMNS_LIVS() {}
 /// @param val   - Absolute value of the parameter
 /// @param phase - Complex phase of the parameter in radians
 ///
-void PMNS_LIVS::SetaT(int flvi, int flvj, double val)
+void PMNS_LIVS::SetA(int flvi, int flvj, int coord, double val)
 {
   if (flvi > flvj) {
     cerr << "WARNING: First argument should be smaller or equal to second "
@@ -91,7 +95,7 @@ void PMNS_LIVS::SetaT(int flvi, int flvj, double val)
     return;
   }
 
-  faT[flvi][flvj] = val;
+  fa[flvi][flvj][coord] = val;
 }
 
 //.............................................................................
@@ -109,7 +113,7 @@ void PMNS_LIVS::SetaT(int flvi, int flvj, double val)
 /// @param val   - Absolute value of the parameter
 /// @param phase - Complex phase of the parameter in radians
 ///
-void PMNS_LIVS::SetcT(int flvi, int flvj, double val)
+void PMNS_LIVS::SetC(int flvi, int flvj, int coord1, int coord2, double val)
 {
   if (flvi > flvj) {
     cerr << "WARNING: First argument should be smaller or equal to second "
@@ -126,7 +130,7 @@ void PMNS_LIVS::SetcT(int flvi, int flvj, double val)
     return;
   }
 
-  fcT[flvi][flvj] = val;
+  fc[flvi][flvj][coord1][coord2] = val;
 }
 
 //.............................................................................
@@ -145,7 +149,7 @@ void PMNS_LIVS::SetcT(int flvi, int flvj, double val)
 ///
 /// @return - The aT parameter value
 ///
-double PMNS_LIVS::GetaT(int flvi, int flvj)
+double PMNS_LIVS::GetA(int flvi, int flvj, int coord)
 {
   if (flvi > flvj) {
     cerr << "WARNING: First argument should be smaller or equal to second "
@@ -162,7 +166,7 @@ double PMNS_LIVS::GetaT(int flvi, int flvj)
     return 0;
   }
 
-  return faT[flvi][flvj];
+  return fa[flvi][flvj][coord];
 }
 
 //.............................................................................
@@ -181,7 +185,7 @@ double PMNS_LIVS::GetaT(int flvi, int flvj)
 ///
 /// @return - The cT parameter value
 ///
-double PMNS_LIVS::GetcT(int flvi, int flvj)
+double PMNS_LIVS::GetC(int flvi, int flvj, int coord1, int coord2)
 {
   if (flvi > flvj) {
     cerr << "WARNING: First argument should be smaller or equal to second "
@@ -198,7 +202,7 @@ double PMNS_LIVS::GetcT(int flvi, int flvj)
     return 0;
   }
 
-  return fcT[flvi][flvj];
+  return fc[flvi][flvj][coord1][coord2];
 }
 
 
@@ -241,7 +245,6 @@ void PMNS_LIVS::SolveHam()
 }
 
 
-
 //.............................................................................
 ///
 /// Build the full LIVS Hamiltonian in matter
@@ -267,16 +270,27 @@ void PMNS_LIVS::UpdateHam()
   omega = 2*M_PI/23.933;
 
   double alpha = azimuth - M_PI;
-  
+
+  double As0 = 0, Ac0 = 0;;
+      
   for (int i = 0; i < fNumNus; i++) {
     for (int j = i; j < fNumNus; j++) {
 
-      double liv_term = (N[1]*sin(omega*T) - N[0]*cos(omega*T));
-
+      double sign = 0;
+      
       if (fIsNuBar)
-	liv_term *= -faT[i][j]*kGeV2eV;
+	sign = -kGeV2eV;
       else
-	liv_term *= faT[i][j]*kGeV2eV;
+	sign = kGeV2eV;
+      
+      
+      As0 =  sign * (fa[i][j][0]*N[1] - fa[i][j][1]*N[0]);
+      Ac0 = -sign * (fa[i][j][0]*N[0] - fa[i][j][1]*N[1]);
+
+      double As = As0;
+      double Ac = Ac0;
+      
+      double liv_term = (As*sin(omega*T) + Ac*cos(omega*T));
 
       fHam[i][j] += liv_term;
     }

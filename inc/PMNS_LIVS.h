@@ -34,8 +34,8 @@ namespace OscProb {
     ///   e   -> 0
     ///   mu  -> 1
     ///   tau -> 2
-    virtual void SetaT(int flvi, int flvj, double val);
-    virtual void SetcT(int flvi, int flvj, double val);
+    virtual void SetA(int flvi, int flvj, int coord, double val);
+    virtual void SetC(int flvi, int flvj, int coord1, int coord2, double val);
     virtual void SetNeutrinoDirection(double zenith, double azimuth, double chi);
     virtual void SetTime(double hours);
 
@@ -44,8 +44,8 @@ namespace OscProb {
     ///   e   -> 0
     ///   mu  -> 1
     ///   tau -> 2
-    virtual double GetaT(int flvi, int flvj);
-    virtual double GetcT(int flvi, int flvj);
+    virtual double GetA(int flvi, int flvj, int coord);
+    virtual double GetC(int flvi, int flvj, int coord1, int coord2);
     
     
   protected:
@@ -54,8 +54,8 @@ namespace OscProb {
     virtual void SolveHam();
     virtual void FillCache() {} ///< Deactivate cache
 
-    double faT[3][3]; ///< Stores each aT LIVS parameter of dimension 3
-    double fcT[3][3]; ///< Stores each cT LIVS parameter of dimension 4
+    double fa[3][3][3]; ///< Stores each aT LIVS parameter of dimension 3
+    double fc[3][3][3][3]; ///< Stores each cT LIVS parameter of dimension 4
 
     double N[3]; ///< neutrino directional factors NX,NY,NZ
 
