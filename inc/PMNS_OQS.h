@@ -15,7 +15,7 @@ namespace OscProb {
     
     /// Compute the probability matrix
     virtual void SetPhi(int i, double val);
-    virtual void SetDissipatorElement(int i, int j, double val);
+    virtual void SetDissipatorElement(int i, int j, double val, bool print = false);
 
     /// Compute the probability matrix
     using PMNS_Base::ProbMatrix;
@@ -29,7 +29,7 @@ namespace OscProb {
     virtual void SetHeff(NuPath p);
     virtual void SetHGM();
     virtual void SetM();
-    virtual void RotateState(bool to_mass); ///< Rotate rho to/from mass basis              
+    virtual void RotateState(bool to_mass, int parameterisation); ///< Rotate rho to/from mass basis 
     virtual void ChangeBaseToGM();
     virtual void ChangeBaseToSU3();
 
@@ -61,9 +61,7 @@ namespace OscProb {
     Eigen::MatrixXcd fMd8;
     Eigen::MatrixXcd fMEvec;
 
-    vectorC fEval; ///< Eigenvalues of the Hamiltonian
-    matrixC fEvec; ///< Eigenvectors of the Hamiltonian
-    
+    vectorC fEval; ///< Eigenvalues of the Hamiltonian    
   };
 
 } // namespace OscProb

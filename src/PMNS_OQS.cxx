@@ -88,14 +88,19 @@ void PMNS_OQS::SetHeff(NuPath p){
   fHeff[2][0] = c12 * c13 * exp(idelta - iphi2) * s13 * Ve;
   fHeff[2][1] = c13 * exp(idelta + iphi1 - iphi2) * s12 * s13 * Ve;
   fHeff[2][2] = s13*s13 * Ve;  
-  
-  
+
+
+  /*for(int i = 1; i < 3; ++i){
+    for(int j = 0; j < 3; ++j){
+      fHeff[j][i] = conj(fHeff[i][j]);
+    }
+    }*/
+
   double lv = 2. * kGeV2eV * fEnergy; // 2E in eV   
   
   // add mass terms
   fHeff[1][1] += fDm[1] / lv;
   fHeff[2][2] += fDm[2] / lv;
-
 }
 
 // Set Heff in Gell-Mann basis: set only right-triangle as the left part is -right
@@ -141,14 +146,29 @@ void PMNS_OQS::SetHGM()
   }
 }
 
-
-void PMNS_OQS::SetDissipatorElement(int i, int j, double val)
+// D must be real
+void PMNS_OQS::SetDissipatorElement(int i, int j, double val, bool print)
 {
-  //  fD[i][j] = -abs(val);
-  fD[i][j] = val;
 
-  if(i==j) fD[i][j] = -abs(val);  // required to satisfy Tr(rho) = 1
-//  if(i != j) fD[j][i] = conj(fD[i][j]);
+  val *= kGeV2eV; // convert to eV
+  
+  //  if(i==j) fD[i][j] = -abs(val);  // required to satisfy Tr(rho) = 1
+  if(i==j) fD[i][j] = val;  // required to satisfy Tr(rho) = 1
+  else{
+    fD[i][j] = val;
+    // symmetrix matrix
+    fD[j][i] = val;
+  }
+  
+  if(print){
+    for(int i = 0; i < 9; i++){
+      for(int j = 0; j < 9; j++){
+	cout << fD[i][j] / kGeV2eV;
+      }
+      cout << endl;
+    }
+  }
+  
 }
 
 
@@ -209,7 +229,7 @@ void PMNS_OQS::Diagonalise()
 ///                                                                                       
 /// @param to_mass - true if to mass basis                                                
 ///                                                               
-void PMNS_OQS::RotateState(bool to_mass)
+void PMNS_OQS::RotateState(bool to_mass, int parameterisation = 1)
 {
 
   matrixC UM(3, vectorC(3, 0));
@@ -229,19 +249,34 @@ void PMNS_OQS::RotateState(bool to_mass)
 
   complexD iphi1(0.0, fPhi[0]);
   complexD iphi2(0.0, fPhi[1]);
-  
+
+  if(parameterisation == 1){
+    
   UM[0][0] =  c12 * c13;
   UM[0][1] =  s12 * c13 * exp(iphi1);
   UM[0][2] =  s13 * exp(iphi2-idelta);
 
-  UM[1][0] = -s12 * c23 * exp(-iphi1) - c12 * s23 * s13 * exp(idelta-iphi1);
-  UM[1][1] =  c12 * c23 - s12 * s23 * s13 * exp(idelta);
+  UM[1][0] = -s12 * c23 * exp(-iphi1) - c12 * s13 * s23 * exp(idelta-iphi1);
+  UM[1][1] =  c12 * c23 - s12 * s13 * s23 * exp(idelta);
   UM[1][2] =  s23 * c13 * exp(iphi2-iphi1);
 
   UM[2][0] =  s12 * s23 * exp(-iphi2) - c12 * c23 * s13 * exp(idelta-iphi2);
   UM[2][1] = -c12 * s23 * exp(iphi1-iphi2) - s12 * c23 * s13 * exp(idelta+iphi1-iphi2);
-  UM[2][2] =  c23 * c13;
+  UM[2][2] =  c13 * c23;
+  } else{
+  UM[0][0] =  c12 * c13;
+  UM[0][1] =  s12 * c13 * exp(iphi1);
+  UM[0][2] =  s13 * exp(iphi2-idelta);
 
+  UM[1][0] = -s12 * c23 - c12 * s13 * s23 * exp(idelta);
+  UM[1][1] =  c12 * c23 * exp(iphi1) - s12 * s13 * s23 * exp(idelta+iphi1);
+  UM[1][2] =  s23 * c13 * exp(iphi2);
+
+  UM[2][0] =  s12 * s23  - c12 * c23 * s13 * exp(idelta);
+  UM[2][1] = -c12 * s23 * exp(iphi1) - s12 * c23 * s13 * exp(idelta+iphi1);
+  UM[2][2] =  c13 * c23 * exp(iphi2);
+  }
+  
   matrixC mult(3, vectorC(3, 0));
 
   for (int i = 0; i < 3; i++) {
@@ -271,6 +306,7 @@ void PMNS_OQS::RotateState(bool to_mass)
       if (j > i) fRho[j][i] = conj(fRho[i][j]);
     }
   }
+
 }
 
 void PMNS_OQS::ChangeBaseToGM()
