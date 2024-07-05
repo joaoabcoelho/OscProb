@@ -26,6 +26,7 @@ PMNS_OQS::PMNS_OQS()
 {  
   SetStdPath();
   InitializeVectors();
+  SetParameterisation(1);
 }
 
 //.............................................................................
@@ -43,6 +44,10 @@ void PMNS_OQS::InitializeVectors()
   fEval = vectorC(9, 0);
 }
 
+
+double PMNS_OQS::SetParameterisation(int param = 1){
+  fParameterisation = param;
+}
 
 // set Heff in vacuum-mass basis
 void PMNS_OQS::SetHeff(NuPath p){
@@ -229,7 +234,7 @@ void PMNS_OQS::Diagonalise()
 ///                                                                                       
 /// @param to_mass - true if to mass basis                                                
 ///                                                               
-void PMNS_OQS::RotateState(bool to_mass, int parameterisation = 1)
+void PMNS_OQS::RotateState(bool to_mass)
 {
 
   matrixC UM(3, vectorC(3, 0));
@@ -250,8 +255,7 @@ void PMNS_OQS::RotateState(bool to_mass, int parameterisation = 1)
   complexD iphi1(0.0, fPhi[0]);
   complexD iphi2(0.0, fPhi[1]);
 
-  if(parameterisation == 1){
-    
+  if(fParameterisation == 1){
   UM[0][0] =  c12 * c13;
   UM[0][1] =  s12 * c13 * exp(iphi1);
   UM[0][2] =  s13 * exp(iphi2-idelta);

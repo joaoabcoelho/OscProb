@@ -13,7 +13,7 @@ namespace OscProb {
     PMNS_OQS();          ///< Constructor
     virtual ~PMNS_OQS(); ///< Destructor
     
-    /// Compute the probability matrix
+    virtual double SetParameterisation(int par);
     virtual void SetPhi(int i, double val);
     virtual void SetDissipatorElement(int i, int j, double val, bool print = false);
 
@@ -29,7 +29,7 @@ namespace OscProb {
     virtual void SetHeff(NuPath p);
     virtual void SetHGM();
     virtual void SetM();
-    virtual void RotateState(bool to_mass, int parameterisation); ///< Rotate rho to/from mass basis 
+    virtual void RotateState(bool to_mass); ///< Rotate rho to/from mass basis 
     virtual void ChangeBaseToGM();
     virtual void ChangeBaseToSU3();
 
@@ -44,6 +44,7 @@ namespace OscProb {
     virtual void PropagatePath(NuPath p); ///< Propagate neutrino through a single path
     virtual double P(int flv); ///< Return the probability of final state in flavour flv
 
+    int fParameterisation;
     double fPhi[2];  ///< Majorana phases
     complexD fR[9];
     complexD fRt[9];
