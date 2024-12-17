@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 /// \class OscProb::PMNS_LIVS
 ///
-/// \brief Implements oscillations with LIV as modelled by SME
+/// \brief Implements oscillations with Sidereal LIV as modelled by SME
 ///
 /// Implementation of neutrino oscillations in matter in a
 /// three-neutrino framework with LIV as modelled by the SME.
@@ -36,7 +36,7 @@ namespace OscProb {
     ///   tau -> 2
     virtual void SetA(int flvi, int flvj, int coord, double val);
     virtual void SetC(int flvi, int flvj, int coord1, int coord2, double val);
-    virtual void SetNeutrinoDirection(double zenith, double azimuth, double chi);
+    virtual void SetNeutrinoDirection(double zenith, double azimuth, double colatitude);
     virtual void SetTime(double hours);
 
     /// Get any given LIVS parameter of a chosen dimension.
@@ -59,8 +59,8 @@ namespace OscProb {
 
     double N[3]; ///< neutrino directional factors NX,NY,NZ
 
-    double zenith;
-    double azimuth;
+    double theta;
+    double phi;
     double chi;
     
     double omega; // 25 h 56 min

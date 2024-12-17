@@ -36,8 +36,8 @@ PMNS_LIVS::PMNS_LIVS() : PMNS_Fast()
   N[1] = 0;
   N[2] = 0;
   
-  zenith = 0;
-  azimuth = 0;
+  theta = 0;
+  phi = 0;
   chi = 0;
   
   omega = 2*M_PI/23.933;
@@ -209,19 +209,19 @@ double PMNS_LIVS::GetC(int flvi, int flvj, int coord1, int coord2)
 ///
 /// Set the neutrino direction.
 ///
-/// @param theta - zenith angle in (rad) 
-/// @param phi   - azimuth angle in (rad) 
-/// @param ch    - colatitude of the detector in (rad) 
+/// @param zenith     - zenith angle in (rad) 
+/// @param azimuth    - azimuth angle in (rad) 
+/// @param colatitude - colatitude of the detector in (rad) 
 ///
-void PMNS_LIVS::SetNeutrinoDirection(double theta, double phi, double ch){
+void PMNS_LIVS::SetNeutrinoDirection(double zenith, double azimuth, double colatitude){
 
-  zenith = theta;
-  azimuth = phi;
-  chi = ch;
+  theta = zenith;
+  phi   = azimuth;
+  chi   = colatitude;
   
-  N[0] = cos(chi)*sin(zenith)*cos(azimuth) + sin(chi)*cos(zenith);
-  N[1] = sin(zenith)*sin(azimuth);
-  N[2] = -sin(chi)*sin(zenith)*cos(azimuth) + cos(chi)*cos(zenith);
+  N[0] = cos(chi)*sin(theta)*cos(phi) + sin(chi)*cos(theta);
+  N[1] = sin(theta)*sin(phi);
+  N[2] = -sin(chi)*sin(theta)*cos(phi) + cos(chi)*cos(theta);
 }
 
 
@@ -272,9 +272,7 @@ void PMNS_LIVS::UpdateHam()
   else
     fHam[0][0] -= kr2GNe;
 
-  double phi_orientation = atan(N[1]/N[0]);
-
-  double alpha = azimuth - M_PI;
+  double alpha = phi - M_PI;
 
   double C0 = 0;
   double As0 = 0, Ac0 = 0;
