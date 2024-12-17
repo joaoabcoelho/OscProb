@@ -2,10 +2,9 @@
 /// class OscProb::PMNS_LIVS
 ///
 /// Implementation of neutrino oscillations in matter in a
-/// three-neutrino framework with LIVS as modelled by the SME.
-/// The SME coefficients are included up to the 8th order,
-/// following the approach described in
-/// https://doi.org/10.1103/PhysRevD.85.096005.
+/// three-neutrino framework with Sidereal LIV as modelled by the SME.
+/// The SME coefficients are included following the approach described in
+/// https://doi.org/10.1103/PhysRevD.70.076002.
 ///
 /// This developement is part of the QGRANT project with
 /// ID: 101068013,
