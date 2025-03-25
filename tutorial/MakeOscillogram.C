@@ -199,7 +199,7 @@ void DrawEnergyLines(TH2* hNH){
     double ndcy = GetNDCy(f->Eval(xval));
 
     // Draw labels
-    if(energy>=1) MiscText(ndcx,ndcy,0.03,TString::Format("%d GeV", int(energy)));
+    if(energy>=1) MiscText(ndcx,ndcy,0.03,TString::Format("%d GeVVV", int(energy)));
     if(energy<1)  MiscText(ndcx,ndcy,0.03,TString::Format("%0.1f GeV", energy));
 
   }// energies loop
