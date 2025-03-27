@@ -99,12 +99,15 @@ TH2D* GetOscHist(int flvf, int mh){
       // Initialize probability
       double prob = 0;
       
+      
+      string section  = string("average flux in [cosZ = ") + to_string(floor(10*cosT)/10) + " -- " + to_string(ceil(10*cosT)/10) + ", phi_Az =   0 -- 360]";
+      
+
       int n_line = 930 - 103*(1+floor(10*cosT));
       string line;
       string E_line_string;
       double E_line = 0;
       int actualLine = 0;
-
       while(actualLine != n_line || E>=E_line){
         getline(flux, line);
         if(actualLine == n_line){
@@ -112,17 +115,23 @@ TH2D* GetOscHist(int flvf, int mh){
           bbb >> E_line_string;
           E_line=stod(E_line_string);
           n_line++;
-          cout<<E<<"   "<<E_line<<endl;
+          //cout<<E<<"   "<<E_line<<endl;
         }
         actualLine++;
         //cout<<actualLine2<<endl;
       }
-      cout<<line<<endl;
+      //cout<<line<<endl;
       
       flux.clear();
       flux.seekg(0);
 
       vector<double> flux;
+
+
+
+
+
+
 
       // Loop over initial flavour and nu or nubar
       for(int flvi = 1; flvi>=0; flvi--){
@@ -137,7 +146,7 @@ TH2D* GetOscHist(int flvf, int mh){
           actualcol++;
         }
         flux.push_back(stod(value));
-        cout<<flux.size()<<"   ";
+        //cout<<flux.size()<<"   ";
 
         double weight_flux = 0;
         if(flvi == 1){
@@ -146,7 +155,7 @@ TH2D* GetOscHist(int flvf, int mh){
         else{
           weight_flux = flux[2.5+nunubar*0.5]/flux[0.5+nunubar*0.5];
         }
-        cout<<weight_flux<<endl;
+        //cout<<weight_flux<<endl;
         
 
         // Define some basic weights for nue/numu and nu/nubar
@@ -160,7 +169,7 @@ TH2D* GetOscHist(int flvf, int mh){
         prob += prob += (weight-weight_upgrade) * myPMNS.Prob(flvi, flvf, L/loe);
 
       }}
-      cout<<"-----------------------------------"<<endl;
+      //cout<<"-----------------------------------"<<endl;
 
       flux.clear();
 
