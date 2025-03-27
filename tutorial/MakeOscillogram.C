@@ -66,6 +66,9 @@ TH2D* GetOscHist(int flvf, int mh){
   // Create default PREM Model
   OscProb::PremModel prem;
 
+  // Open the flux data file
+  ifstream flux("frj-nu-20-01-000.d");
+  
   // Loop over cos(theta_z) and L/E
   for(int ct=1; ct<=nbinsy; ct++){
 
@@ -84,33 +87,91 @@ TH2D* GetOscHist(int flvf, int mh){
     // Set paths in OscProb
     myPMNS.SetPath(prem.GetNuPath());
 
-    // Loop of L/E
+    // Loop of L/Es(theta_z) and L/E
     for(int le=1; le<=nbinsx; le++){
 
       // Set L/E from bin center
       double loe  = h2->GetXaxis()->GetBinCenter(le);
 
+      // Get E from L and L/E
+      double E = L/loe;  
+      
       // Initialize probability
       double prob = 0;
+      
+      int n_line = 930 - 103*(1+floor(10*cosT));
+      string line;
+      string E_line_string;
+      double E_line = 0;
+      int actualLine = 0;
+
+      while(actualLine != n_line || E>=E_line){
+        getline(flux, line);
+        if(actualLine == n_line){
+          istringstream bbb(line);
+          bbb >> E_line_string;
+          E_line=stod(E_line_string);
+          n_line++;
+          cout<<E<<"   "<<E_line<<endl;
+        }
+        actualLine++;
+        //cout<<actualLine2<<endl;
+      }
+      cout<<line<<endl;
+      
+      flux.clear();
+      flux.seekg(0);
+
+      vector<double> flux;
 
       // Loop over initial flavour and nu or nubar
-      for(int flvi = 0; flvi<2; flvi++){
+      for(int flvi = 1; flvi>=0; flvi--){
       for(int nunubar = -1; nunubar<2; nunubar+=2){
+
+        istringstream aaa(line);
+        int n_col = 4.5 - 2*flvi -0.5*nunubar;
+        int actualcol{0};
+        string value;
+        while(actualcol != n_col){
+          aaa >> value;
+          actualcol++;
+        }
+        flux.push_back(stod(value));
+        cout<<flux.size()<<"   ";
+
+        double weight_flux = 0;
+        if(flvi == 1){
+          weight_flux = 1;
+        }
+        else{
+          weight_flux = flux[2.5+nunubar*0.5]/flux[0.5+nunubar*0.5];
+        }
+        cout<<weight_flux<<endl;
+        
 
         // Define some basic weights for nue/numu and nu/nubar
         double weight = (0.75 + 0.25*nunubar) * (0.5 + 0.5*flvi);
 
+        double weight_upgrade = (0.75 + 0.25*nunubar) * weight_flux;
+
         // Add probabilities from OscProb
         myPMNS.SetIsNuBar(nunubar <= 0);
-        prob += weight*myPMNS.Prob(flvi, flvf, L/loe);
+        //prob += weight_upgrade*myPMNS.Prob(flvi, flvf, L/loe);
+        prob += prob += (weight-weight_upgrade) * myPMNS.Prob(flvi, flvf, L/loe);
 
       }}
+      cout<<"-----------------------------------"<<endl;
+
+      flux.clear();
 
       // Fill probabilities in histogram
       h2->SetBinContent(le,ct,prob);
 
     }// loe loop
   }// cosT loop
+
+  // Close the flux data file
+  flux.close();
 
   // Set nice histogram
   SetHist(h2);
@@ -135,6 +196,10 @@ double GetNDCy(double y) {
   return (y - gPad->GetY1())/(gPad->GetY2()-gPad->GetY1());
 
 }
+
+
+
+
 
 // Draw energy lines
 void DrawEnergyLines(TH2* hNH){
@@ -199,7 +264,7 @@ void DrawEnergyLines(TH2* hNH){
     double ndcy = GetNDCy(f->Eval(xval));
 
     // Draw labels
-    if(energy>=1) MiscText(ndcx,ndcy,0.03,TString::Format("%d GeVVV", int(energy)));
+    if(energy>=1) MiscText(ndcx,ndcy,0.03,TString::Format("%d GeV", int(energy)));
     if(energy<1)  MiscText(ndcx,ndcy,0.03,TString::Format("%0.1f GeV", energy));
 
   }// energies loop
