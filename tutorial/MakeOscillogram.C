@@ -34,6 +34,33 @@ void MakeOscillogram(int flvf = 1){
 
 }
 
+string decimal_precision (double value, double precision)
+  {
+    ostringstream returned_string;
+    returned_string<<fixed<<setprecision(2)<<value;
+    return returned_string.str();
+  }
+
+string testCos (double cosT_min , double cosT_max)
+{
+  if(cosT_min<=0){
+    if(cosT_max<=0){
+      return string("average flux in [cosZ =") + decimal_precision(cosT_min,2) + " -- " + decimal_precision(cosT_max,2) + ", phi_Az =   0 -- 360]";
+    }
+    else{
+      return string("average flux in [cosZ =") + decimal_precision(cosT_min,2) + " --  " + decimal_precision(cosT_max,2) + ", phi_Az =   0 -- 360]";
+    }
+  }
+  else{
+    return string("average flux in [cosZ = ") + decimal_precision(cosT_min,2) + " --  " + decimal_precision(cosT_max,2) + ", phi_Az =   0 -- 360]";
+  }
+
+  return 0;
+}
+
+map<string,map<double,map<int,map<int,double>>>> get_flux_data()
+
+
 // Make oscillogram for given final flavour and MH
 TH2D* GetOscHist(int flvf, int mh){
 
@@ -68,6 +95,45 @@ TH2D* GetOscHist(int flvf, int mh){
 
   // Open the flux data file
   ifstream flux("frj-nu-20-01-000.d");
+
+  
+  map<string,map<double,map<int,map<int,double>>>> flux_data; //[cosT][E][flv][nunubar]
+  string linee = "to start the while loop";
+  double cosT_min = 0.90;
+  double cosT_max = 1.00;
+  string indice_cos;
+
+  while(!linee.empty()){
+
+    getline(flux, linee);  
+
+    string test = testCos(cosT_min,cosT_max);
+    
+    if(linee == test){
+      indice_cos = linee;
+      cosT_min -=0.1;
+      cosT_max -=0.1;
+      getline(flux, linee);
+    }
+    else{
+      istringstream col(linee);
+      double indice_E;
+      col >> indice_E;;
+      for(int flvi = 1; flvi>=0; flvi--){
+        for(int nunubar = 1; nunubar>-2; nunubar-=2){
+          double flux_value;
+          col >> flux_value;
+          flux_data[indice_cos][indice_E][flvi][nunubar] = flux_value;
+        }
+      }
+    }
+  }
+
+  flux.clear();
+  flux.seekg(0);
+  
+
+
   
   // Loop over cos(theta_z) and L/E
   for(int ct=1; ct<=nbinsy; ct++){
@@ -100,7 +166,7 @@ TH2D* GetOscHist(int flvf, int mh){
       double prob = 0;
       
       
-      string section  = string("average flux in [cosZ = ") + to_string(floor(10*cosT)/10) + " -- " + to_string(ceil(10*cosT)/10) + ", phi_Az =   0 -- 360]";
+      
       
 
       int n_line = 930 - 103*(1+floor(10*cosT));
