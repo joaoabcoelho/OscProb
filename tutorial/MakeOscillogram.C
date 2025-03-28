@@ -34,6 +34,7 @@ void MakeOscillogram(int flvf = 1){
 
 }
 
+
 string decimal_precision (double value, double precision)
   {
     ostringstream returned_string;
@@ -58,7 +59,76 @@ string testCos (double cosT_min , double cosT_max)
   return 0;
 }
 
-map<string,map<double,map<int,map<int,double>>>> get_flux_data()
+
+//PROBLEME PREND UNE LIGNE EN TROP A LA FIN 
+void get_flux_data(map<string,map<double,map<int,map<int,double>>>> & flux_data){
+
+  // Open the flux data file
+  ifstream flux_file("frj-nu-20-01-000.d");
+
+  string linee;
+  double cosT_min = 0.90;
+  double cosT_max = 1.00;
+  string indice_cos;
+
+  do{
+
+    getline(flux_file, linee);  
+
+    string test = testCos(cosT_min,cosT_max);
+    
+    if(linee == test){
+      indice_cos = linee;
+      cosT_min -=0.1;
+      cosT_max -=0.1;
+      getline(flux_file, linee);
+    }
+    else{
+      istringstream col(linee);
+      double indice_E;
+      col >> indice_E;
+      for(int flvi = 1; flvi>=0; flvi--){
+        for(int nunubar = 1; nunubar>-2; nunubar-=2){
+          double flux_value;
+          col >> flux_value;
+          flux_data[indice_cos][indice_E][flvi][nunubar] = flux_value;
+        }
+      }
+    }
+  }while(!linee.empty());
+
+  flux_file.close();
+}
+
+void get_energy_flux_data (vector<double> & energy_flux_data){
+
+  ifstream energy_flux_file("data_energy_flux.txt");
+
+  string E;
+
+  do{
+    getline(energy_flux_file, E); 
+    double value;
+    istringstream e(E);
+    e >> value;
+    energy_flux_data.push_back(value);
+  }while(!E.empty());
+
+  energy_flux_file.close();
+
+}
+
+double get_index_E (double E , vector<double> energy_flux_data){  //problème si energy plus grande que celledes donnes 
+
+  double index_E = 0;
+
+  for(long unsigned int i= 0 ; i<energy_flux_data.size() ; i++){
+    index_E = energy_flux_data[i];
+    if(E<index_E){break;}
+  }
+  
+  return index_E;
+}
 
 
 // Make oscillogram for given final flavour and MH
@@ -92,48 +162,14 @@ TH2D* GetOscHist(int flvf, int mh){
 
   // Create default PREM Model
   OscProb::PremModel prem;
-
-  // Open the flux data file
-  ifstream flux("frj-nu-20-01-000.d");
-
   
-  map<string,map<double,map<int,map<int,double>>>> flux_data; //[cosT][E][flv][nunubar]
-  string linee = "to start the while loop";
-  double cosT_min = 0.90;
-  double cosT_max = 1.00;
-  string indice_cos;
+  // Stock all the flux data
+  map<string,map<double,map<int,map<int,double>>>> flux_data;     //[cosT][E][flv][nunubar]
+  get_flux_data(flux_data); 
 
-  while(!linee.empty()){
-
-    getline(flux, linee);  
-
-    string test = testCos(cosT_min,cosT_max);
-    
-    if(linee == test){
-      indice_cos = linee;
-      cosT_min -=0.1;
-      cosT_max -=0.1;
-      getline(flux, linee);
-    }
-    else{
-      istringstream col(linee);
-      double indice_E;
-      col >> indice_E;;
-      for(int flvi = 1; flvi>=0; flvi--){
-        for(int nunubar = 1; nunubar>-2; nunubar-=2){
-          double flux_value;
-          col >> flux_value;
-          flux_data[indice_cos][indice_E][flvi][nunubar] = flux_value;
-        }
-      }
-    }
-  }
-
-  flux.clear();
-  flux.seekg(0);
-  
-
-
+  // Stock all the energies flux data
+  vector<double> energy_flux_data;
+  get_energy_flux_data(energy_flux_data);
   
   // Loop over cos(theta_z) and L/E
   for(int ct=1; ct<=nbinsy; ct++){
@@ -153,6 +189,15 @@ TH2D* GetOscHist(int flvf, int mh){
     // Set paths in OscProb
     myPMNS.SetPath(prem.GetNuPath());
 
+    // Get the cosT index
+    double cosT_min = floor(10*cosT)/10;
+    double cosT_max = ceil(10*cosT)/10;
+    string index_cosT = testCos(cosT_min,cosT_max);
+    if(cosT_max == 0){
+      index_cosT = "average flux in [cosZ =-0.10 --  0.00, phi_Az =   0 -- 360]";
+    }
+    
+
     // Loop of L/Es(theta_z) and L/E
     for(int le=1; le<=nbinsx; le++){
 
@@ -161,72 +206,25 @@ TH2D* GetOscHist(int flvf, int mh){
 
       // Get E from L and L/E
       double E = L/loe;  
-      
+
+      // Get the Energy index
+      double index_E = get_index_E(E,energy_flux_data);
+
       // Initialize probability
       double prob = 0;
-      
-      
-      
-      
-
-      int n_line = 930 - 103*(1+floor(10*cosT));
-      string line;
-      string E_line_string;
-      double E_line = 0;
-      int actualLine = 0;
-      while(actualLine != n_line || E>=E_line){
-        getline(flux, line);
-        if(actualLine == n_line){
-          istringstream bbb(line);
-          bbb >> E_line_string;
-          E_line=stod(E_line_string);
-          n_line++;
-          //cout<<E<<"   "<<E_line<<endl;
-        }
-        actualLine++;
-        //cout<<actualLine2<<endl;
-      }
-      //cout<<line<<endl;
-      
-      flux.clear();
-      flux.seekg(0);
-
-      vector<double> flux;
-
-
-
-
-
-
 
       // Loop over initial flavour and nu or nubar
       for(int flvi = 1; flvi>=0; flvi--){
       for(int nunubar = -1; nunubar<2; nunubar+=2){
 
-        istringstream aaa(line);
-        int n_col = 4.5 - 2*flvi -0.5*nunubar;
-        int actualcol{0};
-        string value;
-        while(actualcol != n_col){
-          aaa >> value;
-          actualcol++;
-        }
-        flux.push_back(stod(value));
-        //cout<<flux.size()<<"   ";
+        //REGARDER LES DEX DIFF DS LE GRAPH
+        //double weight_flux = flux_data[index_cosT][index_E][flvi][nunubar]/flux_data[index_cosT][index_E][1][nunubar];
+        double weight_flux = flux_data[index_cosT][index_E][flvi][nunubar]/flux_data[index_cosT][index_E][1][1];
 
-        double weight_flux = 0;
-        if(flvi == 1){
-          weight_flux = 1;
-        }
-        else{
-          weight_flux = flux[2.5+nunubar*0.5]/flux[0.5+nunubar*0.5];
-        }
-        //cout<<weight_flux<<endl;
-        
+        cout<<weight_flux<<"  ";
 
         // Define some basic weights for nue/numu and nu/nubar
         double weight = (0.75 + 0.25*nunubar) * (0.5 + 0.5*flvi);
-
         double weight_upgrade = (0.75 + 0.25*nunubar) * weight_flux;
 
         // Add probabilities from OscProb
@@ -235,9 +233,7 @@ TH2D* GetOscHist(int flvf, int mh){
         prob += prob += (weight-weight_upgrade) * myPMNS.Prob(flvi, flvf, L/loe);
 
       }}
-      //cout<<"-----------------------------------"<<endl;
-
-      flux.clear();
+      cout<<endl<<"----------------------------------------"<<cosT<<endl;
 
       // Fill probabilities in histogram
       h2->SetBinContent(le,ct,prob);
@@ -246,7 +242,6 @@ TH2D* GetOscHist(int flvf, int mh){
   }// cosT loop
 
   // Close the flux data file
-  flux.close();
 
   // Set nice histogram
   SetHist(h2);
