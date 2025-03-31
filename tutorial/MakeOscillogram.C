@@ -1,5 +1,6 @@
 
 #include "TF1.h"
+#include "TFile.h"
 
 #include "PremModel.h"
 #include "PMNS_Fast.h"
@@ -51,6 +52,7 @@ string testCos (double cosT_min , double cosT_max)
     }
     else{
       return string("average flux in [cosZ =") + decimal_precision(cosT_min,2) + " --  " + decimal_precision(cosT_max,2) + ", phi_Az =   0 -- 360]";
+      
     }
   }
   else{
@@ -158,6 +160,30 @@ double get_index_E (double E , vector<double> energy_flux_data){  //problème si
   return index_E;
 }
 
+void get_CS (map<double,map<int,map<int,double>>> &CS_data , vector<double> &energy_CS_data){
+
+  TFile file_CS("crossSection.root");
+  TGraph *histo_CS_nue = (TGraph*)file_CS.Get("single_graphs/gnue_CC_E");
+  TGraph *histo_CS_num = (TGraph*)file_CS.Get("single_graphs/gnum_CC_E");
+  TGraph *histo_CS_nbe = (TGraph*)file_CS.Get("single_graphs/gnbe_CC_E");
+  TGraph *histo_CS_nbm = (TGraph*)file_CS.Get("single_graphs/gnbm_CC_E");
+ 
+  int graph_size = histo_CS_nue->GetMaxSize();
+  
+  for(int i=0 ; i<graph_size ; i++){
+
+    energy_CS_data.push_back(histo_CS_nue->GetPointX(i));
+
+    CS_data[energy_CS_data[i]][0][1] = histo_CS_nue->GetPointY(i);
+    CS_data[energy_CS_data[i]][1][1] = histo_CS_nue->GetPointY(i);
+    CS_data[energy_CS_data[i]][0][-1] = histo_CS_nue->GetPointY(i);
+    CS_data[energy_CS_data[i]][1][-1] = histo_CS_nue->GetPointY(i);
+    
+  }
+
+  file_CS.Close();
+
+}
 
 // Make oscillogram for given final flavour and MH
 TH2D* GetOscHist(int flvf, int mh){
@@ -198,7 +224,13 @@ TH2D* GetOscHist(int flvf, int mh){
   // Stock all the energies flux data
   vector<double> energy_flux_data;
   get_energy_flux_data(energy_flux_data);
-  
+
+
+  map<double,map<int,map<int,double>>> CS_data;
+  vector<double> energy_CS_data;
+  get_CS(CS_data,energy_CS_data);
+
+
   // Loop over cos(theta_z) and L/E
   for(int ct=1; ct<=nbinsy; ct++){
 
@@ -220,12 +252,11 @@ TH2D* GetOscHist(int flvf, int mh){
     // Get the cosT index
     double cosT_min = floor(10*cosT)/10;
     double cosT_max = ceil(10*cosT)/10;
-    if(cosT_max == 0){
-      cosT_max == abs(cosT_max);
-    }
     string index_cosT = testCos(cosT_min,cosT_max);
-    cout<<index_cosT<<endl;
-    
+    if(cosT_max == 0){
+      index_cosT = string("average flux in [cosZ =-0.10 --  0.00, phi_Az =   0 -- 360]");
+    }
+  
 
     // Loop of L/Es(theta_z) and L/E
     for(int le=1; le<=nbinsx; le++){
@@ -236,8 +267,9 @@ TH2D* GetOscHist(int flvf, int mh){
       // Get E from L and L/E
       double E = L/loe;  
 
-      // Get the Energy index
-      double index_E = get_index_E(E,energy_flux_data);
+      // Get the Energy Flux and CS index
+      double index_E_flux = get_index_E(E,energy_flux_data);
+      double index_E_CS = get_index_E(E,energy_CS_data);
 
       // Initialize probability
       double prob = 0;
@@ -247,19 +279,22 @@ TH2D* GetOscHist(int flvf, int mh){
       for(int nunubar = -1; nunubar<2; nunubar+=2){
 
         //REGARDER LES DEX DIFF DS LE GRAPH
-        double weight_flux = flux_data[index_cosT][index_E][flvi][nunubar]/flux_data[index_cosT][index_E][1][1];
+        double weight_flux_part = flux_data[index_cosT][index_E_flux][flvi][nunubar] / flux_data[index_cosT][index_E_flux][1][1];
+        double weight_CS_part = CS_data[index_E_CS][flvi][nunubar] / CS_data[index_E_CS][1][1];
 
         // Define some basic weights for nue/numu and nu/nubar
         double weight = (0.75 + 0.25*nunubar) * (0.5 + 0.5*flvi);
-        double weight_upgrade = (0.75 + 0.25*nunubar) * weight_flux;
+        double weight_flux = (0.75 + 0.25*nunubar) * weight_flux_part;
+        double weight_CS = weight_CS_part * (0.5 + 0.5*flvi);
+        double weight_flux_CS = weight_CS_part * weight_flux_part;
 
         // Add probabilities from OscProb
         myPMNS.SetIsNuBar(nunubar <= 0);
         //prob += weight_upgrade*myPMNS.Prob(flvi, flvf, L/loe);
-        prob += prob += (weight-weight_upgrade) * myPMNS.Prob(flvi, flvf, L/loe);
-
+        prob += prob += (weight-weight_flux_CS) * myPMNS.Prob(flvi, flvf, L/loe);
+        
       }}
-      cout<<"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"<<endl;
+      
       // Fill probabilities in histogram
       h2->SetBinContent(le,ct,prob);
 
