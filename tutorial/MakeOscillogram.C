@@ -34,7 +34,7 @@ void MakeOscillogram(int flvf = 1){
 
 }
 
-
+// force the string to take only two decimal like in the file 
 string decimal_precision (double value, double precision)
   {
     ostringstream returned_string;
@@ -42,6 +42,7 @@ string decimal_precision (double value, double precision)
     return returned_string.str();
   }
 
+ // Choose the right sentence  
 string testCos (double cosT_min , double cosT_max)
 {
   if(cosT_min<=0){
@@ -59,65 +60,92 @@ string testCos (double cosT_min , double cosT_max)
   return 0;
 }
 
-
-//PROBLEME PREND UNE LIGNE EN TROP A LA FIN 
-void get_flux_data(map<string,map<double,map<int,map<int,double>>>> & flux_data){
+// Copy all the flux data in a map 
+void get_flux_data(map<string,map<double,map<int,map<int,double>>>> & flux_data){//PROBLEME PREND UNE LIGNE EN TROP A LA FIN 
 
   // Open the flux data file
   ifstream flux_file("frj-nu-20-01-000.d");
 
-  string linee;
+  // First range value of cosT in the file 
   double cosT_min = 0.90;
   double cosT_max = 1.00;
+
+  string linee;
   string indice_cos;
-
+  
+  // Loop until the end of the file
   do{
-
+    // Copy the current line of the file
     getline(flux_file, linee);  
 
     string test = testCos(cosT_min,cosT_max);
     
+    // Test if we change the range of cosT
     if(linee == test){
+      // Get the value of cosT
       indice_cos = linee;
+
+      // Change the range value of cosT for later
       cosT_min -=0.1;
       cosT_max -=0.1;
+
+      // Skip the line "Enu(GeV) NuMu  NuMubar NuE NuEbar (m^2 sec sr GeV)^-1"
       getline(flux_file, linee);
     }
     else{
+      // Get the value of energy 
       istringstream col(linee);
       double indice_E;
       col >> indice_E;
+
+      // Loop over all the columns except the first one (== energy)
       for(int flvi = 1; flvi>=0; flvi--){
         for(int nunubar = 1; nunubar>-2; nunubar-=2){
+
+          // Get the value of one columns (== flux) 
           double flux_value;
           col >> flux_value;
+
+          // register flux on a map 
           flux_data[indice_cos][indice_E][flvi][nunubar] = flux_value;
         }
       }
     }
   }while(!linee.empty());
 
+  // Close the flux data file
   flux_file.close();
 }
 
+// Get all the energy data
 void get_energy_flux_data (vector<double> & energy_flux_data){
 
+  // Open the energy data file
   ifstream energy_flux_file("data_energy_flux.txt");
 
   string E;
 
+  // Loop until the end of the file
   do{
+    // Copy the current line of the file
     getline(energy_flux_file, E); 
+
+    // Get the value of energys
     double value;
     istringstream e(E);
     e >> value;
+
+    // register energies on a vector 
     energy_flux_data.push_back(value);
+
   }while(!E.empty());
 
+  // Close the flux data file
   energy_flux_file.close();
 
 }
 
+// Get the energy index for the map
 double get_index_E (double E , vector<double> energy_flux_data){  //problème si energy plus grande que celledes donnes 
 
   double index_E = 0;
@@ -192,10 +220,11 @@ TH2D* GetOscHist(int flvf, int mh){
     // Get the cosT index
     double cosT_min = floor(10*cosT)/10;
     double cosT_max = ceil(10*cosT)/10;
-    string index_cosT = testCos(cosT_min,cosT_max);
     if(cosT_max == 0){
-      index_cosT = "average flux in [cosZ =-0.10 --  0.00, phi_Az =   0 -- 360]";
+      cosT_max == abs(cosT_max);
     }
+    string index_cosT = testCos(cosT_min,cosT_max);
+    cout<<index_cosT<<endl;
     
 
     // Loop of L/Es(theta_z) and L/E
@@ -218,10 +247,7 @@ TH2D* GetOscHist(int flvf, int mh){
       for(int nunubar = -1; nunubar<2; nunubar+=2){
 
         //REGARDER LES DEX DIFF DS LE GRAPH
-        //double weight_flux = flux_data[index_cosT][index_E][flvi][nunubar]/flux_data[index_cosT][index_E][1][nunubar];
         double weight_flux = flux_data[index_cosT][index_E][flvi][nunubar]/flux_data[index_cosT][index_E][1][1];
-
-        cout<<weight_flux<<"  ";
 
         // Define some basic weights for nue/numu and nu/nubar
         double weight = (0.75 + 0.25*nunubar) * (0.5 + 0.5*flvi);
@@ -233,13 +259,12 @@ TH2D* GetOscHist(int flvf, int mh){
         prob += prob += (weight-weight_upgrade) * myPMNS.Prob(flvi, flvf, L/loe);
 
       }}
-      cout<<endl<<"----------------------------------------"<<cosT<<endl;
-
+      cout<<"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"<<endl;
       // Fill probabilities in histogram
       h2->SetBinContent(le,ct,prob);
 
     }// loe loop
-  }// cosT loop
+  }// cosT loop 
 
   // Close the flux data file
 
@@ -266,9 +291,6 @@ double GetNDCy(double y) {
   return (y - gPad->GetY1())/(gPad->GetY2()-gPad->GetY1());
 
 }
-
-
-
 
 
 // Draw energy lines
