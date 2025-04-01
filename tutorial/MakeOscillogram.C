@@ -32,6 +32,7 @@ void MakeOscillogram(int flvf = 1){
 
   // Draw some lines of constant energy
   DrawEnergyLines(hNH);
+  
 
 }
 
@@ -191,14 +192,21 @@ TH2D* GetOscHist(int flvf, int mh){
   // Use 200 x bins and 100 y bins
   int nbinsx = 200;
   int nbinsy = 100;
+  ;
 
-  // Set parameters to PDG
-  double dm21 = 7.5e-5;
-  double dm31 = mh>0 ? 2.457e-3 : -2.449e-3 + dm21;
-  double th12 = asin(sqrt(0.304));
-  double th13 = asin(sqrt(mh>0 ? 0.0218 : 0.0219));
-  double th23 = asin(sqrt(mh>0 ? 0.452 : 0.579));
-  double dcp  = (mh>0 ? 306 : 254)*TMath::Pi()/180;
+  // Make the oscillogram
+  TH2D* hNH = GetOscHist(flvf,1);
+
+  // Draw the oscillogram
+  hNH->Draw("colz");
+
+  // Add space for the colz bar
+  gPad->SetRightMargin(0.18);
+
+  // Draw some lines of constant energy
+  DrawEnergyLines(hNH);
+  
+
 
   // Create PMNS object
   OscProb::PMNS_Fast myPMNS;
@@ -290,8 +298,7 @@ TH2D* GetOscHist(int flvf, int mh){
 
         // Add probabilities from OscProb
         myPMNS.SetIsNuBar(nunubar <= 0);
-        //prob += weight_upgrade*myPMNS.Prob(flvi, flvf, L/loe);
-        prob += prob += (weight-weight_flux_CS) * myPMNS.Prob(flvi, flvf, L/loe);
+        prob += prob += weight_CS * myPMNS.Prob(flvi, flvf, L/loe);
         
       }}
       
@@ -301,14 +308,12 @@ TH2D* GetOscHist(int flvf, int mh){
     }// loe loop
   }// cosT loop 
 
-  // Close the flux data file
-
   // Set nice histogram
   SetHist(h2);
 
   // Set titles
   h2->SetTitle(";L/E (km/GeV);cos#theta_{z};P_{#mu#mu} + 0.5#timesP_{#bar{#mu#mu}} + 0.5#timesP_{e#mu} + 0.25#timesP_{#bar{e#mu}}");
-
+  
   return h2;
 
 }
@@ -326,7 +331,6 @@ double GetNDCy(double y) {
   return (y - gPad->GetY1())/(gPad->GetY2()-gPad->GetY1());
 
 }
-
 
 // Draw energy lines
 void DrawEnergyLines(TH2* hNH){
