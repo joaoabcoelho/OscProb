@@ -174,12 +174,14 @@ void get_CS (map<double,map<int,map<int,double>>> &CS_data , vector<double> &ene
   for(int i=0 ; i<graph_size ; i++){
 
     energy_CS_data.push_back(histo_CS_nue->GetPointX(i));
+    cout<<energy_CS_data[i]<<endl;
 
     CS_data[energy_CS_data[i]][0][1] = histo_CS_nue->GetPointY(i);
-    CS_data[energy_CS_data[i]][1][1] = histo_CS_nue->GetPointY(i);
-    CS_data[energy_CS_data[i]][0][-1] = histo_CS_nue->GetPointY(i);
-    CS_data[energy_CS_data[i]][1][-1] = histo_CS_nue->GetPointY(i);
-    
+    CS_data[energy_CS_data[i]][1][1] = histo_CS_num->GetPointY(i);
+    CS_data[energy_CS_data[i]][0][-1] = histo_CS_nbe->GetPointY(i);
+    CS_data[energy_CS_data[i]][1][-1] = histo_CS_nbm->GetPointY(i);
+    cout<<CS_data[energy_CS_data[i]][0][1]<<"  "<<CS_data[energy_CS_data[i]][1][1]<<"  "<<CS_data[energy_CS_data[i]][0][-1]<<"  "<<CS_data[energy_CS_data[i]][1][-1]<<"  "<<endl;
+    cout<<"------------------------------------------"<<endl;
   }
 
   file_CS.Close();
@@ -215,6 +217,9 @@ TH2D* GetOscHist(int flvf, int mh){
   // The oscillogram histogram
   TH2D* h2 = new TH2D("","",nbinsx,0,50*nbinsx,nbinsy,-1,0);
 
+  //map<string,TH2D*> oscilligrams;
+  //oscilligrams["weight_basic"] = new TH2D("","",nbinsx,0,50*nbinsx,nbinsy,-1,0);
+
   // Create default PREM Model
   OscProb::PremModel prem;
   
@@ -227,7 +232,7 @@ TH2D* GetOscHist(int flvf, int mh){
   get_energy_flux_data(energy_flux_data);
 
 
-  map<double,map<int,map<int,double>>> CS_data;
+  map<double,map<int,map<int,double>>> CS_data;     //[E][flv][nunubar]
   vector<double> energy_CS_data;
   get_CS(CS_data,energy_CS_data);
 
@@ -257,7 +262,7 @@ TH2D* GetOscHist(int flvf, int mh){
     if(cosT_max == 0){
       index_cosT = string("average flux in [cosZ =-0.10 --  0.00, phi_Az =   0 -- 360]");
     }
-  
+    
 
     // Loop of L/Es(theta_z) and L/E
     for(int le=1; le<=nbinsx; le++){
@@ -279,7 +284,6 @@ TH2D* GetOscHist(int flvf, int mh){
       for(int flvi = 1; flvi>=0; flvi--){
       for(int nunubar = -1; nunubar<2; nunubar+=2){
 
-        //REGARDER LES DEX DIFF DS LE GRAPH
         double weight_flux_part = flux_data[index_cosT][index_E_flux][flvi][nunubar] / flux_data[index_cosT][index_E_flux][1][1];
         double weight_CS_part = CS_data[index_E_CS][flvi][nunubar] / CS_data[index_E_CS][1][1];
 
@@ -289,12 +293,15 @@ TH2D* GetOscHist(int flvf, int mh){
         double weight_CS = weight_CS_part * (0.5 + 0.5*flvi);
         double weight_flux_CS = weight_CS_part * weight_flux_part;
 
+        //cout<<CS_data[index_E_CS][flvi][nunubar]<<"  ";
+
         // Add probabilities from OscProb
         myPMNS.SetIsNuBar(nunubar <= 0);
-        prob += weight_CS * myPMNS.Prob(flvi, flvf, L/loe);
+        prob +=  (weight_CS -weight) ;
+        //* myPMNS.Prob(flvi, flvf, L/loe)
         
       }}
-      
+      //cout<<endl<<"---------------------------"<<endl;
       // Fill probabilities in histogram
       h2->SetBinContent(le,ct,prob);
 
