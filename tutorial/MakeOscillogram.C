@@ -161,21 +161,29 @@ double get_index_E (double E , vector<double> energy_flux_data){  //problème si
   return index_E;
 }
 
+// Copy all the CS and energy data in a map 
 void get_CS (map<double,map<int,map<int,double>>> &CS_data , vector<double> &energy_CS_data){
 
+  // Open the CS data file
   TFile file_CS("crossSection.root");
+
+  // Select graphs from the CS file 
   TGraph *histo_CS_nue = (TGraph*)file_CS.Get("single_graphs/gnue_CC_E");
   TGraph *histo_CS_num = (TGraph*)file_CS.Get("single_graphs/gnum_CC_E");
   TGraph *histo_CS_nbe = (TGraph*)file_CS.Get("single_graphs/gnbe_CC_E");
   TGraph *histo_CS_nbm = (TGraph*)file_CS.Get("single_graphs/gnbm_CC_E");
  
+  // Get the number of point of these graphs
   int graph_size = histo_CS_nue->GetMaxSize();
   
+  // Loop over all these points
   for(int i=0 ; i<graph_size ; i++){
 
+    // Get abscissa values (== energies)
     energy_CS_data.push_back(histo_CS_nue->GetPointX(i));
     cout<<energy_CS_data[i]<<endl;
 
+    // Get ordinate values (== CS) 
     CS_data[energy_CS_data[i]][0][1] = histo_CS_nue->GetPointY(i);
     CS_data[energy_CS_data[i]][1][1] = histo_CS_num->GetPointY(i);
     CS_data[energy_CS_data[i]][0][-1] = histo_CS_nbe->GetPointY(i);
@@ -184,6 +192,7 @@ void get_CS (map<double,map<int,map<int,double>>> &CS_data , vector<double> &ene
     cout<<"------------------------------------------"<<endl;
   }
 
+  // Close the CS data file
   file_CS.Close();
 
 }
@@ -227,11 +236,11 @@ TH2D* GetOscHist(int flvf, int mh){
   map<string,map<double,map<int,map<int,double>>>> flux_data;     //[cosT][E][flv][nunubar]
   get_flux_data(flux_data); 
 
-  // Stock all the energies flux data
+  // Stock all the energy data for the flux 
   vector<double> energy_flux_data;
   get_energy_flux_data(energy_flux_data);
 
-
+  // // Stock all the CS data and the energy data for the CS 
   map<double,map<int,map<int,double>>> CS_data;     //[E][flv][nunubar]
   vector<double> energy_CS_data;
   get_CS(CS_data,energy_CS_data);
@@ -262,7 +271,6 @@ TH2D* GetOscHist(int flvf, int mh){
     if(cosT_max == 0){
       index_cosT = string("average flux in [cosZ =-0.10 --  0.00, phi_Az =   0 -- 360]");
     }
-    
 
     // Loop of L/Es(theta_z) and L/E
     for(int le=1; le<=nbinsx; le++){
@@ -285,7 +293,7 @@ TH2D* GetOscHist(int flvf, int mh){
       for(int nunubar = -1; nunubar<2; nunubar+=2){
 
         double weight_flux_part = flux_data[index_cosT][index_E_flux][flvi][nunubar] / flux_data[index_cosT][index_E_flux][1][1];
-        double weight_CS_part = CS_data[index_E_CS][flvi][nunubar] / CS_data[index_E_CS][1][1];
+        double weight_CS_part = CS_data[index_E_CS][1][nunubar] / CS_data[index_E_CS][1][1];
 
         // Define some basic weights for nue/numu and nu/nubar
         double weight = (0.75 + 0.25*nunubar) * (0.5 + 0.5*flvi);
@@ -293,21 +301,19 @@ TH2D* GetOscHist(int flvf, int mh){
         double weight_CS = weight_CS_part * (0.5 + 0.5*flvi);
         double weight_flux_CS = weight_CS_part * weight_flux_part;
 
-        //cout<<CS_data[index_E_CS][flvi][nunubar]<<"  ";
-
         // Add probabilities from OscProb
         myPMNS.SetIsNuBar(nunubar <= 0);
-        prob +=  (weight_CS -weight) ;
+        prob +=  weight_flux_CS  * myPMNS.Prob(flvi, flvf, L/loe);
         //* myPMNS.Prob(flvi, flvf, L/loe)
         
       }}
-      //cout<<endl<<"---------------------------"<<endl;
+    
       // Fill probabilities in histogram
       h2->SetBinContent(le,ct,prob);
 
     }// loe loop
   }// cosT loop 
-
+  
   // Set nice histogram
   SetHist(h2);
 
