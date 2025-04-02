@@ -44,11 +44,11 @@ string decimal_precision (double value, double precision)
     return returned_string.str();
   }
 
- // Choose the right sentence  
+// Choose the right sentence  
 string testCos (double cosT_min , double cosT_max)
 {
-  if(cosT_min<=0){
-    if(cosT_max<=0){
+  if(cosT_min<0){
+    if(cosT_max<0){
       return string("average flux in [cosZ =") + decimal_precision(cosT_min,2) + " -- " + decimal_precision(cosT_max,2) + ", phi_Az =   0 -- 360]";
     }
     else{
@@ -162,34 +162,27 @@ double get_index_E (double E , vector<double> energy_flux_data){  //problème si
 }
 
 // Copy all the CS and energy data in a map 
-void get_CS (map<double,map<int,map<int,double>>> &CS_data , vector<double> &energy_CS_data){
+void get_CS (map<double,map<int,double>> &CS_data , vector<double> &energy_CS_data){
 
   // Open the CS data file
   TFile file_CS("crossSection.root");
 
   // Select graphs from the CS file 
-  TGraph *histo_CS_nue = (TGraph*)file_CS.Get("single_graphs/gnue_CC_E");
   TGraph *histo_CS_num = (TGraph*)file_CS.Get("single_graphs/gnum_CC_E");
-  TGraph *histo_CS_nbe = (TGraph*)file_CS.Get("single_graphs/gnbe_CC_E");
   TGraph *histo_CS_nbm = (TGraph*)file_CS.Get("single_graphs/gnbm_CC_E");
  
   // Get the number of point of these graphs
-  int graph_size = histo_CS_nue->GetMaxSize();
+  int graph_size = histo_CS_num->GetMaxSize();
   
   // Loop over all these points
   for(int i=0 ; i<graph_size ; i++){
 
     // Get abscissa values (== energies)
-    energy_CS_data.push_back(histo_CS_nue->GetPointX(i));
-    cout<<energy_CS_data[i]<<endl;
+    energy_CS_data.push_back(histo_CS_num->GetPointX(i));
 
     // Get ordinate values (== CS) 
-    CS_data[energy_CS_data[i]][0][1] = histo_CS_nue->GetPointY(i);
-    CS_data[energy_CS_data[i]][1][1] = histo_CS_num->GetPointY(i);
-    CS_data[energy_CS_data[i]][0][-1] = histo_CS_nbe->GetPointY(i);
-    CS_data[energy_CS_data[i]][1][-1] = histo_CS_nbm->GetPointY(i);
-    cout<<CS_data[energy_CS_data[i]][0][1]<<"  "<<CS_data[energy_CS_data[i]][1][1]<<"  "<<CS_data[energy_CS_data[i]][0][-1]<<"  "<<CS_data[energy_CS_data[i]][1][-1]<<"  "<<endl;
-    cout<<"------------------------------------------"<<endl;
+    CS_data[energy_CS_data[i]][1] = histo_CS_num->GetPointY(i);
+    CS_data[energy_CS_data[i]][-1] = histo_CS_nbm->GetPointY(i);
   }
 
   // Close the CS data file
@@ -241,7 +234,7 @@ TH2D* GetOscHist(int flvf, int mh){
   get_energy_flux_data(energy_flux_data);
 
   // // Stock all the CS data and the energy data for the CS 
-  map<double,map<int,map<int,double>>> CS_data;     //[E][flv][nunubar]
+  map<double,map<int,double>> CS_data;     //[E][nunubar]
   vector<double> energy_CS_data;
   get_CS(CS_data,energy_CS_data);
 
@@ -267,10 +260,10 @@ TH2D* GetOscHist(int flvf, int mh){
     // Get the cosT index
     double cosT_min = floor(10*cosT)/10;
     double cosT_max = ceil(10*cosT)/10;
-    string index_cosT = testCos(cosT_min,cosT_max);
     if(cosT_max == 0){
-      index_cosT = string("average flux in [cosZ =-0.10 --  0.00, phi_Az =   0 -- 360]");
+      cosT_max = abs(cosT_max);
     }
+    string index_cosT = testCos(cosT_min,cosT_max);
 
     // Loop of L/Es(theta_z) and L/E
     for(int le=1; le<=nbinsx; le++){
@@ -293,7 +286,7 @@ TH2D* GetOscHist(int flvf, int mh){
       for(int nunubar = -1; nunubar<2; nunubar+=2){
 
         double weight_flux_part = flux_data[index_cosT][index_E_flux][flvi][nunubar] / flux_data[index_cosT][index_E_flux][1][1];
-        double weight_CS_part = CS_data[index_E_CS][1][nunubar] / CS_data[index_E_CS][1][1];
+        double weight_CS_part = CS_data[index_E_CS][nunubar] / CS_data[index_E_CS][1];
 
         // Define some basic weights for nue/numu and nu/nubar
         double weight = (0.75 + 0.25*nunubar) * (0.5 + 0.5*flvi);
@@ -303,7 +296,8 @@ TH2D* GetOscHist(int flvf, int mh){
 
         // Add probabilities from OscProb
         myPMNS.SetIsNuBar(nunubar <= 0);
-        prob +=  weight_flux_CS  * myPMNS.Prob(flvi, flvf, L/loe);
+        //prob +=  weight_CS  * myPMNS.Prob(flvi, flvf, L/loe);
+        prob +=  weight_flux;
         //* myPMNS.Prob(flvi, flvf, L/loe)
         
       }}
