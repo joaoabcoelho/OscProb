@@ -4,6 +4,7 @@
 
 #include "PremModel.h"
 #include "PMNS_Fast.h"
+#include "PMNS_TaylorExp.h"
 
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
@@ -162,14 +163,23 @@ double get_index_E (double E , vector<double> energy_flux_data){  //problème si
 }
 
 // Copy all the CS and energy data in a map 
-void get_CS (map<double,map<int,double>> &CS_data , vector<double> &energy_CS_data){
+void get_CS (map<double,map<int,double>> &CS_data , vector<double> &energy_CS_data , int flvf){
 
   // Open the CS data file
   TFile file_CS("crossSection.root");
 
   // Select graphs from the CS file 
-  TGraph *histo_CS_num = (TGraph*)file_CS.Get("single_graphs/gnum_CC_E");
-  TGraph *histo_CS_nbm = (TGraph*)file_CS.Get("single_graphs/gnbm_CC_E");
+  TGraph *histo_CS_num;
+  TGraph *histo_CS_nbm;
+
+  if(flvf == 1){
+    histo_CS_num = (TGraph*)file_CS.Get("single_graphs/gnum_CC_E");
+    histo_CS_nbm = (TGraph*)file_CS.Get("single_graphs/gnbm_CC_E");
+  }
+  else{
+    histo_CS_num = (TGraph*)file_CS.Get("single_graphs/gnue_CC_E");
+    histo_CS_nbm = (TGraph*)file_CS.Get("single_graphs/gnbe_CC_E");
+  }
  
   // Get the number of point of these graphs
   int graph_size = histo_CS_num->GetMaxSize();
@@ -207,6 +217,7 @@ TH2D* GetOscHist(int flvf, int mh){
 
   // Create PMNS object
   OscProb::PMNS_Fast myPMNS;
+  OscProb::PMNS_TaylorExp testPMNS;
 
   // Set PMNS parameters
   myPMNS.SetDm(2, dm21);
@@ -219,13 +230,11 @@ TH2D* GetOscHist(int flvf, int mh){
   // The oscillogram histogram
   TH2D* h2 = new TH2D("","",nbinsx,0,50*nbinsx,nbinsy,-1,0);
 
-  //map<string,TH2D*> oscilligrams;
-  //oscilligrams["weight_basic"] = new TH2D("","",nbinsx,0,50*nbinsx,nbinsy,-1,0);
-
   // Create default PREM Model
   OscProb::PremModel prem;
   
   // Stock all the flux data
+  //unordered map
   map<string,map<double,map<int,map<int,double>>>> flux_data;     //[cosT][E][flv][nunubar]
   get_flux_data(flux_data); 
 
@@ -236,8 +245,7 @@ TH2D* GetOscHist(int flvf, int mh){
   // // Stock all the CS data and the energy data for the CS 
   map<double,map<int,double>> CS_data;     //[E][nunubar]
   vector<double> energy_CS_data;
-  get_CS(CS_data,energy_CS_data);
-
+  get_CS(CS_data,energy_CS_data,flvf);
 
   // Loop over cos(theta_z) and L/E
   for(int ct=1; ct<=nbinsy; ct++){
@@ -275,8 +283,8 @@ TH2D* GetOscHist(int flvf, int mh){
       double E = L/loe;  
 
       // Get the Energy Flux and CS index
-      double index_E_flux = get_index_E(E,energy_flux_data);
-      double index_E_CS = get_index_E(E,energy_CS_data);
+      double index_E_flux = get_index_E(E , energy_flux_data);
+      double index_E_CS = get_index_E(E , energy_CS_data);
 
       // Initialize probability
       double prob = 0;
@@ -296,9 +304,7 @@ TH2D* GetOscHist(int flvf, int mh){
 
         // Add probabilities from OscProb
         myPMNS.SetIsNuBar(nunubar <= 0);
-        //prob +=  weight_CS  * myPMNS.Prob(flvi, flvf, L/loe);
-        prob +=  weight_flux;
-        //* myPMNS.Prob(flvi, flvf, L/loe)
+        prob +=  weight_flux_CS  * myPMNS.Prob(flvi, flvf, L/loe);
         
       }}
     
