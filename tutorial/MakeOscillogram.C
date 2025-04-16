@@ -21,6 +21,7 @@ void MakeOscillogram(int flvf = 1){
 
   // Set a nice overall style
   SetNiceStyle();
+  cout<<"mmmmmmmm"<<endl;
 
   // Make the oscillogram
   TH2D* hNH = GetOscHist(flvf,1);
@@ -214,10 +215,11 @@ TH2D* GetOscHist(int flvf, int mh){
   double th13 = asin(sqrt(mh>0 ? 0.0218 : 0.0219));
   double th23 = asin(sqrt(mh>0 ? 0.452 : 0.579));
   double dcp  = (mh>0 ? 306 : 254)*TMath::Pi()/180;
-
+  
   // Create PMNS object
   OscProb::PMNS_Fast myPMNS;
   OscProb::PMNS_TaylorExp testPMNS;
+  
 
   // Set PMNS parameters
   myPMNS.SetDm(2, dm21);

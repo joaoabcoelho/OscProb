@@ -1,6 +1,7 @@
 
 #include "PremModel.h"
 #include "PMNS_Fast.h"
+#include "PMNS_TaylorExp.h"
 
 #include "SetNiceStyle.C"
 
@@ -11,18 +12,26 @@ void DrawFixedCosT(double cosT = -0.7, bool isNuBar = false){
 
   // Probability Calculator
   OscProb::PMNS_Fast p;
+  OscProb::PMNS_TaylorExp t;
+  t.SetwidthBin(5);
+  
+  
 
   // Set neutrino or antineutrino
   p.SetIsNuBar(isNuBar);
 
   // PREM Model
   OscProb::PremModel prem;
+  
+
 
   // Fill path for cosT
   prem.FillPath(cosT);
 
   // Give path to calculator
   p.SetPath(prem.GetNuPath());
+
+  t.avrProbTaylor(2,2);
 
   // Make some histograms
   int nbins = 1000;
