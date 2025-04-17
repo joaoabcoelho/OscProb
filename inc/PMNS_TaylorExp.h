@@ -22,11 +22,17 @@ namespace OscProb {
       virtual void InitializeTaylorsVectors(); ///< Initialize all member vectors with
       ///< zeros
 
+      virtual void BuildKE(double L , matrixC& K);
+
       virtual void PropagatePathTaylor(
         NuPath p);            ///< Propagate neutrino through a single path
       virtual void PropagateTaylor(); ///< Propagate neutrino through full path
 
       virtual void rotateS(vectorC fPhases,matrixC& S);
+
+      virtual void rotateK(matrixC Kmass,matrixC& Kflavor);
+
+      virtual void MultiplicationRule(matrixC SLayer,matrixC KLayer);
 
       // Attributes
 
@@ -35,8 +41,6 @@ namespace OscProb {
 
       vectorD flambdaE;
       matrixC fVE;
-
-      matrixD fperturbHam;
 
       double fwidthBin;
   };
