@@ -65,17 +65,17 @@ void PMNS_TaylorExp::SetwidthBin(double widthBin)
 ///
 void PMNS_TaylorExp::rotateS(vectorC fPhases,matrixC& S)
 {
-    for(int j = 0 ; j<fPhases.size() ; j++)
+    for(int j = 0 ; j<fNumNus ; j++) //PEUT ETRE AMELIORER
     {
         for(int i = 0 ; i<=j ; i++)
         {
-            for(int k = 0 ; k<fPhases.size() ; k++)
+            for(int k = 0 ; k<fNumNus ; k++)
             {
                 S[i][j] += fEvec[i][k] * fPhases[k] * conj(fEvec[j][k]);
             }
 
             if(i != j){
-                S[j][i] = -conj(S[i][j]);
+                S[j][i] = -conj(S[i][j]);//??????????????????????
             }
         }
     }
@@ -126,7 +126,7 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 
             complexD C;
             if(i == j){
-                C = 1;
+                C = complexD(1,0);
             }
             else{
                 double argg = (fEval[i] - fEval[j]) * L;
@@ -134,7 +134,7 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
                 cout<<C<<endl;
             }
 
-            K[i][j] *= (-L / (2*fEnergy)) * K[i][j] * C;
+            K[i][j] *= (-L / (2*fEnergy)) * K[i][j] * C; //UNIT2?????????
 
             if(i != j){
                 K[j][i] = conj(K[i][j]);
@@ -150,7 +150,33 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 ///
 void PMNS_TaylorExp::MultiplicationRule(matrixC SLayer,matrixC KLayer)
 {
-    
+    //K (ne pas modifier S avant de l'appliquer ici )
+
+    //S
+    for(int j = 0 ; j<fNumNus ; j++)
+    {
+        for(int i = 0 ; i<=j ; i++)
+        {
+            for(int k = 0 ; k<fNumNus ; k++)
+            {
+                if(j>k){
+                    fevolutionMatrixS[i][j] -= SLayer[i][k] * conj(fevolutionMatrixS[j][k]);
+                }
+                else{
+                    fevolutionMatrixS[i][j] += SLayer[i][k] * fevolutionMatrixS[k][j];
+                }
+            }
+        }
+    }
+    //PEUT ETRE AMELIORER
+    for(int j = 1 ; j<fNumNus ; j++)
+    {
+        for(int i = 0 ; i<j ; i++)
+        {
+            fevolutionMatrixS[j][i] = -conj(fevolutionMatrixS[i][j]);
+        }
+    }
+
 }
 
 //.............................................................................
@@ -159,8 +185,10 @@ void PMNS_TaylorExp::MultiplicationRule(matrixC SLayer,matrixC KLayer)
 ///
 double PMNS_TaylorExp::avrProbTaylor(double E , double widthBin)
 {
-    SetEnergy(E);
+    // reset K et S et Ve et lambdaE
+    InitializeTaylorsVectors();
 
+    SetEnergy(E);
     SetwidthBin(widthBin);
 
     //Propagate -> get S and K matrix (on the whole path)
@@ -197,9 +225,6 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     // Solve for eigensystem
     SolveHam();
 
-    // Get the perturbative Hamiltonian 
-    //FCT
-
     // Get the evolution matrix in mass basis
     double LengthIneV = kKm2eV * p.length;
     for (int i = 0; i < fNumNus; i++) {
@@ -207,7 +232,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
         fPhases[i] = complexD(cos(arg), -sin(arg));
     }
 
-    // Rotate S from mass basis to flavor basis
+    // Rotate S in flavor basis
     matrixC Sflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
     rotateS(fPhases,Sflavor);
 
@@ -218,21 +243,32 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     // Rotate KE in flavor basis
     matrixC Kflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
     rotateK(Kmass,Kflavor);
-    
 
     //multiplication rule for K and S -> uptade K and S
+    for(int j=0 ; j<3 ; j++)
+    {
+        for(int k=0 ; k<3 ; k++)
+        {
+            cout<<Kflavor[j][k]<<" "; //--> pas de probleme, cela vient donc de MultiplicationRule?? enfin si un prb car valeur trop faible summ!=1
+        }
+        cout<<endl;
+    }
 
-    //end of this fct 
+
+    MultiplicationRule(Sflavor,Kflavor);
+
+
+    cout<<endl;
+
 
     for(int j=0 ; j<3 ; j++)
     {
         for(int k=0 ; k<3 ; k++)
         {
-            cout<<Kflavor[j][k]<<" ";
+            cout<<fevolutionMatrixS[j][k]<<" ";
         }
         cout<<endl;
     }
-
  
 }
 
