@@ -18,14 +18,14 @@ void DrawFixedCosT(double cosT = -0.7, bool isNuBar = false){
   p.SetIsNuBar(isNuBar);
 
   // PREM Model
-  OscProb::PremModel prem;
-  
+  OscProb::PremModel prem;    
 
   // Fill path for cosT
   prem.FillPath(cosT);
 
   // Give path to calculator
   p.SetPath(prem.GetNuPath());
+  t.SetPath(prem.GetNuPath());
 
   // Make some histograms
   int nbins = 1000;
@@ -44,7 +44,7 @@ void DrawFixedCosT(double cosT = -0.7, bool isNuBar = false){
 
     double energy = hMuMu_NH->GetBinCenter(i);
 
-    t.avrProbTaylor(i,2);
+    t.avrProbTaylor(0,1,i,2);
 
     // Set NH
     p.SetDm(3, dm31);

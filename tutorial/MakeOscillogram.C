@@ -220,7 +220,6 @@ TH2D* GetOscHist(int flvf, int mh){
   OscProb::PMNS_Fast myPMNS;
   OscProb::PMNS_TaylorExp testPMNS;
   
-
   // Set PMNS parameters
   myPMNS.SetDm(2, dm21);
   myPMNS.SetDm(3, dm31);
