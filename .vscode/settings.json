@@ -79,7 +79,8 @@
         "streambuf": "cpp",
         "thread": "cpp",
         "cinttypes": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "macroTestTaylor.C": "cpp"
     },
     "cmake.sourceDirectory": "/home/matteo-loup/stage_code/OscProb/eigen/unsupported"
 }

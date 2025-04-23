@@ -12,7 +12,6 @@ void DrawFixedCosT(double cosT = -0.7, bool isNuBar = false){
 
   // Probability Calculator
   OscProb::PMNS_Fast p;
-  OscProb::PMNS_TaylorExp t;
 
   // Set neutrino or antineutrino
   p.SetIsNuBar(isNuBar);
@@ -25,7 +24,6 @@ void DrawFixedCosT(double cosT = -0.7, bool isNuBar = false){
 
   // Give path to calculator
   p.SetPath(prem.GetNuPath());
-  t.SetPath(prem.GetNuPath());
 
   // Make some histograms
   int nbins = 1000;
@@ -43,8 +41,6 @@ void DrawFixedCosT(double cosT = -0.7, bool isNuBar = false){
   for(int i=1; i<=nbins; i++){
 
     double energy = hMuMu_NH->GetBinCenter(i);
-
-    t.avrProbTaylor(0,1,i,2);
 
     // Set NH
     p.SetDm(3, dm31);

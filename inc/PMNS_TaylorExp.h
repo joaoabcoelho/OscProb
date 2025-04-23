@@ -37,11 +37,11 @@ namespace OscProb {
 
       virtual void MultiplicationRule(matrixC SLayer,matrixC KLayer);
 
-      virtual double avgFormula(int flvi, int flvf);
+      virtual double avgFormula(int flvi, int flvf); 
 
       // Attributes
 
-      matrixC fKE; 
+      complexD fKE[3][3]; 
       matrixC fevolutionMatrixS;  
 
       vectorD flambdaE;

@@ -37,7 +37,7 @@ PMNS_TaylorExp::~PMNS_TaylorExp() {}
 ///
 void PMNS_TaylorExp::InitializeTaylorsVectors()
 {
-    fKE = matrixC(fNumNus, vectorC(fNumNus, 0));
+    //fKE = matrixC(fNumNus, vectorC(fNumNus, 0));
 
     flambdaE = vectorD(fNumNus, 0);
 
@@ -46,10 +46,11 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
     fevolutionMatrixS = matrixC(fNumNus, vectorC(fNumNus, 0));
     for(int i= 0 ; i<fevolutionMatrixS.size(); i++){
         fevolutionMatrixS[i][i] = 1;
+        for(int j = 0 ; j<3 ; j++){
+            fKE[i][j] = 0;
+        }
     }
 
-
-    //REEL OU COMPLEX??????????
 }
 
 //.............................................................................
@@ -67,17 +68,10 @@ void PMNS_TaylorExp::SetwidthBin(double widthBin)
 ///
 void PMNS_TaylorExp::rotateS(vectorC fPhases,matrixC& S)
 {
-    for(int j = 0 ; j<fNumNus ; j++) //PEUT ETRE AMELIORER
-    {
-        for(int i = 0 ; i<=j ; i++)
-        {
-            for(int k = 0 ; k<fNumNus ; k++)
-            {
+    for(int j = 0 ; j<fNumNus ; j++){ //PEUT ETRE AMELIORER
+        for(int i = 0 ; i<fNumNus ; i++){ //CHG
+            for(int k = 0 ; k<fNumNus ; k++){
                 S[i][j] += fEvec[i][k] * fPhases[k] * conj(fEvec[j][k]);
-            }
-
-            if(i != j){
-                S[j][i] = -conj(S[i][j]);//??????????????????????
             }
         }
     }
@@ -135,7 +129,7 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
             else{
                 double argg = (fEval[i] - fEval[j]) * L;
                 C = (complexD(cos(argg), sin(argg)) - complexD(1,0) ) / (complexD(0,argg)); 
-                cout<<C<<endl;
+                //cout<<C<<endl;
             }// C=(1,0) because of H H' commutation (due to cst density case)
 
             K[i][j] *= (-L / lv) * K[i][j] * C; 
@@ -163,12 +157,13 @@ void PMNS_TaylorExp::MultiplicationRule(matrixC SLayer,matrixC KLayer)
     }
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
+            fKE[i][j] = 0;
             for(int k = 0 ; k<fNumNus ; k++){
                 for(int l = 0 ; l<fNumNus ; l++){                                                          
                     fKE[i][j] += conj(fevolutionMatrixS[k][i]) * KLayer[k][l] * fevolutionMatrixS[l][j] + KCopy[i][j]; 
                 }
             }
-
+            
             if(i != j){
                 fKE[j][i] = -conj(fKE[i][j]);
             }
@@ -210,19 +205,14 @@ void PMNS_TaylorExp::MultiplicationRule(matrixC SLayer,matrixC KLayer)
     }
 
     for(int j = 0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<=j ; i++){
+        for(int i = 0 ; i<fNumNus ; i++){ //CHG
+            fevolutionMatrixS[i][j] = 0;
             for(int k = 0 ; k<fNumNus ; k++){
 
                 fevolutionMatrixS[i][j] += SLayer[i][k] * SCopy[k][j];
             }
-
-            if(i != j){
-                fevolutionMatrixS[j][i] = -conj(fevolutionMatrixS[i][j]);
-            }
         }
-
     }
-    
 
 }
 
@@ -254,7 +244,7 @@ double PMNS_TaylorExp::avrProbTaylor(int flvi, int flvf, double E , double width
 ///
 void PMNS_TaylorExp::PropagateTaylor()
 {
-  for (int i = 0; i < int(fNuPaths.size()); i++) { cout<<endl<<"path :"<<i<<endl;  PropagatePathTaylor(fNuPaths[i]); }
+  for (int i = 0; i < int(fNuPaths.size()); i++) { PropagatePathTaylor(fNuPaths[i]); }
 }
 
 
@@ -293,17 +283,6 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 
     //multiplication rule for K and S 
     MultiplicationRule(Sflavor,Kflavor);
-
-
-
-    for(int j=0 ; j<3 ; j++)
-    {
-        for(int k=0 ; k<3 ; k++)
-        {
-            cout<<fKE[j][k]<<" ";
-        }
-        cout<<endl;
-    }
  
 }
 
@@ -316,15 +295,8 @@ void PMNS_TaylorExp::SolveK()
     double   fEvalGLoBES[3];
     complexD fEvecGLoBES[3][3];
 
-    complexD fKEconv[3][3];
-    for(int j = 0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<fNumNus ; i++){       //AAAAAAAAAAAAAAAAAA
-            fKEconv[i][j] = fKE[i][j];
-        }
-    }
-
     // Solve Hamiltonian for eigensystem using the GLoBES method
-    zheevh3(fKEconv, fEvecGLoBES, fEvalGLoBES);
+    zheevh3(fKE, fEvecGLoBES, fEvalGLoBES);
 
     // Fill fEval and fEvec vectors from GLoBES arrays
     for (int i = 0; i < fNumNus; i++) {
@@ -370,8 +342,6 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf)
 
         P += norm(s1[j]);
     }
-
-    cout<<"Proba = "<<P<<endl;
 
     return real(P); 
 }
