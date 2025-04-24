@@ -17,7 +17,11 @@ namespace OscProb {
 
       virtual void SetwidthBin(double widthBin);
 
-      virtual double avrProbTaylor(int flvi, int flvf, double E , double widthBin);
+      virtual double avgProbTaylor(int flvi, int flvf, double E , double widthBin);
+
+      virtual double avgProbTaylorLoE(int flvi, int flvf, double ELoE, double widthBin);
+
+      virtual vectorD ConvertLoEtoE(double LoE, double dLoE);
 
     protected:
       virtual void InitializeTaylorsVectors(); ///< Initialize all member vectors with

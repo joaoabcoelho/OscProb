@@ -218,28 +218,6 @@ void PMNS_TaylorExp::MultiplicationRule(matrixC SLayer,matrixC KLayer)
 
 //.............................................................................
 ///
-///
-///
-double PMNS_TaylorExp::avrProbTaylor(int flvi, int flvf, double E , double widthBin)
-{
-    // reset K et S et Ve et lambdaE
-    InitializeTaylorsVectors();
-
-    SetEnergy(E);
-    SetwidthBin(widthBin);
-
-    //Propagate -> get S and K matrix (on the whole path)
-    PropagateTaylor();
-
-    //DiagolK -> get VE and lambdaE
-    SolveK();
-
-    //return fct avr proba
-    return avgFormula(flvi,flvf);
-}
-
-//.............................................................................
-///
 /// Propagate neutrino state through full path
 ///
 void PMNS_TaylorExp::PropagateTaylor()
@@ -345,3 +323,69 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf)
 
     return real(P); 
 }
+
+//.............................................................................
+///
+///
+///
+vectorD PMNS_TaylorExp::ConvertLoEtoE(double LoE, double dLoE)
+{
+    // Make sure fPath is set
+    // Use average if multiple paths
+    SetCurPath(AvgPath(fNuPaths));
+
+    vectorD Ebin(2);
+
+    // Set a minimum energy
+    double minLoE = 0.1 * LoE;
+
+    // Transform range to E
+    // Full range if low edge > minLoE
+    if(LoE - dLoE / 2 >minLoE) {
+        Ebin[0] = fPath.length * 0.5 * (1 / (LoE - dLoE / 2) + 1 / (LoE + dLoE / 2));
+        Ebin[1] = fPath.length * (1 / (LoE - dLoE / 2) - 1 / (LoE + dLoE / 2));
+    }
+    else {
+        Ebin[0] = fPath.length * 0.5 * (1 / minLoE + 1 / (LoE + dLoE / 2));
+        Ebin[1] = fPath.length * (1 / minLoE - 1 / (LoE + dLoE / 2));
+    }
+
+    return Ebin;
+}
+
+//.............................................................................
+///
+///
+///
+double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double widthBin)
+{
+    // reset K et S et Ve et lambdaE
+    InitializeTaylorsVectors();
+
+    SetEnergy(E);
+    SetwidthBin(widthBin);
+
+    //Propagate -> get S and K matrix (on the whole path)
+    PropagateTaylor();
+
+    //DiagolK -> get VE and lambdaE
+    SolveK();
+
+    //return fct avr proba
+    return avgFormula(flvi,flvf);
+}
+
+double PMNS_TaylorExp::avgProbTaylorLoE(int flvi, int flvf, double LoE , double widthBin)
+{
+    if (LoE <= 0) return 0;
+
+    if (fNuPaths.empty()) return 0;
+
+    // Don't average zero width
+    if (widthBin <= 0) return Prob(flvi, flvf, fPath.length / LoE);
+
+    vectorD Ebin = ConvertLoEtoE(LoE,widthBin);
+
+    return avgProbTaylor(flvi,flvf,Ebin[0],Ebin[1]);
+}
+

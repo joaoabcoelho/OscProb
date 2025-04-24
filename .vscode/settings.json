@@ -80,7 +80,12 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
-        "macroTestTaylor.C": "cpp"
+        "macroTestTaylor.C": "cpp",
+        "simpleExamples.C": "cpp",
+        "MakeTestSamples.C": "cpp",
+        "StressTest.C": "cpp",
+        "Oscillogram.C": "cpp",
+        "TimeMeasurement.C": "cpp"
     },
     "cmake.sourceDirectory": "/home/matteo-loup/stage_code/OscProb/eigen/unsupported"
 }

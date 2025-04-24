@@ -5,7 +5,8 @@
 
 #include "SetNiceStyle.C"
 
-void macroTestTaylor(double cosT = -0.7, bool isNuBar = false){
+
+void macroTestTaylor(double cosT = -0.9, bool isNuBar = false){
 
   // Load some nice styles
   SetNiceStyle();
@@ -29,7 +30,7 @@ void macroTestTaylor(double cosT = -0.7, bool isNuBar = false){
   t.SetPath(prem.GetNuPath());
 
   // Make some histograms
-  int nbins = 1000;
+  int nbins = 10000;
   double xmin = 1;
   double xmax = 20;
   double widthBin = (xmax-xmin) / nbins;
@@ -58,8 +59,8 @@ void macroTestTaylor(double cosT = -0.7, bool isNuBar = false){
     //f.SetDm(3, -dm31 + 7.52e-5);
 
     // Fill IH
-    hMuMu_taylor->SetBinContent(i, t.avrProbTaylor(1,1, energy,widthBin));
-    hEMu_taylor->SetBinContent(i, t.avrProbTaylor(0,1, energy,widthBin));
+    hMuMu_taylor->SetBinContent(i, t.avgProbTaylor(1,1, energy,widthBin));
+    hEMu_taylor->SetBinContent(i, t.avgProbTaylor(0,1, energy,widthBin));
 
   }
 
