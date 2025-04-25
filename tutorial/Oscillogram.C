@@ -31,20 +31,23 @@ struct TimeIt {
 
 
 // Make oscillogram for given final flavour and MH
-TH2D* GetOscHist(int flvf = 1, int mh = 1 , int nbinsx =200 , int nbinsy = 100 , string method = "none");
+TH2D* GetOscHist(int flvf = 1, int mh = 1 , int nbinsx =200 , int nbinsy = 100 , 
+                string method = "none" , vector<double> & timeC = *(new vector<double>()));
 
 // Draw energy lines
 void DrawEnergyLines(TH2* hNH);
 
 // Make an oscillogram for NH
 // nue (0), numu (1) or nutau (2)
-void Oscillogram(int flvf = 1 , int nbinsx = 200 , int nbinsy = 100 , string method = "none"){
+vector<double> Oscillogram(int flvf = 1 , int nbinsx = 200 , int nbinsy = 100 , string method = "none"){
 
   // Set a nice overall style
   SetNiceStyle();
 
+  vector<double> timeC;
+
   // Make the oscillogram
-  TH2D* hNH = GetOscHist(flvf,1, nbinsx , nbinsy , method);
+  TH2D* hNH = GetOscHist(flvf,1, nbinsx , nbinsy , method , timeC);
 
   // Draw the oscillogram
   hNH->Draw("colz");
@@ -55,10 +58,12 @@ void Oscillogram(int flvf = 1 , int nbinsx = 200 , int nbinsy = 100 , string met
   // Draw some lines of constant energy
   DrawEnergyLines(hNH);
 
+  return timeC;
+
 }
 
 // Make oscillogram for given final flavour and MH
-TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method){
+TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method , vector<double> & timeC){
 
   // Use 200 x bins and 100 y bins
   //int nbinsx = 200;
@@ -90,7 +95,7 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method){
   double ymin = -0.6;
   double ymax = 0;
   double widthBinX = (xmax-xmin) / nbinsx;
-  double widthBinY = (ymax-ymin) / nbinsy;
+  double widthBinY = (ymax-ymin) / nbinsy; 
 
   // The oscillogram histogram
   TH2D* h2 = new TH2D("","",nbinsx,xmin,xmax,nbinsy,ymin,ymax);
@@ -126,6 +131,8 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method){
       // Set L/E from bin center
       double loe  = h2->GetXaxis()->GetBinCenter(le);
 
+      double widthBinXforE = L * (1 / (loe - widthBinX / 2) - 1 / (loe + widthBinX / 2));
+
       // Initialize probability
       double prob = 0;
 
@@ -140,8 +147,8 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method){
         myPMNS.SetIsNuBar(nunubar <= 0);
         //prob += weight*myPMNS.Prob(flvi, flvf, L/loe);
 
-        if(method == "fast") {prob += weight*myPMNS.AvgProb(flvi, flvf, L/loe ,widthBinX);}
-        if(method == "taylor") {prob += weight*myPMNS.avgProbTaylor(flvi, flvf, L/loe ,widthBinX);}
+        if(method == "fast") {prob += weight*myPMNS.AvgProbLoE(flvi, flvf, loe ,widthBinX);}
+        if(method == "taylor") {prob += weight*myPMNS.avgProbTaylor(flvi, flvf, L/loe ,widthBinXforE);}
         // ICI L/E ET PAS E
         // ESSAYER DECHG DANS CE CODE LE to E
         // ATTENTION AvgProb utilise la converstion E to LoE MAIS pas avgProbTaylor
@@ -158,6 +165,9 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method){
   }// cosT loop
 
   time.Print();
+  double t = time.time();
+  timeC.push_back(t);
+  timeC.push_back(t / time.count);
 
   // Set nice histogram
   SetHist(h2);
