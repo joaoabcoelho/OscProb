@@ -55,9 +55,6 @@ void macroTestTaylor(double cosT = -0.9, bool isNuBar = false){
     hMuMu_fast->SetBinContent(i, f.Prob(1,1, energy));
     hEMu_fast->SetBinContent(i, f.Prob(0,1, energy));
 
-    // Set IH
-    //f.SetDm(3, -dm31 + 7.52e-5);
-
     // Fill IH
     hMuMu_taylor->SetBinContent(i, t.avgProbTaylor(1,1, energy,widthBin));
     hEMu_taylor->SetBinContent(i, t.avgProbTaylor(0,1, energy,widthBin));

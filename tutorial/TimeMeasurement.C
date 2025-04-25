@@ -12,5 +12,9 @@
 
 void TimeMeasurement()
 {
-    Oscillogram(1,2000,1000,"taylor");
+    cout << "========== Fast ==========" << endl;
+    Oscillogram(1,200,100,"fast");
+
+    cout << "========== Taylor ==========" << endl;
+    Oscillogram(1,200,100,"taylor");
 }

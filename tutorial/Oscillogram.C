@@ -8,6 +8,28 @@
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
 
+
+struct TimeIt {
+
+  TimeIt() { reset(); }
+
+  int start;
+  int count;
+  double time(){ return double(clock() - start) / CLOCKS_PER_SEC; }
+  void reset(){ count = 0; start = clock(); }
+  void Print(){
+    double tpi = time() / count;
+    string scale = "s";
+    if(tpi<1){ tpi *= 1e3; scale = "ms"; }
+    if(tpi<1){ tpi *= 1e3; scale = "µs"; }
+    //if(tpi<1){ tpi *= 1e3; scale = "ns"; }
+    cout << "Performance = " << tpi << " " << scale << "/iteration" << endl;
+    cout << "Total time = " << time() << endl;
+  }
+
+};
+
+
 // Make oscillogram for given final flavour and MH
 TH2D* GetOscHist(int flvf = 1, int mh = 1 , int nbinsx =200 , int nbinsy = 100 , string method = "none");
 
@@ -22,7 +44,7 @@ void Oscillogram(int flvf = 1 , int nbinsx = 200 , int nbinsy = 100 , string met
   SetNiceStyle();
 
   // Make the oscillogram
-  TH2D* hNH = GetOscHist(flvf,1, 200 , 100 , method);
+  TH2D* hNH = GetOscHist(flvf,1, nbinsx , nbinsy , method);
 
   // Draw the oscillogram
   hNH->Draw("colz");
@@ -63,19 +85,22 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method){
   myPMNS.SetDelta(1,3, dcp);
 
   // Set histogram parameters
-  int xmin = 0;
-  int xmax = 10000;
-  int ymin = -1;
-  int ymax = 0;
+  double xmin = 0;
+  double xmax = 10000;
+  double ymin = -0.6;
+  double ymax = 0;
   double widthBinX = (xmax-xmin) / nbinsx;
   double widthBinY = (ymax-ymin) / nbinsy;
 
   // The oscillogram histogram
-  TH2D* h2 = new TH2D("","",nbinsx,0,10000,nbinsy,-1,0);
+  TH2D* h2 = new TH2D("","",nbinsx,xmin,xmax,nbinsy,ymin,ymax);
   //TH2D* h2 = new TH2D("","",nbinsx,0,50*nbinsx,nbinsy,-1,0);
 
   // Create default PREM Model
   OscProb::PremModel prem;
+
+  TimeIt time;
+  //for(int k=0; k<1000; k++){ if(time.time()>1) break;
 
   // Loop over cos(theta_z) and L/E
   for(int ct=1; ct<=nbinsy; ct++){
@@ -118,9 +143,12 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method){
         if(method == "fast") {prob += weight*myPMNS.AvgProb(flvi, flvf, L/loe ,widthBinX);}
         if(method == "taylor") {prob += weight*myPMNS.avgProbTaylor(flvi, flvf, L/loe ,widthBinX);}
         // ICI L/E ET PAS E
-        //ESSAYER DECHG DANS CE CODE LE to E
+        // ESSAYER DECHG DANS CE CODE LE to E
+        // ATTENTION AvgProb utilise la converstion E to LoE MAIS pas avgProbTaylor
 
-        prob -= weight*myPMNS.Prob(flvi, flvf, L/loe);
+        //prob -= weight*myPMNS.Prob(flvi, flvf, L/loe);
+
+        time.count++;
       }}
 
       // Fill probabilities in histogram
@@ -128,6 +156,8 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method){
 
     }// loe loop
   }// cosT loop
+
+  time.Print();
 
   // Set nice histogram
   SetHist(h2);

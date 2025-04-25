@@ -261,7 +261,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 
     //multiplication rule for K and S 
     MultiplicationRule(Sflavor,Kflavor);
- 
+
 }
 
 //.............................................................................
