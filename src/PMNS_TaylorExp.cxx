@@ -57,9 +57,10 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
 ///
 ///
 ///
-void PMNS_TaylorExp::SetwidthBin(double widthBin)
+void PMNS_TaylorExp::SetwidthBin(double dE , double dcosTheta)
 {
-    fwidthBin = widthBin;
+    fdE = dE;
+    fdcosTheta = dcosTheta;
 }
 
 //.............................................................................
@@ -68,6 +69,21 @@ void PMNS_TaylorExp::SetwidthBin(double widthBin)
 ///
 void PMNS_TaylorExp::rotateS(vectorC fPhases,matrixC& S)
 {
+    /*for(int j = 0 ; j<fNumNus ; j++){ 
+
+        complexD par[3];
+
+        for(int k = 0 ; k<fNumNus ; k++){
+            par[k] = fPhases[k] * conj(fEvec[j][k]);
+        }
+        
+        for(int i = 0 ; i<fNumNus ; i++){ 
+            for(int k = 0 ; k<fNumNus ; k++){
+                S[i][j] += fEvec[i][k] * par[k];
+            }
+        }
+    }*/
+
     for(int j = 0 ; j<fNumNus ; j++){ //PEUT ETRE AMELIORER
         for(int i = 0 ; i<fNumNus ; i++){ //CHG
             for(int k = 0 ; k<fNumNus ; k++){
@@ -83,6 +99,29 @@ void PMNS_TaylorExp::rotateS(vectorC fPhases,matrixC& S)
 ///
 void PMNS_TaylorExp::rotateK(matrixC Kmass,matrixC& Kflavor)
 {
+    /*for(int j = 0 ; j<fNumNus ; j++){
+
+        complexD par[3];
+
+        for(int k = 0 ; k<fNumNus ; k++){
+            for(int l = 0 ; l<fNumNus ; l++){
+                par[k] += Kmass[k][l] * conj(fEvec[j][l]);
+            }
+        }
+
+        for(int i = 0 ; i<=j ; i++){
+            for(int k = 0 ; k<fNumNus ; k++){
+                Kflavor[i][j] += fEvec[i][k] * par[k];
+            }
+
+            if(i != j){
+                Kflavor[j][i] = conj(Kflavor[i][j]);
+            }
+        }
+    }*/
+
+
+    
     for(int j = 0 ; j<fNumNus ; j++)
     {
         for(int i = 0 ; i<=j ; i++)
@@ -100,6 +139,7 @@ void PMNS_TaylorExp::rotateK(matrixC Kmass,matrixC& Kflavor)
             }
         }
     }
+    
 }
 
 //.............................................................................
@@ -307,7 +347,7 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf)
 
         //sinc[i][i] = 1;
         for(int j = 0 ; j<i ; j++){
-            double arg = (flambdaE[j] - flambdaE[i]) * fwidthBin;
+            double arg = (flambdaE[j] - flambdaE[i]) * fdE;
             sinc[j][i] = sin(arg)/arg;
         }
     }
@@ -357,13 +397,13 @@ vectorD PMNS_TaylorExp::ConvertLoEtoE(double LoE, double dLoE)
 ///
 ///
 ///
-double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double widthBin)
+double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
 {
     // reset K et S et Ve et lambdaE
     InitializeTaylorsVectors();
 
     SetEnergy(E);
-    SetwidthBin(widthBin);
+    SetwidthBin(dE,0);
 
     //Propagate -> get S and K matrix (on the whole path)
     PropagateTaylor();
@@ -375,17 +415,43 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double width
     return avgFormula(flvi,flvf);
 }
 
-double PMNS_TaylorExp::avgProbTaylorLoE(int flvi, int flvf, double LoE , double widthBin)
+//.............................................................................
+///
+///
+///
+double PMNS_TaylorExp::avgProbTaylorLoE(int flvi, int flvf, double LoE , double dLoE)
 {
     if (LoE <= 0) return 0;
 
     if (fNuPaths.empty()) return 0;
 
     // Don't average zero width
-    if (widthBin <= 0) return Prob(flvi, flvf, fPath.length / LoE);
+    if (dLoE <= 0) return Prob(flvi, flvf, fPath.length / LoE);
 
-    vectorD Ebin = ConvertLoEtoE(LoE,widthBin);
+    vectorD Ebin = ConvertLoEtoE(LoE,dLoE);
 
     return avgProbTaylor(flvi,flvf,Ebin[0],Ebin[1]);
+}
+
+//.............................................................................
+///
+///
+///
+double PMNS_TaylorExp::avgProbTaylorAngle(int flvi, int flvf, double cosTheta , double dcosTheta)
+{
+    // reset K et S et Ve et lambdaE
+    InitializeTaylorsVectors();
+
+    // AAAAAAAAAAAA SetAngle(cosTheta);  SETANGLE==MIXING ANGLES
+    SetwidthBin(0,dcosTheta);
+
+    //Propagate -> get S and K matrix (on the whole path)
+    PropagateTaylor();
+
+    //DiagolK -> get VE and lambdaE
+    SolveK();
+
+    //return fct avr proba
+    return avgFormula(flvi,flvf);
 }
 

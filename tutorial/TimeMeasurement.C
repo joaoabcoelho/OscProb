@@ -1,5 +1,7 @@
 #include "TF1.h"
 #include "TGraph.h"
+#include "TFile.h"
+
 
 #include "PremModel.h"
 #include "PMNS_Fast.h"
@@ -14,9 +16,14 @@
 void TimeMeasurement()
 {
 
-    auto g = new TGraph();
+    auto r = new TGraph();
+    auto f = new TGraph();
+    auto t = new TGraph();
 
-    for ( int i = 20 ; i<=200 ; i+= 20 ){
+    double aaa = 0;
+    int ii = 0 ;
+
+    for ( int i = 10 ; i<=500 ; i+= 5 ){
 
         cout << "========== Fast ==========  " << i << endl;
         vector<double> timeFast = Oscillogram(1,i,100,"fast");
@@ -24,11 +31,63 @@ void TimeMeasurement()
         cout << "========== Taylor ==========" << endl;
         vector<double> timeTaylor = Oscillogram(1,i,100,"taylor");
 
-        g->AddPoint( i , timeFast[0] / timeTaylor[0]);
+        r->AddPoint( i , timeFast[0] / timeTaylor[0]);
+        f->AddPoint( i , timeFast[1] );
+        t->AddPoint( i , timeTaylor[1] );
 
+        cout<<endl;
+
+        aaa =timeTaylor[0];
+        ii++;
     }
 
-    g->Draw();
+    //TRACER LE TEMPS/ITERATION POUR CHAQUE METHODE MASI SEPAREMENT
 
-    cout<<"MMMM"<<endl;
+    cout<<"temps moyen :" << aaa/ii<<endl;  
+
+    TFile file1("graphTime.root", "RECREATE");
+
+    r->SetName("ratio");
+    r->SetTitle("ratio;nbrBinE;ratioTemps");
+    r->Draw("AC*");
+    r->Write();
+
+    f->SetName("temps/iter fast");
+    f->SetTitle("temps/iter fast;nbrBinE;temps/iter fast");
+    f->Draw("AC*");
+    f->Write();
+
+    t->SetName("time/iter_taylor");
+    t->SetTitle("time/iter_taylor;nbrBinE;time/iter_taylor");
+    t->Draw("AC*");
+    t->Write();
+
+    file1.Close();
+
+
+
+
+
+    // SEARCH WHEN FAST FASTER THAN TAYLOR
+    /*vector<double> timeFast;
+    vector<double> timeTaylor;
+    int i = 20;
+    do{
+        timeFast.clear();
+        timeTaylor.clear();
+
+        cout << "========== Fast ==========  " << i << endl;
+        timeFast = Oscillogram(1,i,100,"fast");
+
+        cout << "========== Taylor ==========" << endl;
+        timeTaylor = Oscillogram(1,i,100,"taylor");
+
+        r->AddPoint( i , timeFast[0] / timeTaylor[0]);
+
+        i += 10;
+
+        cout<<endl;
+
+    }while(timeFast[0] > timeTaylor[0]);*/
+
 }

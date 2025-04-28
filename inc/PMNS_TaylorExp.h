@@ -15,11 +15,13 @@ namespace OscProb {
       PMNS_TaylorExp();          ///< Constructor
       virtual ~PMNS_TaylorExp(); ///< Destructor
 
-      virtual void SetwidthBin(double widthBin);
+      virtual void SetwidthBin(double dE , double dcosTheta);
 
-      virtual double avgProbTaylor(int flvi, int flvf, double E , double widthBin);
+      virtual double avgProbTaylor(int flvi, int flvf, double E , double dE);
 
-      virtual double avgProbTaylorLoE(int flvi, int flvf, double ELoE, double widthBin);
+      virtual double avgProbTaylorLoE(int flvi, int flvf, double LoE, double dLoE);
+
+      virtual double avgProbTaylorAngle(int flvi, int flvf, double cosTheta , double dcosTheta);
 
       virtual vectorD ConvertLoEtoE(double LoE, double dLoE);
 
@@ -45,13 +47,18 @@ namespace OscProb {
 
       // Attributes
 
-      complexD fKE[3][3]; 
       matrixC fevolutionMatrixS;  
 
+      complexD fKE[3][3];
       vectorD flambdaE;
       matrixC fVE;
 
-      double fwidthBin;
+      complexD fKcosTheta[3][3];
+      vectorD flambdacosTheta;
+      matrixC fVcosTheta;
+
+      double fdE;
+      double fdcosTheta;
   };
 
 } // namespace OscProb
