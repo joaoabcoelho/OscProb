@@ -15,13 +15,15 @@ namespace OscProb {
       PMNS_TaylorExp();          ///< Constructor
       virtual ~PMNS_TaylorExp(); ///< Destructor
 
-      virtual void SetwidthBin(double dE , double dcosTheta);
+      virtual void SetwidthBin(double dE , double dcosT);
+
+      virtual void SetCosT(double cosT);
 
       virtual double avgProbTaylor(int flvi, int flvf, double E , double dE);
 
       virtual double avgProbTaylorLoE(int flvi, int flvf, double LoE, double dLoE);
 
-      virtual double avgProbTaylorAngle(int flvi, int flvf, double cosTheta , double dcosTheta);
+      virtual double avgProbTaylorAngle(int flvi, int flvf, double cosT , double dcosT);
 
       virtual vectorD ConvertLoEtoE(double LoE, double dLoE);
 
@@ -31,7 +33,7 @@ namespace OscProb {
 
       virtual void BuildKE(double L , matrixC& K);
 
-      virtual void SolveK();
+      virtual void SolveK(complexD K[3][3], vectorD lambda, matrixC V);
 
       virtual void PropagatePathTaylor(
         NuPath p);            ///< Propagate neutrino through a single path
@@ -43,22 +45,28 @@ namespace OscProb {
 
       virtual void MultiplicationRule(matrixC SLayer,matrixC KLayer);
 
-      virtual double avgFormula(int flvi, int flvf); 
+      virtual double avgFormula(int flvi, int flvf, double dbin); 
 
       // Attributes
 
       matrixC fevolutionMatrixS;  
 
+      complexD fK[3][3];
+      vectorD flambda;
+      matrixC fV;
+
       complexD fKE[3][3];
       vectorD flambdaE;
       matrixC fVE;
 
-      complexD fKcosTheta[3][3];
-      vectorD flambdacosTheta;
-      matrixC fVcosTheta;
+      complexD fKcosT[3][3];
+      vectorD flambdaCosT;
+      matrixC fVcosT;
 
       double fdE;
-      double fdcosTheta;
+      double fdcosT;
+
+      double fcosT;
   };
 
 } // namespace OscProb

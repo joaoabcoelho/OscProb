@@ -6,7 +6,7 @@
 #include "SetNiceStyle.C"
 
 
-void macroTestTaylor(double cosT = -0.9, bool isNuBar = false){
+void macroTestTaylor(double cosT = -0.7, bool isNuBar = false){
 
   // Load some nice styles
   SetNiceStyle();

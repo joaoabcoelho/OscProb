@@ -23,21 +23,21 @@ void TimeMeasurement()
     double aaa = 0;
     int ii = 0 ;
 
-    for ( int i = 10 ; i<=500 ; i+= 5 ){
+    for ( int i = 0 ; i<=500 ; i+= 1 ){
 
         cout << "========== Fast ==========  " << i << endl;
-        vector<double> timeFast = Oscillogram(1,i,100,"fast");
+        //vector<double> timeFast = Oscillogram(1,i,100,"fast");
 
         cout << "========== Taylor ==========" << endl;
-        vector<double> timeTaylor = Oscillogram(1,i,100,"taylor");
+        vector<double> timeTaylor = Oscillogram(1,200,100,"taylor");
 
-        r->AddPoint( i , timeFast[0] / timeTaylor[0]);
-        f->AddPoint( i , timeFast[1] );
+        //r->AddPoint( i , timeFast[0] / timeTaylor[0]);
+        //f->AddPoint( i , timeFast[1] );
         t->AddPoint( i , timeTaylor[1] );
 
         cout<<endl;
 
-        aaa =timeTaylor[0];
+        aaa += timeTaylor[0];
         ii++;
     }
 
