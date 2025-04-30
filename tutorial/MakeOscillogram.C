@@ -21,7 +21,6 @@ void MakeOscillogram(int flvf = 1){
 
   // Set a nice overall style
   SetNiceStyle();
-  cout<<"mmmmmmmm"<<endl;
 
   // Make the oscillogram
   TH2D* hNH = GetOscHist(flvf,1);
@@ -34,7 +33,6 @@ void MakeOscillogram(int flvf = 1){
 
   // Draw some lines of constant energy
   DrawEnergyLines(hNH);
-  
 
 }
 
@@ -211,6 +209,7 @@ TH2D* GetOscHist(int flvf, int mh){
   // Use 200 x bins and 100 y bins
   int nbinsx = 200;
   int nbinsy = 100;
+  double widthBinX = 10000/200;
 
   // Set parameters to PDG
   double dm21 = 7.5e-5;
@@ -269,6 +268,7 @@ TH2D* GetOscHist(int flvf, int mh){
 
     // Set paths in OscProb
     myPMNS.SetPath(prem.GetNuPath());
+    testPMNS.SetPath(prem.GetNuPath());
 
     // Get the cosT index
     double cosT_min = floor(10*cosT)/10;
@@ -283,6 +283,8 @@ TH2D* GetOscHist(int flvf, int mh){
 
       // Set L/E from bin center
       double loe  = h2->GetXaxis()->GetBinCenter(le);
+
+      double widthBinXforE = L * (1 / (loe - widthBinX / 2) - 1 / (loe + widthBinX / 2));
 
       // Get E from L and L/E
       double E = L/loe;  
@@ -309,7 +311,7 @@ TH2D* GetOscHist(int flvf, int mh){
 
         // Add probabilities from OscProb
         myPMNS.SetIsNuBar(nunubar <= 0);
-        prob +=  weight_flux_CS  * myPMNS.Prob(flvi, flvf, L/loe);
+        prob +=  weight_flux_CS  * testPMNS.avgProbTaylor(flvi, flvf, L/loe, widthBinXforE);
         
       }}
     

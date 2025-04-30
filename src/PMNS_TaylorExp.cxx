@@ -43,6 +43,10 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
 
     fVE = matrixC(fNumNus, vectorC(fNumNus, 0));
 
+    flambdaCosT = vectorD(fNumNus, 0);
+
+    fVcosT = matrixC(fNumNus, vectorC(fNumNus, 0));
+
     fevolutionMatrixS = matrixC(fNumNus, vectorC(fNumNus, 0));
     for(int i= 0 ; i<fevolutionMatrixS.size(); i++){
         fevolutionMatrixS[i][i] = 1;
@@ -191,26 +195,26 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 ///
 ///
 ///
-void PMNS_TaylorExp::MultiplicationRule(matrixC SLayer,matrixC KLayer)
+void PMNS_TaylorExp::MultiplicationRule(matrixC SLayer,matrixC KLayer,complexD K[3][3])
 {
     //K (ne pas modifier S avant de l'appliquer ici )
     matrixC KCopy = matrixC(fNumNus, vectorC(fNumNus, 0));
     for(int j = 0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<fNumNus ; i++){ //PAS OBLIGIER DE COPIER
-            KCopy[i][j] = fKE[i][j];
+        for(int i = 0 ; i<fNumNus ; i++){ //PAS OBLIGIER DE COPIER CAR K1 n'apparait que en + K1
+            KCopy[i][j] = K[i][j];
         }
     }
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
-            fKE[i][j] = 0;
+            K[i][j] = 0;
             for(int k = 0 ; k<fNumNus ; k++){
                 for(int l = 0 ; l<fNumNus ; l++){                                                          
-                    fKE[i][j] += conj(fevolutionMatrixS[k][i]) * KLayer[k][l] * fevolutionMatrixS[l][j] + KCopy[i][j]; 
+                    K[i][j] += conj(fevolutionMatrixS[k][i]) * KLayer[k][l] * fevolutionMatrixS[l][j] + KCopy[i][j]; 
                 }
             }
             
             if(i != j){
-                fKE[j][i] = -conj(fKE[i][j]);
+                K[j][i] = -conj(K[i][j]);
             }
         }
     }
@@ -265,18 +269,17 @@ void PMNS_TaylorExp::MultiplicationRule(matrixC SLayer,matrixC KLayer)
 ///
 /// Propagate neutrino state through full path
 ///
-void PMNS_TaylorExp::PropagateTaylor()
+void PMNS_TaylorExp::PropagateTaylor(complexD K[3][3])
 {
-  for (int i = 0; i < int(fNuPaths.size()); i++) { PropagatePathTaylor(fNuPaths[i]); }
+  for (int i = 0; i < int(fNuPaths.size()); i++) { PropagatePathTaylor(fNuPaths[i], K); }
 }
-
 
 //.............................................................................
 ///
 /// Propagate the current neutrino state through a given path
 /// @param p - A neutrino path segment
 ///
-void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
+void PMNS_TaylorExp::PropagatePathTaylor(NuPath p, complexD K[3][3])
 {
     // Set the neutrino path
     SetCurPath(p);
@@ -298,14 +301,19 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 
     // Build KE in mass basis
     matrixC Kmass = matrixC(fNumNus, vectorC(fNumNus, 0));
-    BuildKE(p.length,Kmass);
+    if(fdcosT == 0){
+        BuildKE(p.length,Kmass);
+    }
+    else{
+
+    }
 
     // Rotate KE in flavor basis
     matrixC Kflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
     rotateK(Kmass,Kflavor);
 
     //multiplication rule for K and S 
-    MultiplicationRule(Sflavor,Kflavor);
+    MultiplicationRule(Sflavor,Kflavor,K);
 
 }
 
@@ -313,7 +321,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 ///
 /// 
 ///
-void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD lambda, matrixC V)
+void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
 {
     double   fEvalGLoBES[3];
     complexD fEvecGLoBES[3][3];
@@ -332,12 +340,12 @@ void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD lambda, matrixC V)
 ///
 /// 
 ///
-double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin)
+double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambda, matrixC V)
 {
     vectorC SVmulti = vectorC(fNumNus, 0);
     for(int i = 0 ; i<fNumNus ; i++) {
         for(int j = 0 ; j<fNumNus ; j++){
-            SVmulti[i] += fevolutionMatrixS[flvf][j] *fV[j][i];
+            SVmulti[i] += fevolutionMatrixS[flvf][j] *V[j][i];
         }
     }
 
@@ -347,12 +355,12 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin)
     complexD sinc[fNumNus][fNumNus];
 
     for(int i = 0 ; i<fNumNus ; i++){
-        s1[i] = SVmulti[i] * conj(fV[flvi][i]) ;
+        s1[i] = SVmulti[i] * conj(V[flvi][i]) ;
         //s2[i] = conj(SVmulti[i]) * fV[flvi][i] ;  S1+CONJ(S2)!!!!!!!!!!!!!
 
         //sinc[i][i] = 1;
         for(int j = 0 ; j<i ; j++){
-            double arg = (flambda[j] - flambda[i]) * dbin;
+            double arg = (lambda[j] - lambda[i]) * dbin;
             sinc[j][i] = sin(arg)/arg;
         }
     }
@@ -411,13 +419,13 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
     SetwidthBin(dE,0);
 
     //Propagate -> get S and K matrix (on the whole path)
-    PropagateTaylor();
+    PropagateTaylor(fKE);
 
     //DiagolK -> get VE and lambdaE
-    SolveK(fK,flambdaE,fVE);
+    SolveK(fKE,flambdaE,fVE);
 
     //return fct avr proba
-    return avgFormula(flvi,flvf,fdE);
+    return avgFormula(flvi,flvf,fdE, flambdaE, fVE);
 }
 
 //.............................................................................
@@ -451,12 +459,12 @@ double PMNS_TaylorExp::avgProbTaylorAngle(int flvi, int flvf, double cosT , doub
     SetwidthBin(0,dcosT);
 
     //Propagate -> get S and K matrix (on the whole path)
-    PropagateTaylor();
+    PropagateTaylor(fKcosT);
 
     //DiagolK -> get VE and lambdaE
-    SolveK(fK,flambdaCosT,fVcosT);
+    SolveK(fKcosT,flambdaCosT,fVcosT);
 
     //return fct avr proba
-    return avgFormula(flvi,flvf,fdcosT);
+    return avgFormula(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
 }
 

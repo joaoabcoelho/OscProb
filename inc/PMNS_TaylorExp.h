@@ -33,37 +33,32 @@ namespace OscProb {
 
       virtual void BuildKE(double L , matrixC& K);
 
-      virtual void SolveK(complexD K[3][3], vectorD lambda, matrixC V);
+      virtual void SolveK(complexD K[3][3], vectorD& lambda, matrixC& V);
 
       virtual void PropagatePathTaylor(
-        NuPath p);            ///< Propagate neutrino through a single path
-      virtual void PropagateTaylor(); ///< Propagate neutrino through full path
+        NuPath p , complexD K[3][3]);            ///< Propagate neutrino through a single path
+      virtual void PropagateTaylor(complexD K[3][3]); ///< Propagate neutrino through full path
 
       virtual void rotateS(vectorC fPhases,matrixC& S);
 
       virtual void rotateK(matrixC Kmass,matrixC& Kflavor);
 
-      virtual void MultiplicationRule(matrixC SLayer,matrixC KLayer);
+      virtual void MultiplicationRule(matrixC SLayer,matrixC KLayer, complexD K[3][3]);
 
-      virtual double avgFormula(int flvi, int flvf, double dbin); 
+      virtual double avgFormula(int flvi, int flvf, double dbin, vectorD flambda, matrixC fV); 
 
       // Attributes
 
       matrixC fevolutionMatrixS;  
 
-      complexD fK[3][3];
-      vectorD flambda;
-      matrixC fV;
-
       complexD fKE[3][3];
       vectorD flambdaE;
       matrixC fVE;
+      double fdE;
 
       complexD fKcosT[3][3];
       vectorD flambdaCosT;
       matrixC fVcosT;
-
-      double fdE;
       double fdcosT;
 
       double fcosT;
