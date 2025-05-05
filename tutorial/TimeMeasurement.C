@@ -16,14 +16,20 @@
 void TimeMeasurement()
 {
 
-    auto r = new TGraph();
-    auto f = new TGraph();
-    auto t = new TGraph();
+    //auto r = new TGraph();
+    //auto f = new TGraph();
+    //auto t = new TGraph();
 
     double aaa = 0;
     int ii = 0 ;
 
-    for ( int i = 0 ; i<=500 ; i+= 1 ){
+    cout << "========== Taylor ==========" << endl;
+    vector<double> timeTaylor = Oscillogram(1,200,100,"taylor");
+
+
+
+    //---------------------------------------------------------------------------
+    /*for ( int i = 0 ; i<=500 ; i+= 1 ){
 
         cout << "========== Fast ==========  " << i << endl;
         //vector<double> timeFast = Oscillogram(1,i,100,"fast");
@@ -42,22 +48,7 @@ void TimeMeasurement()
     }
 
     cout<<"temps moyen :" << aaa/ii<<endl;  
-
-    /*do{
-        cout << "========== Fast ==========  " << i << endl;
-        //vector<double> timeFast = Oscillogram(1,i,100,"fast");
-
-        cout << "========== Taylor ==========" << endl;
-        vector<double> timeTaylor = Oscillogram(1,200,100,"taylor");
-
-    }while();*/
-
-
-
-
-
-
-
+    
     TFile file1("graphTime.root", "RECREATE");
 
     r->SetName("ratio");
@@ -76,10 +67,19 @@ void TimeMeasurement()
     t->Write();
 
     file1.Close();
+    
+    */
+    //---------------------------------------------------------------------------
 
+    /*do{
+        cout << "========== Fast ==========  " << i << endl;
+        //vector<double> timeFast = Oscillogram(1,i,100,"fast");
 
+        cout << "========== Taylor ==========" << endl;
+        vector<double> timeTaylor = Oscillogram(1,200,100,"taylor");
 
-
+    }while();*/
+    //---------------------------------------------------------------------------
 
     // SEARCH WHEN FAST FASTER THAN TAYLOR
     /*vector<double> timeFast;
@@ -102,5 +102,5 @@ void TimeMeasurement()
         cout<<endl;
 
     }while(timeFast[0] > timeTaylor[0]);*/
-
+    //---------------------------------------------------------------------------
 }

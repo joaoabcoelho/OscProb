@@ -217,16 +217,20 @@ void PMNS_TaylorExp::HadamardProduct(vectorD lambda, matrixC& densityMatrix, dou
 {
     matrixC sinc = matrixC(fNumNus, vectorC(fNumNus, 0));
     for(int j=0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<j ; j++){
+        for(int i = 0 ; i<j ; i++){
             double arg = (lambda[i] - lambda[j]) * dbin;
             sinc[i][j] = sin(arg)/arg;
 
             sinc[j][i] = sinc[i][j];
         }
     }    // PEUT ETRE AMELIORE !!!!!!!!!!!!!!!!!!!!!!
+
+    for(int i=0 ; i<fNumNus ; i++){
+        sinc[i][i] = 1;
+    }
     
     for(int j=0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<fNumNus ; j++){
+        for(int i = 0 ; i<fNumNus ; i++){
             densityMatrix[i][j] = densityMatrix[i][j] * sinc[i][j];
         }
     }
