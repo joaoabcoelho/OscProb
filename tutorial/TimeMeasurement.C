@@ -41,9 +41,22 @@ void TimeMeasurement()
         ii++;
     }
 
-    //TRACER LE TEMPS/ITERATION POUR CHAQUE METHODE MASI SEPAREMENT
-
     cout<<"temps moyen :" << aaa/ii<<endl;  
+
+    /*do{
+        cout << "========== Fast ==========  " << i << endl;
+        //vector<double> timeFast = Oscillogram(1,i,100,"fast");
+
+        cout << "========== Taylor ==========" << endl;
+        vector<double> timeTaylor = Oscillogram(1,200,100,"taylor");
+
+    }while();*/
+
+
+
+
+
+
 
     TFile file1("graphTime.root", "RECREATE");
 

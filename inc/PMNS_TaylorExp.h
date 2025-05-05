@@ -21,6 +21,8 @@ namespace OscProb {
 
       virtual double avgProbTaylor(int flvi, int flvf, double E , double dE);
 
+      virtual double avgProbTaylor(int flvi, int flvf, double E , double dE, double cosT , double dcosT);
+
       virtual double avgProbTaylorLoE(int flvi, int flvf, double LoE, double dLoE);
 
       virtual double avgProbTaylorAngle(int flvi, int flvf, double cosT , double dcosT);
@@ -33,19 +35,31 @@ namespace OscProb {
 
       virtual void BuildKE(double L , matrixC& K);
 
+      virtual void BuildKcosT(matrixC& K);
+
       virtual void SolveK(complexD K[3][3], vectorD& lambda, matrixC& V);
 
       virtual void PropagatePathTaylor(
-        NuPath p , complexD K[3][3]);            ///< Propagate neutrino through a single path
-      virtual void PropagateTaylor(complexD K[3][3]); ///< Propagate neutrino through full path
+        NuPath p );            ///< Propagate neutrino through a single path
+      virtual void PropagateTaylor(); ///< Propagate neutrino through full path
 
       virtual void rotateS(vectorC fPhases,matrixC& S);
 
       virtual void rotateK(matrixC Kmass,matrixC& Kflavor);
 
-      virtual void MultiplicationRule(matrixC SLayer,matrixC KLayer, complexD K[3][3]);
+      virtual void firstRotate(matrixC V, matrixC& densityMatrix);
+
+      virtual void secondRotate(matrixC V, matrixC& densityMatrix);
+
+      virtual void HadamardProduct(vectorD lambda, matrixC& densityMatrix, double dbin);
+
+      virtual void MultiplicationRuleK(matrixC SLayer,matrixC KLayer, complexD K[3][3]);
+
+      virtual void MultiplicationRuleS(matrixC SLayer);
 
       virtual double avgFormula(int flvi, int flvf, double dbin, vectorD flambda, matrixC fV); 
+
+      virtual double avgAlgorithm(int flvi, int flvf);
 
       // Attributes
 
