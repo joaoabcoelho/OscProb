@@ -50,6 +50,7 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
         fevolutionMatrixS[i][i] = 1;
         for(int j = 0 ; j<3 ; j++){
             fKE[i][j] = 0;
+            fKcosT[i][j] = 0;
         }
     }
 

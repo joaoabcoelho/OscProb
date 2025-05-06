@@ -24,7 +24,7 @@ void TimeMeasurement()
     int ii = 0 ;
 
     cout << "========== Taylor ==========" << endl;
-    vector<double> timeTaylor = Oscillogram(1,200,100,"taylor");
+    vector<double> timeTaylor = Oscillogram(1,200,1000,"taylor");
 
 
 
