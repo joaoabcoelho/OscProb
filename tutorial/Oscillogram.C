@@ -92,7 +92,7 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method , vec
   // Set histogram parameters
   double xmin = 0;
   double xmax = 10000;
-  double ymin = -0.6;
+  double ymin = -1;
   double ymax = 0;
   double widthBinX = (xmax-xmin) / nbinsx;
   double widthBinY = (ymax-ymin) / nbinsy; 
@@ -112,6 +112,8 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method , vec
 
     // Get cos(theta_z) from bin center
     double cosT = h2->GetYaxis()->GetBinCenter(ct);
+    cout<<endl<<endl<<"------------------cosT="<<cosT<<"------------------------"<<endl;
+    myPMNS.LenghtLayer();
 
     // Set total path length L
     double L = prem.GetTotalL(cosT);
@@ -151,13 +153,13 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method , vec
         //cout<<myPMNS.avgProbTaylorAngle(flvi, flvf,cosT,widthBinY)<<endl;
 
         if(method == "fast") {prob += weight*myPMNS.AvgProbLoE(flvi, flvf, loe ,widthBinX);}
-        if(method == "taylor") {prob += weight*myPMNS.avgProbTaylorAngle(flvi, flvf,cosT,widthBinY);} //L/loe ,widthBinXforE,
+        if(method == "taylor") {prob += weight*myPMNS.avgProbTaylor(flvi, flvf,L/loe ,widthBinXforE,cosT,widthBinY);} //L/loe ,widthBinXforE,
 
         // ICI L/E ET PAS E
         // ESSAYER DECHG DANS CE CODE LE to E
         // ATTENTION AvgProb utilise la converstion E to LoE MAIS pas avgProbTaylor
 
-        prob -= weight*myPMNS.Prob(flvi, flvf, L/loe);
+        //prob -= weight*myPMNS.Prob(flvi, flvf, L/loe);
 
         time.count++;
       }}

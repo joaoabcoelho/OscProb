@@ -29,6 +29,8 @@ namespace OscProb {
 
       virtual vectorD ConvertLoEtoE(double LoE, double dLoE);
 
+      virtual void LenghtLayer();
+
     protected:
       virtual void InitializeTaylorsVectors(); ///< Initialize all member vectors with
       ///< zeros

@@ -377,6 +377,18 @@ void PMNS_TaylorExp::MultiplicationRuleS(matrixC SLayer)
 
 //.............................................................................
 ///
+///
+///
+void PMNS_TaylorExp::LenghtLayer()
+{
+    for(int i = 0 ; i<fNuPaths.size() ; i++)
+    {
+        cout<<"Layer "<<i<<"    L = "<<fNuPaths[i].length<<"   Density = "<<fNuPaths[i].density<<endl;
+    }
+}
+
+//.............................................................................
+///
 /// Propagate neutrino state through full path
 ///
 void PMNS_TaylorExp::PropagateTaylor()
