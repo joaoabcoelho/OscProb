@@ -113,7 +113,7 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method , vec
     // Get cos(theta_z) from bin center
     double cosT = h2->GetYaxis()->GetBinCenter(ct);
     cout<<endl<<endl<<"------------------cosT="<<cosT<<"------------------------"<<endl;
-    myPMNS.LenghtLayer();
+    //myPMNS.LenghtLayer();
 
     // Set total path length L
     double L = prem.GetTotalL(cosT);
@@ -153,7 +153,7 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method , vec
         //cout<<myPMNS.avgProbTaylorAngle(flvi, flvf,cosT,widthBinY)<<endl;
 
         if(method == "fast") {prob += weight*myPMNS.AvgProbLoE(flvi, flvf, loe ,widthBinX);}
-        if(method == "taylor") {prob += weight*myPMNS.avgProbTaylor(flvi, flvf,L/loe ,widthBinXforE,cosT,widthBinY);} //L/loe ,widthBinXforE,
+        if(method == "taylor") {prob += weight*myPMNS.avgProbTaylor(flvi, flvf,L/loe ,widthBinXforE);} //L/loe ,widthBinXforE, cosT ,widthBinY
 
         // ICI L/E ET PAS E
         // ESSAYER DECHG DANS CE CODE LE to E

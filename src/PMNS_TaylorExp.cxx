@@ -283,9 +283,11 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 ///
 void PMNS_TaylorExp::BuildKcosT(matrixC& K)
 {
+    double theta = acos(fcosT);
+
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
-            K[i][j] = 6371 * abs(sin(fcosT)) * fHam[i][j];
+            K[i][j] = 6371 * abs(sin(theta)) * fHam[i][j]; 
 
             if(i != j){
                 K[j][i] = conj(K[i][j]);
@@ -476,10 +478,10 @@ void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
 ///
 double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambda, matrixC V)
 {
-    vectorC SVmulti = vectorC(fNumNus, 0);
+    /*vectorC SVmulti = vectorC(fNumNus, 0);
     for(int i = 0 ; i<fNumNus ; i++) {
         for(int j = 0 ; j<fNumNus ; j++){
-            SVmulti[i] += fevolutionMatrixS[flvf][j] *V[j][i];
+            SVmulti[i] += fevolutionMatrixS[flvf][j] *V[j][i]; //SOMMER SUR K?????????
         }
     }
 
@@ -496,6 +498,7 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
         for(int j = 0 ; j<i ; j++){
             double arg = (lambda[j] - lambda[i]) * dbin;
             sinc[j][i] = sin(arg)/arg;
+            cout<<arg<<"    ";
         }
     }
 
@@ -506,6 +509,34 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
         }
 
         P += norm(s1[j]);
+    }*/
+
+    complexD P;
+
+    matrixC SVmulti = matrixC(fNumNus, vectorC(fNumNus, 0));
+    for(int i = 0 ; i<fNumNus ; i++) {
+        for(int j = 0 ; j<fNumNus ; j++){
+            for(int k = 0 ; k<fNumNus ; k++){
+                SVmulti[i][j] += fevolutionMatrixS[i][k] *V[k][j];
+            }
+        }
+    }
+
+    complexD sinc[fNumNus][fNumNus];
+    for(int i = 0 ; i<fNumNus ; i++){
+        for(int j = 0 ; j<i ; j++){
+            double arg = (lambda[j] - lambda[i]) * dbin;
+            sinc[j][i] = sin(arg)/arg;
+            sinc[i][j] = sinc[j][i];
+        }
+
+        sinc[i][i] = 1;
+    }
+    
+    for(int j = 0 ; j<fNumNus ; j++){
+        for(int i = 0 ;i<fNumNus ;i++){
+            P += SVmulti[flvf][i] * conj(SVmulti[flvf][j]) * conj(V[flvi][i]) * V[flvi][j] * sinc[j][i];
+        }
     }
 
     return real(P); 

@@ -6,7 +6,7 @@
 #include "SetNiceStyle.C"
 
 
-void macroTestTaylor(double cosT = -0.7, bool isNuBar = false){
+void macroTestTaylor(double cosT = -0.9, bool isNuBar = false){
 
   // Load some nice styles
   SetNiceStyle();
@@ -30,7 +30,7 @@ void macroTestTaylor(double cosT = -0.7, bool isNuBar = false){
   t.SetPath(prem.GetNuPath());
 
   // Make some histograms
-  int nbins = 10000;
+  int nbins = 1000;
   double xmin = 1;
   double xmax = 20;
   double widthBin = (xmax-xmin) / nbins;
