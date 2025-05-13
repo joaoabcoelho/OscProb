@@ -25,7 +25,7 @@ namespace OscProb {
 
       virtual double avgProbTaylorLoE(int flvi, int flvf, double LoE, double dLoE);
 
-      virtual double avgProbTaylorAngle(int flvi, int flvf, double cosT , double dcosT);
+      virtual double avgProbTaylorAngle(int flvi, int flvf, double E, double cosT , double dcosT);
 
       virtual vectorD ConvertLoEtoE(double LoE, double dLoE);
 

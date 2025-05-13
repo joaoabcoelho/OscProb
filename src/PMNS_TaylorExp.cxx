@@ -434,6 +434,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 
         //multiplication rule for K and S 
         MultiplicationRuleK(Sflavor,Kflavor,fKE);
+        
     }
 
     if(fdcosT != 0){
@@ -441,12 +442,12 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
         BuildKcosT(Kmass);
 
         // Rotate KE in flavor basis
-        matrixC Kflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
-        rotateK(Kmass,Kflavor);
+        //matrixC Kflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
+        //rotateK(Kmass,Kflavor);
 
         //multiplication rule for K and S 
-        MultiplicationRuleK(Sflavor,Kflavor,fKcosT);
-
+        MultiplicationRuleK(Sflavor,Kmass,fKcosT);
+        
     }
 
     MultiplicationRuleS(Sflavor);
@@ -528,6 +529,8 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
             double arg = (lambda[j] - lambda[i]) * dbin;
             sinc[j][i] = sin(arg)/arg;
             sinc[i][j] = sinc[j][i];
+
+            //cout<<sinc[j][i]<<"  ";
         }
 
         sinc[i][i] = 1;
@@ -615,11 +618,12 @@ double PMNS_TaylorExp::avgProbTaylorLoE(int flvi, int flvf, double LoE , double 
 ///
 ///
 ///
-double PMNS_TaylorExp::avgProbTaylorAngle(int flvi, int flvf, double cosT , double dcosT)
+double PMNS_TaylorExp::avgProbTaylorAngle(int flvi, int flvf, double E, double cosT , double dcosT)
 {
     // reset K et S et Ve et lambdaE
     InitializeTaylorsVectors();
 
+    SetEnergy(E);
     SetCosT(cosT);
     SetwidthBin(0,dcosT);
 
