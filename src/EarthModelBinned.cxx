@@ -49,11 +49,11 @@ void TrajConstants::UpdateNuAngles(double cosTheta, double phi)
 void TrajConstants::UpdateDetPos(double rDet, double DetLat, double DetLon)
 {
   sinDetLat = sin(DetLat);
+  cosDetLat = cos(DetLat);
   cosDetLon = cos(DetLon);
   sinDetLon = sin(DetLon);
   DetRadius = rDet;
 
-  cosDetLat     = 1 - sinDetLat * sinDetLat;
   rDetSinDetLat = DetRadius * sinDetLat;
   rDetCosDetLat = DetRadius * cosDetLat;
 }
@@ -70,13 +70,14 @@ void TrajConstants::Recalculate()
   sinTsinAcosDetLon  = sinTsinA * cosDetLon;
   rDetCosT           = DetRadius * cosT;
   rDetSinT           = DetRadius * sinT;
-  rDetCosAcosDetLat  = cosA * rDetCosDetLat;
   alpha              = sinTcosA * sinDetLat - cosTcosDetLat;
   beta               = sinT * sinDetLat - cosA * cosTcosDetLat;
   gamma              = sinTcosA * cosDetLat + cosT * sinDetLat;
   gammaSq            = gamma * gamma;
   rDetGammaSinDetLat = rDetSinDetLat * gamma;
   maxSinSqLat        = 1 - pow(sinA * cosDetLat, 2);
+  if(beta == 0) { xlatextreme = 0; }
+  else { xlatextreme = cosA * rDetCosDetLat / beta; }
 }
 
 //.............................................................................
@@ -128,8 +129,11 @@ void EarthModelBinned::ClearModel()
 ///
 /// Set the coordinates of the detector:
 ///   radius in km, latitude in degrees, longitude in degrees
-/// Also, updates the detector-coordinate-dependent parts of the trajectory
-/// constants.
+/// Also, updates the detector-coordinate-dependent parts of the
+/// trajectory constants.
+///
+/// Note: If lat = -90 (or 90), lon (or -lon) defines where the
+/// azimuthal angle for the neutrino's trajectory is 0.
 ///
 /// @param rad - The distance from the detector to the Earth's center in km
 /// @param lat - The latitude of the detector in deg N (between -90 and 90)
@@ -151,7 +155,7 @@ void EarthModelBinned::SetDetPos(double rad, double lat, double lon)
 /// @param longitude - The longitude of the bin center in degrees
 /// @param density - The density of the matter in the bin in g/cm^3
 /// @param zoa     - The effective Z/A value of the matter in the bin
-/// @param index   - Region index (all bins with same index have same Z/A)
+/// @param index   - Region index
 ///
 void EarthModelBinned::AddBin(double radius_out, double radius_in,
                               double latitude, double longitude, double density,
@@ -170,12 +174,13 @@ void EarthModelBinned::AddBin(double radius_out, double radius_in,
 ///
 /// The row format for the model table needs to be:
 /// 	longitude (deg)	latitude (deg)	outer depth (km)	density
-/// (g/cm^3?)	Z/A	region_index The data in the table must be in order of
-/// decreasing depth, followed by increasing longitude, and then increasing
-/// latitude. Latitude bin widths and longitude bin widths must each be
-/// constant. In each bin of one coordinate, the bins centers for the other
-/// coordinates must be the same.
-/// This assumes that the center of the Earth is at a depth of 6371 km.
+/// (g/cm^3?)	Z/A region_index
+/// The data in the table must be in order of decreasing depth,
+/// followed by increasing longitude, and then increasing latitude.
+/// Latitude bin widths and longitude bin widths must each be
+/// constant. In each bin of one coordinate, the bins centers for the
+/// other coordinates must be the same.
+/// This assumes that the center of the Earth is at a depth of 6371km.
 ///
 /// @param filename - The txt file containing a table of earth layers
 ///
@@ -283,7 +288,7 @@ void EarthModelBinned::LoadModel(string filename)
   // Error if first latitude bin center deviates from about half of the
   // calculated latitude bin width
   if (abs(fHalfLatBinWidth - (fEarthBins[0].latitude + 0.5 * M_PI)) >
-      fHalfLatBinWidth * 0.1) { // Warn if first latitude bin center isn't about
+      fHalfLatBinWidth * 0.01) { // Warn if first latitude bin center isn't about
                                 // half of the latitude bin width
     cerr << "ERROR: Latitude of 1st bin center (" << fEarthBins[0].latitude
          << ") is not in the middle of the first bin, whose size should be "
@@ -362,8 +367,8 @@ double EarthModelBinned::GetRegionZoA(int index)
 
 //.............................................................................
 ///
-/// Scale density by scaling factor for all bins in region specified by
-/// given index.
+/// Scale density by scaling factor for all bins in region specified
+/// by given index.
 ///
 /// @param index  - The region index
 /// @param factor - The scaling factor for changing the density
@@ -405,13 +410,17 @@ void EarthModelBinned::AddPath(double length, EarthBin bin)
 
 //.............................................................................
 ///
-/// Calculate the distance to the detector along a neutrino trajectory,
-/// specified by cosT and the azimuthal angle, at the edge of
-/// the current latitude bin in the direction specified by dir.
+/// Calculate the distance to the detector along a neutrino
+/// trajectory, specified by cosT and the azimuthal angle, at the
+/// edge of the current latitude bin in the direction specified
+/// by dir.  Returns a negative value if the next latitude bin will
+/// not be reached before the neutrino reaches the detector.  Flips
+/// L.sign and changes L.maxreached to true if the extreme latitude is
+/// within the cur_index Earth bin.
 ///
-/// In an attempt to make this calculation more robust, this function turns
-/// the latitude bin iteration around when sin^2(lat) gets within 10^(-14)
-/// of its extreme limit.
+/// In an attempt to make this calculation more robust, this function
+/// turns the latitude bin iteration around when sin^2(lat) gets
+/// within 10^(-14) of its extreme limit.
 ///
 /// @param cur_index - Index of current Earth bin
 /// @param L         - Information for the lat bin crossings
@@ -419,12 +428,13 @@ void EarthModelBinned::AddPath(double length, EarthBin bin)
 ///
 double EarthModelBinned::DetDistForNextLatBin(int cur_index, LatBinInfo& L)
 {
-  // Find next lat bin boundary
+  // Find next lat bin boundary (bin center +/- 1/2-binwidth)
   double NewLat = fEarthBins[cur_index].latitude + L.sign * L.dLat;
-  // Turn around if lat reaches +/- 90 degrees
+  // Turn around if lat reaches +/- 90 degrees (or close enough)
   if (abs(NewLat) - 0.5 * M_PI > -1.0e-14) {
-    if (L.maxreached > 0) return -1; // Only turn around once
-    L.maxreached = 1;
+    if (L.maxreached) return -1; // Only turn around once
+    L.maxreached = true;
+//    cout << "Max latitude reached..." << endl;
     L.sign       = -L.sign;
     NewLat       = fEarthBins[cur_index].latitude + L.sign * L.dLat;
     if (abs(NewLat) - 0.5 * M_PI > -1.0e-14)
@@ -434,36 +444,40 @@ double EarthModelBinned::DetDistForNextLatBin(int cur_index, LatBinInfo& L)
   // Calculate parts of answer
   double sinNewLat    = sin(NewLat);
   double NsinSqNewLat = -sinNewLat * sinNewLat;
-  double radicand     = fC.maxSinSqLat + NsinSqNewLat;
+  double radicand     = fC.maxSinSqLat + NsinSqNewLat; //1-[sin(NewLat)]^2-[sin(phi)cos(DetLat)]^2
   // Turn around if the radicand is 0 (close enough) or less
   if (radicand < 1.0e-14) {
-    if (L.maxreached > 0) return -1; // Only turn around once
-    L.maxreached = 1;
+    if (L.maxreached) return -1; // Only turn around once
+    L.maxreached = true;
+//    cout << "Max latitude reached..." << endl;
     L.sign       = -L.sign;
     NewLat       = fEarthBins[cur_index].latitude + L.sign * L.dLat;
     sinNewLat    = sin(NewLat);
     NsinSqNewLat = -sinNewLat * sinNewLat;
     radicand     = fC.maxSinSqLat + NsinSqNewLat;
     if (radicand < 1.0e-14)
-      return -1; // The rest of the track is contained in this lon bin
+      return -1; // The rest of the track is contained in this lat bin
   }
   double denominator = fC.gammaSq + NsinSqNewLat;
 
   // Calculate distance from the detector at next lat bin boundary
-  double answer = 0;
+  double answer;
   if (denominator == 0) {
     answer =
-        0.5 * (fC.rDetCosAcosDetLat / fC.beta - fC.rDetSinDetLat / fC.gamma);
+        0.5 * (fC.xlatextreme - fC.rDetSinDetLat / fC.gamma);
+    //There is a "possible" case where answer would be 0:
+    //  if the detector is at the center of the Earth... just don't...
   }
   else {
     answer = -(fC.rDetCosT * NsinSqNewLat + fC.rDetGammaSinDetLat +
                L.sign * fC.rDetSinT * sinNewLat * sqrt(radicand)) /
              denominator;
   }
-  // Indicates that going to the edge of the bin jumped to an invalid part of
-  // the function
-  if (L.maxreached > 0 && answer >= fC.rDetCosAcosDetLat / fC.beta) {
-    return -1; // The rest of the track is contained in this lon bin
+
+  // Check to see if going to the edge of the bin jumped to an invalid
+  // part of the function (cosA*rDetCosDetLat/beta = x at max lat)
+  if (L.maxreached && answer >= fC.xlatextreme) {
+    return -1; // The rest of the track is contained in this lat bin
   }
 
   return answer;
@@ -472,11 +486,11 @@ double EarthModelBinned::DetDistForNextLatBin(int cur_index, LatBinInfo& L)
 //.............................................................................
 ///
 /// Calculate the distance to the detector at the edge of the current
-/// longitude bin along a neutrino trajectory specified by cosT and the
-/// azimuthal angle, setting the index for the next longitude bin in the
-/// process. The maximum/minimum longitude are expressed around the 0-2pi
-/// boundary. So, if the track spans that boundary, the actual allowed
-/// range for lon is [min_lon,2pi)U[0,max_lon].
+/// longitude bin along a neutrino trajectory specified by cosT and
+/// the azimuthal angle, setting the index for the next longitude bin
+/// in the process. The maximum/minimum longitude are expressed around
+/// the 0-2pi boundary. So, if the track spans that boundary, the
+/// actual allowed range for lon is [min_lon,2pi)U[0,max_lon].
 ///
 /// @param prev_lon - Value at center of initial longitude bin
 /// @param L        - Information about longitude bin crossings
@@ -487,7 +501,7 @@ double EarthModelBinned::DetDistForNextLonBin(double prev_lon, LonBinInfo& L)
   double twoPi = 2 * M_PI;
   // Increment to next bin in direction dLon
   double lon = prev_lon + L.dLon;
-  if (lon < 0 || lon >= twoPi) lon -= floor(lon / twoPi) * twoPi;
+  if (lon < 0 || lon >= twoPi) { lon -= floor(lon / twoPi) * twoPi; }
   if (L.dLon > 0) {
     L.nextBin = L.bin + 1;
     if (L.nextBin >= fnLonBins) {
@@ -532,14 +546,11 @@ double EarthModelBinned::DetDistForNextLonBin(double prev_lon, LonBinInfo& L)
 
 //.............................................................................
 ///
-/// Record all the path segments as the neutrino crosses into new latitude
-/// and longitude bins until it reaches the next depth bin.
+/// Record all the path segments as the neutrino crosses into new
+/// latitude and longitude bins until it reaches the next depth bin.
 ///
-/// All the variables not listed below are the same as the arguments for
-/// the DetDistForNextLonBin and DetDistForNextLatBin functions.
-///
-/// @param detDist_nextDbin - Distance from the detector at which neutrino
-/// passes into next depth bin
+/// @param detDist_nextDbin - Distance from the detector at which
+/// neutrino passes into next depth bin
 /// @param DetDist          - Current distance from the detector
 /// @param index            - Index of current Earth bin
 /// @param latI             - Information about lat bin crossings
@@ -550,25 +561,31 @@ void EarthModelBinned::RecordLatLonBinCrossings(double  detDist_nextDbin,
                                                 LatBinInfo& latI,
                                                 LonBinInfo& lonI)
 {
+  //Keep going as long as there is a lat or lon bin crossing before
+  //the next depth bin crossing
   while (detDist_nextDbin < latI.detDist_nextBin ||
          detDist_nextDbin < lonI.detDist_nextBin) {
-    if (latI.detDist_nextBin > lonI.detDist_nextBin) {
+    if (latI.detDist_nextBin > lonI.detDist_nextBin) { //if next lat bin crossing is before next lon bin crossing
       // Add segment to next lat bin to path
       AddPath(DetDist - latI.detDist_nextBin, fEarthBins[index]);
+      double latitude_crossing = fEarthBins[index].latitude + latI.sign * latI.dLat;
 
       // Move lat bins
       DetDist = latI.detDist_nextBin;
       index += latI.nextBin - latI.bin;
       latI.bin = latI.nextBin;
+//      cout << "Latitude bin crossing at x=" << DetDist << "km,lat=" << latitude_crossing << "rad...now in Earth bin " << index << " = (r" << floor(index/(fnLonBins*fnLatBins)) << ", lon" << lonI.bin << ", lat" << latI.bin << ")" << endl;
 
       // Find next lat bin
-      if (latI.dLat == 0) { latI.detDist_nextBin = -1; }
+      if (latI.dLat == 0) { //Only 1 lat bin crossing along entire neutrino trajectory
+        latI.detDist_nextBin = -1;
+      }
       else {
         latI.detDist_nextBin = DetDistForNextLatBin(index, latI);
         latI.nextBin         = latI.bin + latI.sign;
       }
     }
-    else {
+    else { //if next lon bin crossing is before (or simultaneous with) next lat bin corssing
       // Add segment to next lon bin to path
       AddPath(DetDist - lonI.detDist_nextBin, fEarthBins[index]);
 
@@ -576,9 +593,12 @@ void EarthModelBinned::RecordLatLonBinCrossings(double  detDist_nextDbin,
       DetDist = lonI.detDist_nextBin;
       index += (lonI.nextBin - lonI.bin) * fnLatBins;
       lonI.bin = lonI.nextBin;
+//      cout << "Longitude bin crossing at x=" << DetDist << "km...now in Earth bin " << index << " = (r" << floor(index/(fnLonBins*fnLatBins)) << ", lon" << lonI.bin << ", lat" << latI.bin << ")" << endl;
 
       // Find next lon bin
-      if (lonI.dLon == 0) { lonI.detDist_nextBin = -1; }
+      if (lonI.dLon == 0) { //Only 1 lon bin crossing along entire neutrino trajectory
+        lonI.detDist_nextBin = -1;
+      }
       else {
         lonI.detDist_nextBin =
             DetDistForNextLonBin(fEarthBins[index].longitude, lonI);
@@ -611,14 +631,18 @@ int EarthModelBinned::LonBinIndex(double longitude)
 /// Fill the path sequence in a vector.
 ///
 /// This will start at the upper-most layer (where the neutrino's path
-/// started) and find path lengths to the next bin crossed. When reaching
-/// the inner-most depth in the given direction, the paths move back to
-/// outer layers until hitting the detector.  The neutrino direction is
-/// specified as the zenith angle and azimuthal angle of the vector pointing
-/// from the detector to where the neutrino entered the Earth.
+/// started) and find path lengths to the next bin crossed. When
+/// reaching the inner-most depth in the given direction, the paths
+/// move back to outer layers until hitting the detector.  The
+/// neutrino direction is specified as the zenith angle and azimuthal
+/// angle of the vector pointing from the detector to where the
+/// neutrino entered the Earth.
 ///
-/// The path sequence is stored as an attribute and can be retrieved with
-/// the function GetNuPath.
+/// The path sequence is stored as an attribute and can be retrieved
+/// with the function GetNuPath.
+///
+/// Note: This function assumes uniform bin sizes for the latitude
+/// bins and the longitude bins.
 ///
 /// @param cosT - The cosine of the zenith angle of the neutrino direction
 /// @param phi - The azimuthal angle (in degrees from North) of the neutrino
@@ -650,6 +674,12 @@ int EarthModelBinned::FillPath(double cosT, double phi)
   if (cosT < 0) { minRadius = fC.rDetSinT; }
 
   // Starting latitude
+/*  cout << "Pieces of init_lat calculation:" << endl
+       << "\trDetSinT = " << fC.rDetSinT << endl
+       << "\tbeta = " << fC.beta << endl
+       << "\tgamma = " << fC.gamma << endl
+       << "\tdistEdgeToMin = " << distEdgeToMin << endl
+       << "\tRadiusMax = " << fRadiusMax << endl; */
   double init_lat = asin((fC.rDetSinT * fC.beta + fC.gamma * distEdgeToMin) /
                          fRadiusMax); // in radians
 
@@ -668,31 +698,32 @@ int EarthModelBinned::FillPath(double cosT, double phi)
   LonBinInfo loninfo;
   int        binsPerDepth = fEarthBins.size() / fnDepthBins;
   int        init_lonBin  = LonBinIndex(init_lon);
-  int        init_latBin  = floor((init_lat + M_PI / 2) * fInvLatBinWidth);
+  int        init_latBin  = floor((init_lat + M_PI / 2.0) * fInvLatBinWidth);
   int        index =
       fEarthBins.size() - binsPerDepth + init_lonBin * fnLatBins + init_latBin;
 
   latinfo.bin = init_latBin;
   loninfo.bin = init_lonBin;
+//  cout << "Neutrino starting at (lat,lon)=(" << init_lat << "rad," << init_lon << "rad) in Earth bin " << index << " = (r" << floor(index/binsPerDepth) << ", lon" << loninfo.bin << ", lat" << latinfo.bin << ")" << endl;
 
   /* Find detector distances for 1st latitude/longitude bin changes */
   latinfo.dLat = fHalfLatBinWidth; // change in lat from bin center to next bin
                                    // (0 if no more than 1 lat bin change)
   // Condition calculation for starting sign in x(lat) equation
   latinfo.sign       = 1; //+ => lat incr., - => lat decr. (with decr. x)
-  latinfo.maxreached = 0; // this changes to 1 if past the lat func transition
+  latinfo.maxreached = false; // this changes to true if past the lat func transition
   if (fC.beta < 0) latinfo.sign = -1;
   if (fC.beta == 0) {
     if (fC.cosA > 0) latinfo.sign = -1;
   }
-  else if (baseline < fC.rDetCosAcosDetLat / fC.beta) {
+  else if (baseline < fC.xlatextreme) {
     latinfo.sign = -(latinfo.sign);
-    latinfo.maxreached++;
+    latinfo.maxreached = true;
   }
   // Condition calculation for incr./decr. Longitude (with decr. x)
   loninfo.dLon =
-      fHalfLonBinWidth;   // change in lon from bin center to next bin (includes
-                          // direction; 0 if no more than 1 lon bin change)
+      fHalfLonBinWidth; // change in lon from bin center to next bin (includes
+                        // direction; 0 if no more than 1 lon bin change)
   loninfo.min = init_lon; // initial lon if lon is inc.
   loninfo.max = fDetLon;  // detector lon if lon is inc.
   if (fC.sinA < 0) {
@@ -762,6 +793,7 @@ int EarthModelBinned::FillPath(double cosT, double phi)
     // Reset variables for next depth bin
     prev_DetDistance = DetDistance;
     index -= binsPerDepth;
+//    cout << "Depth bin crossing at x=" << DetDistance << "km...now in Earth bin " << index << " = (r" << floor(index/binsPerDepth) << ", lon" << loninfo.bin << ", lat" << latinfo.bin << ")" << endl;
   }
 
   /* Do minimum depth bin and then go up to the detector */
@@ -782,6 +814,7 @@ int EarthModelBinned::FillPath(double cosT, double phi)
 
     // Reset variables for "previous" depth bin
     prev_DetDistance = DetDistance;
+//    cout << "Depth bin crossing at x=" << DetDistance << "km...now in Earth bin " << index2 << " = (r" << floor((index2+binsPerDepth)/binsPerDepth) << ", lon" << loninfo.bin << ", lat" << latinfo.bin << ")" << endl;
   }
 
   /* Do path to detector */
@@ -796,7 +829,7 @@ int EarthModelBinned::FillPath(double cosT, double phi)
         << "ERROR:  Oops... It turns out that I was wrong about the denominator"
         << " of the x(long) equation never being 0 apart from the cases where "
         << "sin(Zenith) = 0, sin(Azimuthal) = 0, or cos(Detector Longitude) = "
-           "0."
+        << "0."
         << "  Send the following message to rpestes@apc.in2p3.fr:" << endl
         << endl
         << "You were wrong about the denominator of x(long)... "

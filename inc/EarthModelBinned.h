@@ -83,15 +83,15 @@ namespace OscProb {
       ///
       /// Constructor.
       ///
-      /// By default, it sets cosT, Az, latD, and lonD equal to 0, and it uses
-      /// 6368km for rD.
+      /// By default, it sets cosT, Az, latD, and lonD equal to 0, and
+      /// it uses 6368km for rD.
       ///
       /// @param cosT - Cosine of the zenith angle for the neutrino trajectory
       /// @param phi - The azimuthal angle for the neutrino trajectory (in rad)
       /// @param DetLat - The latitude of the detector (in rad)
       /// @param DetLon - The longitude of the detector (in rad)
-      /// @param rDet - The distance from the center of the Earth to the
-      /// detector (in km)
+      /// @param rDet - The distance from the center of the Earth to
+      /// the detector (in km)
       ///
       TrajConstants(double cosT = 0, double phi = 0, double DetLat = 0,
                     double DetLon = 0, double rDet = 6368)
@@ -137,7 +137,6 @@ namespace OscProb {
       double cosTcosDetLat;     ///< cosT*cos(DetLat)
       double rDetCosT;          ///< rDet*cosT
       double rDetSinT;          ///< rDet*sin(T)
-      double rDetCosAcosDetLat; ///< rDet*cos(phi)*cos(DetLat)
       double alpha;   ///< sin(T)*cos(phi)*sin(DetLat)-cosT*cos(DetLat)
       double beta;    ///< sin(T)*sin(DetLat)-cos(phi)*cosT*cos(DetLat)
       double gamma;   ///< sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)
@@ -145,6 +144,7 @@ namespace OscProb {
       double
              rDetGammaSinDetLat; ///< rDet*sin(DetLat)*[sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)]
       double maxSinSqLat; ///< 1 - [sin(phi)*cos(DetLat)]^2
+      double xlatextreme; ///< rDet*cos(phi)*cos(DetLat)/[sin(T)*sin(DetLat)-cos(phi)*cosT*cos(DetLat)], unless the denominator is 0, in which case it is set to 0
   };
 
   struct EarthBin {
@@ -242,30 +242,42 @@ namespace OscProb {
       struct LatBinInfo {
           int    bin;             ///< Index of current latitude bin
           int    nextBin;         ///< Index of next latitude bin
-          double detDist_nextBin; ///< Distance along the neutrino trajectory
-                                  ///< from the edge of next latitude bin to the
-                                  ///< detector
-          int sign; ///< Indicates whether latitude is increasing or decreasing
-                    ///< with respect to decreasing distance from the detector
-                    ///< (+1 => inc, -1 => dec)
-          double dLat; ///< Change in lat from bin center to next bin (excludes
-                       ///< direction; 0 if no more than 1 lat bin change)
-          int maxreached; ///< Indicates whether the latitude function
-                          ///< transition is still to come (0 => yes, 1 => no)
+          double detDist_nextBin; ///< Distance from the detector to
+                                  ///< the edge of the next latitude
+                                  ///< bin along the neutrino
+                                  ///< trajectory (<0 => neutrino will
+                                  ///< not reach next latitude bin
+                                  ///< before arriving at detector)
+          int sign; ///< Indicates whether latitude is increasing or
+                    ///< decreasing with respect to decreasing
+                    ///< distance from the detector along trajectory
+                    ///< (+1 => increasing, -1 => decreasing)
+          double dLat; ///< Change in lat from bin center to edge of
+                       ///< next bin (excludes direction; 0 if no more
+                       ///< than 1 lat bin change happens along entire
+                       ///< neutrino trajectory)
+          bool maxreached; ///< Indicates whether the latitude
+                           ///< function transition has happened, yet
+                           ///< (false => no, true => yes)
       };
 
       struct LonBinInfo {
           int    bin;             ///< Index of current longitude bin
           int    nextBin;         ///< Index of next longitude bin
-          double detDist_nextBin; ///< Distance along the neutrino trajectory
-                                  ///< from the edge of next longitude bin to
-                                  ///< the detector
-          double dLon; ///< Change in lon from bin center to next bin (includes
-                       ///< direction; 0 if no more than 1 lon bin change)
+          double detDist_nextBin; ///< Distance from the detector to
+                                  ///< the edge of the next longitude
+                                  ///< bin along the neutrino
+                                  ///< trajectory (<0 => neutrino will
+                                  ///< not reach next longitude bin
+                                  ///< before arriving at detector)
+          double dLon; ///< Change in lon from bin center to edge of
+                       ///< next bin (includes direction; 0 if no more
+                       ///< than 1 lon bin change happens along entire
+                       ///< neutrino trajectory)
           double min;  ///< "Minimum" longitude
           double max;  ///< "Maximum" longitude
-          int error = 0; ///< Indicates if an error has been detected (0 => no,
-                         ///< -1 => yes)
+          int error = 0; ///< Indicates if an error has been detected
+                         ///< (0 => no, -1 => yes)
           std::string
               err_message; ///< Part of error message specific to piece of path
       };
