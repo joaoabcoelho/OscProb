@@ -152,62 +152,36 @@ void PMNS_TaylorExp::rotateK(matrixC Kmass,matrixC& Kflavor)
 ///
 ///
 ///
-void PMNS_TaylorExp::firstRotate(matrixC V, matrixC& densityMatrix)
+void PMNS_TaylorExp::RotateDensityM(bool to_mass, matrixC V, matrixC& densityMatrix)
 {
-    matrixC densityCopy = matrixC(fNumNus, vectorC(fNumNus, 0));
-    for(int j = 0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<fNumNus ; i++){ 
-            densityCopy[i][j] = densityMatrix[i][j];
-        }
+    matrixC Buffer = matrixC(fNumNus, vectorC(fNumNus, 0));
+
+  // buffer = rho . U
+  for (int i = 0; i < fNumNus; i++) {
+    for (int j = 0; j < fNumNus; j++) {
+      for (int k = 0; k < fNumNus; k++) {
+        if (to_mass)
+          Buffer[i][j] += densityMatrix[i][k] * V[k][j];
+        else
+          Buffer[i][j] += densityMatrix[i][k] * conj(V[j][k]);
+      }
     }
+  }
 
-    for(int i = 0 ; i<fNumNus ; i++){ // PEUT ETRE AMELIORE !!!!!!!!!!!!!!!!!!!!!!
-
-        complexD par[3];
-
-        for(int l = 0 ; l<fNumNus ; l++){
-            for(int k = 0 ; k<fNumNus ; k++){
-                par[l] += conj(V[k][i]) * densityCopy[k][l];
-            }
-        }
-
-        for(int j = 0 ; j<fNumNus ; j++){
-            for(int l = 0 ; l<fNumNus ; l++){
-                densityMatrix[i][j] +=  par[l] * V[l][j];
-            }
-        }
+  // rho = U^\dagger . buffer = U^\dagger . rho . U
+  // Final matrix is Hermitian, so copy upper to lower triangle
+  for (int i = 0; i < fNumNus; i++) {
+    for (int j = i; j < fNumNus; j++) {
+        densityMatrix[i][j] = 0;
+      for (int k = 0; k < fNumNus; k++) {
+        if (to_mass)
+            densityMatrix[i][j] += conj(V[k][i]) * Buffer[k][j];
+        else
+            densityMatrix[i][j] += V[i][k] * Buffer[k][j];
+      }
+      if (j > i) densityMatrix[j][i] = conj(densityMatrix[i][j]);
     }
-}
-
-//.............................................................................
-///
-///
-///
-void PMNS_TaylorExp::secondRotate(matrixC V, matrixC& densityMatrix)
-{
-    matrixC densityCopy = matrixC(fNumNus, vectorC(fNumNus, 0));
-    for(int j = 0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<fNumNus ; i++){ 
-            densityCopy[i][j] = densityMatrix[i][j];
-        }
-    }
-
-    for(int j = 0 ; j<fNumNus ; j++){ // PEUT ETRE AMELIORE !!!!!!!!!!!!!!!!!!!!!!
-
-        complexD par[3];
-
-        for(int k = 0 ; k<fNumNus ; k++){
-            for(int l = 0 ; l<fNumNus ; l++){
-                par[k] += densityCopy[k][l] * conj(V[j][l]);
-            }
-        }
-
-        for(int i = 0 ; i<fNumNus ; i++){
-            for(int k = 0 ; k<fNumNus ; k++){
-                densityMatrix[i][j] +=  V[i][k] * par[k];
-            }
-        }
-    }
+  }
 }
 
 //.............................................................................
@@ -646,15 +620,15 @@ double PMNS_TaylorExp::avgAlgorithm(int flvi, int flvf)
     matrixC densityMatrix = matrixC(fNumNus, vectorC(fNumNus, 0));
     densityMatrix[flvi][flvi] = 1;
 
-    firstRotate(fVcosT,densityMatrix);
+    RotateDensityM(true,fVcosT,densityMatrix);
     HadamardProduct(flambdaCosT,densityMatrix,fdcosT);
-    secondRotate(fVcosT,densityMatrix);
+    RotateDensityM(false,fVcosT,densityMatrix);
 
-    firstRotate(fVE,densityMatrix);
+    RotateDensityM(true,fVcosT,densityMatrix);
     HadamardProduct(flambdaE,densityMatrix,fdE);
-    secondRotate(fVE,densityMatrix);
+    RotateDensityM(false,fVcosT,densityMatrix);
 
-    secondRotate(fevolutionMatrixS,densityMatrix);
+    RotateDensityM(false,fevolutionMatrixS,densityMatrix);
 
     return real(densityMatrix[flvf][flvf]);
 }

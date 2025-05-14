@@ -49,9 +49,7 @@ namespace OscProb {
 
       virtual void rotateK(matrixC Kmass,matrixC& Kflavor);
 
-      virtual void firstRotate(matrixC V, matrixC& densityMatrix);
-
-      virtual void secondRotate(matrixC V, matrixC& densityMatrix);
+      virtual void RotateDensityM(bool to_mass, matrixC V, matrixC& densityMatrix);
 
       virtual void HadamardProduct(vectorD lambda, matrixC& densityMatrix, double dbin);
 

@@ -3,6 +3,7 @@
 
 #include "PremModel.h"
 #include "PMNS_Fast.h"
+#include "PMNS_Deco.h"
 #include "PMNS_TaylorExp.h"
 
 // Some functions to make nice plots
@@ -79,6 +80,7 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method , vec
 
   // Create PMNS object
   OscProb::PMNS_TaylorExp myPMNS;
+  OscProb::PMNS_Deco deco;
   
 
   // Set PMNS parameters
@@ -92,7 +94,7 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method , vec
   // Set histogram parameters
   double xmin = 0;
   double xmax = 10000;
-  double ymin = -1;
+  double ymin = -0.9;
   double ymax = 0;
   double widthBinX = (xmax-xmin) / nbinsx;
   double widthBinY = (ymax-ymin) / nbinsy; 
@@ -126,6 +128,7 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method , vec
 
     // Set paths in OscProb
     myPMNS.SetPath(prem.GetNuPath());
+    deco.SetPath(prem.GetNuPath());
 
     // Loop of L/E
     for(int le=1; le<=nbinsx; le++){
@@ -148,8 +151,11 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method , vec
         // Add probabilities from OscProb
         myPMNS.SetIsNuBar(nunubar <= 0);
 
+        //deco.SetDecoAngle(0);
+
         if(method == "fast") {prob += weight*myPMNS.AvgProbLoE(flvi, flvf, loe ,widthBinX);}
-        if(method == "taylor") {prob += weight*myPMNS.avgProbTaylorAngle(flvi, flvf, L/loe, cosT ,widthBinY);} //L/loe ,widthBinXforE, cosT ,widthBinY
+        if(method == "deco") {prob += weight*deco.Prob(flvi,flvf, L/loe);}
+        if(method == "taylor") {prob += weight*myPMNS.avgProbTaylor(flvi, flvf, L/loe ,widthBinXforE, cosT ,widthBinY);} //L/loe ,widthBinXforE, cosT ,widthBinY
 
         //prob -= weight*myPMNS.Prob(flvi, flvf, L/loe);
 
