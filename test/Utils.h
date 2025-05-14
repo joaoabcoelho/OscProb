@@ -49,6 +49,20 @@ OscProb::PMNS_Deco* GetDeco(bool is_nominal){
 }
 
 //.............................................................................
+OscProb::PMNS_GQD* GetGQD(bool is_nominal){
+
+  OscProb::PMNS_GQD* p = new OscProb::PMNS_GQD();
+  SetNominalPars(p);
+  if(!is_nominal){
+    p->SetEta(1e-8);
+    p->SetTemperature(0.9);
+  }
+
+  return p;
+
+}
+
+//.............................................................................
 OscProb::PMNS_Sterile* GetSterile(bool is_nominal){
 
   OscProb::PMNS_Sterile* p = new OscProb::PMNS_Sterile(4);
@@ -166,6 +180,7 @@ OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
   if(model == "LIV")     return GetLIV(is_nominal);
   if(model == "SNSI")    return GetSNSI(is_nominal);
   if(model == "NUNM")    return GetNUNM(is_nominal);
+  if(model == "GQD")     return GetGQD(is_nominal);
 
   return GetFast(is_nominal);
 
@@ -178,7 +193,7 @@ vector<string> GetListOfModels(){
 
   return {"Fast", "Iter", "Sterile", "NSI",
           "Deco", "Decay", "LIV", "SNSI",
-          "NUNM"};
+          "NUNM", "GQD"};
 
 }
 
@@ -227,7 +242,12 @@ int CheckProb(OscProb::PMNS_Base* p, TString filename){
 
   SetTestPath(p);
 
-  TFile* f = new TFile("data/"+filename, "read");
+  TFile* f = TFile::Open("data/"+filename, "read");
+
+  if(!f){
+    printf((Color::FAILED + " data/%s not found\n").c_str(), filename.Data());
+    return 1;
+  }
 
   int ntests = 0;
   int fails = 0;
