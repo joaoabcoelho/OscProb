@@ -31,6 +31,8 @@ namespace OscProb {
 
       virtual void LenghtLayer();
 
+      virtual double interpolationEnergy(int flvi, int flvf, double E , double dE);
+
     protected:
       virtual void InitializeTaylorsVectors(); ///< Initialize all member vectors with
       ///< zeros
@@ -58,6 +60,8 @@ namespace OscProb {
       virtual void MultiplicationRuleS(matrixC SLayer);
 
       virtual double avgFormula(int flvi, int flvf, double dbin, vectorD flambda, matrixC fV); 
+
+      virtual double avgFormulaExtrapolation(int flvi, int flvf, double dbin, vectorD flambda, matrixC fV);
 
       virtual double avgAlgorithm(int flvi, int flvf);
 

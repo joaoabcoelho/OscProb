@@ -1,5 +1,6 @@
 
 #include "PMNS_Fast.h"
+#include "PMNS_TaylorExp.h"
 
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
@@ -13,10 +14,12 @@ void testAvgProb(){
 
   // Get a PMNS object
   OscProb::PMNS_Fast p;
+  OscProb::PMNS_TaylorExp taylor;
 
   // Set the baseline through the earth
   double L = 2*6368 + 18;
   p.SetLength(L);
+  taylor.SetLength(L);
 
   // Define some fine and coarse binnings
   int navg = 20;
@@ -56,7 +59,7 @@ void testAvgProb(){
     double E  = (maxE + minE) / 2;
     double dE = (maxE - minE);
 
-    h2->SetBinContent(i, p.AvgProb(1,1, E, dE));
+    h2->SetBinContent(i, taylor.avgProbTaylor(1,1, E, dE));
 
     h3->SetBinContent(i, h3->GetBinContent(i) / dE);
     h4->SetBinContent(i, p.Prob(1,1, E));
