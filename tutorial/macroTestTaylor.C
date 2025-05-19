@@ -30,9 +30,9 @@ void macroTestTaylor(double cosT = -0.9, bool isNuBar = false){
   t.SetPath(prem.GetNuPath());
 
   // Make some histograms
-  int nbins = 1000;
-  double xmin = 1;
-  double xmax = 20;
+  int nbins = 100;
+  double xmin = 0.1;
+  double xmax = 5;
   double widthBin = (xmax-xmin) / nbins;
 
   TH1D* hMuMu_fast = new TH1D("","",nbins,xmin,xmax);
@@ -52,8 +52,8 @@ void macroTestTaylor(double cosT = -0.9, bool isNuBar = false){
     t.SetDm(3, dm31);
 
     // Fill NH
-    hMuMu_fast->SetBinContent(i, f.Prob(1,1, energy));
-    hEMu_fast->SetBinContent(i, f.Prob(0,1, energy));
+    hMuMu_fast->SetBinContent(i, f.AvgProb(1,1, energy, widthBin));
+    hEMu_fast->SetBinContent(i, f.AvgProb(0,1, energy, widthBin));
 
     // Fill IH
     hMuMu_taylor->SetBinContent(i, t.avgProbTaylor(1,1, energy,widthBin));
@@ -94,17 +94,17 @@ void macroTestTaylor(double cosT = -0.9, bool isNuBar = false){
 
   if(isNuBar){
 
-    leg->AddEntry(hMuMu_fast, "P(#bar{#nu}_{#mu}#rightarrow#bar{#nu}_{#mu}) - fast", "l");
+    leg->AddEntry(hMuMu_fast, "P(#bar{#nu}_{#mu}#rightarrow#bar{#nu}_{#mu}) - avg fast", "l");
     leg->AddEntry(hMuMu_taylor, "P(#bar{#nu}_{#mu}#rightarrow#bar{#nu}_{#mu}) - taylor", "l");
-    leg->AddEntry(hEMu_fast, "P(#bar{#nu}_{e}#rightarrow#bar{#nu}_{#mu}) - fast", "l");
+    leg->AddEntry(hEMu_fast, "P(#bar{#nu}_{e}#rightarrow#bar{#nu}_{#mu}) - avg fast", "l");
     leg->AddEntry(hEMu_taylor, "P(#bar{#nu}_{e}#rightarrow#bar{#nu}_{#mu}) - taylor", "l");
 
   }
   else{
 
-    leg->AddEntry(hMuMu_fast, "P(#nu_{#mu}#rightarrow#nu_{#mu}) - fast", "l");
+    leg->AddEntry(hMuMu_fast, "P(#nu_{#mu}#rightarrow#nu_{#mu}) - avg fast", "l");
     leg->AddEntry(hMuMu_taylor, "P(#nu_{#mu}#rightarrow#nu_{#mu}) - taylor", "l");
-    leg->AddEntry(hEMu_fast, "P(#nu_{e}#rightarrow#nu_{#mu}) - fast", "l");
+    leg->AddEntry(hEMu_fast, "P(#nu_{e}#rightarrow#nu_{#mu}) - avg fast", "l");
     leg->AddEntry(hEMu_taylor, "P(#nu_{e}#rightarrow#nu_{#mu}) - taylor", "l");
 
   }

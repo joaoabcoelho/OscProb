@@ -25,9 +25,11 @@ void VariationTest(){
     t.SetPath(prem.GetNuPath());
 
     int nbins = 100;
-    double xmax = 100;
-    double xmin = 1;
+    double xmax = 0.1;
+    double xmin = -0.1;
     double xCentre = (xmax + xmin) / 2;
+
+    double E = 0.5;
 
     TH1D* h1 = new TH1D("","",nbins,xmin,xmax);
     TH1D* h2 = new TH1D("","",nbins,xmin,xmax);
@@ -37,12 +39,12 @@ void VariationTest(){
         double energy = h1->GetBinCenter(i);
         // EN E OU EN LOG?????
 
-        double ext = xCentre - energy ;
+        double ext = xCentre + energy ;
 
         cout<<ext<<endl;
 
-        h1->SetBinContent(i, t.Prob(1,1,energy));
-        h2->SetBinContent(i, t.interpolationEnergy(1,1,xCentre,ext));
+        h1->SetBinContent(i, t.Prob(1,1,E + ext));
+        h2->SetBinContent(i, t.interpolationEnergy(1,1,E,ext));
     }
 
     // Make a long canvas
@@ -62,5 +64,16 @@ void VariationTest(){
     // Draw different samplings
     h1->DrawCopy("curv");
     h2->DrawCopy("hist same ][");
+
+
+    // Déterminer les limites de Y pour la ligne
+    double y_min = gPad->GetUymin();
+    double y_max = gPad->GetUymax();
+
+    // Créer et dessiner la ligne verticale
+    TLine *line = new TLine(xCentre, y_min, xCentre, y_max);
+    line->SetLineColor(kRed);
+    line->SetLineStyle(1); // Ligne pointillée
+    line->Draw("same");
 
 }

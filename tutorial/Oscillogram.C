@@ -155,9 +155,9 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method , vec
 
         if(method == "fast") {prob += weight*myPMNS.AvgProbLoE(flvi, flvf, loe ,widthBinX);}
         if(method == "deco") {prob += weight*deco.Prob(flvi,flvf, L/loe);}
-        if(method == "taylor") {prob += weight*myPMNS.avgProbTaylor(flvi, flvf, L/loe ,widthBinXforE, cosT ,widthBinY);} //L/loe ,widthBinXforE, cosT ,widthBinY
+        if(method == "taylor") {prob += weight*myPMNS.avgProbTaylor(flvi, flvf, L/loe ,widthBinXforE);} //L/loe ,widthBinXforE, cosT ,widthBinY
 
-        //prob -= weight*myPMNS.Prob(flvi, flvf, L/loe);
+        prob -= weight*weight*myPMNS.AvgProbLoE(flvi, flvf, loe ,widthBinX);
 
         time.count++;
       }}

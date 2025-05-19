@@ -193,7 +193,7 @@ void PMNS_TaylorExp::HadamardProduct(vectorD lambda, matrixC& densityMatrix, dou
     matrixC sinc = matrixC(fNumNus, vectorC(fNumNus, 0));
     for(int j=0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<j ; i++){
-            double arg = (lambda[i] - lambda[j]) * dbin;
+            double arg = (lambda[i] - lambda[j]) * dbin * kGeV2eV; //ATTTTTTTTTTTTTTTTTTTTTTT
             sinc[i][j] = sin(arg)/arg;
 
             sinc[j][i] = sinc[i][j];
@@ -497,10 +497,12 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
         }
     }
 
+    if(fdE != 0) { dbin *= kGeV2eV; }
+
     complexD sinc[fNumNus][fNumNus];
     for(int i = 0 ; i<fNumNus ; i++){
         for(int j = 0 ; j<i ; j++){
-            double arg = (lambda[j] - lambda[i]) * dbin;
+            double arg = (lambda[j] - lambda[i]) * dbin ;
             sinc[j][i] = sin(arg)/arg;
             sinc[i][j] = sinc[j][i];
 
@@ -670,6 +672,7 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
         for(int j = 0 ; j<fNumNus ; j++){
             for(int k = 0 ; k<fNumNus ; k++){
                 SVmulti[i][j] += fevolutionMatrixS[i][k] *V[k][j];
+                cout<< "SVmulti[i][j] = " << SVmulti[i][j] <<endl; 
             }
         }
     }
@@ -677,8 +680,9 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
     complexD exp[fNumNus][fNumNus];
     for(int i = 0 ; i<fNumNus ; i++){
         for(int j = 0 ; j<fNumNus; j++){
-            double arg = (lambda[j] - lambda[i]) * dbin;
+            double arg = (lambda[j] - lambda[i]) * dbin * kGeV2eV;
             exp[j][i] = complexD(cos(arg),sin(arg));
+            cout<< "exp = " <<exp[j][i]<<endl;
         }
     }
     
@@ -687,6 +691,8 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
             P += SVmulti[flvf][i] * conj(SVmulti[flvf][j]) * conj(V[flvi][i]) * V[flvi][j] * exp[j][i];
         }
     }
+
+    cout<<"P="<<P<<endl;
 
     return real(P); 
 }
@@ -708,6 +714,17 @@ double PMNS_TaylorExp::interpolationEnergy(int flvi, int flvf, double E , double
 
     //DiagolK -> get VE and lambdaE
     SolveK(fKE,flambdaE,fVE);
+
+    for(int j=0 ; j<3 ; j++)
+    {
+        for(int k=0 ; k<3 ; k++)
+        {
+            cout<<fVE[j][k]<<" ";
+        }
+        cout<<endl;
+    }
+
+    cout<<flambdaE[0]<<"  "<<flambdaE[0]<<"  "<<flambdaE[0]<<endl;
 
     return avgFormulaExtrapolation(flvi,flvf,fdE, flambdaE, fVE);
 }
