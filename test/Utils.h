@@ -256,6 +256,8 @@ int CheckProb(OscProb::PMNS_Base* p, TString filename){
   TH1D* h0 = 0;
   TH1D* h = 0;
 
+  double max_diff = 0;
+
   for(int flvi=0; flvi<3; flvi++){
   for(int flvf=0; flvf<3; flvf++){
   for(int isnb=0; isnb<2; isnb++){
@@ -272,6 +274,7 @@ int CheckProb(OscProb::PMNS_Base* p, TString filename){
       ntests++;
       if(abs(p0-p1)>1e-12){
         plot = true;
+        if(abs(p0-p1)>max_diff) max_diff = abs(p0-p1);
         fails++;
       }
       h->SetBinContent(i, p1);
@@ -315,8 +318,8 @@ int CheckProb(OscProb::PMNS_Base* p, TString filename){
   }}}
 
   if(fails>0){
-    printf((Color::FAILED + " Found %d differences in %d tests (%.3g%%) in %s\n").c_str(),
-            fails, ntests, 100.*fails/ntests, filename.Data());
+    printf((Color::FAILED + " Found %d differences in %d tests (%.3g%%) in %s (Max diff: %.3g)\n").c_str(),
+            fails, ntests, 100.*fails/ntests, filename.Data(), max_diff);
   }
   else {
     cout << Color::PASSED << " No differences found in " << filename << endl;
