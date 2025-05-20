@@ -38,20 +38,18 @@ PMNS_TaylorExp::~PMNS_TaylorExp() {}
 void PMNS_TaylorExp::InitializeTaylorsVectors()
 {
     flambdaE = vectorD(fNumNus, 0);
-
     fVE = matrixC(fNumNus, vectorC(fNumNus, 0));
 
     flambdaCosT = vectorD(fNumNus, 0);
-
     fVcosT = matrixC(fNumNus, vectorC(fNumNus, 0));
 
     fevolutionMatrixS = matrixC(fNumNus, vectorC(fNumNus, 0));
 
-    for(int i= 0 ; i<fevolutionMatrixS.size(); i++){
+    for(int i= 0 ; i<fNumNus; i++){
 
         fevolutionMatrixS[i][i] = 1;
 
-        for(int j = 0 ; j<3 ; j++){
+        for(int j = 0 ; j<fNumNus ; j++){
             fKE[i][j] = 0;
             fKcosT[i][j] = 0;
         }
@@ -384,7 +382,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     //double L = p.length;
 
     // Solve for eigensystem
-    SolveHam();
+    SolveHam();                 //EST CE QUE CA FAIT APPELLE A CELLE DE FAST???
 
     // Get the evolution matrix in mass basis
     double LengthIneV = kKm2eV * p.length;
@@ -445,6 +443,8 @@ void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
         lambda[i] = fEvalGLoBES[i];
         for (int j = 0; j < fNumNus; j++) { V[i][j] = fEvecGLoBES[i][j]; }
     }
+
+    //IL MANQUE DES CHOSES ICI
 }
 
 //.............................................................................
@@ -561,10 +561,6 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
 
     SetEnergy(E);
     SetwidthBin(dE,0);
-
-    cout<<"E ="<<fEnergy<<endl;
-    cout<<"dE ="<<fdE<<endl;
-    cout<<"r ="<<fdE/fEnergy<<endl<<endl;
 
     //Propagate -> get S and K matrix (on the whole path)
     PropagateTaylor();
