@@ -26,8 +26,7 @@ void VariationTest(){
 
     int nbins = 100;
     double xmax = 0.1;
-    double xmin = -0.1;
-    double xCentre = (xmax + xmin) / 2;
+    double xmin = -xmax;
 
     double E = 0.5;
 
@@ -36,15 +35,13 @@ void VariationTest(){
 
     for(int i = 1 ; i<=nbins ; i++){
 
-        double energy = h1->GetBinCenter(i);
+        double ext = h1->GetBinCenter(i);
         // EN E OU EN LOG?????
-
-        double ext = xCentre + energy ;
 
         cout<<ext<<endl;
 
-        h1->SetBinContent(i, t.Prob(1,1,E + ext));
-        h2->SetBinContent(i, t.interpolationEnergy(1,1,E,ext));
+        h1->SetBinContent(i, t.Prob(1,1,E + ext * E));
+        h2->SetBinContent(i, t.interpolationEnergy(1,1,E,ext * E));
     }
 
     // Make a long canvas
@@ -71,7 +68,7 @@ void VariationTest(){
     double y_max = gPad->GetUymax();
 
     // Créer et dessiner la ligne verticale
-    TLine *line = new TLine(xCentre, y_min, xCentre, y_max);
+    TLine *line = new TLine(0, y_min, 0, y_max);
     line->SetLineColor(kRed);
     line->SetLineStyle(1); // Ligne pointillée
     line->Draw("same");

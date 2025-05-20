@@ -93,7 +93,7 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method , vec
 
   // Set histogram parameters
   double xmin = 0;
-  double xmax = 10000;
+  double xmax = 5000;
   double ymin = -0.9;
   double ymax = 0;
   double widthBinX = (xmax-xmin) / nbinsx;
@@ -152,12 +152,18 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method , vec
         myPMNS.SetIsNuBar(nunubar <= 0);
 
         //deco.SetDecoAngle(0);
+        if(flvi == 0 && nunubar == 1){
+          if(method == "fast") {prob += myPMNS.AvgProbLoE(flvi, flvf, loe ,widthBinX);}
+          if(method == "deco") {prob += deco.Prob(flvi,flvf, L/loe);}
+          if(method == "taylor") {prob += myPMNS.avgProbTaylor(flvi, flvf, L/loe, widthBinXforE );} //L/loe ,widthBinXforE, cosT ,widthBinY
 
-        if(method == "fast") {prob += weight*myPMNS.AvgProbLoE(flvi, flvf, loe ,widthBinX);}
-        if(method == "deco") {prob += weight*deco.Prob(flvi,flvf, L/loe);}
-        if(method == "taylor") {prob += weight*myPMNS.avgProbTaylor(flvi, flvf, L/loe ,widthBinXforE);} //L/loe ,widthBinXforE, cosT ,widthBinY
+          //prob -= myPMNS.AvgProbLoE(flvi, flvf, loe ,widthBinX);
 
-        prob -= weight*weight*myPMNS.AvgProbLoE(flvi, flvf, loe ,widthBinX);
+          prob -= myPMNS.Prob(flvi, flvf, L/loe);
+        }
+  
+
+        
 
         time.count++;
       }}
@@ -177,7 +183,7 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method , vec
   SetHist(h2);
 
   // Set titles
-  h2->SetTitle(";L/E (km/GeV);cos#theta_{z};P_{#mu#mu} + 0.5#timesP_{#bar{#mu#mu}} + 0.5#timesP_{e#mu} + 0.25#timesP_{#bar{e#mu}}");
+  h2->SetTitle(";L/E (km/GeV);cos#theta_{z}; P_{e#mu} ");
 
   return h2;
 

@@ -46,8 +46,11 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
     fVcosT = matrixC(fNumNus, vectorC(fNumNus, 0));
 
     fevolutionMatrixS = matrixC(fNumNus, vectorC(fNumNus, 0));
+
     for(int i= 0 ; i<fevolutionMatrixS.size(); i++){
+
         fevolutionMatrixS[i][i] = 1;
+
         for(int j = 0 ; j<3 ; j++){
             fKE[i][j] = 0;
             fKcosT[i][j] = 0;
@@ -79,15 +82,15 @@ void PMNS_TaylorExp::rotateS(vectorC fPhases,matrixC& S)
 {
     for(int j = 0 ; j<fNumNus ; j++){ 
 
-        complexD par[3];
+        complexD buffer[3];
 
         for(int k = 0 ; k<fNumNus ; k++){
-            par[k] = fPhases[k] * conj(fEvec[j][k]);
+            buffer[k] = fPhases[k] * conj(fEvec[j][k]);
         }
         
         for(int i = 0 ; i<fNumNus ; i++){ 
             for(int k = 0 ; k<fNumNus ; k++){
-                S[i][j] += fEvec[i][k] * par[k];
+                S[i][j] += fEvec[i][k] * buffer[k];
             }
         }
     }
@@ -562,6 +565,10 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
     SetEnergy(E);
     SetwidthBin(dE,0);
 
+    cout<<"E ="<<fEnergy<<endl;
+    cout<<"dE ="<<fdE<<endl;
+    cout<<"r ="<<fdE/fEnergy<<endl<<endl;
+
     //Propagate -> get S and K matrix (on the whole path)
     PropagateTaylor();
 
@@ -648,6 +655,8 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE, d
     SetCosT(cosT);
     SetwidthBin(dE,dcosT);
 
+    cout<<"aaa";
+
     //Propagate -> get S and K matrix (on the whole path)
     PropagateTaylor();
 
@@ -671,8 +680,7 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
     for(int i = 0 ; i<fNumNus ; i++) {
         for(int j = 0 ; j<fNumNus ; j++){
             for(int k = 0 ; k<fNumNus ; k++){
-                SVmulti[i][j] += fevolutionMatrixS[i][k] *V[k][j];
-                cout<< "SVmulti[i][j] = " << SVmulti[i][j] <<endl; 
+                SVmulti[i][j] += fevolutionMatrixS[i][k] *V[k][j]; 
             }
         }
     }
@@ -682,7 +690,6 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
         for(int j = 0 ; j<fNumNus; j++){
             double arg = (lambda[j] - lambda[i]) * dbin * kGeV2eV;
             exp[j][i] = complexD(cos(arg),sin(arg));
-            cout<< "exp = " <<exp[j][i]<<endl;
         }
     }
     
@@ -714,17 +721,6 @@ double PMNS_TaylorExp::interpolationEnergy(int flvi, int flvf, double E , double
 
     //DiagolK -> get VE and lambdaE
     SolveK(fKE,flambdaE,fVE);
-
-    for(int j=0 ; j<3 ; j++)
-    {
-        for(int k=0 ; k<3 ; k++)
-        {
-            cout<<fVE[j][k]<<" ";
-        }
-        cout<<endl;
-    }
-
-    cout<<flambdaE[0]<<"  "<<flambdaE[0]<<"  "<<flambdaE[0]<<endl;
 
     return avgFormulaExtrapolation(flvi,flvf,fdE, flambdaE, fVE);
 }
