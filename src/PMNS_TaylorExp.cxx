@@ -279,24 +279,21 @@ void PMNS_TaylorExp::BuildKcosT(matrixC& K)
 ///
 void PMNS_TaylorExp::MultiplicationRuleK(matrixC SLayer,matrixC KLayer,complexD K[3][3])
 {
-    //K (ne pas modifier S avant de l'appliquer ici )
-    matrixC KCopy = matrixC(fNumNus, vectorC(fNumNus, 0));
-    for(int j = 0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<fNumNus ; i++){ //PAS OBLIGIER DE COPIER CAR K1 n'apparait que en + K1
-            KCopy[i][j] = K[i][j];
-        }
-    }
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
+
+            complexD add = K[i][j];
+
             K[i][j] = 0;
+
             for(int k = 0 ; k<fNumNus ; k++){
                 for(int l = 0 ; l<fNumNus ; l++){                                                          
-                    K[i][j] += conj(fevolutionMatrixS[k][i]) * KLayer[k][l] * fevolutionMatrixS[l][j] + KCopy[i][j]; 
+                    K[i][j] += conj(fevolutionMatrixS[k][i]) * KLayer[k][l] * fevolutionMatrixS[l][j] + add; 
                 }
             }
             
             if(i != j){
-                K[j][i] = -conj(K[i][j]);
+                K[j][i] = conj(K[i][j]); //UNMOINS????
             }
         }
     }    
@@ -317,7 +314,7 @@ void PMNS_TaylorExp::MultiplicationRuleS(matrixC SLayer)
     }
 
     for(int j = 0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<fNumNus ; i++){ //CHG
+        for(int i = 0 ; i<fNumNus ; i++){ 
             fevolutionMatrixS[i][j] = 0;
             for(int k = 0 ; k<fNumNus ; k++){
 
@@ -372,7 +369,7 @@ void PMNS_TaylorExp::LenghtLayer()
 ///
 void PMNS_TaylorExp::PropagateTaylor()
 {
-  for (int i = 0; i < int(fNuPaths.size()); i++) { PropagatePathTaylor(fNuPaths[i]); }
+  for (int i = 0; i < int(fNuPaths.size()); i++) {cout<<"Layer "<<i<<endl; PropagatePathTaylor(fNuPaths[i]); }
 }
 
 //.............................................................................

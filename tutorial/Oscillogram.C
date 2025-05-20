@@ -159,7 +159,7 @@ TH2D* GetOscHist(int flvf, int mh, int nbinsx , int nbinsy , string method , vec
 
           //prob -= myPMNS.AvgProbLoE(flvi, flvf, loe ,widthBinX);
 
-          prob -= myPMNS.Prob(flvi, flvf, L/loe);
+          //prob -= myPMNS.Prob(flvi, flvf, L/loe);
         }
   
 

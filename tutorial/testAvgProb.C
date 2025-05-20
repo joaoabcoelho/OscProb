@@ -1,6 +1,7 @@
 
 #include "PMNS_Fast.h"
 #include "PMNS_TaylorExp.h"
+#include "PremModel.h"
 
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
@@ -20,6 +21,17 @@ void testAvgProb(){
   double L = 2*6368 + 18;
   p.SetLength(L);
   taylor.SetLength(L);
+
+  // PREM Model
+  OscProb::PremModel prem;    
+
+  // Fill path for cosT
+  prem.FillPath(-0.9);
+
+  // Give path to calculator
+  p.SetPath(prem.GetNuPath());
+  taylor.SetPath(prem.GetNuPath());
+
 
   // Define some fine and coarse binnings
   int navg = 20;
@@ -60,6 +72,7 @@ void testAvgProb(){
     double dE = (maxE - minE);
 
     h2->SetBinContent(i, taylor.avgProbTaylor(1,1, E, dE));
+    //h2->SetBinContent(i, p.AvgProb(1,1, E, dE));
 
     h3->SetBinContent(i, h3->GetBinContent(i) / dE);
     h4->SetBinContent(i, p.Prob(1,1, E));
