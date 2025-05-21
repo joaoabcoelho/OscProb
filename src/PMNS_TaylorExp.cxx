@@ -220,14 +220,10 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 {
     double lv = 2 * kGeV2eV * fEnergy; // 2E in eV
 
-    for(int j = 0 ; j<fNumNus ; j++)
-    {
-        for(int i = 0 ; i<=j ; i++)
-        {
-            for(int k = 0 ; k<fNumNus ; k++)
-            {
-                for(int l = 0 ; l<fNumNus ; l++)
-                {
+    for(int j = 0 ; j<fNumNus ; j++){
+        for(int i = 0 ; i<=j ; i++){
+            for(int k = 0 ; k<fNumNus ; k++){
+                for(int l = 0 ; l<fNumNus ; l++){
                     K[i][j] += conj(fEvec[k][i]) * fHam[k][l] * fEvec[l][j];
                 }
             }
@@ -237,12 +233,11 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
                 C = complexD(1,0);
             }
             else{
-                double argg = (fEval[i] - fEval[j]) * L;
+                double argg = (fEval[i] - fEval[j]) * L * kKm2eV;
                 C = (complexD(cos(argg), sin(argg)) - complexD(1,0) ) / (complexD(0,argg)); 
-                //cout<<C<<endl;
             }// C=(1,0) because of H H' commutation (due to cst density case)
 
-            K[i][j] *= (-L / lv) * K[i][j] * C; 
+            K[i][j] *= kKm2eV * (-L / lv) * K[i][j] * C; 
 
             if(i != j){
                 K[j][i] = conj(K[i][j]);
@@ -385,7 +380,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     SolveHam();                 //EST CE QUE CA FAIT APPELLE A CELLE DE FAST???
 
     // Get the evolution matrix in mass basis
-    double LengthIneV = kKm2eV * p.length;
+    double LengthIneV = kKm2eV * p.length;      //IL FAUT CIONVERTIR TOUS LES L
     for (int i = 0; i < fNumNus; i++) {
         double arg = fEval[i] * LengthIneV;
         fPhases[i] = complexD(cos(arg), -sin(arg));
@@ -502,11 +497,10 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
     complexD sinc[fNumNus][fNumNus];
     for(int i = 0 ; i<fNumNus ; i++){
         for(int j = 0 ; j<i ; j++){
-            double arg = (lambda[j] - lambda[i]) * dbin ;
-            sinc[j][i] = sin(arg)/arg;
+            double arg = (lambda[j] - lambda[i]) * dbin ; 
             sinc[i][j] = sinc[j][i];
 
-            //cout<<sinc[j][i]<<"  ";
+            cout<<sinc[j][i]<<"  ";
         }
 
         sinc[i][i] = 1;
@@ -520,6 +514,73 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
 
     return real(P); 
 }
+
+
+//.............................................................................
+///
+///
+///
+double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
+{
+    // reset K et S et Ve et lambdaE
+    InitializeTaylorsVectors();
+
+    SetEnergy(E);
+    SetwidthBin(dE,0);
+
+    //Propagate -> get S and K matrix (on the whole path)
+    PropagateTaylor();
+
+    //DiagolK -> get VE and lambdaE
+    SolveK(fKE,flambdaE,fVE);
+
+    //return fct avr proba
+    return avgFormula(flvi,flvf,fdE, flambdaE, fVE);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //.............................................................................
 ///
@@ -550,27 +611,6 @@ vectorD PMNS_TaylorExp::ConvertLoEtoE(double LoE, double dLoE)
     return Ebin;
 }
 
-//.............................................................................
-///
-///
-///
-double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
-{
-    // reset K et S et Ve et lambdaE
-    InitializeTaylorsVectors();
-
-    SetEnergy(E);
-    SetwidthBin(dE,0);
-
-    //Propagate -> get S and K matrix (on the whole path)
-    PropagateTaylor();
-
-    //DiagolK -> get VE and lambdaE
-    SolveK(fKE,flambdaE,fVE);
-
-    //return fct avr proba
-    return avgFormula(flvi,flvf,fdE, flambdaE, fVE);
-}
 
 //.............................................................................
 ///

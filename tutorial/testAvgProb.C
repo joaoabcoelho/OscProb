@@ -26,11 +26,13 @@ void testAvgProb(){
   OscProb::PremModel prem;    
 
   // Fill path for cosT
-  prem.FillPath(-0.9);
+  prem.FillPath(-0.2);
 
   // Give path to calculator
   p.SetPath(prem.GetNuPath());
   taylor.SetPath(prem.GetNuPath());
+
+  
 
 
   // Define some fine and coarse binnings
@@ -94,6 +96,8 @@ void testAvgProb(){
   cout << "Total samples needed: " << sumsample << endl;
   cout << "Mean samples per bin: " << double(sumsample) / navg << endl;
 
+  cout<<"?????????????????????????";
+
   // Make a long canvas
   MakeLongCanvas();
 
@@ -119,6 +123,7 @@ void testAvgProb(){
   h2->DrawCopy("hist same ][");
   h3->DrawCopy("hist same ][");
 
+  /*
   // Make a new canvas
   gPad->DrawClone();
 
@@ -141,4 +146,5 @@ void testAvgProb(){
   h1->DrawCopy("hist ][ same");
   h5->DrawCopy("hist ][ same");
 
+  */
 }
