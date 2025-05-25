@@ -22,7 +22,7 @@ PMNS_TaylorExp::PMNS_TaylorExp() : PMNS_Fast()
 {
     InitializeTaylorsVectors();
 
-    SetwidthBin(0.1,0.1);
+    SetwidthBin(0,0);
 }
 
 //.............................................................................
@@ -147,6 +147,7 @@ void PMNS_TaylorExp::rotateK(matrixC Kmass,matrixC& Kflavor)
         }
     }*/
     
+    
 }
 
 //.............................................................................
@@ -245,6 +246,9 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 
         }
     }
+    
+
+
 }
 
 //.............................................................................
@@ -257,7 +261,7 @@ void PMNS_TaylorExp::BuildKcosT(matrixC& K)
 
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
-            K[i][j] = 6371 * abs(sin(theta)) * fHam[i][j]; 
+            K[i][j] = 6371 * abs(sin(theta)) * fHam[i][j]; // 6371 en km ici
 
             if(i != j){
                 K[j][i] = conj(K[i][j]);
@@ -270,23 +274,23 @@ void PMNS_TaylorExp::BuildKcosT(matrixC& K)
 ///
 ///
 ///
-void PMNS_TaylorExp::MultiplicationRuleK(matrixC SLayer,matrixC KLayer,complexD K[3][3])
+void PMNS_TaylorExp::MultiplicationRuleK(matrixC KLayer,complexD K[3][3])
 {
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
 
-            complexD add = K[i][j];
+            //complexD add = K[i][j];
 
-            K[i][j] = 0;
+            //K[i][j] = 0;
 
             for(int k = 0 ; k<fNumNus ; k++){
                 for(int l = 0 ; l<fNumNus ; l++){                                                          
-                    K[i][j] += conj(fevolutionMatrixS[k][i]) * KLayer[k][l] * fevolutionMatrixS[l][j] + add; 
+                    K[i][j] += conj(fevolutionMatrixS[k][i]) * KLayer[k][l] * fevolutionMatrixS[l][j] ; 
                 }
             }
             
             if(i != j){
-                K[j][i] = conj(K[i][j]); //UNMOINS????
+                K[j][i] = conj(K[i][j]); 
             }
         }
     }    
@@ -400,7 +404,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
         rotateK(Kmass,Kflavor);
 
         //multiplication rule for K and S 
-        MultiplicationRuleK(Sflavor,Kflavor,fKE);
+        MultiplicationRuleK(Kflavor,fKE);
         
     }
 
@@ -413,7 +417,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
         //rotateK(Kmass,Kflavor);
 
         //multiplication rule for K and S 
-        MultiplicationRuleK(Sflavor,Kmass,fKcosT);
+        MultiplicationRuleK(Kmass,fKcosT);
         
     }
 
@@ -559,6 +563,7 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
 
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 
 
 

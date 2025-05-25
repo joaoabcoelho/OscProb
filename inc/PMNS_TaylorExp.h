@@ -55,7 +55,7 @@ namespace OscProb {
 
       virtual void HadamardProduct(vectorD lambda, matrixC& densityMatrix, double dbin);
 
-      virtual void MultiplicationRuleK(matrixC SLayer,matrixC KLayer, complexD K[3][3]);
+      virtual void MultiplicationRuleK(matrixC KLayer, complexD K[3][3]);
 
       virtual void MultiplicationRuleS(matrixC SLayer);
 

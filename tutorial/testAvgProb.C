@@ -25,8 +25,10 @@ void testAvgProb(){
   // PREM Model
   OscProb::PremModel prem;    
 
+  double cosT = -0.4;
+
   // Fill path for cosT
-  prem.FillPath(-0.2);
+  prem.FillPath(cosT);
 
   // Give path to calculator
   p.SetPath(prem.GetNuPath());
@@ -122,6 +124,19 @@ void testAvgProb(){
   h4->DrawCopy("hist same ][");
   h2->DrawCopy("hist same ][");
   h3->DrawCopy("hist same ][");
+
+  MiscText(0.8, 0.86, 0.04, TString::Format("nbrBinAvg = %0.1d", navg) );
+  MiscText(0.8, 0.82, 0.04, TString::Format("cos#theta_{z} = %0.1f", cosT) );
+
+  TLegend* leg = new TLegend(0.7,0.6,0.9,0.8);
+
+  leg->AddEntry(h2, "P(#nu_{#mu}#rightarrow#nu_{#mu}) - avg taylor", "l");
+  leg->AddEntry(h3, "P(#nu_{#mu}#rightarrow#nu_{#mu}) - avg ", "l");
+  leg->AddEntry(h4, "P(#nu_{#mu}#rightarrow#nu_{#mu}) - centre bin", "l");
+
+  SetLeg(leg);
+
+  leg->Draw();
 
   /*
   // Make a new canvas

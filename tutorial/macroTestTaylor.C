@@ -6,7 +6,7 @@
 #include "SetNiceStyle.C"
 
 
-void macroTestTaylor(double cosT = -0.9, bool isNuBar = false){
+void macroTestTaylor(double cosT = -0.7, bool isNuBar = false){
 
   // Load some nice styles
   SetNiceStyle();
@@ -30,9 +30,9 @@ void macroTestTaylor(double cosT = -0.9, bool isNuBar = false){
   t.SetPath(prem.GetNuPath());
 
   // Make some histograms
-  int nbins = 100;
-  double xmin = 0.1;
-  double xmax = 5;
+  int nbins = 1000;
+  double xmin = 1;
+  double xmax = 10;
   double widthBin = (xmax-xmin) / nbins;
 
   TH1D* hMuMu_fast = new TH1D("","",nbins,xmin,xmax);
@@ -52,8 +52,8 @@ void macroTestTaylor(double cosT = -0.9, bool isNuBar = false){
     t.SetDm(3, dm31);
 
     // Fill NH
-    hMuMu_fast->SetBinContent(i, f.AvgProb(1,1, energy, widthBin));
-    hEMu_fast->SetBinContent(i, f.AvgProb(0,1, energy, widthBin));
+    hMuMu_fast->SetBinContent(i, f.Prob(1,1, energy));
+    hEMu_fast->SetBinContent(i, f.Prob(0,1, energy));
 
     // Fill IH
     hMuMu_taylor->SetBinContent(i, t.avgProbTaylor(1,1, energy,widthBin));
@@ -73,7 +73,7 @@ void macroTestTaylor(double cosT = -0.9, bool isNuBar = false){
 
   // Set axis titles
   if(isNuBar) hMuMu_fast->SetTitle(";Neutrino Energy (GeV);P(#bar{#nu}_{x}#rightarrow#bar{#nu}_{#mu})");
-  else        hMuMu_fast->SetTitle(";Neutrino Energy (GeV);P(#nu_{x}#rightarrow#nu_{#mu})");
+  else        hMuMu_fast->SetTitle(";Neutrino Energy (GeV);P(#nu_{#mu}#rightarrow#nu_{#mu})");
 
   // Set y range
   hMuMu_fast->GetYaxis()->SetRangeUser(0,1);
@@ -83,15 +83,15 @@ void macroTestTaylor(double cosT = -0.9, bool isNuBar = false){
 
   // Draw everything
   hMuMu_fast->Draw("curv");
-  hEMu_fast->Draw("curv same");
-  hMuMu_taylor->Draw("curv same");
-  hEMu_taylor->Draw("curv same");
+  //hEMu_fast->Draw("curv same");
+  //hMuMu_taylor->Draw("curv same");
+  //hEMu_taylor->Draw("curv same");
 
   // Print cosT in canvas
   MiscText(0.8, 0.88, 0.04, TString::Format("cos#theta_{z} = %0.1f", cosT) );
 
   TLegend* leg = new TLegend(0.7,0.6,0.9,0.8);
-
+  /*
   if(isNuBar){
 
     leg->AddEntry(hMuMu_fast, "P(#bar{#nu}_{#mu}#rightarrow#bar{#nu}_{#mu}) - avg fast", "l");
@@ -107,7 +107,7 @@ void macroTestTaylor(double cosT = -0.9, bool isNuBar = false){
     leg->AddEntry(hEMu_fast, "P(#nu_{e}#rightarrow#nu_{#mu}) - avg fast", "l");
     leg->AddEntry(hEMu_taylor, "P(#nu_{e}#rightarrow#nu_{#mu}) - taylor", "l");
 
-  }
+  }*/
 
   SetLeg(leg);
 
