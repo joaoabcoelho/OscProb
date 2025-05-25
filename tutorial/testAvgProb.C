@@ -98,8 +98,6 @@ void testAvgProb(){
   cout << "Total samples needed: " << sumsample << endl;
   cout << "Mean samples per bin: " << double(sumsample) / navg << endl;
 
-  cout<<"?????????????????????????";
-
   // Make a long canvas
   MakeLongCanvas();
 

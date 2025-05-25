@@ -219,7 +219,7 @@ void PMNS_TaylorExp::HadamardProduct(vectorD lambda, matrixC& densityMatrix, dou
 ///
 void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 {
-    double lv = 2 * kGeV2eV * fEnergy; // 2E in eV
+    /*double lv =  kGeV2eV * fEnergy; // E in eV 
 
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
@@ -245,9 +245,19 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
             }
 
         }
-    }
-    
+    }*/
 
+    double lv =  kGeV2eV * fEnergy; // E in eV 
+
+    for(int j = 0 ; j<fNumNus ; j++){
+        for(int i = 0 ; i<=j ; i++){
+            K[i][j] = - kKm2eV * (L / lv) * fHam[i][j];
+
+            if(i != j){
+                K[j][i] = conj(K[i][j]);
+            }
+        }
+    }
 
 }
 
@@ -366,7 +376,7 @@ void PMNS_TaylorExp::LenghtLayer()
 ///
 void PMNS_TaylorExp::PropagateTaylor()
 {
-  for (int i = 0; i < int(fNuPaths.size()); i++) {cout<<"Layer "<<i<<endl; PropagatePathTaylor(fNuPaths[i]); }
+  for (int i = 0; i < int(fNuPaths.size()); i++) { PropagatePathTaylor(fNuPaths[i]); }
 }
 
 //.............................................................................
@@ -440,6 +450,7 @@ void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
     // Fill fEval and fEvec vectors from GLoBES arrays
     for (int i = 0; i < fNumNus; i++) {
         lambda[i] = fEvalGLoBES[i];
+        cout<<lambda[i]<<"  ";
         for (int j = 0; j < fNumNus; j++) { V[i][j] = fEvecGLoBES[i][j]; }
     }
 
@@ -504,7 +515,7 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
             double arg = (lambda[j] - lambda[i]) * dbin ; 
             sinc[i][j] = sinc[j][i];
 
-            cout<<sinc[j][i]<<"  ";
+            //cout<<sinc[j][i]<<"  ";
         }
 
         sinc[i][i] = 1;
@@ -515,6 +526,7 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
             P += SVmulti[flvf][i] * conj(SVmulti[flvf][j]) * conj(V[flvi][i]) * V[flvi][j] * sinc[j][i];
         }
     }
+    cout<<"P = "<<P<<endl;
 
     return real(P); 
 }
@@ -693,8 +705,6 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE, d
     SetCosT(cosT);
     SetwidthBin(dE,dcosT);
 
-    cout<<"aaa";
-
     //Propagate -> get S and K matrix (on the whole path)
     PropagateTaylor();
 
@@ -736,8 +746,6 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
             P += SVmulti[flvf][i] * conj(SVmulti[flvf][j]) * conj(V[flvi][i]) * V[flvi][j] * exp[j][i];
         }
     }
-
-    cout<<"P="<<P<<endl;
 
     return real(P); 
 }
