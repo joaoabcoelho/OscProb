@@ -25,7 +25,7 @@ void testAvgProb(){
   // PREM Model
   OscProb::PremModel prem;    
 
-  double cosT = -0.4;
+  double cosT = -0.7;
 
   // Fill path for cosT
   prem.FillPath(cosT);

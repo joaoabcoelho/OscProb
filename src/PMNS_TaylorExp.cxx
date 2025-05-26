@@ -259,6 +259,30 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
         }
     }
 
+    /*matrixC Hprime = matrixC(fNumNus, vectorC(fNumNus, 0));
+    for (int j = 0; j < fNumNus; j++) {
+        // Set mass splitting
+        Hprime[j][j] = fDm[j];
+        // Reset off-diagonal elements
+        for (int i = 0; i < j; i++) { Hprime[i][j] = 0; }
+        // Rotate j neutrinos
+        for (int i = 0; i < j; i++) { RotateH(i, j, Hprime); }
+    }
+
+    double lv =  kGeV2eV * fEnergy;
+
+    for(int j = 0 ; j<fNumNus ; j++){
+        for(int i = 0 ; i<=j ; i++){
+            K[i][j] = - kKm2eV * (L / (lv*lv)) * Hprime[i][j];
+
+            if(i != j){
+                K[j][i] = conj(K[i][j]);
+            }
+        }
+    }*/
+
+
+
 }
 
 //.............................................................................
@@ -513,6 +537,7 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
     for(int i = 0 ; i<fNumNus ; i++){
         for(int j = 0 ; j<i ; j++){
             double arg = (lambda[j] - lambda[i]) * dbin ; 
+            sinc[j][i] = sin(arg)/arg;
             sinc[i][j] = sinc[j][i];
 
             //cout<<sinc[j][i]<<"  ";
