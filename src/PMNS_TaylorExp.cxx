@@ -35,6 +35,33 @@ PMNS_TaylorExp::~PMNS_TaylorExp() {}
 ///
 ///
 ///
+void PMNS_TaylorExp::printMatrix1(matrixC M)
+{
+    for(int j=0 ; j<3 ; j++)
+    {
+        for(int k=0 ; k<3 ; k++)
+        {
+            cout<<M[j][k]<<" ";
+        }
+        cout<<endl;
+    }
+}
+void PMNS_TaylorExp::printMatrix2(complexD M[3][3])
+{
+    for(int j=0 ; j<3 ; j++)
+    {
+        for(int k=0 ; k<3 ; k++)
+        {
+            cout<<M[j][k]<<" ";
+        }
+        cout<<endl;
+    }
+}
+
+//.............................................................................
+///
+///
+///
 void PMNS_TaylorExp::InitializeTaylorsVectors()
 {
     flambdaE = vectorD(fNumNus, 0);
@@ -219,6 +246,21 @@ void PMNS_TaylorExp::HadamardProduct(vectorD lambda, matrixC& densityMatrix, dou
 ///
 void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 {
+
+    double lv =  kGeV2eV * fEnergy; // E in eV 
+
+    for(int j = 0 ; j<fNumNus ; j++){
+        for(int i = 0 ; i<=j ; i++){
+            K[i][j] = - kKm2eV * (L / (2*lv*lv)) * fHms[i][j]; //ICI dans la matière et pas le vide 
+            //K[i][j] = - kKm2eV * (L / lv) * fHam[i][j]; //ICI dans la matière et pas le vide 
+
+
+            if(i != j){
+                K[j][i] = conj(K[i][j]);
+            }
+        }
+    }
+
     /*double lv =  kGeV2eV * fEnergy; // E in eV 
 
     for(int j = 0 ; j<fNumNus ; j++){
@@ -247,18 +289,6 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
         }
     }*/
 
-    double lv =  kGeV2eV * fEnergy; // E in eV 
-
-    for(int j = 0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<=j ; i++){
-            K[i][j] = - kKm2eV * (L / lv) * fHam[i][j];
-
-            if(i != j){
-                K[j][i] = conj(K[i][j]);
-            }
-        }
-    }
-
     /*matrixC Hprime = matrixC(fNumNus, vectorC(fNumNus, 0));
     for (int j = 0; j < fNumNus; j++) {
         // Set mass splitting
@@ -280,8 +310,6 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
             }
         }
     }*/
-
-
 
 }
 
@@ -312,10 +340,6 @@ void PMNS_TaylorExp::MultiplicationRuleK(matrixC KLayer,complexD K[3][3])
 {
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
-
-            //complexD add = K[i][j];
-
-            //K[i][j] = 0;
 
             for(int k = 0 ; k<fNumNus ; k++){
                 for(int l = 0 ; l<fNumNus ; l++){                                                          
@@ -415,7 +439,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     //double L = p.length;
 
     // Solve for eigensystem
-    SolveHam();                 //EST CE QUE CA FAIT APPELLE A CELLE DE FAST???
+    SolveHam();                 
 
     // Get the evolution matrix in mass basis
     double LengthIneV = kKm2eV * p.length;      //IL FAUT CIONVERTIR TOUS LES L
@@ -434,11 +458,11 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
         BuildKE(p.length,Kmass);
 
         // Rotate KE in flavor basis
-        matrixC Kflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
-        rotateK(Kmass,Kflavor);
+        //matrixC Kflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
+        //rotateK(Kmass,Kflavor);
 
         //multiplication rule for K and S 
-        MultiplicationRuleK(Kflavor,fKE);
+        MultiplicationRuleK(Kmass,fKE);     //MARCHE POUR SYM CAR COMMUTTE AVEC H @@@@@@@@@@@@@@@@@@@@@@//
         
     }
 
@@ -474,7 +498,6 @@ void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
     // Fill fEval and fEvec vectors from GLoBES arrays
     for (int i = 0; i < fNumNus; i++) {
         lambda[i] = fEvalGLoBES[i];
-        cout<<lambda[i]<<"  ";
         for (int j = 0; j < fNumNus; j++) { V[i][j] = fEvecGLoBES[i][j]; }
     }
 
@@ -531,19 +554,19 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
         }
     }
 
-    if(fdE != 0) { dbin *= kGeV2eV; }
+    cout<<endl<<endl<<"E = "<<fEnergy<<endl;
 
     complexD sinc[fNumNus][fNumNus];
-    for(int i = 0 ; i<fNumNus ; i++){
-        for(int j = 0 ; j<i ; j++){
-            double arg = (lambda[j] - lambda[i]) * dbin ; 
-            sinc[j][i] = sin(arg)/arg;
-            sinc[i][j] = sinc[j][i];
+    for(int j = 0 ; j<fNumNus ; j++){
+        for(int i = 0 ; i<j ; i++){
+            double arg = (lambda[i] - lambda[j]) * dbin ; 
+            sinc[i][j] = sin(arg)/arg;
+            sinc[j][i] = sinc[i][j];
 
-            //cout<<sinc[j][i]<<"  ";
+            cout<<"["<<i<<"]"<<"["<<j<<"] : "<<sinc[i][j]<<"    ";
         }
 
-        sinc[i][i] = 1;
+        sinc[j][j] = 1;
     }
     
     for(int j = 0 ; j<fNumNus ; j++){
@@ -551,7 +574,6 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
             P += SVmulti[flvf][i] * conj(SVmulti[flvf][j]) * conj(V[flvi][i]) * V[flvi][j] * sinc[j][i];
         }
     }
-    cout<<"P = "<<P<<endl;
 
     return real(P); 
 }
@@ -576,7 +598,7 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
     SolveK(fKE,flambdaE,fVE);
 
     //return fct avr proba
-    return avgFormula(flvi,flvf,fdE, flambdaE, fVE);
+    return avgFormula(flvi,flvf,fdE*kGeV2eV, flambdaE, fVE);
 }
 
 

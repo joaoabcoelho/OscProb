@@ -40,13 +40,16 @@ void testAvgProb(){
   // Define some fine and coarse binnings
   int navg = 20;
   int nbins = navg * 100;
+  double xmin = 0;
+  double xmax = 3;
 
   // Lots of histograms
-  TH1D* h1 = new TH1D("","",nbins,0,3);
-  TH1D* h2 = new TH1D("","",navg,0,3);
-  TH1D* h3 = new TH1D("","",navg,0,3);
-  TH1D* h4 = new TH1D("","",navg,0,3);
-  TH1D* h5 = new TH1D("","",navg,0,3);
+  TH1D* h1 = new TH1D("","",nbins,xmin,xmax);
+  TH1D* h2 = new TH1D("","",navg,xmin,xmax);
+  TH1D* h3 = new TH1D("","",navg,xmin,xmax);
+  TH1D* h4 = new TH1D("","",navg,xmin,xmax);
+  TH1D* h5 = new TH1D("","",navg,xmin,xmax);
+  TH1D* h6 = new TH1D("","",navg,xmin,xmax);
 
   // Do some fine binning and uniform sampling
   for(int i=1; i<=nbins; i++){
@@ -76,7 +79,7 @@ void testAvgProb(){
     double dE = (maxE - minE);
 
     h2->SetBinContent(i, taylor.avgProbTaylor(1,1, E, dE));
-    //h2->SetBinContent(i, p.AvgProb(1,1, E, dE));
+    //h6->SetBinContent(i, p.AvgProb(1,1, E, dE));
 
     h3->SetBinContent(i, h3->GetBinContent(i) / dE);
     h4->SetBinContent(i, p.Prob(1,1, E));
@@ -130,7 +133,7 @@ void testAvgProb(){
 
   leg->AddEntry(h2, "P(#nu_{#mu}#rightarrow#nu_{#mu}) - avg taylor", "l");
   leg->AddEntry(h3, "P(#nu_{#mu}#rightarrow#nu_{#mu}) - avg ", "l");
-  leg->AddEntry(h4, "P(#nu_{#mu}#rightarrow#nu_{#mu}) - centre bin", "l");
+  //leg->AddEntry(h4, "P(#nu_{#mu}#rightarrow#nu_{#mu}) - centre bin", "l");
 
   SetLeg(leg);
 

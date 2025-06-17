@@ -15,6 +15,9 @@ namespace OscProb {
       PMNS_TaylorExp();          ///< Constructor
       virtual ~PMNS_TaylorExp(); ///< Destructor
 
+      virtual void printMatrix1(matrixC M);
+      virtual void printMatrix2(complexD M[3][3]);
+
       virtual void SetwidthBin(double dE , double dcosT);
 
       virtual void SetCosT(double cosT);
