@@ -41,7 +41,7 @@ void VariationTest(){
 
         h1->SetBinContent(i, t.Prob(1,1,E + varPercentage * E));
         h2->SetBinContent(i, t.interpolationEnergy(1,1,E,varPercentage * E));
-        h3->SetBinContent(i, t.Prob(1,1, E + varPercentage * E));
+        //h3->SetBinContent(i, t.Prob(1,1, E + varPercentage * E));
     }
 
     // Make a long canvas
@@ -49,12 +49,12 @@ void VariationTest(){
 
     // Set some nice histograms
     SetHist(h1, kBlack);
-    SetHist(h2, kBlue);
+    SetHist(h2, kRed);
     SetHist(h3, kGreen);
 
     // Change line styles
     h1->SetLineStyle(1);
-    h2->SetLineStyle(1);
+    h2->SetLineStyle(7);
     h3->SetLineStyle(7);
     
 
@@ -64,7 +64,7 @@ void VariationTest(){
     // Draw different samplings
     h1->DrawCopy("curv");
     h2->DrawCopy("hist same ][");
-    h3->DrawCopy("hist same ][");
+    //h3->DrawCopy("hist same ][");
 
     MiscText(0.75, 0.965, 0.04, TString::Format("Centered Energy = %0.1f", E) );
     MiscText(0.63, 0.965, 0.04, TString::Format("cosT = %0.1f", cosT) );

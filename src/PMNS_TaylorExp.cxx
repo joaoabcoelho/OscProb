@@ -543,7 +543,7 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
         P += norm(s1[j]);
     }*/
 
-    complexD P;
+    complexD P = 0;
 
     matrixC SVmulti = matrixC(fNumNus, vectorC(fNumNus, 0));
     for(int i = 0 ; i<fNumNus ; i++) {
@@ -611,7 +611,7 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
 double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, vectorD lambda, matrixC V)
 {
 
-    complexD P;
+    complexD P = 0;
 
     matrixC SVmulti = matrixC(fNumNus, vectorC(fNumNus, 0));
     for(int i = 0 ; i<fNumNus ; i++) {
@@ -625,7 +625,7 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
     complexD exp[fNumNus][fNumNus];
     for(int i = 0 ; i<fNumNus ; i++){
         for(int j = 0 ; j<fNumNus; j++){
-            double arg = (lambda[j] - lambda[i]) * dbin ; //DIVISER PAR2???
+            double arg = (lambda[j] - lambda[i]) * dbin ; //DIVISER PAR2???    
             exp[j][i] = complexD(cos(arg),sin(arg));
         }
     }
@@ -635,6 +635,8 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
             P += SVmulti[flvf][i] * conj(SVmulti[flvf][j]) * conj(V[flvi][i]) * V[flvi][j] * exp[j][i];
         }
     }
+
+    //cout<<"P = "<<P<<endl;
 
     return real(P); 
 }
