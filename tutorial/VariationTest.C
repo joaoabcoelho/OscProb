@@ -19,29 +19,29 @@ void VariationTest(){
     OscProb::PremModel prem;    
 
     // Fill path for cosT
-    prem.FillPath(-0.6);
+    double cosT = -0.7;
+    prem.FillPath(cosT);
 
     // Give path to calculator
     t.SetPath(prem.GetNuPath());
 
-    int nbins = 100;
+    int nbins = 1000;
+    double E = 0.3;
     double xmax = 0.1;
     double xmin = -xmax;
 
-    double E = 0.5;
-
     TH1D* h1 = new TH1D("","",nbins,xmin,xmax);
     TH1D* h2 = new TH1D("","",nbins,xmin,xmax);
+    TH1D* h3 = new TH1D("","",nbins,xmin,xmax);
 
     for(int i = 1 ; i<=nbins ; i++){
 
-        double ext = h1->GetBinCenter(i);
+        double varPercentage = h1->GetBinCenter(i);
         // EN E OU EN LOG?????
 
-        cout<<ext<<endl;
-
-        h1->SetBinContent(i, t.Prob(1,1,E + ext * E));
-        h2->SetBinContent(i, t.interpolationEnergy(1,1,E,ext * E));
+        h1->SetBinContent(i, t.Prob(1,1,E + varPercentage * E));
+        h2->SetBinContent(i, t.interpolationEnergy(1,1,E,varPercentage * E));
+        h3->SetBinContent(i, t.Prob(1,1, E + varPercentage * E));
     }
 
     // Make a long canvas
@@ -50,17 +50,24 @@ void VariationTest(){
     // Set some nice histograms
     SetHist(h1, kBlack);
     SetHist(h2, kBlue);
+    SetHist(h3, kGreen);
 
     // Change line styles
-    h1->SetLineStyle(3);
-    h2->SetLineStyle(7);
+    h1->SetLineStyle(1);
+    h2->SetLineStyle(1);
+    h3->SetLineStyle(7);
+    
 
     // The axis titles
-    //h1->SetTitle(";Log10[Neutrino Energy (GeV)];P(#nu_{#mu}#rightarrow#nu_{#mu})");
+    h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#mu}#rightarrow#nu_{#mu})");
 
     // Draw different samplings
     h1->DrawCopy("curv");
     h2->DrawCopy("hist same ][");
+    h3->DrawCopy("hist same ][");
+
+    MiscText(0.75, 0.965, 0.04, TString::Format("Centered Energy = %0.1f", E) );
+    MiscText(0.63, 0.965, 0.04, TString::Format("cosT = %0.1f", cosT) );
 
 
     // Déterminer les limites de Y pour la ligne

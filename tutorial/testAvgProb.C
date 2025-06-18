@@ -18,14 +18,15 @@ void testAvgProb(){
   OscProb::PMNS_TaylorExp taylor;
 
   // Set the baseline through the earth
-  double L = 2*6368 + 18;
-  p.SetLength(L);
-  taylor.SetLength(L);
+  //double L = 2*6368 + 18;
+  //p.SetLength(L);
+  //taylor.SetLength(L);
 
   // PREM Model
   OscProb::PremModel prem;    
 
   double cosT = -0.7;
+  double L = 6368 * abs(cosT); //L max = 6368 et non 2*6368
 
   // Fill path for cosT
   prem.FillPath(cosT);
@@ -34,11 +35,9 @@ void testAvgProb(){
   p.SetPath(prem.GetNuPath());
   taylor.SetPath(prem.GetNuPath());
 
-  
-
 
   // Define some fine and coarse binnings
-  int navg = 20;
+  int navg = 40;
   int nbins = navg * 100;
   double xmin = 0;
   double xmax = 3;
@@ -77,6 +76,8 @@ void testAvgProb(){
 
     double E  = (maxE + minE) / 2;
     double dE = (maxE - minE);
+
+    cout<<endl<<"----------------------------"<<endl<<"ratio dE/E = "<<dE/E<<endl<<"------------------------------"<<endl;
 
     h2->SetBinContent(i, taylor.avgProbTaylor(1,1, E, dE));
     //h6->SetBinContent(i, p.AvgProb(1,1, E, dE));
@@ -122,7 +123,7 @@ void testAvgProb(){
 
   // Draw different samplings
   h1->DrawCopy("curv");
-  h4->DrawCopy("hist same ][");
+  //h4->DrawCopy("hist same ][");
   h2->DrawCopy("hist same ][");
   h3->DrawCopy("hist same ][");
 
