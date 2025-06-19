@@ -249,11 +249,12 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 
     double lv =  kGeV2eV * fEnergy; // E in eV 
 
+    //printMatrix2(fHam);
+
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
             //K[i][j] = - kKm2eV * (L / (2*lv*lv)) * fHms[i][j]; 
             K[i][j] = - kKm2eV * (L / lv) * fHam[i][j];  
-
 
             if(i != j){
                 K[j][i] = conj(K[i][j]);
