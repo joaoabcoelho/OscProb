@@ -247,31 +247,55 @@ void PMNS_TaylorExp::HadamardProduct(vectorD lambda, matrixC& densityMatrix, dou
 void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 {
 
-    double lv =  kGeV2eV * fEnergy; // E in eV 
-
-    //printMatrix2(fHam);
+    /*double lv =  kGeV2eV * fEnergy; // E in eV 
 
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
-            //K[i][j] = - kKm2eV * (L / (2*lv*lv)) * fHms[i][j]; 
-            K[i][j] = - kKm2eV * (L / lv) * fHam[i][j];  
+            K[i][j] = - kKm2eV * (L / (2*lv*lv)) * fHms[i][j]; 
+            //K[i][j] = - kKm2eV * (L / lv) * fHam[i][j];  
 
             if(i != j){
                 K[j][i] = conj(K[i][j]);
             }
         }
+    }*/
+
+    /*double h = 1E-6;
+
+    matrixC H = matrixC(fNumNus, vectorC(fNumNus, 0));
+    for(int j = 0 ; j<fNumNus ; j++){
+        for(int i = 0 ; i<fNumNus ; i++){
+            H[i][j] = fHam[i][j];
+        }
     }
 
-    /*double lv =  kGeV2eV * fEnergy; // E in eV 
+    fEnergy += h;
+    BuildHms();
+    UpdateHam();
+    fEnergy -= h;
+
+    for(int j = 0 ; j<fNumNus ; j++){
+        for(int i = 0 ; i<fNumNus ; i++){
+            K[i][j] =  kKm2eV * L  * ( fHam[i][j] - H[i][j] ) / h; 
+        }
+    }*/
+
+
+    double lv =  kGeV2eV * fEnergy; // E in eV 
 
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
             for(int k = 0 ; k<fNumNus ; k++){
                 for(int l = 0 ; l<fNumNus ; l++){
-                    K[i][j] += conj(fEvec[k][i]) * fHms[k][l] * fEvec[l][j];
+
+                    if (k<l)
+                        K[i][j] += conj(fEvec[k][i]) * fHms[k][l] * fEvec[l][j];
+
+                    if (k>l)
+                        K[i][j] += conj(fEvec[k][i]) * conj(fHms[l][k]) * fEvec[l][j];
                 }
             }
-            K[i][j] *= - (1 / (2*lv*lv));
+            K[i][j] *= - (kKm2eV * L / (2*lv*lv));
 
             complexD C;
             if(i == j){
@@ -282,14 +306,19 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
                 C = (complexD(cos(argg), sin(argg)) - complexD(1,0) ) / (complexD(0,argg)); 
             }// C=(1,0) because of H H' commutation (due to cst density case)
 
-            K[i][j] *= kKm2eV * L  * K[i][j] * C; 
+            K[i][j] *= C; 
 
             if(i != j){
                 K[j][i] = conj(K[i][j]);
             }
 
         }
-    }*/
+    }
+
+    printMatrix1(K);
+    cout<<endl;
+
+    
 
     /*matrixC Hprime = matrixC(fNumNus, vectorC(fNumNus, 0));
     for (int j = 0; j < fNumNus; j++) {
@@ -459,11 +488,11 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
         BuildKE(p.length,Kmass);
 
         // Rotate KE in flavor basis
-        //matrixC Kflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
-        //rotateK(Kmass,Kflavor);
+        matrixC Kflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
+        rotateK(Kmass,Kflavor);
 
         //multiplication rule for K and S 
-        MultiplicationRuleK(Kmass,fKE);     //MARCHE POUR SYM CAR COMMUTTE AVEC H @@@@@@@@@@@@@@@@@@@@@@//
+        MultiplicationRuleK(Kflavor,fKE);     //MARCHE POUR SYM CAR COMMUTTE AVEC H @@@@@@@@@@@@@@@@@@@@@@//
         
     }
 

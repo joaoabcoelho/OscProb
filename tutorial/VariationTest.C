@@ -13,14 +13,18 @@ void VariationTest(){
     SetNiceStyle();
 
     // Get a PMNS object
+    OscProb::PMNS_Fast p;
     OscProb::PMNS_TaylorExp t;
 
     // PREM Model
     OscProb::PremModel prem;    
 
     // Fill path for cosT
-    double cosT = -0.7;
+    double cosT = -0.9;
     prem.FillPath(cosT);
+
+    double L = 2*6368*abs(cosT);
+    p.SetLength(L);
 
     // Give path to calculator
     t.SetPath(prem.GetNuPath());
@@ -34,14 +38,16 @@ void VariationTest(){
     TH1D* h2 = new TH1D("","",nbins,xmin,xmax);
     TH1D* h3 = new TH1D("","",nbins,xmin,xmax);
 
+    int flavori = 1;
+
     for(int i = 1 ; i<=nbins ; i++){
 
         double varPercentage = h1->GetBinCenter(i);
         // EN E OU EN LOG?????
 
-        h1->SetBinContent(i, t.Prob(1,1,E + varPercentage * E));
-        h2->SetBinContent(i, t.interpolationEnergy(1,1,E,varPercentage * E));
-        //h3->SetBinContent(i, t.Prob(1,1, E + varPercentage * E));
+        h1->SetBinContent(i, t.Prob(flavori,1,E + varPercentage * E));
+        h2->SetBinContent(i, t.interpolationEnergy(flavori,1,E,varPercentage * E));
+        //h3->SetBinContent(i, p.Prob(flavori,1, E + varPercentage * E));
     }
 
     // Make a long canvas
@@ -59,7 +65,16 @@ void VariationTest(){
     
 
     // The axis titles
-    h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#mu}#rightarrow#nu_{#mu})");
+    if(flavori == 0) {
+        h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{e}#rightarrow#nu_{#mu})");
+    }
+    if(flavori == 1) {
+        h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#mu}#rightarrow#nu_{#mu})");
+    }
+    if(flavori == 2) {
+        h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#tau}#rightarrow#nu_{#mu})");
+    }
+    
 
     // Draw different samplings
     h1->DrawCopy("curv");
