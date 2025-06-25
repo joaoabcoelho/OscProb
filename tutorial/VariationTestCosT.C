@@ -7,7 +7,7 @@
 
 // Check the accuracy of the
 // oscillation averaging function
-void VariationTest(){
+void VariationTestCosT(){
 
     // Set nice overall style
     SetNiceStyle();
@@ -19,19 +19,8 @@ void VariationTest(){
     // PREM Model
     OscProb::PremModel prem;    
 
-    // Fill path for cosT
-    double cosT = -0.9;
-    prem.FillPath(cosT);
-
-    double L = 2*6368*abs(cosT);
-    p.SetLength(L);
-
-    // Give path to calculator
-    t.SetPath(prem.GetNuPath());
-    t.SetLength(L);
-
     int nbins = 1000;
-    double E = 0.3;
+    double cosT = -0.8;
     double xmax = 0.1;
     double xmin = -xmax;
 
@@ -40,15 +29,22 @@ void VariationTest(){
     TH1D* h3 = new TH1D("","",nbins,xmin,xmax);
 
     int flavori = 1;
+    double E = 0.3;
+    t.SetEnergy(E);
+    //p.SetEnergy(E);
 
     for(int i = 1 ; i<=nbins ; i++){
 
         double varPercentage = h1->GetBinCenter(i);
-        // EN E OU EN LOG?????
 
-        h1->SetBinContent(i, t.Prob(flavori,1,E + varPercentage * E));
-        h2->SetBinContent(i, t.interpolationEnergy(flavori,1,E,varPercentage * E));
-        //h3->SetBinContent(i, p.Prob(flavori,1, E + varPercentage * E));
+        prem.FillPath(cosT + varPercentage * cosT);
+        t.SetPath(prem.GetNuPath());
+
+        double L = 2*6368*abs(cosT + varPercentage * cosT);
+
+        h1->SetBinContent(i, t.Prob(flavori,1,E));
+        h2->SetBinContent(i, t.interpolationCosT(flavori,1,cosT,varPercentage * cosT));
+    
     }
 
     // Make a long canvas
@@ -67,13 +63,13 @@ void VariationTest(){
 
     // The axis titles
     if(flavori == 0) {
-        h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{e}#rightarrow#nu_{#mu})");
+        h1->SetTitle(";#epsilon_{#theta } / #theta _{centedred};P(#nu_{e}#rightarrow#nu_{#mu})");
     }
     if(flavori == 1) {
-        h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#mu}#rightarrow#nu_{#mu})");
+        h1->SetTitle(";#epsilon_{#theta  } / #theta _{centedred};P(#nu_{#mu}#rightarrow#nu_{#mu})");
     }
     if(flavori == 2) {
-        h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#tau}#rightarrow#nu_{#mu})");
+        h1->SetTitle(";#epsilon_{#theta  } / #theta _{centedred};P(#nu_{#tau}#rightarrow#nu_{#mu})");
     }
     
 
@@ -82,8 +78,8 @@ void VariationTest(){
     h2->DrawCopy("hist same ][");
     //h3->DrawCopy("hist same ][");
 
-    MiscText(0.75, 0.965, 0.04, TString::Format("Centered Energy = %0.1f", E) );
-    MiscText(0.63, 0.965, 0.04, TString::Format("cosT = %0.1f", cosT) );
+    MiscText(0.85, 0.965, 0.04, TString::Format("Energy = %0.1f", E) );
+    MiscText(0.63, 0.965, 0.04, TString::Format("cosT centered = %0.1f", cosT) );
 
 
     // Déterminer les limites de Y pour la ligne

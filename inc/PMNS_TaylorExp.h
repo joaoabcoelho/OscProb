@@ -36,6 +36,8 @@ namespace OscProb {
 
       virtual double interpolationEnergy(int flvi, int flvf, double E , double dE);
 
+      virtual double interpolationCosT(int flvi, int flvf, double cosT , double dcosT);
+
     protected:
       virtual void InitializeTaylorsVectors(); ///< Initialize all member vectors with
       ///< zeros

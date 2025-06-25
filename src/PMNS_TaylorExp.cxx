@@ -304,7 +304,7 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
             else{
                 double argg = (fEval[i] - fEval[j]) * L * kKm2eV;
                 C = (complexD(cos(argg), sin(argg)) - complexD(1,0) ) / (complexD(0,argg)); 
-            }// C=(1,0) because of H H' commutation (due to cst density case)
+            }
 
             K[i][j] *= C; 
 
@@ -352,9 +352,11 @@ void PMNS_TaylorExp::BuildKcosT(matrixC& K)
 {
     double theta = acos(fcosT);
 
+    cout<<fcosT<<"   "<<sin(theta)<<endl;
+
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
-            K[i][j] = 6371 * abs(sin(theta)) * fHam[i][j]; // 6371 en km ici
+            K[i][j] = 2 * 6371 * kKm2eV * abs(sin(theta)) * fHam[i][j]; //  abs()???
 
             if(i != j){
                 K[j][i] = conj(K[i][j]);
@@ -455,7 +457,7 @@ void PMNS_TaylorExp::LenghtLayer()
 ///
 void PMNS_TaylorExp::PropagateTaylor()
 {
-  for (int i = 0; i < int(fNuPaths.size()); i++) { PropagatePathTaylor(fNuPaths[i]); }
+  for (int i = 0; i < int(fNuPaths.size()); i++) {cout<<"Layer "<<i<<endl; PropagatePathTaylor(fNuPaths[i]); }
 }
 
 //.............................................................................
@@ -690,6 +692,28 @@ double PMNS_TaylorExp::interpolationEnergy(int flvi, int flvf, double E , double
     SolveK(fKE,flambdaE,fVE);
 
     return avgFormulaExtrapolation(flvi,flvf,fdE*kGeV2eV, flambdaE, fVE);
+}
+
+//.............................................................................
+///
+///
+///
+double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , double dcosT)
+{
+    // reset K et S et Ve et lambdaE
+    InitializeTaylorsVectors();
+
+    //SetEnergy(E);
+    SetCosT(cosT);
+    SetwidthBin(0,dcosT);
+
+    //Propagate -> get S and K matrix (on the whole path)
+    PropagateTaylor();
+
+    //DiagolK -> get VE and lambdaE
+    SolveK(fKcosT,flambdaCosT,fVcosT);
+
+    return avgFormulaExtrapolation(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
 }
 
 
