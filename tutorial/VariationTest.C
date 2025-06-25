@@ -28,11 +28,10 @@ void VariationTest(){
 
     // Give path to calculator
     t.SetPath(prem.GetNuPath());
-    t.SetLength(L);
 
-    int nbins = 1000;
-    double E = 0.3;
-    double xmax = 0.1;
+    int nbins = 4000;
+    double E = 3;
+    double xmax = 0.4;
     double xmin = -xmax;
 
     TH1D* h1 = new TH1D("","",nbins,xmin,xmax);

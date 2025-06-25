@@ -8,6 +8,8 @@
 
 #include "MatrixDecomp/zheevh3.h"
 
+#include "PremModel.h"
+
 using namespace OscProb;
 
 using namespace std;
@@ -285,17 +287,22 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
+
             for(int k = 0 ; k<fNumNus ; k++){
                 for(int l = 0 ; l<fNumNus ; l++){
 
                     if (k<l)
-                        K[i][j] += conj(fEvec[k][i]) * fHms[k][l] * fEvec[l][j];
+                        {K[i][j] += conj(fEvec[k][i]) * fHms[k][l] * fEvec[l][j];}
 
                     if (k>l)
-                        K[i][j] += conj(fEvec[k][i]) * conj(fHms[l][k]) * fEvec[l][j];
+                        {K[i][j] += conj(fEvec[k][i]) * conj(fHms[l][k]) * fEvec[l][j];}
+
+                    if (k==l)
+                        {K[i][j] += conj(fEvec[k][i]) * fHms[k][l] * fEvec[l][j];}
                 }
             }
-            K[i][j] *= - (kKm2eV * L / (2*lv*lv));
+
+            //K[i][j] *= - (kKm2eV * L / (2*lv*lv));
 
             complexD C;
             if(i == j){
@@ -306,7 +313,7 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
                 C = (complexD(cos(argg), sin(argg)) - complexD(1,0) ) / (complexD(0,argg)); 
             }
 
-            K[i][j] *= C; 
+            K[i][j] *=  (kKm2eV * L / (2*lv*lv)) * C; 
 
             if(i != j){
                 K[j][i] = conj(K[i][j]);
@@ -315,8 +322,7 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
         }
     }
 
-    printMatrix1(K);
-    cout<<endl;
+
 
     
 
@@ -348,21 +354,25 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 ///
 ///
 ///
-void PMNS_TaylorExp::BuildKcosT(matrixC& K)
+void PMNS_TaylorExp::BuildKcosT(double L, matrixC& K)
 {
     double theta = acos(fcosT);
 
-    cout<<fcosT<<"   "<<sin(theta)<<endl;
+    //cout<<fcosT<<"   "<<sin(theta)<<endl;
+
 
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
-            K[i][j] = 2 * 6371 * kKm2eV * abs(sin(theta)) * fHam[i][j]; //  abs()???
+            //K[i][j] = (- 2 * 6371 * kKm2eV * sin(theta) ) * fHam[i][j]; //  abs()???  
+            K[i][j] =   kKm2eV *  2 * L * fHam[i][j];
 
             if(i != j){
                 K[j][i] = conj(K[i][j]);
             }
         }
-    }
+    } 
+
+    printMatrix1(K);
 }
 
 //.............................................................................
@@ -457,7 +467,7 @@ void PMNS_TaylorExp::LenghtLayer()
 ///
 void PMNS_TaylorExp::PropagateTaylor()
 {
-  for (int i = 0; i < int(fNuPaths.size()); i++) {cout<<"Layer "<<i<<endl; PropagatePathTaylor(fNuPaths[i]); }
+  for (int i = 0; i < int(fNuPaths.size()); i++) { PropagatePathTaylor(fNuPaths[i]); }
 }
 
 //.............................................................................
@@ -500,7 +510,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 
     if(fdcosT != 0){
         matrixC Kmass = matrixC(fNumNus, vectorC(fNumNus, 0));
-        BuildKcosT(Kmass);
+        BuildKcosT(p.length, Kmass);
 
         // Rotate KE in flavor basis
         //matrixC Kflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
@@ -508,6 +518,8 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 
         //multiplication rule for K and S 
         MultiplicationRuleK(Kmass,fKcosT);
+
+        cout<<"stp";
         
     }
 
@@ -659,6 +671,7 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
         for(int j = 0 ; j<fNumNus; j++){
             double arg = (lambda[j] - lambda[i]) * dbin ; //DIVISER PAR2???    
             exp[j][i] = complexD(cos(arg),sin(arg));
+            //cout<<exp[j][i]<<endl;
         }
     }
     

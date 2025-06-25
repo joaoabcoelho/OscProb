@@ -25,7 +25,7 @@ void testAvgProb(){
   // PREM Model
   OscProb::PremModel prem;    
 
-  double cosT = -0.7;
+  double cosT = -0.9;
   double L = 6368 * abs(cosT); //L max = 6368 et non 2*6368
 
   // Fill path for cosT
@@ -37,7 +37,7 @@ void testAvgProb(){
 
 
   // Define some fine and coarse binnings
-  int navg = 20;
+  int navg = 50;
   int nbins = navg * 100;
   double xmin = 0;
   double xmax = 3;

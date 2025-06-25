@@ -44,7 +44,7 @@ namespace OscProb {
 
       virtual void BuildKE(double L , matrixC& K);
 
-      virtual void BuildKcosT(matrixC& K);
+      virtual void BuildKcosT(double L, matrixC& K);
 
       virtual void SolveK(complexD K[3][3], vectorD& lambda, matrixC& V);
 
@@ -85,6 +85,8 @@ namespace OscProb {
       double fdcosT;
 
       double fcosT;
+
+      std::vector<NuPath> fNuPathsVariation ;
   };
 
 } // namespace OscProb

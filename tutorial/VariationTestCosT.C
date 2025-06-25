@@ -18,31 +18,33 @@ void VariationTestCosT(){
 
     // PREM Model
     OscProb::PremModel prem;    
+    OscProb::PremModel premTaylor; 
 
-    int nbins = 1000;
-    double cosT = -0.8;
-    double xmax = 0.1;
+    int nbins = 4000;
+    double cosT = -0.6;
+    double xmax = 0.4;
     double xmin = -xmax;
 
     TH1D* h1 = new TH1D("","",nbins,xmin,xmax);
     TH1D* h2 = new TH1D("","",nbins,xmin,xmax);
     TH1D* h3 = new TH1D("","",nbins,xmin,xmax);
 
-    int flavori = 1;
-    double E = 0.3;
+    int flavori = 0;
+    double E = 1;
     t.SetEnergy(E);
     //p.SetEnergy(E);
+
+    premTaylor.FillPath(cosT);
+    t.SetPath(premTaylor.GetNuPath());
 
     for(int i = 1 ; i<=nbins ; i++){
 
         double varPercentage = h1->GetBinCenter(i);
 
         prem.FillPath(cosT + varPercentage * cosT);
-        t.SetPath(prem.GetNuPath());
+        p.SetPath(prem.GetNuPath());
 
-        double L = 2*6368*abs(cosT + varPercentage * cosT);
-
-        h1->SetBinContent(i, t.Prob(flavori,1,E));
+        h1->SetBinContent(i, p.Prob(flavori,1,E));
         h2->SetBinContent(i, t.interpolationCosT(flavori,1,cosT,varPercentage * cosT));
     
     }
