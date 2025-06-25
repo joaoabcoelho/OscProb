@@ -37,7 +37,7 @@ void testAvgProb(){
 
 
   // Define some fine and coarse binnings
-  int navg = 50;
+  int navg = 20;
   int nbins = navg * 100;
   double xmin = 0;
   double xmax = 3;
@@ -77,13 +77,21 @@ void testAvgProb(){
     double E  = (maxE + minE) / 2;
     double dE = (maxE - minE);
 
-    cout<<endl<<"----------------------------"<<endl<<"ratio dE/E = "<<dE/E<<endl<<"------------------------------"<<endl;
+    double pp =taylor.avgProbTaylor(1,1, E, dE);
+
+ 
+    cout<<endl<<"----------------------------"<<endl<<"Diff ="<<(pp - (h3->GetBinContent(i) / dE) ) / (h3->GetBinContent(i) / dE) <<endl<<"------------------------------"<<endl;
+
+    cout<<endl<<"ratio dE/E = "<<dE/E<<endl<<endl;
 
     h2->SetBinContent(i, taylor.avgProbTaylor(1,1, E, dE));
     //h6->SetBinContent(i, p.AvgProb(1,1, E, dE));
 
     h3->SetBinContent(i, h3->GetBinContent(i) / dE);
     h4->SetBinContent(i, p.Prob(1,1, E));
+
+    
+
 
     // Store the number of samples per bin
     if(minE < 0.1*E) minE = 0.1 * E;
