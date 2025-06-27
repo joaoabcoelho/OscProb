@@ -70,6 +70,8 @@ namespace OscProb {
 
       virtual double avgAlgorithm(int flvi, int flvf);
 
+      virtual vectorI sort3(const vectorD& x);
+
       // Attributes
 
       matrixC fevolutionMatrixS;  

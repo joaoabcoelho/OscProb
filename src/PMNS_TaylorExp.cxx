@@ -285,6 +285,17 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 
     double lv =  kGeV2eV * fEnergy; // E in eV 
 
+    vectorI dm_idx = sort3(fDm);
+    vectorI ev_idx = sort3(fEval);
+
+    int idx[3];
+    for (int i = 0; i < fNumNus; i++) idx[ev_idx[i]] = dm_idx[i] ;
+
+    cout<<"ev :"<<endl;
+    cout<<fEval[0]<<"  "<<fEval[1]<<"  "<<fEval[2]<<"        "<<ev_idx[0]<<"  "<<ev_idx[1]<<"  "<<ev_idx[2]<<endl;
+    cout<<"dm :"<<endl;
+    cout<<fDm[0]<<"  "<<fDm[1]<<"  "<<fDm[2]<<endl<<endl;
+
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
 
@@ -305,9 +316,12 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
                 C = complexD(1,0);
             }
             else{
+                //double argg = (fEval[i] - fEval[j]) * L * kKm2eV;
                 double argg = (fEval[i] - fEval[j]) * L * kKm2eV;
                 C = (complexD(cos(argg), sin(argg)) - complexD(1,0) ) / (complexD(0,argg)); 
             }
+
+            //cout<<i<<"  "<<j<<"  "<<idx[i]<<"  "<<idx[j]<<endl;
 
             K[i][j] *= - (kKm2eV * L / (2*lv*lv)) * C; 
 
@@ -477,7 +491,28 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     SetCurPath(p);
 
     // Solve for eigensystem
-    SolveHam();                 
+    SolveHam();          
+    
+    vectorI dm_idx = sort3(fDm);
+    vectorI ev_idx = sort3(fEval);
+
+    int idx[3];
+    double save[3];
+    complexD saveU[3][3];
+    for (int i = 0; i < fNumNus; i++) {
+
+        idx[ev_idx[i]] = dm_idx[i] ;
+        save[i] = fEval[i];
+        for(int j = 0; j < fNumNus; j++) {saveU[i][j] = fEvec[i][j];}
+    }
+
+    for (int i = 0; i < fNumNus; i++) {
+
+        fEval[i] = save[idx[i]];
+        for(int j = 0; j < fNumNus; j++) {fEvec[i][j] = saveU[i][idx[j]];}
+    }
+
+
 
     // Get the evolution matrix in mass basis
     double LengthIneV = kKm2eV * p.length;      //IL FAUT CIONVERTIR TOUS LES L
@@ -514,8 +549,6 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 
         //multiplication rule for K and S 
         MultiplicationRuleK(Kmass,fKcosT);
-
-        cout<<"stp";
         
     }
 
@@ -666,7 +699,7 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
     for(int i = 0 ; i<fNumNus ; i++){
         for(int j = 0 ; j<fNumNus; j++){
             double arg = (lambda[j] - lambda[i]) * dbin ; //DIVISER PAR2???    
-            exp[j][i] = complexD(cos(arg),sin(arg));
+            exp[j][i] = complexD(cos(arg),sin(arg)); //AAAAAAAAA
             //cout<<exp[j][i]<<endl;
         }
     }
@@ -727,7 +760,48 @@ double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , doubl
 
 
 
+//.............................................................................
+///
+/// Simple index sorting of 3-vector
+///
+vectorI PMNS_TaylorExp::sort3(const vectorD& x)
+{
+  vectorI out(3, 0);
 
+  // 1st element is smallest
+  if (x[0] < x[1] && x[0] < x[2]) {
+    // 3rd element is largest
+    if (x[1] < x[2]) {
+      out[1] = 1;
+      out[2] = 2;
+    }
+    // 2nd element is largest
+    else {
+      out[1] = 2;
+      out[2] = 1;
+    }
+  }
+  // 2nd element is smallest
+  else if (x[1] < x[2]) {
+    out[0] = 1;
+    // 3rd element is largest
+    if (x[0] < x[2]) out[2] = 2;
+    // 1st element is largest
+    else
+      out[1] = 2;
+  }
+  // 3rd element is smallest
+  else {
+    out[0] = 2;
+    // 2nd element is largest
+    if (x[0] < x[1]) out[2] = 1;
+    // 1st element is largest
+    else
+      out[1] = 1;
+  }
+
+  return out;
+}
 
 
 
