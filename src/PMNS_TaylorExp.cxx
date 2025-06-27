@@ -291,18 +291,14 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
             for(int k = 0 ; k<fNumNus ; k++){
                 for(int l = 0 ; l<fNumNus ; l++){
 
-                    if (k<l)
+                    if (k<l || k==l)
                         {K[i][j] += conj(fEvec[k][i]) * fHms[k][l] * fEvec[l][j];}
 
                     if (k>l)
                         {K[i][j] += conj(fEvec[k][i]) * conj(fHms[l][k]) * fEvec[l][j];}
 
-                    if (k==l)
-                        {K[i][j] += conj(fEvec[k][i]) * fHms[k][l] * fEvec[l][j];}
                 }
             }
-
-            //K[i][j] *= - (kKm2eV * L / (2*lv*lv));
 
             complexD C;
             if(i == j){
@@ -313,7 +309,7 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
                 C = (complexD(cos(argg), sin(argg)) - complexD(1,0) ) / (complexD(0,argg)); 
             }
 
-            K[i][j] *=  (kKm2eV * L / (2*lv*lv)) * C; 
+            K[i][j] *= - (kKm2eV * L / (2*lv*lv)) * C; 
 
             if(i != j){
                 K[j][i] = conj(K[i][j]);

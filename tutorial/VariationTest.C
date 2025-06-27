@@ -23,15 +23,15 @@ void VariationTest(){
     double cosT = -0.9;
     prem.FillPath(cosT);
 
-    double L = 2*6368*abs(cosT);
-    p.SetLength(L);
+    //double L = 2*6368*abs(cosT);
+    //p.SetLength(L);
 
     // Give path to calculator
     t.SetPath(prem.GetNuPath());
 
-    int nbins = 4000;
-    double E = 3;
-    double xmax = 0.4;
+    int nbins = 1000;
+    double E = 0.3;
+    double xmax = 0.1;
     double xmin = -xmax;
 
     TH1D* h1 = new TH1D("","",nbins,xmin,xmax);
