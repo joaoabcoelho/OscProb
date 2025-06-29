@@ -285,16 +285,18 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 
     double lv =  kGeV2eV * fEnergy; // E in eV 
 
-    vectorI dm_idx = sort3(fDm);
+    //cout<<"E = "<<lv<<endl;
+
+    /*vectorI dm_idx = sort3(fDm);
     vectorI ev_idx = sort3(fEval);
 
     int idx[3];
-    for (int i = 0; i < fNumNus; i++) idx[ev_idx[i]] = dm_idx[i] ;
+    for (int i = 0; i < fNumNus; i++) idx[ev_idx[i]] = dm_idx[i] ;*/
 
-    cout<<"ev :"<<endl;
-    cout<<fEval[0]<<"  "<<fEval[1]<<"  "<<fEval[2]<<"        "<<ev_idx[0]<<"  "<<ev_idx[1]<<"  "<<ev_idx[2]<<endl;
-    cout<<"dm :"<<endl;
-    cout<<fDm[0]<<"  "<<fDm[1]<<"  "<<fDm[2]<<endl<<endl;
+    //cout<<"ev :"<<endl;
+    //cout<<fEval[0]<<"  "<<fEval[1]<<"  "<<fEval[2]<<"        "<<ev_idx[0]<<"  "<<ev_idx[1]<<"  "<<ev_idx[2]<<endl;
+    //cout<<"dm :"<<endl;
+    //cout<<fDm[0]<<"  "<<fDm[1]<<"  "<<fDm[2]<<endl<<endl;
 
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
@@ -316,14 +318,15 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
                 C = complexD(1,0);
             }
             else{
-                //double argg = (fEval[i] - fEval[j]) * L * kKm2eV;
                 double argg = (fEval[i] - fEval[j]) * L * kKm2eV;
                 C = (complexD(cos(argg), sin(argg)) - complexD(1,0) ) / (complexD(0,argg)); 
             }
 
             //cout<<i<<"  "<<j<<"  "<<idx[i]<<"  "<<idx[j]<<endl;
 
-            K[i][j] *= - (kKm2eV * L / (2*lv*lv)) * C; 
+            K[i][j] *= - (kKm2eV * L / (2*lv*lv)) * C; //kKm2eV *
+
+            //cout<<"blabla "<<(kKm2eV * L / (2*lv*lv))<<" et "<<C<<endl; //kKm2eV *
 
             if(i != j){
                 K[j][i] = conj(K[i][j]);
@@ -332,7 +335,7 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
         }
     }
 
-
+    //printMatrix1(K);
 
     
 
@@ -373,8 +376,8 @@ void PMNS_TaylorExp::BuildKcosT(double L, matrixC& K)
 
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
-            //K[i][j] = (- 2 * 6371 * kKm2eV * sin(theta) ) * fHam[i][j]; //  abs()???  
-            K[i][j] =   kKm2eV *  2 * L * fHam[i][j];
+            K[i][j] = ( -2* 6371 * kKm2eV * sin(theta) ) * fHam[i][j]; //  abs()???  
+            //K[i][j] =   kKm2eV *  2 * L * fHam[i][j];
 
             if(i != j){
                 K[j][i] = conj(K[i][j]);
@@ -382,7 +385,7 @@ void PMNS_TaylorExp::BuildKcosT(double L, matrixC& K)
         }
     } 
 
-    printMatrix1(K);
+    //printMatrix1(K);
 }
 
 //.............................................................................
@@ -477,7 +480,7 @@ void PMNS_TaylorExp::LenghtLayer()
 ///
 void PMNS_TaylorExp::PropagateTaylor()
 {
-  for (int i = 0; i < int(fNuPaths.size()); i++) { PropagatePathTaylor(fNuPaths[i]); }
+  for (int i = 0; i < int(fNuPaths.size()); i++) { cout<<"Layer "<<i<<endl; PropagatePathTaylor(fNuPaths[i]); }
 }
 
 //.............................................................................
@@ -493,7 +496,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     // Solve for eigensystem
     SolveHam();          
     
-    vectorI dm_idx = sort3(fDm);
+    /*vectorI dm_idx = sort3(fDm);
     vectorI ev_idx = sort3(fEval);
 
     int idx[3];
@@ -504,13 +507,20 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
         idx[ev_idx[i]] = dm_idx[i] ;
         save[i] = fEval[i];
         for(int j = 0; j < fNumNus; j++) {saveU[i][j] = fEvec[i][j];}
+
+        cout<<fEval[i]<<"  ";
     }
+
+    cout<<"||  ";
 
     for (int i = 0; i < fNumNus; i++) {
 
         fEval[i] = save[idx[i]];
         for(int j = 0; j < fNumNus; j++) {fEvec[i][j] = saveU[i][idx[j]];}
+        cout<<fEval[i]<<"  ";
     }
+
+    cout<<endl<<endl;*/
 
 
 
@@ -535,7 +545,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
         rotateK(Kmass,Kflavor);
 
         //multiplication rule for K and S 
-        MultiplicationRuleK(Kflavor,fKE);     //MARCHE POUR SYM CAR COMMUTTE AVEC H @@@@@@@@@@@@@@@@@@@@@@//
+        MultiplicationRuleK(Kflavor,fKE);    
         
     }
 
@@ -565,14 +575,22 @@ void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
     double   fEvalGLoBES[3];
     complexD fEvecGLoBES[3][3];
 
-    // Solve Hamiltonian for eigensystem using the GLoBES method
+    // Solve K for eigensystem using the GLoBES method
     zheevh3(K, fEvecGLoBES, fEvalGLoBES);
 
-    // Fill fEval and fEvec vectors from GLoBES arrays
+    printMatrix2(K);
+
+    // Fill flambdaE and fVE vectors from GLoBES arrays
     for (int i = 0; i < fNumNus; i++) {
-        lambda[i] = fEvalGLoBES[i];
+        lambda[i] = fEvalGLoBES[i]; 
         for (int j = 0; j < fNumNus; j++) { V[i][j] = fEvecGLoBES[i][j]; }
+
+        //cout<<lambda[i]<<"  ";
     }
+    /*cout<<endl;
+    printMatrix1(V);
+    cout<<endl<<endl;*/
+    
 
     //IL MANQUE DES CHOSES ICI
 }
@@ -698,15 +716,15 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
     complexD exp[fNumNus][fNumNus];
     for(int i = 0 ; i<fNumNus ; i++){
         for(int j = 0 ; j<fNumNus; j++){
-            double arg = (lambda[j] - lambda[i]) * dbin ; //DIVISER PAR2???    
-            exp[j][i] = complexD(cos(arg),sin(arg)); //AAAAAAAAA
+            double arg = (lambda[j] - lambda[i]) * dbin ;    
+            exp[j][i] = complexD(cos(arg),sin(arg)); 
             //cout<<exp[j][i]<<endl;
         }
     }
     
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ;i<fNumNus ;i++){
-            P += SVmulti[flvf][i] * conj(SVmulti[flvf][j]) * conj(V[flvi][i]) * V[flvi][j] * exp[j][i];
+            P += SVmulti[flvf][i] * conj(SVmulti[flvf][j]) * conj(V[flvi][i]) * V[flvi][j] *  exp[j][i];
         }
     }
 
