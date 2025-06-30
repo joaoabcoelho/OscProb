@@ -21,12 +21,12 @@ void VariationTest(){
 
     // Fill path for cosT
     double cosT = -0.9;
-    //prem.FillPath(cosT);
-    //t.SetPath(prem.GetNuPath());
-    //double L = 2*6368 + 18;
-    double L= 2*6368*abs(cosT);
-    t.SetLength(L);
+    prem.FillPath(cosT);
+    t.SetPath(prem.GetNuPath());
+    //double L= 2*6368*abs(cosT);
+    //t.SetLength(L);
 
+    //double L = 2*6368 + 18;
     //double L = 2*6368*abs(cosT);
     //p.SetLength(L);
 
@@ -91,16 +91,12 @@ void VariationTest(){
     
 
     // The axis titles
-    if(flavori == 0) {
-        h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{e}#rightarrow#nu_{#mu})");
-    }
-    if(flavori == 1) {
-        h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#mu}#rightarrow#nu_{#mu})");
-    }
-    if(flavori == 2) {
-        h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#tau}#rightarrow#nu_{#mu})");
-    }
-    
+    //if(flavori == 0) {
+        //h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{e}#rightarrow#nu_{#mu})");
+    //}
+    //if(flavori == 1) { h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#mu}#rightarrow#nu_{#mu})"); }
+    //if(flavori == 2) {h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#tau}#rightarrow#nu_{#mu})");}
+    h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#alpha}#rightarrow#nu_{#mu})");
 
     // Draw different samplings
     h1->DrawCopy("curv");
@@ -108,11 +104,22 @@ void VariationTest(){
     //h3->DrawCopy("curv");
     h4->DrawCopy("hist same ][");
     h5->DrawCopy("hist same ][");
-    h6->DrawCopy("hist same ][");
-    h7->DrawCopy("hist same ][");
+    //h6->DrawCopy("hist same ][");
+    //h7->DrawCopy("hist same ][");
 
     MiscText(0.75, 0.965, 0.04, TString::Format("Centered Energy = %0.1f", E) );
     MiscText(0.63, 0.965, 0.04, TString::Format("cosT = %0.1f", cosT) );
+
+    TLegend* leg = new TLegend(0.7,0.6,0.1,1);
+    //leg->AddEntry(h1, " P(#nu_{#alpha}#rightarrow#nu_{#mu}) - exacte", "l");
+    leg->AddEntry(h2, " P(#nu_{#mu}#rightarrow#nu_{#mu}) - algorithme", "l");
+    //leg->AddEntry(h4, " P(#nu_{#e}#rightarrow#nu_{#mu}) - exacte", "l");
+    leg->AddEntry(h5, " P(#nu_{e}#rightarrow#nu_{#mu}) - algorithme", "l");
+
+    leg->SetLineColor(kBlack);  // Couleur du cadre
+    leg->SetLineWidth(2);  
+    SetLeg(leg);
+    leg->Draw();
 
 
     // Déterminer les limites de Y pour la ligne
