@@ -292,7 +292,7 @@ void PMNS_LIVS::UpdateHam()
       C0  = -sign * fa[i][j][2]*N[2];
       
       As0 =  sign * (fa[i][j][0]*N[1] - fa[i][j][1]*N[0]);
-      Ac0 = -sign * (fa[i][j][0]*N[0] - fa[i][j][1]*N[1]);
+      Ac0 = -sign * (fa[i][j][0]*N[0] + fa[i][j][1]*N[1]);
 
       As1 =  2*N[1]*N[2]*fc[i][j][0][2] - 2*N[0]*N[2]*fc[i][j][1][2];
       Ac1 = -2*N[0]*N[2]*fc[i][j][0][2] - 2*N[1]*N[2]*fc[i][j][1][2];
