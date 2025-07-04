@@ -28,7 +28,7 @@ const double PMNS_Base::kKm2eV  = 1.0 / 1.973269788e-10; // (hbar.c [eV.km])^-1
 const double PMNS_Base::kNA     = 6.022140857e23; // Avogadro constant (N_A)
 const double PMNS_Base::kK2 =
     1e-3 * kNA / pow(kKm2eV, 3); // N_A * (hbar*c [GeV.cm])^3 * kGeV2eV
-const double PMNS_Base::kGf = 1.1663787e-05; // G_F/(hbar*c)^3 [GeV^-2]
+const double PMNS_Base::kGmu = 1.1663787e-05; // G_mu/(hbar*c)^3 [GeV^-2]
 
 //.............................................................................
 ///
@@ -64,6 +64,8 @@ PMNS_Base::PMNS_Base(int numNus)
   ClearCache(); // Clear cache to initialize it
 
   SetAvgProbPrec(1e-4); // Set default AvgProb precision
+
+  SetUseOneLoopGF(true);
 }
 
 //.............................................................................
@@ -103,6 +105,23 @@ void PMNS_Base::InitializeVectors()
 /// @param u - flag to set caching on (default: true)
 ///
 void PMNS_Base::SetUseCache(bool u) { fUseCache = u; }
+
+//.............................................................................
+///
+/// Turn on/off one-loop correction to G_F
+/// This is based on https://doi.org/10.1103/b5h5-5gkc
+///
+/// @param u - flag to enable one-loop correction (default: true)
+///
+void PMNS_Base::SetUseOneLoopGF(bool u) { SetGFCorrection(u ? 2.0 : 0); }
+
+//.............................................................................
+///
+/// Set an arbitrary correction to G_F
+///
+/// @param c - correction factor in % (default: 0)
+///
+void PMNS_Base::SetGFCorrection(double c) { kGf = (1 + 0.01 * c) * kGmu; }
 
 //.............................................................................
 ///

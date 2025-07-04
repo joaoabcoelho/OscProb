@@ -206,6 +206,12 @@ namespace OscProb {
       /// Set the AvgProb precision
       virtual void SetAvgProbPrec(double prec);
 
+      /// Use the one-loop correction to Fermi constant
+      virtual void SetUseOneLoopGF(bool u = true);
+
+      /// Set a relative correction to Fermi constant
+      virtual void SetGFCorrection(double c = 0);
+
     protected:
       // Some useful complex numbers
       static const complexD zero; ///< zero in complex
@@ -217,7 +223,8 @@ namespace OscProb {
       static const double kGeV2eV; ///< GeV to eV
       static const double kNA;     ///< Avogadro constant
 
-      static const double kGf; ///< G_F in units of GeV^-2
+      static const double kGmu; ///< G_mu in units of GeV^-2
+      double              kGf;  ///< Corrected value of G_F
 
       virtual void InitializeVectors(); ///< Initialize all member vectors with
                                         ///< zeros

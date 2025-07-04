@@ -226,6 +226,7 @@ void SaveTestFile(OscProb::PMNS_Base* p, TString filename){
 int CheckProb(OscProb::PMNS_Base* p, TString filename){
 
   SetTestPath(p);
+  p->SetUseOneLoopGF(false);
 
   TFile* f = new TFile("data/"+filename, "read");
 
@@ -291,7 +292,8 @@ int CheckProb(OscProb::PMNS_Base* p, TString filename){
       c1->SaveAs("plots/Failed_"+hname+"_"+pngfile);
       delete c1;
     }
-    delete h0, h;
+    if(h0) delete h0;
+    if(h) delete h;
   }}}
 
   if(fails>0){
@@ -302,6 +304,7 @@ int CheckProb(OscProb::PMNS_Base* p, TString filename){
     cout << Color::PASSED << " No differences found in " << filename << endl;
   }
 
+  p->SetUseOneLoopGF(true);
   return fails;
 
 }

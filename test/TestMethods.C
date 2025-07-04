@@ -156,7 +156,8 @@ bool TestNominal(string model, double &max_diff){
 
   }
 
-  delete p, p0;
+  if(p) delete p;
+  if(p0) delete p0;
 
   return true;
 
