@@ -2,6 +2,8 @@
 #include "PMNS_TaylorExp.h"
 #include "PremModel.h"
 
+
+
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
 
@@ -38,7 +40,12 @@ void VariationTest(){
     double xmax = 0.1;
     double xmin = -xmax;
 
-    //t.SetDm(2, 0.01);
+    cout<<t.GetDm(2)<<endl;
+    cout<<t.GetDm(3)<<endl;
+    //t.SetDm(2, -0.01);
+    cout<<t.GetDm(2)<<endl;
+    cout<<t.GetDm(3)<<endl;
+
 
     TH1D* h1 = new TH1D("","",nbins,xmin,xmax);
     TH1D* h2 = new TH1D("","",nbins,xmin,xmax);
@@ -64,6 +71,7 @@ void VariationTest(){
         h5->SetBinContent(i, t.interpolationEnergy(0,1,E,varPercentage * E));
         h6->SetBinContent(i, t.Prob(2,1,E + varPercentage * E));
         h7->SetBinContent(i, t.interpolationEnergy(2,1,E,varPercentage * E));
+
         //h3->SetBinContent(i, p.Prob(flavori,1, E + varPercentage * E));
     }
 
