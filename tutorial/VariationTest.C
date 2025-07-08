@@ -42,7 +42,7 @@ void VariationTest(){
 
     cout<<t.GetDm(2)<<endl;
     cout<<t.GetDm(3)<<endl;
-    //t.SetDm(2, -0.01);
+    //t.SetDm(2, -0.001);
     cout<<t.GetDm(2)<<endl;
     cout<<t.GetDm(3)<<endl;
 
@@ -59,18 +59,19 @@ void VariationTest(){
     
 
     int flavori = 1;
+    int flavorf = 1;
 
     for(int i = 1 ; i<=nbins ; i++){
 
         double varPercentage = h1->GetBinCenter(i);
         // EN E OU EN LOG?????
 
-        h1->SetBinContent(i, t.Prob(flavori,1,E + varPercentage * E));
-        h2->SetBinContent(i, t.interpolationEnergy(flavori,1,E,varPercentage * E));
-        h4->SetBinContent(i, t.Prob(0,1,E + varPercentage * E));
-        h5->SetBinContent(i, t.interpolationEnergy(0,1,E,varPercentage * E));
-        h6->SetBinContent(i, t.Prob(2,1,E + varPercentage * E));
-        h7->SetBinContent(i, t.interpolationEnergy(2,1,E,varPercentage * E));
+        h1->SetBinContent(i, t.Prob(flavori,flavorf,E + varPercentage * E));
+        h2->SetBinContent(i, t.interpolationEnergy(flavori,flavorf,E,varPercentage * E));
+        h4->SetBinContent(i, t.Prob(0,flavorf,E + varPercentage * E));
+        h5->SetBinContent(i, t.interpolationEnergy(0,flavorf,E,varPercentage * E));
+        h6->SetBinContent(i, t.Prob(2,flavorf,E + varPercentage * E));
+        h7->SetBinContent(i, t.interpolationEnergy(2,flavorf,E,varPercentage * E));
 
         //h3->SetBinContent(i, p.Prob(flavori,1, E + varPercentage * E));
     }
@@ -85,7 +86,7 @@ void VariationTest(){
     SetHist(h4, kBlack);
     SetHist(h5, kBlue);
 
-    SetHist(h6, kYellow);
+    SetHist(h6, kBlack);
     SetHist(h7, kGreen);
 
     // Change line styles
@@ -112,8 +113,8 @@ void VariationTest(){
     //h3->DrawCopy("curv");
     h4->DrawCopy("hist same ][");
     h5->DrawCopy("hist same ][");
-    //h6->DrawCopy("hist same ][");
-    //h7->DrawCopy("hist same ][");
+    h6->DrawCopy("hist same ][");
+    h7->DrawCopy("hist same ][");
 
     MiscText(0.75, 0.965, 0.04, TString::Format("Centered Energy = %0.1f", E) );
     MiscText(0.63, 0.965, 0.04, TString::Format("cosT = %0.1f", cosT) );

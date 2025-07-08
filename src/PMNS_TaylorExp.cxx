@@ -303,7 +303,7 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
     double kr2GNe = kK2 * M_SQRT2 * kGf;
     kr2GNe *= fPath.density * fPath.zoa; // Matter potential in eV
 
-    /*matrixC Ho = matrixC(fNumNus, vectorC(fNumNus, 0));
+    matrixC Ho = matrixC(fNumNus, vectorC(fNumNus, 0));
     for (int j = 0; j < fNumNus; j++) {
         // Set mass splitting
         Ho[j][j] = fDm[j];
@@ -317,6 +317,27 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
     printMatrix1(fHms);
     printMatrix1(Ho);
 
+    matrixC Hooo = matrixC(fNumNus, vectorC(fNumNus, 0));
+
+    double lvv = 2 * kGeV2eV * fEnergy; // 2E in eV
+    double kr2GNee = kK2 * M_SQRT2 * kGf;
+    kr2GNee *= fPath.density * fPath.zoa; // Matter potential in eV
+    // Finish building Hamiltonian in matter with dimension of eV
+    for (int i = 0; i < fNumNus; i++) {
+        Hooo[i][i] = Ho[i][i] / lvv;
+        for (int j = i + 1; j < fNumNus; j++) {
+        if (!fIsNuBar)
+            Hooo[i][j] = Ho[i][j] / lvv;
+        else
+            Hooo[i][j] = conj(Ho[i][j]) / lvv;
+        }
+    }
+    if (!fIsNuBar)
+        Hooo[0][0] += kr2GNee;
+    else
+        Hooo[0][0] -= kr2GNee;
+
+    
     complexD stock[3][3];
 
     for(int j = 0 ; j<fNumNus ; j++){
@@ -325,14 +346,18 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
             Ho[i][j] /= (2*lv);
         }
     }
+    
 
     stock[0][0] += kr2GNe;
 
+    cout<<"----------------";
+    
     printMatrix2(fHam);
     printMatrix2(stock);
     printMatrix1(Ho);
+    printMatrix1(Hooo);
 
-    cout<<"------------------------------------------";*/
+    cout<<"------------------------------------------------------------------------------------";
 
 
     for(int j = 0 ; j<fNumNus ; j++){
@@ -342,7 +367,7 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
                 for(int l = 0 ; l<fNumNus ; l++){
 
                     if ( k == 0 && l == 0){
-                            K[i][j] += conj(fEvec[k][i]) * ( fHam[k][l] - kr2GNe ) * fEvec[l][j] ; //fHms
+                            K[i][j] += conj(fEvec[k][i]) * ( fHam[k][l] - kr2GNe ) * fEvec[l][j] ; //
                     }
                     else {
 

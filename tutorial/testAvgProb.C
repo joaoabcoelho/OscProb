@@ -37,7 +37,7 @@ void testAvgProb(){
 
 
   // Define some fine and coarse binnings
-  int navg = 30;
+  int navg = 40;
   int nbins = navg * 100;
   double xmin = 0;
   double xmax = 3;
@@ -131,7 +131,7 @@ void testAvgProb(){
 
   // Draw different samplings
   h1->DrawCopy("curv");
-  h4->DrawCopy("hist same ][");
+  //h4->DrawCopy("hist same ][");
   h2->DrawCopy("hist same ][");
   h3->DrawCopy("hist same ][");
 
@@ -140,7 +140,7 @@ void testAvgProb(){
 
   TLegend* leg = new TLegend(0.7,0.6,0.9,0.6);
 
-  leg->AddEntry(h4," P cst in every bin ", "l");
+  //leg->AddEntry(h4," P cst in every bin ", "l");
   leg->AddEntry(h3, " avg P", "l");
   leg->AddEntry(h2, "avg P with Taylor", "l");
 
