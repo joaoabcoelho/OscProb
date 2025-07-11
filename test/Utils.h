@@ -49,6 +49,24 @@ OscProb::PMNS_Deco* GetDeco(bool is_nominal){
 }
 
 //.............................................................................
+OscProb::PMNS_OQS* GetOQS(bool is_nominal){
+
+  OscProb::PMNS_OQS* p = new OscProb::PMNS_OQS();
+  SetNominalPars(p);
+  if(!is_nominal){
+    p->SetDissipatorElement(1,1, 1e-23);
+    p->SetDissipatorElement(2,2, 1e-23);
+    p->SetDissipatorElement(4,4, 1e-22);
+    p->SetDissipatorElement(5,5, 1e-22);
+    p->SetDissipatorElement(6,6, 2e-22);
+    p->SetDissipatorElement(7,7, 2e-22);
+  }
+
+  return p;
+
+}
+
+//.............................................................................
 OscProb::PMNS_Sterile* GetSterile(bool is_nominal){
 
   OscProb::PMNS_Sterile* p = new OscProb::PMNS_Sterile(4);
@@ -166,6 +184,7 @@ OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
   if(model == "LIV")     return GetLIV(is_nominal);
   if(model == "SNSI")    return GetSNSI(is_nominal);
   if(model == "NUNM")    return GetNUNM(is_nominal);
+  if(model == "OQS")     return GetOQS(is_nominal);
 
   return GetFast(is_nominal);
 
@@ -178,7 +197,7 @@ vector<string> GetListOfModels(){
 
   return {"Fast", "Iter", "Sterile", "NSI",
           "Deco", "Decay", "LIV", "SNSI",
-          "NUNM"};
+          "NUNM", "OQS"};
 
 }
 
@@ -227,7 +246,12 @@ int CheckProb(OscProb::PMNS_Base* p, TString filename){
 
   SetTestPath(p);
 
-  TFile* f = new TFile("data/"+filename, "read");
+  TFile* f = TFile::Open("data/"+filename, "read");
+
+  if(!f){
+    printf((Color::FAILED + " data/%s not found\n").c_str(), filename.Data());
+    return 1;
+  }
 
   int ntests = 0;
   int fails = 0;
@@ -291,7 +315,8 @@ int CheckProb(OscProb::PMNS_Base* p, TString filename){
       c1->SaveAs("plots/Failed_"+hname+"_"+pngfile);
       delete c1;
     }
-    delete h0, h;
+    if(h0) delete h0;
+    if(h)  delete h;
   }}}
 
   if(fails>0){
