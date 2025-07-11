@@ -40,10 +40,7 @@ void PMNS_OQS::InitializeVectors()
   fEval = vectorC(9, 0);
 }
 
-double PMNS_OQS::SetParameterisation(int param = 1)
-{
-  fParameterisation = param;
-}
+void PMNS_OQS::SetParameterisation(int param = 1) { fParameterisation = param; }
 
 // set Heff in vacuum-mass basis
 void PMNS_OQS::SetHeff(NuPath p)

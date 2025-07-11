@@ -12,10 +12,10 @@ namespace OscProb {
       PMNS_OQS();          ///< Constructor
       virtual ~PMNS_OQS(); ///< Destructor
 
-      virtual double SetParameterisation(int par);
-      virtual void   SetPhi(int i, double val);
-      virtual void   SetDissipatorElement(int i, int j, double val,
-                                          bool print = false);
+      virtual void SetParameterisation(int par);
+      virtual void SetPhi(int i, double val);
+      virtual void SetDissipatorElement(int i, int j, double val,
+                                        bool print = false);
 
       /// Compute the probability matrix
       using PMNS_Base::ProbMatrix;
