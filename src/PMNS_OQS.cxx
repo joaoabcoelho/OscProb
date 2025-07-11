@@ -69,7 +69,7 @@ void PMNS_OQS::SetHeff(NuPath p)
   double c13 = cos(fTheta[0][2]);
   double c23 = cos(fTheta[1][2]);
 
-  complexD idelta(0.0, fDelta[0][2]);
+  complexD idelta(0.0, -fDelta[0][2]);
   complexD iphi1(0.0, fPhi[0]);
   complexD iphi2(0.0, fPhi[1]);
   if (fIsNuBar) {
@@ -223,7 +223,7 @@ void PMNS_OQS::RotateState(bool to_mass)
   double c13 = cos(fTheta[0][2]);
   double c23 = cos(fTheta[1][2]);
 
-  complexD idelta(0.0, fDelta[0][2]);
+  complexD idelta(0.0, -fDelta[0][2]);
   if (fIsNuBar) { idelta = conj(idelta); }
 
   complexD iphi1(0.0, fPhi[0]);
