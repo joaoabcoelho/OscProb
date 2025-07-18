@@ -85,6 +85,7 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
         for(int j = 0 ; j<fNumNus ; j++){
             fKE[i][j] = 0;
             fKcosT[i][j] = 0;
+            //fHam[i][j] = 0;
         }
     }
 
@@ -264,100 +265,12 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
         }
     }*/
 
-    /*double h = 1E-6;
 
-    matrixC H = matrixC(fNumNus, vectorC(fNumNus, 0));
-    for(int j = 0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<fNumNus ; i++){
-            H[i][j] = fHam[i][j];
-        }
-    }
-
-    fEnergy += h;
-    BuildHms();
-    UpdateHam();
-    fEnergy -= h;
-
-    for(int j = 0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<fNumNus ; i++){
-            K[i][j] =  kKm2eV * L  * ( fHam[i][j] - H[i][j] ) / h; 
-        }
-    }*/
-
-
-    /*vectorI dm_idx = sort3(fDm);
-    vectorI ev_idx = sort3(fEval);
-
-    int idx[3];
-    for (int i = 0; i < fNumNus; i++) idx[ev_idx[i]] = dm_idx[i] ;
-
-    for (int i = 0; i < fNumNus; i++) {
-        cout<<dm_idx[i]<<"   "<<ev_idx[i]<<"   "<<idx[i]<<endl;
-    }
-    cout<<endl;*/
 
     double lv =  kGeV2eV * fEnergy; // E in eV 
+    double lv2 =  kGeV2eV * ( fEnergy + (fdE /2) ); // E in eV 
     double lenghtEV = L * kKm2eV ; // L in eV-1
-    double bufK = - lenghtEV / (lv) ; // -L / 2E^2 in ?? CHAAAGaaaaaaaaaaaa
-
-    double kr2GNe = kK2 * M_SQRT2 * kGf;
-    kr2GNe *= fPath.density * fPath.zoa; // Matter potential in eV
-
-    matrixC Ho = matrixC(fNumNus, vectorC(fNumNus, 0));
-    for (int j = 0; j < fNumNus; j++) {
-        // Set mass splitting
-        Ho[j][j] = fDm[j];
-        // Reset off-diagonal elements
-        for (int i = 0; i < j; i++) { Ho[i][j] = 0; }
-        // Rotate j neutrinos
-        for (int i = 0; i < j; i++) { RotateH(i, j, Ho); }
-      }
-
-    printMatrix2(fHam);
-    printMatrix1(fHms);
-    printMatrix1(Ho);
-
-    matrixC Hooo = matrixC(fNumNus, vectorC(fNumNus, 0));
-
-    double lvv = 2 * kGeV2eV * fEnergy; // 2E in eV
-    double kr2GNee = kK2 * M_SQRT2 * kGf;
-    kr2GNee *= fPath.density * fPath.zoa; // Matter potential in eV
-    // Finish building Hamiltonian in matter with dimension of eV
-    for (int i = 0; i < fNumNus; i++) {
-        Hooo[i][i] = Ho[i][i] / lvv;
-        for (int j = i + 1; j < fNumNus; j++) {
-        if (!fIsNuBar)
-            Hooo[i][j] = Ho[i][j] / lvv;
-        else
-            Hooo[i][j] = conj(Ho[i][j]) / lvv;
-        }
-    }
-    if (!fIsNuBar)
-        Hooo[0][0] += kr2GNee;
-    else
-        Hooo[0][0] -= kr2GNee;
-
-    
-    complexD stock[3][3];
-
-    for(int j = 0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<=j ; i++){
-            stock[i][j] = fHms[i][j] / (2*lv) ;
-            Ho[i][j] /= (2*lv);
-        }
-    }
-    
-
-    stock[0][0] += kr2GNe;
-
-    cout<<"----------------";
-    
-    printMatrix2(fHam);
-    printMatrix2(stock);
-    printMatrix1(Ho);
-    printMatrix1(Hooo);
-
-    cout<<"------------------------------------------------------------------------------------";
+    double bufK = - lenghtEV / (2 * lv * lv2) ; // -L / 2E^2 in ?? 
 
 
     for(int j = 0 ; j<fNumNus ; j++){
@@ -366,17 +279,10 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
             for(int k = 0 ; k<fNumNus ; k++){
                 for(int l = 0 ; l<fNumNus ; l++){
 
-                    if ( k == 0 && l == 0){
-                            K[i][j] += conj(fEvec[k][i]) * ( fHam[k][l] - kr2GNe ) * fEvec[l][j] ; //
-                    }
-                    else {
-
-                        if (k<l || k==l)
-                            {K[i][j] += conj(fEvec[k][i]) *  fHam[k][l] * fEvec[l][j] ;} //fHms
-                        else
-                            {K[i][j] += conj(fEvec[k][i]) * conj(fHam[l][k]) * fEvec[l][j] ;}  //fHms
-
-                    }
+                    if (k<l || k==l)
+                        {K[i][j] += conj(fEvec[k][i]) *  fHms[k][l] * fEvec[l][j] ;} //fHms
+                    else
+                        {K[i][j] += conj(fEvec[k][i]) * conj(fHms[l][k]) * fEvec[l][j] ;}  //fHms
 
                 }
             }
@@ -392,58 +298,16 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
                 C = complexD(1,0) * ( exp(complexD(0.0 , arg)) - complexD(1 , 0.0) ) / complexD(0.0 , arg)  ;
                 
                 //cout<<i<<"  "<<j<<"  "<<C<<"         "<<K[i][j]<<endl;
-            }
-        
-            //K[i][j] *= - ( (C * lenghtEV) / (2*lv*lv) ) *complexD(1.0,0.0) ; //* complexD(1,1)
+            }  
 
             K[i][j] *= bufK * C ;
-
-            /*int m = i;
-            int n = j;
-            if ( m == i && n == j){
-                K[m][n] += 2*lv * bufK * kr2GNe * conj(fEvec[0][m]) * fEvec[0][n] * C;
-                //cout<<m<<"  "<<n<<"  "<<fEvec[0][m]<<"  "<<fEvec[0][n]<<endl;
-            }*/
-
-            //cout<<i<<"  "<<j<<"  "<<C<<"   "<<K[i][j]<<"   "<<K[i][j]*C<<endl;
 
             if(i != j)  K[j][i] = conj(K[i][j]);
             
 
         }
     }
-    
-    //{K[i][j] += (1/ (2*lv) ) * conj(fEvec[k][i]) * fHms[k][l] * fEvec[l][j] + kr2GNe * conj(fEvec[0][i]) * fEvec[0][j] ;}
 
-    int i = 2;
-    int j = 2;
-    //cout<<K[i][j]<<"   ";
-    //K[i][j] += 2*lv * bufK * kr2GNe * conj(fEvec[0][i]) * fEvec[0][j];
-    //cout<<2*lv * bufK * kr2GNe * conj(fEvec[0][i]) * fEvec[0][j]<<endl;
-    
-    
-
-    /*matrixC Hprime = matrixC(fNumNus, vectorC(fNumNus, 0));
-    for (int j = 0; j < fNumNus; j++) {
-        // Set mass splitting
-        Hprime[j][j] = fDm[j];
-        // Reset off-diagonal elements
-        for (int i = 0; i < j; i++) { Hprime[i][j] = 0; }
-        // Rotate j neutrinos
-        for (int i = 0; i < j; i++) { RotateH(i, j, Hprime); }
-    }
-
-    double lv =  kGeV2eV * fEnergy;
-
-    for(int j = 0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<=j ; i++){
-            K[i][j] = - kKm2eV * (L / (lv*lv)) * Hprime[i][j];
-
-            if(i != j){
-                K[j][i] = conj(K[i][j]);
-            }
-        }
-    }*/
 
 }
 
@@ -578,33 +442,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     SetCurPath(p);
 
     // Solve for eigensystem
-    SolveHam();          
-    
-    /*vectorI dm_idx = sort3(fDm);
-    vectorI ev_idx = sort3(fEval);
-
-    int idx[3];
-    double save[3];
-    complexD saveU[3][3];
-    for (int i = 0; i < fNumNus; i++) {
-
-        idx[ev_idx[i]] = dm_idx[i] ;
-        save[i] = fEval[i];
-        for(int j = 0; j < fNumNus; j++) {saveU[i][j] = fEvec[i][j];}
-
-        cout<<fEval[i]<<"  ";
-    }
-
-    cout<<"||  ";
-
-    for (int i = 0; i < fNumNus; i++) {
-
-        fEval[i] = save[idx[i]];
-        for(int j = 0; j < fNumNus; j++) {fEvec[i][j] = saveU[i][idx[j]];}
-        cout<<fEval[i]<<"  ";
-    }
-
-    cout<<endl<<endl;*/
+    SolveHam();   
 
     // Get the evolution matrix in mass basis
     double LengthIneV = kKm2eV * p.length;      //IL FAUT CIONVERTIR TOUS LES L
@@ -634,10 +472,6 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     if(fdcosT != 0){
         matrixC Kmass = matrixC(fNumNus, vectorC(fNumNus, 0));
         BuildKcosT(p.length, Kmass);
-
-        // Rotate KE in flavor basis
-        //matrixC Kflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
-        //rotateK(Kmass,Kflavor);
 
         //multiplication rule for K and S 
         MultiplicationRuleK(Kmass,fKcosT);
@@ -726,6 +560,9 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
         P += norm(s1[j]);
     }*/
 
+    double lv =  kGeV2eV * fEnergy; // E in eV 
+    double lv2 =  kGeV2eV * ( fEnergy + (fdE/2) ); // E in eV 
+
     complexD P = 0;
 
     matrixC SVmulti = matrixC(fNumNus, vectorC(fNumNus, 0));
@@ -741,15 +578,14 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
 
     complexD sinc[fNumNus][fNumNus];
     for(int j = 0 ; j<fNumNus ; j++){
+
+        sinc[j][j] = 1;
+        
         for(int i = 0 ; i<j ; i++){
             double arg = (lambda[i] - lambda[j]) * dbin / 2; 
             sinc[i][j] = sin(arg) / arg;
             sinc[j][i] = sinc[i][j];
-
-            //cout<<"["<<i<<"]"<<"["<<j<<"] : "<<sinc[i][j]<<"    ";
         }
-
-        sinc[j][j] = 1;
     }
     
     for(int j = 0 ; j<fNumNus ; j++){
@@ -793,6 +629,8 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
 ///
 double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, vectorD lambda, matrixC V)
 {
+    double lv =  kGeV2eV * fEnergy; // E in eV 
+    double lv2 =  kGeV2eV * ( fEnergy + fdE ); // E in eV 
 
     complexD P = 0;
 
@@ -808,13 +646,13 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
     complexD expo[fNumNus][fNumNus];
     for(int i = 0 ; i<fNumNus ; i++){
         for(int j = 0 ; j<fNumNus; j++){
-            double arg = (lambda[j] - lambda[i]) * dbin ;    
+            double arg = (lambda[j] - lambda[i]) * dbin ;    //* (lv / lv2)
 
             //if(dbin<0) arg *= 1.05;
             //if(dbin>0) arg *= 0.95;
 
             expo[j][i] = exp(complexD(0.0, arg)) ; 
-            //cout<<exp[j][i]<<endl;
+            //cout<<expo[j][i]<<endl;
         }
     }
     

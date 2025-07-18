@@ -24,6 +24,7 @@ void VariationTest(){
     // Fill path for cosT
     double cosT = -0.9;
     prem.FillPath(cosT);
+    p.SetPath(prem.GetNuPath());
     t.SetPath(prem.GetNuPath());
     //double L= 2*6368*abs(cosT);
     //t.SetLength(L);
@@ -33,18 +34,11 @@ void VariationTest(){
     //p.SetLength(L);
 
     // Give path to calculator
-    
 
     int nbins = 1000;
     double E = 0.3;
     double xmax = 0.1;
     double xmin = -xmax;
-
-    cout<<t.GetDm(2)<<endl;
-    cout<<t.GetDm(3)<<endl;
-    //t.SetDm(2, -0.001);
-    cout<<t.GetDm(2)<<endl;
-    cout<<t.GetDm(3)<<endl;
 
 
     TH1D* h1 = new TH1D("","",nbins,xmin,xmax);
@@ -66,11 +60,12 @@ void VariationTest(){
         double varPercentage = h1->GetBinCenter(i);
         // EN E OU EN LOG?????
 
-        h1->SetBinContent(i, t.Prob(flavori,flavorf,E + varPercentage * E));
+        //h5->SetBinContent(i, t.interpolationEnergy(flavori,flavorf,E,varPercentage * E));
+        h1->SetBinContent(i, p.Prob(flavori,flavorf,E + varPercentage * E));
         h2->SetBinContent(i, t.interpolationEnergy(flavori,flavorf,E,varPercentage * E));
-        h4->SetBinContent(i, t.Prob(0,flavorf,E + varPercentage * E));
+        h4->SetBinContent(i, p.Prob(0,flavorf,E + varPercentage * E));
         h5->SetBinContent(i, t.interpolationEnergy(0,flavorf,E,varPercentage * E));
-        h6->SetBinContent(i, t.Prob(2,flavorf,E + varPercentage * E));
+        h6->SetBinContent(i, p.Prob(2,flavorf,E + varPercentage * E));
         h7->SetBinContent(i, t.interpolationEnergy(2,flavorf,E,varPercentage * E));
 
         //h3->SetBinContent(i, p.Prob(flavori,1, E + varPercentage * E));
@@ -119,11 +114,12 @@ void VariationTest(){
     MiscText(0.75, 0.965, 0.04, TString::Format("Centered Energy = %0.1f", E) );
     MiscText(0.63, 0.965, 0.04, TString::Format("cosT = %0.1f", cosT) );
 
-    TLegend* leg = new TLegend(0.7,0.6,0.1,1);
+    TLegend* leg = new TLegend(0.7,0.6,0.1,1.005);
     //leg->AddEntry(h1, " P(#nu_{#alpha}#rightarrow#nu_{#mu}) - exacte", "l");
-    leg->AddEntry(h2, " P(#nu_{#mu}#rightarrow#nu_{#mu}) - algorithme", "l");
+    //leg->AddEntry(h2, " P(#nu_{#mu}#rightarrow#nu_{#mu}) - algorithme", "l");
     //leg->AddEntry(h4, " P(#nu_{#e}#rightarrow#nu_{#mu}) - exacte", "l");
-    leg->AddEntry(h5, " P(#nu_{e}#rightarrow#nu_{#mu}) - algorithme", "l");
+    //leg->AddEntry(h5, " P(#nu_{e}#rightarrow#nu_{#mu}) - algorithme", "l");
+    //leg->AddEntry(h7, " P(#nu_{#tau}#rightarrow#nu_{#mu}) - algorithme", "l");
 
     leg->SetLineColor(kBlack);  // Couleur du cadre
     leg->SetLineWidth(2);  
