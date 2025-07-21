@@ -22,7 +22,7 @@ void VariationTest(){
     OscProb::PremModel prem;    
 
     // Fill path for cosT
-    double cosT = -0.9;
+    double cosT = -0.3;
     prem.FillPath(cosT);
     p.SetPath(prem.GetNuPath());
     t.SetPath(prem.GetNuPath());
@@ -35,9 +35,9 @@ void VariationTest(){
 
     // Give path to calculator
 
-    int nbins = 1000;
-    double E = 0.3;
-    double xmax = 0.1;
+    int nbins = 4000;
+    double E = 1;
+    double xmax = 0.4;
     double xmin = -xmax;
 
 

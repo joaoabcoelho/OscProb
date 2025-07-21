@@ -266,11 +266,11 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
     }*/
 
 
-
     double lv =  kGeV2eV * fEnergy; // E in eV 
-    double lv2 =  kGeV2eV * ( fEnergy + (fdE /2) ); // E in eV 
+    double lv2 =  kGeV2eV * ( fEnergy + fdE ); // E in eV 
+    double lv3 = kGeV2eV * fEnergy * fEnergy / ( fEnergy - fdE );
     double lenghtEV = L * kKm2eV ; // L in eV-1
-    double bufK = - lenghtEV / (2 * lv * lv2) ; // -L / 2E^2 in ?? 
+    double bufK = - lenghtEV / (2 * lv * lv) ; // -L / 2E^2 in ?? 
 
 
     for(int j = 0 ; j<fNumNus ; j++){
@@ -631,6 +631,8 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
 {
     double lv =  kGeV2eV * fEnergy; // E in eV 
     double lv2 =  kGeV2eV * ( fEnergy + fdE ); // E in eV 
+    double lv3 = ( fEnergy - fdE ) / fEnergy;
+    double lv4 = ( fEnergy * fEnergy + fdE * fdE - fdE * fEnergy) / ( fEnergy *fEnergy );
 
     complexD P = 0;
 
@@ -646,7 +648,7 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
     complexD expo[fNumNus][fNumNus];
     for(int i = 0 ; i<fNumNus ; i++){
         for(int j = 0 ; j<fNumNus; j++){
-            double arg = (lambda[j] - lambda[i]) * dbin ;    //* (lv / lv2)
+            double arg = (lambda[j] - lambda[i]) * dbin * lv3 * (lv / lv2);    //* (lv / lv2)
 
             //if(dbin<0) arg *= 1.05;
             //if(dbin>0) arg *= 0.95;
@@ -757,6 +759,38 @@ vectorI PMNS_TaylorExp::sort3(const vectorD& x)
 
 
 
+//.............................................................................
+///
+///
+///
+double PMNS_TaylorExp::avgSubBin(int flvi, int flvf)
+{
+    
+
+    return 0;
+}
+
+//.............................................................................
+///
+///
+///
+double PMNS_TaylorExp::avgProbTaylor_SubBin(int flvi, int flvf, double E , double dE)
+{
+    // reset K et S et Ve et lambdaE
+    InitializeTaylorsVectors();
+
+    SetEnergy(E);
+    SetwidthBin(dE,0);
+
+    //Propagate -> get S and K matrix (on the whole path)
+    PropagateTaylor();
+
+    //DiagolK -> get VE and lambdaE
+    SolveK(fKE,flambdaE,fVE);
+
+    //return fct avr proba
+    return avgSubBin(flvi,flvf);
+}
 
 
 

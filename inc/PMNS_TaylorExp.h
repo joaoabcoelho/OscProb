@@ -30,6 +30,8 @@ namespace OscProb {
 
       virtual double avgProbTaylorAngle(int flvi, int flvf, double E, double cosT , double dcosT);
 
+      virtual double avgProbTaylor_SubBin(int flvi, int flvf, double E , double dE);
+
       virtual vectorD ConvertLoEtoE(double LoE, double dLoE);
 
       virtual void LenghtLayer();
@@ -69,6 +71,8 @@ namespace OscProb {
       virtual double avgFormulaExtrapolation(int flvi, int flvf, double dbin, vectorD flambda, matrixC fV);
 
       virtual double avgAlgorithm(int flvi, int flvf);
+
+      virtual double avgSubBin(int flvi, int flvf);
 
       virtual vectorI sort3(const vectorD& x);
 
