@@ -18,11 +18,18 @@ void VariationTest(){
     OscProb::PMNS_Fast p;
     OscProb::PMNS_TaylorExp t;
 
+    t.SetAngle(1, 2, asin(sqrt(0.303)));
+    t.SetAngle(1, 3, asin(sqrt(0.022)));
+    t.SetAngle(2, 3, asin(sqrt(0.572)));
+    t.SetDm(2, 7.41e-5);
+    t.SetDm(3, 2.51e-3);
+    t.SetDelta(1,3,197);
+
     // PREM Model
     OscProb::PremModel prem;    
 
     // Fill path for cosT
-    double cosT = -0.3;
+    double cosT = -0.9;
     prem.FillPath(cosT);
     p.SetPath(prem.GetNuPath());
     t.SetPath(prem.GetNuPath());
@@ -35,9 +42,9 @@ void VariationTest(){
 
     // Give path to calculator
 
-    int nbins = 4000;
-    double E = 1;
-    double xmax = 0.4;
+    int nbins = 1200;
+    double E = 0.3;
+    double xmax = 0.12;
     double xmin = -xmax;
 
 
@@ -61,12 +68,12 @@ void VariationTest(){
         // EN E OU EN LOG?????
 
         //h5->SetBinContent(i, t.interpolationEnergy(flavori,flavorf,E,varPercentage * E));
-        h1->SetBinContent(i, p.Prob(flavori,flavorf,E + varPercentage * E));
+        h1->SetBinContent(i, t.Prob(flavori,flavorf,E + varPercentage * E));
         h2->SetBinContent(i, t.interpolationEnergy(flavori,flavorf,E,varPercentage * E));
-        h4->SetBinContent(i, p.Prob(0,flavorf,E + varPercentage * E));
+        h4->SetBinContent(i, t.Prob(0,flavorf,E + varPercentage * E));
         h5->SetBinContent(i, t.interpolationEnergy(0,flavorf,E,varPercentage * E));
-        h6->SetBinContent(i, p.Prob(2,flavorf,E + varPercentage * E));
-        h7->SetBinContent(i, t.interpolationEnergy(2,flavorf,E,varPercentage * E));
+        //h6->SetBinContent(i, p.Prob(2,flavorf,E + varPercentage * E));
+        //h7->SetBinContent(i, t.interpolationEnergy(2,flavorf,E,varPercentage * E));
 
         //h3->SetBinContent(i, p.Prob(flavori,1, E + varPercentage * E));
     }
@@ -75,21 +82,21 @@ void VariationTest(){
     MakeLongCanvas();
 
     // Set some nice histograms
-    SetHist(h1, kBlack);
-    SetHist(h2, kRed);
+    SetHist(h1, kGreen);
+    SetHist(h2, kBlack);
     //SetHist(h3, kGreen);
-    SetHist(h4, kBlack);
-    SetHist(h5, kBlue);
+    SetHist(h4, kOrange);
+    SetHist(h5, kBlack);
 
     SetHist(h6, kBlack);
     SetHist(h7, kGreen);
 
     // Change line styles
-    h1->SetLineStyle(1);
-    h2->SetLineStyle(7);
+    h1->SetLineStyle(7);
+    h2->SetLineStyle(1);
     //h3->SetLineStyle(7);
-    h4->SetLineStyle(1);
-    h5->SetLineStyle(7);
+    h4->SetLineStyle(7);
+    h5->SetLineStyle(1);
     h6->SetLineStyle(1);
     h7->SetLineStyle(7);
     
@@ -100,25 +107,25 @@ void VariationTest(){
     //}
     //if(flavori == 1) { h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#mu}#rightarrow#nu_{#mu})"); }
     //if(flavori == 2) {h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#tau}#rightarrow#nu_{#mu})");}
-    h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#alpha}#rightarrow#nu_{#mu})");
+    h2->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#alpha}#rightarrow#nu_{#mu})");
 
     // Draw different samplings
-    h1->DrawCopy("curv");
-    h2->DrawCopy("hist same ][");
+    h2->DrawCopy("curv");
+    h1->DrawCopy("hist same ][");
     //h3->DrawCopy("curv");
-    h4->DrawCopy("hist same ][");
     h5->DrawCopy("hist same ][");
-    h6->DrawCopy("hist same ][");
-    h7->DrawCopy("hist same ][");
+    h4->DrawCopy("hist same ][");
+    //h6->DrawCopy("hist same ][");
+    //h7->DrawCopy("hist same ][");
 
     MiscText(0.75, 0.965, 0.04, TString::Format("Centered Energy = %0.1f", E) );
     MiscText(0.63, 0.965, 0.04, TString::Format("cosT = %0.1f", cosT) );
 
     TLegend* leg = new TLegend(0.7,0.6,0.1,1.005);
     //leg->AddEntry(h1, " P(#nu_{#alpha}#rightarrow#nu_{#mu}) - exacte", "l");
-    //leg->AddEntry(h2, " P(#nu_{#mu}#rightarrow#nu_{#mu}) - algorithme", "l");
+    leg->AddEntry(h1, " P(#nu_{#mu}#rightarrow#nu_{#mu})", "l");
     //leg->AddEntry(h4, " P(#nu_{#e}#rightarrow#nu_{#mu}) - exacte", "l");
-    //leg->AddEntry(h5, " P(#nu_{e}#rightarrow#nu_{#mu}) - algorithme", "l");
+    leg->AddEntry(h4, " P(#nu_{e}#rightarrow#nu_{#mu})", "l");
     //leg->AddEntry(h7, " P(#nu_{#tau}#rightarrow#nu_{#mu}) - algorithme", "l");
 
     leg->SetLineColor(kBlack);  // Couleur du cadre

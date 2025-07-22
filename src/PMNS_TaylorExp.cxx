@@ -648,7 +648,7 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
     complexD expo[fNumNus][fNumNus];
     for(int i = 0 ; i<fNumNus ; i++){
         for(int j = 0 ; j<fNumNus; j++){
-            double arg = (lambda[j] - lambda[i]) * dbin * lv3 * (lv / lv2);    //* (lv / lv2)
+            double arg = (lambda[j] - lambda[i]) * dbin ;    //* (lv / lv2)
 
             //if(dbin<0) arg *= 1.05;
             //if(dbin>0) arg *= 0.95;
