@@ -272,6 +272,16 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
     double lenghtEV = L * kKm2eV ; // L in eV-1
     double bufK = - lenghtEV / (2 * lv * lv) ; // -L / 2E^2 in ?? 
 
+    /*printMatrix1(fHms);
+    if (fIsNuBar){
+        for (int i = 0; i < fNumNus; i++) {
+            for (int j = i + 1; j < fNumNus; j++) {
+                fHms[i][j] = conj(fHms[i][j]) ;
+            }
+        }
+    }
+    printMatrix1(fHms);*/
+
 
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
@@ -279,10 +289,23 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
             for(int k = 0 ; k<fNumNus ; k++){
                 for(int l = 0 ; l<fNumNus ; l++){
 
+                    complexD Hms_kl;
+
                     if (k<l || k==l)
+                        Hms_kl  = fHms[k][l];
+                    else
+                        Hms_kl  = conj(fHms[l][k]);
+
+                    if(fIsNuBar && k!=l)
+                        Hms_kl = conj(Hms_kl);
+                    
+
+                    K[i][j] += conj(fEvec[k][i]) *  Hms_kl * fEvec[l][j] ;
+
+                    /*if (k<l || k==l)
                         {K[i][j] += conj(fEvec[k][i]) *  fHms[k][l] * fEvec[l][j] ;} //fHms
                     else
-                        {K[i][j] += conj(fEvec[k][i]) * conj(fHms[l][k]) * fEvec[l][j] ;}  //fHms
+                        {K[i][j] += conj(fEvec[k][i]) * conj(fHms[l][k]) * fEvec[l][j] ;}  //fHms*/
 
                 }
             }
@@ -302,7 +325,8 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 
             K[i][j] *= bufK * C ;
 
-            if(i != j)  K[j][i] = conj(K[i][j]);
+            if(i != j)  
+                K[j][i] = conj(K[i][j]);
             
 
         }
@@ -648,7 +672,7 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
     complexD expo[fNumNus][fNumNus];
     for(int i = 0 ; i<fNumNus ; i++){
         for(int j = 0 ; j<fNumNus; j++){
-            double arg = (lambda[j] - lambda[i]) * dbin ;    //* (lv / lv2)
+            double arg = (lambda[j] - lambda[i]) * dbin * ( lv / lv2);    //* (lv / lv2)
 
             //if(dbin<0) arg *= 1.05;
             //if(dbin>0) arg *= 0.95;

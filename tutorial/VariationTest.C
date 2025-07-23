@@ -33,106 +33,128 @@ void VariationTest(){
     prem.FillPath(cosT);
     p.SetPath(prem.GetNuPath());
     t.SetPath(prem.GetNuPath());
+
     //double L= 2*6368*abs(cosT);
     //t.SetLength(L);
-
     //double L = 2*6368 + 18;
     //double L = 2*6368*abs(cosT);
     //p.SetLength(L);
-
-    // Give path to calculator
 
     int nbins = 1200;
     double E = 0.3;
     double xmax = 0.12;
     double xmin = -xmax;
 
+    TH1D* NumuNumu_Exact = new TH1D("","",nbins,xmin,xmax);
+    TH1D* NumuNumu_Order = new TH1D("","",nbins,xmin,xmax);
 
-    TH1D* h1 = new TH1D("","",nbins,xmin,xmax);
-    TH1D* h2 = new TH1D("","",nbins,xmin,xmax);
-    TH1D* h3 = new TH1D("","",nbins,xmin,xmax);
+    TH1D* NueNumu_Exact = new TH1D("","",nbins,xmin,xmax);
+    TH1D* NueNumu_Order = new TH1D("","",nbins,xmin,xmax);
 
-    TH1D* h4 = new TH1D("","",nbins,xmin,xmax);
-    TH1D* h5 = new TH1D("","",nbins,xmin,xmax);
+    TH1D* NumuNumuBar_Exact = new TH1D("","",nbins,xmin,xmax);
+    TH1D* NumuNumuBar_Order = new TH1D("","",nbins,xmin,xmax);
 
-    TH1D* h6 = new TH1D("","",nbins,xmin,xmax);
-    TH1D* h7 = new TH1D("","",nbins,xmin,xmax);
+    TH1D* NueNumuBar_Exact = new TH1D("","",nbins,xmin,xmax);
+    TH1D* NueNumuBar_Order = new TH1D("","",nbins,xmin,xmax);
     
-
-    int flavori = 1;
-    int flavorf = 1;
+    bool barOrNot;
+    int flavorf = 0;
 
     for(int i = 1 ; i<=nbins ; i++){
 
-        double varPercentage = h1->GetBinCenter(i);
-        // EN E OU EN LOG?????
+        double varPercentage = NumuNumu_Exact->GetBinCenter(i);
 
-        //h5->SetBinContent(i, t.interpolationEnergy(flavori,flavorf,E,varPercentage * E));
-        h1->SetBinContent(i, t.Prob(flavori,flavorf,E + varPercentage * E));
-        h2->SetBinContent(i, t.interpolationEnergy(flavori,flavorf,E,varPercentage * E));
-        h4->SetBinContent(i, t.Prob(0,flavorf,E + varPercentage * E));
-        h5->SetBinContent(i, t.interpolationEnergy(0,flavorf,E,varPercentage * E));
-        //h6->SetBinContent(i, p.Prob(2,flavorf,E + varPercentage * E));
-        //h7->SetBinContent(i, t.interpolationEnergy(2,flavorf,E,varPercentage * E));
+        t.SetIsNuBar(false);
 
-        //h3->SetBinContent(i, p.Prob(flavori,1, E + varPercentage * E));
+        NumuNumu_Exact->SetBinContent(i, t.Prob(1,flavorf,E + varPercentage * E));
+        NumuNumu_Order->SetBinContent(i, t.interpolationEnergy(1,flavorf,E,varPercentage * E));
+        NueNumu_Exact->SetBinContent(i, t.Prob(0,flavorf,E + varPercentage * E));
+        NueNumu_Order->SetBinContent(i, t.interpolationEnergy(0,flavorf,E,varPercentage * E));
+
+        t.SetIsNuBar(true);
+
+        NumuNumuBar_Exact->SetBinContent(i, t.Prob(1,flavorf,E + varPercentage * E));
+        NumuNumuBar_Order->SetBinContent(i, t.interpolationEnergy(1,flavorf,E,varPercentage * E));
+        NueNumuBar_Exact->SetBinContent(i, t.Prob(0,flavorf,E + varPercentage * E));
+        NueNumuBar_Order->SetBinContent(i, t.interpolationEnergy(0,flavorf,E,varPercentage * E));
+
     }
 
     // Make a long canvas
     MakeLongCanvas();
 
     // Set some nice histograms
-    SetHist(h1, kGreen);
-    SetHist(h2, kBlack);
-    //SetHist(h3, kGreen);
-    SetHist(h4, kOrange);
-    SetHist(h5, kBlack);
+    SetHist(NumuNumu_Exact, kBlue);
+    SetHist(NumuNumu_Order, kBlack);
+    SetHist(NueNumu_Exact, kRed);
+    SetHist(NueNumu_Order, kBlack);
 
-    SetHist(h6, kBlack);
-    SetHist(h7, kGreen);
+    SetHist(NumuNumuBar_Exact, kBlue);
+    SetHist(NumuNumuBar_Order, kBlack);
+    SetHist(NueNumuBar_Exact, kRed);
+    SetHist(NueNumuBar_Order, kBlack);
 
     // Change line styles
-    h1->SetLineStyle(7);
-    h2->SetLineStyle(1);
-    //h3->SetLineStyle(7);
-    h4->SetLineStyle(7);
-    h5->SetLineStyle(1);
-    h6->SetLineStyle(1);
-    h7->SetLineStyle(7);
+    NumuNumu_Exact->SetLineStyle(1);
+    NumuNumu_Exact->SetLineWidth(2);
+    NumuNumu_Order->SetLineStyle(1);
+    NueNumu_Exact->SetLineStyle(1);
+    NueNumu_Exact->SetLineWidth(2);
+    NueNumu_Order->SetLineStyle(1);
+
+    NumuNumuBar_Exact->SetLineStyle(7);
+    NumuNumuBar_Exact->SetLineWidth(2);
+    NumuNumuBar_Order->SetLineStyle(7);
+    NueNumuBar_Exact->SetLineStyle(7);
+    NueNumuBar_Exact->SetLineWidth(2);
+    NueNumuBar_Order->SetLineStyle(7);
+
     
 
     // The axis titles
     //if(flavori == 0) {
-        //h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{e}#rightarrow#nu_{#mu})");
+        //NumuNumu_Exact->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{e}#rightarrow#nu_{#mu})");
     //}
-    //if(flavori == 1) { h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#mu}#rightarrow#nu_{#mu})"); }
-    //if(flavori == 2) {h1->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#tau}#rightarrow#nu_{#mu})");}
-    h2->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#alpha}#rightarrow#nu_{#mu})");
+    //if(flavori == 1) { NumuNumu_Exact->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#mu}#rightarrow#nu_{#mu})"); }
+    //if(flavori == 2) {NumuNumu_Exact->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#tau}#rightarrow#nu_{#mu})");}
+
+    NumuNumuBar_Order->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#alpha}#rightarrow#nu_{e})");
+
+    NumuNumuBar_Order->GetYaxis()->SetRangeUser(0,1.1);
 
     // Draw different samplings
-    h2->DrawCopy("curv");
-    h1->DrawCopy("hist same ][");
-    //h3->DrawCopy("curv");
-    h5->DrawCopy("hist same ][");
-    h4->DrawCopy("hist same ][");
-    //h6->DrawCopy("hist same ][");
-    //h7->DrawCopy("hist same ][");
+    NumuNumuBar_Order->DrawCopy("curv");
+    NumuNumuBar_Exact->DrawCopy("hist same ][");
+    NueNumuBar_Order->DrawCopy("hist same ][");
+    NueNumuBar_Exact->DrawCopy("hist same ][");
+
+    NumuNumu_Order->DrawCopy("hist same ][");
+    NumuNumu_Exact->DrawCopy("hist same ][");
+    NueNumu_Order->DrawCopy("hist same ][");
+    NueNumu_Exact->DrawCopy("hist same ][");
+
+    
 
     MiscText(0.75, 0.965, 0.04, TString::Format("Centered Energy = %0.1f", E) );
     MiscText(0.63, 0.965, 0.04, TString::Format("cosT = %0.1f", cosT) );
 
     TLegend* leg = new TLegend(0.7,0.6,0.1,1.005);
-    //leg->AddEntry(h1, " P(#nu_{#alpha}#rightarrow#nu_{#mu}) - exacte", "l");
-    leg->AddEntry(h1, " P(#nu_{#mu}#rightarrow#nu_{#mu})", "l");
-    //leg->AddEntry(h4, " P(#nu_{#e}#rightarrow#nu_{#mu}) - exacte", "l");
-    leg->AddEntry(h4, " P(#nu_{e}#rightarrow#nu_{#mu})", "l");
-    //leg->AddEntry(h7, " P(#nu_{#tau}#rightarrow#nu_{#mu}) - algorithme", "l");
+    leg->AddEntry(NumuNumu_Exact, " P(#nu_{#mu}#rightarrow#nu_{e})", "l");
+    leg->AddEntry(NueNumu_Exact, " P(#nu_{e}#rightarrow#nu_{e})", "l");
+
+    TLegend* legBar = new TLegend(0.7,0.6,0.37,1.005);
+    legBar->AddEntry(NumuNumuBar_Exact, " P(#bar#nu_{#mu}#rightarrow#bar#nu_{e})", "l");
+    legBar->AddEntry(NueNumuBar_Exact, " P(#bar#nu_{e}#rightarrow#bar#nu_{e})", "l");
 
     leg->SetLineColor(kBlack);  // Couleur du cadre
     leg->SetLineWidth(2);  
     SetLeg(leg);
     leg->Draw();
 
+    legBar->SetLineColor(kBlack);  // Couleur du cadre
+    legBar->SetLineWidth(2);  
+    SetLeg(legBar);
+    legBar->Draw();
 
     // Déterminer les limites de Y pour la ligne
     double y_min = gPad->GetUymin();
