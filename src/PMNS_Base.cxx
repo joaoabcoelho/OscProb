@@ -65,7 +65,7 @@ PMNS_Base::PMNS_Base(int numNus)
 
   SetAvgProbPrec(1e-4); // Set default AvgProb precision
 
-  SetUseOneLoopGF(true);
+  SetUseOneLoopGF(false);
 }
 
 //.............................................................................
@@ -113,15 +113,21 @@ void PMNS_Base::SetUseCache(bool u) { fUseCache = u; }
 ///
 /// @param u - flag to enable one-loop correction (default: true)
 ///
-void PMNS_Base::SetUseOneLoopGF(bool u) { SetGFCorrection(u ? 2.0 : 0); }
+void PMNS_Base::SetUseOneLoopGF(bool u) {
+  SetGF((u ? 1.02 : 1) * kGmu);
+}
 
 //.............................................................................
 ///
-/// Set an arbitrary correction to G_F
+/// Set an arbitrary value to G_F
 ///
-/// @param c - correction factor in % (default: 0)
+/// @param Gf - Fermi Constant in GeV^-2 (default: kGmu)
 ///
-void PMNS_Base::SetGFCorrection(double c) { kGf = (1 + 0.01 * c) * kGmu; }
+void PMNS_Base::SetGF(double Gf) {
+  // Check if value is actually changing
+  fGotES *= (kGf == Gf);
+  kGf = Gf;
+}
 
 //.............................................................................
 ///

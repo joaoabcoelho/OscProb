@@ -209,8 +209,8 @@ namespace OscProb {
       /// Use the one-loop correction to Fermi constant
       virtual void SetUseOneLoopGF(bool u = true);
 
-      /// Set a relative correction to Fermi constant
-      virtual void SetGFCorrection(double c = 0);
+      /// Set Fermi constant
+      virtual void SetGF(double Gf = kGmu);
 
     protected:
       // Some useful complex numbers
@@ -224,7 +224,7 @@ namespace OscProb {
       static const double kNA;     ///< Avogadro constant
 
       static const double kGmu; ///< G_mu in units of GeV^-2
-      double              kGf;  ///< Corrected value of G_F
+      double              kGf;  ///< User value of G_F
 
       virtual void InitializeVectors(); ///< Initialize all member vectors with
                                         ///< zeros
