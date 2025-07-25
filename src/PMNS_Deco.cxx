@@ -3,7 +3,7 @@
 // Implementation of oscillations of neutrinos in matter in a
 // three-neutrino framework with decoherence.
 //
-// This  class inherits from the PMNS_Fast class
+// This  class inherits from the PMNS_DensityMatrix class
 //
 // jcoelho\@apc.in2p3.fr
 ///////////////////////////////////////////////////////////////////////////////
@@ -19,14 +19,12 @@ using namespace std;
 
 //.............................................................................
 ///
-/// Constructor. \sa PMNS_Base::PMNS_Base
+/// Constructor. \sa PMNS_DensityMatrix::PMNS_DensityMatrix
 ///
 /// This class is restricted to 3 neutrino flavours.
 ///
-PMNS_Deco::PMNS_Deco()
-    : PMNS_Fast(), fGamma(), fRho(3, vectorC(3, 0)), fMBuffer(3, vectorC(3, 0))
+PMNS_Deco::PMNS_Deco() : PMNS_DensityMatrix(), fGamma()
 {
-  SetStdPath();
   SetGamma(2, 0);
   SetGamma(3, 0);
   SetDecoAngle(0);
@@ -213,43 +211,6 @@ double PMNS_Deco::GetGamma(int i, int j)
 
 //.............................................................................
 ///
-/// Rotate the density matrix to or from the mass basis
-///
-/// @param to_mass - true if to mass basis
-///
-void PMNS_Deco::RotateState(bool to_mass)
-{
-  // buffer = rho . U
-  for (int i = 0; i < fNumNus; i++) {
-    for (int j = 0; j < fNumNus; j++) {
-      fMBuffer[i][j] = 0;
-      for (int k = 0; k < fNumNus; k++) {
-        if (to_mass)
-          fMBuffer[i][j] += fRho[i][k] * fEvec[k][j];
-        else
-          fMBuffer[i][j] += fRho[i][k] * conj(fEvec[j][k]);
-      }
-    }
-  }
-
-  // rho = U^\dagger . buffer = U^\dagger . rho . U
-  // Final matrix is Hermitian, so copy upper to lower triangle
-  for (int i = 0; i < fNumNus; i++) {
-    for (int j = i; j < fNumNus; j++) {
-      fRho[i][j] = 0;
-      for (int k = 0; k < fNumNus; k++) {
-        if (to_mass)
-          fRho[i][j] += conj(fEvec[k][i]) * fMBuffer[k][j];
-        else
-          fRho[i][j] += fEvec[i][k] * fMBuffer[k][j];
-      }
-      if (j > i) fRho[j][i] = conj(fRho[i][j]);
-    }
-  }
-}
-
-//.............................................................................
-///
 /// Simple index sorting of 3-vector
 ///
 vectorI sort3(const vectorD& x)
@@ -306,7 +267,7 @@ void PMNS_Deco::PropagatePath(NuPath p)
   SolveHam();
 
   // Rotate to effective mass basis
-  RotateState(true);
+  RotateState(true, fEvec);
 
   // Some ugly way of matching gamma and dmsqr indices
   vectorI dm_idx = sort3(fDm);
@@ -339,119 +300,7 @@ void PMNS_Deco::PropagatePath(NuPath p)
   }
 
   // Rotate back to flavour basis
-  RotateState(false);
-}
-
-//.............................................................................
-///
-/// Reset the neutrino state back to a pure flavour where it starts
-///
-/// Flavours are:
-/// <pre>
-///   0 = nue, 1 = numu, 2 = nutau
-///   3 = sterile_1, 4 = sterile_2, etc.
-/// </pre>
-/// @param flv - The neutrino starting flavour.
-///
-void PMNS_Deco::ResetToFlavour(int flv)
-{
-  PMNS_Base::ResetToFlavour(flv);
-
-  assert(flv >= 0 && flv < fNumNus);
-  for (int i = 0; i < fNumNus; ++i) {
-    for (int j = 0; j < fNumNus; ++j) {
-      if (i == flv && i == j)
-        fRho[i][j] = one;
-      else
-        fRho[i][j] = zero;
-    }
-  }
-}
-
-//.............................................................................
-///
-/// Compute oscillation probability of flavour flv from current state
-///
-/// Flavours are:
-/// <pre>
-///   0 = nue, 1 = numu, 2 = nutau
-///   3 = sterile_1, 4 = sterile_2, etc.
-/// </pre>
-/// @param flv - The neutrino final flavour.
-///
-/// @return Neutrino oscillation probability
-///
-double PMNS_Deco::P(int flv)
-{
-  assert(flv >= 0 && flv < fNumNus);
-  return abs(fRho[flv][flv]);
-}
-
-//.............................................................................
-///
-/// Set the density matrix from a pure state
-///
-/// @param nu_in - The neutrino initial state in flavour basis.
-///
-void PMNS_Deco::SetPureState(vectorC nu_in)
-{
-  assert(nu_in.size() == fNumNus);
-
-  for (int i = 0; i < fNumNus; i++) {
-    for (int j = 0; j < fNumNus; j++) {
-      fRho[i][j] = conj(nu_in[i]) * nu_in[j];
-    }
-  }
-}
-
-//.............................................................................
-///
-/// Compute the probability matrix for the first nflvi and nflvf states.
-///
-/// Flavours are:
-/// <pre>
-///   0 = nue, 1 = numu, 2 = nutau
-///   3 = sterile_1, 4 = sterile_2, etc.
-/// </pre>
-/// @param nflvi - The number of initial flavours in the matrix.
-/// @param nflvf - The number of final flavours in the matrix.
-///
-/// @return Neutrino oscillation probabilities
-///
-matrixD PMNS_Deco::ProbMatrix(int nflvi, int nflvf)
-{
-  assert(nflvi <= fNumNus && nflvi >= 0);
-  assert(nflvf <= fNumNus && nflvf >= 0);
-
-  // Output probabilities
-  matrixD probs(nflvi, vectorD(nflvf));
-
-  // List of states
-  vector<matrixC> allstates(nflvi, matrixC(fNumNus, vectorC(fNumNus)));
-
-  // Reset all initial states
-  for (int i = 0; i < nflvi; i++) {
-    ResetToFlavour(i);
-    allstates[i] = fRho;
-  }
-
-  // Propagate all states in parallel
-  for (int i = 0; i < int(fNuPaths.size()); i++) {
-    for (int flvi = 0; flvi < nflvi; flvi++) {
-      fRho = allstates[flvi];
-      PropagatePath(fNuPaths[i]);
-      allstates[flvi] = fRho;
-    }
-  }
-
-  // Get all probabilities
-  for (int flvi = 0; flvi < nflvi; flvi++) {
-    for (int flvj = 0; flvj < nflvf; flvj++) {
-      probs[flvi][flvj] = abs(allstates[flvi][flvj][flvj]);
-    }
-  }
-
-  return probs;
+  RotateState(false, fEvec);
 }
 
 ////////////////////////////////////////////////////////////////////////
