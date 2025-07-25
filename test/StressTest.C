@@ -91,9 +91,9 @@ void TimeTest(OscProb::PMNS_Base* p, string model, int max_length){
 ///
 /// Run the time test over all models
 ///
-int StressTest(){
+int StressTest(vector<string> models = {}){
 
-  vector<string> models = GetListOfModels();
+  if(!models.size()) models = GetListOfModels();
 
   // Keep track of the longest name
   int max_length = 0;
