@@ -24,19 +24,23 @@ namespace OscProb {
 
       virtual double avgProbTaylor(int flvi, int flvf, double E , double dE);
 
-      virtual double avgProbTaylor(int flvi, int flvf, double E , double dE, double cosT , double dcosT);
+      virtual double avgProbTaylorLoE(int flvi, int flvf, double LoE , double dLoE);
 
-      virtual double avgProbTaylorLoE(int flvi, int flvf, double LoE, double dLoE);
+      virtual double avgProbTaylor1oE(int flvi, int flvf, double ONEoE , double d1oE);
+
+      virtual double avgProbTaylor(int flvi, int flvf, double E , double dE, double cosT , double dcosT);
 
       virtual double avgProbTaylorAngle(int flvi, int flvf, double E, double cosT , double dcosT);
 
-      virtual double avgProbTaylor_SubBin(int flvi, int flvf, double E , double dE);
-
       virtual vectorD ConvertLoEtoE(double LoE, double dLoE);
+
+      virtual vectorD ConvertEto1oE(double E, double dE);
 
       virtual void LenghtLayer();
 
       virtual double interpolationEnergy(int flvi, int flvf, double E , double dE);
+
+      virtual double interpolationEnergyLoE(int flvi, int flvf, double LoE , double dLoE);
 
       virtual double interpolationCosT(int flvi, int flvf, double cosT , double dcosT);
 
@@ -71,10 +75,6 @@ namespace OscProb {
       virtual double avgFormulaExtrapolation(int flvi, int flvf, double dbin, vectorD flambda, matrixC fV);
 
       virtual double avgAlgorithm(int flvi, int flvf);
-
-      virtual double avgSubBin(int flvi, int flvf);
-
-      virtual vectorI sort3(const vectorD& x);
 
       // Attributes
 

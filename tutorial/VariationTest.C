@@ -58,7 +58,7 @@ void VariationTest(){
     TH1D* NueNumuBar_Order = new TH1D("","",nbins,xmin,xmax);
     
     bool barOrNot;
-    int flavorf = 0;
+    int flavorf = 1;
 
     for(int i = 1 ; i<=nbins ; i++){
 
@@ -118,7 +118,11 @@ void VariationTest(){
     //if(flavori == 1) { NumuNumu_Exact->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#mu}#rightarrow#nu_{#mu})"); }
     //if(flavori == 2) {NumuNumu_Exact->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#tau}#rightarrow#nu_{#mu})");}
 
-    NumuNumuBar_Order->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#alpha}#rightarrow#nu_{e})");
+    if (flavorf == 0)
+        NumuNumuBar_Order->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#alpha}#rightarrow#nu_{e})");
+
+    if (flavorf == 1)
+        NumuNumuBar_Order->SetTitle(";#epsilon_{E } / E_{centedred};P(#nu_{#alpha}#rightarrow#nu_{#mu})");
 
     NumuNumuBar_Order->GetYaxis()->SetRangeUser(0,1.1);
 

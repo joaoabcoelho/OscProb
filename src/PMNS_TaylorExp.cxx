@@ -270,18 +270,8 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
     double lv2 =  kGeV2eV * ( fEnergy + fdE ); // E in eV 
     double lv3 = kGeV2eV * fEnergy * fEnergy / ( fEnergy - fdE );
     double lenghtEV = L * kKm2eV ; // L in eV-1
-    double bufK = - lenghtEV / (2 * lv * lv) ; // -L / 2E^2 in ?? 
-
-    /*printMatrix1(fHms);
-    if (fIsNuBar){
-        for (int i = 0; i < fNumNus; i++) {
-            for (int j = i + 1; j < fNumNus; j++) {
-                fHms[i][j] = conj(fHms[i][j]) ;
-            }
-        }
-    }
-    printMatrix1(fHms);*/
-
+    //double bufK = - lenghtEV / (2 * lv * lv) ; // -L / 2E^2 in ?? 
+    double bufK =  lenghtEV * 0.5 ; // -L / 2E^2 in ?? 
 
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
@@ -302,11 +292,6 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 
                     K[i][j] += conj(fEvec[k][i]) *  Hms_kl * fEvec[l][j] ;
 
-                    /*if (k<l || k==l)
-                        {K[i][j] += conj(fEvec[k][i]) *  fHms[k][l] * fEvec[l][j] ;} //fHms
-                    else
-                        {K[i][j] += conj(fEvec[k][i]) * conj(fHms[l][k]) * fEvec[l][j] ;}  //fHms*/
-
                 }
             }
 
@@ -316,11 +301,9 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
             }
             else {
                 double arg = (fEval[i] - fEval[j]) * lenghtEV ;
-                //cout<<"diff ev = "<<fEval[i]<<" - "<<fEval[j]<<" = "<<fEval[i] - fEval[j]<<endl;
-                //cout<<"diff ev = "<<fEval[i] - fEval[j]<<endl;
+
                 C = complexD(1,0) * ( exp(complexD(0.0 , arg)) - complexD(1 , 0.0) ) / complexD(0.0 , arg)  ;
                 
-                //cout<<i<<"  "<<j<<"  "<<C<<"         "<<K[i][j]<<endl;
             }  
 
             K[i][j] *= bufK * C ;
@@ -525,24 +508,6 @@ void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
         lambda[i] = fEvalGLoBES[i]; 
         for (int j = 0; j < fNumNus; j++) { V[i][j] = fEvecGLoBES[i][j]; }
     }
-    
-
-
-
-    /*vectorI ev_idx = sort3(lambda);
-
-    vectorD stock = vectorD(fNumNus, 0);;
-    for (int i = 0; i < fNumNus; i++) {
-        
-        //cout<<ev_idx[i]<<"    ";
-        stock[ev_idx[i]] = lambda[i];
-        //cout<<vectorD[v_idx[i]]
-    }
-    for (int i = 0; i < fNumNus; i++) {lambda[i] = stock[i];}
-
-
-    cout<<endl;*/
-
 }
 
 //.............................................................................
@@ -598,8 +563,6 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
         }
     }
 
-    cout<<endl<<endl<<"E = "<<fEnergy<<endl;
-
     complexD sinc[fNumNus][fNumNus];
     for(int j = 0 ; j<fNumNus ; j++){
 
@@ -621,18 +584,56 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
     return real(P); 
 }
 
-
 //.............................................................................
 ///
 ///
 ///
 double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
 {
+    if (E <= 0) return 0;
+
+    if (fNuPaths.empty()) return 0;
+
+    // Don't average zero width
+    if (dE <= 0) return Prob(flvi, flvf, E);
+
+    vectorD Ebin = ConvertEto1oE(E,dE);
+
+    cout<<"E = "<<E<<"  dE = "<<dE<<endl;
+    cout<<"1/E = "<<Ebin[0]<<"  d1/E = "<<Ebin[1]<<endl;
+    cout<<1/(Ebin[0]+Ebin[1]/2)<<"   "<<E+dE/2<<endl<<endl;
+
+    //return fct avr proba
+    return avgProbTaylor1oE(flvi, flvf, Ebin[0], Ebin[1]);
+}
+
+//.............................................................................
+///
+///
+///
+double PMNS_TaylorExp::avgProbTaylorLoE(int flvi, int flvf, double LoE , double dLoE)
+{
+    if (LoE <= 0) return 0;
+
+    if (fNuPaths.empty()) return 0;
+
+    // Don't average zero width
+    if (dLoE <= 0) return Prob(flvi, flvf, fPath.length / LoE);
+
+    return avgProbTaylor1oE(flvi, flvf, LoE/fPath.length, dLoE/fPath.length);
+}
+
+//.............................................................................
+///
+///
+///
+double PMNS_TaylorExp::avgProbTaylor1oE(int flvi, int flvf, double ONEoE , double d1oE)
+{
     // reset K et S et Ve et lambdaE
     InitializeTaylorsVectors();
 
-    SetEnergy(E);
-    SetwidthBin(dE,0);
+    SetEnergy(1 / ONEoE);
+    SetwidthBin(d1oE,0);
 
     //Propagate -> get S and K matrix (on the whole path)
     PropagateTaylor();
@@ -641,10 +642,8 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
     SolveK(fKE,flambdaE,fVE);
 
     //return fct avr proba
-    return avgFormula(flvi,flvf,fdE*kGeV2eV, flambdaE, fVE);
+    return avgFormula(flvi, flvf, d1oE*kGeV2eV, flambdaE, fVE);
 }
-
-
 
 
 //.............................................................................
@@ -672,13 +671,10 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
     complexD expo[fNumNus][fNumNus];
     for(int i = 0 ; i<fNumNus ; i++){
         for(int j = 0 ; j<fNumNus; j++){
-            double arg = (lambda[j] - lambda[i]) * dbin * ( lv / lv2);    //* (lv / lv2)
-
-            //if(dbin<0) arg *= 1.05;
-            //if(dbin>0) arg *= 0.95;
+            double arg = (lambda[j] - lambda[i]) * dbin ;    //* (lv / lv2)
 
             expo[j][i] = exp(complexD(0.0, arg)) ; 
-            //cout<<expo[j][i]<<endl;
+
         }
     }
     
@@ -687,8 +683,6 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
             P += SVmulti[flvf][i] * conj(SVmulti[flvf][j]) * conj(V[flvi][i]) * V[flvi][j] *  expo[j][i];
         }
     }
-
-    //cout<<"P = "<<P<<endl;
 
     return real(P); 
 }
@@ -718,93 +712,16 @@ double PMNS_TaylorExp::interpolationEnergy(int flvi, int flvf, double E , double
 ///
 ///
 ///
-double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , double dcosT)
+double PMNS_TaylorExp::interpolationEnergyLoE(int flvi, int flvf, double LoE , double dLoE)
 {
     // reset K et S et Ve et lambdaE
     InitializeTaylorsVectors();
 
-    //SetEnergy(E);
-    SetCosT(cosT);
-    SetwidthBin(0,dcosT);
+    SetCurPath(AvgPath(fNuPaths));
+    double L = fPath.length;
 
-    //Propagate -> get S and K matrix (on the whole path)
-    PropagateTaylor();
-
-    //DiagolK -> get VE and lambdaE
-    SolveK(fKcosT,flambdaCosT,fVcosT);
-
-    return avgFormulaExtrapolation(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
-}
-
-
-
-//.............................................................................
-///
-/// Simple index sorting of 3-vector
-///
-vectorI PMNS_TaylorExp::sort3(const vectorD& x)
-{
-  vectorI out(3, 0);
-
-  // 1st element is smallest
-  if (x[0] < x[1] && x[0] < x[2]) {
-    // 3rd element is largest
-    if (x[1] < x[2]) {
-      out[1] = 1;
-      out[2] = 2;
-    }
-    // 2nd element is largest
-    else {
-      out[1] = 2;
-      out[2] = 1;
-    }
-  }
-  // 2nd element is smallest
-  else if (x[1] < x[2]) {
-    out[0] = 1;
-    // 3rd element is largest
-    if (x[0] < x[2]) out[2] = 2;
-    // 1st element is largest
-    else
-      out[1] = 2;
-  }
-  // 3rd element is smallest
-  else {
-    out[0] = 2;
-    // 2nd element is largest
-    if (x[0] < x[1]) out[2] = 1;
-    // 1st element is largest
-    else
-      out[1] = 1;
-  }
-
-  return out;
-}
-
-
-
-//.............................................................................
-///
-///
-///
-double PMNS_TaylorExp::avgSubBin(int flvi, int flvf)
-{
-    
-
-    return 0;
-}
-
-//.............................................................................
-///
-///
-///
-double PMNS_TaylorExp::avgProbTaylor_SubBin(int flvi, int flvf, double E , double dE)
-{
-    // reset K et S et Ve et lambdaE
-    InitializeTaylorsVectors();
-
-    SetEnergy(E);
-    SetwidthBin(dE,0);
+    SetEnergy(LoE);
+    SetwidthBin(dLoE,0);
 
     //Propagate -> get S and K matrix (on the whole path)
     PropagateTaylor();
@@ -812,9 +729,41 @@ double PMNS_TaylorExp::avgProbTaylor_SubBin(int flvi, int flvf, double E , doubl
     //DiagolK -> get VE and lambdaE
     SolveK(fKE,flambdaE,fVE);
 
-    //return fct avr proba
-    return avgSubBin(flvi,flvf);
+    return avgFormulaExtrapolation(flvi,flvf,dLoE*kGeV2eV, flambdaE, fVE);
 }
+
+
+//.............................................................................
+///
+///
+///
+vectorD PMNS_TaylorExp::ConvertEto1oE(double E, double dE)
+{
+    vectorD Ebin(2);
+
+    // Set a minimum energy
+    //double minLoE = 0.1 * E;
+    double minLoE = 0;
+
+
+    // Transform range to E
+    // Full range if low edge > minLoE
+    if(E - dE / 2 > minLoE) {
+        Ebin[0] =  0.5 * (1 / (E - dE / 2) + 1 / (E + dE / 2));
+        Ebin[1] =  1 / (E - dE / 2) - 1 / (E + dE / 2);
+    }
+    else {
+        Ebin[0] = 0.5 * (1 / minLoE + 1 / (E + dE / 2));
+        Ebin[1] = (1 / minLoE - 1 / (E + dE / 2));
+    }
+
+    return Ebin;
+}
+
+
+
+
+
 
 
 
@@ -847,6 +796,27 @@ double PMNS_TaylorExp::avgProbTaylor_SubBin(int flvi, int flvf, double E , doubl
 
 
 
+//.............................................................................
+///
+///
+///
+double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , double dcosT)
+{
+    // reset K et S et Ve et lambdaE
+    InitializeTaylorsVectors();
+
+    //SetEnergy(E);
+    SetCosT(cosT);
+    SetwidthBin(0,dcosT);
+
+    //Propagate -> get S and K matrix (on the whole path)
+    PropagateTaylor();
+
+    //DiagolK -> get VE and lambdaE
+    SolveK(fKcosT,flambdaCosT,fVcosT);
+
+    return avgFormulaExtrapolation(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
+}
 
 
 //.............................................................................
@@ -879,23 +849,7 @@ vectorD PMNS_TaylorExp::ConvertLoEtoE(double LoE, double dLoE)
 }
 
 
-//.............................................................................
-///
-///
-///
-double PMNS_TaylorExp::avgProbTaylorLoE(int flvi, int flvf, double LoE , double dLoE)
-{
-    if (LoE <= 0) return 0;
 
-    if (fNuPaths.empty()) return 0;
-
-    // Don't average zero width
-    if (dLoE <= 0) return Prob(flvi, flvf, fPath.length / LoE);
-
-    vectorD Ebin = ConvertLoEtoE(LoE,dLoE);
-
-    return avgProbTaylor(flvi,flvf,Ebin[0],Ebin[1]);
-}
 
 //.............................................................................
 ///
