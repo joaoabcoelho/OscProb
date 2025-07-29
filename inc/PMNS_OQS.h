@@ -14,10 +14,12 @@ namespace OscProb {
 
       virtual void SetParameterisation(int par);
       virtual void SetPhi(int i, double val);
-      virtual void SetDissipatorElement(int i, int j, double val,
-                                        bool print = false);
+      virtual void Seta(int i, double val);
+      virtual void Setcos(int i, int j, double val);
 
     protected:
+      virtual void SetDissipatorElement(int i, int j);
+      virtual void SetDissipator();
       virtual void InitializeVectors();
       virtual void SetHeff(NuPath p);
       virtual void SetHGM();
@@ -30,6 +32,7 @@ namespace OscProb {
       template <typename T> void SolveEigenSystem();
 
       virtual void Diagonalise();
+      virtual void FillCache() {} ///< Deactivate cache
 
       /// Propagate neutrino through a single path
       virtual void PropagatePath(NuPath p);
@@ -44,14 +47,18 @@ namespace OscProb {
 
       std::vector<matrixC> fGM; ///< 3x3 Gell-Mann matrices: they are 9
 
-      matrixC fD; ///< Off-diagonal, 9x9 dissipator
+      matrixD fD; ///< Off-diagonal, 9x9 dissipator
       matrixC fM; ///< M
+      vectorD fa; ///< a vector
+      matrixD fcos; ///< cosines ai . aj
 
       Eigen::MatrixXcd fMd;
       Eigen::MatrixXcd fMd8;
       Eigen::MatrixXcd fMEvec;
 
       vectorC fEvalC; ///< Complex eigenvalues
+
+      bool fBuiltDissipator; ///< Flag to rebuilt D
   };
 
 } // namespace OscProb

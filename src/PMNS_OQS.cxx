@@ -18,10 +18,12 @@ using namespace OscProb;
 ///
 PMNS_OQS::PMNS_OQS()
     : PMNS_DensityMatrix(), fPhi(), fR(), fRt(),
+      fa(9, 0),
       fMd(9, 9),
       fMEvec(9, 9),
-      fD(9, vectorC(9, 0)),
+      fD(9, vectorD(9, 0)),
       fM(9, vectorC(9, 0)),
+      fcos(9, vectorD(9, 1)),
       fHGM(9, vectorC(9, 0)),
       fHeff(3, vectorC(3, 0))
 {
@@ -144,30 +146,97 @@ void PMNS_OQS::SetHGM()
   }
 }
 
-// D must be real
-void PMNS_OQS::SetDissipatorElement(int i, int j, double val, bool print)
+bool is_same_array(array<int, 3> input, array<int, 3> test){
+  sort(input.begin(), input.end());
+  sort(test.begin(), test.end());
+  return input == test;
+}
+
+int get_permutation(array<int, 3> input, array<int, 3> test){
+
+  if(!is_same_array(input, test)) return 0;
+
+  if(input[0]==test[0] && input[1]==test[1]) return 1;
+  if(input[0]==test[1] && input[1]==test[2]) return 1;
+  if(input[0]==test[2] && input[1]==test[0]) return 1;
+
+  return -1;
+
+}
+
+double get_f(array<int, 3> indices){
+
+  int perm = 0;
+
+  if((perm = get_permutation(indices, {1,2,3}))) return perm;
+
+  double value = 0.5;
+
+  if((perm = get_permutation(indices, {1,4,7}))) return perm * value;
+  if((perm = get_permutation(indices, {1,6,5}))) return perm * value;
+  if((perm = get_permutation(indices, {2,4,6}))) return perm * value;
+  if((perm = get_permutation(indices, {2,5,7}))) return perm * value;
+  if((perm = get_permutation(indices, {3,4,5}))) return perm * value;
+  if((perm = get_permutation(indices, {3,7,6}))) return perm * value;
+
+  value = sqrt(3)/2;
+
+  if((perm = get_permutation(indices, {4,5,8}))) return perm * value;
+  if((perm = get_permutation(indices, {6,7,8}))) return perm * value;
+
+  return 0;
+
+}
+
+void PMNS_OQS::SetDissipatorElement(int j, int k)
 {
+  double val = 0;
+
+  for(int l=0; l<9; l++){
+  for(int m=l; m<9; m++){
+    double f = 0;
+    for(int n=0; n<9; n++){
+      f += get_f({l,k,n}) * get_f({n,m,j});
+      if(m>l) f += get_f({m,k,n}) * get_f({n,l,j});
+    }
+    val += fa[l] * fa[m] * fcos[l][m] * f;
+  }}
+
   val *= kGeV2eV; // convert to eV
 
-  //  if(i==j) fD[i][j] = -abs(val);  // required to satisfy Tr(rho) = 1
-  if (i == j)
-    fD[i][j] = val; // required to satisfy Tr(rho) = 1
-  else {
-    fD[i][j] = val;
-    // symmetrix matrix
-    fD[j][i] = val;
-  }
+  fD[j][k] = -val;
+  fD[k][j] = -val;
+}
 
-  if (print) {
-    for (int i = 0; i < 9; i++) {
-      for (int j = 0; j < 9; j++) { cout << fD[i][j] / kGeV2eV; }
-      cout << endl;
-    }
-  }
+void PMNS_OQS::SetDissipator(){
+
+  if(fBuiltDissipator) return;
+
+  for(int j=0; j<9; j++){
+  for(int k=j; k<9; k++){
+    SetDissipatorElement(j,k);
+  }}
+
+  fBuiltDissipator = true;
+}
+
+void PMNS_OQS::Seta(int i, double val){
+  fBuiltDissipator *= (fa[i] == val);
+  fa[i] = abs(val);
+}
+
+void PMNS_OQS::Setcos(int i, int j, double val){
+  fBuiltDissipator *= (fcos[i][j] == val);
+  if(i==j) fcos[i][j] = 1;
+  if(val > 1) val = 1;
+  if(val < -1) val = -1;
+  fcos[i][j] = val;
+  fcos[j][i] = val;
 }
 
 void PMNS_OQS::SetM()
 {
+  SetDissipator();
   for (int k = 0; k < 9; ++k) {
     for (int j = 0; j < 9; ++j) { fM[k][j] = fHGM[k][j] + fD[k][j]; }
   }
@@ -197,12 +266,10 @@ template <typename T> void PMNS_OQS::SolveEigenSystem()
 void PMNS_OQS::Diagonalise()
 {
   SolveEigenSystem<Eigen::MatrixXcd>();
+  SolveHam();
 
   // Mark eigensystem as solved
   fGotES = true;
-
-  // Fill cache if activated
-  FillCache();
 }
 
 //.............................................................................

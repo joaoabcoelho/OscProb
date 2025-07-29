@@ -54,12 +54,9 @@ OscProb::PMNS_OQS* GetOQS(bool is_nominal){
   OscProb::PMNS_OQS* p = new OscProb::PMNS_OQS();
   SetNominalPars(p);
   if(!is_nominal){
-    p->SetDissipatorElement(1,1, 1e-23);
-    p->SetDissipatorElement(2,2, 1e-23);
-    p->SetDissipatorElement(4,4, 1e-22);
-    p->SetDissipatorElement(5,5, 1e-22);
-    p->SetDissipatorElement(6,6, 2e-22);
-    p->SetDissipatorElement(7,7, 2e-22);
+    p->Seta(3, sqrt(2e-23));
+    p->Seta(8, sqrt(4e-23));
+    p->Setcos(3,8, 0.5);
   }
 
   return p;
