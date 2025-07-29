@@ -253,9 +253,9 @@ bool TestMethodsModel(OscProb::PMNS_Base* p, string model){
 }
 
 //.............................................................................
-int TestMethods(){
+int TestMethods(vector<string> models = {}){
 
-  vector<string> models = GetListOfModels();
+  if(!models.size()) models = GetListOfModels();
 
   bool pass_all = true;
 

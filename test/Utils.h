@@ -193,8 +193,6 @@ OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
 //.............................................................................
 vector<string> GetListOfModels(){
 
-  //return {"Decay"};
-
   return {"Fast", "Iter", "Sterile", "NSI",
           "Deco", "Decay", "LIV", "SNSI",
           "NUNM", "OQS"};
