@@ -37,7 +37,7 @@ void testAvgProb(){
 
 
   // Define some fine and coarse binnings
-  int navg = 20;
+  int navg = 30;
   int nbins = navg * 100;
   double xmin = 0;
   double xmax = 3;
@@ -78,6 +78,8 @@ void testAvgProb(){
     double dE = (maxE - minE);
 
     //double pp =taylor.avgProbTaylor(1,1, E, dE);
+
+    cout<<"i : "<< i << "  E = "<< E << endl;
 
 
     h2->SetBinContent(i, taylor.avgProbTaylor(1,1, E, dE));

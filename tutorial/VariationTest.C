@@ -40,9 +40,9 @@ void VariationTest(){
     //double L = 2*6368*abs(cosT);
     //p.SetLength(L);
 
-    int nbins = 1200;
+    int nbins = 4000;
     double E = 0.3;
-    double xmax = 0.12;
+    double xmax = 0.4;
     double xmin = -xmax;
 
     TH1D* NumuNumu_Exact = new TH1D("","",nbins,xmin,xmax);

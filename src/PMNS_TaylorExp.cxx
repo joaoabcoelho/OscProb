@@ -266,11 +266,11 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
     }*/
 
 
-    double lv =  kGeV2eV * fEnergy; // E in eV 
+    /*double lv =  kGeV2eV * fEnergy; // E in eV 
     double lv2 =  kGeV2eV * ( fEnergy + fdE ); // E in eV 
     double lv3 = kGeV2eV * fEnergy * fEnergy / ( fEnergy - fdE );
+    double bufK = - lenghtEV / (2 * lv * lv) ; // -L / 2E^2 in ?? */
     double lenghtEV = L * kKm2eV ; // L in eV-1
-    //double bufK = - lenghtEV / (2 * lv * lv) ; // -L / 2E^2 in ?? 
     double bufK =  lenghtEV * 0.5 ; // -L / 2E^2 in ?? 
 
     for(int j = 0 ; j<fNumNus ; j++){
@@ -599,10 +599,6 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
 
     vectorD Ebin = ConvertEto1oE(E,dE);
 
-    cout<<"E = "<<E<<"  dE = "<<dE<<endl;
-    cout<<"1/E = "<<Ebin[0]<<"  d1/E = "<<Ebin[1]<<endl;
-    cout<<1/(Ebin[0]+Ebin[1]/2)<<"   "<<E+dE/2<<endl<<endl;
-
     //return fct avr proba
     return avgProbTaylor1oE(flvi, flvf, Ebin[0], Ebin[1]);
 }
@@ -642,7 +638,7 @@ double PMNS_TaylorExp::avgProbTaylor1oE(int flvi, int flvf, double ONEoE , doubl
     SolveK(fKE,flambdaE,fVE);
 
     //return fct avr proba
-    return avgFormula(flvi, flvf, d1oE*kGeV2eV, flambdaE, fVE);
+    return avgFormula(flvi, flvf, d1oE/kGeV2eV, flambdaE, fVE);
 }
 
 
@@ -697,7 +693,7 @@ double PMNS_TaylorExp::interpolationEnergy(int flvi, int flvf, double E , double
     InitializeTaylorsVectors();
 
     SetEnergy(E);
-    SetwidthBin(dE,0);
+    SetwidthBin( 1 / (E + dE) - 1 / E ,0);
 
     //Propagate -> get S and K matrix (on the whole path)
     PropagateTaylor();
@@ -705,7 +701,7 @@ double PMNS_TaylorExp::interpolationEnergy(int flvi, int flvf, double E , double
     //DiagolK -> get VE and lambdaE
     SolveK(fKE,flambdaE,fVE);
 
-    return avgFormulaExtrapolation(flvi,flvf,fdE*kGeV2eV, flambdaE, fVE);
+    return avgFormulaExtrapolation(flvi,flvf,fdE/kGeV2eV, flambdaE, fVE);
 }
 
 //.............................................................................
@@ -742,9 +738,8 @@ vectorD PMNS_TaylorExp::ConvertEto1oE(double E, double dE)
     vectorD Ebin(2);
 
     // Set a minimum energy
-    //double minLoE = 0.1 * E;
-    double minLoE = 0;
-
+    double minLoE = 0.1 * E;
+    //double minLoE = 0;
 
     // Transform range to E
     // Full range if low edge > minLoE
@@ -759,6 +754,7 @@ vectorD PMNS_TaylorExp::ConvertEto1oE(double E, double dE)
 
     return Ebin;
 }
+
 
 
 
