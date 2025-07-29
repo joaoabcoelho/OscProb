@@ -58,7 +58,7 @@ void VariationTest(){
     TH1D* NueNumuBar_Order = new TH1D("","",nbins,xmin,xmax);
     
     bool barOrNot;
-    int flavorf = 1;
+    int flavorf = 0;
 
     for(int i = 1 ; i<=nbins ; i++){
 

@@ -5,6 +5,7 @@
 
 #include "PremModel.h"
 #include "PMNS_Fast.h"
+#include "PMNS_TaylorExp.h"
 
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
@@ -13,13 +14,79 @@
 
 
 
+
 void TimeMeasurement()
 {
 
+    auto r = new TGraph();
+
+
+    OscProb::PMNS_Fast f;
+    OscProb::PMNS_TaylorExp t;
+
+    OscProb::PremModel prem;    
+
+    double cosT = -0.9;
+    prem.FillPath(cosT);
+    f.SetPath(prem.GetNuPath());
+    t.SetPath(prem.GetNuPath());
+
+    TimeIt time;
+
+    for (int i = 0 ; i<1000 ; i++)
+    {
+        time.count ++;
+    }
+
+    time.Print();
+    double timeTotal = time.time();
+    double timeIter = timeTotal / time.count;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+    
     //auto r = new TGraph();
     //auto f = new TGraph();
     //auto t = new TGraph();
-
+    
     double aaa = 0;
     int ii = 0 ;
 
@@ -29,7 +96,7 @@ void TimeMeasurement()
 
 
     //---------------------------------------------------------------------------
-    /*for ( int i = 0 ; i<=500 ; i+= 1 ){
+    for ( int i = 0 ; i<=500 ; i+= 1 ){
 
         cout << "========== Fast ==========  " << i << endl;
         //vector<double> timeFast = Oscillogram(1,i,100,"fast");

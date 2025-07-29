@@ -85,7 +85,6 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
         for(int j = 0 ; j<fNumNus ; j++){
             fKE[i][j] = 0;
             fKcosT[i][j] = 0;
-            //fHam[i][j] = 0;
         }
     }
 
@@ -252,26 +251,8 @@ void PMNS_TaylorExp::HadamardProduct(vectorD lambda, matrixC& densityMatrix, dou
 void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 {
 
-   /*double lv =  kGeV2eV * fEnergy; // E in eV 
-
-    for(int j = 0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<=j ; i++){
-            //K[i][j] = - kKm2eV * (L / (2*lv*lv)) * fHms[i][j]; 
-            K[i][j] = - kKm2eV * (L / lv) * fHam[i][j];  
-            cout<<"test";
-            if(i != j){
-                K[j][i] = conj(K[i][j]);
-            }
-        }
-    }*/
-
-
-    /*double lv =  kGeV2eV * fEnergy; // E in eV 
-    double lv2 =  kGeV2eV * ( fEnergy + fdE ); // E in eV 
-    double lv3 = kGeV2eV * fEnergy * fEnergy / ( fEnergy - fdE );
-    double bufK = - lenghtEV / (2 * lv * lv) ; // -L / 2E^2 in ?? */
     double lenghtEV = L * kKm2eV ; // L in eV-1
-    double bufK =  lenghtEV * 0.5 ; // -L / 2E^2 in ?? 
+    double bufK =  lenghtEV * 0.5 ; // L/2 in eV-1
 
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
@@ -648,11 +629,6 @@ double PMNS_TaylorExp::avgProbTaylor1oE(int flvi, int flvf, double ONEoE , doubl
 ///
 double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, vectorD lambda, matrixC V)
 {
-    double lv =  kGeV2eV * fEnergy; // E in eV 
-    double lv2 =  kGeV2eV * ( fEnergy + fdE ); // E in eV 
-    double lv3 = ( fEnergy - fdE ) / fEnergy;
-    double lv4 = ( fEnergy * fEnergy + fdE * fdE - fdE * fEnergy) / ( fEnergy *fEnergy );
-
     complexD P = 0;
 
     matrixC SVmulti = matrixC(fNumNus, vectorC(fNumNus, 0));
