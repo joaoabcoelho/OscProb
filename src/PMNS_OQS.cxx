@@ -17,7 +17,7 @@ using namespace OscProb;
 /// This class is restricted to 3 neutrino flavours.
 ///
 PMNS_OQS::PMNS_OQS()
-    : PMNS_DensityMatrix(), fPhi(), fR(), fRt(), fa(9, 0), fMe(9, 9),
+    : PMNS_DensityMatrix(), fPhi(), fR(), fRt(), fa(9, 0), fMe(8, 8),
       fD(9, vectorD(9, 0)), fM(9, vectorC(9, 0)), fcos(9, vectorD(9, 1)),
       fHGM(9, vectorC(9, 0)), fHeff(3, vectorC(3, 0))
 {
@@ -330,8 +330,8 @@ void PMNS_OQS::PropagatePath(NuPath p)
 
   // Solve for eigensystem
   SolveHam();
-  for (int i = 0; i < 9; i++) {
-    for (int j = 0; j < 9; j++) { fMe(i, j) = fM[i][j]; }
+  for (int i = 1; i < 9; i++) {
+    for (int j = 1; j < 9; j++) { fMe(i - 1, j - 1) = fM[i][j]; }
   }
 
   // Convert path length to eV
@@ -344,9 +344,11 @@ void PMNS_OQS::PropagatePath(NuPath p)
 
   ChangeBaseToGM();
 
-  for (int i = 0; i < 9; ++i) {
+  fRt[0] = fR[0];
+
+  for (int i = 1; i < 9; ++i) {
     fRt[i] = 0;
-    for (int j = 0; j < 9; ++j) { fRt[i] += fMe(i, j) * fR[j]; }
+    for (int j = 1; j < 9; ++j) { fRt[i] += fMe(i - 1, j - 1) * fR[j]; }
   }
 
   ChangeBaseToSU3();
