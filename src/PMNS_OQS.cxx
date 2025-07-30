@@ -18,8 +18,8 @@ using namespace OscProb;
 ///
 PMNS_OQS::PMNS_OQS()
     : PMNS_DensityMatrix(), fPhi(), fR(), fRt(), fa(9, 0), fM(8, 8),
-      fD(9, vectorD(9, 0)), fcos(9, vectorD(9, 1)),
-      fHGM(9, vectorD(9, 0)), fHeff(3, vectorC(3, 0)), fUM(3, vectorC(3, 0))
+      fD(9, vectorD(9, 0)), fcos(9, vectorD(9, 1)), fHGM(9, vectorD(9, 0)),
+      fHeff(3, vectorC(3, 0)), fUM(3, vectorC(3, 0))
 {
   InitializeVectors();
   SetParameterisation(1);
@@ -211,7 +211,7 @@ void PMNS_OQS::SetM()
 {
   SetDissipator();
   for (int k = 1; k < 9; ++k) {
-    for (int j = 1; j < 9; ++j) { fM(k-1,j-1) = fHGM[k][j] + fD[k][j]; }
+    for (int j = 1; j < 9; ++j) { fM(k - 1, j - 1) = fHGM[k][j] + fD[k][j]; }
   }
 }
 
@@ -288,10 +288,9 @@ void PMNS_OQS::ChangeBaseToSU3()
   fRho[0][2] = complexD(fRt[4], -fRt[5]);
   fRho[1][2] = complexD(fRt[6], -fRt[7]);
 
-  for(int i=0; i<3; i++){
-  for(int j=0; j<i; j++){
-    fRho[i][j] = conj(fRho[j][i]);
-  }}
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < i; j++) { fRho[i][j] = conj(fRho[j][i]); }
+  }
 }
 
 //.............................................................................
