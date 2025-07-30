@@ -10,7 +10,28 @@
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
 
-#include "Oscillogram.C"
+//#include "Oscillogram.C"
+
+
+struct TimeIt {
+
+    TimeIt() { reset(); }
+  
+    int start;
+    int count;
+    double time(){ return double(clock() - start) / CLOCKS_PER_SEC; }
+    void reset(){ count = 0; start = clock(); }
+    void Print(){
+      double tpi = time() / count;
+      string scale = "s";
+      if(tpi<1){ tpi *= 1e3; scale = "ms"; }
+      if(tpi<1){ tpi *= 1e3; scale = "µs"; }
+      if(tpi<1){ tpi *= 1e3; scale = "ns"; }
+      cout << "Performance = " << tpi << " " << scale << "/iteration" << endl;
+      cout << "Total time = " << time() << endl;
+    }
+  
+  };
 
 
 
@@ -31,20 +52,26 @@ void TimeMeasurement()
     f.SetPath(prem.GetNuPath());
     t.SetPath(prem.GetNuPath());
 
+    int nbrDataAvg= 10000;
+
     TimeIt time;
 
-    for (int i = 0 ; i<1000 ; i++)
-    {
-        time.count ++;
+    for (double E = 0.5 ; E<100; E+=0.5){
+
+        time.reset();
+
+        for (int i = 0 ; i<nbrDataAvg ; i++){
+            t.avgProbTaylor(1,1,E,E*0.9);
+            time.count ++;
+        }
+
+        //time.Print();
+        r->AddPoint( E , time.time() / time.count); 
     }
 
-    time.Print();
-    double timeTotal = time.time();
-    double timeIter = timeTotal / time.count;
-
-
-
-
+    r->SetName("time for one avgP");
+    r->SetTitle("time for one avgP;E (GeV) ;Time (s)");
+    r->Draw("AC*");
 
 
 
