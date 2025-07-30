@@ -45,12 +45,11 @@ namespace OscProb {
       matrixD fHGM;
 
       matrixD fD;   ///< Off-diagonal, 9x9 dissipator
-      matrixD fM;   ///< M
       matrixC fUM;  ///< PMNS Matrix
       vectorD fa;   ///< a vector
       matrixD fcos; ///< cosines ai . aj
 
-      Eigen::MatrixXd fMe; ///< Buffer matrix for exponential
+      Eigen::MatrixXd fM; ///< Buffer matrix for exponential
 
       bool fBuiltDissipator; ///< Flag to rebuilt D
   };
