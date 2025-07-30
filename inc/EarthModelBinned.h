@@ -144,7 +144,9 @@ namespace OscProb {
       double
              rDetGammaSinDetLat; ///< rDet*sin(DetLat)*[sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)]
       double maxSinSqLat; ///< 1 - [sin(phi)*cos(DetLat)]^2
-      double xlatextreme; ///< rDet*cos(phi)*cos(DetLat)/[sin(T)*sin(DetLat)-cos(phi)*cosT*cos(DetLat)], unless the denominator is 0, in which case it is set to 0
+      double xlatextreme; ///< rDet*cos(phi)*cos(DetLat)/[sin(T)*sin(DetLat)-cos(phi)*cosT*cos(DetLat)],
+                          ///< unless the denominator is 0, in which case it is
+                          ///< set to 0
   };
 
   struct EarthBin {
@@ -248,14 +250,14 @@ namespace OscProb {
                                   ///< trajectory (<0 => neutrino will
                                   ///< not reach next latitude bin
                                   ///< before arriving at detector)
-          int sign; ///< Indicates whether latitude is increasing or
-                    ///< decreasing with respect to decreasing
-                    ///< distance from the detector along trajectory
-                    ///< (+1 => increasing, -1 => decreasing)
-          double dLat; ///< Change in lat from bin center to edge of
-                       ///< next bin (excludes direction; 0 if no more
-                       ///< than 1 lat bin change happens along entire
-                       ///< neutrino trajectory)
+          int sign;        ///< Indicates whether latitude is increasing or
+                           ///< decreasing with respect to decreasing
+                           ///< distance from the detector along trajectory
+                           ///< (+1 => increasing, -1 => decreasing)
+          double dLat;     ///< Change in lat from bin center to edge of
+                           ///< next bin (excludes direction; 0 if no more
+                           ///< than 1 lat bin change happens along entire
+                           ///< neutrino trajectory)
           bool maxreached; ///< Indicates whether the latitude
                            ///< function transition has happened, yet
                            ///< (false => no, true => yes)
@@ -270,14 +272,14 @@ namespace OscProb {
                                   ///< trajectory (<0 => neutrino will
                                   ///< not reach next longitude bin
                                   ///< before arriving at detector)
-          double dLon; ///< Change in lon from bin center to edge of
+          double dLon;            ///< Change in lon from bin center to edge of
                        ///< next bin (includes direction; 0 if no more
                        ///< than 1 lon bin change happens along entire
                        ///< neutrino trajectory)
-          double min;  ///< "Minimum" longitude
-          double max;  ///< "Maximum" longitude
-          int error = 0; ///< Indicates if an error has been detected
-                         ///< (0 => no, -1 => yes)
+          double min;       ///< "Minimum" longitude
+          double max;       ///< "Maximum" longitude
+          int    error = 0; ///< Indicates if an error has been detected
+                            ///< (0 => no, -1 => yes)
           std::string
               err_message; ///< Part of error message specific to piece of path
       };
