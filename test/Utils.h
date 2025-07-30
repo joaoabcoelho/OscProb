@@ -289,7 +289,8 @@ int CheckProb(OscProb::PMNS_Base* p, TString filename){
       c1->SaveAs("plots/Failed_"+hname+"_"+pngfile);
       delete c1;
     }
-    delete h0, h;
+    if(h0) delete h0;
+    if(h) delete h;
   }}}
 
   if(fails>0){
