@@ -3,7 +3,7 @@
 #include <iostream>
 #include <math.h>
 
-#include <Eigen/Eigenvalues>
+#include <unsupported/Eigen/MatrixFunctions>
 
 #include "PMNS_OQS.h"
 
@@ -17,9 +17,9 @@ using namespace OscProb;
 /// This class is restricted to 3 neutrino flavours.
 ///
 PMNS_OQS::PMNS_OQS()
-    : PMNS_DensityMatrix(), fPhi(), fR(), fRt(), fa(9, 0), fMd(9, 9),
-      fMEvec(9, 9), fD(9, vectorD(9, 0)), fM(9, vectorC(9, 0)),
-      fcos(9, vectorD(9, 1)), fHGM(9, vectorC(9, 0)), fHeff(3, vectorC(3, 0))
+    : PMNS_DensityMatrix(), fPhi(), fR(), fRt(), fa(9, 0), fMe(9, 9),
+      fD(9, vectorD(9, 0)), fM(9, vectorC(9, 0)), fcos(9, vectorD(9, 1)),
+      fHGM(9, vectorC(9, 0)), fHeff(3, vectorC(3, 0))
 {
   InitializeVectors();
   SetParameterisation(1);
@@ -35,8 +35,6 @@ void PMNS_OQS::InitializeVectors()
 {
   SetPhi(1, 0);
   SetPhi(2, 0);
-
-  fEvalC = vectorC(9, 0);
 }
 
 void PMNS_OQS::SetParameterisation(int param = 1) { fParameterisation = param; }
@@ -85,12 +83,6 @@ void PMNS_OQS::SetHeff(NuPath p)
   fHeff[2][0] = c12 * c13 * exp(idelta - iphi2) * s13 * Ve;
   fHeff[2][1] = c13 * exp(idelta + iphi1 - iphi2) * s12 * s13 * Ve;
   fHeff[2][2] = s13 * s13 * Ve;
-
-  /*for(int i = 1; i < 3; ++i){
-    for(int j = 0; j < 3; ++j){
-      fHeff[j][i] = conj(fHeff[i][j]);
-    }
-    }*/
 
   double lv = 2. * kGeV2eV * fEnergy; // 2E in eV
 
@@ -239,34 +231,6 @@ void PMNS_OQS::SetM()
 
 void PMNS_OQS::SetPhi(int i, double val) { fPhi[i - 1] = val; }
 
-template <typename T> void PMNS_OQS::SolveEigenSystem()
-{
-  for (int i = 0; i < 9; ++i) {
-    for (int j = 0; j < 9; ++j) { fMd(i, j) = fM[i][j]; }
-  }
-
-  Eigen::Ref<T> M(fMd);
-
-  Eigen::ComplexEigenSolver<T> eigensolver(M);
-
-  // Fill fEvalC and fEvec vectors from GSL objects
-  for (int i = 0; i < 9; i++) {
-    fEvalC[i] = eigensolver.eigenvalues()(i);
-    for (int j = 0; j < 9; j++) {
-      fMEvec(i, j) = eigensolver.eigenvectors()(i, j);
-    }
-  }
-}
-
-void PMNS_OQS::Diagonalise()
-{
-  SolveEigenSystem<Eigen::MatrixXcd>();
-  SolveHam();
-
-  // Mark eigensystem as solved
-  fGotES = true;
-}
-
 //.............................................................................
 ///
 /// Rotate the density matrix to or from the mass basis
@@ -365,31 +329,24 @@ void PMNS_OQS::PropagatePath(NuPath p)
   SetM();
 
   // Solve for eigensystem
-  Diagonalise();
+  SolveHam();
+  for (int i = 0; i < 9; i++) {
+    for (int j = 0; j < 9; j++) { fMe(i, j) = fM[i][j]; }
+  }
 
-  Eigen::MatrixXcd fMEvecInv = fMEvec.inverse();
+  // Convert path length to eV
+  double lengthIneV = kKm2eV * p.length;
 
-  matrixC mult(9, vectorC(9, 0));
-  matrixC diag(9, vectorC(9, 0));
+  fMe *= lengthIneV;
+  fMe = fMe.exp();
 
   RotateState(true);
 
   ChangeBaseToGM();
 
-  matrixC mult2(9, vectorC(9, 0));
-  vectorC vec(9, 0);
-
-  // Convert path length to eV
-  double lengthIneV = kKm2eV * p.length;
-
   for (int i = 0; i < 9; ++i) {
     fRt[i] = 0;
-    for (int j = 0; j < 9; ++j) {
-      for (int k = 0; k < 9; ++k) {
-        fRt[i] += exp(fEvalC[k] * lengthIneV) * fMEvec(i, k) * fMEvecInv(k, j) *
-                  fR[j];
-      }
-    }
+    for (int j = 0; j < 9; ++j) { fRt[i] += fMe(i, j) * fR[j]; }
   }
 
   ChangeBaseToSU3();

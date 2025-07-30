@@ -28,11 +28,6 @@ namespace OscProb {
       virtual void ChangeBaseToGM();
       virtual void ChangeBaseToSU3();
 
-      /// Specialized solver for NxN matrices
-      template <typename T> void SolveEigenSystem();
-
-      virtual void Diagonalise();
-
       virtual void FillCache() {} ///< Deactivate cache
 
       /// Propagate neutrino through a single path
@@ -46,18 +41,12 @@ namespace OscProb {
       matrixC fHeff;
       matrixC fHGM;
 
-      std::vector<matrixC> fGM; ///< 3x3 Gell-Mann matrices: they are 9
-
       matrixD fD;   ///< Off-diagonal, 9x9 dissipator
       matrixC fM;   ///< M
       vectorD fa;   ///< a vector
       matrixD fcos; ///< cosines ai . aj
 
-      Eigen::MatrixXcd fMd;
-      Eigen::MatrixXcd fMd8;
-      Eigen::MatrixXcd fMEvec;
-
-      vectorC fEvalC; ///< Complex eigenvalues
+      Eigen::MatrixXcd fMe; ///< Buffer matrix for exponential
 
       bool fBuiltDissipator; ///< Flag to rebuilt D
   };
