@@ -267,30 +267,31 @@ void PMNS_OQS::RotateState(bool to_mass)
 
 void PMNS_OQS::ChangeBaseToGM()
 {
-  fR[0] = real(fRho[0][0] + fRho[1][1] + fRho[2][2]) / sqrt(6.);
+  fR[3] = real(fRho[0][0] - fRho[1][1]) / 2;
+  fR[8] = real(fRho[0][0] + fRho[1][1] - 2. * fRho[2][2]) / (2 * sqrt(3));
+
   fR[1] = real(fRho[0][1]);
   fR[2] = -imag(fRho[0][1]);
-  fR[3] = real(fRho[0][0] - fRho[1][1]) / 2.;
   fR[4] = real(fRho[0][2]);
   fR[5] = -imag(fRho[0][2]);
-  // fR[5] =  0;
   fR[6] = real(fRho[1][2]);
   fR[7] = -imag(fRho[1][2]);
-  //  fR[7] =  0;
-  fR[8] = real(fRho[0][0] + fRho[1][1] - 2. * fRho[2][2]) / (2. * sqrt(3.));
 }
 
 void PMNS_OQS::ChangeBaseToSU3()
 {
-  fRho[0][0] = (sqrt(2.) * fRt[0] + sqrt(3.) * fRt[3] + fRt[8]) / sqrt(3.);
-  fRho[0][1] = (fRt[1] - complexD(0.0, 1.0) * fRt[2]);
-  fRho[0][2] = (fRt[4] - complexD(0.0, 1.0) * fRt[5]);
-  fRho[1][0] = (fRt[1] + complexD(0.0, 1.0) * fRt[2]);
-  fRho[1][1] = (sqrt(2. / 3.) * fRt[0] - fRt[3] + fRt[8] / sqrt(3.));
-  fRho[1][2] = (fRt[6] - complexD(0.0, 1.0) * fRt[7]);
-  fRho[2][0] = (fRt[4] + complexD(0.0, 1.0) * fRt[5]);
-  fRho[2][1] = (fRt[6] + complexD(0.0, 1.0) * fRt[7]);
-  fRho[2][2] = (1. / sqrt(3.) * (sqrt(2.) * fRt[0] - 2. * fRt[8]));
+  fRho[0][0] = 1 / 3. + fRt[3] + fRt[8] / sqrt(3);
+  fRho[1][1] = 1 / 3. - fRt[3] + fRt[8] / sqrt(3);
+  fRho[2][2] = 1 / 3. - 2 * fRt[8] / sqrt(3);
+
+  fRho[0][1] = complexD(fRt[1], -fRt[2]);
+  fRho[0][2] = complexD(fRt[4], -fRt[5]);
+  fRho[1][2] = complexD(fRt[6], -fRt[7]);
+
+  for(int i=0; i<3; i++){
+  for(int j=0; j<i; j++){
+    fRho[i][j] = conj(fRho[j][i]);
+  }}
 }
 
 //.............................................................................
