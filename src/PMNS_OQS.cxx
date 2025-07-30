@@ -17,15 +17,9 @@ using namespace OscProb;
 /// This class is restricted to 3 neutrino flavours.
 ///
 PMNS_OQS::PMNS_OQS()
-    : PMNS_DensityMatrix(), fPhi(), fR(), fRt(),
-      fa(9, 0),
-      fMd(9, 9),
-      fMEvec(9, 9),
-      fD(9, vectorD(9, 0)),
-      fM(9, vectorC(9, 0)),
-      fcos(9, vectorD(9, 1)),
-      fHGM(9, vectorC(9, 0)),
-      fHeff(3, vectorC(3, 0))
+    : PMNS_DensityMatrix(), fPhi(), fR(), fRt(), fa(9, 0), fMd(9, 9),
+      fMEvec(9, 9), fD(9, vectorD(9, 0)), fM(9, vectorC(9, 0)),
+      fcos(9, vectorD(9, 1)), fHGM(9, vectorC(9, 0)), fHeff(3, vectorC(3, 0))
 {
   InitializeVectors();
   SetParameterisation(1);
@@ -146,61 +140,61 @@ void PMNS_OQS::SetHGM()
   }
 }
 
-bool is_same_array(array<int, 3> input, array<int, 3> test){
+bool is_same_array(array<int, 3> input, array<int, 3> test)
+{
   sort(input.begin(), input.end());
   sort(test.begin(), test.end());
   return input == test;
 }
 
-int get_permutation(array<int, 3> input, array<int, 3> test){
+int get_permutation(array<int, 3> input, array<int, 3> test)
+{
+  if (!is_same_array(input, test)) return 0;
 
-  if(!is_same_array(input, test)) return 0;
-
-  if(input[0]==test[0] && input[1]==test[1]) return 1;
-  if(input[0]==test[1] && input[1]==test[2]) return 1;
-  if(input[0]==test[2] && input[1]==test[0]) return 1;
+  if (input[0] == test[0] && input[1] == test[1]) return 1;
+  if (input[0] == test[1] && input[1] == test[2]) return 1;
+  if (input[0] == test[2] && input[1] == test[0]) return 1;
 
   return -1;
-
 }
 
-double get_f(array<int, 3> indices){
-
+double get_f(array<int, 3> indices)
+{
   int perm = 0;
 
-  if((perm = get_permutation(indices, {1,2,3}))) return perm;
+  if ((perm = get_permutation(indices, {1, 2, 3}))) return perm;
 
   double value = 0.5;
 
-  if((perm = get_permutation(indices, {1,4,7}))) return perm * value;
-  if((perm = get_permutation(indices, {1,6,5}))) return perm * value;
-  if((perm = get_permutation(indices, {2,4,6}))) return perm * value;
-  if((perm = get_permutation(indices, {2,5,7}))) return perm * value;
-  if((perm = get_permutation(indices, {3,4,5}))) return perm * value;
-  if((perm = get_permutation(indices, {3,7,6}))) return perm * value;
+  if ((perm = get_permutation(indices, {1, 4, 7}))) return perm * value;
+  if ((perm = get_permutation(indices, {1, 6, 5}))) return perm * value;
+  if ((perm = get_permutation(indices, {2, 4, 6}))) return perm * value;
+  if ((perm = get_permutation(indices, {2, 5, 7}))) return perm * value;
+  if ((perm = get_permutation(indices, {3, 4, 5}))) return perm * value;
+  if ((perm = get_permutation(indices, {3, 7, 6}))) return perm * value;
 
-  value = sqrt(3)/2;
+  value = sqrt(3) / 2;
 
-  if((perm = get_permutation(indices, {4,5,8}))) return perm * value;
-  if((perm = get_permutation(indices, {6,7,8}))) return perm * value;
+  if ((perm = get_permutation(indices, {4, 5, 8}))) return perm * value;
+  if ((perm = get_permutation(indices, {6, 7, 8}))) return perm * value;
 
   return 0;
-
 }
 
 void PMNS_OQS::SetDissipatorElement(int j, int k)
 {
   double val = 0;
 
-  for(int l=0; l<9; l++){
-  for(int m=l; m<9; m++){
-    double f = 0;
-    for(int n=0; n<9; n++){
-      f += get_f({l,k,n}) * get_f({n,m,j});
-      if(m>l) f += get_f({m,k,n}) * get_f({n,l,j});
+  for (int l = 0; l < 9; l++) {
+    for (int m = l; m < 9; m++) {
+      double f = 0;
+      for (int n = 0; n < 9; n++) {
+        f += get_f({l, k, n}) * get_f({n, m, j});
+        if (m > l) f += get_f({m, k, n}) * get_f({n, l, j});
+      }
+      val += fa[l] * fa[m] * fcos[l][m] * f;
     }
-    val += fa[l] * fa[m] * fcos[l][m] * f;
-  }}
+  }
 
   val *= kGeV2eV; // convert to eV
 
@@ -208,28 +202,29 @@ void PMNS_OQS::SetDissipatorElement(int j, int k)
   fD[k][j] = -val;
 }
 
-void PMNS_OQS::SetDissipator(){
+void PMNS_OQS::SetDissipator()
+{
+  if (fBuiltDissipator) return;
 
-  if(fBuiltDissipator) return;
-
-  for(int j=0; j<9; j++){
-  for(int k=j; k<9; k++){
-    SetDissipatorElement(j,k);
-  }}
+  for (int j = 0; j < 9; j++) {
+    for (int k = j; k < 9; k++) { SetDissipatorElement(j, k); }
+  }
 
   fBuiltDissipator = true;
 }
 
-void PMNS_OQS::Seta(int i, double val){
+void PMNS_OQS::Seta(int i, double val)
+{
   fBuiltDissipator *= (fa[i] == val);
   fa[i] = abs(val);
 }
 
-void PMNS_OQS::Setcos(int i, int j, double val){
+void PMNS_OQS::Setcos(int i, int j, double val)
+{
   fBuiltDissipator *= (fcos[i][j] == val);
-  if(i==j) fcos[i][j] = 1;
-  if(val > 1) val = 1;
-  if(val < -1) val = -1;
+  if (i == j) fcos[i][j] = 1;
+  if (val > 1) val = 1;
+  if (val < -1) val = -1;
   fcos[i][j] = val;
   fcos[j][i] = val;
 }
@@ -391,8 +386,8 @@ void PMNS_OQS::PropagatePath(NuPath p)
     fRt[i] = 0;
     for (int j = 0; j < 9; ++j) {
       for (int k = 0; k < 9; ++k) {
-        fRt[i] +=
-            exp(fEvalC[k] * lengthIneV) * fMEvec(i, k) * fMEvecInv(k, j) * fR[j];
+        fRt[i] += exp(fEvalC[k] * lengthIneV) * fMEvec(i, k) * fMEvecInv(k, j) *
+                  fR[j];
       }
     }
   }

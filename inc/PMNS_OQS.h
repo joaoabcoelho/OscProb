@@ -32,6 +32,7 @@ namespace OscProb {
       template <typename T> void SolveEigenSystem();
 
       virtual void Diagonalise();
+
       virtual void FillCache() {} ///< Deactivate cache
 
       /// Propagate neutrino through a single path
@@ -47,9 +48,9 @@ namespace OscProb {
 
       std::vector<matrixC> fGM; ///< 3x3 Gell-Mann matrices: they are 9
 
-      matrixD fD; ///< Off-diagonal, 9x9 dissipator
-      matrixC fM; ///< M
-      vectorD fa; ///< a vector
+      matrixD fD;   ///< Off-diagonal, 9x9 dissipator
+      matrixC fM;   ///< M
+      vectorD fa;   ///< a vector
       matrixD fcos; ///< cosines ai . aj
 
       Eigen::MatrixXcd fMd;
