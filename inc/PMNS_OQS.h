@@ -16,6 +16,7 @@ namespace OscProb {
       virtual void SetPhi(int i, double val);
       virtual void Seta(int i, double val);
       virtual void Setcos(int i, int j, double val);
+      virtual void SetIsNuBar(bool isNuBar);
 
     protected:
       virtual void SetDissipatorElement(int i, int j);
@@ -24,6 +25,8 @@ namespace OscProb {
       virtual void SetHeff(NuPath p);
       virtual void SetHGM();
       virtual void SetM();
+      virtual void BuildHms();
+      virtual void BuildUM();
       virtual void RotateState(bool to_mass); ///< Rotate rho to/from mass basis
       virtual void ChangeBaseToGM();
       virtual void ChangeBaseToSU3();
@@ -33,20 +36,21 @@ namespace OscProb {
       /// Propagate neutrino through a single path
       virtual void PropagatePath(NuPath p);
 
-      int      fParameterisation;
-      double   fPhi[2]; ///< Majorana phases
-      complexD fR[9];
-      complexD fRt[9];
+      int    fParameterisation;
+      double fPhi[2]; ///< Majorana phases
+      double fR[9];
+      double fRt[9];
 
       matrixC fHeff;
-      matrixC fHGM;
+      matrixD fHGM;
 
       matrixD fD;   ///< Off-diagonal, 9x9 dissipator
-      matrixC fM;   ///< M
+      matrixD fM;   ///< M
+      matrixC fUM;  ///< PMNS Matrix
       vectorD fa;   ///< a vector
       matrixD fcos; ///< cosines ai . aj
 
-      Eigen::MatrixXcd fMe; ///< Buffer matrix for exponential
+      Eigen::MatrixXd fMe; ///< Buffer matrix for exponential
 
       bool fBuiltDissipator; ///< Flag to rebuilt D
   };

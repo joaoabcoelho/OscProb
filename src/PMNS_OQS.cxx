@@ -18,8 +18,8 @@ using namespace OscProb;
 ///
 PMNS_OQS::PMNS_OQS()
     : PMNS_DensityMatrix(), fPhi(), fR(), fRt(), fa(9, 0), fMe(8, 8),
-      fD(9, vectorD(9, 0)), fM(9, vectorC(9, 0)), fcos(9, vectorD(9, 1)),
-      fHGM(9, vectorC(9, 0)), fHeff(3, vectorC(3, 0))
+      fD(9, vectorD(9, 0)), fM(9, vectorD(9, 0)), fcos(9, vectorD(9, 1)),
+      fHGM(9, vectorD(9, 0)), fHeff(3, vectorC(3, 0)), fUM(3, vectorC(3, 0))
 {
   InitializeVectors();
   SetParameterisation(1);
@@ -35,6 +35,12 @@ void PMNS_OQS::InitializeVectors()
 {
   SetPhi(1, 0);
   SetPhi(2, 0);
+}
+
+void PMNS_OQS::SetIsNuBar(bool isNuBar)
+{
+  fBuiltHms *= (fIsNuBar == isNuBar);
+  PMNS_Base::SetIsNuBar(isNuBar);
 }
 
 void PMNS_OQS::SetParameterisation(int param = 1) { fParameterisation = param; }
@@ -55,34 +61,14 @@ void PMNS_OQS::SetHeff(NuPath p)
   else
     Ve = -kr2GNe;
 
-  double s12 = sin(fTheta[0][1]);
-  double s13 = sin(fTheta[0][2]);
-  double s23 = sin(fTheta[1][2]);
+  BuildHms();
 
-  double c12 = cos(fTheta[0][1]);
-  double c13 = cos(fTheta[0][2]);
-  double c23 = cos(fTheta[1][2]);
-
-  complexD idelta(0.0, -fDelta[0][2]);
-  complexD iphi1(0.0, fPhi[0]);
-  complexD iphi2(0.0, fPhi[1]);
-  if (fIsNuBar) {
-    idelta = conj(idelta);
-    iphi1  = conj(iphi1);
-    iphi2  = conj(iphi2);
+  for (int i = 0; i < 3; i++) {
+    for (int j = i; j < 3; j++) {
+      fHeff[i][j] = conj(fUM[0][i]) * Ve * fUM[0][j];
+      if (i > j) fHeff[j][i] = conj(fHeff[i][j]);
+    }
   }
-
-  fHeff[0][0] = c12 * c12 * c13 * c13 * Ve;
-  fHeff[0][1] = c12 * c13 * c13 * exp(iphi1) * s12 * Ve;
-  fHeff[0][2] = c12 * c13 * exp(iphi2 - idelta) * s13 * Ve;
-
-  fHeff[1][0] = c12 * c13 * c13 * exp(-iphi1) * s12 * Ve;
-  fHeff[1][1] = c13 * c13 * s12 * s12 * Ve;
-  fHeff[1][2] = c13 * exp(-idelta - iphi1 + iphi2) * s12 * s13 * Ve;
-
-  fHeff[2][0] = c12 * c13 * exp(idelta - iphi2) * s13 * Ve;
-  fHeff[2][1] = c13 * exp(idelta + iphi1 - iphi2) * s12 * s13 * Ve;
-  fHeff[2][2] = s13 * s13 * Ve;
 
   double lv = 2. * kGeV2eV * fEnergy; // 2E in eV
 
@@ -95,7 +81,7 @@ void PMNS_OQS::SetHeff(NuPath p)
 // -right
 void PMNS_OQS::SetHGM()
 {
-  fHGM[1][2] = fHeff[0][0] - fHeff[1][1];
+  fHGM[1][2] = real(fHeff[0][0] - fHeff[1][1]);
   fHGM[1][3] = 2. * imag(fHeff[0][1]);
   fHGM[1][4] = -imag(fHeff[1][2]);
   fHGM[1][5] = -real(fHeff[1][2]);
@@ -113,7 +99,7 @@ void PMNS_OQS::SetHGM()
   fHGM[3][6] = imag(fHeff[1][2]);
   fHGM[3][7] = real(fHeff[1][2]);
 
-  fHGM[4][5] = fHeff[0][0] - fHeff[2][2];
+  fHGM[4][5] = real(fHeff[0][0] - fHeff[2][2]);
   fHGM[4][6] = -imag(fHeff[0][1]);
   fHGM[4][7] = real(fHeff[0][1]);
   fHGM[4][8] = sqrt(3.) * imag(fHeff[0][2]);
@@ -122,13 +108,13 @@ void PMNS_OQS::SetHGM()
   fHGM[5][7] = -imag(fHeff[0][1]);
   fHGM[5][8] = sqrt(3.) * real(fHeff[0][2]);
 
-  fHGM[6][7] = fHeff[1][1] - fHeff[2][2];
+  fHGM[6][7] = real(fHeff[1][1] - fHeff[2][2]);
   fHGM[6][8] = sqrt(3.) * imag(fHeff[1][2]);
 
   fHGM[7][8] = sqrt(3.) * real(fHeff[1][2]);
 
   for (int i = 1; i < 9; ++i) {
-    for (int j = 1; j < 9; ++j) { fHGM[j][i] = -fHGM[i][j]; }
+    for (int j = i + 1; j < 9; ++j) { fHGM[j][i] = -fHGM[i][j]; }
   }
 }
 
@@ -231,6 +217,42 @@ void PMNS_OQS::SetM()
 
 void PMNS_OQS::SetPhi(int i, double val) { fPhi[i - 1] = val; }
 
+void PMNS_OQS::BuildHms()
+{
+  if (fBuiltHms) return;
+  BuildUM();
+  PMNS_Base::BuildHms();
+}
+
+void PMNS_OQS::BuildUM()
+{
+  SetVacuumEigensystem();
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) { fUM[i][j] = conj(fEvec[i][j]); }
+  }
+
+  complexD iphi1(0.0, fPhi[0]);
+  complexD iphi2(0.0, fPhi[1]);
+
+  fUM[0][1] *= exp(iphi1);
+  fUM[0][2] *= exp(iphi2);
+
+  if (fParameterisation == 1) {
+    fUM[1][0] *= exp(-iphi1);
+    fUM[1][2] *= exp(iphi2 - iphi1);
+
+    fUM[2][0] *= exp(-iphi2);
+    fUM[2][1] *= exp(iphi1 - iphi2);
+  }
+  else {
+    fUM[1][1] *= exp(iphi1);
+    fUM[1][2] *= exp(iphi2);
+
+    fUM[2][1] *= exp(iphi1);
+    fUM[2][2] *= exp(iphi2);
+  }
+}
+
 //.............................................................................
 ///
 /// Rotate the density matrix to or from the mass basis
@@ -239,66 +261,23 @@ void PMNS_OQS::SetPhi(int i, double val) { fPhi[i - 1] = val; }
 ///
 void PMNS_OQS::RotateState(bool to_mass)
 {
-  matrixC UM(3, vectorC(3, 0));
-
-  double s12 = sin(fTheta[0][1]);
-  double s13 = sin(fTheta[0][2]);
-  double s23 = sin(fTheta[1][2]);
-
-  double c12 = cos(fTheta[0][1]);
-  double c13 = cos(fTheta[0][2]);
-  double c23 = cos(fTheta[1][2]);
-
-  complexD idelta(0.0, -fDelta[0][2]);
-  if (fIsNuBar) { idelta = conj(idelta); }
-
-  complexD iphi1(0.0, fPhi[0]);
-  complexD iphi2(0.0, fPhi[1]);
-
-  if (fParameterisation == 1) {
-    UM[0][0] = c12 * c13;
-    UM[0][1] = s12 * c13 * exp(iphi1);
-    UM[0][2] = s13 * exp(iphi2 - idelta);
-
-    UM[1][0] = -s12 * c23 * exp(-iphi1) - c12 * s13 * s23 * exp(idelta - iphi1);
-    UM[1][1] = c12 * c23 - s12 * s13 * s23 * exp(idelta);
-    UM[1][2] = s23 * c13 * exp(iphi2 - iphi1);
-
-    UM[2][0] = s12 * s23 * exp(-iphi2) - c12 * c23 * s13 * exp(idelta - iphi2);
-    UM[2][1] = -c12 * s23 * exp(iphi1 - iphi2) -
-               s12 * c23 * s13 * exp(idelta + iphi1 - iphi2);
-    UM[2][2] = c13 * c23;
-  }
-  else {
-    UM[0][0] = c12 * c13;
-    UM[0][1] = s12 * c13 * exp(iphi1);
-    UM[0][2] = s13 * exp(iphi2 - idelta);
-
-    UM[1][0] = -s12 * c23 - c12 * s13 * s23 * exp(idelta);
-    UM[1][1] = c12 * c23 * exp(iphi1) - s12 * s13 * s23 * exp(idelta + iphi1);
-    UM[1][2] = s23 * c13 * exp(iphi2);
-
-    UM[2][0] = s12 * s23 - c12 * c23 * s13 * exp(idelta);
-    UM[2][1] = -c12 * s23 * exp(iphi1) - s12 * c23 * s13 * exp(idelta + iphi1);
-    UM[2][2] = c13 * c23 * exp(iphi2);
-  }
-
-  PMNS_DensityMatrix::RotateState(to_mass, UM);
+  BuildHms();
+  PMNS_DensityMatrix::RotateState(to_mass, fUM);
 }
 
 void PMNS_OQS::ChangeBaseToGM()
 {
-  fR[0] = (fRho[0][0] + fRho[1][1] + fRho[2][2]) / sqrt(6.);
+  fR[0] = real(fRho[0][0] + fRho[1][1] + fRho[2][2]) / sqrt(6.);
   fR[1] = real(fRho[0][1]);
   fR[2] = -imag(fRho[0][1]);
-  fR[3] = (fRho[0][0] - fRho[1][1]) / 2.;
+  fR[3] = real(fRho[0][0] - fRho[1][1]) / 2.;
   fR[4] = real(fRho[0][2]);
   fR[5] = -imag(fRho[0][2]);
   // fR[5] =  0;
   fR[6] = real(fRho[1][2]);
   fR[7] = -imag(fRho[1][2]);
   //  fR[7] =  0;
-  fR[8] = (fRho[0][0] + fRho[1][1] - 2. * fRho[2][2]) / (2. * sqrt(3.));
+  fR[8] = real(fRho[0][0] + fRho[1][1] - 2. * fRho[2][2]) / (2. * sqrt(3.));
 }
 
 void PMNS_OQS::ChangeBaseToSU3()
