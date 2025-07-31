@@ -108,7 +108,8 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 
         for(int l = 0 ; l<fNumNus ; l++){
             for(int k = 0 ; k<fNumNus ; k++){
-                if (k<l || k==l)
+                
+                if (k<=l)
                     Hms_kl  = fHms[k][l];
                 else
                     Hms_kl  = conj(fHms[l][k]);
@@ -227,7 +228,7 @@ void PMNS_TaylorExp::rotateK(matrixC Kmass , matrixC& Kflavor)
 ///
 void PMNS_TaylorExp::MultiplicationRuleK(matrixC KLayer,complexD K[3][3])
 {
-    
+
     for(int i = 0 ; i<fNumNus ; i++){
 
         complexD buffer[3];

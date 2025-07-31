@@ -92,23 +92,24 @@ namespace OscProb {
 
       // Attributes
 
-      matrixC fevolutionMatrixS;  ///< Evolution matrix S for reference energy and angle (i.e 
+      matrixC fevolutionMatrixS;  ///< Evolution matrix S for reference energy and angle 
 
-      complexD fKInvE[3][3]; ///< The perturbatif matrix for energy variation in GeV
-      vectorD flambdaInvE; ///<
-      matrixC fVInvE;  ///<
       double fdInvE; ///< Bin's width for the inverse of energy in GeV-1 
 
-      complexD fKcosT[3][3];  ///<
-      vectorD flambdaCosT;  ///<
-      matrixC fVcosT; ///<
+      complexD fKInvE[3][3];  ///< K matrix for the inverse of energy in GeV
+      vectorD flambdaInvE;    ///< Eigenvectors of K_invE
+      matrixC fVInvE;         ///< Eigenvalues of K_invE
+
+      double fcosT;   ///<  Cosine of neutrino angle 
       double fdcosT;  ///< Bin's width for angle
 
-      double fcosT; ///<  Cosine of neutrino angle 
-
-      std::vector<NuPath> fNuPathsVariation ;
+      complexD fKcosT[3][3];  ///< K matrix for neutrino angle 
+      vectorD flambdaCosT;    ///< Eigenvectors of K_cosTheta
+      matrixC fVcosT;         ///< Eigenvalues of K_cosTheta
 
       matrixC densityMatrix; ///< The neutrino density matrix state
+
+      std::vector<NuPath> fNuPathsVariation ;
 
   };
 
