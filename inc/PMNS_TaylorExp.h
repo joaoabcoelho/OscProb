@@ -1,5 +1,20 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// mettre info et biblio
+/// \class OscProb::PMNS_TaylorExp
+///
+/// \brief Implementation of oscillations of neutrinos in matter in a
+///        three-neutrino framework with a first order Taylor expansion.
+///
+/// This class expands the PMNS_Fast class including the use of a first order 
+/// Taylor expansion to calculate the average on bins faster.
+///
+/// The model assumes a first order expansion over neutrino energy and angle
+/// for both dynamical variables at the same time or for only one.
+///
+/// Reference: https://doi.org/10.48550/arXiv.2308.00037
+///
+/// \sa PMNS_Fast
+///
+/// \author jcoelho\@apc.in2p3.fr
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifndef PMNS_TaylorExp_H
@@ -15,8 +30,11 @@ namespace OscProb {
       PMNS_TaylorExp();          ///< Constructor
       virtual ~PMNS_TaylorExp(); ///< Destructor
 
+      //@@@@@@
       virtual void printMatrix1(matrixC M);
       virtual void printMatrix2(complexD M[3][3]);
+      virtual void LenghtLayer();
+      //@@@@@@
 
       virtual void SetwidthBin(double dE , double dcosT);
 
@@ -32,11 +50,7 @@ namespace OscProb {
 
       virtual double avgProbTaylorAngle(int flvi, int flvf, double E, double cosT , double dcosT);
 
-      virtual vectorD ConvertLoEtoE(double LoE, double dLoE);
-
       virtual vectorD ConvertEto1oE(double E, double dE);
-
-      virtual void LenghtLayer();
 
       virtual double interpolationEnergy(int flvi, int flvf, double E , double dE);
 
@@ -78,21 +92,24 @@ namespace OscProb {
 
       // Attributes
 
-      matrixC fevolutionMatrixS;  
+      matrixC fevolutionMatrixS;  ///< Evolution matrix S for reference energy and angle (i.e 
 
-      complexD fKE[3][3];
-      vectorD flambdaE;
-      matrixC fVE;
-      double fdE;
+      complexD fKInvE[3][3]; ///< The perturbatif matrix for energy variation in GeV
+      vectorD flambdaInvE; ///<
+      matrixC fVInvE;  ///<
+      double fdInvE; ///< Bin's width for the inverse of energy in GeV-1 
 
-      complexD fKcosT[3][3];
-      vectorD flambdaCosT;
-      matrixC fVcosT;
-      double fdcosT;
+      complexD fKcosT[3][3];  ///<
+      vectorD flambdaCosT;  ///<
+      matrixC fVcosT; ///<
+      double fdcosT;  ///< Bin's width for angle
 
-      double fcosT;
+      double fcosT; ///<  Cosine of neutrino angle 
 
       std::vector<NuPath> fNuPathsVariation ;
+
+      matrixC densityMatrix; ///< The neutrino density matrix state
+
   };
 
 } // namespace OscProb

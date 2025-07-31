@@ -1,5 +1,10 @@
 ///////////////////////////////////////////////////////////////////////////////
-//info
+//
+// Implementation of oscillations of neutrinos in matter in a
+// three-neutrino framework with a first order Taylor expansion.
+//
+// This  class inherits from the PMNS_Fast class
+//
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
@@ -35,12 +40,15 @@ PMNS_TaylorExp::~PMNS_TaylorExp() {}
 
 //.............................................................................
 ///
-///
+/// Set vector sizes and initialize elements to zero.
+/// Initialize diagonal elements of S to one
 ///
 void PMNS_TaylorExp::InitializeTaylorsVectors()
 {
-    flambdaE = vectorD(fNumNus, 0);
-    fVE = matrixC(fNumNus, vectorC(fNumNus, 0));
+    matrixC densityMatrix = matrixC(fNumNus, vectorC(fNumNus, 0));
+
+    flambdaInvE = vectorD(fNumNus, 0);
+    fVInvE = matrixC(fNumNus, vectorC(fNumNus, 0));
 
     flambdaCosT = vectorD(fNumNus, 0);
     fVcosT = matrixC(fNumNus, vectorC(fNumNus, 0));
@@ -52,16 +60,17 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
         fevolutionMatrixS[i][i] = 1;
 
         for(int j = 0 ; j<fNumNus ; j++){
-            fKE[i][j] = 0;
+            fKInvE[i][j] = 0;
             fKcosT[i][j] = 0;
         }
     }
-
 }
 
 //.............................................................................
 ///
+/// Set neutrino trajectory.
 ///
+/// @param cosT - The cosine of the neutrino angle
 ///
 void PMNS_TaylorExp::SetCosT(double cosT)
  {
@@ -70,125 +79,17 @@ void PMNS_TaylorExp::SetCosT(double cosT)
 
 //.............................................................................
 ///
+/// Set bin's widths.
 ///
+/// @param dE - The width of the bin for energy in GeV
+/// @param dcosT - The width of the bin for angle
 ///
 void PMNS_TaylorExp::SetwidthBin(double dE , double dcosT)
 {
-    fdE = dE;
+    fdInvE = dE;
     fdcosT = dcosT;
 }
 
-//.............................................................................
-///
-///
-///
-void PMNS_TaylorExp::rotateS(vectorC fPhases,matrixC& S)
-{
-
-    complexD buffer[3];
-
-    for(int j = 0 ; j<fNumNus ; j++){ 
-
-        for(int k = 0 ; k<fNumNus ; k++) { buffer[k] = fPhases[k] * conj(fEvec[j][k]); }
-        
-        for(int i = 0 ; i<fNumNus ; i++){ 
-            for(int k = 0 ; k<fNumNus ; k++){
-                S[i][j] += fEvec[i][k] * buffer[k];
-            }
-        }
-    }
-
-}
-
-//.............................................................................
-///
-///
-///
-void PMNS_TaylorExp::rotateK(matrixC Kmass , matrixC& Kflavor)
-{
-    for(int j = 0 ; j<fNumNus ; j++){
-
-        complexD buffer[3];
-
-        for(int k = 0 ; k<fNumNus ; k++){
-            for(int l = 0 ; l<fNumNus ; l++){
-                buffer[k] += Kmass[k][l] * conj(fEvec[j][l]);
-            }
-        }
-
-        for(int i = 0 ; i<=j ; i++){
-            for(int k = 0 ; k<fNumNus ; k++){
-                Kflavor[i][j] += fEvec[i][k] * buffer[k];
-            }
-
-            if(i != j){ Kflavor[j][i] = conj(Kflavor[i][j]); }
-        }
-    }    
-    
-}
-
-//.............................................................................
-///
-///
-///
-void PMNS_TaylorExp::RotateDensityM(bool to_mass, matrixC V, matrixC& densityMatrix)
-{
-    matrixC Buffer = matrixC(fNumNus, vectorC(fNumNus, 0));
-
-  // buffer = rho . U
-  for (int i = 0; i < fNumNus; i++) {
-    for (int j = 0; j < fNumNus; j++) {
-      for (int k = 0; k < fNumNus; k++) {
-        if (to_mass)
-          Buffer[i][j] += densityMatrix[i][k] * V[k][j];
-        else
-          Buffer[i][j] += densityMatrix[i][k] * conj(V[j][k]);
-      }
-    }
-  }
-
-  // rho = U^\dagger . buffer = U^\dagger . rho . U
-  // Final matrix is Hermitian, so copy upper to lower triangle
-  for (int i = 0; i < fNumNus; i++) {
-    for (int j = i; j < fNumNus; j++) {
-        densityMatrix[i][j] = 0;
-      for (int k = 0; k < fNumNus; k++) {
-        if (to_mass)
-            densityMatrix[i][j] += conj(V[k][i]) * Buffer[k][j];
-        else
-            densityMatrix[i][j] += V[i][k] * Buffer[k][j];
-      }
-      if (j > i) densityMatrix[j][i] = conj(densityMatrix[i][j]);
-    }
-  }
-}
-
-//.............................................................................
-///
-///
-///
-void PMNS_TaylorExp::HadamardProduct(vectorD lambda, matrixC& densityMatrix, double dbin)
-{
-    matrixC sinc = matrixC(fNumNus, vectorC(fNumNus, 0));
-    for(int j=0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<j ; i++){
-            double arg = (lambda[i] - lambda[j]) * dbin * kGeV2eV; //ATTTTTTTTTTTTTTTTTTTTTTT
-            sinc[i][j] = sin(arg)/arg;
-
-            sinc[j][i] = sinc[i][j];
-        }
-    }    // PEUT ETRE AMELIORE !!!!!!!!!!!!!!!!!!!!!!
-
-    for(int i=0 ; i<fNumNus ; i++){
-        sinc[i][i] = 1;
-    }
-    
-    for(int j=0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<fNumNus ; i++){
-            densityMatrix[i][j] = densityMatrix[i][j] * sinc[i][j];
-        }
-    }
-}
 
 //.............................................................................
 ///
@@ -196,33 +97,37 @@ void PMNS_TaylorExp::HadamardProduct(vectorD lambda, matrixC& densityMatrix, dou
 ///
 void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 {
-
     double lenghtEV = L * kKm2eV ; // L in eV-1
     double bufK =  lenghtEV * 0.5 ; // L/2 in eV-1
 
-    for(int j = 0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<=j ; i++){
+    for(int i = 0 ; i<fNumNus ; i++){
 
+        complexD buffer[3];
+
+        complexD Hms_kl;
+
+        for(int l = 0 ; l<fNumNus ; l++){
             for(int k = 0 ; k<fNumNus ; k++){
-                for(int l = 0 ; l<fNumNus ; l++){
+                if (k<l || k==l)
+                    Hms_kl  = fHms[k][l];
+                else
+                    Hms_kl  = conj(fHms[l][k]);
 
-                    complexD Hms_kl;
+                if(fIsNuBar && k!=l)
+                    Hms_kl = conj(Hms_kl);
 
-                    if (k<l || k==l)
-                        Hms_kl  = fHms[k][l];
-                    else
-                        Hms_kl  = conj(fHms[l][k]);
-
-                    if(fIsNuBar && k!=l)
-                        Hms_kl = conj(Hms_kl);
-                    
-
-                    K[i][j] += conj(fEvec[k][i]) *  Hms_kl * fEvec[l][j] ;
-
-                }
+                buffer[l] += conj(fEvec[k][i]) *  Hms_kl;
             }
+        }
 
+        for(int j = 0 ; j<=i ; j++){
+
+            for (int l = 0 ; l<fNumNus ; l++){
+                K[i][j] += buffer[l] * fEvec[l][j] ;
+            }
+            
             complexD C;
+
             if(i == j){
                 C = complexD(1,0);
             }
@@ -238,10 +143,8 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
             if(i != j)  
                 K[j][i] = conj(K[i][j]);
             
-
         }
     }
-
 
 }
 
@@ -274,22 +177,78 @@ void PMNS_TaylorExp::BuildKcosT(double L, matrixC& K)
 ///
 ///
 ///
-void PMNS_TaylorExp::MultiplicationRuleK(matrixC KLayer,complexD K[3][3])
+void PMNS_TaylorExp::rotateS(vectorC fPhases,matrixC& S)
+{
+    complexD buffer[3];
+
+    for(int j = 0 ; j<fNumNus ; j++){ 
+
+        for(int k = 0 ; k<fNumNus ; k++) { buffer[k] = fPhases[k] * conj(fEvec[j][k]); }
+        
+        for(int i = 0 ; i<fNumNus ; i++){ 
+            for(int k = 0 ; k<fNumNus ; k++){
+                S[i][j] += fEvec[i][k] * buffer[k];
+            }
+        }
+    }
+}
+
+//.............................................................................
+///
+///
+///
+void PMNS_TaylorExp::rotateK(matrixC Kmass , matrixC& Kflavor)
 {
     for(int j = 0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<=j ; i++){
 
+        complexD buffer[3];
+
+        for(int k = 0 ; k<fNumNus ; k++){
+            for(int l = 0 ; l<fNumNus ; l++){
+                buffer[k] += Kmass[k][l] * conj(fEvec[j][l]);
+            }
+        }
+
+        for(int i = 0 ; i<=j ; i++){
             for(int k = 0 ; k<fNumNus ; k++){
-                for(int l = 0 ; l<fNumNus ; l++){                                                          
-                    K[i][j] += conj(fevolutionMatrixS[k][i]) * KLayer[k][l] * fevolutionMatrixS[l][j] ; 
-                }
+                Kflavor[i][j] += fEvec[i][k] * buffer[k];
+            }
+
+            if(i != j){ Kflavor[j][i] = conj(Kflavor[i][j]); }
+        }
+    }    
+    
+}
+
+
+//.............................................................................
+///
+///
+///
+void PMNS_TaylorExp::MultiplicationRuleK(matrixC KLayer,complexD K[3][3])
+{
+    
+    for(int i = 0 ; i<fNumNus ; i++){
+
+        complexD buffer[3];
+
+        for(int l = 0 ; l<fNumNus ; l++){
+            for(int k = 0 ; k<fNumNus ; k++){
+                buffer[l] += conj(fevolutionMatrixS[k][i]) * KLayer[k][l];
+            }
+        }
+
+        for(int j = 0 ; j<=i ; j++){
+
+            for(int l = 0 ; l<fNumNus ; l++){                                                     
+                K[i][j] += buffer[l] * fevolutionMatrixS[l][j] ; 
             }
             
             if(i != j){
                 K[j][i] = conj(K[i][j]); 
             }
         }
-    }    
+    }  
 
 }
 
@@ -299,7 +258,6 @@ void PMNS_TaylorExp::MultiplicationRuleK(matrixC KLayer,complexD K[3][3])
 ///
 void PMNS_TaylorExp::MultiplicationRuleS(matrixC SLayer)
 {
-
     complexD save [3];
 
     for(int j = 0 ; j<fNumNus ; j++){
@@ -353,7 +311,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     rotateS(fPhases,Sflavor);                                    
 
     // if avg on E
-    if(fdE != 0){
+    if(fdInvE != 0){
 
         // Build KE in mass basis
         matrixC Kmass = matrixC(fNumNus, vectorC(fNumNus, 0));
@@ -364,7 +322,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
         rotateK(Kmass,Kflavor);
 
         // Multiply this layer K's with the previous path K's
-        MultiplicationRuleK(Kflavor,fKE);    
+        MultiplicationRuleK(Kflavor,fKInvE);    
         
     }
 
@@ -395,9 +353,7 @@ void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
     // Solve K for eigensystem using the GLoBES method
     zheevh3(K, fEvecGLoBES, fEvalGLoBES);
 
-    //printMatrix2(K);
-
-    // Fill flambdaE and fVE vectors from GLoBES arrays
+    // Fill flambdaInvE and fVInvE vectors from GLoBES arrays
     for (int i = 0; i < fNumNus; i++) {
         lambda[i] = fEvalGLoBES[i]; 
         for (int j = 0; j < fNumNus; j++) { V[i][j] = fEvecGLoBES[i][j]; }
@@ -500,10 +456,10 @@ double PMNS_TaylorExp::avgProbTaylor1oE(int flvi, int flvf, double ONEoE , doubl
     PropagateTaylor();
 
     //DiagolK -> get VE and lambdaE
-    SolveK(fKE,flambdaE,fVE);
+    SolveK(fKInvE,flambdaInvE,fVInvE);
 
     //return fct avr proba
-    return avgFormula(flvi, flvf, d1oE/kGeV2eV, flambdaE, fVE);
+    return avgFormula(flvi, flvf, d1oE/kGeV2eV, flambdaInvE, fVInvE);
 }
 
 
@@ -566,9 +522,9 @@ double PMNS_TaylorExp::interpolationEnergy(int flvi, int flvf, double E , double
     PropagateTaylor();
 
     //DiagolK -> get VE and lambdaE
-    SolveK(fKE,flambdaE,fVE);
+    SolveK(fKInvE,flambdaInvE,fVInvE);
 
-    return avgFormulaExtrapolation(flvi,flvf,fdE/kGeV2eV, flambdaE, fVE);
+    return avgFormulaExtrapolation(flvi,flvf,fdInvE/kGeV2eV, flambdaInvE, fVInvE);
 }
 
 //.............................................................................
@@ -590,10 +546,34 @@ double PMNS_TaylorExp::interpolationEnergyLoE(int flvi, int flvf, double LoE , d
     PropagateTaylor();
 
     //DiagolK -> get VE and lambdaE
-    SolveK(fKE,flambdaE,fVE);
+    SolveK(fKInvE,flambdaInvE,fVInvE);
 
-    return avgFormulaExtrapolation(flvi,flvf,dLoE*kGeV2eV, flambdaE, fVE);
+    return avgFormulaExtrapolation(flvi,flvf,dLoE*kGeV2eV, flambdaInvE, fVInvE);
 }
+
+
+//.............................................................................
+///
+///
+///
+double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , double dcosT)
+{
+    // reset K et S et Ve et lambdaE
+    InitializeTaylorsVectors();
+
+    //SetEnergy(E);
+    SetCosT(cosT);
+    SetwidthBin(0,dcosT);
+
+    //Propagate -> get S and K matrix (on the whole path)
+    PropagateTaylor();
+
+    //DiagolK -> get VE and lambdaE
+    SolveK(fKcosT,flambdaCosT,fVcosT);
+
+    return avgFormulaExtrapolation(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
+}
+
 
 
 //.............................................................................
@@ -626,94 +606,6 @@ vectorD PMNS_TaylorExp::ConvertEto1oE(double E, double dE)
 
 
 
-
-
-
-
-
-
-
-
-
-
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//.............................................................................
-///
-///
-///
-double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , double dcosT)
-{
-    // reset K et S et Ve et lambdaE
-    InitializeTaylorsVectors();
-
-    //SetEnergy(E);
-    SetCosT(cosT);
-    SetwidthBin(0,dcosT);
-
-    //Propagate -> get S and K matrix (on the whole path)
-    PropagateTaylor();
-
-    //DiagolK -> get VE and lambdaE
-    SolveK(fKcosT,flambdaCosT,fVcosT);
-
-    return avgFormulaExtrapolation(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
-}
-
-
-//.............................................................................
-///
-///
-///
-vectorD PMNS_TaylorExp::ConvertLoEtoE(double LoE, double dLoE)
-{
-    // Make sure fPath is set
-    // Use average if multiple paths
-    SetCurPath(AvgPath(fNuPaths));
-
-    vectorD Ebin(2);
-
-    // Set a minimum energy
-    double minLoE = 0.1 * LoE;
-
-    // Transform range to E
-    // Full range if low edge > minLoE
-    if(LoE - dLoE / 2 >minLoE) {
-        Ebin[0] = fPath.length * 0.5 * (1 / (LoE - dLoE / 2) + 1 / (LoE + dLoE / 2));
-        Ebin[1] = fPath.length * (1 / (LoE - dLoE / 2) - 1 / (LoE + dLoE / 2));
-    }
-    else {
-        Ebin[0] = fPath.length * 0.5 * (1 / minLoE + 1 / (LoE + dLoE / 2));
-        Ebin[1] = fPath.length * (1 / minLoE - 1 / (LoE + dLoE / 2));
-    }
-
-    return Ebin;
-}
-
-
-
-
 //.............................................................................
 ///
 ///
@@ -737,13 +629,77 @@ double PMNS_TaylorExp::avgProbTaylorAngle(int flvi, int flvf, double E, double c
     return avgFormula(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
 }
 
+
+//.............................................................................
+///
+///
+///
+void PMNS_TaylorExp::RotateDensityM(bool to_mass, matrixC V, matrixC& densityMatrix)
+{
+    matrixC Buffer = matrixC(fNumNus, vectorC(fNumNus, 0));
+
+  // buffer = rho . U
+  for (int i = 0; i < fNumNus; i++) {
+    for (int j = 0; j < fNumNus; j++) {
+      for (int k = 0; k < fNumNus; k++) {
+        if (to_mass)
+          Buffer[i][j] += densityMatrix[i][k] * V[k][j];
+        else
+          Buffer[i][j] += densityMatrix[i][k] * conj(V[j][k]);
+      }
+    }
+  }
+
+  // rho = U^\dagger . buffer = U^\dagger . rho . U
+  // Final matrix is Hermitian, so copy upper to lower triangle
+  for (int i = 0; i < fNumNus; i++) {
+    for (int j = i; j < fNumNus; j++) {
+        densityMatrix[i][j] = 0;
+      for (int k = 0; k < fNumNus; k++) {
+        if (to_mass)
+            densityMatrix[i][j] += conj(V[k][i]) * Buffer[k][j];
+        else
+            densityMatrix[i][j] += V[i][k] * Buffer[k][j];
+      }
+      if (j > i) densityMatrix[j][i] = conj(densityMatrix[i][j]);
+    }
+  }
+}
+
+//.............................................................................
+///
+///
+///
+void PMNS_TaylorExp::HadamardProduct(vectorD lambda, matrixC& densityMatrix, double dbin)
+{
+    matrixC sinc = matrixC(fNumNus, vectorC(fNumNus, 0));
+    for(int j=0 ; j<fNumNus ; j++){
+        for(int i = 0 ; i<j ; i++){
+            double arg = (lambda[i] - lambda[j]) * dbin * kGeV2eV; //ATTTTTTTTTTTTTTTTTTTTTTT
+            sinc[i][j] = sin(arg)/arg;
+
+            sinc[j][i] = sinc[i][j];
+        }
+    }    // PEUT ETRE AMELIORE !!!!!!!!!!!!!!!!!!!!!!
+
+    for(int i=0 ; i<fNumNus ; i++){
+        sinc[i][i] = 1;
+    }
+    
+    for(int j=0 ; j<fNumNus ; j++){
+        for(int i = 0 ; i<fNumNus ; i++){
+            densityMatrix[i][j] = densityMatrix[i][j] * sinc[i][j];
+        }
+    }
+}
+
 //.............................................................................
 ///
 ///
 ///
 double PMNS_TaylorExp::avgAlgorithm(int flvi, int flvf)
 {
-    matrixC densityMatrix = matrixC(fNumNus, vectorC(fNumNus, 0));
+    //matrixC densityMatrix = matrixC(fNumNus, vectorC(fNumNus, 0));
     densityMatrix[flvi][flvi] = 1;
 
     RotateDensityM(true,fVcosT,densityMatrix);
@@ -751,7 +707,7 @@ double PMNS_TaylorExp::avgAlgorithm(int flvi, int flvf)
     RotateDensityM(false,fVcosT,densityMatrix);
 
     RotateDensityM(true,fVcosT,densityMatrix);
-    HadamardProduct(flambdaE,densityMatrix,fdE);
+    HadamardProduct(flambdaInvE,densityMatrix,fdInvE);
     RotateDensityM(false,fVcosT,densityMatrix);
 
     RotateDensityM(false,fevolutionMatrixS,densityMatrix);
@@ -776,7 +732,7 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE, d
     PropagateTaylor();
 
     //DiagolK -> get VE and lambdaE
-    SolveK(fKE,flambdaE,fVE);
+    SolveK(fKInvE,flambdaInvE,fVInvE);
     SolveK(fKcosT,flambdaCosT,fVcosT);
 
     return avgAlgorithm(flvi,flvf);
