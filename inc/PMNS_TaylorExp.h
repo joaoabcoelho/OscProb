@@ -42,29 +42,30 @@ namespace OscProb {
 
       virtual void SetCosT(double cosT); ///< Set neutrino angle.
 
-      virtual vectorD ConvertEto1oE(double E, double dE);
+      virtual vectorD ConvertEto1oE(
+        double E, double dE); ///< Convert a bin of energy into a bin of 1/E
 
       // Get probability averaged over a bin
       virtual double avgProbTaylor(int flvi, int flvf, 
         double E, double dE); ///< Compute the average probability over 
-                              ///< a bin of energy with Taylor expansion
+                              ///< a bin of energy with a Taylor expansion
 
       virtual double avgProbTaylorLoE(int flvi, int flvf, 
         double LoE, double dLoE);  ///< Compute the average probability over 
-                                   ///< a bin of LoE with Taylor expansion
+                                   ///< a bin of LoE with a Taylor expansion
 
       virtual double avgProbTaylor1oE(int flvi, int flvf, 
         double ONEoE, double d1oE);  ///< Compute the average probability over 
-                                     ///< a bin of 1oE with Taylor expansion
+                                     ///< a bin of 1oE with a Taylor expansion
 
       virtual double avgProbTaylorAngle(int flvi, int flvf, double E, 
         double cosT, double dcosT); ///< Compute the average probability over a 
-                                    ///< bin of cosTheta with Taylor expansion
+                                    ///< bin of cosTheta with a Taylor expansion
 
       virtual double avgProbTaylor(int flvi, int flvf, double E, 
         double dE, 
         double cosT, double dcosT); ///< Compute the average probability over a 
-                                    ///< bin of cosTheta and energy with Taylor
+                                    ///< bin of cosTheta and energy with a Taylor
                                     ///< expansion
 
       // blablabla
@@ -83,19 +84,20 @@ namespace OscProb {
       virtual void InitializeTaylorsVectors(); ///< Initialize all member vectors 
                                                ///< with zeros
 
-      // Construction of the K matricies                                   
+      // Construction of the K matrices                                   
       virtual void BuildKE(
         double L, matrixC& K); ///< build K matrix for the inverse of energy in mass basis
       virtual void BuildKcosT(
         double L, matrixC& K); ///< build K matrix for angle in flavor basis
 
-      // Rotation from mass basis to flavor basis
+      // Rotation from mass to flavor basis
       virtual void rotateS(vectorC fPhases,matrixC& S); ///< Rotate the S matrix 
       virtual void rotateK(matrixC Kmass,matrixC& Kflavor); ///< Rotate one K matrix 
 
-      // Multiplication between two pairs of (S,K) matricies 
-      virtual void MultiplicationRuleS(matrixC SLayer); /// < Multiplication between two
-      virtual void MultiplicationRuleK(matrixC KLayer, complexD K[3][3]);
+      // Multiplication rule between two pairs of (S,K) 
+      virtual void MultiplicationRuleS(matrixC SLayer); /// < Product between two S matrices
+      virtual void MultiplicationRuleK(matrixC KLayer, complexD K[3][3]); ///< Product between 
+                                                                          ///< two K matrices
 
       /// Solve one K matrix
       virtual void SolveK(complexD K[3][3], 
@@ -107,14 +109,17 @@ namespace OscProb {
         NuPath p );                   ///< Propagate neutrino through a single path
       virtual void PropagateTaylor(); ///< Propagate neutrino through full path
 
-      // Avg or interpolation for only one dynamical variable
-      virtual double avgFormula(int flvi, int flvf, double dbin, vectorD flambda, matrixC fV); 
-      virtual double avgFormulaExtrapolation(int flvi, int flvf, double dbin, vectorD flambda, matrixC fV);
+      // Avg for only one dynamical variable
+      virtual double avgFormula(int flvi, int flvf, double dbin, 
+        vectorD flambda, matrixC fV); ///< Formula for the average probability over a bin
 
       // Avg on energy and cosT at the same time 
       virtual void RotateDensityM(bool to_mass, matrixC V, matrixC& densityMatrix);
       virtual void HadamardProduct(vectorD lambda, matrixC& densityMatrix, double dbin);
       virtual double avgAlgorithm(int flvi, int flvf);
+
+      // Interpolation for only one dynamical variable
+      virtual double avgFormulaExtrapolation(int flvi, int flvf, double dbin, vectorD flambda, matrixC fV);
 
 
       // Attributes

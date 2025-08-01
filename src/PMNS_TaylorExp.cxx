@@ -209,7 +209,10 @@ void PMNS_TaylorExp::rotateS(vectorC fPhases, matrixC& S)
 
 //.............................................................................
 ///
+/// Rotate the K matrix from mass to flavor basis
 ///
+/// @param Kmass - The K matrix in mass basis
+/// @param Kflavor - The K matrix in flavor basis
 ///
 void PMNS_TaylorExp::rotateK(matrixC Kmass , matrixC& Kflavor)
 {
@@ -237,7 +240,49 @@ void PMNS_TaylorExp::rotateK(matrixC Kmass , matrixC& Kflavor)
 
 //.............................................................................
 ///
+/// Product between two S matrices. 
 ///
+/// This is used to calculate the matrix S corresponding to the propagation 
+/// between the beginning of the path and the end of the current layer. 
+///
+/// The matrix fevolutionMatrixS represent the propagation between the beginning 
+/// of the path and the beginning of the current layer. This matrix is updated 
+/// after every layer with this function.
+///
+/// @param SLayer - The S matrix corresponding to the propagation in the current 
+///                 layer
+///
+void PMNS_TaylorExp::MultiplicationRuleS(matrixC SLayer)
+{
+    complexD save [3];
+
+    for(int j = 0 ; j<fNumNus ; j++){
+
+        for(int n = 0 ; n <fNumNus ; n++) { save[n] = fevolutionMatrixS[n][j]; }
+
+        for(int i = 0 ; i<fNumNus ; i++){ 
+
+            fevolutionMatrixS[i][j] = 0;
+
+            for(int k = 0 ; k<fNumNus ; k++){
+                fevolutionMatrixS[i][j] += SLayer[i][k] * save[k];
+            }
+        }
+    }
+
+}
+
+//.............................................................................
+///
+/// Product between two K matrices. 
+///
+/// This is used to calculate the matrix K corresponding to the propagation 
+/// between the beginning of the path and the end of the current layer. 
+///
+/// @param KLayer - The S matrix corresponding to the propagation in the current 
+///                 layer
+/// @param K - The S matrix corresponding to the propagation between the beginning 
+///            of the path and the beginning of the current layer
 ///
 void PMNS_TaylorExp::MultiplicationRuleK(matrixC KLayer,complexD K[3][3])
 {
@@ -263,30 +308,6 @@ void PMNS_TaylorExp::MultiplicationRuleK(matrixC KLayer,complexD K[3][3])
             }
         }
     }  
-
-}
-
-//.............................................................................
-///
-///
-///
-void PMNS_TaylorExp::MultiplicationRuleS(matrixC SLayer)
-{
-    complexD save [3];
-
-    for(int j = 0 ; j<fNumNus ; j++){
-
-        for(int n = 0 ; n <fNumNus ; n++) { save[n] = fevolutionMatrixS[n][j]; }
-
-        for(int i = 0 ; i<fNumNus ; i++){ 
-
-            fevolutionMatrixS[i][j] = 0;
-
-            for(int k = 0 ; k<fNumNus ; k++){
-                fevolutionMatrixS[i][j] += SLayer[i][k] * save[k];
-            }
-        }
-    }
 
 }
 
@@ -357,7 +378,15 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 
 //.............................................................................
 ///
-/// 
+/// Solve one K matrix for eigenvectors and eigenvalues.
+///
+/// This is using a method from the GLoBES software available at
+/// http://www.mpi-hd.mpg.de/personalhomes/globes/3x3/ \n
+/// We should cite them accordingly
+///
+/// @param K - The K matrix 
+/// @param lambda - The eigenvalues of K 
+/// @param V - The eigenvectors of K 
 ///
 void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
 {
@@ -376,7 +405,22 @@ void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
 
 //.............................................................................
 ///
-/// 
+/// Formula for the average probability of flvi going to flvf over 
+/// a bin of energy E with width dE with a Taylor expansion.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param dbin - The width of the bin
+/// @param lambda - The eigenvalues of K 
+/// @param V - The eigenvectors of K 
+///
+/// @return Average neutrino oscillation probability
 ///
 double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambda, matrixC V)
 {
@@ -421,7 +465,24 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
 
 //.............................................................................
 ///
+/// Compute the average probability of flvi going to flvf over 
+/// a bin of energy E with width dE with a Taylor expansion.
 ///
+/// This gets transformed into 1/E, since the oscillation terms
+/// have arguments linear in 1/E and not E. 
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param E - The neutrino energy in GeV
+/// @param dE - The energy bin width in GeV
+///
+/// @return Average neutrino oscillation probability
 ///
 double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
 {
@@ -440,7 +501,21 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
 
 //.............................................................................
 ///
+/// Compute the average probability of flvi going to flvf over 
+/// a bin of energy L/E with width dLoE with a Taylor expansion.
 ///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param LoE - The neutrino  L/E value in the bin center in km/GeV
+/// @param dLoE - The L/E bin width in km/GeV
+///
+/// @return Average neutrino oscillation probability
 ///
 double PMNS_TaylorExp::avgProbTaylorLoE(int flvi, int flvf, double LoE , double dLoE)
 {
@@ -456,7 +531,21 @@ double PMNS_TaylorExp::avgProbTaylorLoE(int flvi, int flvf, double LoE , double 
 
 //.............................................................................
 ///
+/// Compute the average probability of flvi going to flvf over 
+/// a bin of energy 1/E with width d1oE with a Taylor expansion.
 ///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param ONEoE - The neutrino  1/E value in the bin center in GeV-1
+/// @param d1oE - The 1/E bin width in GeV-1
+///
+/// @return Average neutrino oscillation probability
 ///
 double PMNS_TaylorExp::avgProbTaylor1oE(int flvi, int flvf, double ONEoE , double d1oE)
 {
@@ -476,10 +565,62 @@ double PMNS_TaylorExp::avgProbTaylor1oE(int flvi, int flvf, double ONEoE , doubl
     return avgFormula(flvi, flvf, d1oE/kGeV2eV, flambdaInvE, fVInvE);
 }
 
+//.............................................................................
+///
+/// Compute the average probability of flvi going to flvf over 
+/// a bin of angle cost with width dcosT with a Taylor expansion.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param E - The neutrino energy in GeV
+/// @param cosT - The cosine of the neutrino angle
+/// @param dcosT - The cosT bin width in GeV-1
+///
+/// @return Average neutrino oscillation probability
+///
+double PMNS_TaylorExp::avgProbTaylorAngle(int flvi, int flvf, double E, double cosT , double dcosT)
+{
+    // reset K et S et Ve et lambdaE
+    InitializeTaylorsVectors();
+
+    SetEnergy(E);
+    SetCosT(cosT);
+    SetwidthBin(0,dcosT);
+
+    //Propagate -> get S and K matrix (on the whole path)
+    PropagateTaylor();
+
+    //DiagolK -> get VE and lambdaE
+    SolveK(fKcosT,flambdaCosT,fVcosT);
+
+    //return fct avr proba
+    return avgFormula(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
+}
 
 //.............................................................................
 ///
-/// 
+/// Fomula for the propability for flvi going to flvf for an energy E+dE 
+/// using a first order Taylor expansion from a reference energy E.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param dE - The energy variation in GeV
+/// @param lambda - The eigenvalues of K 
+/// @param V - The eigenvectors of K 
+///
+/// @return Neutrino oscillation probability
 ///
 double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, vectorD lambda, matrixC V)
 {
@@ -522,7 +663,21 @@ double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, 
 
 //.............................................................................
 ///
+/// Compute the propability for flvi going to flvf for an energy E+dE 
+/// using a first order Taylor expansion from a reference energy E.
 ///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param E - The reference energy in GeV
+/// @param dE - The energy variation in GeV
+///
+/// @return Neutrino oscillation probability
 ///
 double PMNS_TaylorExp::interpolationEnergy(int flvi, int flvf, double E , double dE)
 {
@@ -568,7 +723,21 @@ double PMNS_TaylorExp::interpolationEnergyLoE(int flvi, int flvf, double LoE , d
 
 //.............................................................................
 ///
+/// Compute the propability for flvi going to flvf for an angle cosT+dcosT 
+/// using a first order Taylor expansion from a reference angle cosT.
 ///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param cosT - The reference angle 
+/// @param dcosT - The angle variation 
+///
+/// @return Neutrino oscillation probability
 ///
 double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , double dcosT)
 {
@@ -592,25 +761,30 @@ double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , doubl
 
 //.............................................................................
 ///
+/// Convert a bin of energy into a bin of 1/E
 ///
+/// @param E  - energy bin center in GeV
+/// @param dE - energy bin width in GeV
+///
+/// @return The 1/E bin center and width in GeV-1
 ///
 vectorD PMNS_TaylorExp::ConvertEto1oE(double E, double dE)
 {
     vectorD Ebin(2);
 
     // Set a minimum energy
-    double minLoE = 0.1 * E;
+    double minE = 0.1 * E;
     //double minLoE = 0;
 
     // Transform range to E
     // Full range if low edge > minLoE
-    if(E - dE / 2 > minLoE) {
+    if(E - dE / 2 > minE) {
         Ebin[0] =  0.5 * (1 / (E - dE / 2) + 1 / (E + dE / 2));
         Ebin[1] =  1 / (E - dE / 2) - 1 / (E + dE / 2);
     }
     else {
-        Ebin[0] = 0.5 * (1 / minLoE + 1 / (E + dE / 2));
-        Ebin[1] = (1 / minLoE - 1 / (E + dE / 2));
+        Ebin[0] = 0.5 * (1 / minE + 1 / (E + dE / 2));
+        Ebin[1] = (1 / minE - 1 / (E + dE / 2));
     }
 
     return Ebin;
@@ -620,28 +794,15 @@ vectorD PMNS_TaylorExp::ConvertEto1oE(double E, double dE)
 
 
 
-//.............................................................................
-///
-///
-///
-double PMNS_TaylorExp::avgProbTaylorAngle(int flvi, int flvf, double E, double cosT , double dcosT)
-{
-    // reset K et S et Ve et lambdaE
-    InitializeTaylorsVectors();
 
-    SetEnergy(E);
-    SetCosT(cosT);
-    SetwidthBin(0,dcosT);
 
-    //Propagate -> get S and K matrix (on the whole path)
-    PropagateTaylor();
 
-    //DiagolK -> get VE and lambdaE
-    SolveK(fKcosT,flambdaCosT,fVcosT);
 
-    //return fct avr proba
-    return avgFormula(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
-}
+
+
+
+
+
 
 
 //.............................................................................
