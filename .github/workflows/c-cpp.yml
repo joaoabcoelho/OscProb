@@ -11,7 +11,7 @@ jobs:
 
     runs-on: ubuntu-22.04
     container:
-      image: rootproject/root:6.26.06-ubuntu22.04
+      image: rootproject/root:6.30.04-ubuntu22.04
 
     steps:
     - name: Install git
