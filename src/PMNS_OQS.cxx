@@ -1,8 +1,3 @@
-#include <cassert>
-#include <complex>
-#include <iostream>
-#include <math.h>
-
 #include <unsupported/Eigen/MatrixFunctions>
 
 #include "PMNS_OQS.h"
@@ -17,11 +12,10 @@ using namespace OscProb;
 /// This class is restricted to 3 neutrino flavours.
 ///
 PMNS_OQS::PMNS_OQS()
-    : PMNS_DensityMatrix(), fPhi(), fR(), fRt(), fa(9, 0), fM(8, 8),
+    : PMNS_DensityMatrix(), fPhi{}, fR(9), fRt(9), fa(9, 0), fM(8, 8),
       fD(9, vectorD(9, 0)), fcos(9, vectorD(9, 1)), fHGM(9, vectorD(9, 0)),
       fHeff(3, vectorC(3, 0)), fUM(3, vectorC(3, 0))
 {
-  InitializeVectors();
   SetParameterisation(1);
 }
 
@@ -31,19 +25,13 @@ PMNS_OQS::PMNS_OQS()
 ///
 PMNS_OQS::~PMNS_OQS() {}
 
-void PMNS_OQS::InitializeVectors()
-{
-  SetPhi(1, 0);
-  SetPhi(2, 0);
-}
-
 void PMNS_OQS::SetIsNuBar(bool isNuBar)
 {
   fBuiltHms *= (fIsNuBar == isNuBar);
   PMNS_Base::SetIsNuBar(isNuBar);
 }
 
-void PMNS_OQS::SetParameterisation(int param = 1) { fParameterisation = param; }
+void PMNS_OQS::SetParameterisation(int param) { fParameterisation = param; }
 
 // set Heff in vacuum-mass basis
 void PMNS_OQS::SetHeff(NuPath p)
@@ -70,122 +58,161 @@ void PMNS_OQS::SetHeff(NuPath p)
     }
   }
 
-  double lv = 2. * kGeV2eV * fEnergy; // 2E in eV
+  double lv = 2 * kGeV2eV * fEnergy; // 2E in eV
 
   // add mass terms
   fHeff[1][1] += fDm[1] / lv;
   fHeff[2][2] += fDm[2] / lv;
 }
 
-// Set Heff in Gell-Mann basis: set only right-triangle as the left part is
-// -right
-void PMNS_OQS::SetHGM()
+void get_GM(const matrixC& A, vectorD& v)
 {
-  fHGM[1][2] = real(fHeff[0][0] - fHeff[1][1]);
-  fHGM[1][3] = 2. * imag(fHeff[0][1]);
-  fHGM[1][4] = -imag(fHeff[1][2]);
-  fHGM[1][5] = -real(fHeff[1][2]);
-  fHGM[1][6] = -imag(fHeff[0][2]);
-  fHGM[1][7] = -real(fHeff[0][2]);
+  v[0] = real(A[0][0] + A[1][1] + A[2][2]) / sqrt(6);
+  v[3] = real(A[0][0] - A[1][1]) / 2;
+  v[8] = real(A[0][0] + A[1][1] - 2. * A[2][2]) / sqrt(12);
 
-  fHGM[2][3] = 2. * real(fHeff[0][1]);
-  fHGM[2][4] = real(fHeff[1][2]);
-  fHGM[2][5] = -imag(fHeff[1][2]);
-  fHGM[2][6] = -real(fHeff[0][2]);
-  fHGM[2][7] = imag(fHeff[0][2]);
+  v[1] = real(A[0][1]);
+  v[4] = real(A[0][2]);
+  v[6] = real(A[1][2]);
 
-  fHGM[3][4] = -imag(fHeff[0][2]);
-  fHGM[3][5] = -real(fHeff[0][2]);
-  fHGM[3][6] = imag(fHeff[1][2]);
-  fHGM[3][7] = real(fHeff[1][2]);
+  v[2] = -imag(A[0][1]);
+  v[5] = -imag(A[0][2]);
+  v[7] = -imag(A[1][2]);
+}
 
-  fHGM[4][5] = real(fHeff[0][0] - fHeff[2][2]);
-  fHGM[4][6] = -imag(fHeff[0][1]);
-  fHGM[4][7] = real(fHeff[0][1]);
-  fHGM[4][8] = sqrt(3.) * imag(fHeff[0][2]);
+void get_SU3(const vectorD& v, matrixC& A)
+{
+  A[0][0] = v[0] * sqrt(2 / 3.) + v[3] + v[8] / sqrt(3);
+  A[1][1] = v[0] * sqrt(2 / 3.) - v[3] + v[8] / sqrt(3);
+  A[2][2] = v[0] * sqrt(2 / 3.) - 2 * v[8] / sqrt(3);
 
-  fHGM[5][6] = -real(fHeff[0][1]);
-  fHGM[5][7] = -imag(fHeff[0][1]);
-  fHGM[5][8] = sqrt(3.) * real(fHeff[0][2]);
+  A[1][0] = complexD(v[1], v[2]);
+  A[2][0] = complexD(v[4], v[5]);
+  A[2][1] = complexD(v[6], v[7]);
 
-  fHGM[6][7] = real(fHeff[1][1] - fHeff[2][2]);
-  fHGM[6][8] = sqrt(3.) * imag(fHeff[1][2]);
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < i; j++) { A[j][i] = conj(A[i][j]); }
+  }
+}
 
-  fHGM[7][8] = sqrt(3.) * real(fHeff[1][2]);
+void get_GMOP(const matrixC& A, matrixD& B)
+{
+  B[1][2] = real(A[0][0] - A[1][1]);
+  B[1][3] = 2 * imag(A[0][1]);
+  B[1][4] = -imag(A[1][2]);
+  B[1][5] = -real(A[1][2]);
+  B[1][6] = -imag(A[0][2]);
+  B[1][7] = -real(A[0][2]);
+
+  B[2][3] = 2 * real(A[0][1]);
+  B[2][4] = real(A[1][2]);
+  B[2][5] = -imag(A[1][2]);
+  B[2][6] = -real(A[0][2]);
+  B[2][7] = imag(A[0][2]);
+
+  B[3][4] = -imag(A[0][2]);
+  B[3][5] = -real(A[0][2]);
+  B[3][6] = imag(A[1][2]);
+  B[3][7] = real(A[1][2]);
+
+  B[4][5] = real(A[0][0] - A[2][2]);
+  B[4][6] = -imag(A[0][1]);
+  B[4][7] = real(A[0][1]);
+  B[4][8] = sqrt(3) * imag(A[0][2]);
+
+  B[5][6] = -real(A[0][1]);
+  B[5][7] = -imag(A[0][1]);
+  B[5][8] = sqrt(3) * real(A[0][2]);
+
+  B[6][7] = real(A[1][1] - A[2][2]);
+  B[6][8] = sqrt(3) * imag(A[1][2]);
+
+  B[7][8] = sqrt(3) * real(A[1][2]);
 
   for (int i = 1; i < 9; ++i) {
-    for (int j = i + 1; j < 9; ++j) { fHGM[j][i] = -fHGM[i][j]; }
+    for (int j = i + 1; j < 9; ++j) { B[j][i] = -B[i][j]; }
   }
 }
 
-bool is_same_array(array<int, 3> input, array<int, 3> test)
-{
-  sort(input.begin(), input.end());
-  sort(test.begin(), test.end());
-  return input == test;
-}
-
-int get_permutation(array<int, 3> input, array<int, 3> test)
-{
-  if (!is_same_array(input, test)) return 0;
-
-  if (input[0] == test[0] && input[1] == test[1]) return 1;
-  if (input[0] == test[1] && input[1] == test[2]) return 1;
-  if (input[0] == test[2] && input[1] == test[0]) return 1;
-
-  return -1;
-}
-
-double get_f(array<int, 3> indices)
-{
-  int perm = 0;
-
-  if ((perm = get_permutation(indices, {1, 2, 3}))) return perm;
-
-  double value = 0.5;
-
-  if ((perm = get_permutation(indices, {1, 4, 7}))) return perm * value;
-  if ((perm = get_permutation(indices, {1, 6, 5}))) return perm * value;
-  if ((perm = get_permutation(indices, {2, 4, 6}))) return perm * value;
-  if ((perm = get_permutation(indices, {2, 5, 7}))) return perm * value;
-  if ((perm = get_permutation(indices, {3, 4, 5}))) return perm * value;
-  if ((perm = get_permutation(indices, {3, 7, 6}))) return perm * value;
-
-  value = sqrt(3) / 2;
-
-  if ((perm = get_permutation(indices, {4, 5, 8}))) return perm * value;
-  if ((perm = get_permutation(indices, {6, 7, 8}))) return perm * value;
-
-  return 0;
-}
-
-void PMNS_OQS::SetDissipatorElement(int j, int k)
-{
-  double val = 0;
-
-  for (int l = 0; l < 9; l++) {
-    for (int m = l; m < 9; m++) {
-      double f = 0;
-      for (int n = 0; n < 9; n++) {
-        f += get_f({l, k, n}) * get_f({n, m, j});
-        if (m > l) f += get_f({m, k, n}) * get_f({n, l, j});
-      }
-      val += fa[l] * fa[m] * fcos[l][m] * f;
-    }
-  }
-
-  val *= kGeV2eV; // convert to eV
-
-  fD[j][k] = -val;
-  fD[k][j] = -val;
-}
+// Set Heff in Gell-Mann basis: set only right-triangle as the left part is
+// -right
+void PMNS_OQS::SetHGM() { get_GMOP(fHeff, fHGM); }
 
 void PMNS_OQS::SetDissipator()
 {
   if (fBuiltDissipator) return;
 
+  double aa[9][9];
+  for (int i = 1; i < 9; i++) {
+    for (int j = i; j < 9; j++) {
+      aa[i][j] = fa[i] * fa[j];
+      if (i < j) aa[i][j] *= fcos[i][j];
+    }
+  }
+  double suma = 0;
+  for (int i = 1; i < 9; i++) { suma += aa[i][i]; }
+
+  fD[1][1] = (suma + 3 * (aa[2][2] + aa[3][3]) - aa[1][1] - aa[8][8]) / 4;
+  fD[2][2] = (suma + 3 * (aa[1][1] + aa[3][3]) - aa[2][2] - aa[8][8]) / 4;
+  fD[3][3] = (suma + 3 * (aa[1][1] + aa[2][2]) - aa[3][3] - aa[8][8]) / 4;
+
+  fD[4][4] =
+      (suma + 2 * sqrt(3) * aa[3][8] + 3 * aa[5][5] + 2 * aa[8][8] - aa[4][4]) /
+      4;
+  fD[5][5] =
+      (suma + 2 * sqrt(3) * aa[3][8] + 3 * aa[4][4] + 2 * aa[8][8] - aa[5][5]) /
+      4;
+  fD[6][6] =
+      (suma - 2 * sqrt(3) * aa[3][8] + 3 * aa[7][7] + 2 * aa[8][8] - aa[6][6]) /
+      4;
+  fD[7][7] =
+      (suma - 2 * sqrt(3) * aa[3][8] + 3 * aa[6][6] + 2 * aa[8][8] - aa[7][7]) /
+      4;
+
+  fD[8][8] = (aa[4][4] + aa[5][5] + aa[6][6] + aa[7][7]) * 3 / 4;
+  fD[3][8] = (aa[4][4] + aa[5][5] - aa[6][6] - aa[7][7]) * sqrt(3) / 4;
+
+  fD[1][2] = -aa[1][2];
+  fD[1][3] = -aa[1][3];
+  fD[2][3] = -aa[2][3];
+  fD[4][5] = -aa[4][5];
+  fD[6][7] = -aa[6][7];
+
+  fD[1][8] = (aa[4][6] + aa[5][7]) * sqrt(3) / 2;
+  fD[2][8] = (aa[5][6] - aa[4][7]) * sqrt(3) / 2;
+
+  fD[4][6] = -(aa[4][6] - 2 * sqrt(3) * aa[1][8] - 3 * aa[5][7]) / 4;
+  fD[4][7] = -(aa[4][7] + 2 * sqrt(3) * aa[2][8] + 3 * aa[5][6]) / 4;
+  fD[5][6] = -(aa[5][6] - 2 * sqrt(3) * aa[2][8] + 3 * aa[4][7]) / 4;
+  fD[5][7] = -(aa[5][7] - 2 * sqrt(3) * aa[1][8] - 3 * aa[4][6]) / 4;
+
+  fD[1][4] = -(aa[1][4] - 3 * (aa[2][5] - aa[3][6]) + sqrt(3) * aa[6][8]) / 4;
+  fD[1][5] = -(aa[1][5] + 3 * (aa[2][4] + aa[3][7]) + sqrt(3) * aa[7][8]) / 4;
+  fD[1][6] = -(aa[1][6] + 3 * (aa[2][7] - aa[3][4]) + sqrt(3) * aa[4][8]) / 4;
+  fD[1][7] = -(aa[1][7] - 3 * (aa[2][6] + aa[3][5]) + sqrt(3) * aa[5][8]) / 4;
+  fD[2][4] = -(aa[2][4] + 3 * (aa[1][5] - aa[3][7]) - sqrt(3) * aa[7][8]) / 4;
+  fD[2][5] = -(aa[2][5] - 3 * (aa[1][4] - aa[3][6]) + sqrt(3) * aa[6][8]) / 4;
+  fD[2][6] = -(aa[2][6] - 3 * (aa[1][7] + aa[3][5]) + sqrt(3) * aa[5][8]) / 4;
+  fD[2][7] = -(aa[2][7] + 3 * (aa[1][6] + aa[3][4]) - sqrt(3) * aa[4][8]) / 4;
+  fD[3][4] = -(aa[3][4] - 3 * (aa[1][6] - aa[2][7]) + sqrt(3) * aa[4][8]) / 4;
+  fD[3][5] = -(aa[3][5] - 3 * (aa[1][7] + aa[2][6]) + sqrt(3) * aa[5][8]) / 4;
+  fD[3][6] = -(aa[3][6] + 3 * (aa[1][4] + aa[2][5]) - sqrt(3) * aa[6][8]) / 4;
+  fD[3][7] = -(aa[3][7] + 3 * (aa[1][5] - aa[2][4]) - sqrt(3) * aa[7][8]) / 4;
+
+  fD[4][8] = -(sqrt(3) * (aa[1][6] - aa[2][7] + aa[3][4]) + 3 * aa[4][8]) / 4;
+  fD[5][8] = -(sqrt(3) * (aa[1][7] + aa[2][6] + aa[3][5]) + 3 * aa[5][8]) / 4;
+  fD[6][8] = -(sqrt(3) * (aa[1][4] + aa[2][5] - aa[3][6]) + 3 * aa[6][8]) / 4;
+  fD[7][8] = -(sqrt(3) * (aa[1][5] - aa[2][4] - aa[3][7]) + 3 * aa[7][8]) / 4;
+
   for (int j = 0; j < 9; j++) {
-    for (int k = j; k < 9; k++) { SetDissipatorElement(j, k); }
+    for (int k = j; k < 9; k++) {
+      if (j == 0 || k == 0) {
+        fD[j][k] = 0;
+        continue;
+      }
+      fD[j][k] = -fD[j][k] * kGeV2eV;
+      fD[k][j] = fD[j][k];
+    }
   }
 
   fBuiltDissipator = true;
@@ -265,33 +292,9 @@ void PMNS_OQS::RotateState(bool to_mass)
   PMNS_DensityMatrix::RotateState(to_mass, fUM);
 }
 
-void PMNS_OQS::ChangeBaseToGM()
-{
-  fR[3] = real(fRho[0][0] - fRho[1][1]) / 2;
-  fR[8] = real(fRho[0][0] + fRho[1][1] - 2. * fRho[2][2]) / (2 * sqrt(3));
+void PMNS_OQS::ChangeBaseToGM() { get_GM(fRho, fR); }
 
-  fR[1] = real(fRho[0][1]);
-  fR[2] = -imag(fRho[0][1]);
-  fR[4] = real(fRho[0][2]);
-  fR[5] = -imag(fRho[0][2]);
-  fR[6] = real(fRho[1][2]);
-  fR[7] = -imag(fRho[1][2]);
-}
-
-void PMNS_OQS::ChangeBaseToSU3()
-{
-  fRho[0][0] = 1 / 3. + fRt[3] + fRt[8] / sqrt(3);
-  fRho[1][1] = 1 / 3. - fRt[3] + fRt[8] / sqrt(3);
-  fRho[2][2] = 1 / 3. - 2 * fRt[8] / sqrt(3);
-
-  fRho[0][1] = complexD(fRt[1], -fRt[2]);
-  fRho[0][2] = complexD(fRt[4], -fRt[5]);
-  fRho[1][2] = complexD(fRt[6], -fRt[7]);
-
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < i; j++) { fRho[i][j] = conj(fRho[j][i]); }
-  }
-}
+void PMNS_OQS::ChangeBaseToSU3() { get_SU3(fRt, fRho); }
 
 //.............................................................................
 ///

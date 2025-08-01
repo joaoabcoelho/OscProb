@@ -19,9 +19,7 @@ namespace OscProb {
       virtual void SetIsNuBar(bool isNuBar);
 
     protected:
-      virtual void SetDissipatorElement(int i, int j);
       virtual void SetDissipator();
-      virtual void InitializeVectors();
       virtual void SetHeff(NuPath p);
       virtual void SetHGM();
       virtual void SetM();
@@ -36,10 +34,10 @@ namespace OscProb {
       /// Propagate neutrino through a single path
       virtual void PropagatePath(NuPath p);
 
-      int    fParameterisation;
-      double fPhi[2]; ///< Majorana phases
-      double fR[9];
-      double fRt[9];
+      int     fParameterisation;
+      double  fPhi[2]; ///< Majorana phases
+      vectorD fR;
+      vectorD fRt;
 
       matrixC fHeff;
       matrixD fHGM;
