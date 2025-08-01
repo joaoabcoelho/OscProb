@@ -14,8 +14,9 @@ namespace OscProb {
 
       virtual void SetParameterisation(int par);
       virtual void SetPhi(int i, double val);
-      virtual void Seta(int i, double val);
-      virtual void Setcos(int i, int j, double val);
+      virtual void SetDecoElement(int i, double val);
+      virtual void SetDecoAngle(int i, int j, double th);
+      virtual void SetPower(int n);
       virtual void SetIsNuBar(bool isNuBar);
 
       virtual matrixD ProbMatrix(int nflvi, int nflvf);
@@ -35,6 +36,7 @@ namespace OscProb {
       /// Propagate neutrino through a single path
       virtual void PropagatePath(NuPath p);
 
+      int     fPower;
       int     fParameterisation;
       double  fPhi[2]; ///< Majorana phases
       vectorD fR;

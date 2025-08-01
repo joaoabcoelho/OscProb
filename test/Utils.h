@@ -54,9 +54,9 @@ OscProb::PMNS_OQS* GetOQS(bool is_nominal){
   OscProb::PMNS_OQS* p = new OscProb::PMNS_OQS();
   SetNominalPars(p);
   if(!is_nominal){
-    p->Seta(3, sqrt(2e-23));
-    p->Seta(8, sqrt(4e-23));
-    p->Setcos(3,8, 0.5);
+    p->SetDecoElement(3, sqrt(2e-23));
+    p->SetDecoElement(8, sqrt(4e-23));
+    p->SetDecoAngle(3,8, acos(0.5));
   }
 
   return p;

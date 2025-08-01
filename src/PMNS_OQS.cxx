@@ -17,6 +17,10 @@ PMNS_OQS::PMNS_OQS()
       fHeff(3, vectorC(3, 0)), fUM(3, vectorC(3, 0))
 {
   SetParameterisation(1);
+  SetPower(0);
+  SetPhi(1, 0);
+  SetPhi(2, 0);
+  fBuiltDissipator = false;
 }
 
 //.............................................................................
@@ -146,31 +150,29 @@ void PMNS_OQS::SetDissipator()
   for (int i = 1; i < 9; i++) {
     for (int j = i; j < 9; j++) {
       aa[i][j] = fa[i] * fa[j];
+      if (i == 8) aa[i][j] *= sqrt(3);
+      if (j == 8) aa[i][j] *= sqrt(3);
       if (i < j) aa[i][j] *= fcos[i][j];
     }
   }
-  double suma = 0;
-  for (int i = 1; i < 9; i++) { suma += aa[i][i]; }
+  double sum12   = aa[1][1] + aa[2][2];
+  double sum45   = aa[4][4] + aa[5][5];
+  double sum67   = aa[6][6] + aa[7][7];
+  double gamma21 = aa[3][3];
+  double gamma31 = (aa[3][3] + aa[8][8] + 2 * aa[3][8]) / 4;
+  double gamma32 = (aa[3][3] + aa[8][8] - 2 * aa[3][8]) / 4;
 
-  fD[1][1] = (suma + 3 * (aa[2][2] + aa[3][3]) - aa[1][1] - aa[8][8]) / 4;
-  fD[2][2] = (suma + 3 * (aa[1][1] + aa[3][3]) - aa[2][2] - aa[8][8]) / 4;
-  fD[3][3] = (suma + 3 * (aa[1][1] + aa[2][2]) - aa[3][3] - aa[8][8]) / 4;
+  fD[1][1] = gamma21 + aa[2][2] + (sum45 + sum67) / 4;
+  fD[2][2] = gamma21 + aa[1][1] + (sum45 + sum67) / 4;
+  fD[3][3] = sum12 + (sum45 + sum67) / 4;
 
-  fD[4][4] =
-      (suma + 2 * sqrt(3) * aa[3][8] + 3 * aa[5][5] + 2 * aa[8][8] - aa[4][4]) /
-      4;
-  fD[5][5] =
-      (suma + 2 * sqrt(3) * aa[3][8] + 3 * aa[4][4] + 2 * aa[8][8] - aa[5][5]) /
-      4;
-  fD[6][6] =
-      (suma - 2 * sqrt(3) * aa[3][8] + 3 * aa[7][7] + 2 * aa[8][8] - aa[6][6]) /
-      4;
-  fD[7][7] =
-      (suma - 2 * sqrt(3) * aa[3][8] + 3 * aa[6][6] + 2 * aa[8][8] - aa[7][7]) /
-      4;
+  fD[4][4] = gamma31 + aa[5][5] + (sum12 + sum67) / 4;
+  fD[5][5] = gamma31 + aa[4][4] + (sum12 + sum67) / 4;
+  fD[6][6] = gamma32 + aa[7][7] + (sum12 + sum45) / 4;
+  fD[7][7] = gamma32 + aa[6][6] + (sum12 + sum45) / 4;
 
-  fD[8][8] = (aa[4][4] + aa[5][5] + aa[6][6] + aa[7][7]) * 3 / 4;
-  fD[3][8] = (aa[4][4] + aa[5][5] - aa[6][6] - aa[7][7]) * sqrt(3) / 4;
+  fD[8][8] = (sum45 + sum67) * 3 / 4;
+  fD[3][8] = (sum45 - sum67) * sqrt(3) / 4;
 
   fD[1][2] = -aa[1][2];
   fD[1][3] = -aa[1][3];
@@ -181,28 +183,28 @@ void PMNS_OQS::SetDissipator()
   fD[1][8] = (aa[4][6] + aa[5][7]) * sqrt(3) / 2;
   fD[2][8] = (aa[5][6] - aa[4][7]) * sqrt(3) / 2;
 
-  fD[4][6] = -(aa[4][6] - 2 * sqrt(3) * aa[1][8] - 3 * aa[5][7]) / 4;
-  fD[4][7] = -(aa[4][7] + 2 * sqrt(3) * aa[2][8] + 3 * aa[5][6]) / 4;
-  fD[5][6] = -(aa[5][6] - 2 * sqrt(3) * aa[2][8] + 3 * aa[4][7]) / 4;
-  fD[5][7] = -(aa[5][7] - 2 * sqrt(3) * aa[1][8] - 3 * aa[4][6]) / 4;
+  fD[4][6] = -(aa[4][6] - 2 * aa[1][8] - 3 * aa[5][7]) / 4;
+  fD[4][7] = -(aa[4][7] + 2 * aa[2][8] + 3 * aa[5][6]) / 4;
+  fD[5][6] = -(aa[5][6] - 2 * aa[2][8] + 3 * aa[4][7]) / 4;
+  fD[5][7] = -(aa[5][7] - 2 * aa[1][8] - 3 * aa[4][6]) / 4;
 
-  fD[1][4] = -(aa[1][4] - 3 * (aa[2][5] - aa[3][6]) + sqrt(3) * aa[6][8]) / 4;
-  fD[1][5] = -(aa[1][5] + 3 * (aa[2][4] + aa[3][7]) + sqrt(3) * aa[7][8]) / 4;
-  fD[1][6] = -(aa[1][6] + 3 * (aa[2][7] - aa[3][4]) + sqrt(3) * aa[4][8]) / 4;
-  fD[1][7] = -(aa[1][7] - 3 * (aa[2][6] + aa[3][5]) + sqrt(3) * aa[5][8]) / 4;
-  fD[2][4] = -(aa[2][4] + 3 * (aa[1][5] - aa[3][7]) - sqrt(3) * aa[7][8]) / 4;
-  fD[2][5] = -(aa[2][5] - 3 * (aa[1][4] - aa[3][6]) + sqrt(3) * aa[6][8]) / 4;
-  fD[2][6] = -(aa[2][6] - 3 * (aa[1][7] + aa[3][5]) + sqrt(3) * aa[5][8]) / 4;
-  fD[2][7] = -(aa[2][7] + 3 * (aa[1][6] + aa[3][4]) - sqrt(3) * aa[4][8]) / 4;
-  fD[3][4] = -(aa[3][4] - 3 * (aa[1][6] - aa[2][7]) + sqrt(3) * aa[4][8]) / 4;
-  fD[3][5] = -(aa[3][5] - 3 * (aa[1][7] + aa[2][6]) + sqrt(3) * aa[5][8]) / 4;
-  fD[3][6] = -(aa[3][6] + 3 * (aa[1][4] + aa[2][5]) - sqrt(3) * aa[6][8]) / 4;
-  fD[3][7] = -(aa[3][7] + 3 * (aa[1][5] - aa[2][4]) - sqrt(3) * aa[7][8]) / 4;
+  fD[1][4] = -(aa[1][4] - 3 * (aa[2][5] - aa[3][6]) + aa[6][8]) / 4;
+  fD[1][5] = -(aa[1][5] + 3 * (aa[2][4] + aa[3][7]) + aa[7][8]) / 4;
+  fD[1][6] = -(aa[1][6] + 3 * (aa[2][7] - aa[3][4]) + aa[4][8]) / 4;
+  fD[1][7] = -(aa[1][7] - 3 * (aa[2][6] + aa[3][5]) + aa[5][8]) / 4;
+  fD[2][4] = -(aa[2][4] + 3 * (aa[1][5] - aa[3][7]) - aa[7][8]) / 4;
+  fD[2][5] = -(aa[2][5] - 3 * (aa[1][4] - aa[3][6]) + aa[6][8]) / 4;
+  fD[2][6] = -(aa[2][6] - 3 * (aa[1][7] + aa[3][5]) + aa[5][8]) / 4;
+  fD[2][7] = -(aa[2][7] + 3 * (aa[1][6] + aa[3][4]) - aa[4][8]) / 4;
+  fD[3][4] = -(aa[3][4] - 3 * (aa[1][6] - aa[2][7]) + aa[4][8]) / 4;
+  fD[3][5] = -(aa[3][5] - 3 * (aa[1][7] + aa[2][6]) + aa[5][8]) / 4;
+  fD[3][6] = -(aa[3][6] + 3 * (aa[1][4] + aa[2][5]) - aa[6][8]) / 4;
+  fD[3][7] = -(aa[3][7] + 3 * (aa[1][5] - aa[2][4]) - aa[7][8]) / 4;
 
-  fD[4][8] = -(sqrt(3) * (aa[1][6] - aa[2][7] + aa[3][4]) + 3 * aa[4][8]) / 4;
-  fD[5][8] = -(sqrt(3) * (aa[1][7] + aa[2][6] + aa[3][5]) + 3 * aa[5][8]) / 4;
-  fD[6][8] = -(sqrt(3) * (aa[1][4] + aa[2][5] - aa[3][6]) + 3 * aa[6][8]) / 4;
-  fD[7][8] = -(sqrt(3) * (aa[1][5] - aa[2][4] - aa[3][7]) + 3 * aa[7][8]) / 4;
+  fD[4][8] = -(aa[1][6] - aa[2][7] + aa[3][4] + aa[4][8]) * sqrt(3) / 4;
+  fD[5][8] = -(aa[1][7] + aa[2][6] + aa[3][5] + aa[5][8]) * sqrt(3) / 4;
+  fD[6][8] = -(aa[1][4] + aa[2][5] - aa[3][6] + aa[6][8]) * sqrt(3) / 4;
+  fD[7][8] = -(aa[1][5] - aa[2][4] - aa[3][7] + aa[7][8]) * sqrt(3) / 4;
 
   for (int j = 0; j < 9; j++) {
     for (int k = j; k < 9; k++) {
@@ -218,14 +220,17 @@ void PMNS_OQS::SetDissipator()
   fBuiltDissipator = true;
 }
 
-void PMNS_OQS::Seta(int i, double val)
+void PMNS_OQS::SetDecoElement(int i, double val)
 {
-  fBuiltDissipator *= (fa[i] == val);
+  fBuiltDissipator *= (fa[i] == abs(val));
   fa[i] = abs(val);
 }
 
-void PMNS_OQS::Setcos(int i, int j, double val)
+void PMNS_OQS::SetPower(int n) { fPower = n; }
+
+void PMNS_OQS::SetDecoAngle(int i, int j, double th)
 {
+  double val = cos(th);
   fBuiltDissipator *= (fcos[i][j] == val);
   if (i == j) fcos[i][j] = 1;
   if (val > 1) val = 1;
@@ -237,8 +242,11 @@ void PMNS_OQS::Setcos(int i, int j, double val)
 void PMNS_OQS::SetM()
 {
   SetDissipator();
+  double energyCorr = pow(fEnergy, fPower);
   for (int k = 1; k < 9; ++k) {
-    for (int j = 1; j < 9; ++j) { fM(k - 1, j - 1) = fHGM[k][j] + fD[k][j]; }
+    for (int j = 1; j < 9; ++j) {
+      fM(k - 1, j - 1) = fHGM[k][j] + fD[k][j] * energyCorr;
+    }
   }
 }
 
