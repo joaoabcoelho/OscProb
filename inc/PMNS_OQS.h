@@ -18,6 +18,8 @@ namespace OscProb {
       virtual void Setcos(int i, int j, double val);
       virtual void SetIsNuBar(bool isNuBar);
 
+      virtual matrixD ProbMatrix(int nflvi, int nflvf);
+
     protected:
       virtual void SetDissipator();
       virtual void SetHeff(NuPath p);
@@ -29,8 +31,7 @@ namespace OscProb {
       virtual void ChangeBaseToGM();
       virtual void ChangeBaseToSU3();
 
-      virtual void FillCache() {} ///< Deactivate cache
-
+      virtual void Propagate();
       /// Propagate neutrino through a single path
       virtual void PropagatePath(NuPath p);
 

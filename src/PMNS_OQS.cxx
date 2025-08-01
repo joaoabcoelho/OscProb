@@ -289,12 +289,21 @@ void PMNS_OQS::BuildUM()
 void PMNS_OQS::RotateState(bool to_mass)
 {
   BuildHms();
+  if (!to_mass) ChangeBaseToSU3();
   PMNS_DensityMatrix::RotateState(to_mass, fUM);
+  if (to_mass) ChangeBaseToGM();
 }
 
 void PMNS_OQS::ChangeBaseToGM() { get_GM(fRho, fR); }
 
-void PMNS_OQS::ChangeBaseToSU3() { get_SU3(fRt, fRho); }
+void PMNS_OQS::ChangeBaseToSU3() { get_SU3(fR, fRho); }
+
+void PMNS_OQS::Propagate()
+{
+  RotateState(true);
+  PMNS_Base::Propagate();
+  RotateState(false);
+}
 
 //.............................................................................
 ///
@@ -319,20 +328,64 @@ void PMNS_OQS::PropagatePath(NuPath p)
   fM *= lengthIneV;
   fM = fM.exp();
 
-  RotateState(true);
-
-  ChangeBaseToGM();
-
   fRt[0] = fR[0];
 
   for (int i = 1; i < 9; ++i) {
     fRt[i] = 0;
     for (int j = 1; j < 9; ++j) { fRt[i] += fM(i - 1, j - 1) * fR[j]; }
   }
+  fR = fRt;
+}
 
-  ChangeBaseToSU3();
+//.............................................................................
+///
+/// Compute the probability matrix for the first nflvi and nflvf states.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+/// @param nflvi - The number of initial flavours in the matrix.
+/// @param nflvf - The number of final flavours in the matrix.
+///
+/// @return Neutrino oscillation probabilities
+///
+matrixD PMNS_OQS::ProbMatrix(int nflvi, int nflvf)
+{
+  assert(nflvi <= fNumNus && nflvi >= 0);
+  assert(nflvf <= fNumNus && nflvf >= 0);
 
-  RotateState(false); // go back to flavour basis
+  // Output probabilities
+  matrixD probs(nflvi, vectorD(nflvf));
+
+  // List of states
+  vector<vectorD> allstates(nflvi, vectorD(9));
+
+  // Reset all initial states
+  for (int i = 0; i < nflvi; i++) {
+    ResetToFlavour(i);
+    RotateState(true);
+    allstates[i] = fR;
+  }
+
+  // Propagate all states in parallel
+  for (int i = 0; i < int(fNuPaths.size()); i++) {
+    for (int flvi = 0; flvi < nflvi; flvi++) {
+      fR = allstates[flvi];
+      PropagatePath(fNuPaths[i]);
+      allstates[flvi] = fR;
+    }
+  }
+
+  // Get all probabilities
+  for (int flvi = 0; flvi < nflvi; flvi++) {
+    fR = allstates[flvi];
+    RotateState(false);
+    for (int flvj = 0; flvj < nflvf; flvj++) { probs[flvi][flvj] = P(flvj); }
+  }
+
+  return probs;
 }
 
 ////////////////////////////////////////////////////////////////////////
