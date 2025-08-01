@@ -68,7 +68,7 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
 
 //.............................................................................
 ///
-/// Set neutrino trajectory.
+/// Set neutrino angle.
 ///
 /// @param cosT - The cosine of the neutrino angle
 ///
@@ -93,7 +93,14 @@ void PMNS_TaylorExp::SetwidthBin(double dE , double dcosT)
 
 //.............................................................................
 ///
+/// Build K matrix for the inverse of energy in mass basis. 
 ///
+/// The variable for which a Taylor expansion is done here is not directly the 
+/// energy but the inverse of it. This change of variable allow to express the
+/// hamiltonien as linear with respect to this new variable.
+///  
+/// @param L - The length of the layer in GeV-1
+/// @param K - The K matrix for the inverse of energy in the mass basis
 ///
 void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 {
@@ -151,7 +158,10 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 
 //.............................................................................
 ///
-///
+/// Build K matrix for angle in flavor basis 
+///  
+/// @param L - The length of the layer in GeV-1
+/// @param K - The K matrix for the angle in the flavor basis
 ///
 void PMNS_TaylorExp::BuildKcosT(double L, matrixC& K)
 {
@@ -176,9 +186,12 @@ void PMNS_TaylorExp::BuildKcosT(double L, matrixC& K)
 
 //.............................................................................
 ///
+/// Rotate the S matrix from mass to flavor basis
 ///
+/// @param fPhases - The diagonal elements of S in mass basis
+/// @param S - The S matrix in flavor basis
 ///
-void PMNS_TaylorExp::rotateS(vectorC fPhases,matrixC& S)
+void PMNS_TaylorExp::rotateS(vectorC fPhases, matrixC& S)
 {
     complexD buffer[3];
 

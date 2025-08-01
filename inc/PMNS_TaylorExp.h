@@ -36,59 +36,86 @@ namespace OscProb {
       virtual void LenghtLayer();
       //@@@@@@
 
-      virtual void SetwidthBin(double dE , double dcosT);
+      virtual void SetwidthBin(double dE, 
+        double dcosT); ///< Set bin's widths for 
+                       ///< energy and angle
 
-      virtual void SetCosT(double cosT);
-
-      virtual double avgProbTaylor(int flvi, int flvf, double E , double dE);
-
-      virtual double avgProbTaylorLoE(int flvi, int flvf, double LoE , double dLoE);
-
-      virtual double avgProbTaylor1oE(int flvi, int flvf, double ONEoE , double d1oE);
-
-      virtual double avgProbTaylor(int flvi, int flvf, double E , double dE, double cosT , double dcosT);
-
-      virtual double avgProbTaylorAngle(int flvi, int flvf, double E, double cosT , double dcosT);
+      virtual void SetCosT(double cosT); ///< Set neutrino angle.
 
       virtual vectorD ConvertEto1oE(double E, double dE);
 
-      virtual double interpolationEnergy(int flvi, int flvf, double E , double dE);
+      // Get probability averaged over a bin
+      virtual double avgProbTaylor(int flvi, int flvf, 
+        double E, double dE); ///< Compute the average probability over 
+                              ///< a bin of energy with Taylor expansion
 
-      virtual double interpolationEnergyLoE(int flvi, int flvf, double LoE , double dLoE);
+      virtual double avgProbTaylorLoE(int flvi, int flvf, 
+        double LoE, double dLoE);  ///< Compute the average probability over 
+                                   ///< a bin of LoE with Taylor expansion
 
-      virtual double interpolationCosT(int flvi, int flvf, double cosT , double dcosT);
+      virtual double avgProbTaylor1oE(int flvi, int flvf, 
+        double ONEoE, double d1oE);  ///< Compute the average probability over 
+                                     ///< a bin of 1oE with Taylor expansion
+
+      virtual double avgProbTaylorAngle(int flvi, int flvf, double E, 
+        double cosT, double dcosT); ///< Compute the average probability over a 
+                                    ///< bin of cosTheta with Taylor expansion
+
+      virtual double avgProbTaylor(int flvi, int flvf, double E, 
+        double dE, 
+        double cosT, double dcosT); ///< Compute the average probability over a 
+                                    ///< bin of cosTheta and energy with Taylor
+                                    ///< expansion
+
+      // blablabla
+      virtual double interpolationEnergy(int flvi, int flvf, 
+        double E , double dE);      /// < 
+
+      virtual double interpolationEnergyLoE(int flvi, int flvf, 
+        double LoE , double dLoE);
+
+      virtual double interpolationCosT(int flvi, int flvf, 
+        double cosT , double dcosT);
+
 
     protected:
-      virtual void InitializeTaylorsVectors(); ///< Initialize all member vectors with
-      ///< zeros
 
-      virtual void BuildKE(double L , matrixC& K);
+      virtual void InitializeTaylorsVectors(); ///< Initialize all member vectors 
+                                               ///< with zeros
 
-      virtual void BuildKcosT(double L, matrixC& K);
+      // Construction of the K matricies                                   
+      virtual void BuildKE(
+        double L, matrixC& K); ///< build K matrix for the inverse of energy in mass basis
+      virtual void BuildKcosT(
+        double L, matrixC& K); ///< build K matrix for angle in flavor basis
 
-      virtual void SolveK(complexD K[3][3], vectorD& lambda, matrixC& V);
+      // Rotation from mass basis to flavor basis
+      virtual void rotateS(vectorC fPhases,matrixC& S); ///< Rotate the S matrix 
+      virtual void rotateK(matrixC Kmass,matrixC& Kflavor); ///< Rotate one K matrix 
 
-      virtual void PropagatePathTaylor(
-        NuPath p );            ///< Propagate neutrino through a single path
-      virtual void PropagateTaylor(); ///< Propagate neutrino through full path
-
-      virtual void rotateS(vectorC fPhases,matrixC& S);
-
-      virtual void rotateK(matrixC Kmass,matrixC& Kflavor);
-
-      virtual void RotateDensityM(bool to_mass, matrixC V, matrixC& densityMatrix);
-
-      virtual void HadamardProduct(vectorD lambda, matrixC& densityMatrix, double dbin);
-
+      // Multiplication between two pairs of (S,K) matricies 
+      virtual void MultiplicationRuleS(matrixC SLayer); /// < Multiplication between two
       virtual void MultiplicationRuleK(matrixC KLayer, complexD K[3][3]);
 
-      virtual void MultiplicationRuleS(matrixC SLayer);
+      /// Solve one K matrix
+      virtual void SolveK(complexD K[3][3], 
+        vectorD& lambda, matrixC& V); ///< Solve one K matrix for
+                                      ///< eigenvectors and eigenvalues
 
+      // Propagating
+      virtual void PropagatePathTaylor(
+        NuPath p );                   ///< Propagate neutrino through a single path
+      virtual void PropagateTaylor(); ///< Propagate neutrino through full path
+
+      // Avg or interpolation for only one dynamical variable
       virtual double avgFormula(int flvi, int flvf, double dbin, vectorD flambda, matrixC fV); 
-
       virtual double avgFormulaExtrapolation(int flvi, int flvf, double dbin, vectorD flambda, matrixC fV);
 
+      // Avg on energy and cosT at the same time 
+      virtual void RotateDensityM(bool to_mass, matrixC V, matrixC& densityMatrix);
+      virtual void HadamardProduct(vectorD lambda, matrixC& densityMatrix, double dbin);
       virtual double avgAlgorithm(int flvi, int flvf);
+
 
       // Attributes
 
