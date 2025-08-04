@@ -52,7 +52,7 @@ void TimeMeasurement()
     f.SetPath(prem.GetNuPath());
     t.SetPath(prem.GetNuPath());
 
-    int nbrDataAvg= 10000;
+    int nbrDataAvg= 1;
 
     TimeIt time;
 
@@ -65,12 +65,27 @@ void TimeMeasurement()
             time.count ++;
         }
 
+        double timeTaylor = time.time() / time.count;
+
+
+        time.reset();
+
+        for (int i = 0 ; i<nbrDataAvg ; i++){
+            f.AvgProb(1,1,E,E*0.9); //AvgProb
+            time.count ++;
+        }
+
+        double timeFast = time.time() / time.count;
+
         //time.Print();
-        r->AddPoint( E , time.time() / time.count); 
+        if ((timeFast / timeTaylor)<200)
+            r->AddPoint( E , timeFast / timeTaylor); 
+        else
+            r->AddPoint( E , 200); 
     }
 
-    r->SetName("time for one avgP");
-    r->SetTitle("time for one avgP;E (GeV) ;Time (s)");
+    r->SetName("ratio");
+    r->SetTitle("avgFast / avgTaylor;E (GeV) ;ratio");
     r->Draw("AC*");
 
 

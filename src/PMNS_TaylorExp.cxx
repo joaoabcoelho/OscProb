@@ -368,6 +368,12 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 
         // Multiply this layer K's with the previous path K's
         MultiplicationRuleK(Kmass,fKcosT);
+
+        //********************************************************************************************* */
+
+        //fCountLayer++;
+
+        //*********************************************************************************************
         
     }
 
