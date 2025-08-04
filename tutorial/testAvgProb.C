@@ -82,7 +82,7 @@ void testAvgProb(){
     cout<<"i : "<< i << "  E = "<< E << endl;
 
 
-    h2->SetBinContent(i, taylor.avgProbTaylor(1,1, E, dE));
+    h2->SetBinContent(i, taylor.AvgProb(1,1, E, dE));
     //h6->SetBinContent(i, p.AvgProb(1,1, E, dE));
 
     h3->SetBinContent(i, h3->GetBinContent(i) / dE);

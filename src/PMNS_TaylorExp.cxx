@@ -428,7 +428,7 @@ void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambda, matrixC V)
+double PMNS_TaylorExp::AvgFormula(int flvi, int flvf, double dbin, vectorD lambda, matrixC V)
 {
 
     vectorC SV = vectorC(fNumNus, 0);
@@ -474,7 +474,7 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
 /// Compute the average probability of flvi going to flvf over 
 /// a bin of energy E with width dE with a Taylor expansion.
 ///
-/// This gets transformed into 1/E, since the oscillation terms
+/// This gets transformed into L/E, since the oscillation terms
 /// have arguments linear in 1/E and not E. 
 ///
 /// Flavours are:
@@ -490,7 +490,7 @@ double PMNS_TaylorExp::avgFormula(int flvi, int flvf, double dbin, vectorD lambd
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
+double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E , double dE)
 {
     if (E <= 0) return 0;
 
@@ -499,10 +499,13 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
     // Don't average zero width
     if (dE <= 0) return Prob(flvi, flvf, E);
 
-    vectorD Ebin = ConvertEto1oE(E,dE);
+    //vectorD Ebin = ConvertEto1oE(E,dE);
+    vectorD Ebin = ConvertEtoLoE(E,dE);
+
+    cout<<"ICI TAYLOR"<<endl;
 
     //return fct avr proba
-    return avgProbTaylor1oE(flvi, flvf, Ebin[0], Ebin[1]);
+    return AvgProbLoE(flvi, flvf, Ebin[0], Ebin[1]);
 }
 
 //.............................................................................
@@ -523,7 +526,7 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE)
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_TaylorExp::avgProbTaylorLoE(int flvi, int flvf, double LoE , double dLoE)
+double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE , double dLoE)
 {
     if (LoE <= 0) return 0;
 
@@ -532,34 +535,13 @@ double PMNS_TaylorExp::avgProbTaylorLoE(int flvi, int flvf, double LoE , double 
     // Don't average zero width
     if (dLoE <= 0) return Prob(flvi, flvf, fPath.length / LoE);
 
-    return avgProbTaylor1oE(flvi, flvf, LoE/fPath.length, dLoE/fPath.length);
-}
+    double d1oE = dLoE / fPath.length;
 
-//.............................................................................
-///
-/// Compute the average probability of flvi going to flvf over 
-/// a bin of energy 1/E with width d1oE with a Taylor expansion.
-///
-/// Flavours are:
-/// <pre>
-///   0 = nue, 1 = numu, 2 = nutau
-///   3 = sterile_1, 4 = sterile_2, etc.
-/// </pre>
-///
-/// @param flvi - The neutrino starting flavour.
-/// @param flvf - The neutrino final flavour.
-/// @param ONEoE - The neutrino  1/E value in the bin center in GeV-1
-/// @param d1oE - The 1/E bin width in GeV-1
-///
-/// @return Average neutrino oscillation probability
-///
-double PMNS_TaylorExp::avgProbTaylor1oE(int flvi, int flvf, double ONEoE , double d1oE)
-{
     // reset K et S et Ve et lambdaE
     InitializeTaylorsVectors();
 
-    SetEnergy(1 / ONEoE);
-    SetwidthBin(d1oE,0);
+    SetEnergy(fPath.length / LoE);
+    SetwidthBin(d1oE, 0);
 
     //Propagate -> get S and K matrix (on the whole path)
     PropagateTaylor();
@@ -568,7 +550,7 @@ double PMNS_TaylorExp::avgProbTaylor1oE(int flvi, int flvf, double ONEoE , doubl
     SolveK(fKInvE,flambdaInvE,fVInvE);
 
     //return fct avr proba
-    return avgFormula(flvi, flvf, d1oE/kGeV2eV, flambdaInvE, fVInvE);
+    return AvgFormula(flvi, flvf, d1oE/ kGeV2eV , flambdaInvE, fVInvE);
 }
 
 //.............................................................................
@@ -590,7 +572,7 @@ double PMNS_TaylorExp::avgProbTaylor1oE(int flvi, int flvf, double ONEoE , doubl
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_TaylorExp::avgProbTaylorAngle(int flvi, int flvf, double E, double cosT , double dcosT)
+double PMNS_TaylorExp::AvgProbAngle(int flvi, int flvf, double E, double cosT , double dcosT)
 {
     // reset K et S et Ve et lambdaE
     InitializeTaylorsVectors();
@@ -606,7 +588,7 @@ double PMNS_TaylorExp::avgProbTaylorAngle(int flvi, int flvf, double E, double c
     SolveK(fKcosT,flambdaCosT,fVcosT);
 
     //return fct avr proba
-    return avgFormula(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
+    return AvgFormula(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
 }
 
 //.............................................................................
@@ -628,7 +610,7 @@ double PMNS_TaylorExp::avgProbTaylorAngle(int flvi, int flvf, double E, double c
 ///
 /// @return Neutrino oscillation probability
 ///
-double PMNS_TaylorExp::avgFormulaExtrapolation(int flvi, int flvf, double dbin, vectorD lambda, matrixC V)
+double PMNS_TaylorExp::AvgFormulaExtrapolation(int flvi, int flvf, double dbin, vectorD lambda, matrixC V)
 {
  
     vectorC SV = vectorC(fNumNus, 0);
@@ -699,7 +681,7 @@ double PMNS_TaylorExp::interpolationEnergy(int flvi, int flvf, double E , double
     //DiagolK -> get VE and lambdaE
     SolveK(fKInvE,flambdaInvE,fVInvE);
 
-    return avgFormulaExtrapolation(flvi,flvf,fdInvE/kGeV2eV, flambdaInvE, fVInvE);
+    return AvgFormulaExtrapolation(flvi,flvf,fdInvE/kGeV2eV, flambdaInvE, fVInvE);
 }
 
 //.............................................................................
@@ -723,7 +705,7 @@ double PMNS_TaylorExp::interpolationEnergyLoE(int flvi, int flvf, double LoE , d
     //DiagolK -> get VE and lambdaE
     SolveK(fKInvE,flambdaInvE,fVInvE);
 
-    return avgFormulaExtrapolation(flvi,flvf,dLoE*kGeV2eV, flambdaInvE, fVInvE);
+    return AvgFormulaExtrapolation(flvi,flvf,dLoE*kGeV2eV, flambdaInvE, fVInvE);
 }
 
 
@@ -760,7 +742,7 @@ double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , doubl
     //DiagolK -> get VE and lambdaE
     SolveK(fKcosT,flambdaCosT,fVcosT);
 
-    return avgFormulaExtrapolation(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
+    return AvgFormulaExtrapolation(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
 }
 
 
@@ -878,7 +860,7 @@ void PMNS_TaylorExp::HadamardProduct(vectorD lambda, matrixC& densityMatrix, dou
 ///
 ///
 ///
-double PMNS_TaylorExp::avgAlgorithm(int flvi, int flvf)
+double PMNS_TaylorExp::AvgAlgorithm(int flvi, int flvf)
 {
     //matrixC densityMatrix = matrixC(fNumNus, vectorC(fNumNus, 0));
     densityMatrix[flvi][flvi] = 1;
@@ -900,7 +882,7 @@ double PMNS_TaylorExp::avgAlgorithm(int flvi, int flvf)
 ///
 ///
 ///
-double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE, double cosT , double dcosT)
+double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E , double dE, double cosT , double dcosT)
 {
     // reset K et S et Ve et lambdaE
     InitializeTaylorsVectors();
@@ -916,7 +898,7 @@ double PMNS_TaylorExp::avgProbTaylor(int flvi, int flvf, double E , double dE, d
     SolveK(fKInvE,flambdaInvE,fVInvE);
     SolveK(fKcosT,flambdaCosT,fVcosT);
 
-    return avgAlgorithm(flvi,flvf);
+    return AvgAlgorithm(flvi,flvf);
 }
 
 
