@@ -156,6 +156,15 @@ OscProb::PMNS_NUNM* GetNUNM(bool is_nominal){
 }
 
 //.............................................................................
+OscProb::PMNS_TaylorExp* GetTaylorExp(bool is_nominal){
+
+  OscProb::PMNS_TaylorExp* p = new OscProb::PMNS_TaylorExp();
+  SetNominalPars(p);
+  return p;
+
+}
+
+//.............................................................................
 OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
 
   if(model == "Iter")    return GetIter(is_nominal);
@@ -166,6 +175,7 @@ OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
   if(model == "LIV")     return GetLIV(is_nominal);
   if(model == "SNSI")    return GetSNSI(is_nominal);
   if(model == "NUNM")    return GetNUNM(is_nominal);
+  if(model == "TaylorExp")    return GetTaylorExp(is_nominal);
 
   return GetFast(is_nominal);
 
@@ -178,7 +188,7 @@ vector<string> GetListOfModels(){
 
   return {"Fast", "Iter", "Sterile", "NSI",
           "Deco", "Decay", "LIV", "SNSI",
-          "NUNM"};
+          "NUNM", "TayloreExp"};
 
 }
 

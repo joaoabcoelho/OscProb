@@ -82,6 +82,9 @@ void TimeMeasurement()
             r->AddPoint( E , timeFast / timeTaylor); 
         else
             r->AddPoint( E , 200); 
+
+        f->ClearCache();
+        t->ClearCache();
     }
 
     r->SetName("ratio");
