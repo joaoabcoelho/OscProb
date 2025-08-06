@@ -39,7 +39,11 @@ void PMNS_OQS::SetIsNuBar(bool isNuBar)
   PMNS_Base::SetIsNuBar(isNuBar);
 }
 
-void PMNS_OQS::SetParameterisation(int param) { fParameterisation = param; }
+void PMNS_OQS::SetParameterisation(int param)
+{
+  fBuiltHms *= (fParameterisation == param);
+  fParameterisation = param;
+}
 
 // set Heff in vacuum-mass basis
 void PMNS_OQS::SetHeff(NuPath p)
