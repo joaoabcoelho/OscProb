@@ -234,6 +234,11 @@ double PMNS_OQS::GetDissipatorElement(int i, int j){
 
 void PMNS_OQS::SetDecoElement(int i, double val)
 {
+  if(1 > i || i >= SU3_DIM){
+    cerr << "WARNING: a_" << i << " is not valid. Doing nothing." << endl;
+    return;
+  }
+
   fBuiltDissipator *= (fa[i] == abs(val));
   fa[i] = abs(val);
 }
