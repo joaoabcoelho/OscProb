@@ -210,12 +210,8 @@ void PMNS_OQS::SetDissipator()
   fD[6][8] = -(aa[1][4] + aa[2][5] - aa[3][6] + aa[6][8]) * sqrt(3) / 4;
   fD[7][8] = -(aa[1][5] - aa[2][4] - aa[3][7] + aa[7][8]) * sqrt(3) / 4;
 
-  for (int j = 0; j < SU3_DIM; j++) {
+  for (int j = 1; j < SU3_DIM; j++) {
     for (int k = j; k < SU3_DIM; k++) {
-      if (j == 0 || k == 0) {
-        fD[j][k] = 0;
-        continue;
-      }
       fD[j][k] = -fD[j][k] * kGeV2eV;
       fD[k][j] = fD[j][k];
     }
