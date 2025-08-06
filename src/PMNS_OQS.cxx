@@ -7,6 +7,8 @@
 using namespace std;
 using namespace OscProb;
 
+constexpr int SU3_DIM = PMNS_OQS::SU3_DIM;
+
 //.............................................................................
 ///
 /// Constructor. \sa PMNS_Base::PMNS_Base
@@ -14,8 +16,8 @@ using namespace OscProb;
 /// This class is restricted to 3 neutrino flavours.
 ///
 PMNS_OQS::PMNS_OQS()
-    : PMNS_DensityMatrix(), fPhi{}, fR(9), fRt(9), fa(9, 0), fM(8, 8),
-      fD(9, vectorD(9, 0)), fcos(9, vectorD(9, 1)), fHGM(9, vectorD(9, 0)),
+    : PMNS_DensityMatrix(), fPhi{}, fR(SU3_DIM), fRt(SU3_DIM), fa(SU3_DIM, 0), fM(8, 8),
+      fD(SU3_DIM, vectorD(SU3_DIM, 0)), fcos(SU3_DIM, vectorD(SU3_DIM, 1)), fHGM(SU3_DIM, vectorD(SU3_DIM, 0)),
       fHeff(3, vectorC(3, 0)), fUM(3, vectorC(3, 0))
 {
   SetParameterisation(1);
@@ -135,8 +137,8 @@ void get_GMOP(const matrixC& A, matrixD& B)
 
   B[7][8] = sqrt(3) * real(A[1][2]);
 
-  for (int i = 1; i < 9; ++i) {
-    for (int j = i + 1; j < 9; ++j) { B[j][i] = -B[i][j]; }
+  for (int i = 1; i < SU3_DIM; ++i) {
+    for (int j = i + 1; j < SU3_DIM; ++j) { B[j][i] = -B[i][j]; }
   }
 }
 
@@ -148,9 +150,9 @@ void PMNS_OQS::SetDissipator()
 {
   if (fBuiltDissipator) return;
 
-  double aa[9][9];
-  for (int i = 1; i < 9; i++) {
-    for (int j = i; j < 9; j++) {
+  double aa[SU3_DIM][SU3_DIM];
+  for (int i = 1; i < SU3_DIM; i++) {
+    for (int j = i; j < SU3_DIM; j++) {
       aa[i][j] = fa[i] * fa[j];
       if (i == 8) aa[i][j] *= sqrt(3);
       if (j == 8) aa[i][j] *= sqrt(3);
@@ -208,8 +210,8 @@ void PMNS_OQS::SetDissipator()
   fD[6][8] = -(aa[1][4] + aa[2][5] - aa[3][6] + aa[6][8]) * sqrt(3) / 4;
   fD[7][8] = -(aa[1][5] - aa[2][4] - aa[3][7] + aa[7][8]) * sqrt(3) / 4;
 
-  for (int j = 0; j < 9; j++) {
-    for (int k = j; k < 9; k++) {
+  for (int j = 0; j < SU3_DIM; j++) {
+    for (int k = j; k < SU3_DIM; k++) {
       if (j == 0 || k == 0) {
         fD[j][k] = 0;
         continue;
@@ -247,8 +249,8 @@ void PMNS_OQS::SetM()
 {
   SetDissipator();
   double energyCorr = pow(fEnergy, fPower);
-  for (int k = 1; k < 9; ++k) {
-    for (int j = 1; j < 9; ++j) {
+  for (int k = 1; k < SU3_DIM; ++k) {
+    for (int j = 1; j < SU3_DIM; ++j) {
       fM(k - 1, j - 1) = fHGM[k][j] + fD[k][j] * energyCorr;
     }
   }
@@ -342,9 +344,9 @@ void PMNS_OQS::PropagatePath(NuPath p)
 
   fRt[0] = fR[0];
 
-  for (int i = 1; i < 9; ++i) {
+  for (int i = 1; i < SU3_DIM; ++i) {
     fRt[i] = 0;
-    for (int j = 1; j < 9; ++j) { fRt[i] += fM(i - 1, j - 1) * fR[j]; }
+    for (int j = 1; j < SU3_DIM; ++j) { fRt[i] += fM(i - 1, j - 1) * fR[j]; }
   }
   fR = fRt;
 }

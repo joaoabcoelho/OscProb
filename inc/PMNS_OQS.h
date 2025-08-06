@@ -12,6 +12,8 @@ namespace OscProb {
       PMNS_OQS();          ///< Constructor
       virtual ~PMNS_OQS(); ///< Destructor
 
+      static constexpr int SU3_DIM = 9;
+    
       virtual void SetParameterisation(int par);
       virtual void SetPhi(int i, double val);
       virtual void SetDecoElement(int i, double val);
