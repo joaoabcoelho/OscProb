@@ -242,15 +242,15 @@ void PMNS_OQS::SetPower(int n) { fPower = n; }
 
 void PMNS_OQS::SetDecoAngle(int i, int j, double th)
 {
+  if(0 > i || i >= SU3_DIM || 0 > j || j >= SU3_DIM || i==j){
+    cerr << "WARNING: deco angle " << i << j << " not valid. Doing nothing." << endl;
+    return;
+  }
+
   double val = cos(th);
   fBuiltDissipator *= (fcos[i][j] == val);
-
-  if (i == j){
-    fcos[i][j] = 1;
-  } else {
-    fcos[i][j] = val;
-    fcos[j][i] = val;
-  }
+  fcos[i][j] = val;
+  fcos[j][i] = val;
 }
 
 void PMNS_OQS::SetM()
