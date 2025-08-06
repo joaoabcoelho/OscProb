@@ -55,6 +55,10 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
 
     fevolutionMatrixS = matrixC(fNumNus, vectorC(fNumNus, 0));
 
+    Sflavor= matrixC(fNumNus, vectorC(fNumNus, 0));
+    Kmass= matrixC(fNumNus, vectorC(fNumNus, 0));
+    Kflavor= matrixC(fNumNus, vectorC(fNumNus, 0));
+
     for(int i= 0 ; i<fNumNus; i++){
 
         fevolutionMatrixS[i][i] = 1;
@@ -130,6 +134,8 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 
         for(int j = 0 ; j<=i ; j++){
 
+            K[i][j] = 0;
+
             for (int l = 0 ; l<fNumNus ; l++){
                 K[i][j] += buffer[l] * fEvec[l][j] ;
             }
@@ -200,6 +206,7 @@ void PMNS_TaylorExp::rotateS(vectorC fPhases, matrixC& S)
         for(int k = 0 ; k<fNumNus ; k++) { buffer[k] = fPhases[k] * conj(fEvec[j][k]); }
         
         for(int i = 0 ; i<fNumNus ; i++){ 
+            S[i][j] = 0;
             for(int k = 0 ; k<fNumNus ; k++){
                 S[i][j] += fEvec[i][k] * buffer[k];
             }
@@ -227,6 +234,9 @@ void PMNS_TaylorExp::rotateK(matrixC Kmass , matrixC& Kflavor)
         }
 
         for(int i = 0 ; i<=j ; i++){
+
+            Kflavor[i][j] = 0;
+
             for(int k = 0 ; k<fNumNus ; k++){
                 Kflavor[i][j] += fEvec[i][k] * buffer[k];
             }
@@ -342,18 +352,18 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     }
 
     // Rotate S in flavor basis
-    matrixC Sflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
+    //matrixC Sflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
     rotateS(fPhases,Sflavor);                                    
 
     // if avg on E
     if(fdInvE != 0){
 
         // Build KE in mass basis
-        matrixC Kmass = matrixC(fNumNus, vectorC(fNumNus, 0));
+        //matrixC Kmass = matrixC(fNumNus, vectorC(fNumNus, 0));
         BuildKE(p.length,Kmass);
 
         // Rotate KE in flavor basis
-        matrixC Kflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
+        //matrixC Kflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
         rotateK(Kmass,Kflavor);
 
         // Multiply this layer K's with the previous path K's
@@ -501,8 +511,6 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E , double dE)
 
     //vectorD Ebin = ConvertEto1oE(E,dE);
     vectorD Ebin = ConvertEtoLoE(E,dE);
-
-    cout<<"ICI TAYLOR"<<endl;
 
     //return fct avr proba
     return AvgProbLoE(flvi, flvf, Ebin[0], Ebin[1]);

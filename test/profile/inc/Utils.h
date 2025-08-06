@@ -5,6 +5,7 @@
 #include "PMNS_Iter.h"
 #include "PMNS_Decay.h"
 #include "PMNS_Sterile.h"
+#include "PMNS_TaylorExp.h"
 
 //.............................................................................
 OscProb::PMNS_Fast* GetFast(){
@@ -106,6 +107,13 @@ OscProb::PMNS_LIV* GetLIV(){
 }
 
 //.............................................................................
+OscProb::PMNS_TaylorExp* GetTaylorExp(){
+
+  return new OscProb::PMNS_TaylorExp();
+
+}
+
+//.............................................................................
 OscProb::PMNS_Base* GetModel(std::string model){
 
   if(model == "Iter")    return GetIter();
@@ -115,8 +123,11 @@ OscProb::PMNS_Base* GetModel(std::string model){
   if(model == "NSI")     return GetNSI();
   if(model == "LIV")     return GetLIV();
   if(model == "SNSI")    return GetSNSI();
+  if(model == "TaylorExp")    return GetTaylorExp();
 
   return GetFast();
 
 }
+
+
 

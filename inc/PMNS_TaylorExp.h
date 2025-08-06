@@ -21,7 +21,6 @@
 #define PMNS_TaylorExp_H
 
 #include "PMNS_Fast.h"
-#include "MatrixDecomp/zheevh3.h"
 
 namespace OscProb {
 
@@ -123,6 +122,10 @@ namespace OscProb {
       // Attributes
 
       matrixC fevolutionMatrixS;  ///< Evolution matrix S for reference energy and angle 
+
+      matrixC Sflavor;
+      matrixC Kmass;
+      matrixC Kflavor;
 
       double fdInvE; ///< Bin's width for the inverse of energy in GeV-1 
 

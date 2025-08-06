@@ -57,7 +57,7 @@ void StressTest(OscProb::PMNS_Base* p, string model){
 ///
 int main(int argc, char* argv[]){
 
-  string model = "Fast";
+  string model = "TaylorExp";
 
   if(argc>1) model = argv[1];
 

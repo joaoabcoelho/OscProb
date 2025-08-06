@@ -61,7 +61,7 @@ void TimeMeasurement()
         time.reset();
 
         for (int i = 0 ; i<nbrDataAvg ; i++){
-            t.avgProbTaylor(1,1,E,E*0.9);
+            t.AvgProb(1,1,E,E*0.1);
             time.count ++;
         }
 
@@ -83,8 +83,8 @@ void TimeMeasurement()
         else
             r->AddPoint( E , 200); 
 
-        f->ClearCache();
-        t->ClearCache();
+        f.ClearCache();
+        t.ClearCache();
     }
 
     r->SetName("ratio");
