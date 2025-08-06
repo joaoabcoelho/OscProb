@@ -2,6 +2,8 @@
 
 #include "PMNS_OQS.h"
 
+#include <iostream>
+
 using namespace std;
 using namespace OscProb;
 
@@ -216,7 +218,7 @@ void PMNS_OQS::SetDissipator()
       fD[k][j] = fD[j][k];
     }
   }
-
+  
   fBuiltDissipator = true;
 }
 
@@ -232,11 +234,13 @@ void PMNS_OQS::SetDecoAngle(int i, int j, double th)
 {
   double val = cos(th);
   fBuiltDissipator *= (fcos[i][j] == val);
-  if (i == j) fcos[i][j] = 1;
-  if (val > 1) val = 1;
-  if (val < -1) val = -1;
-  fcos[i][j] = val;
-  fcos[j][i] = val;
+
+  if (i == j){
+    fcos[i][j] = 1;
+  } else {
+    fcos[i][j] = val;
+    fcos[j][i] = val;
+  }
 }
 
 void PMNS_OQS::SetM()
