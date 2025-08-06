@@ -264,7 +264,16 @@ void PMNS_OQS::SetM()
   }
 }
 
-void PMNS_OQS::SetPhi(int i, double val) { fPhi[i - 1] = val; }
+void PMNS_OQS::SetPhi(int i, double val)
+{
+  if(i!=1 && i!=2){
+    cerr << "WARNING: phi_" << i << " is not valid. Doing nothing." << endl;
+    return;
+  }
+
+  fBuildHms *= (fPhi[i-1] == val);
+  fPhi[i - 1] = val;
+}
 
 void PMNS_OQS::BuildHms()
 {
