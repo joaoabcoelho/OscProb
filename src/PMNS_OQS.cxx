@@ -224,6 +224,14 @@ void PMNS_OQS::SetDissipator()
   fBuiltDissipator = true;
 }
 
+
+double PMNS_OQS::GetDissipatorElement(int i, int j){
+
+  return fD[i][j];
+  
+}
+
+
 void PMNS_OQS::SetDecoElement(int i, double val)
 {
   fBuiltDissipator *= (fa[i] == abs(val));

@@ -21,6 +21,8 @@ namespace OscProb {
       virtual void SetPower(int n);
       virtual void SetIsNuBar(bool isNuBar);
 
+      virtual double GetDissipatorElement(int i, int j);
+
       virtual matrixD ProbMatrix(int nflvi, int nflvf);
 
     protected:
