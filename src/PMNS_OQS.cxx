@@ -276,7 +276,7 @@ void PMNS_OQS::SetPhi(int i, double val)
     return;
   }
 
-  fBuildHms *= (fPhi[i-1] == val);
+  fBuiltHms *= (fPhi[i-1] == val);
   fPhi[i - 1] = val;
 }
 
