@@ -41,9 +41,6 @@ namespace OscProb {
 
       virtual void SetCosT(double cosT); ///< Set neutrino angle.
 
-      virtual vectorD ConvertEto1oE(
-        double E, double dE); ///< Convert a bin of energy into a bin of 1/E
-
       // Get probability averaged over a bin
       using PMNS_Base::AvgProb;
       virtual double AvgProb(int flvi, int flvf, 
@@ -81,6 +78,8 @@ namespace OscProb {
       virtual void InitializeTaylorsVectors(); ///< Initialize all member vectors 
                                                ///< with zeros
 
+      virtual vectorD GetSamplePoints(double LoE, double dLoE);
+
       // Construction of the K matrices                                   
       virtual void BuildKE(
         double L, matrixC& K); ///< build K matrix for the inverse of energy in mass basis
@@ -109,6 +108,8 @@ namespace OscProb {
       // Avg for only one dynamical variable
       virtual double AvgFormula(int flvi, int flvf, double dbin, 
         vectorD flambda, matrixC fV); ///< Formula for the average probability over a bin
+
+      virtual double AvgAlgo(int flvi, int flvf, double LoE , double dLoE);
 
       // Avg on energy and cosT at the same time 
       virtual void RotateDensityM(bool to_mass, matrixC V, matrixC& densityMatrix);

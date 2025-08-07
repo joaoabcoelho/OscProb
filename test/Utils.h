@@ -188,7 +188,7 @@ vector<string> GetListOfModels(){
 
   return {"Fast", "Iter", "Sterile", "NSI",
           "Deco", "Decay", "LIV", "SNSI",
-          "NUNM", "TayloreExp"};
+          "NUNM", "TaylorExp"};
 
 }
 

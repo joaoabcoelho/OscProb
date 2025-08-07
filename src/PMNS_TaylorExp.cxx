@@ -8,12 +8,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
-
 #include "PMNS_TaylorExp.h"
-
 #include "MatrixDecomp/zheevh3.h"
-
 #include "PremModel.h"
+#include <algorithm>
+
 
 using namespace OscProb;
 
@@ -30,6 +29,8 @@ PMNS_TaylorExp::PMNS_TaylorExp() : PMNS_Fast()
     InitializeTaylorsVectors();
 
     SetwidthBin(0,0);
+
+    SetAvgProbPrec(1e-4);
 }
 
 //.............................................................................
@@ -509,7 +510,6 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E , double dE)
     // Don't average zero width
     if (dE <= 0) return Prob(flvi, flvf, E);
 
-    //vectorD Ebin = ConvertEto1oE(E,dE);
     vectorD Ebin = ConvertEtoLoE(E,dE);
 
     //return fct avr proba
@@ -543,6 +543,34 @@ double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE , double dLoE)
     // Don't average zero width
     if (dLoE <= 0) return Prob(flvi, flvf, fPath.length / LoE);
 
+    // Get sample points for this bin
+    vectorD samples = GetSamplePoints(LoE, dLoE);
+
+    double avgprob  = 0;
+
+    // Loop over all sample points
+    for (int j = 0; j < int(samples.size()); j+=2) {
+
+        avgprob += AvgAlgo(flvi, flvf, samples[j], samples[j+1]);
+        cout<<"LoE = "<< samples[j]<<"   dLoE = "<<samples[j+1]<<endl;
+        cout<<AvgAlgo(flvi, flvf, samples[j], samples[j+1])<<endl<<endl;
+
+    }
+
+    // Return average of probabilities
+    return 2 * avgprob / samples.size();
+
+    //return fct avr proba
+    //return AvgFormula(flvi, flvf, d1oE/ kGeV2eV , flambdaInvE, fVInvE);
+}
+
+//.............................................................................
+///
+/// 
+///
+double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double LoE , double dLoE)
+{
+    // Set width bin as 1/E 
     double d1oE = dLoE / fPath.length;
 
     // reset K et S et Ve et lambdaE
@@ -755,41 +783,51 @@ double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , doubl
 
 
 
+
 //.............................................................................
 ///
-/// Convert a bin of energy into a bin of 1/E
+/// Compute the sample points for a bin of L/E with width dLoE
 ///
-/// @param E  - energy bin center in GeV
-/// @param dE - energy bin width in GeV
+/// This is used for averaging the probability over a bin of L/E.
+/// It should be a private function, but I'm keeping it public for
+/// now for debugging purposes. The number of sample points seems
+/// too high for most purposes. The number of subdivisions needs
+/// to be optimized.
 ///
-/// @return The 1/E bin center and width in GeV-1
+/// @param LoE  - The neutrino  L/E value in the bin center in km/GeV
+/// @param dLoE   - The L/E bin width in km/GeV
 ///
-vectorD PMNS_TaylorExp::ConvertEto1oE(double E, double dE)
+vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE)
 {
-    vectorD Ebin(2);
 
-    // Set a minimum energy
-    double minE = 0.1 * E;
-    //double minLoE = 0;
+  // Set a number of sub-divisions to achieve "good" accuracy
+  // This needs to be studied better
+  int n_div = ceil(200 * pow(dLoE / LoE, 0.8) / sqrt(fAvgProbPrec / 1e-4));
+  // int n_div = 1;
 
-    // Transform range to E
-    // Full range if low edge > minLoE
-    if(E - dE / 2 > minE) {
-        Ebin[0] =  0.5 * (1 / (E - dE / 2) + 1 / (E + dE / 2));
-        Ebin[1] =  1 / (E - dE / 2) - 1 / (E + dE / 2);
-    }
-    else {
-        Ebin[0] = 0.5 * (1 / minE + 1 / (E + dE / 2));
-        Ebin[1] = (1 / minE - 1 / (E + dE / 2));
-    }
+  // A vector to store sample points
+  vectorD allSamples;
 
-    return Ebin;
+  // Loop over sub-divisions
+  for (int k = 0; k < n_div; k++) {
+    // Define sub-division center and width
+    double bctr = LoE - dLoE / 2 + (k + 0.5) * dLoE / n_div;
+    double bwdt = dLoE / n_div;
+
+    // Make a vector of L/E sample values
+    // Initialized in the sub-division center
+    vectorD samples;
+    allSamples.push_back(bctr);
+    allSamples.push_back(bwdt);
+
+    // Add sub-division samples to the end of allSamples vector
+    //allSamples.insert(allSamples.end(), samples.begin(), samples.end());*/
+
+  } // End of loop over sub-divisions
+
+  // Return all sample points
+  return allSamples;
 }
-
-
-
-
-
 
 
 

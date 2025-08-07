@@ -59,7 +59,7 @@ int main(int argc, char* argv[]){
 
   string model = "TaylorExp";
 
-  if(argc>1) model = argv[1];
+  //if(argc>1) model = argv[1];
 
   OscProb::PMNS_Base* p = GetModel(model);
 
