@@ -32,12 +32,12 @@ namespace OscProb {
       virtual void SetPhi(int i, double val);
 
     protected:
-      virtual void SetDissipator();
+      virtual void BuildUM();
+      virtual void BuildHms();
       virtual void SetHeff(NuPath p);
       virtual void SetHGM();
+      virtual void SetDissipator();
       virtual void SetM();
-      virtual void BuildHms();
-      virtual void BuildUM();
       virtual void RotateState(bool to_mass); ///< Rotate rho to/from mass basis
       virtual void ChangeBaseToGM();
       virtual void ChangeBaseToSU3();

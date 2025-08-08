@@ -19,7 +19,7 @@ PMNS_OQS::PMNS_OQS()
     : PMNS_DensityMatrix(), fPhi{}, fR(SU3_DIM), fRt(SU3_DIM), fa(SU3_DIM, 0),
       fM(8, 8), fD(SU3_DIM, vectorD(SU3_DIM, 0)), fHeff(3, vectorC(3, 0)),
       fUM(3, vectorC(3, 0)), fcos(SU3_DIM, vectorD(SU3_DIM, 1)),
-      fHGM(SU3_DIM, vectorD(SU3_DIM, 0)),
+      fHGM(SU3_DIM, vectorD(SU3_DIM, 0))
 {
   SetParameterisation(1);
   SetPower(0);
