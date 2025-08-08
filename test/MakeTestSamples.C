@@ -1,9 +1,9 @@
 
 #include "Utils.h"
 
-void MakeTestSamples(){
+void MakeTestSamples(vector<string> models = {}){
 
-  vector<string> models = GetListOfModels();
+  if(!models.size()) models = GetListOfModels();
 
   for(int i=0; i<models.size(); i++){
 

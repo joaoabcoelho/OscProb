@@ -4,7 +4,7 @@
 /// \brief Implementation of oscillations of neutrinos in matter in a
 ///        three-neutrino framework with decoherence.
 ///
-/// This class expands the PMNS_Fast class including a effects from
+/// This class expands the PMNS_Fast class including effects from
 /// decoherence in an increasing entropy and energy conserving model.
 ///
 /// The model assumes a power law energy dependence of the decoherence
@@ -20,11 +20,11 @@
 #ifndef PMNS_Deco_H
 #define PMNS_Deco_H
 
-#include "PMNS_Fast.h"
+#include "PMNS_DensityMatrix.h"
 
 namespace OscProb {
 
-  class PMNS_Deco : public PMNS_Fast {
+  class PMNS_Deco : public PMNS_DensityMatrix {
     public:
       PMNS_Deco();          ///< Constructor
       virtual ~PMNS_Deco(); ///< Destructor
@@ -50,31 +50,12 @@ namespace OscProb {
       /// Get the power index
       virtual double GetPower();
 
-      /// Compute the probability matrix
-      using PMNS_Base::ProbMatrix;
-      virtual matrixD ProbMatrix(int nflvi, int nflvf);
-
     protected:
-      // Resetting and propagating
-      virtual void ResetToFlavour(
-          int flv); ///< Reset neutrino state to pure flavour flv
-      virtual void SetPureState(
-          vectorC nu_in); ///< Set the density matrix from a pure state
-
-      virtual void PropagatePath(
-          NuPath p); ///< Propagate neutrino through a single path
-
-      virtual double P(
-          int flv); ///< Return the probability of final state in flavour flv
-
-      virtual void RotateState(bool to_mass); ///< Rotate rho to/from mass basis
+      /// Propagate neutrino through a single path
+      virtual void PropagatePath(NuPath p);
 
       double fGamma[3]; ///< Stores each decoherence parameter
       double fPower;    ///< Stores the power index parameter
-
-      matrixC fRho; ///< The neutrino density matrix state
-
-      matrixC fMBuffer; ///< Some memory buffer for matrix operations
   };
 
 } // namespace OscProb
