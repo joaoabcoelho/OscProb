@@ -16,9 +16,10 @@ constexpr int SU3_DIM = PMNS_OQS::SU3_DIM;
 /// This class is restricted to 3 neutrino flavours.
 ///
 PMNS_OQS::PMNS_OQS()
-    : PMNS_DensityMatrix(), fPhi{}, fR(SU3_DIM), fRt(SU3_DIM), fa(SU3_DIM, 0), fM(8, 8),
-      fD(SU3_DIM, vectorD(SU3_DIM, 0)), fcos(SU3_DIM, vectorD(SU3_DIM, 1)), fHGM(SU3_DIM, vectorD(SU3_DIM, 0)),
-      fHeff(3, vectorC(3, 0)), fUM(3, vectorC(3, 0))
+    : PMNS_DensityMatrix(), fPhi{}, fR(SU3_DIM), fRt(SU3_DIM), fa(SU3_DIM, 0),
+      fM(8, 8), fD(SU3_DIM, vectorD(SU3_DIM, 0)), fHeff(3, vectorC(3, 0)),
+      fUM(3, vectorC(3, 0)), fcos(SU3_DIM, vectorD(SU3_DIM, 1)),
+      fHGM(SU3_DIM, vectorD(SU3_DIM, 0)),
 {
   SetParameterisation(1);
   SetPower(0);
@@ -33,6 +34,59 @@ PMNS_OQS::PMNS_OQS()
 ///
 PMNS_OQS::~PMNS_OQS() {}
 
+void PMNS_OQS::SetPower(int n) { fPower = n; }
+
+void PMNS_OQS::SetDecoElement(int i, double val)
+{
+  if (1 > i || i >= SU3_DIM) {
+    cerr << "WARNING: a_" << i << " is not valid. Doing nothing." << endl;
+    return;
+  }
+
+  fBuiltDissipator *= (fa[i] == abs(val));
+  fa[i] = abs(val);
+}
+
+void PMNS_OQS::SetDecoAngle(int i, int j, double th)
+{
+  if (1 > i || i >= SU3_DIM || 1 > j || j >= SU3_DIM || i == j) {
+    cerr << "WARNING: deco angle " << i << j << " not valid. Doing nothing."
+         << endl;
+    return;
+  }
+
+  double val = cos(th);
+  fBuiltDissipator *= (fcos[i][j] == val);
+  fcos[i][j] = val;
+  fcos[j][i] = val;
+}
+
+int PMNS_OQS::GetPower() { return fPower; }
+
+double PMNS_OQS::GetDecoElement(int i)
+{
+  assert(0 < i && i < SU3_DIM);
+  return fa[i];
+}
+
+double PMNS_OQS::GetDecoAngle(int i, int j)
+{
+  assert(0 < i && i < SU3_DIM && 0 < j && j < SU3_DIM && i != j);
+  return fcos[i][j];
+}
+
+double PMNS_OQS::GetHGM(int i, int j)
+{
+  assert(0 <= i && i < SU3_DIM && 0 <= j && j < SU3_DIM);
+  return fHGM[i][j];
+}
+
+double PMNS_OQS::GetDissipatorElement(int i, int j)
+{
+  assert(0 <= i && i < SU3_DIM && 0 <= j && j < SU3_DIM);
+  return fD[i][j];
+}
+
 void PMNS_OQS::SetIsNuBar(bool isNuBar)
 {
   fBuiltHms *= (fIsNuBar == isNuBar);
@@ -43,6 +97,53 @@ void PMNS_OQS::SetParameterisation(int param)
 {
   fBuiltHms *= (fParameterisation == param);
   fParameterisation = param;
+}
+
+void PMNS_OQS::SetPhi(int i, double val)
+{
+  if (i != 1 && i != 2) {
+    cerr << "WARNING: phi_" << i << " is not valid. Doing nothing." << endl;
+    return;
+  }
+
+  fBuiltHms *= (fPhi[i - 1] == val);
+  fPhi[i - 1] = val;
+}
+
+void PMNS_OQS::BuildUM()
+{
+  SetVacuumEigensystem();
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) { fUM[i][j] = conj(fEvec[i][j]); }
+  }
+
+  complexD iphi1(0.0, fPhi[0]);
+  complexD iphi2(0.0, fPhi[1]);
+
+  fUM[0][1] *= exp(iphi1);
+  fUM[0][2] *= exp(iphi2);
+
+  if (fParameterisation == 1) {
+    fUM[1][0] *= exp(-iphi1);
+    fUM[1][2] *= exp(iphi2 - iphi1);
+
+    fUM[2][0] *= exp(-iphi2);
+    fUM[2][1] *= exp(iphi1 - iphi2);
+  }
+  else {
+    fUM[1][1] *= exp(iphi1);
+    fUM[1][2] *= exp(iphi2);
+
+    fUM[2][1] *= exp(iphi1);
+    fUM[2][2] *= exp(iphi2);
+  }
+}
+
+void PMNS_OQS::BuildHms()
+{
+  if (fBuiltHms) return;
+  BuildUM();
+  PMNS_Base::BuildHms();
 }
 
 // set Heff in vacuum-mass basis
@@ -220,42 +321,8 @@ void PMNS_OQS::SetDissipator()
       fD[k][j] = fD[j][k];
     }
   }
-  
+
   fBuiltDissipator = true;
-}
-
-
-double PMNS_OQS::GetDissipatorElement(int i, int j){
-
-  return fD[i][j];
-  
-}
-
-
-void PMNS_OQS::SetDecoElement(int i, double val)
-{
-  if(1 > i || i >= SU3_DIM){
-    cerr << "WARNING: a_" << i << " is not valid. Doing nothing." << endl;
-    return;
-  }
-
-  fBuiltDissipator *= (fa[i] == abs(val));
-  fa[i] = abs(val);
-}
-
-void PMNS_OQS::SetPower(int n) { fPower = n; }
-
-void PMNS_OQS::SetDecoAngle(int i, int j, double th)
-{
-  if(0 > i || i >= SU3_DIM || 0 > j || j >= SU3_DIM || i==j){
-    cerr << "WARNING: deco angle " << i << j << " not valid. Doing nothing." << endl;
-    return;
-  }
-
-  double val = cos(th);
-  fBuiltDissipator *= (fcos[i][j] == val);
-  fcos[i][j] = val;
-  fcos[j][i] = val;
 }
 
 void PMNS_OQS::SetM()
@@ -269,52 +336,9 @@ void PMNS_OQS::SetM()
   }
 }
 
-void PMNS_OQS::SetPhi(int i, double val)
-{
-  if(i!=1 && i!=2){
-    cerr << "WARNING: phi_" << i << " is not valid. Doing nothing." << endl;
-    return;
-  }
+void PMNS_OQS::ChangeBaseToGM() { get_GM(fRho, fR); }
 
-  fBuiltHms *= (fPhi[i-1] == val);
-  fPhi[i - 1] = val;
-}
-
-void PMNS_OQS::BuildHms()
-{
-  if (fBuiltHms) return;
-  BuildUM();
-  PMNS_Base::BuildHms();
-}
-
-void PMNS_OQS::BuildUM()
-{
-  SetVacuumEigensystem();
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) { fUM[i][j] = conj(fEvec[i][j]); }
-  }
-
-  complexD iphi1(0.0, fPhi[0]);
-  complexD iphi2(0.0, fPhi[1]);
-
-  fUM[0][1] *= exp(iphi1);
-  fUM[0][2] *= exp(iphi2);
-
-  if (fParameterisation == 1) {
-    fUM[1][0] *= exp(-iphi1);
-    fUM[1][2] *= exp(iphi2 - iphi1);
-
-    fUM[2][0] *= exp(-iphi2);
-    fUM[2][1] *= exp(iphi1 - iphi2);
-  }
-  else {
-    fUM[1][1] *= exp(iphi1);
-    fUM[1][2] *= exp(iphi2);
-
-    fUM[2][1] *= exp(iphi1);
-    fUM[2][2] *= exp(iphi2);
-  }
-}
+void PMNS_OQS::ChangeBaseToSU3() { get_SU3(fR, fRho); }
 
 //.............................................................................
 ///
@@ -329,10 +353,6 @@ void PMNS_OQS::RotateState(bool to_mass)
   PMNS_DensityMatrix::RotateState(to_mass, fUM);
   if (to_mass) ChangeBaseToGM();
 }
-
-void PMNS_OQS::ChangeBaseToGM() { get_GM(fRho, fR); }
-
-void PMNS_OQS::ChangeBaseToSU3() { get_SU3(fR, fRho); }
 
 void PMNS_OQS::Propagate()
 {

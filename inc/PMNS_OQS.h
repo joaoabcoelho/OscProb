@@ -13,17 +13,23 @@ namespace OscProb {
       virtual ~PMNS_OQS(); ///< Destructor
 
       static constexpr int SU3_DIM = 9;
-    
-      virtual void SetParameterisation(int par);
-      virtual void SetPhi(int i, double val);
+
+      virtual void SetPower(int n);
       virtual void SetDecoElement(int i, double val);
       virtual void SetDecoAngle(int i, int j, double th);
-      virtual void SetPower(int n);
-      virtual void SetIsNuBar(bool isNuBar);
 
+      virtual int    GetPower();
+      virtual double GetDecoElement(int i);
+      virtual double GetDecoAngle(int i, int j);
+
+      virtual double GetHGM(int i, int j);
       virtual double GetDissipatorElement(int i, int j);
 
+      virtual void    SetIsNuBar(bool isNuBar);
       virtual matrixD ProbMatrix(int nflvi, int nflvf);
+
+      virtual void SetParameterisation(int par);
+      virtual void SetPhi(int i, double val);
 
     protected:
       virtual void SetDissipator();
@@ -41,22 +47,22 @@ namespace OscProb {
       virtual void PropagatePath(NuPath p);
 
       int     fPower;
-      int     fParameterisation;
-      double  fPhi[2]; ///< Majorana phases
-      vectorD fR;
-      vectorD fRt;
-
-      matrixC fHeff;
-      matrixD fHGM;
-
-      matrixD fD;   ///< Off-diagonal, 9x9 dissipator
-      matrixC fUM;  ///< PMNS Matrix
       vectorD fa;   ///< a vector
       matrixD fcos; ///< cosines ai . aj
+
+      vectorD fR;
+      vectorD fRt;
+      matrixC fUM; ///< PMNS Matrix
+      matrixC fHeff;
+      matrixD fHGM;
+      matrixD fD; ///< Off-diagonal, 9x9 dissipator
 
       Eigen::MatrixXd fM; ///< Buffer matrix for exponential
 
       bool fBuiltDissipator; ///< Flag to rebuilt D
+
+      int    fParameterisation;
+      double fPhi[2]; ///< Majorana phases
   };
 
 } // namespace OscProb
