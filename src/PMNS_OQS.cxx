@@ -47,8 +47,19 @@ PMNS_OQS::PMNS_OQS()
 ///
 PMNS_OQS::~PMNS_OQS() {}
 
+//.............................................................................
+///
+/// Set the power-law index for the energy dependence of decoherence parameters.
+/// \param n Power-law index.
+///
 void PMNS_OQS::SetPower(int n) { fPower = n; }
 
+//.............................................................................
+///
+/// Set the value of decoherence parameter a_i in Gell-Mann basis.
+/// \param i Index of the parameter [1, SU3_DIM].
+/// \param val Value to assign.
+///
 void PMNS_OQS::SetDecoElement(int i, double val)
 {
   if (1 > i || i >= SU3_DIM) {
@@ -60,6 +71,13 @@ void PMNS_OQS::SetDecoElement(int i, double val)
   fa[i] = abs(val);
 }
 
+//.............................................................................                        
+///                                                                                                        
+/// Set mixing angle between two decoherence parameters a_i, a_j.
+/// \param i First index in GM basis.
+/// \param j Second index in GM basis.
+/// \param th Angle in radians.
+///
 void PMNS_OQS::SetDecoAngle(int i, int j, double th)
 {
   if (1 > i || i >= SU3_DIM || 1 > j || j >= SU3_DIM || i == j) {
@@ -74,26 +92,53 @@ void PMNS_OQS::SetDecoAngle(int i, int j, double th)
   fcos[j][i] = val;
 }
 
+//.............................................................................                        
+///                                                                                                        
+/// Get the currently set power-law index for decoherence parameters.
+///
 int PMNS_OQS::GetPower() { return fPower; }
 
+//.............................................................................                        
+///                                                                                                        
+/// Get the value of a_i decoherence parameter in GM basis.
+/// \param i Index of the parameter [1, SU3_DIM].
+///
 double PMNS_OQS::GetDecoElement(int i)
 {
   assert(0 < i && i < SU3_DIM);
   return fa[i];
 }
 
+//.............................................................................                        
+///                                                                                                        
+/// Get mixing angle between two decoherence parameters a_i, a_j.
+/// \param i First index in GM basis.
+/// \param j Second index in GM basis.
+///
 double PMNS_OQS::GetDecoAngle(int i, int j)
 {
   assert(0 < i && i < SU3_DIM && 0 < j && j < SU3_DIM && i != j);
   return fcos[i][j];
 }
 
+//.............................................................................                        
+///                                                                                                        
+/// Get element of the Hamiltonian in GM basis.
+/// \param i Row index.
+/// \param j Column index.
+///
 double PMNS_OQS::GetHGM(int i, int j)
 {
   assert(0 <= i && i < SU3_DIM && 0 <= j && j < SU3_DIM);
   return fHGM[i][j];
 }
 
+//.............................................................................                        
+///                                                                                                        
+/// Get specific element of the dissipator matrix in the GM basis.
+/// \param i Row index.
+/// \param j Column index.
+///
 double PMNS_OQS::GetDissipatorElement(int i, int j)
 {
   assert(0 <= i && i < SU3_DIM && 0 <= j && j < SU3_DIM);
@@ -106,6 +151,10 @@ void PMNS_OQS::SetIsNuBar(bool isNuBar)
   PMNS_Base::SetIsNuBar(isNuBar);
 }
 
+//.............................................................................                        
+///                                                                                                        
+/// Build the standard Hamiltonian in mass basis.
+///
 void PMNS_OQS::BuildHms()
 {
   if (fBuiltHms) return;
@@ -116,7 +165,11 @@ void PMNS_OQS::BuildHms()
   PMNS_Base::BuildHms();
 }
 
-// set Heff in vacuum-mass basis
+//.............................................................................                        
+///                                                                                                        
+/// Set the effective Hamiltonian in VMB for a given propagation path.
+/// \param p Neutrino path segment (contains baseline length and matter density profile).
+///
 void PMNS_OQS::SetHeff(NuPath p)
 {
   // Set the neutrino path
@@ -217,10 +270,17 @@ void get_GMOP(const matrixC& A, matrixD& B)
   }
 }
 
-// Set Heff in Gell-Mann basis: set only right-triangle as the left part is
-// -right
+//.............................................................................                        
+///                                                                                                        
+/// Set Effective Hamiltonian in Gell-Mann basis:
+/// set only right-triangle as the left part is -right.
+///
 void PMNS_OQS::SetHGM() { get_GMOP(fHeff, fHGM); }
 
+//.............................................................................                        
+///                                                                                                        
+/// Set Dissipator in Gell-Mann basis.
+///
 void PMNS_OQS::SetDissipator()
 {
   if (fBuiltDissipator) return;
@@ -295,6 +355,10 @@ void PMNS_OQS::SetDissipator()
   fBuiltDissipator = true;
 }
 
+//.............................................................................                        
+///
+/// Build the matrix M used in evolution equations.
+///
 void PMNS_OQS::SetM()
 {
   SetDissipator();
@@ -306,8 +370,16 @@ void PMNS_OQS::SetM()
   }
 }
 
+//.............................................................................
+///
+/// Change base to Gell-Mann.
+///
 void PMNS_OQS::ChangeBaseToGM() { get_GM(fRho, fR); }
 
+//.............................................................................
+///
+/// Change base to SU(3).
+///
 void PMNS_OQS::ChangeBaseToSU3() { get_SU3(fR, fRho); }
 
 //.............................................................................
