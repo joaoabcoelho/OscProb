@@ -28,9 +28,6 @@ namespace OscProb {
       virtual void    SetIsNuBar(bool isNuBar);
       virtual matrixD ProbMatrix(int nflvi, int nflvf);
 
-      virtual void SetParameterisation(int par);
-      virtual void SetPhi(int i, double val);
-
     protected:
       virtual void BuildUM();
       virtual void BuildHms();
@@ -61,8 +58,6 @@ namespace OscProb {
 
       bool fBuiltDissipator; ///< Flag to rebuilt D
 
-      int    fParameterisation;
-      double fPhi[2]; ///< Majorana phases
   };
 
 } // namespace OscProb

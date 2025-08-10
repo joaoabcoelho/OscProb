@@ -16,15 +16,12 @@ constexpr int SU3_DIM = PMNS_OQS::SU3_DIM;
 /// This class is restricted to 3 neutrino flavours.
 ///
 PMNS_OQS::PMNS_OQS()
-    : PMNS_DensityMatrix(), fPhi{}, fR(SU3_DIM), fRt(SU3_DIM), fa(SU3_DIM, 0),
+    : PMNS_DensityMatrix(), fR(SU3_DIM), fRt(SU3_DIM), fa(SU3_DIM, 0),
       fM(8, 8), fD(SU3_DIM, vectorD(SU3_DIM, 0)), fHeff(3, vectorC(3, 0)),
       fUM(3, vectorC(3, 0)), fcos(SU3_DIM, vectorD(SU3_DIM, 1)),
       fHGM(SU3_DIM, vectorD(SU3_DIM, 0))
 {
-  SetParameterisation(1);
   SetPower(0);
-  SetPhi(1, 0);
-  SetPhi(2, 0);
   fBuiltDissipator = false;
 }
 
@@ -93,49 +90,11 @@ void PMNS_OQS::SetIsNuBar(bool isNuBar)
   PMNS_Base::SetIsNuBar(isNuBar);
 }
 
-void PMNS_OQS::SetParameterisation(int param)
-{
-  fBuiltHms *= (fParameterisation == param);
-  fParameterisation = param;
-}
-
-void PMNS_OQS::SetPhi(int i, double val)
-{
-  if (i != 1 && i != 2) {
-    cerr << "WARNING: phi_" << i << " is not valid. Doing nothing." << endl;
-    return;
-  }
-
-  fBuiltHms *= (fPhi[i - 1] == val);
-  fPhi[i - 1] = val;
-}
-
 void PMNS_OQS::BuildUM()
 {
   SetVacuumEigensystem();
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) { fUM[i][j] = conj(fEvec[i][j]); }
-  }
-
-  complexD iphi1(0.0, fPhi[0]);
-  complexD iphi2(0.0, fPhi[1]);
-
-  fUM[0][1] *= exp(iphi1);
-  fUM[0][2] *= exp(iphi2);
-
-  if (fParameterisation == 1) {
-    fUM[1][0] *= exp(-iphi1);
-    fUM[1][2] *= exp(iphi2 - iphi1);
-
-    fUM[2][0] *= exp(-iphi2);
-    fUM[2][1] *= exp(iphi1 - iphi2);
-  }
-  else {
-    fUM[1][1] *= exp(iphi1);
-    fUM[1][2] *= exp(iphi2);
-
-    fUM[2][1] *= exp(iphi1);
-    fUM[2][2] *= exp(iphi2);
   }
 }
 
