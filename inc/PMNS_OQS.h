@@ -29,7 +29,6 @@ namespace OscProb {
       virtual matrixD ProbMatrix(int nflvi, int nflvf);
 
     protected:
-      virtual void BuildUM();
       virtual void BuildHms();
       virtual void SetHeff(NuPath p);
       virtual void SetHGM();

@@ -90,18 +90,13 @@ void PMNS_OQS::SetIsNuBar(bool isNuBar)
   PMNS_Base::SetIsNuBar(isNuBar);
 }
 
-void PMNS_OQS::BuildUM()
+void PMNS_OQS::BuildHms()
 {
+  if (fBuiltHms) return;
   SetVacuumEigensystem();
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 3; j++) { fUM[i][j] = conj(fEvec[i][j]); }
   }
-}
-
-void PMNS_OQS::BuildHms()
-{
-  if (fBuiltHms) return;
-  BuildUM();
   PMNS_Base::BuildHms();
 }
 
