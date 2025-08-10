@@ -1,3 +1,19 @@
+///////////////////////////////////////////////////////////////////////////////                            
+/// \class OscProb::PMNS_OQS                                                                            
+///                                                                                                   
+/// \brief Implements neutrino oscillations using an open quantum system approach.                         
+///                                                                                                      
+/// Implementation of three-flavor neutrino oscillations in vacuum and matter,                               
+/// incorporating quantum dissipation effects.                     
+/// Based on the formalism described in: https://doi.org/10.48550/arXiv.hep-ph/0208166.
+///                                                                                                          
+/// This developement is part of the QGRANT project (ID: 101068013),                                      
+/// founded by the HORIZON-MSCA-2021-PF-01-01 programme.                                        
+///                                                                                                     
+/// \author Alba Domi - alba.domi\@fau.de                                                                  
+/// \author Joao Coelho - jcoelho\@apc.in2p3.fr                                                       
+///////////////////////////////////////////////////////////////////////////////     
+
 #include <unsupported/Eigen/MatrixFunctions>
 
 #include "PMNS_OQS.h"
