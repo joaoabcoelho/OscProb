@@ -1,5 +1,7 @@
 //#include <ostream>
 
+using namespace std;
+
 namespace Color {
 
     enum Code {
