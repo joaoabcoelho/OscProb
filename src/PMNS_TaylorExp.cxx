@@ -56,7 +56,7 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
 
     fevolutionMatrixS = matrixC(fNumNus, vectorC(fNumNus, 0));
 
-    Sflavor= matrixC(fNumNus, vectorC(fNumNus, 0));
+    fSflavor= matrixC(fNumNus, vectorC(fNumNus, 0));
     Kmass= matrixC(fNumNus, vectorC(fNumNus, 0));
     Kflavor= matrixC(fNumNus, vectorC(fNumNus, 0));
 
@@ -353,8 +353,8 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     }
 
     // Rotate S in flavor basis
-    //matrixC Sflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
-    rotateS(fPhases,Sflavor);                                    
+    //matrixC fSflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
+    rotateS(fPhases,fSflavor);                                    
 
     // if avg on E
     if(fdInvE != 0){
@@ -389,7 +389,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     }
 
     // Multiply this layer S's with the previous path S's
-    MultiplicationRuleS(Sflavor);
+    MultiplicationRuleS(fSflavor);
 
 }
 
@@ -788,15 +788,12 @@ double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , doubl
 
 
 
+
 //.............................................................................
 ///
 /// Compute the sample points for a bin of L/E with width dLoE
 ///
-/// This is used for averaging the probability over a bin of L/E.
-/// It should be a private function, but I'm keeping it public for
-/// now for debugging purposes. The number of sample points seems
-/// too high for most purposes. The number of subdivisions needs
-/// to be optimized.
+/// This is used for averaging the probability over a bin of L/E..
 ///
 /// @param LoE  - The neutrino  L/E value in the bin center in km/GeV
 /// @param dLoE   - The L/E bin width in km/GeV
@@ -806,9 +803,10 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE)
 
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
-  int n_div = ceil(100* pow(dLoE / LoE, 0.8) / ( pow(LoE, 5) * sqrt(fAvgProbPrec / 1e-4)));
+  int n_div = ceil(10* pow(dLoE / LoE, 0.8) * pow(LoE, 0.2) /  sqrt(fAvgProbPrec / 1e-4));
+  //int n_div = ceil(10* pow(dLoE / LoE, 0.9) * pow(LoE, 0.1) * (1 + 2 * exp(-pow((LoE-2100),2)/(2*pow(300,2))) ) /  sqrt(fAvgProbPrec / 1e-4));
   //int n_div = 15;
-  cout<<"nbr sub-bins = "<<n_div<<endl;
+  //cout<<"nbr sub-bins = "<<n_div<<endl;
 
   // A vector to store sample points
   vectorD allSamples;
@@ -828,7 +826,28 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE)
 }
 
 
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+
+
+/*double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E , double dE, double a, double b, double c, double k)
+{
+    if (E <= 0) return 0;
+
+    if (fNuPaths.empty()) return 0;
+
+    // Don't average zero width
+    if (dE <= 0) return Prob(flvi, flvf, E);
+
+    vectorD Ebin = ConvertEtoLoE(E,dE);
+
+    //cout<<endl<<"(NEW BIN)-------------------------E = "<<E<<"-----------------------------------"<<endl;
+
+    //return fct avr proba
+    return AvgProbLoE(flvi, flvf, Ebin[0], Ebin[1],a,b,c,k);
+}
 
 double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE , double dLoE, double a, double b, double c, double k)
 {
@@ -840,7 +859,7 @@ double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE , double dLoE, 
     if (dLoE <= 0) return Prob(flvi, flvf, fPath.length / LoE);
 
     // Get sample points for this bin
-    vectorD samples = GetSamplePoints(LoE, dLoE);
+    vectorD samples = GetSamplePoints(LoE, dLoE,a,b,c,k);
     
     double avgprob  = 0;
     double L = fPath.length;
@@ -868,9 +887,9 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE, double a, doubl
 
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
-  int n_div = ceil(k* pow(dLoE / LoE, a) / ( pow(LoE, b) * pow(fAvgProbPrec / 1e-4 , c)));
+  int n_div = ceil(k* pow(dLoE / LoE, a) * pow(LoE, b) * (1 + 2 * exp(-pow((LoE-2100),2)/(2*pow(500,2))) ) / pow(fAvgProbPrec / 1e-4 , c));
   //int n_div = 15;
-  cout<<"nbr sub-bins = "<<n_div<<endl;
+  //cout<<"nbr sub-bins = "<<n_div<<endl;
 
   // A vector to store sample points
   vectorD allSamples;
@@ -887,9 +906,8 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE, double a, doubl
 
   // Return all sample points
   return allSamples;
-}
+}*/
 
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
 

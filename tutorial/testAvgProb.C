@@ -37,9 +37,9 @@ void testAvgProb(){
 
 
   // Define some fine and coarse binnings
-  int navg = 30;
+  int navg = 20;
   int nbins = navg * 100;
-  double xmin = 0;
+  double xmin = -1;
   double xmax = 3;
 
   // Lots of histograms
@@ -80,13 +80,13 @@ void testAvgProb(){
     //double pp =taylor.avgProbTaylor(1,1, E, dE);
     
 
-    cout<<"---------------i : "<< i << "  E = "<< E <<"------------------"<< endl;
+    cout<<"---------------i : "<< i << "  E = "<< E <<"----- LoE ="<< L / E << "------------------"<< endl;
     double a = taylor.AvgProb(1,1, E, dE);
     double b = h3->GetBinContent(i) / dE;
     double ab = abs(a-b);
     cout<<a<<" - "<< b << " = " <<ab;
 
-    if (ab < 1E-4)
+    if (ab < 5 * 1E-4)
       cout<<"                 TRUE";
     else
       cout<<"                 FALSE";

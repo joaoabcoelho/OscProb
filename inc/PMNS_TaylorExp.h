@@ -73,9 +73,9 @@ namespace OscProb {
         double cosT , double dcosT);
 
 
-
+        /*virtual double AvgProb(int flvi, int flvf, double E, double dE,double a, double b, double c, double k);
         virtual double AvgProbLoE(int flvi, int flvf, double LoE, double dLoE, double a, double b, double c, double k);
-        virtual vectorD GetSamplePoints(double LoE, double dLoE, double a, double b, double c, double k);
+        virtual vectorD GetSamplePoints(double LoE, double dLoE, double a, double b, double c, double k);*/
 
 
     protected:
@@ -129,7 +129,7 @@ namespace OscProb {
 
       matrixC fevolutionMatrixS;  ///< Evolution matrix S for reference energy and angle 
 
-      matrixC Sflavor;
+      matrixC fSflavor;
       matrixC Kmass;
       matrixC Kflavor;
 
@@ -149,11 +149,6 @@ namespace OscProb {
       matrixC densityMatrix; ///< The neutrino density matrix state
 
       std::vector<NuPath> fNuPathsVariation ;
-
-      double aCst;
-      double bCst;
-      double cCst;
-      double kCst;
 
   };
 
