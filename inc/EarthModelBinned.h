@@ -144,9 +144,10 @@ namespace OscProb {
       double
              rDetGammaSinDetLat; ///< rDet*sin(DetLat)*[sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)]
       double maxSinSqLat; ///< 1 - [sin(phi)*cos(DetLat)]^2
-      double xlatextreme; ///< rDet*cos(phi)*cos(DetLat)/[sin(T)*sin(DetLat)-cos(phi)*cosT*cos(DetLat)],
-                          ///< unless the denominator is 0, in which case it is
-                          ///< set to 0
+      double
+          xlatextreme; ///< rDet*cos(phi)*cos(DetLat)/[sin(T)*sin(DetLat)-cos(phi)*cosT*cos(DetLat)],
+                       ///< unless the denominator is 0, in which case it is
+                       ///< set to 0
   };
 
   struct EarthBin {
