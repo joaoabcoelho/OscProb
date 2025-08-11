@@ -1,18 +1,10 @@
-///////////////////////////////////////////////////////////////////////////////                            
-/// \class OscProb::PMNS_OQS                                                                            
-///                                                                                                   
-/// \brief Implements neutrino oscillations using an open quantum system approach.                         
-///                                                                                                      
-/// Implementation of three-flavor neutrino oscillations in vacuum and matter,                               
-/// incorporating quantum dissipation effects.                     
-/// Based on the formalism described in: https://doi.org/10.48550/arXiv.hep-ph/0208166.
-///                                                                                                          
-/// This developement is part of the QGRANT project (ID: 101068013),                                      
-/// founded by the HORIZON-MSCA-2021-PF-01-01 programme.                                        
-///                                                                                                     
-/// \author Alba Domi - alba.domi\@fau.de                                                                  
-/// \author Joao Coelho - jcoelho\@apc.in2p3.fr                                                       
-///////////////////////////////////////////////////////////////////////////////     
+///////////////////////////////////////////////////////////////////////////////
+/// Implementation of three-flavor neutrino oscillations in vacuum and matter,
+/// incorporating quantum dissipation effects.
+///
+/// @author Alba Domi - alba.domi@fau.de
+/// @author Joao Coelho - jcoelho@apc.in2p3.fr
+///////////////////////////////////////////////////////////////////////////////
 
 #include <unsupported/Eigen/MatrixFunctions>
 
@@ -32,10 +24,10 @@ constexpr int SU3_DIM = PMNS_OQS::SU3_DIM;
 /// This class is restricted to 3 neutrino flavours.
 ///
 PMNS_OQS::PMNS_OQS()
-    : PMNS_DensityMatrix(), fR(SU3_DIM), fRt(SU3_DIM), fa(SU3_DIM, 0),
-      fM(8, 8), fD(SU3_DIM, vectorD(SU3_DIM, 0)), fHeff(3, vectorC(3, 0)),
-      fUM(3, vectorC(3, 0)), fcos(SU3_DIM, vectorD(SU3_DIM, 1)),
-      fHGM(SU3_DIM, vectorD(SU3_DIM, 0))
+    : PMNS_DensityMatrix(), fUM(3, vectorC(3, 0)), fHVMB(3, vectorC(3, 0)),
+      fHGM(SU3_DIM, vectorD(SU3_DIM, 0)), fD(SU3_DIM, vectorD(SU3_DIM, 0)),
+      fcos(SU3_DIM, vectorD(SU3_DIM, 1)), fa(SU3_DIM, 0), fR(SU3_DIM),
+      fRt(SU3_DIM), fM(8, 8)
 {
   SetPower(0);
   fBuiltDissipator = false;
@@ -50,15 +42,17 @@ PMNS_OQS::~PMNS_OQS() {}
 //.............................................................................
 ///
 /// Set the power-law index for the energy dependence of decoherence parameters.
-/// \param n Power-law index.
+///
+/// @param n - Power-law index.
 ///
 void PMNS_OQS::SetPower(int n) { fPower = n; }
 
 //.............................................................................
 ///
-/// Set the value of decoherence parameter a_i in Gell-Mann basis.
-/// \param i Index of the parameter [1, SU3_DIM].
-/// \param val Value to assign.
+/// Set the value of decoherence parameter |a_i| in Gell-Mann representation.
+///
+/// @param i   - Index of the parameter in range [1, 8].
+/// @param val - Value to assign.
 ///
 void PMNS_OQS::SetDecoElement(int i, double val)
 {
@@ -71,12 +65,13 @@ void PMNS_OQS::SetDecoElement(int i, double val)
   fa[i] = abs(val);
 }
 
-//.............................................................................                        
-///                                                                                                        
-/// Set mixing angle between two decoherence parameters a_i, a_j.
-/// \param i First index in GM basis.
-/// \param j Second index in GM basis.
-/// \param th Angle in radians.
+//.............................................................................
+///
+/// Set angle between two decoherence vectors a_i and a_j.
+///
+/// @param i  - First index in GM representation in range [1, 8].
+/// @param j  - Second index in GM representation in range [2, 8].
+/// @param th - Angle in radians.
 ///
 void PMNS_OQS::SetDecoAngle(int i, int j, double th)
 {
@@ -92,16 +87,21 @@ void PMNS_OQS::SetDecoAngle(int i, int j, double th)
   fcos[j][i] = val;
 }
 
-//.............................................................................                        
-///                                                                                                        
+//.............................................................................
+///
 /// Get the currently set power-law index for decoherence parameters.
+///
+/// @return Power-law index.
 ///
 int PMNS_OQS::GetPower() { return fPower; }
 
-//.............................................................................                        
-///                                                                                                        
-/// Get the value of a_i decoherence parameter in GM basis.
-/// \param i Index of the parameter [1, SU3_DIM].
+//.............................................................................
+///
+/// Get the value of a_i decoherence parameter in GM representation.
+///
+/// @param i - Index of the parameter in range [1, 8].
+///
+/// @return Decoherence parameter a_i.
 ///
 double PMNS_OQS::GetDecoElement(int i)
 {
@@ -109,23 +109,29 @@ double PMNS_OQS::GetDecoElement(int i)
   return fa[i];
 }
 
-//.............................................................................                        
-///                                                                                                        
-/// Get mixing angle between two decoherence parameters a_i, a_j.
-/// \param i First index in GM basis.
-/// \param j Second index in GM basis.
+//.............................................................................
+///
+/// Get mixing angle between two decoherence vectors a_i and a_j.
+///
+/// @param i - First index in GM representation in range [1, 8].
+/// @param j - Second index in GM representation in range [2, 8].
+///
+/// @return Decoherence angle between a_i and a_j.
 ///
 double PMNS_OQS::GetDecoAngle(int i, int j)
 {
   assert(0 < i && i < SU3_DIM && 0 < j && j < SU3_DIM && i != j);
-  return fcos[i][j];
+  return acos(fcos[i][j]);
 }
 
-//.............................................................................                        
-///                                                                                                        
-/// Get element of the Hamiltonian in GM basis.
-/// \param i Row index.
-/// \param j Column index.
+//.............................................................................
+///
+/// Get element of the Hamiltonian in GM representation.
+///
+/// @param i - Row index in range [0, 8].
+/// @param j - Column index in range [0, 8].
+///
+/// @return Hamiltonian element i,j in GM representation.
 ///
 double PMNS_OQS::GetHGM(int i, int j)
 {
@@ -133,11 +139,14 @@ double PMNS_OQS::GetHGM(int i, int j)
   return fHGM[i][j];
 }
 
-//.............................................................................                        
-///                                                                                                        
-/// Get specific element of the dissipator matrix in the GM basis.
-/// \param i Row index.
-/// \param j Column index.
+//.............................................................................
+///
+/// Get specific element of the dissipator matrix in the GM representation.
+///
+/// @param i Row index in range [0, 8].
+/// @param j Column index in range [0, 8].
+///
+/// @return Dissipator element i,j.
 ///
 double PMNS_OQS::GetDissipatorElement(int i, int j)
 {
@@ -145,15 +154,21 @@ double PMNS_OQS::GetDissipatorElement(int i, int j)
   return fD[i][j];
 }
 
+//.............................................................................
+///
+/// Reimplement from PMNS_Base flagging to rebuild Hamiltonian.
+///
+/// @param isNuBar - Flag for anti-neutrinos.
+///
 void PMNS_OQS::SetIsNuBar(bool isNuBar)
 {
   fBuiltHms *= (fIsNuBar == isNuBar);
   PMNS_Base::SetIsNuBar(isNuBar);
 }
 
-//.............................................................................                        
-///                                                                                                        
-/// Build the standard Hamiltonian in mass basis.
+//.............................................................................
+///
+/// Reimplement from PMNS_Base and save the PMNS matrix for later use.
 ///
 void PMNS_OQS::BuildHms()
 {
@@ -165,12 +180,13 @@ void PMNS_OQS::BuildHms()
   PMNS_Base::BuildHms();
 }
 
-//.............................................................................                        
-///                                                                                                        
-/// Set the effective Hamiltonian in VMB for a given propagation path.
-/// \param p Neutrino path segment (contains baseline length and matter density profile).
+//.............................................................................
 ///
-void PMNS_OQS::SetHeff(NuPath p)
+/// Build the effective Hamiltonian in VMB for a given propagation path.
+///
+/// @param p - Neutrino path segment.
+///
+void PMNS_OQS::BuildHVMB(NuPath p)
 {
   // Set the neutrino path
   SetCurPath(p);
@@ -189,18 +205,26 @@ void PMNS_OQS::SetHeff(NuPath p)
 
   for (int i = 0; i < 3; i++) {
     for (int j = i; j < 3; j++) {
-      fHeff[i][j] = conj(fUM[0][i]) * Ve * fUM[0][j];
-      if (i > j) fHeff[j][i] = conj(fHeff[i][j]);
+      fHVMB[i][j] = conj(fUM[0][i]) * Ve * fUM[0][j];
+      if (i > j) fHVMB[j][i] = conj(fHVMB[i][j]);
     }
   }
 
   double lv = 2 * kGeV2eV * fEnergy; // 2E in eV
 
   // add mass terms
-  fHeff[1][1] += fDm[1] / lv;
-  fHeff[2][2] += fDm[2] / lv;
+  fHVMB[1][1] += fDm[1] / lv;
+  fHVMB[2][2] += fDm[2] / lv;
 }
 
+//.............................................................................
+///
+/// Auxiliary function to convert Hermitian 3x3 matrices
+/// to GM representation vectors.
+///
+/// @param A - The input Hermitian 3x3 matrix.
+/// @param v - The output real 9-vector.
+///
 void get_GM(const matrixC& A, vectorD& v)
 {
   v[0] = real(A[0][0] + A[1][1] + A[2][2]) / sqrt(6);
@@ -216,6 +240,14 @@ void get_GM(const matrixC& A, vectorD& v)
   v[7] = -imag(A[1][2]);
 }
 
+//.............................................................................
+///
+/// Auxiliary function to convert GM representation vectors
+/// to Hermitian 3x3 matrices.
+///
+/// @param v - The input real 9-vector.
+/// @param A - The output Hermitian 3x3 matrix.
+///
 void get_SU3(const vectorD& v, matrixC& A)
 {
   A[0][0] = v[0] * sqrt(2 / 3.) + v[3] + v[8] / sqrt(3);
@@ -231,6 +263,14 @@ void get_SU3(const vectorD& v, matrixC& A)
   }
 }
 
+//.............................................................................
+///
+/// Auxiliary function to convert Hermitian 3x3 matrices to
+/// GM representation 9x9 operators.
+///
+/// @param A - The input Hermitian 3x3 matrix.
+/// @param B - The output real 9x9 matrix.
+///
 void get_GMOP(const matrixC& A, matrixD& B)
 {
   B[1][2] = real(A[0][0] - A[1][1]);
@@ -270,18 +310,23 @@ void get_GMOP(const matrixC& A, matrixD& B)
   }
 }
 
-//.............................................................................                        
-///                                                                                                        
-/// Set Effective Hamiltonian in Gell-Mann basis:
-/// set only right-triangle as the left part is -right.
+//.............................................................................
 ///
-void PMNS_OQS::SetHGM() { get_GMOP(fHeff, fHGM); }
+/// Build the effective Hamiltonian in Gell-Mann representation.
+///
+/// @param p - Neutrino path segment.
+///
+void PMNS_OQS::BuildHGM(NuPath p)
+{
+  BuildHVMB(p);
+  get_GMOP(fHVMB, fHGM);
+}
 
-//.............................................................................                        
-///                                                                                                        
-/// Set Dissipator in Gell-Mann basis.
+//.............................................................................
 ///
-void PMNS_OQS::SetDissipator()
+/// Build dissipator in Gell-Mann representation.
+///
+void PMNS_OQS::BuildDissipator()
 {
   if (fBuiltDissipator) return;
 
@@ -355,13 +400,16 @@ void PMNS_OQS::SetDissipator()
   fBuiltDissipator = true;
 }
 
-//.............................................................................                        
+//.............................................................................
 ///
 /// Build the matrix M used in evolution equations.
 ///
-void PMNS_OQS::SetM()
+/// @param p - Neutrino path segment.
+///
+void PMNS_OQS::BuildM(NuPath p)
 {
-  SetDissipator();
+  BuildHGM(p);
+  BuildDissipator();
   double energyCorr = pow(fEnergy, fPower);
   for (int k = 1; k < SU3_DIM; ++k) {
     for (int j = 1; j < SU3_DIM; ++j) {
@@ -372,30 +420,34 @@ void PMNS_OQS::SetM()
 
 //.............................................................................
 ///
-/// Change base to Gell-Mann.
+/// Build Gell-Mann representation of density matrix.
 ///
-void PMNS_OQS::ChangeBaseToGM() { get_GM(fRho, fR); }
+void PMNS_OQS::BuildR() { get_GM(fRho, fR); }
 
 //.............................................................................
 ///
-/// Change base to SU(3).
+/// Update density matrix from Gell-Mann representation.
 ///
-void PMNS_OQS::ChangeBaseToSU3() { get_SU3(fR, fRho); }
+void PMNS_OQS::UpdateRho() { get_SU3(fR, fRho); }
 
 //.............................................................................
 ///
-/// Rotate the density matrix to or from the mass basis
+/// Rotate the density matrix to or from the mass basis.
 ///
-/// @param to_mass - true if to mass basis
+/// @param to_mass - true if to mass basis.
 ///
 void PMNS_OQS::RotateState(bool to_mass)
 {
   BuildHms();
-  if (!to_mass) ChangeBaseToSU3();
+  if (!to_mass) UpdateRho();
   PMNS_DensityMatrix::RotateState(to_mass, fUM);
-  if (to_mass) ChangeBaseToGM();
+  if (to_mass) BuildR();
 }
 
+//.............................................................................
+///
+/// Reimplemented from PMNS_Base to rotate to mass basis before propagation.
+///
 void PMNS_OQS::Propagate()
 {
   RotateState(true);
@@ -405,17 +457,13 @@ void PMNS_OQS::Propagate()
 
 //.............................................................................
 ///
-/// Propagate the current neutrino state through a given path
+/// Propagate the current neutrino state through a given path.
 ///
-/// @param p - A neutrino path segment
+/// @param p - A neutrino path segment.
 ///
 void PMNS_OQS::PropagatePath(NuPath p)
 {
-  SetHeff(p);
-
-  SetHGM();
-
-  SetM();
+  BuildM(p);
 
   // Solve for eigensystem
   SolveHam();
@@ -447,7 +495,7 @@ void PMNS_OQS::PropagatePath(NuPath p)
 /// @param nflvi - The number of initial flavours in the matrix.
 /// @param nflvf - The number of final flavours in the matrix.
 ///
-/// @return Neutrino oscillation probabilities
+/// @return Neutrino oscillation probabilities.
 ///
 matrixD PMNS_OQS::ProbMatrix(int nflvi, int nflvf)
 {
