@@ -16,7 +16,7 @@ void StressTest(OscProb::PMNS_Base* p, string model){
 
   // Use a PremModel to make paths
   // through the earth
-  OscProb::PremModel prem;
+  OscProb::PremModel prem("../../PremTables/prem_15layers.txt");
 
   // Chose an angle for the neutrino
   // and fill the paths with cosTheta
@@ -28,7 +28,7 @@ void StressTest(OscProb::PMNS_Base* p, string model){
   p->SetPath(prem.GetNuPath());
 
   // Define energy sample points
-  int nbins = 100;
+  int nbins = 10;
   vector<double> xbins = GetLogAxis(nbins, 1, 100);
 
   cout << "PMNS_" << model << ": Starting..." << endl;
@@ -36,7 +36,7 @@ void StressTest(OscProb::PMNS_Base* p, string model){
   for(int k=0; k<1; k++){
     p->ClearCache(); // Clear cache at each iteration
     // Compute oscillogram
-    for(double cosZ=-0.95; cosZ<1; cosZ+=0.1){
+    for(double cosZ=-0.9; cosZ<1; cosZ+=0.2){
       prem.FillPath(cosZ);
       p->SetPath(prem.GetNuPath());
       for(int i=0; i<nbins; i++){
