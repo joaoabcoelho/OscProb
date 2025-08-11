@@ -512,6 +512,8 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E , double dE)
 
     vectorD Ebin = ConvertEtoLoE(E,dE);
 
+    //cout<<endl<<"(NEW BIN)-------------------------E = "<<E<<"-----------------------------------"<<endl;
+
     //return fct avr proba
     return AvgProbLoE(flvi, flvf, Ebin[0], Ebin[1]);
 }
@@ -547,36 +549,38 @@ double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE , double dLoE)
     vectorD samples = GetSamplePoints(LoE, dLoE);
 
     double avgprob  = 0;
+    double L = fPath.length;
+    double sumw   = 0;
 
     // Loop over all sample points
-    for (int j = 0; j < int(samples.size()); j+=2) {
+    for (int j = 1; j < int(samples.size()); j++) {
 
-        avgprob += AvgAlgo(flvi, flvf, samples[j], samples[j+1]);
-        cout<<"LoE = "<< samples[j]<<"   dLoE = "<<samples[j+1]<<endl;
-        cout<<AvgAlgo(flvi, flvf, samples[j], samples[j+1])<<endl<<endl;
+        double w = 1. / pow(samples[j], 2);
+
+        avgprob += w * AvgAlgo(flvi, flvf, samples[j], samples[0],L);
+
+        sumw += w;
 
     }
-
+    
     // Return average of probabilities
-    return 2 * avgprob / samples.size();
-
-    //return fct avr proba
-    //return AvgFormula(flvi, flvf, d1oE/ kGeV2eV , flambdaInvE, fVInvE);
+    return  avgprob / sumw;
 }
 
 //.............................................................................
 ///
 /// 
 ///
-double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double LoE , double dLoE)
+double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double LoE , double dLoE, double L)
 {
     // Set width bin as 1/E 
-    double d1oE = dLoE / fPath.length;
+    //double L = fPath.length;
+    double d1oE = dLoE / L;
 
     // reset K et S et Ve et lambdaE
     InitializeTaylorsVectors();
 
-    SetEnergy(fPath.length / LoE);
+    SetEnergy(L / LoE);
     SetwidthBin(d1oE, 0);
 
     //Propagate -> get S and K matrix (on the whole path)
@@ -802,26 +806,20 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE)
 
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
-  int n_div = ceil(200 * pow(dLoE / LoE, 0.8) / sqrt(fAvgProbPrec / 1e-4));
-  // int n_div = 1;
+  int n_div = ceil(100* pow(dLoE / LoE, 0.8) / ( pow(LoE, 5) * sqrt(fAvgProbPrec / 1e-4)));
+  //int n_div = 15;
+  cout<<"nbr sub-bins = "<<n_div<<endl;
 
   // A vector to store sample points
   vectorD allSamples;
+  allSamples.push_back(dLoE / n_div);
 
   // Loop over sub-divisions
   for (int k = 0; k < n_div; k++) {
     // Define sub-division center and width
     double bctr = LoE - dLoE / 2 + (k + 0.5) * dLoE / n_div;
-    double bwdt = dLoE / n_div;
-
-    // Make a vector of L/E sample values
-    // Initialized in the sub-division center
-    vectorD samples;
+   
     allSamples.push_back(bctr);
-    allSamples.push_back(bwdt);
-
-    // Add sub-division samples to the end of allSamples vector
-    //allSamples.insert(allSamples.end(), samples.begin(), samples.end());*/
 
   } // End of loop over sub-divisions
 
@@ -830,12 +828,68 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE)
 }
 
 
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE , double dLoE, double a, double b, double c, double k)
+{
+    if (LoE <= 0) return 0;
+
+    if (fNuPaths.empty()) return 0;
+
+    // Don't average zero width
+    if (dLoE <= 0) return Prob(flvi, flvf, fPath.length / LoE);
+
+    // Get sample points for this bin
+    vectorD samples = GetSamplePoints(LoE, dLoE);
+    
+    double avgprob  = 0;
+    double L = fPath.length;
+    double sumw   = 0;
+
+    // Loop over all sample points
+    for (int j = 1; j < int(samples.size()); j++) {
+
+        double w = 1. / pow(samples[j], 2);
+
+        avgprob += w * AvgAlgo(flvi, flvf, samples[j], samples[0],L);
+
+        sumw += w;
+
+    }
+    
+    // Return average of probabilities
+    return  avgprob / sumw;
+}
 
 
 
+vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE, double a, double b, double c, double k)
+{
 
+  // Set a number of sub-divisions to achieve "good" accuracy
+  // This needs to be studied better
+  int n_div = ceil(k* pow(dLoE / LoE, a) / ( pow(LoE, b) * pow(fAvgProbPrec / 1e-4 , c)));
+  //int n_div = 15;
+  cout<<"nbr sub-bins = "<<n_div<<endl;
 
+  // A vector to store sample points
+  vectorD allSamples;
+  allSamples.push_back(dLoE / n_div);
 
+  // Loop over sub-divisions
+  for (int k = 0; k < n_div; k++) {
+    // Define sub-division center and width
+    double bctr = LoE - dLoE / 2 + (k + 0.5) * dLoE / n_div;
+   
+    allSamples.push_back(bctr);
+
+  } // End of loop over sub-divisions
+
+  // Return all sample points
+  return allSamples;
+}
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
 

@@ -78,14 +78,26 @@ void testAvgProb(){
     double dE = (maxE - minE);
 
     //double pp =taylor.avgProbTaylor(1,1, E, dE);
+    
 
-    cout<<"i : "<< i << "  E = "<< E << endl;
+    cout<<"---------------i : "<< i << "  E = "<< E <<"------------------"<< endl;
+    double a = taylor.AvgProb(1,1, E, dE);
+    double b = h3->GetBinContent(i) / dE;
+    double ab = abs(a-b);
+    cout<<a<<" - "<< b << " = " <<ab;
+
+    if (ab < 1E-4)
+      cout<<"                 TRUE";
+    else
+      cout<<"                 FALSE";
+
+    cout<<endl<<endl;
 
 
-    h2->SetBinContent(i, taylor.AvgProb(1,1, E, dE));
+    h2->SetBinContent(i, a);
     //h6->SetBinContent(i, p.AvgProb(1,1, E, dE));
 
-    h3->SetBinContent(i, h3->GetBinContent(i) / dE);
+    h3->SetBinContent(i, b);
     h4->SetBinContent(i, p.Prob(1,1, E));
 
     // Store the number of samples per bin

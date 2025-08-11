@@ -73,6 +73,11 @@ namespace OscProb {
         double cosT , double dcosT);
 
 
+
+        virtual double AvgProbLoE(int flvi, int flvf, double LoE, double dLoE, double a, double b, double c, double k);
+        virtual vectorD GetSamplePoints(double LoE, double dLoE, double a, double b, double c, double k);
+
+
     protected:
 
       virtual void InitializeTaylorsVectors(); ///< Initialize all member vectors 
@@ -109,7 +114,7 @@ namespace OscProb {
       virtual double AvgFormula(int flvi, int flvf, double dbin, 
         vectorD flambda, matrixC fV); ///< Formula for the average probability over a bin
 
-      virtual double AvgAlgo(int flvi, int flvf, double LoE , double dLoE);
+      virtual double AvgAlgo(int flvi, int flvf, double LoE , double dLoE, double L);
 
       // Avg on energy and cosT at the same time 
       virtual void RotateDensityM(bool to_mass, matrixC V, matrixC& densityMatrix);
@@ -144,6 +149,11 @@ namespace OscProb {
       matrixC densityMatrix; ///< The neutrino density matrix state
 
       std::vector<NuPath> fNuPathsVariation ;
+
+      double aCst;
+      double bCst;
+      double cCst;
+      double kCst;
 
   };
 
