@@ -786,9 +786,6 @@ double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , doubl
 }
 
 
-
-
-
 //.............................................................................
 ///
 /// Compute the sample points for a bin of L/E with width dLoE
@@ -803,111 +800,26 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE)
 
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
-  int n_div = ceil(10* pow(dLoE / LoE, 0.8) * pow(LoE, 0.2) /  sqrt(fAvgProbPrec / 1e-4));
+  int n_div = ceil(3 * pow(dLoE / LoE, 0.8) * pow(LoE, 0.3) /  sqrt(fAvgProbPrec / 1e-4));
+  //int n_div = ceil(10* pow(dLoE / LoE, 0.8) * pow(LoE, 0.2) /  sqrt(fAvgProbPrec / 1e-4));
   //int n_div = ceil(10* pow(dLoE / LoE, 0.9) * pow(LoE, 0.1) * (1 + 2 * exp(-pow((LoE-2100),2)/(2*pow(300,2))) ) /  sqrt(fAvgProbPrec / 1e-4));
-  //int n_div = 15;
-  //cout<<"nbr sub-bins = "<<n_div<<endl;
 
   // A vector to store sample points
-  vectorD allSamples;
-  allSamples.push_back(dLoE / n_div);
+  vectorD Samples;
+  Samples.push_back(dLoE / n_div);
 
   // Loop over sub-divisions
   for (int k = 0; k < n_div; k++) {
     // Define sub-division center and width
     double bctr = LoE - dLoE / 2 + (k + 0.5) * dLoE / n_div;
    
-    allSamples.push_back(bctr);
+    Samples.push_back(bctr);
 
   } // End of loop over sub-divisions
 
   // Return all sample points
-  return allSamples;
+  return Samples;
 }
-
-
-
-
-
-
-
-
-/*double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E , double dE, double a, double b, double c, double k)
-{
-    if (E <= 0) return 0;
-
-    if (fNuPaths.empty()) return 0;
-
-    // Don't average zero width
-    if (dE <= 0) return Prob(flvi, flvf, E);
-
-    vectorD Ebin = ConvertEtoLoE(E,dE);
-
-    //cout<<endl<<"(NEW BIN)-------------------------E = "<<E<<"-----------------------------------"<<endl;
-
-    //return fct avr proba
-    return AvgProbLoE(flvi, flvf, Ebin[0], Ebin[1],a,b,c,k);
-}
-
-double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE , double dLoE, double a, double b, double c, double k)
-{
-    if (LoE <= 0) return 0;
-
-    if (fNuPaths.empty()) return 0;
-
-    // Don't average zero width
-    if (dLoE <= 0) return Prob(flvi, flvf, fPath.length / LoE);
-
-    // Get sample points for this bin
-    vectorD samples = GetSamplePoints(LoE, dLoE,a,b,c,k);
-    
-    double avgprob  = 0;
-    double L = fPath.length;
-    double sumw   = 0;
-
-    // Loop over all sample points
-    for (int j = 1; j < int(samples.size()); j++) {
-
-        double w = 1. / pow(samples[j], 2);
-
-        avgprob += w * AvgAlgo(flvi, flvf, samples[j], samples[0],L);
-
-        sumw += w;
-
-    }
-    
-    // Return average of probabilities
-    return  avgprob / sumw;
-}
-
-
-
-vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE, double a, double b, double c, double k)
-{
-
-  // Set a number of sub-divisions to achieve "good" accuracy
-  // This needs to be studied better
-  int n_div = ceil(k* pow(dLoE / LoE, a) * pow(LoE, b) * (1 + 2 * exp(-pow((LoE-2100),2)/(2*pow(500,2))) ) / pow(fAvgProbPrec / 1e-4 , c));
-  //int n_div = 15;
-  //cout<<"nbr sub-bins = "<<n_div<<endl;
-
-  // A vector to store sample points
-  vectorD allSamples;
-  allSamples.push_back(dLoE / n_div);
-
-  // Loop over sub-divisions
-  for (int k = 0; k < n_div; k++) {
-    // Define sub-division center and width
-    double bctr = LoE - dLoE / 2 + (k + 0.5) * dLoE / n_div;
-   
-    allSamples.push_back(bctr);
-
-  } // End of loop over sub-divisions
-
-  // Return all sample points
-  return allSamples;
-}*/
-
 
 
 

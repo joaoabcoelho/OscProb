@@ -73,11 +73,6 @@ namespace OscProb {
         double cosT , double dcosT);
 
 
-        /*virtual double AvgProb(int flvi, int flvf, double E, double dE,double a, double b, double c, double k);
-        virtual double AvgProbLoE(int flvi, int flvf, double LoE, double dLoE, double a, double b, double c, double k);
-        virtual vectorD GetSamplePoints(double LoE, double dLoE, double a, double b, double c, double k);*/
-
-
     protected:
 
       virtual void InitializeTaylorsVectors(); ///< Initialize all member vectors 

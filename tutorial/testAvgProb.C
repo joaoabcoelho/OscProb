@@ -37,7 +37,7 @@ void testAvgProb(){
 
 
   // Define some fine and coarse binnings
-  int navg = 20;
+  int navg = 40;
   int nbins = navg * 100;
   double xmin = -1;
   double xmax = 3;
