@@ -93,9 +93,7 @@ void PMNS_Fast::UpdateHam()
 ///
 /// Solve the full Hamiltonian for eigenvectors and eigenvalues.
 ///
-/// This is using a method from the GLoBES software available at
-/// http://www.mpi-hd.mpg.de/personalhomes/globes/3x3/ \n
-/// We should cite them accordingly
+/// If vacuum, just use the PMNS matrix, otherwise solve in Matter using GLoBES.
 ///
 void PMNS_Fast::SolveHam()
 {
@@ -105,6 +103,19 @@ void PMNS_Fast::SolveHam()
     return;
   }
 
+  SolveHamMatter();
+}
+
+//.............................................................................
+///
+/// Solve the full Hamiltonian for eigenvectors and eigenvalues.
+///
+/// This is using a method from the GLoBES software available at
+/// http://www.mpi-hd.mpg.de/personalhomes/globes/3x3/ \n
+/// We should cite them accordingly
+///
+void PMNS_Fast::SolveHamMatter()
+{
   // Build Hamiltonian
   BuildHms();
 
