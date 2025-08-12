@@ -55,6 +55,8 @@ namespace OscProb {
 
       /// Solve the full Hamiltonian for eigenvectors and eigenvalues
       virtual void SolveHam();
+      /// Solve the full Hamiltonian in matter
+      virtual void SolveHamMatter();
 
       /// Set the eigensystem to the analytic solution of the vacuum Hamiltonian
       virtual void SetVacuumEigensystem();
