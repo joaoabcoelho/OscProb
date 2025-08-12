@@ -7,7 +7,7 @@
 // jcoelho\@apc.in2p3.fr
 ///////////////////////////////////////////////////////////////////////////////
 
-#include <cassert>
+//#include <cassert>
 
 #include "MatrixDecomp/zheevh3.h"
 
@@ -86,7 +86,7 @@ void PMNS_DensityMatrix::RotateState(bool to_basis, matrixC U)
 ///
 void PMNS_DensityMatrix::ResetToFlavour(int flv)
 {
-  assert(flv >= 0 && flv < fNumNus);
+  THROW_ON_LOGIC_ERR(0 <= flv && flv < fNumNus, "flavour not valid,", flv);
 
   PMNS_Base::ResetToFlavour(flv);
 
@@ -115,7 +115,7 @@ void PMNS_DensityMatrix::ResetToFlavour(int flv)
 ///
 double PMNS_DensityMatrix::P(int flv)
 {
-  assert(flv >= 0 && flv < fNumNus);
+  THROW_ON_LOGIC_ERR(0 <= flv && flv < fNumNus, "flavour not valid.", flv);
   return abs(fRho[flv][flv]);
 }
 
@@ -127,7 +127,8 @@ double PMNS_DensityMatrix::P(int flv)
 ///
 void PMNS_DensityMatrix::SetPureState(vectorC nu_in)
 {
-  assert(nu_in.size() == fNumNus);
+  THROW_ON_LOGIC_ERR(nu_in.size() == fNumNus, "Invalid state vector size.",
+                     nu_in.size());
 
   for (int i = 0; i < fNumNus; i++) {
     for (int j = 0; j < fNumNus; j++) {
@@ -149,8 +150,9 @@ void PMNS_DensityMatrix::SetPureState(vectorC nu_in)
 ///
 void PMNS_DensityMatrix::SetInitialRho(matrixC rho_in)
 {
-  assert(rho_in.size() == fNumNus);
-  assert(rho_in[0].size() == fNumNus);
+  THROW_ON_LOGIC_ERR(rho_in.size() == fNumNus && rho_in[0].size() == fNumNus,
+                     "Invalid density matrix size", rho_in.size(),
+                     rho_in[0].size());
 
   double eps = 1e-12;
 
@@ -160,13 +162,14 @@ void PMNS_DensityMatrix::SetInitialRho(matrixC rho_in)
     trace += abs(rho_in[i][i]);
     for (int j = i; j < fNumNus; j++) {
       // Ensure rho_in is hermitian
-      assert(abs(rho_in[i][j] - conj(rho_in[j][i])) < eps);
+      THROW_ON_LOGIC_ERR(abs(rho_in[i][j] - conj(rho_in[j][i])) < eps,
+                         "Matrix not hermitian", rho_in[i][j], rho_in[j][i]);
       rho_array[i][j] = rho_in[i][j];
     }
   }
 
   // Ensure rho_in has trace 1
-  assert(abs(trace - 1) < eps);
+  THROW_ON_LOGIC_ERR(abs(trace - 1) < eps, "Total probability not 1", trace);
 
   double   fEvalGLoBES[3];
   complexD fEvecGLoBES[3][3];
@@ -175,7 +178,9 @@ void PMNS_DensityMatrix::SetInitialRho(matrixC rho_in)
   zheevh3(rho_array, fEvecGLoBES, fEvalGLoBES);
 
   // Ensure rho_in is positive definite
-  for (int i = 0; i < fNumNus; i++) assert(fEvalGLoBES[i] >= -eps);
+  for (int i = 0; i < fNumNus; i++)
+    THROW_ON_LOGIC_ERR(fEvalGLoBES[i] >= -eps, "Matrix not positive definite",
+                       fEvalGLoBES[i], i);
 
   fRho = rho_in;
 }
@@ -196,10 +201,10 @@ void PMNS_DensityMatrix::SetInitialRho(matrixC rho_in)
 ///
 matrixD PMNS_DensityMatrix::ProbMatrix(int nflvi, int nflvf)
 {
-  THROW_ON_INVALID_ARG(nflvi >= 0, nflvi);
-  THROW_ON_INVALID_ARG(nflvi <= fNumNus, nflvi, fNumNus);
-  THROW_ON_INVALID_ARG(nflvf >= 0, nflvf);
-  THROW_ON_INVALID_ARG(nflvf <= fNumNus, nflvf, fNumNus);
+  THROW_ON_INVALID_ARG(nflvi >= 0, "", nflvi);
+  THROW_ON_INVALID_ARG(nflvi <= fNumNus, "", nflvi, fNumNus);
+  THROW_ON_INVALID_ARG(nflvf >= 0, "", nflvf);
+  THROW_ON_INVALID_ARG(nflvf <= fNumNus, "", nflvf, fNumNus);
 
   // Output probabilities
   matrixD probs(nflvi, vectorD(nflvf));

@@ -48,7 +48,7 @@ PMNS_Deco::~PMNS_Deco() {}
 ///
 void PMNS_Deco::SetGamma(int j, double val)
 {
-  THROW_ON_INVALID_ARG(j == 2 || j == 3, j);
+  THROW_ON_INVALID_ARG(j == 2 || j == 3, "Gamma" << j << "1 not valid", j);
 
   if (val < 0) {
     cerr << "WARNING: Gamma_" << j << 1 << " must be positive. "
@@ -121,7 +121,8 @@ void PMNS_Deco::SetGamma32(double gamma32)
 
   // Sanity check
   double get_gamma32 = GetGamma(3, 2);
-  THROW_ON_INVALID_ARG(fabs(gamma32 - get_gamma32) < 1e-6, gamma32, gamma32);
+  THROW_ON_LOGIC_ERR(fabs(gamma32 - get_gamma32) < 1e-6, "Failed sanity check",
+                     gamma32, get_gamma32);
 }
 
 //.............................................................................
@@ -182,9 +183,8 @@ double PMNS_Deco::GetGamma(int i, int j)
     i        = j;
     j        = temp;
   }
-  THROW_ON_INVALID_ARG(i == 2 || i == 3, i);
-  THROW_ON_INVALID_ARG(j == 1 || j == 2, i);
-  THROW_ON_INVALID_ARG(i > j, i, j);
+  THROW_ON_INVALID_ARG(2 <= i && i <= 3 && 1 <= j && j <= 2 && i > j,
+                       "Gamma" << i << j << " not valid.", i, j);
 
   if (j == 1) { return fGamma[i - 1]; }
   else {
