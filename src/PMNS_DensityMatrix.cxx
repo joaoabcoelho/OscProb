@@ -12,6 +12,7 @@
 #include "MatrixDecomp/zheevh3.h"
 
 #include "PMNS_DensityMatrix.h"
+#include "exceptions.h"
 
 using namespace OscProb;
 
@@ -85,9 +86,10 @@ void PMNS_DensityMatrix::RotateState(bool to_basis, matrixC U)
 ///
 void PMNS_DensityMatrix::ResetToFlavour(int flv)
 {
+  assert(flv >= 0 && flv < fNumNus);
+
   PMNS_Base::ResetToFlavour(flv);
 
-  assert(flv >= 0 && flv < fNumNus);
   for (int i = 0; i < fNumNus; ++i) {
     for (int j = 0; j < fNumNus; ++j) {
       if (i == flv && i == j)
@@ -194,8 +196,10 @@ void PMNS_DensityMatrix::SetInitialRho(matrixC rho_in)
 ///
 matrixD PMNS_DensityMatrix::ProbMatrix(int nflvi, int nflvf)
 {
-  assert(nflvi <= fNumNus && nflvi >= 0);
-  assert(nflvf <= fNumNus && nflvf >= 0);
+  THROW_ON_INVALID_ARG(nflvi >= 0, nflvi);
+  THROW_ON_INVALID_ARG(nflvi <= fNumNus, nflvi, fNumNus);
+  THROW_ON_INVALID_ARG(nflvf >= 0, nflvf);
+  THROW_ON_INVALID_ARG(nflvf <= fNumNus, nflvf, fNumNus);
 
   // Output probabilities
   matrixD probs(nflvi, vectorD(nflvf));

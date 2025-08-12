@@ -11,6 +11,7 @@
 #include <iostream>
 
 #include "PMNS_Deco.h"
+#include "exceptions.h"
 
 using namespace OscProb;
 
@@ -40,26 +41,21 @@ PMNS_Deco::~PMNS_Deco() {}
 ///
 /// Set the decoherence parameter \f$\Gamma_{j1}\f$.
 ///
-/// Requires that j = 2 or 3. Will notify you if input is wrong.
+/// Requires that j = 2 or 3.
 ///
 /// @param j   - The first mass index
 /// @param val - The absolute value of the parameter
 ///
 void PMNS_Deco::SetGamma(int j, double val)
 {
-  if (j < 2 || j > 3) {
-    cerr << "WARNING: Gamma_" << j << 1 << " not valid for " << fNumNus
-         << " neutrinos. Doing nothing." << endl;
-    return;
-  }
+  THROW_ON_INVALID_ARG(j == 2 || j == 3, j);
 
   if (val < 0) {
     cerr << "WARNING: Gamma_" << j << 1 << " must be positive. "
-         << "Setting it to absolute value of input: " << -val << endl;
-    val = -val;
+         << "Setting it to absolute value of input: " << abs(val) << endl;
   }
 
-  fGamma[j - 1] = val;
+  fGamma[j - 1] = abs(val);
 }
 
 //.............................................................................
@@ -76,14 +72,13 @@ void PMNS_Deco::SetGamma(int j, double val)
 /// IMPORTANT: Note this needs to be used AFTER defining \f$\Gamma_{21}\f$ and
 /// \f$\theta\f$.
 ///
-/// @param val - The absolute value of the parameter
+/// @param gamma32 - The absolute value of the parameter
 ///
-void PMNS_Deco::SetGamma32(double val)
+void PMNS_Deco::SetGamma32(double gamma32)
 {
-  if (val < 0) {
+  if (gamma32 < 0) {
     cerr << "WARNING: Gamma_32 must be positive. "
-         << "Setting it to absolute value of input: " << -val << endl;
-    val = -val;
+         << "Setting it to absolute value of input: " << abs(gamma32) << endl;
   }
 
   double min32 = 0.25 * fGamma[1];
@@ -93,17 +88,17 @@ void PMNS_Deco::SetGamma32(double val)
   else
     min32 *= 1 + 3 * pow(fGamma[0], 2);
 
-  if (val < min32) {
-    if (fGamma[0] >= 0 || 4 * val / fGamma[1] < 1) {
-      fGamma[0] = sqrt(1 - 4 * val / fGamma[1]);
+  if (gamma32 < min32) {
+    if (fGamma[0] >= 0 || 4 * gamma32 / fGamma[1] < 1) {
+      fGamma[0] = sqrt(1 - 4 * gamma32 / fGamma[1]);
       fGamma[2] = 0.25 * fGamma[1] * (1 + 3 * pow(fGamma[0], 2));
     }
     else {
-      fGamma[0] = -sqrt((4 * val / fGamma[1] - 1) / 3);
+      fGamma[0] = -sqrt((4 * gamma32 / fGamma[1] - 1) / 3);
       fGamma[2] = 0.25 * fGamma[1] * (1 - pow(fGamma[0], 2));
     }
 
-    cerr << "WARNING: Impossible to have Gamma32 = " << val
+    cerr << "WARNING: Impossible to have Gamma32 = " << gamma32
          << " with current Gamma21 and theta parameters." << endl
          << "         Changing the value of cos(theta) to " << fGamma[0]
          << endl;
@@ -111,24 +106,22 @@ void PMNS_Deco::SetGamma32(double val)
     return;
   }
 
-  double arg = fGamma[1] * (4 * val - fGamma[1] * (1 - pow(fGamma[0], 2)));
+  double arg = fGamma[1] * (4 * gamma32 - fGamma[1] * (1 - pow(fGamma[0], 2)));
 
   if (arg < 0) {
     arg       = 0;
-    fGamma[0] = sqrt(1 - 4 * val / fGamma[1]);
-    cerr << "WARNING: Imaginary Gamma31 found. Changing the value of "
-            "cos(theta) to "
-         << fGamma[0] << endl;
+    fGamma[0] = sqrt(1 - 4 * gamma32 / fGamma[1]);
+    cerr << "WARNING: Imaginary Gamma31 found. "
+         << "Changing the value of cos(theta) to " << fGamma[0] << endl;
   }
 
-  double gamma31 = val + fGamma[1] * pow(fGamma[0], 2) + fGamma[0] * sqrt(arg);
+  double gamma31 = gamma32 + fGamma[0] * (fGamma[0] * fGamma[1] + sqrt(arg));
 
   fGamma[2] = gamma31;
 
-  if (fabs(val - GetGamma(3, 2)) > 1e-6) {
-    cerr << "ERROR: Failed sanity check: GetGamma(3,2) = " << GetGamma(3, 2)
-         << " != " << val << endl;
-  }
+  // Sanity check
+  double get_gamma32 = GetGamma(3, 2);
+  THROW_ON_INVALID_ARG(fabs(gamma32 - get_gamma32) < 1e-6, gamma32, gamma32);
 }
 
 //.............................................................................
@@ -173,7 +166,7 @@ double PMNS_Deco::GetPower() { return fPower; }
 ///
 /// Get any given decoherence parameter.
 ///
-/// Requires that i > j. Will notify you if input is wrong.
+/// Requires that i > j.
 /// If i < j, will assume reverse order and swap i and j.
 ///
 /// @param i  - The first mass index
@@ -189,11 +182,9 @@ double PMNS_Deco::GetGamma(int i, int j)
     i        = j;
     j        = temp;
   }
-  if (i < 1 || i > 3 || i <= j || j < 1) {
-    cerr << "WARNING: Gamma_" << i << j << " not valid for " << fNumNus
-         << " neutrinos. Returning 0." << endl;
-    return 0;
-  }
+  THROW_ON_INVALID_ARG(i == 2 || i == 3, i);
+  THROW_ON_INVALID_ARG(j == 1 || j == 2, i);
+  THROW_ON_INVALID_ARG(i > j, i, j);
 
   if (j == 1) { return fGamma[i - 1]; }
   else {
