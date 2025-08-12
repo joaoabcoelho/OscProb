@@ -83,6 +83,7 @@ var classOscProb_1_1PMNS__Iter =
     [ "SetZoA", "classOscProb_1_1PMNS__Iter.html#a1bf3ea8fd2507fd2fd82d7410ff8f578", null ],
     [ "SetZoA", "classOscProb_1_1PMNS__Iter.html#a9324540d24fb809fbd1f59ee80093268", null ],
     [ "SolveHam", "classOscProb_1_1PMNS__Iter.html#a0a4a4af377f11e8d4c681c17ced7c9e9", null ],
+    [ "SolveHamMatter", "classOscProb_1_1PMNS__Iter.html#a72150a1ccb27f0395a5d14a66dc8f858", null ],
     [ "TryCache", "classOscProb_1_1PMNS__Iter.html#abe533da5f64bec1f4724ab7b58606b77", null ],
     [ "UpdateHam", "classOscProb_1_1PMNS__Iter.html#a16248082308f9d2c332ebf1be0aa90c3", null ],
     [ "fAvgProbPrec", "classOscProb_1_1PMNS__Iter.html#a468e587b88f994b61691dded271b9fe1", null ],
