@@ -26,14 +26,15 @@ namespace OscProb {
       using PMNS_Base::ProbMatrix;
       virtual matrixD ProbMatrix(int nflvi, int nflvf);
 
+      /// Set the density matrix from an arbitrary state
+      virtual void SetInitialRho(matrixC rho_in);
+
     protected:
       // Resetting and propagating
       /// Reset neutrino state to pure flavour flv
       virtual void ResetToFlavour(int flv);
       /// Set the density matrix from a pure state
       virtual void SetPureState(vectorC nu_in);
-      /// Set the density matrix from an arbitrary state
-      virtual void SetInitialRho(matrixC rho_in);
 
       /// Propagate neutrino through a single path
       virtual void PropagatePath(NuPath p) = 0;

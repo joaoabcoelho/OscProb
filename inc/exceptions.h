@@ -61,7 +61,10 @@ std::string format_args(const std::string& names, const Args&... args)
   // Lambda to iterate and print each argument.
   auto printer = [&](const auto& arg_value) {
     if (i < arg_names.size()) {
-      if (i > 0) ss << ", ";
+      if (i > 0)
+        ss << ", ";
+      else
+        ss << "\n    With: ";
       ss << arg_names[i] << " = " << arg_value;
     }
     i++;
@@ -70,6 +73,18 @@ std::string format_args(const std::string& names, const Args&... args)
   (printer(args), ...);
 
   return ss.str();
+}
+
+//.............................................................................
+///
+/// @brief Helper function to handle empty arguments
+///
+template <typename... Args> auto format_args_wrapper(const Args&... args)
+{
+  if constexpr (sizeof...(args) == 0) { return format_args(""); }
+  else {
+    return format_args(args...);
+  }
 }
 
 // Macro to get the most descriptive function name available
@@ -82,17 +97,40 @@ std::string format_args(const std::string& names, const Args&... args)
 #endif
 
 // The core macro for throwing an exception with detailed info
-#define THROW_ON_INVALID_ARG(condition, ...)                                   \
+#define THROW_ON_FAIL(exception_type, condition, message, ...)                 \
   do {                                                                         \
     if (!(condition)) {                                                        \
       std::stringstream ss;                                                    \
-      ss << "\n    Condition '" << #condition << "' failed."                   \
-         << "\n    With: " << format_args(#__VA_ARGS__, __VA_ARGS__)           \
+      ss << message << "\n    Condition '" << #condition << "' failed."        \
+         << format_args_wrapper(#__VA_ARGS__, ##__VA_ARGS__)                   \
          << "\n    In function: " << FUNCTION_NAME                             \
          << "\n    At file: " << __FILE__ << "\n    At line: " << __LINE__;    \
-      throw std::invalid_argument(ss.str());                                   \
+      throw exception_type(ss.str());                                          \
     }                                                                          \
   }                                                                            \
   while (0)
+
+// Shorthand macro for invalid argument
+#define THROW_ON_INVALID_ARG(condition, message, ...)                          \
+  THROW_ON_FAIL(std::invalid_argument, condition, message, ##__VA_ARGS__)
+
+// Shorthand macro for logic error
+#define THROW_ON_LOGIC_ERR(condition, message, ...)                            \
+  THROW_ON_FAIL(std::logic_error, condition, message, ##__VA_ARGS__)
+
+#define TRY_TO_RETURN(function_call)                                           \
+  ([&]() -> decltype(function_call) {                                          \
+    try {                                                                      \
+      return function_call;                                                    \
+    }                                                                          \
+    catch (const std::exception& e) {                                          \
+      std::stringstream ss;                                                    \
+      ss << "An exception was thrown from " << #function_call                  \
+         << "\n    In function: " << FUNCTION_NAME                             \
+         << "\n    At file: " << __FILE__ << "\n    At line: " << __LINE__     \
+         << "\n  Original error message: " << e.what();                        \
+      throw std::runtime_error(ss.str());                                      \
+    }                                                                          \
+  }())
 
 #endif // EXCEPTIONS_H

@@ -57,10 +57,7 @@ void PMNS_OQS::SetPower(int n) { fPower = n; }
 ///
 void PMNS_OQS::SetDecoElement(int i, double val)
 {
-  THROW_ON_INVALID_ARG(i > 0, i);
-  THROW_ON_INVALID_ARG(i < SU3_DIM, i, SU3_DIM);
-
-  fBuiltDissipator *= (fa[i] == abs(val));
+  fBuiltDissipator *= (TRY_TO_RETURN(GetDecoElement(i)) == abs(val));
   fa[i] = abs(val);
 }
 
@@ -74,14 +71,8 @@ void PMNS_OQS::SetDecoElement(int i, double val)
 ///
 void PMNS_OQS::SetDecoAngle(int i, int j, double th)
 {
-  THROW_ON_INVALID_ARG(i > 0, i);
-  THROW_ON_INVALID_ARG(i < SU3_DIM, i, SU3_DIM);
-  THROW_ON_INVALID_ARG(j > 0, i);
-  THROW_ON_INVALID_ARG(j < SU3_DIM, j, SU3_DIM);
-  THROW_ON_INVALID_ARG(i != j, i, j);
-
   double val = cos(th);
-  fBuiltDissipator *= (fcos[i][j] == val);
+  fBuiltDissipator *= (TRY_TO_RETURN(GetDecoAngle(i, j)) == val);
   fcos[i][j] = val;
   fcos[j][i] = val;
 }
@@ -104,8 +95,10 @@ int PMNS_OQS::GetPower() { return fPower; }
 ///
 double PMNS_OQS::GetDecoElement(int i)
 {
-  THROW_ON_INVALID_ARG(i > 0, i);
-  THROW_ON_INVALID_ARG(i < SU3_DIM, i, SU3_DIM);
+  THROW_ON_INVALID_ARG(0 < i && i < SU3_DIM,
+                       "a_" << i << " is not a valid element. "
+                            << "i must be in range [1, 8]",
+                       i, SU3_DIM);
 
   return fa[i];
 }
@@ -121,11 +114,10 @@ double PMNS_OQS::GetDecoElement(int i)
 ///
 double PMNS_OQS::GetDecoAngle(int i, int j)
 {
-  THROW_ON_INVALID_ARG(i > 0, i);
-  THROW_ON_INVALID_ARG(i < SU3_DIM, i, SU3_DIM);
-  THROW_ON_INVALID_ARG(j > 0, i);
-  THROW_ON_INVALID_ARG(j < SU3_DIM, j, SU3_DIM);
-  THROW_ON_INVALID_ARG(i != j, i, j);
+  THROW_ON_INVALID_ARG(0 < i && i < SU3_DIM && 0 < j && j < SU3_DIM && i != j,
+                       "th_" << i << j << " is not a valid angle. "
+                             << "i,j must be in range [1, 8] with i<j",
+                       i, j, SU3_DIM);
 
   return acos(fcos[i][j]);
 }
@@ -141,10 +133,10 @@ double PMNS_OQS::GetDecoAngle(int i, int j)
 ///
 double PMNS_OQS::GetHGM(int i, int j)
 {
-  THROW_ON_INVALID_ARG(i >= 0, i);
-  THROW_ON_INVALID_ARG(i < SU3_DIM, i, SU3_DIM);
-  THROW_ON_INVALID_ARG(j >= 0, i);
-  THROW_ON_INVALID_ARG(j < SU3_DIM, j, SU3_DIM);
+  THROW_ON_INVALID_ARG(0 <= i && i < SU3_DIM && 0 <= j && j < SU3_DIM,
+                       "HGM_" << i << j << " is not a valid element. "
+                              << "i,j must be in range [0, 8]",
+                       i, j, SU3_DIM);
 
   return fHGM[i][j];
 }
@@ -160,10 +152,10 @@ double PMNS_OQS::GetHGM(int i, int j)
 ///
 double PMNS_OQS::GetDissipatorElement(int i, int j)
 {
-  THROW_ON_INVALID_ARG(i >= 0, i);
-  THROW_ON_INVALID_ARG(i < SU3_DIM, i, SU3_DIM);
-  THROW_ON_INVALID_ARG(j >= 0, i);
-  THROW_ON_INVALID_ARG(j < SU3_DIM, j, SU3_DIM);
+  THROW_ON_INVALID_ARG(0 <= i && i < SU3_DIM && 0 <= j && j < SU3_DIM,
+                       "D_" << i << j << " is not a valid element. "
+                            << "i,j must be in range [0, 8]",
+                       i, j, SU3_DIM);
 
   return fD[i][j];
 }
@@ -513,10 +505,10 @@ void PMNS_OQS::PropagatePath(NuPath p)
 ///
 matrixD PMNS_OQS::ProbMatrix(int nflvi, int nflvf)
 {
-  THROW_ON_INVALID_ARG(nflvi >= 0, nflvi);
-  THROW_ON_INVALID_ARG(nflvi <= fNumNus, nflvi, fNumNus);
-  THROW_ON_INVALID_ARG(nflvf >= 0, nflvf);
-  THROW_ON_INVALID_ARG(nflvf <= fNumNus, nflvf, fNumNus);
+  THROW_ON_INVALID_ARG(1 <= nflvi <= fNumNus,
+                       "Invalid number of initial flavours", nflvi);
+  THROW_ON_INVALID_ARG(1 <= nflvi <= fNumNus,
+                       "Invalid number of final flavours", nflvi);
 
   // Output probabilities
   matrixD probs(nflvi, vectorD(nflvf));
