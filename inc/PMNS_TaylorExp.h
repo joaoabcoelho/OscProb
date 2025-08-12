@@ -145,6 +145,8 @@ namespace OscProb {
 
       std::vector<NuPath> fNuPathsVariation ;
 
+      int fcountLayer; 
+
   };
 
 } // namespace OscProb

@@ -69,6 +69,8 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
             fKcosT[i][j] = 0;
         }
     }
+
+    fcountLayer = 0;
 }
 
 //.............................................................................
@@ -112,13 +114,18 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
     double lenghtEV = L * kKm2eV ; // L in eV-1
     double bufK =  lenghtEV * 0.5 ; // L/2 in eV-1
 
+    complexD buffer[3];
+
     for(int i = 0 ; i<fNumNus ; i++){
 
-        complexD buffer[3];
+        //complexD buffer[3];
 
         complexD Hms_kl;
 
         for(int l = 0 ; l<fNumNus ; l++){
+
+            buffer[l] = 0;
+
             for(int k = 0 ; k<fNumNus ; k++){
                 
                 if (k<=l)
@@ -149,7 +156,8 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
             else {
                 double arg = (fEval[i] - fEval[j]) * lenghtEV ;
 
-                C = complexD(1,0) * ( exp(complexD(0.0 , arg)) - complexD(1 , 0.0) ) / complexD(0.0 , arg)  ;
+                //C = ( exp(complexD(0.0 , arg)) - complexD(1 , 0.0) ) / complexD(0.0 , arg)  ;
+                C = ( complexD(cos(arg) , sin(arg)) - complexD(1 , 0.0) ) / complexD(0.0 , arg)  ;
                 
             }  
 
@@ -175,6 +183,11 @@ void PMNS_TaylorExp::BuildKcosT(double L, matrixC& K)
     double theta = acos(fcosT);
 
     //cout<<fcosT<<"   "<<sin(theta)<<endl;
+
+    vector<PremLayer> Prme = GetPremLayers() ;
+
+    //int toplayer = fPremLayers.size() - 1;
+    //cout<<"ici : "<<fPremLayers[0]<<endl;
 
 
     for(int j = 0 ; j<fNumNus ; j++){
@@ -224,11 +237,14 @@ void PMNS_TaylorExp::rotateS(vectorC fPhases, matrixC& S)
 ///
 void PMNS_TaylorExp::rotateK(matrixC Kmass , matrixC& Kflavor)
 {
+    complexD buffer[3];
+
     for(int j = 0 ; j<fNumNus ; j++){
 
-        complexD buffer[3];
-
         for(int k = 0 ; k<fNumNus ; k++){
+
+            buffer[k] = 0;
+
             for(int l = 0 ; l<fNumNus ; l++){
                 buffer[k] += Kmass[k][l] * conj(fEvec[j][l]);
             }
@@ -374,17 +390,13 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 
     // if avg on cosT
     if(fdcosT != 0){
-        matrixC Kmass = matrixC(fNumNus, vectorC(fNumNus, 0));
-        BuildKcosT(p.length, Kmass);
+        matrixC Kmass2 = matrixC(fNumNus, vectorC(fNumNus, 0));
+        BuildKcosT(p.length, Kmass2);
 
         // Multiply this layer K's with the previous path K's
-        MultiplicationRuleK(Kmass,fKcosT);
+        MultiplicationRuleK(Kmass2,fKcosT);
 
-        //********************************************************************************************* */
-
-        //fCountLayer++;
-
-        //*********************************************************************************************
+        fcountLayer++;
         
     }
 
@@ -512,8 +524,6 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E , double dE)
 
     vectorD Ebin = ConvertEtoLoE(E,dE);
 
-    //cout<<endl<<"(NEW BIN)-------------------------E = "<<E<<"-----------------------------------"<<endl;
-
     //return fct avr proba
     return AvgProbLoE(flvi, flvf, Ebin[0], Ebin[1]);
 }
@@ -574,7 +584,6 @@ double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE , double dLoE)
 double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double LoE , double dLoE, double L)
 {
     // Set width bin as 1/E 
-    //double L = fPath.length;
     double d1oE = dLoE / L;
 
     // reset K et S et Ve et lambdaE
