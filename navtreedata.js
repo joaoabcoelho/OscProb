@@ -50,6 +50,7 @@ var NAVTREE =
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
+        [ "Variables", "globals_vars.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -59,18 +60,20 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "Absorption_8cxx.html",
-"classOscProb_1_1PMNS__Base.html#a1f07a919eacb3823d791ebf4f1c9f6d9",
-"classOscProb_1_1PMNS__Decay.html#a375596aa6efe69f148f49289c3a449e7",
-"classOscProb_1_1PMNS__Deco.html#a492243b22fb1b783cd2943f507cff970",
+"classOscProb_1_1PMNS__Base.html#a0b4c41a27de281472453a1912cbc1e64",
+"classOscProb_1_1PMNS__Decay.html#a2d0f021378d6c782a88298ae2f734f4c",
+"classOscProb_1_1PMNS__Deco.html#a35e79054682aa88c55f4350c29336014",
+"classOscProb_1_1PMNS__DensityMatrix.html#a382ddd7b76ca89b43f22614a2ea7327b",
 "classOscProb_1_1PMNS__Fast.html#a4de96ac9b6d1e9b029ab877e57d211ad",
 "classOscProb_1_1PMNS__Iter.html#a69355e770b89e99437c2b8a66e48eeb9",
 "classOscProb_1_1PMNS__LIV.html#a7257809db071d6dd9780671d30a0d1e6",
 "classOscProb_1_1PMNS__NSI.html#a5fbeeb25bd00fbda7c484dbdb6748a58",
 "classOscProb_1_1PMNS__NUNM.html#a420235c777bfa4dd4cd12ce46343d396",
-"classOscProb_1_1PMNS__SNSI.html#a314360bbb52eca3130b90aa319aab70e",
-"classOscProb_1_1PMNS__Sterile.html#a273d49f3c5390e7bce624c97c4da5677",
-"classOscProb_1_1PremModel.html#ae40eaf3d8b666cfd4fe9242decf78121",
-"structOscProb_1_1TrajConstants.html#a1dae85a396f884f2168a2d9007e0478f"
+"classOscProb_1_1PMNS__OQS.html#a2f7c04af7ab88917c85634ce8380a574",
+"classOscProb_1_1PMNS__SNSI.html#a0ebaeaefab36a3ff381c6293faedfdd6",
+"classOscProb_1_1PMNS__SNSI.html#af0c77c891219912723aaa92033679c42",
+"classOscProb_1_1PremModel.html#a5c1e80b6c99f58dcbb4eec872f013fdd",
+"structOscProb_1_1NuPath.html#a1cc885eb24b3152596ac2f8500f81ae6"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

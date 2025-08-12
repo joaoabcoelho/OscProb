@@ -10,6 +10,7 @@ var Utils_8h =
     [ "GetModel", "Utils_8h.html#a8c065748e8cb1ef6936817ac6c3bd3df", null ],
     [ "GetNSI", "Utils_8h.html#a5f6a7ac9c1c969d060726edffefd9428", null ],
     [ "GetNUNM", "Utils_8h.html#a05bbfaf7a6b81b476c84a227126eb34e", null ],
+    [ "GetOQS", "Utils_8h.html#ab37ceed04c6b021cff98284dd524830c", null ],
     [ "GetSNSI", "Utils_8h.html#ab2c8b7b18746f234083fa3b370242650", null ],
     [ "GetSterile", "Utils_8h.html#a3ca82e4ad574189d41bdd72ad54bb82c", null ],
     [ "SaveTestFile", "Utils_8h.html#aab1f4fea28da49a4ba323ee630a7de81", null ],

@@ -9,5 +9,6 @@ var searchData=
   ['sintcosa_6',['sinTcosA',['../structOscProb_1_1TrajConstants.html#a53769a1e4a973ade88e0a2e0285eb018',1,'OscProb::TrajConstants']]],
   ['sintsina_7',['sinTsinA',['../structOscProb_1_1TrajConstants.html#a029de58b21f6ef6a52861f963bf0c030',1,'OscProb::TrajConstants']]],
   ['sintsinacosdetlon_8',['sinTsinAcosDetLon',['../structOscProb_1_1TrajConstants.html#ac0c5f8ad095f9f55a2a1f94af7402757',1,'OscProb::TrajConstants']]],
-  ['sintsinasindetlon_9',['sinTsinAsinDetLon',['../structOscProb_1_1TrajConstants.html#a913597a42222e54e0585c8ec0e9bebc5',1,'OscProb::TrajConstants']]]
+  ['sintsinasindetlon_9',['sinTsinAsinDetLon',['../structOscProb_1_1TrajConstants.html#a913597a42222e54e0585c8ec0e9bebc5',1,'OscProb::TrajConstants']]],
+  ['su3_5fdim_10',['SU3_DIM',['../classOscProb_1_1PMNS__OQS.html#a5fb1136d7601efd594c4b7b83b3e8744',1,'OscProb::PMNS_OQS::SU3_DIM()'],['../PMNS__OQS_8cxx.html#a81e1179e8b61ae1dd8674c4ef1341be5',1,'SU3_DIM():&#160;PMNS_OQS.cxx']]]
 ];

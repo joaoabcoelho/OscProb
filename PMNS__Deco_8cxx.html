@@ -93,9 +93,9 @@ $(document).ready(function(){initNavTree('PMNS__Deco_8cxx.html',''); initResizab
   <div class="headertitle"><div class="title">PMNS_Deco.cxx File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cassert&gt;</code><br />
-<code>#include &lt;iostream&gt;</code><br />
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
 <code>#include &quot;<a class="el" href="PMNS__Deco_8h_source.html">PMNS_Deco.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="exceptions_8h_source.html">exceptions.h</a>&quot;</code><br />
 </div>
 <p><a href="PMNS__Deco_8cxx_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -122,47 +122,47 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p >Simple index sorting of 3-vector </p>
 
-<p class="definition">Definition at line <a class="el" href="PMNS__Deco_8cxx_source.html#l00255">255</a> of file <a class="el" href="PMNS__Deco_8cxx_source.html">PMNS_Deco.cxx</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  256</span>{</div>
-<div class="line"><span class="lineno">  257</span>  <a class="code hl_typedef" href="namespaceOscProb.html#a2a006582e68eb670c6b33b3b19042068">vectorI</a> out(3, 0);</div>
-<div class="line"><span class="lineno">  258</span> </div>
-<div class="line"><span class="lineno">  259</span>  <span class="comment">// 1st element is smallest</span></div>
-<div class="line"><span class="lineno">  260</span>  <span class="keywordflow">if</span> (x[0] &lt; x[1] &amp;&amp; x[0] &lt; x[2]) {</div>
-<div class="line"><span class="lineno">  261</span>    <span class="comment">// 3rd element is largest</span></div>
-<div class="line"><span class="lineno">  262</span>    <span class="keywordflow">if</span> (x[1] &lt; x[2]) {</div>
-<div class="line"><span class="lineno">  263</span>      out[1] = 1;</div>
-<div class="line"><span class="lineno">  264</span>      out[2] = 2;</div>
-<div class="line"><span class="lineno">  265</span>    }</div>
-<div class="line"><span class="lineno">  266</span>    <span class="comment">// 2nd element is largest</span></div>
-<div class="line"><span class="lineno">  267</span>    <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  268</span>      out[1] = 2;</div>
-<div class="line"><span class="lineno">  269</span>      out[2] = 1;</div>
-<div class="line"><span class="lineno">  270</span>    }</div>
-<div class="line"><span class="lineno">  271</span>  }</div>
-<div class="line"><span class="lineno">  272</span>  <span class="comment">// 2nd element is smallest</span></div>
-<div class="line"><span class="lineno">  273</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (x[1] &lt; x[2]) {</div>
-<div class="line"><span class="lineno">  274</span>    out[0] = 1;</div>
-<div class="line"><span class="lineno">  275</span>    <span class="comment">// 3rd element is largest</span></div>
-<div class="line"><span class="lineno">  276</span>    <span class="keywordflow">if</span> (x[0] &lt; x[2]) out[2] = 2;</div>
-<div class="line"><span class="lineno">  277</span>    <span class="comment">// 1st element is largest</span></div>
-<div class="line"><span class="lineno">  278</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  279</span>      out[1] = 2;</div>
-<div class="line"><span class="lineno">  280</span>  }</div>
-<div class="line"><span class="lineno">  281</span>  <span class="comment">// 3rd element is smallest</span></div>
-<div class="line"><span class="lineno">  282</span>  <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  283</span>    out[0] = 2;</div>
-<div class="line"><span class="lineno">  284</span>    <span class="comment">// 2nd element is largest</span></div>
-<div class="line"><span class="lineno">  285</span>    <span class="keywordflow">if</span> (x[0] &lt; x[1]) out[2] = 1;</div>
-<div class="line"><span class="lineno">  286</span>    <span class="comment">// 1st element is largest</span></div>
-<div class="line"><span class="lineno">  287</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  288</span>      out[1] = 1;</div>
-<div class="line"><span class="lineno">  289</span>  }</div>
-<div class="line"><span class="lineno">  290</span> </div>
-<div class="line"><span class="lineno">  291</span>  <span class="keywordflow">return</span> out;</div>
-<div class="line"><span class="lineno">  292</span>}</div>
+<p class="definition">Definition at line <a class="el" href="PMNS__Deco_8cxx_source.html#l00206">206</a> of file <a class="el" href="PMNS__Deco_8cxx_source.html">PMNS_Deco.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  207</span>{</div>
+<div class="line"><span class="lineno">  208</span>  <a class="code hl_typedef" href="namespaceOscProb.html#a2a006582e68eb670c6b33b3b19042068">vectorI</a> out(3, 0);</div>
+<div class="line"><span class="lineno">  209</span> </div>
+<div class="line"><span class="lineno">  210</span>  <span class="comment">// 1st element is smallest</span></div>
+<div class="line"><span class="lineno">  211</span>  <span class="keywordflow">if</span> (x[0] &lt; x[1] &amp;&amp; x[0] &lt; x[2]) {</div>
+<div class="line"><span class="lineno">  212</span>    <span class="comment">// 3rd element is largest</span></div>
+<div class="line"><span class="lineno">  213</span>    <span class="keywordflow">if</span> (x[1] &lt; x[2]) {</div>
+<div class="line"><span class="lineno">  214</span>      out[1] = 1;</div>
+<div class="line"><span class="lineno">  215</span>      out[2] = 2;</div>
+<div class="line"><span class="lineno">  216</span>    }</div>
+<div class="line"><span class="lineno">  217</span>    <span class="comment">// 2nd element is largest</span></div>
+<div class="line"><span class="lineno">  218</span>    <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  219</span>      out[1] = 2;</div>
+<div class="line"><span class="lineno">  220</span>      out[2] = 1;</div>
+<div class="line"><span class="lineno">  221</span>    }</div>
+<div class="line"><span class="lineno">  222</span>  }</div>
+<div class="line"><span class="lineno">  223</span>  <span class="comment">// 2nd element is smallest</span></div>
+<div class="line"><span class="lineno">  224</span>  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (x[1] &lt; x[2]) {</div>
+<div class="line"><span class="lineno">  225</span>    out[0] = 1;</div>
+<div class="line"><span class="lineno">  226</span>    <span class="comment">// 3rd element is largest</span></div>
+<div class="line"><span class="lineno">  227</span>    <span class="keywordflow">if</span> (x[0] &lt; x[2]) out[2] = 2;</div>
+<div class="line"><span class="lineno">  228</span>    <span class="comment">// 1st element is largest</span></div>
+<div class="line"><span class="lineno">  229</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  230</span>      out[1] = 2;</div>
+<div class="line"><span class="lineno">  231</span>  }</div>
+<div class="line"><span class="lineno">  232</span>  <span class="comment">// 3rd element is smallest</span></div>
+<div class="line"><span class="lineno">  233</span>  <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  234</span>    out[0] = 2;</div>
+<div class="line"><span class="lineno">  235</span>    <span class="comment">// 2nd element is largest</span></div>
+<div class="line"><span class="lineno">  236</span>    <span class="keywordflow">if</span> (x[0] &lt; x[1]) out[2] = 1;</div>
+<div class="line"><span class="lineno">  237</span>    <span class="comment">// 1st element is largest</span></div>
+<div class="line"><span class="lineno">  238</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  239</span>      out[1] = 1;</div>
+<div class="line"><span class="lineno">  240</span>  }</div>
+<div class="line"><span class="lineno">  241</span> </div>
+<div class="line"><span class="lineno">  242</span>  <span class="keywordflow">return</span> out;</div>
+<div class="line"><span class="lineno">  243</span>}</div>
 <div class="ttc" id="anamespaceOscProb_html_a2a006582e68eb670c6b33b3b19042068"><div class="ttname"><a href="namespaceOscProb.html#a2a006582e68eb670c6b33b3b19042068">OscProb::vectorI</a></div><div class="ttdeci">std::vector&lt; int &gt; vectorI</div><div class="ttdef"><b>Definition:</b> <a href="Definitions_8h_source.html#l00016">Definitions.h:16</a></div></div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="PMNS__Deco_8cxx_source.html#l00300">OscProb::PMNS_Deco::PropagatePath()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PMNS__Deco_8cxx_source.html#l00251">OscProb::PMNS_Deco::PropagatePath()</a>.</p>
 
 </div>
 </div>
