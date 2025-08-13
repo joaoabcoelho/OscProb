@@ -241,6 +241,14 @@ complex<double> PMNS_LIV::GetcT(int flvi, int flvj, int dim)
 
 //.............................................................................
 ///
+/// Solve LIV Hamiltonian in matter.
+///
+/// Reimplemented to avoid using the standard oscillations in vacuum.
+///
+void PMNS_LIV::SolveHam() { PMNS_Fast::SolveHamMatter(); }
+
+//.............................................................................
+///
 /// Build the full LIV Hamiltonian in matter
 ///
 void PMNS_LIV::UpdateHam()

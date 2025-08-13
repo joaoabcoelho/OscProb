@@ -22,17 +22,23 @@ struct TimeIt {
     return 1e-9 * duration_cast<nanoseconds>(hrc::now() - start).count();
   }
 
-  // Print performance metric
-  void Print(){
+  double get_tpi(){
     if(!count) count = 1;
-    double tpi = time() / count;
+    return time() / count;
+  }
+
+  // Print performance metric
+  void Print(double ref_tpi=0){
+    double tpi = get_tpi();
     string scale = "s";
     if(tpi<1){ tpi *= 1e3; scale = "ms"; }
     if(tpi<1){ tpi *= 1e3; scale = "µs"; }
     if(tpi<1){ tpi *= 1e3; scale = "ns"; }
     TString stpi = TString::Format(tpi>9.95 ? "%.0f" : "%.1f",tpi);
     if(stpi.Length()<3) stpi = " " + stpi;
-    cout << "Performance = " << stpi << " " << scale << "/iteration" << endl;
+    cout << "Performance = " << stpi << " " << scale << "/iteration";
+    if(ref_tpi) printf(" (%.1fx)", get_tpi()/ref_tpi);
+    cout << endl;
   }
 
   // Member attributes
@@ -46,7 +52,7 @@ struct TimeIt {
 ///
 /// Test the speed performance of a given PMNS object
 ///
-void TimeTest(OscProb::PMNS_Base* p, string model, int max_length){
+double TimeTest(OscProb::PMNS_Base* p, string model, int max_length, double ref_tpi=0){
 
   // Use a PremModel to make paths
   // through the earth
@@ -81,9 +87,15 @@ void TimeTest(OscProb::PMNS_Base* p, string model, int max_length){
   }
 
   // Print performance estimate
+  if(!ref_tpi){
+    cout << string(20, '=') << " Reference " << string(20, '=') << endl;
+  }
   cout << "PMNS_" << model << ": "
        << string(max_length - model.size(), ' ');
-  time.Print();
+  time.Print(ref_tpi);
+  if(!ref_tpi) cout << string(51, '=') << endl;
+
+  return time.get_tpi();
 
 }
 
@@ -91,21 +103,26 @@ void TimeTest(OscProb::PMNS_Base* p, string model, int max_length){
 ///
 /// Run the time test over all models
 ///
-int StressTest(){
+int StressTest(vector<string> models = {}){
 
-  vector<string> models = GetListOfModels();
+  if(!models.size()) models = GetListOfModels();
 
   // Keep track of the longest name
-  int max_length = 0;
+  int max_length = 4;
   for(int i=0; i<models.size(); i++){
     max_length = max(int(models[i].size()), max_length);
   }
 
+  OscProb::PMNS_Base* p0 = GetModel("Fast");
+  double ref_tpi = TimeTest(p0, "Fast", max_length);
+
   for(int i=0; i<models.size(); i++){
+
+    if(models[i]=="Fast") continue;
 
     OscProb::PMNS_Base* p = GetModel(models[i]);
 
-    TimeTest(p, models[i], max_length);
+    TimeTest(p, models[i], max_length, ref_tpi);
 
   }
 

@@ -156,7 +156,8 @@ bool TestNominal(string model, double &max_diff){
 
   }
 
-  delete p, p0;
+  if(p)  delete p;
+  if(p0) delete p0;
 
   return true;
 
@@ -252,9 +253,9 @@ bool TestMethodsModel(OscProb::PMNS_Base* p, string model){
 }
 
 //.............................................................................
-int TestMethods(){
+int TestMethods(vector<string> models = {}){
 
-  vector<string> models = GetListOfModels();
+  if(!models.size()) models = GetListOfModels();
 
   bool pass_all = true;
 

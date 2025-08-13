@@ -7,7 +7,7 @@ BINDIR = bin
 
 override LDFLAGS += -L$(PREFIX)/lib $(PREFIX)/lib/libOscProb.so
 
-INCDIRS = -I$(PREFIX)/inc -Iinc -I$(PREFIX)/eigen
+INCDIRS = -I$(PREFIX)/inc -I.. -I$(PREFIX)/eigen
 
 SOURCE = $(wildcard src/*.cc)
 TARGET = $(patsubst %.cc,%,$(shell basename $(SOURCE)))

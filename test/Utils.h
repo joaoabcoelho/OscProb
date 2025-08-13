@@ -13,6 +13,18 @@
 
 #include "../tutorial/SetNiceStyle.C"
 
+#include "TMath.h"
+#include "TFile.h"
+
+#include "PMNS_OQS.h"
+#include "PMNS_LIV.h"
+#include "PMNS_Deco.h"
+#include "PMNS_Iter.h"
+#include "PMNS_NUNM.h"
+#include "PMNS_SNSI.h"
+#include "PMNS_Decay.h"
+#include "PMNS_Sterile.h"
+
 //.............................................................................
 void SetNominalPars(OscProb::PMNS_Base* p){
 
@@ -52,6 +64,21 @@ OscProb::PMNS_Deco* GetDeco(bool is_nominal){
   if(!is_nominal){
     p->SetGamma(2, 1e-23);
     p->SetGamma(3, 1e-22);
+  }
+
+  return p;
+
+}
+
+//.............................................................................
+OscProb::PMNS_OQS* GetOQS(bool is_nominal){
+
+  OscProb::PMNS_OQS* p = new OscProb::PMNS_OQS();
+  SetNominalPars(p);
+  if(!is_nominal){
+    p->SetDecoElement(3, sqrt(2e-23));
+    p->SetDecoElement(8, sqrt(4e-23));
+    p->SetDecoAngle(3,8, acos(0.5));
   }
 
   return p;
@@ -185,6 +212,7 @@ OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
   if(model == "LIV")     return GetLIV(is_nominal);
   if(model == "SNSI")    return GetSNSI(is_nominal);
   if(model == "NUNM")    return GetNUNM(is_nominal);
+  if(model == "OQS")     return GetOQS(is_nominal);
   if(model == "TaylorExp")    return GetTaylorExp(is_nominal);
 
   return GetFast(is_nominal);
@@ -194,11 +222,9 @@ OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
 //.............................................................................
 vector<string> GetListOfModels(){
 
-  //return {"Decay"};
-
   return {"Fast", "Iter", "Sterile", "NSI",
           "Deco", "Decay", "LIV", "SNSI",
-          "NUNM", "TaylorExp"};
+          "NUNM", "OQS", "TaylorExp"};
 
 }
 
@@ -247,7 +273,12 @@ int CheckProb(OscProb::PMNS_Base* p, TString filename){
 
   SetTestPath(p);
 
-  TFile* f = new TFile("data/"+filename, "read");
+  TFile* f = TFile::Open("data/"+filename, "read");
+
+  if(!f){
+    printf((Color::FAILED + " data/%s not found\n").c_str(), filename.Data());
+    return 1;
+  }
 
   int ntests = 0;
   int fails = 0;
@@ -311,7 +342,8 @@ int CheckProb(OscProb::PMNS_Base* p, TString filename){
       c1->SaveAs("plots/Failed_"+hname+"_"+pngfile);
       delete c1;
     }
-    delete h0, h;
+    if(h0) delete h0;
+    if(h)  delete h;
   }}}
 
   if(fails>0){

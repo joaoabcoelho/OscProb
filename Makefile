@@ -78,9 +78,25 @@ $(PREMINC): $(PREMDIR) $(PREMFILE) $(MODEL3DDIR) $(PREM3DFILE)
 	@echo "const std::string PREM_DEFAULT = \"$(PREMFILE)\";" >> $@
 	@echo "const std::string PREM3D_DEFAULT = \"$(PREM3DFILE)\";" >> $@
 
+# If running over specific models: TEST_MODELS="Model1 Model2 ..."
+# Default: empty list runs all methods
+TEST_MODELS ?=
+
+# The foreach function iterates over words in TEST_MODELS,
+# adding double quotes around each.
+QUOTED_METHODS := $(foreach m,$(TEST_MODELS),"$(m)")
+
+# The subst function replaces all occurrences of a space with a comma.
+space := $(eval) $(eval)
+comma := ,
+COMMA_SEPARATED_METHODS := $(subst $(space),$(comma),$(QUOTED_METHODS))
+
+# Enclose in curly braces
+ROOT_FUNCTION_ARG := {$(COMMA_SEPARATED_METHODS)}
+
 test: $(TARGET_LIB)
-	@cd test && root -l -b -q ../tutorial/LoadOscProb.C TestMethods.C
-	@cd test && root -l -b -q ../tutorial/LoadOscProb.C StressTest.C
+	@cd test && root -l -b -q ../tutorial/LoadOscProb.C 'TestMethods.C($(ROOT_FUNCTION_ARG))'
+	@cd test && root -l -b -q ../tutorial/LoadOscProb.C 'StressTest.C($(ROOT_FUNCTION_ARG))'
 
 clean: $(CLEANDIRS)
 	@echo "  Cleaning $(PACKAGE)..."

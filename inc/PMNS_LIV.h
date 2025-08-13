@@ -49,6 +49,8 @@ namespace OscProb {
     protected:
       /// Build the full Hamiltonian
       virtual void UpdateHam();
+      /// Solve the full Hamiltonian
+      virtual void SolveHam();
 
       virtual void FillCache() {} ///< Deactivate cache
 
