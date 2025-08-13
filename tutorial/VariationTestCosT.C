@@ -17,37 +17,40 @@ void VariationTestCosT(){
     OscProb::PMNS_TaylorExp t;
 
     // PREM Model
-    //OscProb::PremModel prem;    
-    //OscProb::PremModel premTaylor; 
+    OscProb::PremModel prem;    
+    OscProb::PremModel premTaylor; 
 
     int nbins = 1000;
-    double cosT = -0.6;
     double xmax = 0.1;
     double xmin = -xmax;
+
+    double cosT = -0.9;
 
     TH1D* h1 = new TH1D("","",nbins,xmin,xmax);
     TH1D* h2 = new TH1D("","",nbins,xmin,xmax);
     TH1D* h3 = new TH1D("","",nbins,xmin,xmax);
 
     int flavori = 0;
-    double E = 1;
+    double E = 0.3;
     t.SetEnergy(E);
     //p.SetEnergy(E);
 
-    //premTaylor.FillPath(cosT);
-    //t.SetPath(premTaylor.GetNuPath());
+    premTaylor.FillPath(cosT);
+    t.SetPath(premTaylor.GetNuPath());
+    t.GetPremLayers(premTaylor.GetPremLayers());
 
-    double L = 2*6368*abs(cosT);
-    t.SetLength(L);
+    //double L = 2*6368*abs(cosT);
+    //t.SetLength(L);
 
     for(int i = 1 ; i<=nbins ; i++){
 
         double varPercentage = h1->GetBinCenter(i);
 
-        //prem.FillPath(cosT + varPercentage * cosT);
-        //p.SetPath(prem.GetNuPath());
-        double Lfast = 2*6368*abs(cosT+ varPercentage * cosT);
-        p.SetLength(Lfast);
+        prem.FillPath(cosT + varPercentage * cosT);
+        p.SetPath(prem.GetNuPath());
+
+        //double Lfast = 2*6368*abs(cosT+ varPercentage * cosT);
+        //p.SetLength(Lfast);
 
         h1->SetBinContent(i, p.Prob(flavori,1,E));
         h2->SetBinContent(i, t.interpolationCosT(flavori,1,cosT,varPercentage * cosT));

@@ -41,6 +41,8 @@ namespace OscProb {
 
       virtual void SetCosT(double cosT); ///< Set neutrino angle.
 
+      virtual void GetPremLayers(std::vector<PremLayer> PremLayers);
+
       // Get probability averaged over a bin
       using PMNS_Base::AvgProb;
       virtual double AvgProb(int flvi, int flvf, 
@@ -85,6 +87,9 @@ namespace OscProb {
         double L, matrixC& K); ///< build K matrix for the inverse of energy in mass basis
       virtual void BuildKcosT(
         double L, matrixC& K); ///< build K matrix for angle in flavor basis
+
+      virtual double LnDerivative();
+
 
       // Rotation from mass to flavor basis
       virtual void rotateS(vectorC fPhases,matrixC& S); ///< Rotate the S matrix 
@@ -145,7 +150,11 @@ namespace OscProb {
 
       std::vector<NuPath> fNuPathsVariation ;
 
-      int fcountLayer; 
+      int flayer;
+      int fdl;
+      double fDetRadius;
+      double fminRsq ;
+      std::vector<PremLayer> fPremLayers; ///< The layers in the earth model
 
   };
 

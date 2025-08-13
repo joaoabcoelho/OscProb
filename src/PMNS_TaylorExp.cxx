@@ -70,7 +70,11 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
         }
     }
 
-    fcountLayer = 0;
+    flayer = fPremLayers.size() - 1;
+
+    fdl = -1;
+
+    fDetRadius = fPremLayers[flayer].radius;
 }
 
 //.............................................................................
@@ -95,6 +99,15 @@ void PMNS_TaylorExp::SetwidthBin(double dE , double dcosT)
 {
     fdInvE = dE;
     fdcosT = dcosT;
+}
+
+//.............................................................................
+///
+///
+///
+void PMNS_TaylorExp::GetPremLayers(std::vector<PremLayer> PremLayers)
+{
+    fPremLayers = PremLayers;
 }
 
 
@@ -180,20 +193,33 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 ///
 void PMNS_TaylorExp::BuildKcosT(double L, matrixC& K)
 {
-    double theta = acos(fcosT);
+    double lv = 2 * kGeV2eV * fEnergy; // 2E in eV
+    double kr2GNe = kK2 * M_SQRT2 * kGf;
+    kr2GNe *= fPath.density * fPath.zoa; // Matter potential in eV
 
-    //cout<<fcosT<<"   "<<sin(theta)<<endl;
+    matrixC Hbar = matrixC(fNumNus, vectorC(fNumNus, 0));
 
-    vector<PremLayer> Prme = GetPremLayers() ;
+    // Finish building Hamiltonian in matter with dimension of eV
+    for (int i = 0; i < fNumNus; i++) {
+        Hbar[i][i] = fHms[i][i] / lv;
+        for (int j = i + 1; j < fNumNus; j++) {
+            if (!fIsNuBar)
+                Hbar[i][j] = fHms[i][j] / lv;
+            else
+                Hbar[i][j] = conj(fHms[i][j]) / lv;
+        }
+    }
+    if (!fIsNuBar)
+        Hbar[0][0] += kr2GNe;
+    else
+        Hbar[0][0] -= kr2GNe;
 
-    //int toplayer = fPremLayers.size() - 1;
-    //cout<<"ici : "<<fPremLayers[0]<<endl;
-
+  
+    double dL = LnDerivative();
 
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
-            K[i][j] = ( -2* 6371 * kKm2eV * sin(theta) ) * fHam[i][j]; //  abs()???  
-            //K[i][j] =   kKm2eV *  2 * L * fHam[i][j];
+            K[i][j] = dL * Hbar[i][j];   
 
             if(i != j){
                 K[j][i] = conj(K[i][j]);
@@ -201,7 +227,33 @@ void PMNS_TaylorExp::BuildKcosT(double L, matrixC& K)
         }
     } 
 
-    //printMatrix1(K);
+}
+
+//.............................................................................
+///
+///
+///
+double PMNS_TaylorExp::LnDerivative()
+{
+    double dL = 0;
+
+    /*double L1 = pow(fPremLayers[flayer].radius, 2) - fminRsq;
+
+    double L2 = -fminRsq;
+    if (flayer > 0) L2 += pow(fPremLayers[flayer - 1].radius, 2);
+
+    bool ismin = (L2 <= 0 && fcosT < 0);
+
+    if (ismin)
+      dL = 2 * pow(fDetRadius,2) * fcosT * pow( L1 , -0.5) ;
+    else 
+      dL = pow(fDetRadius,2) * fcosT * ( pow( L1 , -0.5) - pow( L2 , -0.5));
+
+    if (ismin) fdl = 1;
+
+    flayer += fdl;*/
+
+    return dL;
 }
 
 //.............................................................................
@@ -395,8 +447,6 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 
         // Multiply this layer K's with the previous path K's
         MultiplicationRuleK(Kmass2,fKcosT);
-
-        fcountLayer++;
         
     }
 
@@ -784,6 +834,9 @@ double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , doubl
     //SetEnergy(E);
     SetCosT(cosT);
     SetwidthBin(0,dcosT);
+
+    fminRsq  = pow(fDetRadius * sqrt(1 - cosT * cosT) , 2);
+    cout<<"fDetRadius = "<<fDetRadius<<endl;
 
     //Propagate -> get S and K matrix (on the whole path)
     PropagateTaylor();
