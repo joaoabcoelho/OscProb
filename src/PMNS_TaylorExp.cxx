@@ -74,7 +74,7 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
 
     fdl = -1;
 
-    fDetRadius = fPremLayers[flayer].radius;
+    fDetRadius = 6371;//fPremLayers[flayer].radius;
 }
 
 //.............................................................................
