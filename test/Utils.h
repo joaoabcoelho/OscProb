@@ -1,15 +1,5 @@
 
 #include "colormod.h"
-/*#include "PMNS_LIV.h"
-#include "PMNS_SNSI.h"
-#include "PMNS_Deco.h"
-#include "PMNS_Iter.h"
-#include "PMNS_Decay.h"
-#include "PMNS_Sterile.h"
-#include "PMNS_NUNM.h"
-#include "PMNS_TaylorExp.h"
-#include "TMath.h"
-#include "TFile.h"*/
 
 #include "../tutorial/SetNiceStyle.C"
 
@@ -24,6 +14,7 @@
 #include "PMNS_SNSI.h"
 #include "PMNS_Decay.h"
 #include "PMNS_Sterile.h"
+#include "PMNS_TaylorExp.h"
 
 //.............................................................................
 void SetNominalPars(OscProb::PMNS_Base* p){
