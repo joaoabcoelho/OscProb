@@ -74,6 +74,7 @@
 #define EARTHMODELBINNED_H
 
 #include "EarthModelBase.h"
+#include <cmath>
 
 namespace OscProb {
 
