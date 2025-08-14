@@ -1,7 +1,6 @@
 
 #include "PremModel.h"
 #include "PMNS_Fast.h"
-#include "PMNS_TaylorExp.h"
 
 #include "SetNiceStyle.C"
 
@@ -17,7 +16,7 @@ void DrawFixedCosT(double cosT = -0.7, bool isNuBar = false){
   p.SetIsNuBar(isNuBar);
 
   // PREM Model
-  OscProb::PremModel prem;    
+  OscProb::PremModel prem;
 
   // Fill path for cosT
   prem.FillPath(cosT);
