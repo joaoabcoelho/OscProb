@@ -35,16 +35,13 @@ void VariationTestCosT(){
     OscProb::PremModel premTaylor; 
 
     int nbins = 1000;
-    double xmax = 0.1;
+    double xmax = 0.11;
     double xmin = -xmax;
 
     double cosT = -0.9;
+    double Theta = acos(cosT);
     double E = 0.3;
     t.SetEnergy(E);
-
-    TH1D* h1 = new TH1D("","",nbins,xmin,xmax);
-    TH1D* h2 = new TH1D("","",nbins,xmin,xmax);
-    TH1D* h3 = new TH1D("","",nbins,xmin,xmax);
 
     TH1D* NumuNumu_Exact = new TH1D("","",nbins,xmin,xmax);
     TH1D* NumuNumu_Order = new TH1D("","",nbins,xmin,xmax);
@@ -58,60 +55,67 @@ void VariationTestCosT(){
     TH1D* NueNumuBar_Exact = new TH1D("","",nbins,xmin,xmax);
     TH1D* NueNumuBar_Order = new TH1D("","",nbins,xmin,xmax);
 
-    int flavorf = 0;
+    int flavorf = 1;
     bool barOrNot;
 
     premTaylor.FillPath(cosT);
     t.SetPath(premTaylor.GetNuPath());
     t.GetPremLayers(premTaylor.GetPremLayers());
 
-    //double L = 2*6368*abs(cosT);
-    //t.SetLength(L);
-
     for(int i = 1 ; i<=nbins ; i++){
 
-        double varPercentage = h1->GetBinCenter(i);
+        //double varPercentage = -NumuNumu_Exact->GetBinCenter(i);
 
-        prem.FillPath(cosT + varPercentage * cosT);
+        double ThetaVaria = -NumuNumu_Exact->GetBinCenter(i);
+
+        //prem.FillPath(cosT + varPercentage * cosT);
+        prem.FillPath(cos(Theta + ThetaVaria) );
         p.SetPath(prem.GetNuPath());
-
-        //double Lfast = 2*6368*abs(cosT+ varPercentage * cosT);
-        //p.SetLength(Lfast);
-
-        //h1->SetBinContent(i, p.Prob(0,1,E));
-        //h2->SetBinContent(i, t.interpolationCosT(0,1,cosT,varPercentage * cosT));
 
         t.SetIsNuBar(false);
         p.SetIsNuBar(false);
 
         NumuNumu_Exact->SetBinContent(i, p.Prob(1,flavorf,E));
-        NumuNumu_Order->SetBinContent(i, t.interpolationCosT(1,flavorf,cosT,varPercentage * cosT));
+        NumuNumu_Order->SetBinContent(i, t.interpolationCosT(1,flavorf,cosT, cos(Theta + ThetaVaria) - cosT ));
         NueNumu_Exact->SetBinContent(i, p.Prob(0,flavorf,E));
-        NueNumu_Order->SetBinContent(i, t.interpolationCosT(0,flavorf,cosT,varPercentage * cosT));
+        NueNumu_Order->SetBinContent(i, t.interpolationCosT(0,flavorf,cosT, cos(Theta + ThetaVaria) - cosT  ));
         
         t.SetIsNuBar(true);
         p.SetIsNuBar(true);
 
         NumuNumuBar_Exact->SetBinContent(i, p.Prob(1,flavorf,E));
-        NumuNumuBar_Order->SetBinContent(i, t.interpolationCosT(1,flavorf,cosT,varPercentage * cosT));
+        NumuNumuBar_Order->SetBinContent(i, t.interpolationCosT(1,flavorf,cosT,cos(Theta + ThetaVaria) - cosT ));
         NueNumuBar_Exact->SetBinContent(i, p.Prob(0,flavorf,E));
-        NueNumuBar_Order->SetBinContent(i, t.interpolationCosT(0,flavorf,cosT,varPercentage * cosT));
-
+        NueNumuBar_Order->SetBinContent(i, t.interpolationCosT(0,flavorf,cosT,cos(Theta + ThetaVaria) - cosT ));
+        //cos(Theta + ThetaVaria) - cosT
     }
 
     // Make a long canvas
     MakeLongCanvas();
 
     // Set some nice histograms
-    SetHist(NumuNumu_Exact, kBlue);
-    SetHist(NumuNumu_Order, kBlack);
-    SetHist(NueNumu_Exact, kRed);
-    SetHist(NueNumu_Order, kBlack);
+    if (flavorf == 0){
+        SetHist(NumuNumu_Exact, kBlue);
+        SetHist(NumuNumu_Order, kBlack);
+        SetHist(NueNumu_Exact, kRed);
+        SetHist(NueNumu_Order, kBlack);
 
-    SetHist(NumuNumuBar_Exact, kBlue);
-    SetHist(NumuNumuBar_Order, kBlack);
-    SetHist(NueNumuBar_Exact, kRed);
-    SetHist(NueNumuBar_Order, kBlack);
+        SetHist(NumuNumuBar_Exact, kBlue);
+        SetHist(NumuNumuBar_Order, kBlack);
+        SetHist(NueNumuBar_Exact, kRed);
+        SetHist(NueNumuBar_Order, kBlack);
+    }
+    if (flavorf == 1){
+        SetHist(NumuNumu_Exact, kGreen);
+        SetHist(NumuNumu_Order, kBlack);
+        SetHist(NueNumu_Exact, kOrange);
+        SetHist(NueNumu_Order, kBlack);
+
+        SetHist(NumuNumuBar_Exact, kGreen);
+        SetHist(NumuNumuBar_Order, kBlack);
+        SetHist(NueNumuBar_Exact, kOrange);
+        SetHist(NueNumuBar_Order, kBlack);
+    }
 
     // Change line styles
     NumuNumu_Exact->SetLineStyle(1);
@@ -131,10 +135,10 @@ void VariationTestCosT(){
     
     // The axis titles
     if (flavorf == 0)
-        NumuNumuBar_Order->SetTitle(";#epsilon_{cosT } / cosT_{centedred};P(#nu_{#alpha}#rightarrow#nu_{e})");
+        NumuNumuBar_Order->SetTitle(";-#epsilon_{cosT } / cosT_{centedred};P(#nu_{#alpha}#rightarrow#nu_{e})");
 
     if (flavorf == 1)
-        NumuNumuBar_Order->SetTitle(";#epsilon_{cosT } / cosT_{centedred};P(#nu_{#alpha}#rightarrow#nu_{#mu})");
+        NumuNumuBar_Order->SetTitle(";-#epsilon_{cosT } / cosT_{centedred};P(#nu_{#alpha}#rightarrow#nu_{#mu})");
     
     NumuNumuBar_Order->GetYaxis()->SetRangeUser(0,1.1);
 
