@@ -214,8 +214,7 @@ void PMNS_TaylorExp::BuildKcosT(double L, matrixC& K)
     else
         Hbar[0][0] -= kr2GNe;
 
-  
-    double dL = LnDerivative();
+    double dL = LnDerivative() * kKm2eV;
 
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
@@ -237,7 +236,7 @@ double PMNS_TaylorExp::LnDerivative()
 {
     double dL = 0;
 
-    /*double L1 = pow(fPremLayers[flayer].radius, 2) - fminRsq;
+    double L1 = pow(fPremLayers[flayer].radius, 2) - fminRsq;
 
     double L2 = -fminRsq;
     if (flayer > 0) L2 += pow(fPremLayers[flayer - 1].radius, 2);
@@ -251,7 +250,7 @@ double PMNS_TaylorExp::LnDerivative()
 
     if (ismin) fdl = 1;
 
-    flayer += fdl;*/
+    flayer += fdl;
 
     return dL;
 }
@@ -836,7 +835,6 @@ double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , doubl
     SetwidthBin(0,dcosT);
 
     fminRsq  = pow(fDetRadius * sqrt(1 - cosT * cosT) , 2);
-    cout<<"fDetRadius = "<<fDetRadius<<endl;
 
     //Propagate -> get S and K matrix (on the whole path)
     PropagateTaylor();

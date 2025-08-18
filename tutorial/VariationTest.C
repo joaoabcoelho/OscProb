@@ -25,6 +25,13 @@ void VariationTest(){
     t.SetDm(3, 2.51e-3);
     t.SetDelta(1,3,197);
 
+    p.SetAngle(1, 2, asin(sqrt(0.303)));
+    p.SetAngle(1, 3, asin(sqrt(0.022)));
+    p.SetAngle(2, 3, asin(sqrt(0.572)));
+    p.SetDm(2, 7.41e-5);
+    p.SetDm(3, 2.51e-3);
+    p.SetDelta(1,3,197);
+
     // PREM Model
     OscProb::PremModel prem;    
 
