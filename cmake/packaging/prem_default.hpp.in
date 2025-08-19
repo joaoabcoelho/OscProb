@@ -1,0 +1,5 @@
+#include <string>
+const std::string PREM_DIR       = "@PREMDIR@";
+const std::string MODEL3D_DIR    = "@MODEL3DDIR@";
+const std::string PREM_DEFAULT   = "@PREMFILE@";
+const std::string PREM3D_DEFAULT = "@PREM3DFILE@";
