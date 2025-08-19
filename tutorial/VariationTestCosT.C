@@ -38,7 +38,7 @@ void VariationTestCosT(){
     double xmax = 0.11;
     double xmin = -xmax;
 
-    double cosT = -0.9;
+    double cosT = -0.2;
     double Theta = acos(cosT);
     double E = 0.3;
     t.SetEnergy(E);

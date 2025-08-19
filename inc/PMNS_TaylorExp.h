@@ -54,7 +54,7 @@ namespace OscProb {
         double LoE, double dLoE);  ///< Compute the average probability over 
                                    ///< a bin of LoE with a Taylor expansion
 
-      virtual double AvgProbAngle(int flvi, int flvf, double E, 
+      virtual double AvgProb(int flvi, int flvf, double E, 
         double cosT, double dcosT); ///< Compute the average probability over a 
                                     ///< bin of cosTheta with a Taylor expansion
 

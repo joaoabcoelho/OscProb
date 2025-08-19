@@ -199,7 +199,6 @@ void PMNS_TaylorExp::BuildKcosT(double L, matrixC& K)
 
     matrixC Hbar = matrixC(fNumNus, vectorC(fNumNus, 0));
 
-    // Finish building Hamiltonian in matter with dimension of eV
     for (int i = 0; i < fNumNus; i++) {
         Hbar[i][i] = fHms[i][i] / lv;
         for (int j = i + 1; j < fNumNus; j++) {
@@ -234,7 +233,7 @@ void PMNS_TaylorExp::BuildKcosT(double L, matrixC& K)
 ///
 double PMNS_TaylorExp::LnDerivative()
 {
-    double dL = 0;
+    double dL = 0;    
 
     double L1 = pow(fPremLayers[flayer].radius, 2) - fminRsq;
 
@@ -406,6 +405,7 @@ void PMNS_TaylorExp::PropagateTaylor()
 ///
 void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 {
+
     // Set the neutrino path
     SetCurPath(p);
 
@@ -441,6 +441,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 
     // if avg on cosT
     if(fdcosT != 0){
+
         matrixC Kmass2 = matrixC(fNumNus, vectorC(fNumNus, 0));
         BuildKcosT(p.length, Kmass2);
 
@@ -448,6 +449,9 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
         MultiplicationRuleK(Kmass2,fKcosT);
         
     }
+
+    
+
 
     // Multiply this layer S's with the previous path S's
     MultiplicationRuleS(fSflavor);
@@ -656,6 +660,8 @@ double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double LoE , double dLoE, dou
 /// Compute the average probability of flvi going to flvf over 
 /// a bin of angle cost with width dcosT with a Taylor expansion.
 ///
+/// DOIT UTILISER FCT DS MACRO AVANT CETTE FCT
+///
 /// Flavours are:
 /// <pre>
 ///   0 = nue, 1 = numu, 2 = nutau
@@ -670,7 +676,7 @@ double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double LoE , double dLoE, dou
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_TaylorExp::AvgProbAngle(int flvi, int flvf, double E, double cosT , double dcosT)
+double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double cosT , double dcosT)
 {
     // reset K et S et Ve et lambdaE
     InitializeTaylorsVectors();
@@ -678,6 +684,8 @@ double PMNS_TaylorExp::AvgProbAngle(int flvi, int flvf, double E, double cosT , 
     SetEnergy(E);
     SetCosT(cosT);
     SetwidthBin(0,dcosT);
+
+    fminRsq  = pow(fDetRadius * sqrt(1 - cosT * cosT) , 2);
 
     //Propagate -> get S and K matrix (on the whole path)
     PropagateTaylor();
@@ -811,6 +819,8 @@ double PMNS_TaylorExp::interpolationEnergyLoE(int flvi, int flvf, double LoE , d
 ///
 /// Compute the propability for flvi going to flvf for an angle cosT+dcosT 
 /// using a first order Taylor expansion from a reference angle cosT.
+///
+/// DOIT UTILISER FCT DS MACRO AVANT CETTE FCT
 ///
 /// Flavours are:
 /// <pre>
