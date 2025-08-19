@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.23)
 project(oscprob LANGUAGES CXX)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
@@ -116,6 +116,7 @@ target_link_libraries(
 
 set_target_properties(OscProb PROPERTIES OUTPUT_NAME OscProb)
 get_target_property(hdrs OscProb HEADER_SET)
+message(STATUS "Hdrs: ${hdrs}")
 add_root_dictionary(OscProb HEADERS ${hdrs} LINKDEF inc/LinkDef.h)
 
 install(
