@@ -678,6 +678,39 @@ double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double LoE , double dLoE, dou
 ///
 double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double cosT , double dcosT)
 {
+    if (cosT > 0) return 0;   
+
+    if (fNuPaths.empty()) return 0;
+
+    // Don't average zero width
+    if (dcosT == 0) return Prob(flvi, flvf, E);
+
+    vectorD samples = GetSamplePoints(E, cosT, dcosT);
+
+    double avgprob  = 0;
+
+    // Loop over all sample points
+    for (int j = 1; j < int(samples.size()); j++) {
+
+        avgprob +=  AvgAlgoCosT(flvi, flvf, E , samples[j], samples[0]); 
+
+    }
+    
+    // Return average of probabilities
+    return  avgprob / (samples.size()-1);
+}
+
+//.............................................................................
+///
+/// 
+///
+double PMNS_TaylorExp::AvgAlgoCosT(int flvi, int flvf, double E, double cosT , double dcosT)
+{
+    OscProb::PremModel prem;
+
+    prem.FillPath(cosT);
+    SetPath(prem.GetNuPath());
+
     // reset K et S et Ve et lambdaE
     InitializeTaylorsVectors();
 
@@ -696,6 +729,7 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double cosT , doubl
     //return fct avr proba
     return AvgFormula(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
 }
+
 
 //.............................................................................
 ///
@@ -882,6 +916,33 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE)
   for (int k = 0; k < n_div; k++) {
     // Define sub-division center and width
     double bctr = LoE - dLoE / 2 + (k + 0.5) * dLoE / n_div;
+   
+    Samples.push_back(bctr);
+
+  } // End of loop over sub-divisions
+
+  // Return all sample points
+  return Samples;
+}
+
+
+vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
+{
+
+  // Set a number of sub-divisions to achieve "good" accuracy
+  // This needs to be studied better
+  int n_div = ceil(10 * pow(E , -1.5) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4));
+  //int n_div = 5;
+  cout<<"@@@ n_div = "<<n_div<<endl;
+
+  // A vector to store sample points
+  vectorD Samples;
+  Samples.push_back(dcosT / n_div);
+
+  // Loop over sub-divisions
+  for (int k = 0; k < n_div; k++) {
+    // Define sub-division center and width
+    double bctr = cosT - dcosT / 2 + (k + 0.5) * dcosT / n_div;
    
     Samples.push_back(bctr);
 

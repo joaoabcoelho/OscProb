@@ -81,6 +81,7 @@ namespace OscProb {
                                                ///< with zeros
 
       virtual vectorD GetSamplePoints(double LoE, double dLoE);
+      virtual vectorD GetSamplePoints(double E, double cosT, double dcosT);
 
       // Construction of the K matrices                                   
       virtual void BuildKE(
@@ -115,6 +116,7 @@ namespace OscProb {
         vectorD flambda, matrixC fV); ///< Formula for the average probability over a bin
 
       virtual double AvgAlgo(int flvi, int flvf, double LoE , double dLoE, double L);
+      virtual double AvgAlgoCosT(int flvi, int flvf, double E , double cosT, double dcosT);
 
       // Avg on energy and cosT at the same time 
       virtual void RotateDensityM(bool to_mass, matrixC V, matrixC& densityMatrix);

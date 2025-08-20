@@ -24,7 +24,7 @@ void testAvgProbCosT(){
   taylor.GetPremLayers(premTaylor.GetPremLayers());
 
   // Define some fine and coarse binnings
-  int navg = 80;
+  int navg = 40;
   int nbins = navg * 100;
   double xmin = -0.9;
   double xmax = -0.1;
@@ -75,20 +75,20 @@ void testAvgProbCosT(){
     premTaylor.FillPath(cosT);
     taylor.SetPath(premTaylor.GetNuPath());
   
-    cout<<"cosT = "<<cosT<<"    dcosT = "<<dcosT<<"   r = "<<dcosT/cosT<<endl;
     double a = taylor.AvgProb(1,1, E, cosT,dcosT);
-
-
     double b = h3->GetBinContent(i) / dcosT;
     double ab = abs(a-b);
-    cout<<a<<" - "<< b << " = " <<ab;
+
+    cout<<"cosT = "<<cosT<<endl;
+    cout<<"dcosT = "<<dcosT<<"    diff = "<<ab;
+    
 
     if (ab < 5 * 1E-4)
-      cout<<"                 TRUE";
+      cout<<"     TRUE"<<endl;
     else
-      cout<<"                 FALSE";
+      cout<<"     FALSE"<<endl;;
 
-    cout<<endl<<endl;
+    cout<<"r = "<<dcosT/cosT<<endl<<endl;
 
 
 
