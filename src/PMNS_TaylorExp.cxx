@@ -57,8 +57,8 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
     fevolutionMatrixS = matrixC(fNumNus, vectorC(fNumNus, 0));
 
     fSflavor= matrixC(fNumNus, vectorC(fNumNus, 0));
-    Kmass= matrixC(fNumNus, vectorC(fNumNus, 0));
-    Kflavor= matrixC(fNumNus, vectorC(fNumNus, 0));
+    fKmass= matrixC(fNumNus, vectorC(fNumNus, 0));
+    fKflavor= matrixC(fNumNus, vectorC(fNumNus, 0));
 
     for(int i= 0 ; i<fNumNus; i++){
 
@@ -279,10 +279,10 @@ void PMNS_TaylorExp::rotateS()
 ///
 /// Rotate the K matrix from mass to flavor basis
 ///
-/// @param Kmass - The K matrix in mass basis
-/// @param Kflavor - The K matrix in flavor basis
+/// @param fKmass - The K matrix in mass basis
+/// @param fKflavor - The K matrix in flavor basis
 ///
-void PMNS_TaylorExp::rotateK(matrixC Kmass , matrixC& Kflavor)
+void PMNS_TaylorExp::rotateK(matrixC fKmass , matrixC& fKflavor)
 {
     complexD buffer[3];
 
@@ -293,19 +293,19 @@ void PMNS_TaylorExp::rotateK(matrixC Kmass , matrixC& Kflavor)
             buffer[k] = 0;
 
             for(int l = 0 ; l<fNumNus ; l++){
-                buffer[k] += Kmass[k][l] * conj(fEvec[j][l]);
+                buffer[k] += fKmass[k][l] * conj(fEvec[j][l]);
             }
         }
 
         for(int i = 0 ; i<=j ; i++){
 
-            Kflavor[i][j] = 0;
+            fKflavor[i][j] = 0;
 
             for(int k = 0 ; k<fNumNus ; k++){
-                Kflavor[i][j] += fEvec[i][k] * buffer[k];
+                fKflavor[i][j] += fEvec[i][k] * buffer[k];
             }
 
-            if(i != j){ Kflavor[j][i] = conj(Kflavor[i][j]); }
+            if(i != j){ fKflavor[j][i] = conj(fKflavor[i][j]); }
         }
     }    
     
@@ -424,26 +424,26 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     if(fdInvE != 0){
 
         // Build KE in mass basis
-        //matrixC Kmass = matrixC(fNumNus, vectorC(fNumNus, 0));
-        BuildKE(p.length,Kmass);
+        //matrixC fKmass = matrixC(fNumNus, vectorC(fNumNus, 0));
+        BuildKE(p.length,fKmass);
 
         // Rotate KE in flavor basis
-        //matrixC Kflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
-        rotateK(Kmass,Kflavor);
+        //matrixC fKflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
+        rotateK(fKmass,fKflavor);
 
         // Multiply this layer K's with the previous path K's
-        MultiplicationRuleK(Kflavor,fKInvE);    
+        MultiplicationRuleK(fKflavor,fKInvE);    
         
     }
 
     // if avg on cosT
     if(fdcosT != 0){
 
-        //matrixC Kmass2 = matrixC(fNumNus, vectorC(fNumNus, 0));
-        BuildKcosT(p.length, Kflavor);
+        //matrixC fKmass2 = matrixC(fNumNus, vectorC(fNumNus, 0));
+        BuildKcosT(p.length, fKflavor);
 
         // Multiply this layer K's with the previous path K's
-        MultiplicationRuleK(Kflavor,fKcosT);
+        MultiplicationRuleK(fKflavor,fKcosT);
         
     }
 
