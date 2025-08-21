@@ -931,9 +931,10 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
 
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
-  int n_div = ceil(10 * pow(E , -1.5) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4));
+  int n_div = ceil(35 * pow(E , -0.4) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4));
   //int n_div = 5;
   cout<<"@@@ n_div = "<<n_div<<endl;
+  cout<<"sans ceil = "<<20 * pow(E , -0.5) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4)<<endl;
 
   // A vector to store sample points
   vectorD Samples;

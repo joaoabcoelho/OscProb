@@ -24,7 +24,7 @@ void testAvgProbCosT(){
   taylor.GetPremLayers(premTaylor.GetPremLayers());
 
   // Define some fine and coarse binnings
-  int navg = 40;
+  int navg = 30;
   int nbins = navg * 100;
   double xmin = -0.9;
   double xmax = -0.1;
