@@ -46,7 +46,7 @@ PMNS_TaylorExp::~PMNS_TaylorExp() {}
 ///
 void PMNS_TaylorExp::InitializeTaylorsVectors()
 {
-    matrixC densityMatrix = matrixC(fNumNus, vectorC(fNumNus, 0));
+    matrixC fdensityMatrix = matrixC(fNumNus, vectorC(fNumNus, 0));
 
     flambdaInvE = vectorD(fNumNus, 0);
     fVInvE = matrixC(fNumNus, vectorC(fNumNus, 0));
@@ -130,8 +130,6 @@ void PMNS_TaylorExp::BuildKE(double L)
 
     for(int i = 0 ; i<fNumNus ; i++){
 
-        //complexD buffer[3];
-
         complexD Hms_kl;
 
         for(int l = 0 ; l<fNumNus ; l++){
@@ -168,7 +166,6 @@ void PMNS_TaylorExp::BuildKE(double L)
             else {
                 double arg = (fEval[i] - fEval[j]) * lenghtEV ;
 
-                //C = ( exp(complexD(0.0 , arg)) - complexD(1 , 0.0) ) / complexD(0.0 , arg)  ;
                 C = ( complexD(cos(arg) , sin(arg)) - complexD(1 , 0.0) ) / complexD(0.0 , arg)  ;
                 
             }  
@@ -186,11 +183,13 @@ void PMNS_TaylorExp::BuildKE(double L)
 //.............................................................................
 ///
 /// Build K matrix for angle in flavor basis 
+///
+/// The variable for which a Taylor expansion is done here is not directly the
+/// angle but the cosine of the angle 
 ///  
 /// @param L - The length of the layer in GeV-1
-/// @param K - The K matrix for the angle in the flavor basis
 ///
-void PMNS_TaylorExp::BuildKcosT(double L, matrixC& K)
+void PMNS_TaylorExp::BuildKcosT(double L)
 {
     double lv = 2 * kGeV2eV * fEnergy; // 2E in eV
     double kr2GNe = kK2 * M_SQRT2 * kGf;
@@ -216,10 +215,10 @@ void PMNS_TaylorExp::BuildKcosT(double L, matrixC& K)
 
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
-            K[i][j] = dL * Hbar[i][j];   
+            fKflavor[i][j] = dL * Hbar[i][j];   
 
             if(i != j){
-                K[j][i] = conj(K[i][j]);
+                fKflavor[j][i] = conj(fKflavor[i][j]);
             }
         }
     } 
@@ -378,7 +377,6 @@ void PMNS_TaylorExp::MultiplicationRuleK(complexD K[3][3])
 
 }
 
-
 //.............................................................................
 ///
 /// Propagate neutrino state through full path
@@ -430,7 +428,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     if(fdcosT != 0){
 
         // Build KcosT in mass basis
-        BuildKcosT(p.length, fKflavor);
+        BuildKcosT(p.length);
 
         // Multiply this layer K's with the previous path K's
         MultiplicationRuleK(fKcosT);
@@ -714,7 +712,6 @@ double PMNS_TaylorExp::AvgAlgoCosT(int flvi, int flvf, double E, double cosT , d
     return AvgFormula(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
 }
 
-
 //.............................................................................
 ///
 /// Fomula for the propability for flvi going to flvf for an energy E+dE 
@@ -832,7 +829,6 @@ double PMNS_TaylorExp::interpolationEnergyLoE(int flvi, int flvf, double LoE , d
     return AvgFormulaExtrapolation(flvi,flvf,dLoE*kGeV2eV, flambdaInvE, fVInvE);
 }
 
-
 //.............................................................................
 ///
 /// Compute the propability for flvi going to flvf for an angle cosT+dcosT 
@@ -873,7 +869,6 @@ double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , doubl
     return AvgFormulaExtrapolation(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
 }
 
-
 //.............................................................................
 ///
 /// Compute the sample points for a bin of L/E with width dLoE
@@ -909,7 +904,16 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE)
   return Samples;
 }
 
-
+//.............................................................................
+///
+/// Compute the sample points for a bin of cosTheta with width dcosTheta
+///
+/// This is used for averaging the probability over a bin of CosTheta.
+///
+/// @param E  - The neutrino  Energy value GeV
+/// @param cosT   - The neutrino  cosT value in the bin center 
+/// @param dcosT   - The cosT bin width 
+///
 vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
 {
 
@@ -917,8 +921,8 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
   // This needs to be studied better
   int n_div = ceil(35 * pow(E , -0.4) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4));
   //int n_div = 5;
-  cout<<"@@@ n_div = "<<n_div<<endl;
-  cout<<"sans ceil = "<<20 * pow(E , -0.5) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4)<<endl;
+  //cout<<"@@@ n_div = "<<n_div<<endl;
+  //cout<<"sans ceil = "<<20 * pow(E , -0.5) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4)<<endl;
 
   // A vector to store sample points
   vectorD Samples;
@@ -937,13 +941,52 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
   return Samples;
 }
 
+//.............................................................................
+///
+///
+///
+/*vector<vectorD> PMNS_TaylorExp::GetSamplePoints(double InvE, double dInvE, double cosT, double dcosT)
+{
+
+  // Set a number of sub-divisions to achieve "good" accuracy
+  // This needs to be studied better
+  //int n_div = ceil(35 * pow(E , -0.4) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4));
+  int n_divE = 1;
+  int n_divCosT = 1;
+  //cout<<"@@@ n_div = "<<n_div<<endl;
+  //cout<<"sans ceil = "<<20 * pow(E , -0.5) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4)<<endl;
+
+  // A vector to store sample points
+  vectorD Samples;
+  Samples.push_back(dcosT / n_div);
+
+  // Loop over sub-divisions
+  for (int k = 0; k < n_div; k++) {
+    // Define sub-division center and width
+    double bctr = cosT - dcosT / 2 + (k + 0.5) * dcosT / n_div;
+   
+    Samples.push_back(bctr);
+
+  } // End of loop over sub-divisions
+
+  // Return all sample points
+  return Samples;
+}*/
+
+
+
+
+
+
+
+
 
 
 //.............................................................................
 ///
 ///
 ///
-void PMNS_TaylorExp::RotateDensityM(bool to_mass, matrixC V, matrixC& densityMatrix)
+void PMNS_TaylorExp::RotateDensityM(bool to_mass, matrixC V)
 {
     matrixC Buffer = matrixC(fNumNus, vectorC(fNumNus, 0));
 
@@ -952,9 +995,9 @@ void PMNS_TaylorExp::RotateDensityM(bool to_mass, matrixC V, matrixC& densityMat
     for (int j = 0; j < fNumNus; j++) {
       for (int k = 0; k < fNumNus; k++) {
         if (to_mass)
-          Buffer[i][j] += densityMatrix[i][k] * V[k][j];
+          Buffer[i][j] += fdensityMatrix[i][k] * V[k][j];
         else
-          Buffer[i][j] += densityMatrix[i][k] * conj(V[j][k]);
+          Buffer[i][j] += fdensityMatrix[i][k] * conj(V[j][k]);
       }
     }
   }
@@ -963,14 +1006,14 @@ void PMNS_TaylorExp::RotateDensityM(bool to_mass, matrixC V, matrixC& densityMat
   // Final matrix is Hermitian, so copy upper to lower triangle
   for (int i = 0; i < fNumNus; i++) {
     for (int j = i; j < fNumNus; j++) {
-        densityMatrix[i][j] = 0;
+        fdensityMatrix[i][j] = 0;
       for (int k = 0; k < fNumNus; k++) {
         if (to_mass)
-            densityMatrix[i][j] += conj(V[k][i]) * Buffer[k][j];
+            fdensityMatrix[i][j] += conj(V[k][i]) * Buffer[k][j];
         else
-            densityMatrix[i][j] += V[i][k] * Buffer[k][j];
+            fdensityMatrix[i][j] += V[i][k] * Buffer[k][j];
       }
-      if (j > i) densityMatrix[j][i] = conj(densityMatrix[i][j]);
+      if (j > i) fdensityMatrix[j][i] = conj(fdensityMatrix[i][j]);
     }
   }
 }
@@ -979,17 +1022,17 @@ void PMNS_TaylorExp::RotateDensityM(bool to_mass, matrixC V, matrixC& densityMat
 ///
 ///
 ///
-void PMNS_TaylorExp::HadamardProduct(vectorD lambda, matrixC& densityMatrix, double dbin)
+void PMNS_TaylorExp::HadamardProduct(vectorD lambda, double dbin)
 {
     matrixC sinc = matrixC(fNumNus, vectorC(fNumNus, 0));
     for(int j=0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<j ; i++){
-            double arg = (lambda[i] - lambda[j]) * dbin * kGeV2eV; //ATTTTTTTTTTTTTTTTTTTTTTT
+            double arg = (lambda[i] - lambda[j]) * dbin ; 
             sinc[i][j] = sin(arg)/arg;
 
             sinc[j][i] = sinc[i][j];
         }
-    }    // PEUT ETRE AMELIORE !!!!!!!!!!!!!!!!!!!!!!
+    }    
 
     for(int i=0 ; i<fNumNus ; i++){
         sinc[i][i] = 1;
@@ -997,7 +1040,7 @@ void PMNS_TaylorExp::HadamardProduct(vectorD lambda, matrixC& densityMatrix, dou
     
     for(int j=0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<fNumNus ; i++){
-            densityMatrix[i][j] = densityMatrix[i][j] * sinc[i][j];
+            fdensityMatrix[i][j] = fdensityMatrix[i][j] * sinc[i][j];
         }
     }
 }
@@ -1006,36 +1049,92 @@ void PMNS_TaylorExp::HadamardProduct(vectorD lambda, matrixC& densityMatrix, dou
 ///
 ///
 ///
-double PMNS_TaylorExp::AvgAlgorithm(int flvi, int flvf)
+double PMNS_TaylorExp::AlgorithmDensityMatrix(int flvi, int flvf)
 {
-    //matrixC densityMatrix = matrixC(fNumNus, vectorC(fNumNus, 0));
-    densityMatrix[flvi][flvi] = 1;
+    fdensityMatrix[flvi][flvi] = 1;
 
-    RotateDensityM(true,fVcosT,densityMatrix);
-    HadamardProduct(flambdaCosT,densityMatrix,fdcosT);
-    RotateDensityM(false,fVcosT,densityMatrix);
+    RotateDensityM(true,fVcosT);
+    HadamardProduct(flambdaCosT,fdcosT);
+    RotateDensityM(false,fVcosT);
 
-    RotateDensityM(true,fVcosT,densityMatrix);
-    HadamardProduct(flambdaInvE,densityMatrix,fdInvE);
-    RotateDensityM(false,fVcosT,densityMatrix);
+    RotateDensityM(true,fVInvE);
+    HadamardProduct(flambdaInvE,fdInvE / kGeV2eV);
+    RotateDensityM(false,fVInvE);
 
-    RotateDensityM(false,fevolutionMatrixS,densityMatrix);
+    RotateDensityM(false,fevolutionMatrixS);
 
-    return real(densityMatrix[flvf][flvf]);
+    return real(fdensityMatrix[flvf][flvf]);
+}
+
+
+double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double dE, double cosT , double dcosT)
+{
+    if (E <= 0) return 0;
+    if (cosT > 0) return 0; 
+
+    if (fNuPaths.empty()) return 0;
+
+    // Don't average zero width
+    if (dE <= 0 && dcosT == 0) return Prob(flvi, flvf, E);
+    if (dE <= 0) return AvgProb(flvi, flvf, E, cosT, dcosT);
+    if (dcosT == 0) return AvgProb(flvi, flvf, E, dE);  
+
+    vectorD Ebin = ConvertEtoLoE(E,dE);
+
+    return AvgProbLoE(flvi, flvf, Ebin[0], Ebin[1], cosT, dcosT);
+}
+
+
+double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE, double cosT , double dcosT)
+{
+    if (LoE <= 0) return 0;
+    if (cosT > 0) return 0; 
+
+    if (fNuPaths.empty()) return 0;
+
+    // Don't average zero width
+    if (dLoE <= 0 && dcosT == 0) return Prob(flvi, flvf, fPath.length / LoE);
+    if (dLoE <= 0) return AvgProb(flvi, flvf, fPath.length / LoE, cosT, dcosT);   ///chg ici
+    if (dcosT == 0) return AvgProbLoE(flvi, flvf, LoE, dLoE);  
+
+    /*
+    // Make sample with 1oE and not LoE
+    vector<vectorD> samples = GetSamplePoints(LoE / fPath.length, dLoE /fPath.length, cosT, dcosT);
+
+    double avgprob  = 0;
+
+    // Loop over all sample points
+    for (int j = 1; j < int(samples.size()); j++) {
+
+        avgprob +=  AvgAlgo(flvi, flvf, E , samples[j], samples[0]); 
+
+    }
+    
+    // Return average of probabilities
+    return  avgprob / (samples.size()-1);*/
+
+    return AvgAlgo(flvi, flvf, LoE / fPath.length, dLoE / fPath.length, cosT, dcosT);
 }
 
 //.............................................................................
 ///
 ///
 ///
-double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E , double dE, double cosT , double dcosT)
+double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double InvE , double dInvE, double cosT , double dcosT)
 {
+    OscProb::PremModel prem;
+
+    prem.FillPath(cosT);
+    SetPath(prem.GetNuPath());
+
     // reset K et S et Ve et lambdaE
     InitializeTaylorsVectors();
 
-    SetEnergy(E);
+    SetEnergy(1 / InvE);
     SetCosT(cosT);
-    SetwidthBin(dE,dcosT);
+    SetwidthBin(dInvE,dcosT);
+
+    fminRsq  = pow(fDetRadius * sqrt(1 - cosT * cosT) , 2);
 
     //Propagate -> get S and K matrix (on the whole path)
     PropagateTaylor();
@@ -1044,7 +1143,7 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E , double dE, double 
     SolveK(fKInvE,flambdaInvE,fVInvE);
     SolveK(fKcosT,flambdaCosT,fVcosT);
 
-    return AvgAlgorithm(flvi,flvf);
+    return AlgorithmDensityMatrix(flvi,flvf);
 }
 
 

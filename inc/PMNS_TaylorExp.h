@@ -64,6 +64,8 @@ namespace OscProb {
                                     ///< bin of cosTheta and energy with a Taylor
                                     ///< expansion
 
+      virtual double AvgProbLoE(int flvi, int flvf, double LoE, double dLoE, double cosT , double dcosT);
+
       // blablabla
       virtual double interpolationEnergy(int flvi, int flvf, 
         double E , double dE);      /// < 
@@ -87,7 +89,7 @@ namespace OscProb {
       virtual void BuildKE(
         double L); ///< build K matrix for the inverse of energy in mass basis
       virtual void BuildKcosT(
-        double L, matrixC& K); ///< build K matrix for angle in flavor basis
+        double L); ///< build K matrix for angle in flavor basis
 
       virtual double LnDerivative();
 
@@ -117,11 +119,12 @@ namespace OscProb {
 
       virtual double AvgAlgo(int flvi, int flvf, double LoE , double dLoE, double L);
       virtual double AvgAlgoCosT(int flvi, int flvf, double E , double cosT, double dcosT);
+      virtual double AvgAlgo(int flvi, int flvf, double InvE , double dInvE, double cosT , double dcosT);
 
       // Avg on energy and cosT at the same time 
-      virtual void RotateDensityM(bool to_mass, matrixC V, matrixC& densityMatrix);
-      virtual void HadamardProduct(vectorD lambda, matrixC& densityMatrix, double dbin);
-      virtual double AvgAlgorithm(int flvi, int flvf);
+      virtual void RotateDensityM(bool to_mass, matrixC V);
+      virtual void HadamardProduct(vectorD lambda, double dbin);
+      virtual double AlgorithmDensityMatrix(int flvi, int flvf);
 
       // Interpolation for only one dynamical variable
       virtual double AvgFormulaExtrapolation(int flvi, int flvf, double dbin, vectorD flambda, matrixC fV);
@@ -148,7 +151,7 @@ namespace OscProb {
       vectorD flambdaCosT;    ///< Eigenvectors of K_cosTheta
       matrixC fVcosT;         ///< Eigenvalues of K_cosTheta
 
-      matrixC densityMatrix; ///< The neutrino density matrix state
+      matrixC fdensityMatrix; ///< The neutrino density matrix state
 
       int flayer;
       int fdl;
