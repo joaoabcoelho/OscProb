@@ -85,7 +85,7 @@ namespace OscProb {
 
       // Construction of the K matrices                                   
       virtual void BuildKE(
-        double L, matrixC& K); ///< build K matrix for the inverse of energy in mass basis
+        double L); ///< build K matrix for the inverse of energy in mass basis
       virtual void BuildKcosT(
         double L, matrixC& K); ///< build K matrix for angle in flavor basis
 
@@ -94,11 +94,11 @@ namespace OscProb {
 
       // Rotation from mass to flavor basis
       virtual void rotateS(); ///< Rotate the S matrix 
-      virtual void rotateK(matrixC Kmass,matrixC& Kflavor); ///< Rotate one K matrix 
+      virtual void rotateK(); ///< Rotate one K matrix 
 
       // Multiplication rule between two pairs of (S,K) 
-      virtual void MultiplicationRuleS(matrixC SLayer); /// < Product between two S matrices
-      virtual void MultiplicationRuleK(matrixC KLayer, complexD K[3][3]); ///< Product between 
+      virtual void MultiplicationRuleS(); /// < Product between two S matrices
+      virtual void MultiplicationRuleK( complexD K[3][3]); ///< Product between 
                                                                           ///< two K matrices
 
       /// Solve one K matrix

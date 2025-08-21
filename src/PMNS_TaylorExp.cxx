@@ -120,9 +120,8 @@ void PMNS_TaylorExp::GetPremLayers(std::vector<PremLayer> PremLayers)
 /// hamiltonien as linear with respect to this new variable.
 ///  
 /// @param L - The length of the layer in GeV-1
-/// @param K - The K matrix for the inverse of energy in the mass basis
 ///
-void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
+void PMNS_TaylorExp::BuildKE(double L)
 {
     double lenghtEV = L * kKm2eV ; // L in eV-1
     double bufK =  lenghtEV * 0.5 ; // L/2 in eV-1
@@ -155,10 +154,10 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
 
         for(int j = 0 ; j<=i ; j++){
 
-            K[i][j] = 0;
+            fKmass[i][j] = 0;
 
             for (int l = 0 ; l<fNumNus ; l++){
-                K[i][j] += buffer[l] * fEvec[l][j] ;
+                fKmass[i][j] += buffer[l] * fEvec[l][j] ;
             }
             
             complexD C;
@@ -174,10 +173,10 @@ void PMNS_TaylorExp::BuildKE(double L , matrixC& K)
                 
             }  
 
-            K[i][j] *= bufK * C ;
+            fKmass[i][j] *= bufK * C ;
 
             if(i != j)  
-                K[j][i] = conj(K[i][j]);
+                fKmass[j][i] = conj(fKmass[i][j]);
             
         }
     }
@@ -279,10 +278,8 @@ void PMNS_TaylorExp::rotateS()
 ///
 /// Rotate the K matrix from mass to flavor basis
 ///
-/// @param fKmass - The K matrix in mass basis
-/// @param fKflavor - The K matrix in flavor basis
 ///
-void PMNS_TaylorExp::rotateK(matrixC fKmass , matrixC& fKflavor)
+void PMNS_TaylorExp::rotateK()
 {
     complexD buffer[3];
 
@@ -323,10 +320,8 @@ void PMNS_TaylorExp::rotateK(matrixC fKmass , matrixC& fKflavor)
 /// of the path and the beginning of the current layer. This matrix is updated 
 /// after every layer with this function.
 ///
-/// @param SLayer - The S matrix corresponding to the propagation in the current 
-///                 layer
 ///
-void PMNS_TaylorExp::MultiplicationRuleS(matrixC SLayer)
+void PMNS_TaylorExp::MultiplicationRuleS()
 {
     complexD save [3];
 
@@ -339,7 +334,7 @@ void PMNS_TaylorExp::MultiplicationRuleS(matrixC SLayer)
             fevolutionMatrixS[i][j] = 0;
 
             for(int k = 0 ; k<fNumNus ; k++){
-                fevolutionMatrixS[i][j] += SLayer[i][k] * save[k];
+                fevolutionMatrixS[i][j] += fSflavor[i][k] * save[k];
             }
         }
     }
@@ -353,12 +348,10 @@ void PMNS_TaylorExp::MultiplicationRuleS(matrixC SLayer)
 /// This is used to calculate the matrix K corresponding to the propagation 
 /// between the beginning of the path and the end of the current layer. 
 ///
-/// @param KLayer - The S matrix corresponding to the propagation in the current 
-///                 layer
 /// @param K - The S matrix corresponding to the propagation between the beginning 
 ///            of the path and the beginning of the current layer
 ///
-void PMNS_TaylorExp::MultiplicationRuleK(matrixC KLayer,complexD K[3][3])
+void PMNS_TaylorExp::MultiplicationRuleK(complexD K[3][3])
 {
 
     for(int i = 0 ; i<fNumNus ; i++){
@@ -367,7 +360,7 @@ void PMNS_TaylorExp::MultiplicationRuleK(matrixC KLayer,complexD K[3][3])
 
         for(int l = 0 ; l<fNumNus ; l++){
             for(int k = 0 ; k<fNumNus ; k++){
-                buffer[l] += conj(fevolutionMatrixS[k][i]) * KLayer[k][l];
+                buffer[l] += conj(fevolutionMatrixS[k][i]) * fKflavor[k][l];
             }
         }
 
@@ -417,41 +410,35 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     }
 
     // Rotate S in flavor basis
-    //matrixC fSflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
     rotateS();                                    
 
     // if avg on E
     if(fdInvE != 0){
 
         // Build KE in mass basis
-        //matrixC fKmass = matrixC(fNumNus, vectorC(fNumNus, 0));
-        BuildKE(p.length,fKmass);
+        BuildKE(p.length);
 
         // Rotate KE in flavor basis
-        //matrixC fKflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
-        rotateK(fKmass,fKflavor);
+        rotateK();
 
         // Multiply this layer K's with the previous path K's
-        MultiplicationRuleK(fKflavor,fKInvE);    
+        MultiplicationRuleK(fKInvE);    
         
     }
 
     // if avg on cosT
     if(fdcosT != 0){
 
-        //matrixC fKmass2 = matrixC(fNumNus, vectorC(fNumNus, 0));
+        // Build KcosT in mass basis
         BuildKcosT(p.length, fKflavor);
 
         // Multiply this layer K's with the previous path K's
-        MultiplicationRuleK(fKflavor,fKcosT);
+        MultiplicationRuleK(fKcosT);
         
     }
 
-    
-
-
     // Multiply this layer S's with the previous path S's
-    MultiplicationRuleS(fSflavor);
+    MultiplicationRuleS();
 
 }
 
