@@ -93,7 +93,7 @@ namespace OscProb {
 
 
       // Rotation from mass to flavor basis
-      virtual void rotateS(vectorC fPhases,matrixC& S); ///< Rotate the S matrix 
+      virtual void rotateS(); ///< Rotate the S matrix 
       virtual void rotateK(matrixC Kmass,matrixC& Kflavor); ///< Rotate one K matrix 
 
       // Multiplication rule between two pairs of (S,K) 

@@ -256,12 +256,9 @@ double PMNS_TaylorExp::LnDerivative()
 
 //.............................................................................
 ///
-/// Rotate the S matrix from mass to flavor basis
+/// Rotate the S matrix for the current layer from mass to flavor basis
 ///
-/// @param fPhases - The diagonal elements of S in mass basis
-/// @param S - The S matrix in flavor basis
-///
-void PMNS_TaylorExp::rotateS(vectorC fPhases, matrixC& S)
+void PMNS_TaylorExp::rotateS()
 {
     complexD buffer[3];
 
@@ -270,9 +267,9 @@ void PMNS_TaylorExp::rotateS(vectorC fPhases, matrixC& S)
         for(int k = 0 ; k<fNumNus ; k++) { buffer[k] = fPhases[k] * conj(fEvec[j][k]); }
         
         for(int i = 0 ; i<fNumNus ; i++){ 
-            S[i][j] = 0;
+            fSflavor[i][j] = 0;
             for(int k = 0 ; k<fNumNus ; k++){
-                S[i][j] += fEvec[i][k] * buffer[k];
+                fSflavor[i][j] += fEvec[i][k] * buffer[k];
             }
         }
     }
@@ -421,7 +418,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 
     // Rotate S in flavor basis
     //matrixC fSflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
-    rotateS(fPhases,fSflavor);                                    
+    rotateS();                                    
 
     // if avg on E
     if(fdInvE != 0){
@@ -442,11 +439,11 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
     // if avg on cosT
     if(fdcosT != 0){
 
-        matrixC Kmass2 = matrixC(fNumNus, vectorC(fNumNus, 0));
-        BuildKcosT(p.length, Kmass2);
+        //matrixC Kmass2 = matrixC(fNumNus, vectorC(fNumNus, 0));
+        BuildKcosT(p.length, Kflavor);
 
         // Multiply this layer K's with the previous path K's
-        MultiplicationRuleK(Kmass2,fKcosT);
+        MultiplicationRuleK(Kflavor,fKcosT);
         
     }
 
