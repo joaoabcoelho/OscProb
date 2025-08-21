@@ -46,7 +46,7 @@ PMNS_TaylorExp::~PMNS_TaylorExp() {}
 ///
 void PMNS_TaylorExp::InitializeTaylorsVectors()
 {
-    matrixC fdensityMatrix = matrixC(fNumNus, vectorC(fNumNus, 0));
+    fdensityMatrix = matrixC(fNumNus, vectorC(fNumNus, 0));
 
     flambdaInvE = vectorD(fNumNus, 0);
     fVInvE = matrixC(fNumNus, vectorC(fNumNus, 0));
@@ -212,7 +212,7 @@ void PMNS_TaylorExp::BuildKcosT(double L)
         Hbar[0][0] -= kr2GNe;
 
     double dL = LnDerivative() * kKm2eV;
-
+   
     for(int j = 0 ; j<fNumNus ; j++){
         for(int i = 0 ; i<=j ; i++){
             fKflavor[i][j] = dL * Hbar[i][j];   
@@ -989,7 +989,7 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
 void PMNS_TaylorExp::RotateDensityM(bool to_mass, matrixC V)
 {
     matrixC Buffer = matrixC(fNumNus, vectorC(fNumNus, 0));
-
+    
   // buffer = rho . U
   for (int i = 0; i < fNumNus; i++) {
     for (int j = 0; j < fNumNus; j++) {
@@ -1001,7 +1001,7 @@ void PMNS_TaylorExp::RotateDensityM(bool to_mass, matrixC V)
       }
     }
   }
-
+  
   // rho = U^\dagger . buffer = U^\dagger . rho . U
   // Final matrix is Hermitian, so copy upper to lower triangle
   for (int i = 0; i < fNumNus; i++) {
@@ -1016,6 +1016,7 @@ void PMNS_TaylorExp::RotateDensityM(bool to_mass, matrixC V)
       if (j > i) fdensityMatrix[j][i] = conj(fdensityMatrix[i][j]);
     }
   }
+  
 }
 
 //.............................................................................

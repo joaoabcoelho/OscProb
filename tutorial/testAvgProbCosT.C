@@ -29,7 +29,7 @@ void testAvgProbCosT(){
   double xmin = -0.9;
   double xmax = -0.1;
 
-  double E = 0.3;
+  double E = 3;
 
   // Lots of histograms
   TH1D* h1 = new TH1D("","",nbins,xmin,xmax);
