@@ -945,7 +945,7 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
 ///
 ///
 ///
-vector<vectorD> PMNS_TaylorExp::GetSamplePoints(double InvE, double dInvE, double cosT, double dcosT)
+matrixD PMNS_TaylorExp::GetSamplePoints(double InvE, double dInvE, double cosT, double dcosT)
 {
 
   // Set a number of sub-divisions to achieve "good" accuracy
@@ -957,8 +957,8 @@ vector<vectorD> PMNS_TaylorExp::GetSamplePoints(double InvE, double dInvE, doubl
   //cout<<"sans ceil = "<<20 * pow(E , -0.5) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4)<<endl;
 
   // A vector to store sample points
-  vectorD Samples;
-  Samples.push_back(dcosT / n_div);
+  matrixD  Samples;
+  /*Samples.push_back(dcosT / n_div);
 
   // Loop over sub-divisions
   for (int k = 0; k < n_div; k++) {
@@ -969,7 +969,7 @@ vector<vectorD> PMNS_TaylorExp::GetSamplePoints(double InvE, double dInvE, doubl
 
   } // End of loop over sub-divisions
 
-  // Return all sample points
+  // Return all sample points*/
   return Samples;
 }
 
