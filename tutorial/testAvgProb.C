@@ -1,5 +1,7 @@
 
 #include "PMNS_Fast.h"
+#include "PMNS_TaylorExp.h"
+#include "PremModel.h"
 
 // Some functions to make nice plots
 #include "SetNiceStyle.C"
@@ -13,21 +15,40 @@ void testAvgProb(){
 
   // Get a PMNS object
   OscProb::PMNS_Fast p;
+  OscProb::PMNS_TaylorExp taylor;
 
   // Set the baseline through the earth
-  double L = 2*6368 + 18;
-  p.SetLength(L);
+  //double L = 2*6368 + 18;
+  //p.SetLength(L);
+  //taylor.SetLength(L);
+
+  // PREM Model
+  OscProb::PremModel prem;    
+
+  double cosT = -0.6;
+  double L = 6368 * abs(cosT); //L max = 6368 et non 2*6368
+
+  // Fill path for cosT
+  prem.FillPath(cosT);
+
+  // Give path to calculator
+  p.SetPath(prem.GetNuPath());
+  taylor.SetPath(prem.GetNuPath());
+
 
   // Define some fine and coarse binnings
-  int navg = 20;
+  int navg = 40;
   int nbins = navg * 100;
+  double xmin = -1;
+  double xmax = 3;
 
   // Lots of histograms
-  TH1D* h1 = new TH1D("","",nbins,0,3);
-  TH1D* h2 = new TH1D("","",navg,0,3);
-  TH1D* h3 = new TH1D("","",navg,0,3);
-  TH1D* h4 = new TH1D("","",navg,0,3);
-  TH1D* h5 = new TH1D("","",navg,0,3);
+  TH1D* h1 = new TH1D("","",nbins,xmin,xmax);
+  TH1D* h2 = new TH1D("","",navg,xmin,xmax);
+  TH1D* h3 = new TH1D("","",navg,xmin,xmax);
+  TH1D* h4 = new TH1D("","",navg,xmin,xmax);
+  TH1D* h5 = new TH1D("","",navg,xmin,xmax);
+  TH1D* h6 = new TH1D("","",navg,xmin,xmax);
 
   // Do some fine binning and uniform sampling
   for(int i=1; i<=nbins; i++){
@@ -56,9 +77,27 @@ void testAvgProb(){
     double E  = (maxE + minE) / 2;
     double dE = (maxE - minE);
 
-    h2->SetBinContent(i, p.AvgProb(1,1, E, dE));
+    //double pp =taylor.avgProbTaylor(1,1, E, dE);
+    
 
-    h3->SetBinContent(i, h3->GetBinContent(i) / dE);
+    cout<<"---------------i : "<< i << "  E = "<< E <<"----- LoE ="<< L / E << "------------------"<< endl;
+    double a = taylor.AvgProb(1,1, E, dE);
+    double b = h3->GetBinContent(i) / dE;
+    double ab = abs(a-b);
+    cout<<a<<" - "<< b << " = " <<ab;
+
+    if (ab < 5 * 1E-4)
+      cout<<"                 TRUE";
+    else
+      cout<<"                 FALSE";
+
+    cout<<endl<<endl;
+
+
+    h2->SetBinContent(i, a);
+    //h6->SetBinContent(i, p.AvgProb(1,1, E, dE));
+
+    h3->SetBinContent(i, b);
     h4->SetBinContent(i, p.Prob(1,1, E));
 
     // Store the number of samples per bin
@@ -99,10 +138,30 @@ void testAvgProb(){
 
   // Draw different samplings
   h1->DrawCopy("curv");
-  h4->DrawCopy("hist same ][");
+  //h4->DrawCopy("hist same ][");
   h2->DrawCopy("hist same ][");
   h3->DrawCopy("hist same ][");
 
+  MiscText(0.75, 0.965, 0.04, TString::Format("nbrBin = %0.1d", navg) );
+  MiscText(0.63, 0.965, 0.04, TString::Format("cos#theta_{z} = %0.1f", cosT) );
+
+  TLegend* leg = new TLegend(0.7,0.6,0.9,0.6);
+
+  //leg->AddEntry(h4," P cst in every bin ", "l");
+  leg->AddEntry(h3, " avg P", "l");
+  leg->AddEntry(h2, "avg P with Taylor", "l");
+
+  leg->SetLineColor(kBlack);  // Couleur du cadre
+  leg->SetLineWidth(2);       // Épaisseur du cadre
+  //leg->AddEntry(h2, "P(#nu_{#mu}#rightarrow#nu_{#mu}) - avg with Taylor", "l");
+  
+  //leg->AddEntry(h4, "P(#nu_{#mu}#rightarrow#nu_{#mu}) - centre bin", "l");
+
+  SetLeg(leg);
+
+  leg->Draw();
+
+  /*
   // Make a new canvas
   gPad->DrawClone();
 
@@ -125,4 +184,5 @@ void testAvgProb(){
   h1->DrawCopy("hist ][ same");
   h5->DrawCopy("hist ][ same");
 
+  */
 }
