@@ -84,7 +84,7 @@ namespace OscProb {
 
       virtual vectorD GetSamplePoints(double LoE, double dLoE);
       virtual vectorD GetSamplePoints(double E, double cosT, double dcosT);
-      virtual matrixD GetSamplePoints(double InvE, double dInvE, double cosT, double dcosT);
+      virtual matrixC GetSamplePoints(double InvE, double dInvE, double cosT, double dcosT);
 
 
       // Construction of the K matrices                                   

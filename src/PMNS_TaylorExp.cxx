@@ -945,31 +945,38 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
 ///
 ///
 ///
-matrixD PMNS_TaylorExp::GetSamplePoints(double InvE, double dInvE, double cosT, double dcosT)
+matrixC PMNS_TaylorExp::GetSamplePoints(double InvE, double dInvE, double cosT, double dcosT)
 {
 
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
-  //int n_div = ceil(35 * pow(E , -0.4) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4));
-  int n_divE = 1;
-  int n_divCosT = 1;
+  int n_divE = 25;
+  int n_divCosT = 10;
   //cout<<"@@@ n_div = "<<n_div<<endl;
   //cout<<"sans ceil = "<<20 * pow(E , -0.5) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4)<<endl;
 
   // A vector to store sample points
-  matrixD  Samples;
-  /*Samples.push_back(dcosT / n_div);
+  matrixC Samples = matrixC(n_divE + 1, vectorC(n_divCosT + 1, 0));
+
+  Samples[0][0] = complexD(dInvE / n_divE , dcosT / n_divCosT);
 
   // Loop over sub-divisions
-  for (int k = 0; k < n_div; k++) {
-    // Define sub-division center and width
-    double bctr = cosT - dcosT / 2 + (k + 0.5) * dcosT / n_div;
+  for (int k = 0; k < n_divE; k++) {
+
+    double bctr_InvE = InvE - dInvE / 2 + (k + 0.5) * dInvE / n_divE;
+
+    for (int l = 0; l < n_divCosT; l++) {
+
+        // Define sub-division center and width
+        double bctr_CosT = cosT - dcosT / 2 + (l + 0.5) * dcosT / n_divCosT;
+
+        Samples[k+1][l+1] = complexD(bctr_InvE, bctr_CosT);
    
-    Samples.push_back(bctr);
+    }
 
   } // End of loop over sub-divisions
 
-  // Return all sample points*/
+  // Return all sample points
   return Samples;
 }
 
@@ -1098,23 +1105,53 @@ double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE, d
     if (dLoE <= 0) return AvgProb(flvi, flvf, fPath.length / LoE, cosT, dcosT);   ///chg ici
     if (dcosT == 0) return AvgProbLoE(flvi, flvf, LoE, dLoE);  
 
-    /*
+    
     // Make sample with 1oE and not LoE
-    vector<vectorD> samples = GetSamplePoints(LoE / fPath.length, dLoE /fPath.length, cosT, dcosT);
+    matrixC samples = GetSamplePoints(LoE / fPath.length, dLoE /fPath.length, cosT, dcosT);
+
+    int rows = samples.size();                  
+    int cols = samples[0].size();               
 
     double avgprob  = 0;
+    double sumw   = 0;
+
+    // Loop over all sample points
+    for (int k = 1; k < int(rows); k++) {
+        for(int l =1 ; l < int(cols); l++){
+
+            double w = 1. / pow(real(samples[k][l]), 2);
+
+            avgprob += w * AvgAlgo(flvi, flvf, real(samples[k][l]), real(samples[0][0]), imag(samples[k][l]), imag(samples[0][0])); 
+
+            sumw += w;
+        }
+    }
+    
+    // Return average of probabilities
+    cout<<"avgprob = "<<avgprob<<"     avgprob / ( (sumw) * (cols-1)) = "<< avgprob / ( (sumw) * (cols-1))<<endl;
+    return   avgprob / ( (sumw) );
+
+
+    /* double avgprob  = 0;
+    double L = fPath.length;
+    double sumw   = 0;
 
     // Loop over all sample points
     for (int j = 1; j < int(samples.size()); j++) {
 
-        avgprob +=  AvgAlgo(flvi, flvf, E , samples[j], samples[0]); 
+        double w = 1. / pow(samples[j], 2);
+
+        avgprob += w * AvgAlgo(flvi, flvf, samples[j], samples[0],L);
+
+        sumw += w;
 
     }
     
     // Return average of probabilities
-    return  avgprob / (samples.size()-1);*/
+    return  avgprob / sumw;*/
 
-    return AvgAlgo(flvi, flvf, LoE / fPath.length, dLoE / fPath.length, cosT, dcosT);
+    //return AvgAlgo(flvi, flvf, LoE / fPath.length, dLoE / fPath.length, cosT, dcosT);
+    //return AvgAlgo(flvi, flvf, real(samples[1][1]), real(samples[0][0]), imag(samples[1][1]), imag(samples[0][0]));
 }
 
 //.............................................................................

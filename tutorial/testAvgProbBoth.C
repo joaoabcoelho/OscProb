@@ -101,6 +101,7 @@ void testAvgProbBoth(){
 
         double a = taylor.AvgProb(1, 1, E, dE, cosT, dcosT);
         double b = h3->GetBinContent(j,i) / ( dcosT * dE);
+        cout<<"                                                    avgFast = "<<b<<endl<<endl;
         double c = p.Prob(1,1, E);
         double ab = abs(a-b);
 
