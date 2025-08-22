@@ -945,7 +945,7 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
 ///
 ///
 ///
-/*vector<vectorD> PMNS_TaylorExp::GetSamplePoints(double InvE, double dInvE, double cosT, double dcosT)
+vector<vectorD> PMNS_TaylorExp::GetSamplePoints(double InvE, double dInvE, double cosT, double dcosT)
 {
 
   // Set a number of sub-divisions to achieve "good" accuracy
@@ -971,7 +971,7 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
 
   // Return all sample points
   return Samples;
-}*/
+}
 
 
 

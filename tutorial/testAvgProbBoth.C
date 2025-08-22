@@ -34,10 +34,11 @@ void testAvgProbBoth(){
   double ymaxCosT = -0.1;
 
   // Lots of histograms
-  TH2D* h1 = new TH2D("","",nbinsE,xminE,xmaxE,navgCosT,yminCosT,ymaxCosT);
+  TH2D* h1 = new TH2D("","",nbinsE,xminE,xmaxE,nbinsCosT,yminCosT,ymaxCosT);
   TH2D* h2 = new TH2D("","",navgE,xminE,xmaxE,navgCosT,yminCosT,ymaxCosT);
   TH2D* h3 = new TH2D("","",navgE,xminE,xmaxE,navgCosT,yminCosT,ymaxCosT);
   TH2D* h4 = new TH2D("","",navgE,xminE,xmaxE,navgCosT,yminCosT,ymaxCosT);
+  TH2D* h5 = new TH2D("","",navgE,xminE,xmaxE,navgCosT,yminCosT,ymaxCosT);
 
   //h2->SetBinContent(x,y,z);
 
@@ -58,8 +59,8 @@ void testAvgProbBoth(){
 
     for(int j=1; j<=nbinsE; j++){
 
-        double minE  = pow(10, h1->GetXaxis()->GetBinLowEdge(i));
-        double maxE  = pow(10, h1->GetXaxis()->GetBinLowEdge(i+1));
+        double minE  = pow(10, h1->GetXaxis()->GetBinLowEdge(j));
+        double maxE  = pow(10, h1->GetXaxis()->GetBinLowEdge(j+1));
 
         double E = 0.5 * (minE + maxE);
         double dE = (maxE - minE);
@@ -92,14 +93,15 @@ void testAvgProbBoth(){
 
     for(int j=0; j<=navgE; j++){
 
-        double minE  = pow(10, h2->GetXaxis()->GetBinLowEdge(i));
-        double maxE  = pow(10, h2->GetXaxis()->GetBinLowEdge(i+1));
+        double minE  = pow(10, h2->GetXaxis()->GetBinLowEdge(j));
+        double maxE  = pow(10, h2->GetXaxis()->GetBinLowEdge(j+1));
 
         double E = 0.5 * (minE + maxE);
         double dE = (maxE - minE);
 
         double a = taylor.AvgProb(1, 1, E, dE, cosT, dcosT);
         double b = h3->GetBinContent(j,i) / ( dcosT * dE);
+        double c = p.Prob(1,1, E);
         double ab = abs(a-b);
 
         /*cout<<"cosT = "<<cosT<<endl;
@@ -113,24 +115,24 @@ void testAvgProbBoth(){
 
         cout<<"r = "<<dcosT/cosT<<endl<<endl;*/
 
-
-
         h2->SetBinContent(j, i, a);
 
         h3->SetBinContent(j, i, b);
-        h4->SetBinContent(j,i, p.Prob(1,1, E));
+        h4->SetBinContent(j,i, c);
+
+        h5->SetBinContent(j, i, ab);
 
     }
 
   }
 
   // Set nice histogram
-  SetHist(h2);
+  SetHist(h5);
 
   // Set titles
-  h2->SetTitle(";L/E (km/GeV);cos#theta_{z};P_{#mu#mu} + 0.5#timesP_{#bar{#mu#mu}} + 0.5#timesP_{e#mu} + 0.25#timesP_{#bar{e#mu}}");
+  h5->SetTitle(";log(E) (GeV); log(cos#theta_{z});P_{#mu#mu}");
 
-  h2->Draw();
+  h5->Draw("colz");
 
   gPad->SetRightMargin(0.18);
 
