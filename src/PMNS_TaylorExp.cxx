@@ -947,12 +947,17 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
 ///
 matrixC PMNS_TaylorExp::GetSamplePoints(double InvE, double dInvE, double cosT, double dcosT)
 {
-
+  //double L = fPath.length ;
+  //cout<<"L = "<<L<<"   ";
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
-  int n_divE = 25;
-  int n_divCosT = 10;
-  //cout<<"@@@ n_div = "<<n_div<<endl;
+  //int n_divE = 25;
+  //int n_divCosT = 10;
+  int n_divCosT = ceil(380 * pow(InvE , 0.5) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4));
+  int n_divE = ceil(280 * pow(dInvE / InvE, 0.8) * pow(InvE, 0.6) /  sqrt(fAvgProbPrec / 1e-4));
+
+  cout<<"n_divE = "<<n_divE<<"     n_divT = "<<n_divCosT;
+  //cout<<"@@@ n_divT = "<<n_divCosT<<endl;
   //cout<<"sans ceil = "<<20 * pow(E , -0.5) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4)<<endl;
 
   // A vector to store sample points
@@ -1128,7 +1133,6 @@ double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE, d
     }
     
     // Return average of probabilities
-    cout<<"avgprob = "<<avgprob<<"     avgprob / ( (sumw) * (cols-1)) = "<< avgprob / ( (sumw) * (cols-1))<<endl;
     return   avgprob / ( (sumw) );
 
 

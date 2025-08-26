@@ -91,6 +91,8 @@ void testAvgProbBoth(){
     premTaylor.FillPath(cosT);
     taylor.SetPath(premTaylor.GetNuPath());
 
+    cout<<endl<<endl<<"--------------------------cosT = "<<cosT<<"--------------------------"<<endl<<endl;
+
     for(int j=0; j<=navgE; j++){
 
         double minE  = pow(10, h2->GetXaxis()->GetBinLowEdge(j));
@@ -99,22 +101,25 @@ void testAvgProbBoth(){
         double E = 0.5 * (minE + maxE);
         double dE = (maxE - minE);
 
+        cout<<"E = "<<E<<"     ";
+
         double a = taylor.AvgProb(1, 1, E, dE, cosT, dcosT);
         double b = h3->GetBinContent(j,i) / ( dcosT * dE);
-        cout<<"                                                    avgFast = "<<b<<endl<<endl;
         double c = p.Prob(1,1, E);
         double ab = abs(a-b);
 
+      
+      
+
         /*cout<<"cosT = "<<cosT<<endl;
-        cout<<"dcosT = "<<dcosT<<"    diff = "<<ab;
+        cout<<"dcosT = "<<dcosT<<"    diff = "<<ab;*/
     
 
-        if (ab < 5 * 1E-4)
-            cout<<"     TRUE"<<endl;
-        else
-            cout<<"     FALSE"<<endl;;
+        if (ab > 5 * 1E-4)
+            cout<<"     FALSE     "<<abs(ab);
 
-        cout<<"r = "<<dcosT/cosT<<endl<<endl;*/
+        cout<<endl;
+        //cout<<"r = "<<dcosT/cosT<<endl<<endl;
 
         h2->SetBinContent(j, i, a);
 
@@ -137,50 +142,6 @@ void testAvgProbBoth(){
 
   gPad->SetRightMargin(0.18);
 
-
-  // Make a long canvas
-  /*MakeLongCanvas();
-
-  // Set some nice histograms
-  SetHist(h1, kBlack);
-  SetHist(h2, kBlue);
-  SetHist(h3, kGreen);
-  SetHist(h4, kRed);
-
-  // Change line styles
-  h3->SetLineStyle(7);
-
-  h2->SetLineWidth(3);
-  h3->SetLineWidth(3);
-  h4->SetLineWidth(3);
-
-  // The axis titles
-  h1->SetTitle(";Log10[Neutrino Energy (GeV)];P(#nu_{#mu}#rightarrow#nu_{#mu})");
-
-  // Draw different samplings
-  h1->DrawCopy("curv");
-  h2->DrawCopy("hist same ][");
-  h3->DrawCopy("hist same ][");
-  //h4->DrawCopy("hist same ][");
-
-  MiscText(0.75, 0.965, 0.04, TString::Format("nbrBin = %0.1d", navg) );
-  MiscText(0.63, 0.965, 0.04, TString::Format("E = %0.1f", E) );
-
-  TLegend* leg = new TLegend(0.2,0.9,0.9,0.6);
-
-  //leg->AddEntry(h4," P cst in every bin ", "l");
-  leg->AddEntry(h3, " avg P", "l");
-  leg->AddEntry(h2, "avg P with Taylor", "l");
-
-  leg->SetLineColor(kBlack);  // Couleur du cadre
-  leg->SetLineWidth(2);       // Épaisseur du cadre
-  //leg->AddEntry(h2, "P(#nu_{#mu}#rightarrow#nu_{#mu}) - avg with Taylor", "l");
-  
-  //leg->AddEntry(h4, "P(#nu_{#mu}#rightarrow#nu_{#mu}) - centre bin", "l");
-
-  SetLeg(leg);
-
-  leg->Draw();*/
 
   
 }
