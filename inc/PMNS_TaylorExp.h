@@ -35,7 +35,9 @@ namespace OscProb {
 
       virtual void SetCosT(double cosT); ///< Set neutrino angle.
 
-      virtual void GetPremLayers(std::vector<PremLayer> PremLayers);
+      virtual void GetPremLayers(
+        std::vector<PremLayer> PremLayers); ///< Get the list of layers
+
 
       // Get probability averaged over a bin
       using PMNS_Base::AvgProb;
@@ -58,28 +60,44 @@ namespace OscProb {
                                     ///< bin of cosTheta and energy with a Taylor
                                     ///< expansion
 
-      virtual double AvgProbLoE(int flvi, int flvf, double LoE, double dLoE, double cosT , double dcosT);
+      virtual double AvgProbLoE(int flvi, int flvf, 
+        double LoE, double dLoE, 
+        double cosT , double dcosT); ///< Compute the average probability over a 
+                                     ///< bin of cosTheta and LoE with a Taylor
+                                     ///< expansion
 
-      // blablabla
-      virtual double interpolationEnergy(int flvi, int flvf, 
-        double E , double dE);      /// < 
+      // Get probability 
+      virtual double InterpolationEnergy(int flvi, int flvf, 
+        double E , double dE);      ///< Compute the probability of flvi going to  
+                                    ///< flvf for an energy E+dE
 
-      virtual double interpolationEnergyLoE(int flvi, int flvf, 
-        double LoE , double dLoE);
+      virtual double InterpolationEnergyLoE(int flvi, int flvf, 
+        double LoE , double dLoE);  ///< Compute the probability of flvi going to  
+                                    ///< flvf at LoE+dLoE
 
-      virtual double interpolationCosT(int flvi, int flvf, 
-        double cosT , double dcosT);
+      virtual double InterpolationCosT(int flvi, int flvf, 
+        double cosT , double dcosT); ///< Compute the probability of flvi going to  
+                                     ///< flvf for an angle cosT+dcosT
 
 
     protected:
 
-      virtual void InitializeTaylorsVectors(); ///< Initialize all member vectors 
-                                               ///< with zeros
+      virtual void InitializeTaylorsVectors(); ///< Initialize all member  
+                                               ///< vectors with zeros
 
-      virtual vectorD GetSamplePoints(double LoE, double dLoE);
-      virtual vectorD GetSamplePoints(double E, double cosT, double dcosT);
-      virtual matrixC GetSamplePoints(double InvE, double dInvE, double cosT, double dcosT);
+      virtual vectorD GetSamplePoints(double LoE, 
+                                      double dLoE); ///< Compute the sample points for  
+                                                    ///< a bin of L/E with width dLoE
 
+      virtual vectorD GetSamplePoints(double E, double cosT, 
+                                      double dcosT); ///< Compute the sample points for  
+                                                     ///< a bin of cosT with width dcosT
+
+      virtual matrixC GetSamplePoints(double InvE, double dInvE, 
+                                      double cosT, double dcosT); ///< Compute the sample  
+                                                                  ///< points for a bin  
+                                                                  ///< of E and cosT with 
+                                                                  ///< width dE and dcosT
 
       // Construction of the K matrices                                   
       virtual void BuildKE(
@@ -87,21 +105,19 @@ namespace OscProb {
       virtual void BuildKcosT(
         double L); ///< build K matrix for angle in flavor basis
 
-      virtual double LnDerivative();
-
+      virtual double LnDerivative(); ///< Compute the derivation of one layer's length
 
       // Rotation from mass to flavor basis
       virtual void rotateS(); ///< Rotate the S matrix 
       virtual void rotateK(); ///< Rotate one K matrix 
 
       // Multiplication rule between two pairs of (S,K) 
-      virtual void MultiplicationRuleS(); /// < Product between two S matrices
-      virtual void MultiplicationRuleK( complexD K[3][3]); ///< Product between 
-                                                                          ///< two K matrices
-
-      /// Solve one K matrix
+      virtual void MultiplicationRuleS();                  ///< Product between two S matrices
+      virtual void MultiplicationRuleK( complexD K[3][3]); ///< Product between two K matrices
+                                                                          
+      /// Solve the K matrix
       virtual void SolveK(complexD K[3][3], 
-        vectorD& lambda, matrixC& V); ///< Solve one K matrix for
+        vectorD& lambda, matrixC& V); ///< Solve the K matrix for
                                       ///< eigenvectors and eigenvalues
 
       // Propagating
@@ -109,22 +125,36 @@ namespace OscProb {
         NuPath p );                   ///< Propagate neutrino through a single path
       virtual void PropagateTaylor(); ///< Propagate neutrino through full path
 
-      // Avg for only one dynamical variable
+      
       virtual double AvgFormula(int flvi, int flvf, double dbin, 
         vectorD flambda, matrixC fV); ///< Formula for the average probability over a bin
+                                      ///< of width dbin
 
-      virtual double AvgAlgo(int flvi, int flvf, double LoE , double dLoE, double L);
-      virtual double AvgAlgoCosT(int flvi, int flvf, double E , double cosT, double dcosT);
-      virtual double AvgAlgo(int flvi, int flvf, double InvE , double dInvE, double cosT , double dcosT);
+      virtual double AvgAlgo(int flvi, int flvf, 
+          double LoE , double dLoE, double L); ///< Algorithm for the compute of the average  
+                                               ///< probability over a bin of LoE 
 
-      // Avg on energy and cosT at the same time 
-      virtual void RotateDensityM(bool to_mass, matrixC V);
-      virtual void HadamardProduct(vectorD lambda, double dbin);
-      virtual double AlgorithmDensityMatrix(int flvi, int flvf);
+      virtual double AvgAlgoCosT(int flvi, int flvf, double E , 
+        double cosT, double dcosT); ///< Algorithm for the compute of the average  
+                                    ///< probability over a bin of cosT 
 
-      // Interpolation for only one dynamical variable
-      virtual double AvgFormulaExtrapolation(int flvi, int flvf, double dbin, vectorD flambda, matrixC fV);
+      virtual double AvgAlgo(int flvi, int flvf, 
+        double InvE , double dInvE, 
+        double cosT , double dcosT); ///< Algorithm for the compute of the average  
+                                     ///< probability over a bin of 1oE and cosT
 
+      virtual double AlgorithmDensityMatrix(
+        int flvi, int flvf);  ///< Algorithm for the transformations on the density matrix 
+
+      virtual void RotateDensityM(bool to_mass, matrixC V); ///< Apply rotation to the density matrix 
+
+      virtual void HadamardProduct(vectorD lambda, double dbin); ///< Apply an Hadamard Product to  
+                                                                 ///< to the density matrix
+      
+
+      virtual double AvgFormulaExtrapolation(int flvi, int flvf, 
+        double dbin, vectorD flambda, matrixC fV);  ///< Formula for the interpolation 
+                                                    
 
       // Attributes
 
@@ -149,11 +179,12 @@ namespace OscProb {
 
       matrixC fdensityMatrix; ///< The neutrino density matrix state
 
+      // Variables for the compute of the derivation of one layer's length
       int flayer;
       int fdl;
       double fDetRadius;
       double fminRsq ;
-      std::vector<PremLayer> fPremLayers; ///< The layers in the earth model
+      std::vector<PremLayer> fPremLayers; ///< The list of layers in the earth model
 
   };
 

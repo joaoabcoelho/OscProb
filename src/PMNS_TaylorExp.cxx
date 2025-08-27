@@ -788,7 +788,7 @@ double PMNS_TaylorExp::AvgFormulaExtrapolation(int flvi, int flvf, double dbin, 
 ///
 /// @return Neutrino oscillation probability
 ///
-double PMNS_TaylorExp::interpolationEnergy(int flvi, int flvf, double E , double dE)
+double PMNS_TaylorExp::InterpolationEnergy(int flvi, int flvf, double E , double dE)
 {
     // reset K et S et Ve et lambdaE
     InitializeTaylorsVectors();
@@ -809,7 +809,7 @@ double PMNS_TaylorExp::interpolationEnergy(int flvi, int flvf, double E , double
 ///
 ///
 ///
-double PMNS_TaylorExp::interpolationEnergyLoE(int flvi, int flvf, double LoE , double dLoE)
+double PMNS_TaylorExp::InterpolationEnergyLoE(int flvi, int flvf, double LoE , double dLoE)
 {
     // reset K et S et Ve et lambdaE
     InitializeTaylorsVectors();
@@ -849,7 +849,7 @@ double PMNS_TaylorExp::interpolationEnergyLoE(int flvi, int flvf, double LoE , d
 ///
 /// @return Neutrino oscillation probability
 ///
-double PMNS_TaylorExp::interpolationCosT(int flvi, int flvf, double cosT , double dcosT)
+double PMNS_TaylorExp::InterpolationCosT(int flvi, int flvf, double cosT , double dcosT)
 {
     // reset K et S et Ve et lambdaE
     InitializeTaylorsVectors();
