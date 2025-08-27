@@ -29,12 +29,6 @@ namespace OscProb {
       PMNS_TaylorExp();          ///< Constructor
       virtual ~PMNS_TaylorExp(); ///< Destructor
 
-      //@@@@@@
-      virtual void printMatrix1(matrixC M);
-      virtual void printMatrix2(complexD M[3][3]);
-      virtual void LenghtLayer();
-      //@@@@@@
-
       virtual void SetwidthBin(double dE, 
         double dcosT); ///< Set bin's widths for 
                        ///< energy and angle

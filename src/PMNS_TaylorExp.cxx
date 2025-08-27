@@ -951,10 +951,10 @@ matrixC PMNS_TaylorExp::GetSamplePoints(double InvE, double dInvE, double cosT, 
   //cout<<"L = "<<L<<"   ";
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
-  //int n_divE = 25;
-  //int n_divCosT = 10;
+  //int n_divE = 2;
+  //int n_divCosT = 2;
   int n_divCosT = ceil(380 * pow(InvE , 0.5) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4));
-  int n_divE = ceil(280 * pow(dInvE / InvE, 0.8) * pow(InvE, 0.6) /  sqrt(fAvgProbPrec / 1e-4));
+  int n_divE = ceil(260 * pow(dInvE / InvE, 0.8) * pow(InvE, 0.6) /  sqrt(fAvgProbPrec / 1e-4));
 
   cout<<"n_divE = "<<n_divE<<"     n_divT = "<<n_divCosT;
   //cout<<"@@@ n_divT = "<<n_divCosT<<endl;
@@ -1189,56 +1189,3 @@ double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double InvE , double dInvE, d
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void PMNS_TaylorExp::printMatrix1(matrixC M)
-{
-    cout<<endl;
-    for(int j=0 ; j<3 ; j++)
-    {
-        for(int k=0 ; k<3 ; k++)
-        {
-            cout<<M[j][k]<<" ";
-        }
-        cout<<endl;
-    }
-    cout<<endl;
-}
-void PMNS_TaylorExp::printMatrix2(complexD M[3][3])
-{
-    cout<<endl;
-    for(int j=0 ; j<3 ; j++)
-    {
-        for(int k=0 ; k<3 ; k++)
-        {
-            cout<<M[j][k]<<" ";
-        }
-        cout<<endl;
-    }
-    cout<<endl;
-}
-void PMNS_TaylorExp::LenghtLayer()
-{
-    for(int i = 0 ; i<fNuPaths.size() ; i++)
-    {
-        cout<<"Layer "<<i<<"    L = "<<fNuPaths[i].length<<"   Density = "<<fNuPaths[i].density<<endl;
-    }
-}

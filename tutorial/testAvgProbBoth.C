@@ -91,7 +91,7 @@ void testAvgProbBoth(){
     premTaylor.FillPath(cosT);
     taylor.SetPath(premTaylor.GetNuPath());
 
-    cout<<endl<<endl<<"--------------------------cosT = "<<cosT<<"--------------------------"<<endl<<endl;
+    cout<<endl<<endl<<"--------------------------cosT = "<<cosT<<"--------------------------   ";
 
     for(int j=0; j<=navgE; j++){
 
@@ -100,6 +100,9 @@ void testAvgProbBoth(){
 
         double E = 0.5 * (minE + maxE);
         double dE = (maxE - minE);
+
+        if(j==0)
+          cout<<"r = "<<100*dE/E<<"% & "<<100*abs(dcosT/cosT)<<"%"<<endl<<endl;
 
         cout<<"E = "<<E<<"     ";
 
@@ -116,7 +119,7 @@ void testAvgProbBoth(){
     
 
         if (ab > 5 * 1E-4)
-            cout<<"     FALSE     "<<abs(ab);
+            cout<<"     FALSE     "<<a<<" - "<<b<<" -> "<<100*abs(ab)/b<<"%";
 
         cout<<endl;
         //cout<<"r = "<<dcosT/cosT<<endl<<endl;
