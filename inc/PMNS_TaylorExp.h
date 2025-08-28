@@ -146,9 +146,9 @@ namespace OscProb {
       virtual double AlgorithmDensityMatrix(
         int flvi, int flvf);  ///< Algorithm for the transformations on the density matrix 
 
-      virtual void RotateDensityM(bool to_mass, matrixC V); ///< Apply rotation to the density matrix 
+      virtual void RotateDensityM(bool to_basis, matrixC V); ///< Apply rotation to the density matrix 
 
-      virtual void HadamardProduct(vectorD lambda, double dbin); ///< Apply an Hadamard Product to  
+      virtual void HadamardProduct(vectorD lambda, double dbin); ///< Apply an Hadamard Product   
                                                                  ///< to the density matrix
       
 

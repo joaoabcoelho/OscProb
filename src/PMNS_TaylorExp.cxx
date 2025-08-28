@@ -119,7 +119,7 @@ void PMNS_TaylorExp::GetPremLayers(std::vector<PremLayer> PremLayers)
 /// energy but the inverse of it. This change of variable allow to express the
 /// hamiltonien as linear with respect to this new variable.
 ///  
-/// @param L - The length of the layer in GeV-1
+/// @param L - The length of the layer in km
 ///
 void PMNS_TaylorExp::BuildKE(double L)
 {
@@ -187,7 +187,7 @@ void PMNS_TaylorExp::BuildKE(double L)
 /// The variable for which a Taylor expansion is done here is not directly the
 /// angle but the cosine of the angle 
 ///  
-/// @param L - The length of the layer in GeV-1
+/// @param L - The length of the layer in km
 ///
 void PMNS_TaylorExp::BuildKcosT(double L)
 {
@@ -227,7 +227,7 @@ void PMNS_TaylorExp::BuildKcosT(double L)
 
 //.............................................................................
 ///
-///
+/// Compute the derivation of one layer's length depending on the angle 
 ///
 double PMNS_TaylorExp::LnDerivative()
 {
@@ -277,7 +277,6 @@ void PMNS_TaylorExp::rotateS()
 ///
 /// Rotate the K matrix from mass to flavor basis
 ///
-///
 void PMNS_TaylorExp::rotateK()
 {
     complexD buffer[3];
@@ -317,8 +316,8 @@ void PMNS_TaylorExp::rotateK()
 ///
 /// The matrix fevolutionMatrixS represent the propagation between the beginning 
 /// of the path and the beginning of the current layer. This matrix is updated 
-/// after every layer with this function.
-///
+/// after every layer with this function. The matrix fSflavor represent the
+/// propagation between the beginning and the end of the layer.
 ///
 void PMNS_TaylorExp::MultiplicationRuleS()
 {
@@ -347,7 +346,10 @@ void PMNS_TaylorExp::MultiplicationRuleS()
 /// This is used to calculate the matrix K corresponding to the propagation 
 /// between the beginning of the path and the end of the current layer. 
 ///
-/// @param K - The S matrix corresponding to the propagation between the beginning 
+/// The matrix fKflavor correspond to the propagation between the beginning and 
+/// the end of the layer.
+///
+/// @param K - The K matrix corresponding to the propagation between the beginning 
 ///            of the path and the beginning of the current layer
 ///
 void PMNS_TaylorExp::MultiplicationRuleK(complexD K[3][3])
@@ -393,7 +395,6 @@ void PMNS_TaylorExp::PropagateTaylor()
 ///
 void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 {
-
     // Set the neutrino path
     SetCurPath(p);
 
@@ -470,7 +471,7 @@ void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
 //.............................................................................
 ///
 /// Formula for the average probability of flvi going to flvf over 
-/// a bin of energy E with width dE with a Taylor expansion.
+/// a bin of width dbin with a Taylor expansion.
 ///
 /// Flavours are:
 /// <pre>
@@ -568,6 +569,11 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E , double dE)
 /// Compute the average probability of flvi going to flvf over 
 /// a bin of energy L/E with width dLoE with a Taylor expansion.
 ///
+/// The probabilities are weighted by (L/E)^-2 so that event
+/// density is flat in energy. This avoids giving too much
+/// weight to low energies. Better approximations would be
+/// achieved if we used an interpolated event density. 
+///
 /// Flavours are:
 /// <pre>
 ///   0 = nue, 1 = numu, 2 = nutau
@@ -614,7 +620,15 @@ double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE , double dLoE)
 
 //.............................................................................
 ///
-/// 
+/// Algorithm for the compute of the average probability over a bin of LoE
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param LoE - The neutrino  L/E value in the bin center in km/GeV
+/// @param dLoE - The L/E bin width in km/GeV
+/// @param L - The length of the path in km
+///
+/// @return Average neutrino oscillation probability
 ///
 double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double LoE , double dLoE, double L)
 {
@@ -642,7 +656,9 @@ double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double LoE , double dLoE, dou
 /// Compute the average probability of flvi going to flvf over 
 /// a bin of angle cost with width dcosT with a Taylor expansion.
 ///
-/// DOIT UTILISER FCT DS MACRO AVANT CETTE FCT
+/// IMPORTANT: The function GetPremLayers must be used in the 
+/// macro file to make this function work. The argument for 
+/// GetPremLayers must be premModel.GetPremLayers().
 ///
 /// Flavours are:
 /// <pre>
@@ -654,7 +670,7 @@ double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double LoE , double dLoE, dou
 /// @param flvf - The neutrino final flavour.
 /// @param E - The neutrino energy in GeV
 /// @param cosT - The cosine of the neutrino angle
-/// @param dcosT - The cosT bin width in GeV-1
+/// @param dcosT - The cosT bin width 
 ///
 /// @return Average neutrino oscillation probability
 ///
@@ -684,7 +700,15 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double cosT , doubl
 
 //.............................................................................
 ///
+/// Algorithm for the compute of the average probability over a bin of cosT
 /// 
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param E - The neutrino energy in GeV
+/// @param cosT - The cosine of the neutrino angle
+/// @param dcosT - The cosT bin width 
+///
+/// @return Average neutrino oscillation probability
 ///
 double PMNS_TaylorExp::AvgAlgoCosT(int flvi, int flvf, double E, double cosT , double dcosT)
 {
@@ -710,6 +734,374 @@ double PMNS_TaylorExp::AvgAlgoCosT(int flvi, int flvf, double E, double cosT , d
 
     //return fct avr proba
     return AvgFormula(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
+}
+
+//.............................................................................
+///
+/// Compute the average probability of flvi going to flvf over 
+/// a bin of energy E and angle cosT with width dE and dcosT 
+/// with a Taylor expansion.
+///
+/// This gets transformed into L/E, since the oscillation terms
+/// have arguments linear in 1/E and not E. 
+///
+/// IMPORTANT: The function GetPremLayers must be used in the 
+/// macro file to make this function work. The argument for 
+/// GetPremLayers must be premModel.GetPremLayers().
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param E - The neutrino energy in GeV
+/// @param dE - The energy bin width in GeV
+/// @param cosT - The cosine of the neutrino angle
+/// @param dcosT - The cosT bin width
+///
+/// @return Average neutrino oscillation probability
+///
+double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double dE, double cosT , double dcosT)
+{
+    if (E <= 0) return 0;
+    if (cosT > 0) return 0; 
+
+    if (fNuPaths.empty()) return 0;
+
+    // Don't average zero width
+    if (dE <= 0 && dcosT == 0) return Prob(flvi, flvf, E);
+    if (dE <= 0) return AvgProb(flvi, flvf, E, cosT, dcosT);
+    if (dcosT == 0) return AvgProb(flvi, flvf, E, dE);  
+
+    vectorD Ebin = ConvertEtoLoE(E,dE);
+
+    return AvgProbLoE(flvi, flvf, Ebin[0], Ebin[1], cosT, dcosT);
+}
+
+//.............................................................................
+///
+/// Compute the average probability of flvi going to flvf over 
+/// a bin of energy L/E and cosT with width dLoE and dcosT 
+/// with a Taylor expansion.
+///
+/// The probabilities are weighted by (L/E)^-2 so that event
+/// density is flat in energy. This avoids giving too much
+/// weight to low energies. Better approximations would be
+/// achieved if we used an interpolated event density. 
+///
+/// IMPORTANT: The function GetPremLayers must be used in the 
+/// macro file to make this function work. The argument for 
+/// GetPremLayers must be premModel.GetPremLayers().
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param LoE - The neutrino  L/E value in the bin center in km/GeV
+/// @param dLoE - The L/E bin width in km/GeV
+/// @param cosT - The cosine of the neutrino angle
+/// @param dcosT - The cosT bin width
+///
+/// @return Average neutrino oscillation probability
+///
+double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE, double cosT , double dcosT)
+{
+    if (LoE <= 0) return 0;
+    if (cosT > 0) return 0; 
+
+    if (fNuPaths.empty()) return 0;
+
+    // Don't average zero width
+    if (dLoE <= 0 && dcosT == 0) return Prob(flvi, flvf, fPath.length / LoE);
+    if (dLoE <= 0) return AvgProb(flvi, flvf, fPath.length / LoE, cosT, dcosT);   ///chg ici
+    if (dcosT == 0) return AvgProbLoE(flvi, flvf, LoE, dLoE);  
+
+    
+    // Make sample with 1oE and not LoE
+    matrixC samples = GetSamplePoints(LoE / fPath.length, dLoE /fPath.length, cosT, dcosT);
+
+    int rows = samples.size();                  
+    int cols = samples[0].size();               
+
+    double avgprob  = 0;
+    double sumw   = 0;
+
+    // Loop over all sample points
+    for (int k = 1; k < int(rows); k++) {
+        for(int l =1 ; l < int(cols); l++){
+
+            double w = 1. / pow(real(samples[k][l]), 2);
+
+            avgprob += w * AvgAlgo(flvi, flvf, real(samples[k][l]), real(samples[0][0]), imag(samples[k][l]), imag(samples[0][0])); 
+
+            sumw += w;
+        }
+    }
+    
+    // Return average of probabilities
+    return   avgprob / ( (sumw) );
+
+}
+
+//.............................................................................
+///
+/// Algorithm for the compute of the average probability 
+/// over a bin of 1oE and cosT
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param InvE - The neutrino  1/E value in the bin center in GeV-1
+/// @param dInvE - The 1/E bin width in GeV-1
+/// @param cosT - The cosine of the neutrino angle
+/// @param dcosT - The cosT bin width
+///
+/// @return Average neutrino oscillation probability
+///
+double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double InvE , double dInvE, double cosT , double dcosT)
+{
+    OscProb::PremModel prem;
+
+    prem.FillPath(cosT);
+    SetPath(prem.GetNuPath());
+
+    // reset K et S et Ve et lambdaE
+    InitializeTaylorsVectors();
+
+    SetEnergy(1 / InvE);
+    SetCosT(cosT);
+    SetwidthBin(dInvE,dcosT);
+
+    fminRsq  = pow(fDetRadius * sqrt(1 - cosT * cosT) , 2);
+
+    //Propagate -> get S and K matrix (on the whole path)
+    PropagateTaylor();
+
+    //DiagolK -> get VE and lambdaE
+    SolveK(fKInvE,flambdaInvE,fVInvE);
+    SolveK(fKcosT,flambdaCosT,fVcosT);
+
+    return AlgorithmDensityMatrix(flvi,flvf);
+}
+
+//.............................................................................
+///
+/// Algorithm for the transformations on the density matrix 
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+///
+/// @return Average neutrino oscillation probability
+///
+double PMNS_TaylorExp::AlgorithmDensityMatrix(int flvi, int flvf)
+{
+    fdensityMatrix[flvi][flvi] = 1;
+
+    RotateDensityM(true,fVcosT);
+    HadamardProduct(flambdaCosT,fdcosT);
+    RotateDensityM(false,fVcosT);
+
+    RotateDensityM(true,fVInvE);
+    HadamardProduct(flambdaInvE,fdInvE / kGeV2eV);
+    RotateDensityM(false,fVInvE);
+
+    RotateDensityM(false,fevolutionMatrixS);
+
+    return real(fdensityMatrix[flvf][flvf]);
+}
+
+//.............................................................................
+///
+/// Apply rotation to the density matrix from or to the basis 
+/// where V is diagonal 
+///
+/// @param to_basis - Rotation from (false) or to (true) 
+/// @param V - The matrix used for the denisty matrix rotation.
+///
+void PMNS_TaylorExp::RotateDensityM(bool to_basis, matrixC V)
+{
+    matrixC Buffer = matrixC(fNumNus, vectorC(fNumNus, 0));
+    
+  for (int i = 0; i < fNumNus; i++) {
+    for (int j = 0; j < fNumNus; j++) {
+      for (int k = 0; k < fNumNus; k++) {
+        if (to_basis)
+          Buffer[i][j] += fdensityMatrix[i][k] * V[k][j];
+        else
+          Buffer[i][j] += fdensityMatrix[i][k] * conj(V[j][k]);
+      }
+    }
+  }
+  
+  for (int i = 0; i < fNumNus; i++) {
+    for (int j = i; j < fNumNus; j++) {
+        fdensityMatrix[i][j] = 0;
+      for (int k = 0; k < fNumNus; k++) {
+        if (to_basis)
+            fdensityMatrix[i][j] += conj(V[k][i]) * Buffer[k][j];
+        else
+            fdensityMatrix[i][j] += V[i][k] * Buffer[k][j];
+      }
+      if (j > i) fdensityMatrix[j][i] = conj(fdensityMatrix[i][j]);
+    }
+  }
+  
+}
+
+//.............................................................................
+///
+/// Apply an Hadamard Product to the density matrix
+///
+/// @param lambda - Eigenvalues of the K matrix
+/// @param dbin - Width of the bin 
+///
+void PMNS_TaylorExp::HadamardProduct(vectorD lambda, double dbin)
+{
+    matrixC sinc = matrixC(fNumNus, vectorC(fNumNus, 0));
+    for(int j=0 ; j<fNumNus ; j++){
+        for(int i = 0 ; i<j ; i++){
+            double arg = (lambda[i] - lambda[j]) * dbin ; 
+            sinc[i][j] = sin(arg)/arg;
+
+            sinc[j][i] = sinc[i][j];
+        }
+    }    
+
+    for(int i=0 ; i<fNumNus ; i++){
+        sinc[i][i] = 1;
+    }
+    
+    for(int j=0 ; j<fNumNus ; j++){
+        for(int i = 0 ; i<fNumNus ; i++){
+            fdensityMatrix[i][j] = fdensityMatrix[i][j] * sinc[i][j];
+        }
+    }
+}
+
+//.............................................................................
+///
+/// Compute the sample points for a bin of L/E with width dLoE
+///
+/// This is used to increase the average probability over a bin of L/E,
+/// calculated with a Taylor expansion 
+///
+/// @param LoE  - The neutrino  L/E value in the bin center in km/GeV
+/// @param dLoE   - The L/E bin width in km/GeV
+///
+vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE)
+{
+  // Set a number of sub-divisions to achieve "good" accuracy
+  // This needs to be studied better
+  int n_div = ceil(3 * pow(dLoE / LoE, 0.8) * pow(LoE, 0.3) /  sqrt(fAvgProbPrec / 1e-4));
+
+  // A vector to store sample points
+  vectorD Samples;
+
+  // Define sub-division width
+  Samples.push_back(dLoE / n_div);
+
+  // Loop over sub-divisions
+  for (int k = 0; k < n_div; k++) {
+    // Define sub-division center 
+    double bctr = LoE - dLoE / 2 + (k + 0.5) * dLoE / n_div;
+   
+    Samples.push_back(bctr);
+
+  } // End of loop over sub-divisions
+
+  // Return sample points
+  return Samples;
+}
+
+//.............................................................................
+///
+/// Compute the sample points for a bin of cosTheta with width dcosTheta
+///
+/// This is used to increase the average probability over a bin of cosT,
+/// calculated with a Taylor expansion 
+///
+/// @param E  - The neutrino  Energy value GeV
+/// @param cosT   - The neutrino  cosT value in the bin center 
+/// @param dcosT   - The cosT bin width 
+///
+vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
+{
+
+  // Set a number of sub-divisions to achieve "good" accuracy
+  // This needs to be studied better
+  int n_div = ceil(35 * pow(E , -0.4) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4));
+
+  // A vector to store sample points
+  vectorD Samples;
+
+  // Define sub-division width
+  Samples.push_back(dcosT / n_div);
+
+  // Loop over sub-divisions
+  for (int k = 0; k < n_div; k++) {
+    // Define sub-division center
+    double bctr = cosT - dcosT / 2 + (k + 0.5) * dcosT / n_div;
+   
+    Samples.push_back(bctr);
+
+  } // End of loop over sub-divisions
+
+  // Return sample points
+  return Samples;
+}
+
+//.............................................................................
+///
+/// Compute the sample points for a bin of 1oE and cosTheta 
+/// with width d1oE and dcosTheta
+///
+/// This is used to increase the average probability over a bin of L/E
+/// and cosT, calculated with a Taylor expansion 
+///
+/// @param InvE  - The neutrino  1/E value in the bin center in GeV-1
+/// @param dInvE   - The 1/E bin width in GeV-1
+/// @param cosT   - The neutrino  cosT value in the bin center 
+/// @param dcosT   - The cosT bin width 
+///
+matrixC PMNS_TaylorExp::GetSamplePoints(double InvE, double dInvE, double cosT, double dcosT)
+{
+
+  // Set a number of sub-divisions to achieve "good" accuracy
+  // This needs to be studied better
+  int n_divCosT = ceil(380 * pow(InvE , 0.5) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4));
+  int n_divE = ceil(260 * pow(dInvE / InvE, 0.8) * pow(InvE, 0.6) /  sqrt(fAvgProbPrec / 1e-4));
+
+  // A matrix to store sample points
+  matrixC Samples = matrixC(n_divE + 1, vectorC(n_divCosT + 1, 0));
+
+  // Define sub-division width
+  Samples[0][0] = complexD(dInvE / n_divE , dcosT / n_divCosT);
+
+  // Loop over sub-divisions
+  for (int k = 0; k < n_divE; k++) {
+
+    // Define sub-division center for energy 
+    double bctr_InvE = InvE - dInvE / 2 + (k + 0.5) * dInvE / n_divE;
+
+    for (int l = 0; l < n_divCosT; l++) {
+
+        // Define sub-division center for angle  
+        double bctr_CosT = cosT - dcosT / 2 + (l + 0.5) * dcosT / n_divCosT;
+
+        Samples[k+1][l+1] = complexD(bctr_InvE, bctr_CosT);
+   
+    }
+
+  } // End of loop over sub-divisions
+
+  // Return sample points
+  return Samples;
 }
 
 //.............................................................................
@@ -807,7 +1199,21 @@ double PMNS_TaylorExp::InterpolationEnergy(int flvi, int flvf, double E , double
 
 //.............................................................................
 ///
+/// Compute the propability for flvi going to flvf for an energy LoE+dLoE 
+/// using a first order Taylor expansion from a reference value LoE.
 ///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param LoE - The reference energy in GeV
+/// @param dLoE - The energy variation in GeV
+///
+/// @return Neutrino oscillation probability
 ///
 double PMNS_TaylorExp::InterpolationEnergyLoE(int flvi, int flvf, double LoE , double dLoE)
 {
@@ -817,8 +1223,8 @@ double PMNS_TaylorExp::InterpolationEnergyLoE(int flvi, int flvf, double LoE , d
     SetCurPath(AvgPath(fNuPaths));
     double L = fPath.length;
 
-    SetEnergy(LoE);
-    SetwidthBin(dLoE,0);
+    SetEnergy(L / LoE);
+    SetwidthBin(dLoE / L,0);
 
     //Propagate -> get S and K matrix (on the whole path)
     PropagateTaylor();
@@ -826,7 +1232,7 @@ double PMNS_TaylorExp::InterpolationEnergyLoE(int flvi, int flvf, double LoE , d
     //DiagolK -> get VE and lambdaE
     SolveK(fKInvE,flambdaInvE,fVInvE);
 
-    return AvgFormulaExtrapolation(flvi,flvf,dLoE*kGeV2eV, flambdaInvE, fVInvE);
+    return AvgFormulaExtrapolation(flvi,flvf,dLoE*kGeV2eV/L, flambdaInvE, fVInvE);
 }
 
 //.............................................................................
@@ -834,7 +1240,9 @@ double PMNS_TaylorExp::InterpolationEnergyLoE(int flvi, int flvf, double LoE , d
 /// Compute the propability for flvi going to flvf for an angle cosT+dcosT 
 /// using a first order Taylor expansion from a reference angle cosT.
 ///
-/// DOIT UTILISER FCT DS MACRO AVANT CETTE FCT
+/// IMPORTANT: The function GetPremLayers must be used in the 
+/// macro file to make this function work. The argument for 
+/// GetPremLayers must be premModel.GetPremLayers().
 ///
 /// Flavours are:
 /// <pre>
@@ -868,324 +1276,3 @@ double PMNS_TaylorExp::InterpolationCosT(int flvi, int flvf, double cosT , doubl
 
     return AvgFormulaExtrapolation(flvi,flvf,fdcosT, flambdaCosT, fVcosT);
 }
-
-//.............................................................................
-///
-/// Compute the sample points for a bin of L/E with width dLoE
-///
-/// This is used for averaging the probability over a bin of L/E..
-///
-/// @param LoE  - The neutrino  L/E value in the bin center in km/GeV
-/// @param dLoE   - The L/E bin width in km/GeV
-///
-vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE)
-{
-
-  // Set a number of sub-divisions to achieve "good" accuracy
-  // This needs to be studied better
-  int n_div = ceil(3 * pow(dLoE / LoE, 0.8) * pow(LoE, 0.3) /  sqrt(fAvgProbPrec / 1e-4));
-  //int n_div = ceil(10* pow(dLoE / LoE, 0.8) * pow(LoE, 0.2) /  sqrt(fAvgProbPrec / 1e-4));
-  //int n_div = ceil(10* pow(dLoE / LoE, 0.9) * pow(LoE, 0.1) * (1 + 2 * exp(-pow((LoE-2100),2)/(2*pow(300,2))) ) /  sqrt(fAvgProbPrec / 1e-4));
-
-  // A vector to store sample points
-  vectorD Samples;
-  Samples.push_back(dLoE / n_div);
-
-  // Loop over sub-divisions
-  for (int k = 0; k < n_div; k++) {
-    // Define sub-division center and width
-    double bctr = LoE - dLoE / 2 + (k + 0.5) * dLoE / n_div;
-   
-    Samples.push_back(bctr);
-
-  } // End of loop over sub-divisions
-
-  // Return all sample points
-  return Samples;
-}
-
-//.............................................................................
-///
-/// Compute the sample points for a bin of cosTheta with width dcosTheta
-///
-/// This is used for averaging the probability over a bin of CosTheta.
-///
-/// @param E  - The neutrino  Energy value GeV
-/// @param cosT   - The neutrino  cosT value in the bin center 
-/// @param dcosT   - The cosT bin width 
-///
-vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
-{
-
-  // Set a number of sub-divisions to achieve "good" accuracy
-  // This needs to be studied better
-  int n_div = ceil(35 * pow(E , -0.4) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4));
-  //int n_div = 5;
-  //cout<<"@@@ n_div = "<<n_div<<endl;
-  //cout<<"sans ceil = "<<20 * pow(E , -0.5) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4)<<endl;
-
-  // A vector to store sample points
-  vectorD Samples;
-  Samples.push_back(dcosT / n_div);
-
-  // Loop over sub-divisions
-  for (int k = 0; k < n_div; k++) {
-    // Define sub-division center and width
-    double bctr = cosT - dcosT / 2 + (k + 0.5) * dcosT / n_div;
-   
-    Samples.push_back(bctr);
-
-  } // End of loop over sub-divisions
-
-  // Return all sample points
-  return Samples;
-}
-
-//.............................................................................
-///
-///
-///
-matrixC PMNS_TaylorExp::GetSamplePoints(double InvE, double dInvE, double cosT, double dcosT)
-{
-  //double L = fPath.length ;
-  //cout<<"L = "<<L<<"   ";
-  // Set a number of sub-divisions to achieve "good" accuracy
-  // This needs to be studied better
-  //int n_divE = 2;
-  //int n_divCosT = 2;
-  int n_divCosT = ceil(380 * pow(InvE , 0.5) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4));
-  int n_divE = ceil(260 * pow(dInvE / InvE, 0.8) * pow(InvE, 0.6) /  sqrt(fAvgProbPrec / 1e-4));
-
-  cout<<"n_divE = "<<n_divE<<"     n_divT = "<<n_divCosT;
-  //cout<<"@@@ n_divT = "<<n_divCosT<<endl;
-  //cout<<"sans ceil = "<<20 * pow(E , -0.5) * pow( abs(dcosT / cosT), 0.8)  /  sqrt(fAvgProbPrec / 1e-4)<<endl;
-
-  // A vector to store sample points
-  matrixC Samples = matrixC(n_divE + 1, vectorC(n_divCosT + 1, 0));
-
-  Samples[0][0] = complexD(dInvE / n_divE , dcosT / n_divCosT);
-
-  // Loop over sub-divisions
-  for (int k = 0; k < n_divE; k++) {
-
-    double bctr_InvE = InvE - dInvE / 2 + (k + 0.5) * dInvE / n_divE;
-
-    for (int l = 0; l < n_divCosT; l++) {
-
-        // Define sub-division center and width
-        double bctr_CosT = cosT - dcosT / 2 + (l + 0.5) * dcosT / n_divCosT;
-
-        Samples[k+1][l+1] = complexD(bctr_InvE, bctr_CosT);
-   
-    }
-
-  } // End of loop over sub-divisions
-
-  // Return all sample points
-  return Samples;
-}
-
-
-
-
-
-
-
-
-
-
-//.............................................................................
-///
-///
-///
-void PMNS_TaylorExp::RotateDensityM(bool to_mass, matrixC V)
-{
-    matrixC Buffer = matrixC(fNumNus, vectorC(fNumNus, 0));
-    
-  // buffer = rho . U
-  for (int i = 0; i < fNumNus; i++) {
-    for (int j = 0; j < fNumNus; j++) {
-      for (int k = 0; k < fNumNus; k++) {
-        if (to_mass)
-          Buffer[i][j] += fdensityMatrix[i][k] * V[k][j];
-        else
-          Buffer[i][j] += fdensityMatrix[i][k] * conj(V[j][k]);
-      }
-    }
-  }
-  
-  // rho = U^\dagger . buffer = U^\dagger . rho . U
-  // Final matrix is Hermitian, so copy upper to lower triangle
-  for (int i = 0; i < fNumNus; i++) {
-    for (int j = i; j < fNumNus; j++) {
-        fdensityMatrix[i][j] = 0;
-      for (int k = 0; k < fNumNus; k++) {
-        if (to_mass)
-            fdensityMatrix[i][j] += conj(V[k][i]) * Buffer[k][j];
-        else
-            fdensityMatrix[i][j] += V[i][k] * Buffer[k][j];
-      }
-      if (j > i) fdensityMatrix[j][i] = conj(fdensityMatrix[i][j]);
-    }
-  }
-  
-}
-
-//.............................................................................
-///
-///
-///
-void PMNS_TaylorExp::HadamardProduct(vectorD lambda, double dbin)
-{
-    matrixC sinc = matrixC(fNumNus, vectorC(fNumNus, 0));
-    for(int j=0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<j ; i++){
-            double arg = (lambda[i] - lambda[j]) * dbin ; 
-            sinc[i][j] = sin(arg)/arg;
-
-            sinc[j][i] = sinc[i][j];
-        }
-    }    
-
-    for(int i=0 ; i<fNumNus ; i++){
-        sinc[i][i] = 1;
-    }
-    
-    for(int j=0 ; j<fNumNus ; j++){
-        for(int i = 0 ; i<fNumNus ; i++){
-            fdensityMatrix[i][j] = fdensityMatrix[i][j] * sinc[i][j];
-        }
-    }
-}
-
-//.............................................................................
-///
-///
-///
-double PMNS_TaylorExp::AlgorithmDensityMatrix(int flvi, int flvf)
-{
-    fdensityMatrix[flvi][flvi] = 1;
-
-    RotateDensityM(true,fVcosT);
-    HadamardProduct(flambdaCosT,fdcosT);
-    RotateDensityM(false,fVcosT);
-
-    RotateDensityM(true,fVInvE);
-    HadamardProduct(flambdaInvE,fdInvE / kGeV2eV);
-    RotateDensityM(false,fVInvE);
-
-    RotateDensityM(false,fevolutionMatrixS);
-
-    return real(fdensityMatrix[flvf][flvf]);
-}
-
-
-double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double dE, double cosT , double dcosT)
-{
-    if (E <= 0) return 0;
-    if (cosT > 0) return 0; 
-
-    if (fNuPaths.empty()) return 0;
-
-    // Don't average zero width
-    if (dE <= 0 && dcosT == 0) return Prob(flvi, flvf, E);
-    if (dE <= 0) return AvgProb(flvi, flvf, E, cosT, dcosT);
-    if (dcosT == 0) return AvgProb(flvi, flvf, E, dE);  
-
-    vectorD Ebin = ConvertEtoLoE(E,dE);
-
-    return AvgProbLoE(flvi, flvf, Ebin[0], Ebin[1], cosT, dcosT);
-}
-
-
-double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE, double cosT , double dcosT)
-{
-    if (LoE <= 0) return 0;
-    if (cosT > 0) return 0; 
-
-    if (fNuPaths.empty()) return 0;
-
-    // Don't average zero width
-    if (dLoE <= 0 && dcosT == 0) return Prob(flvi, flvf, fPath.length / LoE);
-    if (dLoE <= 0) return AvgProb(flvi, flvf, fPath.length / LoE, cosT, dcosT);   ///chg ici
-    if (dcosT == 0) return AvgProbLoE(flvi, flvf, LoE, dLoE);  
-
-    
-    // Make sample with 1oE and not LoE
-    matrixC samples = GetSamplePoints(LoE / fPath.length, dLoE /fPath.length, cosT, dcosT);
-
-    int rows = samples.size();                  
-    int cols = samples[0].size();               
-
-    double avgprob  = 0;
-    double sumw   = 0;
-
-    // Loop over all sample points
-    for (int k = 1; k < int(rows); k++) {
-        for(int l =1 ; l < int(cols); l++){
-
-            double w = 1. / pow(real(samples[k][l]), 2);
-
-            avgprob += w * AvgAlgo(flvi, flvf, real(samples[k][l]), real(samples[0][0]), imag(samples[k][l]), imag(samples[0][0])); 
-
-            sumw += w;
-        }
-    }
-    
-    // Return average of probabilities
-    return   avgprob / ( (sumw) );
-
-
-    /* double avgprob  = 0;
-    double L = fPath.length;
-    double sumw   = 0;
-
-    // Loop over all sample points
-    for (int j = 1; j < int(samples.size()); j++) {
-
-        double w = 1. / pow(samples[j], 2);
-
-        avgprob += w * AvgAlgo(flvi, flvf, samples[j], samples[0],L);
-
-        sumw += w;
-
-    }
-    
-    // Return average of probabilities
-    return  avgprob / sumw;*/
-
-    //return AvgAlgo(flvi, flvf, LoE / fPath.length, dLoE / fPath.length, cosT, dcosT);
-    //return AvgAlgo(flvi, flvf, real(samples[1][1]), real(samples[0][0]), imag(samples[1][1]), imag(samples[0][0]));
-}
-
-//.............................................................................
-///
-///
-///
-double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double InvE , double dInvE, double cosT , double dcosT)
-{
-    OscProb::PremModel prem;
-
-    prem.FillPath(cosT);
-    SetPath(prem.GetNuPath());
-
-    // reset K et S et Ve et lambdaE
-    InitializeTaylorsVectors();
-
-    SetEnergy(1 / InvE);
-    SetCosT(cosT);
-    SetwidthBin(dInvE,dcosT);
-
-    fminRsq  = pow(fDetRadius * sqrt(1 - cosT * cosT) , 2);
-
-    //Propagate -> get S and K matrix (on the whole path)
-    PropagateTaylor();
-
-    //DiagolK -> get VE and lambdaE
-    SolveK(fKInvE,flambdaInvE,fVInvE);
-    SolveK(fKcosT,flambdaCosT,fVcosT);
-
-    return AlgorithmDensityMatrix(flvi,flvf);
-}
-
-
