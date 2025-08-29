@@ -67,15 +67,15 @@ namespace OscProb {
                                      ///< expansion
 
       // Get probability 
-      virtual double InterpolationEnergy(int flvi, int flvf, 
+      virtual double ExtrapolationProb(int flvi, int flvf, 
         double E , double dE);      ///< Compute the probability of flvi going to  
                                     ///< flvf for an energy E+dE
 
-      virtual double InterpolationEnergyLoE(int flvi, int flvf, 
+      virtual double ExtrapolationProbLoE(int flvi, int flvf, 
         double LoE , double dLoE);  ///< Compute the probability of flvi going to  
                                     ///< flvf at LoE+dLoE
 
-      virtual double InterpolationCosT(int flvi, int flvf, 
+      virtual double ExtrapolationProbCosT(int flvi, int flvf, 
         double cosT , double dcosT); ///< Compute the probability of flvi going to  
                                      ///< flvf for an angle cosT+dcosT
 
@@ -153,7 +153,7 @@ namespace OscProb {
       
 
       virtual double AvgFormulaExtrapolation(int flvi, int flvf, 
-        double dbin, vectorD flambda, matrixC fV);  ///< Formula for the interpolation 
+        double dbin, vectorD flambda, matrixC fV);  ///< Formula for the extrapolation of probability
                                                     
 
       // Attributes
