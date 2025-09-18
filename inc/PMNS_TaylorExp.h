@@ -29,10 +29,6 @@ namespace OscProb {
       PMNS_TaylorExp();          ///< Constructor
       virtual ~PMNS_TaylorExp(); ///< Destructor
 
-      virtual void SetwidthBin(double dE,
-                               double dcosT); ///< Set bin's widths for
-                                              ///< energy and angle
-
       virtual void SetCosT(double cosT); ///< Set neutrino angle.
 
       virtual void GetPremLayers(
@@ -87,6 +83,10 @@ namespace OscProb {
     protected:
       virtual void InitializeTaylorsVectors(); ///< Initialize all member
                                                ///< vectors with zeros
+
+      virtual void SetwidthBin(double dE,
+                               double dcosT); ///< Set bin's widths for
+                                              ///< energy and angle
 
       virtual vectorD GetSamplePoints(
           double LoE,
