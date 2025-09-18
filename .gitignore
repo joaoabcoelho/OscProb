@@ -7,7 +7,10 @@
 *_C.so
 *_C_ACLiC_dict*.h
 
-# Ignore compilated macros
+build
+install
+
+# Ignore compiled macros
 *.d
 AutoDict*
 
@@ -18,3 +21,6 @@ test/plots/*
 
 test/profile/callgrind.out
 test/profile/bin
+
+# Ignore IDE files
+.vscode
