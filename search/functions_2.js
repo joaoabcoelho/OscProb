@@ -6,6 +6,6 @@ var searchData=
   ['clearcache_3',['ClearCache',['../classOscProb_1_1PMNS__Base.html#ac47fd33e69aa6490f99e2fd147a92f03',1,'OscProb::PMNS_Base']]],
   ['clearmodel_4',['ClearModel',['../classOscProb_1_1EarthModelBinned.html#a0cd434f08ca3d4d48ee339b9c16446e8',1,'OscProb::EarthModelBinned::ClearModel()'],['../classOscProb_1_1PremModel.html#aaead53a9385bda9b0219fd051d0cdd11',1,'OscProb::PremModel::ClearModel()']]],
   ['clearpath_5',['ClearPath',['../classOscProb_1_1PMNS__Base.html#aefe521239031c418cfaaaa550a6e13bb',1,'OscProb::PMNS_Base']]],
-  ['complexsolver_6',['complexsolver',['../complexsolver_8h.html#aa8645f701df9e48cfbaca849f28c42ed',1,'complexsolver(const Eigen::Matrix3cd &amp;A, OscProb::vectorD &amp;w):&#160;complexsolver.cxx'],['../complexsolver_8cxx.html#aa8645f701df9e48cfbaca849f28c42ed',1,'complexsolver(const Eigen::Matrix3cd &amp;A, OscProb::vectorD &amp;w):&#160;complexsolver.cxx']]],
+  ['complexsolver_6',['complexsolver',['../complexsolver_8cxx.html#aa8645f701df9e48cfbaca849f28c42ed',1,'complexsolver(const Eigen::Matrix3cd &amp;A, OscProb::vectorD &amp;w):&#160;complexsolver.cxx'],['../complexsolver_8h.html#aa8645f701df9e48cfbaca849f28c42ed',1,'complexsolver(const Eigen::Matrix3cd &amp;A, OscProb::vectorD &amp;w):&#160;complexsolver.cxx']]],
   ['convertetoloe_7',['ConvertEtoLoE',['../classOscProb_1_1PMNS__Base.html#a1998ea292e904a83a7fdc2d8589c6535',1,'OscProb::PMNS_Base']]]
 ];

@@ -1,6 +1,6 @@
 var structOscProb_1_1TrajConstants =
 [
-    [ "TrajConstants", "structOscProb_1_1TrajConstants.html#ac2abe83d100e90dca3363be4bdc92e4d", null ],
+    [ "TrajConstants", "structOscProb_1_1TrajConstants.html#aa49fb14893c99d1f8a46d0399bfbc3ce", null ],
     [ "Recalculate", "structOscProb_1_1TrajConstants.html#aea9fd40eb64ccf33dd796f46261dc596", null ],
     [ "UpdateDetPos", "structOscProb_1_1TrajConstants.html#a926dabbc669d99deb962faeb0b0f798e", null ],
     [ "UpdateNuAngles", "structOscProb_1_1TrajConstants.html#a9e2d2f88f27cbfec6f2a812dee43479e", null ],

@@ -21,7 +21,7 @@ var searchData=
   ['setat_5ftautau_18',['SetaT_tautau',['../classOscProb_1_1PMNS__LIV.html#a296ae6961e988e5919ae0b1e30706236',1,'OscProb::PMNS_LIV']]],
   ['setatt_19',['SetAtt',['../classOscProb_1_1PMNS__Base.html#aba565962a440d14bee7a2a96d2eca2c5',1,'OscProb::PMNS_Base::SetAtt(double att, int idx)'],['../classOscProb_1_1PMNS__Base.html#ac8b2d41b0f315f00de139a11034e9439',1,'OscProb::PMNS_Base::SetAtt(vectorD att, int idx)']]],
   ['setavgprobprec_20',['SetAvgProbPrec',['../classOscProb_1_1PMNS__Base.html#ab68bc0474bb7e4b3b136cf85985fdf01',1,'OscProb::PMNS_Base']]],
-  ['setbin_21',['SetBin',['../structOscProb_1_1EarthBin.html#af074fa67904d242f01fcf5bb3785a1a9',1,'OscProb::EarthBin']]],
+  ['setbin_21',['SetBin',['../structOscProb_1_1EarthBin.html#a14849943c3bd4dfe1a619e179b70558e',1,'OscProb::EarthBin']]],
   ['setcoupbyindex_22',['SetCoupByIndex',['../classOscProb_1_1PMNS__NSI.html#a276d475bbebcdf24502a5555ee65b136',1,'OscProb::PMNS_NSI']]],
   ['setct_23',['SetcT',['../classOscProb_1_1PMNS__LIV.html#aed4cfc40058c6a3cb9b23d887bb042c9',1,'OscProb::PMNS_LIV::SetcT(int flvi, int flvj, int dim, double val, double phase)'],['../classOscProb_1_1PMNS__LIV.html#aee872c8fb1e6d2bc93be711cf2455cd3',1,'OscProb::PMNS_LIV::SetcT(int flvi, int flvj, double val, double phase)']]],
   ['setct_5fee_24',['SetcT_ee',['../classOscProb_1_1PMNS__LIV.html#a083dc35476bf5b9376e0ae86c9f10433',1,'OscProb::PMNS_LIV']]],
@@ -87,5 +87,5 @@ var searchData=
   ['solveham_84',['SolveHam',['../classOscProb_1_1PMNS__Iter.html#a0a4a4af377f11e8d4c681c17ced7c9e9',1,'OscProb::PMNS_Iter::SolveHam()'],['../classOscProb_1_1PMNS__LIV.html#ada8a9571ed903bc3ac02e748ec36e038',1,'OscProb::PMNS_LIV::SolveHam()'],['../classOscProb_1_1PMNS__Sterile.html#af60f89862d0fe333c62d6f87ecfd89f8',1,'OscProb::PMNS_Sterile::SolveHam()'],['../classOscProb_1_1PMNS__Fast.html#a8a0828401591e88c60e0051fbfe02d5e',1,'OscProb::PMNS_Fast::SolveHam()'],['../classOscProb_1_1PMNS__Decay.html#aab2c974ea66e13233186af8eca319496',1,'OscProb::PMNS_Decay::SolveHam()'],['../classOscProb_1_1PMNS__Base.html#a91f065cb9e910e0095e41462b4420b01',1,'OscProb::PMNS_Base::SolveHam()']]],
   ['solvehammatter_85',['SolveHamMatter',['../classOscProb_1_1PMNS__Fast.html#a72150a1ccb27f0395a5d14a66dc8f858',1,'OscProb::PMNS_Fast']]],
   ['sort3_86',['sort3',['../PMNS__Deco_8cxx.html#a464c6078e2bcc4d428d3a889bb8315b3',1,'PMNS_Deco.cxx']]],
-  ['split_87',['split',['../exceptions_8h.html#a3f636bd567ab8b54acdb65cac34acd3e',1,'exceptions.h']]]
+  ['split_87',['split',['../namespaceOscProb.html#ae739b83db6bf56d50bed3ab914644f88',1,'OscProb']]]
 ];

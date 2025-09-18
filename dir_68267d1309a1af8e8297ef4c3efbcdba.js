@@ -2,9 +2,11 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
 [
     [ "Absorption.cxx", "Absorption_8cxx.html", null ],
     [ "complexsolver.cxx", "complexsolver_8cxx.html", "complexsolver_8cxx" ],
+    [ "complexsolver.h", "complexsolver_8h.html", "complexsolver_8h" ],
     [ "EarthModelBase.cxx", "EarthModelBase_8cxx.html", null ],
     [ "EarthModelBinned.cxx", "EarthModelBinned_8cxx.html", null ],
     [ "EigenPoint.cxx", "EigenPoint_8cxx.html", null ],
+    [ "exceptions.h", "exceptions_8h.html", "exceptions_8h" ],
     [ "NuPath.cxx", "NuPath_8cxx.html", null ],
     [ "PMNS_Base.cxx", "PMNS__Base_8cxx.html", null ],
     [ "PMNS_Decay.cxx", "PMNS__Decay_8cxx.html", null ],

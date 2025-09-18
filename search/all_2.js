@@ -10,7 +10,7 @@ var searchData=
   ['color_7',['Color',['../namespaceColor.html',1,'']]],
   ['colormod_2eh_8',['colormod.h',['../colormod_8h.html',1,'']]],
   ['complexd_9',['complexD',['../namespaceOscProb.html#a8414445995fd13f07a3c2c2b168dcb1f',1,'OscProb']]],
-  ['complexsolver_10',['complexsolver',['../complexsolver_8cxx.html#aa8645f701df9e48cfbaca849f28c42ed',1,'complexsolver(const Eigen::Matrix3cd &amp;A, OscProb::vectorD &amp;w):&#160;complexsolver.cxx'],['../complexsolver_8h.html#aa8645f701df9e48cfbaca849f28c42ed',1,'complexsolver(const Eigen::Matrix3cd &amp;A, OscProb::vectorD &amp;w):&#160;complexsolver.cxx']]],
+  ['complexsolver_10',['complexsolver',['../complexsolver_8h.html#aa8645f701df9e48cfbaca849f28c42ed',1,'complexsolver(const Eigen::Matrix3cd &amp;A, OscProb::vectorD &amp;w):&#160;complexsolver.cxx'],['../complexsolver_8cxx.html#aa8645f701df9e48cfbaca849f28c42ed',1,'complexsolver(const Eigen::Matrix3cd &amp;A, OscProb::vectorD &amp;w):&#160;complexsolver.cxx']]],
   ['complexsolver_2ecxx_11',['complexsolver.cxx',['../complexsolver_8cxx.html',1,'']]],
   ['complexsolver_2eh_12',['complexsolver.h',['../complexsolver_8h.html',1,'']]],
   ['convertetoloe_13',['ConvertEtoLoE',['../classOscProb_1_1PMNS__Base.html#a1998ea292e904a83a7fdc2d8589c6535',1,'OscProb::PMNS_Base']]],

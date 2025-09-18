@@ -62,7 +62,7 @@ var searchData=
   ['fnupaths_59',['fNuPaths',['../classOscProb_1_1PMNS__Base.html#a273d49f3c5390e7bce624c97c4da5677',1,'OscProb::PMNS_Base::fNuPaths()'],['../classOscProb_1_1Absorption.html#a5a869a7322c87e94559a3b42d2d02ad2',1,'OscProb::Absorption::fNuPaths()']]],
   ['fnustate_60',['fNuState',['../classOscProb_1_1PMNS__Base.html#a2148b210ca835ab5b60cdaf48a2906be',1,'OscProb::PMNS_Base']]],
   ['fnustatebuffer_61',['fNuStateBuffer',['../classOscProb_1_1PMNS__NUNM.html#ae6c02c8d2356ec2b8e0a13ab2a8f5507',1,'OscProb::PMNS_NUNM']]],
-  ['format_5fargs_62',['format_args',['../exceptions_8h.html#ab518619a03c3514e33975cdcb92791ce',1,'exceptions.h']]],
+  ['format_5fargs_62',['format_args',['../namespaceOscProb.html#a1e721f898070fb059d0798ffedb4781e',1,'OscProb']]],
   ['fpath_63',['fPath',['../structOscProb_1_1EigenPoint.html#a1c263b6ceef5bd4de3181182f944efbb',1,'OscProb::EigenPoint::fPath()'],['../classOscProb_1_1PMNS__Base.html#a8f8fb0cd89fb6e8eb0167eb2c752bbd0',1,'OscProb::PMNS_Base::fPath()']]],
   ['fphases_64',['fPhases',['../classOscProb_1_1PMNS__Base.html#aafed7b62c249ec811201cbcbc58e0866',1,'OscProb::PMNS_Base']]],
   ['fpower_65',['fPower',['../classOscProb_1_1PMNS__OQS.html#a0f56544abea01012459700f1d79e1af6',1,'OscProb::PMNS_OQS::fPower()'],['../classOscProb_1_1PMNS__Deco.html#a19fdcdf9a8b2bd9677f72ca1fd77dc3e',1,'OscProb::PMNS_Deco::fPower()']]],

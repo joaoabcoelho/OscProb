@@ -1,7 +1,7 @@
 var structOscProb_1_1EarthBin =
 [
-    [ "EarthBin", "structOscProb_1_1EarthBin.html#a8cfed4a828764e1922a14633e6d92ae6", null ],
-    [ "SetBin", "structOscProb_1_1EarthBin.html#af074fa67904d242f01fcf5bb3785a1a9", null ],
+    [ "EarthBin", "structOscProb_1_1EarthBin.html#acf5c25c74b7ad3c9a76eb868f0d7fa2e", null ],
+    [ "SetBin", "structOscProb_1_1EarthBin.html#a14849943c3bd4dfe1a619e179b70558e", null ],
     [ "density", "structOscProb_1_1EarthBin.html#af70ecdf5f9255dcefd4427a48fcbbbaf", null ],
     [ "index", "structOscProb_1_1EarthBin.html#ac93310c7dde51855e5d3dd869322ba94", null ],
     [ "latitude", "structOscProb_1_1EarthBin.html#a20edd55a94ecd137eb658eb6879c6ad2", null ],

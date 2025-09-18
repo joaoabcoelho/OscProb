@@ -114,7 +114,6 @@ var menudata={children:[
 {text:"z",url:"globals.html#index_z"}]},
 {text:"Functions",url:"globals_func.html",children:[
 {text:"c",url:"globals_func.html#index_c"},
-{text:"f",url:"globals_func.html#index_f"},
 {text:"g",url:"globals_func.html#index_g"},
 {text:"h",url:"globals_func.html#index_h"},
 {text:"s",url:"globals_func.html#index_s"},

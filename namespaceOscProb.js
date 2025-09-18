@@ -30,5 +30,7 @@ var namespaceOscProb =
     [ "vectorI", "namespaceOscProb.html#a2a006582e68eb670c6b33b3b19042068", null ],
     [ "AvgPath", "namespaceOscProb.html#ac4f1bdf84ce6aa7a16b6d3c91272d428", null ],
     [ "AvgPath", "namespaceOscProb.html#a8c3367945f87051d5a6ece39fb2b45bb", null ],
-    [ "MergePaths", "namespaceOscProb.html#a21f576551c47cf787c2df50a4f4b5c83", null ]
+    [ "format_args", "namespaceOscProb.html#a1e721f898070fb059d0798ffedb4781e", null ],
+    [ "MergePaths", "namespaceOscProb.html#a21f576551c47cf787c2df50a4f4b5c83", null ],
+    [ "split", "namespaceOscProb.html#ae739b83db6bf56d50bed3ab914644f88", null ]
 ];

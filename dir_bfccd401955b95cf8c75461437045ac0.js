@@ -1,12 +1,10 @@
 var dir_bfccd401955b95cf8c75461437045ac0 =
 [
     [ "Absorption.h", "Absorption_8h.html", "Absorption_8h" ],
-    [ "complexsolver.h", "complexsolver_8h.html", "complexsolver_8h" ],
     [ "Definitions.h", "Definitions_8h.html", "Definitions_8h" ],
     [ "EarthModelBase.h", "EarthModelBase_8h.html", "EarthModelBase_8h" ],
     [ "EarthModelBinned.h", "EarthModelBinned_8h.html", "EarthModelBinned_8h" ],
     [ "EigenPoint.h", "EigenPoint_8h.html", "EigenPoint_8h" ],
-    [ "exceptions.h", "exceptions_8h.html", "exceptions_8h" ],
     [ "NuPath.h", "NuPath_8h.html", "NuPath_8h" ],
     [ "PMNS_Base.h", "PMNS__Base_8h.html", "PMNS__Base_8h" ],
     [ "PMNS_Decay.h", "PMNS__Decay_8h.html", "PMNS__Decay_8h" ],
