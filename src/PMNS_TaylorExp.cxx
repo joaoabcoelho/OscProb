@@ -100,7 +100,7 @@ void PMNS_TaylorExp::SetwidthBin(double dE, double dcosT)
 ///
 ///
 ///
-void PMNS_TaylorExp::GetPremLayers(std::vector<PremLayer> PremLayers)
+void PMNS_TaylorExp::SetPremLayers(std::vector<PremLayer> PremLayers)
 {
   fPremLayers = PremLayers;
 }
@@ -618,9 +618,9 @@ double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double LoE, double dLoE,
 /// Compute the average probability of flvi going to flvf over
 /// a bin of angle cost with width dcosT with a Taylor expansion.
 ///
-/// IMPORTANT: The function GetPremLayers must be used in the
+/// IMPORTANT: The function SetPremLayers must be used in the
 /// macro file to make this function work. The argument for
-/// GetPremLayers must be premModel.GetPremLayers().
+/// SetPremLayers must be premModel.GetPremLayers().
 ///
 /// Flavours are:
 /// <pre>
@@ -707,9 +707,9 @@ double PMNS_TaylorExp::AvgAlgoCosT(int flvi, int flvf, double E, double cosT,
 /// This gets transformed into L/E, since the oscillation terms
 /// have arguments linear in 1/E and not E.
 ///
-/// IMPORTANT: The function GetPremLayers must be used in the
+/// IMPORTANT: The function SetPremLayers must be used in the
 /// macro file to make this function work. The argument for
-/// GetPremLayers must be premModel.GetPremLayers().
+/// SetPremLayers must be premModel.GetPremLayers().
 ///
 /// Flavours are:
 /// <pre>
@@ -755,9 +755,9 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double dE,
 /// weight to low energies. Better approximations would be
 /// achieved if we used an interpolated event density.
 ///
-/// IMPORTANT: The function GetPremLayers must be used in the
+/// IMPORTANT: The function SetPremLayers must be used in the
 /// macro file to make this function work. The argument for
-/// GetPremLayers must be premModel.GetPremLayers().
+/// SetPremLayers must be premModel.GetPremLayers().
 ///
 /// Flavours are:
 /// <pre>
@@ -1203,9 +1203,9 @@ double PMNS_TaylorExp::ExtrapolationProbLoE(int flvi, int flvf, double LoE,
 /// Compute the propability for flvi going to flvf for an angle cosT+dcosT
 /// using a first order Taylor expansion from a reference angle cosT.
 ///
-/// IMPORTANT: The function GetPremLayers must be used in the
+/// IMPORTANT: The function SetPremLayers must be used in the
 /// macro file to make this function work. The argument for
-/// GetPremLayers must be premModel.GetPremLayers().
+/// SetPremLayers must be premModel.GetPremLayers().
 ///
 /// Flavours are:
 /// <pre>

@@ -29,8 +29,8 @@ namespace OscProb {
       PMNS_TaylorExp();          ///< Constructor
       virtual ~PMNS_TaylorExp(); ///< Destructor
 
-      virtual void GetPremLayers(
-          std::vector<PremLayer> PremLayers); ///< Get the list of layers
+      virtual void SetPremLayers(
+          std::vector<PremLayer> PremLayers); ///< Set the list of layers
 
       // Get probability averaged over a bin
       virtual double AvgProb(
