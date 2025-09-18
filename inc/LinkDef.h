@@ -27,6 +27,7 @@
 #pragma link C++ class OscProb::PMNS_LIV+;
 #pragma link C++ class OscProb::PMNS_SNSI+;
 #pragma link C++ class OscProb::PMNS_OQS+;
+#pragma link C++ class OscProb::PMNS_TaylorExp+;
 
 #pragma link C++ class OscProb::EarthModelBase+;
 #pragma link C++ class OscProb::PremModel+;
