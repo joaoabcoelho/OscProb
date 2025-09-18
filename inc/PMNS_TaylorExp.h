@@ -33,13 +33,11 @@ namespace OscProb {
           std::vector<PremLayer> PremLayers); ///< Get the list of layers
 
       // Get probability averaged over a bin
-      using PMNS_Base::AvgProb;
       virtual double AvgProb(
           int flvi, int flvf, double E,
           double dE); ///< Compute the average probability over
                       ///< a bin of energy with a Taylor expansion
 
-      using PMNS_Base::AvgProbLoE;
       virtual double AvgProbLoE(
           int flvi, int flvf, double LoE,
           double dLoE); ///< Compute the average probability over
