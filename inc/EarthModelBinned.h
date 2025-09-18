@@ -138,7 +138,7 @@ namespace OscProb {
       double gamma;   ///< sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)
       double gammaSq; ///< [sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)]^2
       double
-          rDetGammaSinDetLat; ///< rDet*sin(DetLat)*[sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)]
+             rDetGammaSinDetLat; ///< rDet*sin(DetLat)*[sin(T)*cos(phi)*cos(DetLat)+cosT*sin(DetLat)]
       double maxSinSqLat; ///< 1 - [sin(phi)*cos(DetLat)]^2
       double
           xlatextreme; ///< rDet*cos(phi)*cos(DetLat)/[sin(T)*sin(DetLat)-cos(phi)*cosT*cos(DetLat)],
