@@ -34,7 +34,7 @@ namespace OscProb {
       virtual void SetPremLayers(
           std::vector<PremLayer> PremLayers); ///< Set the list of layers
 
-      virtual void InitializePrem(OscProb::PremModel prem);
+      virtual void SetPremModel(OscProb::PremModel prem);
 
       // Get probability averaged over a bin
       virtual double AvgProb(
@@ -200,8 +200,11 @@ namespace OscProb {
       int    fdl;
       double fDetRadius;
       double fminRsq;
+
+    //Part that will disappear 
       std::vector<PremLayer>
-          fPremLayers; ///< The list of layers in the earth model
+          fPremLayers; 
+    //Part that will disappear 
 
       OscProb::PremModel fprem;    
 

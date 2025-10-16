@@ -79,7 +79,7 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
 ///
 ///
 ///
-void PMNS_TaylorExp::InitializePrem(OscProb::PremModel prem)
+void PMNS_TaylorExp::SetPremModel(OscProb::PremModel prem)
 {
   fprem = prem;
 }
@@ -184,26 +184,6 @@ void PMNS_TaylorExp::BuildKE(double L)
 ///
 void PMNS_TaylorExp::BuildKcosT(double L)
 {
-  /*double lv     = 2 * kGeV2eV * fEnergy; // 2E in eV
-  double kr2GNe = kK2 * M_SQRT2 * kGf;
-  kr2GNe *= fPath.density * fPath.zoa; // Matter potential in eV
-
-  matrixC Hbar = matrixC(fNumNus, vectorC(fNumNus, 0));
-
-  for (int i = 0; i < fNumNus; i++) {
-    Hbar[i][i] = fHms[i][i] / lv;
-    for (int j = i + 1; j < fNumNus; j++) {
-      if (!fIsNuBar)
-        Hbar[i][j] = fHms[i][j] / lv;
-      else
-        Hbar[i][j] = conj(fHms[i][j]) / lv;
-    }
-  }
-  if (!fIsNuBar)
-    Hbar[0][0] += kr2GNe;
-  else
-    Hbar[0][0] -= kr2GNe;*/
-
   UpdateHam();
 
   double dL = LnDerivative() * kKm2eV;
@@ -652,10 +632,12 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double cosT,
 {
   if (cosT > 0) return 0;
 
-  if (fNuPaths.empty()) return 0;
+  //if (fNuPaths.empty()) return 0; //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
   // Don't average zero width
   if (dcosT == 0) return Prob(flvi, flvf, E);
+
+  fPremLayers = fprem.GetPremLayers();
 
   vectorD samples = GetSamplePoints(E, cosT, dcosT);
 
@@ -685,17 +667,15 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double cosT,
 double PMNS_TaylorExp::AvgAlgoCosT(int flvi, int flvf, double E, double cosT,
                                    double dcosT)
 {
-  OscProb::PremModel prem;
-
-  prem.FillPath(cosT);
-  SetPath(prem.GetNuPath());
-
   // reset K et S et Ve et lambdaE
   InitializeTaylorsVectors();
 
   SetEnergy(E);
   SetCosT(cosT);
   SetwidthBin(0, dcosT);
+
+  fprem.FillPath(cosT);
+  SetPath(fprem.GetNuPath());
 
   fminRsq = pow(fDetRadius * sqrt(1 - cosT * cosT), 2);
 
@@ -1236,6 +1216,10 @@ double PMNS_TaylorExp::ExtrapolationProbLoE(int flvi, int flvf, double LoE,
 double PMNS_TaylorExp::ExtrapolationProbCosT(int flvi, int flvf, double cosT,
                                              double dcosT)
 {
+  fPremLayers = fprem.GetPremLayers();
+  fprem.FillPath(cosT);
+  SetPath(fprem.GetNuPath());
+
   // reset K et S et Ve et lambdaE
   InitializeTaylorsVectors();
 
@@ -1250,6 +1234,8 @@ double PMNS_TaylorExp::ExtrapolationProbCosT(int flvi, int flvf, double cosT,
 
   // DiagolK -> get VE and lambdaE
   SolveK(fKcosT, flambdaCosT, fVcosT);
+
+  cout<<AvgFormulaExtrapolation(flvi, flvf, fdcosT, flambdaCosT, fVcosT)<<endl;
 
   return AvgFormulaExtrapolation(flvi, flvf, fdcosT, flambdaCosT, fVcosT);
 }
