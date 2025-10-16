@@ -21,6 +21,8 @@
 #define PMNS_TaylorExp_H
 
 #include "PMNS_Fast.h"
+#include "PremModel.h"
+
 
 namespace OscProb {
 
@@ -31,6 +33,8 @@ namespace OscProb {
 
       virtual void SetPremLayers(
           std::vector<PremLayer> PremLayers); ///< Set the list of layers
+
+      virtual void InitializePrem(OscProb::PremModel prem);
 
       // Get probability averaged over a bin
       virtual double AvgProb(
@@ -198,6 +202,9 @@ namespace OscProb {
       double fminRsq;
       std::vector<PremLayer>
           fPremLayers; ///< The list of layers in the earth model
+
+      OscProb::PremModel fprem;    
+
   };
 
 } // namespace OscProb

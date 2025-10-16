@@ -77,6 +77,15 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
 
 //.............................................................................
 ///
+///
+///
+void PMNS_TaylorExp::InitializePrem(OscProb::PremModel prem)
+{
+  fprem = prem;
+}
+
+//.............................................................................
+///
 /// Set neutrino angle.
 ///
 /// @param cosT - The cosine of the neutrino angle
@@ -175,7 +184,7 @@ void PMNS_TaylorExp::BuildKE(double L)
 ///
 void PMNS_TaylorExp::BuildKcosT(double L)
 {
-  double lv     = 2 * kGeV2eV * fEnergy; // 2E in eV
+  /*double lv     = 2 * kGeV2eV * fEnergy; // 2E in eV
   double kr2GNe = kK2 * M_SQRT2 * kGf;
   kr2GNe *= fPath.density * fPath.zoa; // Matter potential in eV
 
@@ -193,13 +202,15 @@ void PMNS_TaylorExp::BuildKcosT(double L)
   if (!fIsNuBar)
     Hbar[0][0] += kr2GNe;
   else
-    Hbar[0][0] -= kr2GNe;
+    Hbar[0][0] -= kr2GNe;*/
+
+  UpdateHam();
 
   double dL = LnDerivative() * kKm2eV;
 
   for (int j = 0; j < fNumNus; j++) {
     for (int i = 0; i <= j; i++) {
-      fKflavor[i][j] = dL * Hbar[i][j];
+      fKflavor[i][j] = dL * fHam[i][j];
 
       if (i != j) { fKflavor[j][i] = conj(fKflavor[i][j]); }
     }
@@ -964,6 +975,8 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE)
   int n_div = ceil(3 * pow(dLoE / LoE, 0.8) * pow(LoE, 0.3) /
                    sqrt(fAvgProbPrec / 1e-4));
 
+  //int n_div = 1;
+
   // A vector to store sample points
   vectorD Samples;
 
@@ -1000,7 +1013,7 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
   // This needs to be studied better
   int n_div = ceil(35 * pow(E, -0.4) * pow(abs(dcosT / cosT), 0.8) /
                    sqrt(fAvgProbPrec / 1e-4));
-
+  //int n_div = 1;
   // A vector to store sample points
   vectorD Samples;
 
