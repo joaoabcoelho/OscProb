@@ -10,6 +10,9 @@
 /// The model assumes a first order expansion over neutrino energy and angle
 /// for both dynamical variables at the same time or for only one.
 ///
+/// This is the first version of this class. A second version will be release 
+/// with a better implementation with the other classes.
+///
 /// Reference: https://doi.org/10.48550/arXiv.2308.00037
 ///
 /// \sa PMNS_Fast
@@ -30,9 +33,6 @@ namespace OscProb {
     public:
       PMNS_TaylorExp();          ///< Constructor
       virtual ~PMNS_TaylorExp(); ///< Destructor
-
-      virtual void SetPremLayers(
-          std::vector<PremLayer> PremLayers); ///< Set the list of layers
 
       virtual void SetPremModel(OscProb::PremModel prem);
 
@@ -196,16 +196,12 @@ namespace OscProb {
       matrixC fdensityMatrix; ///< The neutrino density matrix state
 
       // Variables for the compute of the derivation of one layer's length
-      int    flayer;
+      int    fLayer;
       int    fdl;
       double fDetRadius;
       double fminRsq;
 
-    //Part that will disappear 
-      std::vector<PremLayer>
-          fPremLayers; 
-    //Part that will disappear 
-
+      // Copy of the earth model used 
       OscProb::PremModel fprem;    
 
   };

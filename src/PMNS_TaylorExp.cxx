@@ -68,16 +68,21 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
     }
   }
 
-  flayer = fPremLayers.size() - 1;
+  fLayer = fprem.GetPremLayers().size() - 1;
 
   fdl = -1;
 
-  fDetRadius = 6371; // fPremLayers[flayer].radius;
+  fDetRadius = 6371; // fPremLayers[fLayer].radius;
 }
 
 //.............................................................................
 ///
+/// Copy the earth model used 
 ///
+/// This is done to get access to the PremLayer list to be used in the 
+/// LnDerivative() function. 
+///
+/// @param prem - The earth model used
 ///
 void PMNS_TaylorExp::SetPremModel(OscProb::PremModel prem)
 {
@@ -103,15 +108,6 @@ void PMNS_TaylorExp::SetwidthBin(double dE, double dcosT)
 {
   fdInvE = dE;
   fdcosT = dcosT;
-}
-
-//.............................................................................
-///
-///
-///
-void PMNS_TaylorExp::SetPremLayers(std::vector<PremLayer> PremLayers)
-{
-  fPremLayers = PremLayers;
 }
 
 //.............................................................................
@@ -205,10 +201,11 @@ double PMNS_TaylorExp::LnDerivative()
 {
   double dL = 0;
 
-  double L1 = pow(fPremLayers[flayer].radius, 2) - fminRsq;
+  double L1 = pow(fprem.GetPremLayers()[fLayer].radius, 2) - fminRsq;
 
   double L2 = -fminRsq;
-  if (flayer > 0) L2 += pow(fPremLayers[flayer - 1].radius, 2);
+  if (fLayer > 0) L2 += pow(fprem.GetPremLayers()[fLayer - 1].radius, 2);
+
 
   bool ismin = (L2 <= 0 && fcosT < 0);
 
@@ -219,7 +216,7 @@ double PMNS_TaylorExp::LnDerivative()
 
   if (ismin) fdl = 1;
 
-  flayer += fdl;
+  fLayer += fdl;
 
   return dL;
 }
@@ -609,9 +606,8 @@ double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double LoE, double dLoE,
 /// Compute the average probability of flvi going to flvf over
 /// a bin of angle cost with width dcosT with a Taylor expansion.
 ///
-/// IMPORTANT: The function SetPremLayers must be used in the
-/// macro file to make this function work. The argument for
-/// SetPremLayers must be premModel.GetPremLayers().
+/// IMPORTANT: The PremModel object used must be copied by this 
+/// class using the function SetPremModel.
 ///
 /// Flavours are:
 /// <pre>
@@ -636,8 +632,6 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double cosT,
 
   // Don't average zero width
   if (dcosT == 0) return Prob(flvi, flvf, E);
-
-  fPremLayers = fprem.GetPremLayers();
 
   vectorD samples = GetSamplePoints(E, cosT, dcosT);
 
@@ -746,9 +740,8 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double dE,
 /// weight to low energies. Better approximations would be
 /// achieved if we used an interpolated event density.
 ///
-/// IMPORTANT: The function SetPremLayers must be used in the
-/// macro file to make this function work. The argument for
-/// SetPremLayers must be premModel.GetPremLayers().
+/// IMPORTANT: The PremModel object used must be copied by this 
+/// class using the function SetPremModel.
 ///
 /// Flavours are:
 /// <pre>
@@ -771,7 +764,7 @@ double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE,
   if (LoE <= 0) return 0;
   if (cosT > 0) return 0;
 
-  if (fNuPaths.empty()) return 0;
+  //if (fNuPaths.empty()) return 0;
 
   // Don't average zero width
   if (dLoE <= 0 && dcosT == 0) return Prob(flvi, flvf, fPath.length / LoE);
@@ -823,10 +816,8 @@ double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE,
 double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double InvE, double dInvE,
                                double cosT, double dcosT)
 {
-  OscProb::PremModel prem;
-
-  prem.FillPath(cosT);
-  SetPath(prem.GetNuPath());
+  fprem.FillPath(cosT);
+  SetPath(fprem.GetNuPath());
 
   // reset K et S et Ve et lambdaE
   InitializeTaylorsVectors();
@@ -955,8 +946,6 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE)
   int n_div = ceil(3 * pow(dLoE / LoE, 0.8) * pow(LoE, 0.3) /
                    sqrt(fAvgProbPrec / 1e-4));
 
-  //int n_div = 1;
-
   // A vector to store sample points
   vectorD Samples;
 
@@ -993,7 +982,7 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
   // This needs to be studied better
   int n_div = ceil(35 * pow(E, -0.4) * pow(abs(dcosT / cosT), 0.8) /
                    sqrt(fAvgProbPrec / 1e-4));
-  //int n_div = 1;
+  
   // A vector to store sample points
   vectorD Samples;
 
@@ -1196,9 +1185,8 @@ double PMNS_TaylorExp::ExtrapolationProbLoE(int flvi, int flvf, double LoE,
 /// Compute the propability for flvi going to flvf for an angle cosT+dcosT
 /// using a first order Taylor expansion from a reference angle cosT.
 ///
-/// IMPORTANT: The function SetPremLayers must be used in the
-/// macro file to make this function work. The argument for
-/// SetPremLayers must be premModel.GetPremLayers().
+/// IMPORTANT: The PremModel object used must be copied by this 
+/// class using the function SetPremModel.
 ///
 /// Flavours are:
 /// <pre>
@@ -1216,7 +1204,6 @@ double PMNS_TaylorExp::ExtrapolationProbLoE(int flvi, int flvf, double LoE,
 double PMNS_TaylorExp::ExtrapolationProbCosT(int flvi, int flvf, double cosT,
                                              double dcosT)
 {
-  fPremLayers = fprem.GetPremLayers();
   fprem.FillPath(cosT);
   SetPath(fprem.GetNuPath());
 
@@ -1234,8 +1221,6 @@ double PMNS_TaylorExp::ExtrapolationProbCosT(int flvi, int flvf, double cosT,
 
   // DiagolK -> get VE and lambdaE
   SolveK(fKcosT, flambdaCosT, fVcosT);
-
-  cout<<AvgFormulaExtrapolation(flvi, flvf, fdcosT, flambdaCosT, fVcosT)<<endl;
 
   return AvgFormulaExtrapolation(flvi, flvf, fdcosT, flambdaCosT, fVcosT);
 }
