@@ -68,7 +68,9 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
     }
   }
 
-  fLayer = fprem.GetPremLayers().size() - 1;
+  fPrem.LoadModel("");
+
+  fLayer = fPrem.GetPremLayers().size() - 1;
 
   fdl = -1;
 
@@ -84,9 +86,9 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
 ///
 /// @param prem - The earth model used
 ///
-void PMNS_TaylorExp::SetPremModel(OscProb::PremModel prem)
+void PMNS_TaylorExp::SetPremModel(OscProb::PremModel& prem)
 {
-  fprem = prem;
+  fPrem = prem;
 }
 
 //.............................................................................
@@ -201,10 +203,10 @@ double PMNS_TaylorExp::LnDerivative()
 {
   double dL = 0;
 
-  double L1 = pow(fprem.GetPremLayers()[fLayer].radius, 2) - fminRsq;
+  double L1 = pow(fPrem.GetPremLayers()[fLayer].radius, 2) - fminRsq;
 
   double L2 = -fminRsq;
-  if (fLayer > 0) L2 += pow(fprem.GetPremLayers()[fLayer - 1].radius, 2);
+  if (fLayer > 0) L2 += pow(fPrem.GetPremLayers()[fLayer - 1].radius, 2);
 
 
   bool ismin = (L2 <= 0 && fcosT < 0);
@@ -668,8 +670,8 @@ double PMNS_TaylorExp::AvgAlgoCosT(int flvi, int flvf, double E, double cosT,
   SetCosT(cosT);
   SetwidthBin(0, dcosT);
 
-  fprem.FillPath(cosT);
-  SetPath(fprem.GetNuPath());
+  fPrem.FillPath(cosT);
+  SetPath(fPrem.GetNuPath());
 
   fminRsq = pow(fDetRadius * sqrt(1 - cosT * cosT), 2);
 
@@ -816,8 +818,8 @@ double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE,
 double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double InvE, double dInvE,
                                double cosT, double dcosT)
 {
-  fprem.FillPath(cosT);
-  SetPath(fprem.GetNuPath());
+  fPrem.FillPath(cosT);
+  SetPath(fPrem.GetNuPath());
 
   // reset K et S et Ve et lambdaE
   InitializeTaylorsVectors();
@@ -1204,8 +1206,8 @@ double PMNS_TaylorExp::ExtrapolationProbLoE(int flvi, int flvf, double LoE,
 double PMNS_TaylorExp::ExtrapolationProbCosT(int flvi, int flvf, double cosT,
                                              double dcosT)
 {
-  fprem.FillPath(cosT);
-  SetPath(fprem.GetNuPath());
+  fPrem.FillPath(cosT);
+  SetPath(fPrem.GetNuPath());
 
   // reset K et S et Ve et lambdaE
   InitializeTaylorsVectors();

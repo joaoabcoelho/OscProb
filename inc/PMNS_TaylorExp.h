@@ -34,7 +34,7 @@ namespace OscProb {
       PMNS_TaylorExp();          ///< Constructor
       virtual ~PMNS_TaylorExp(); ///< Destructor
 
-      virtual void SetPremModel(OscProb::PremModel prem);
+      virtual void SetPremModel(OscProb::PremModel& prem);
 
       // Get probability averaged over a bin
       virtual double AvgProb(
@@ -202,7 +202,7 @@ namespace OscProb {
       double fminRsq;
 
       // Copy of the earth model used 
-      OscProb::PremModel fprem;    
+      OscProb::PremModel fPrem;    
 
   };
 
