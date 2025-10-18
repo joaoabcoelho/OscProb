@@ -25,6 +25,8 @@ using namespace std;
 ///
 PMNS_TaylorExp::PMNS_TaylorExp() : PMNS_Fast()
 {
+  fPrem.LoadModel("");
+
   InitializeTaylorsVectors();
 
   SetwidthBin(0, 0);
@@ -67,8 +69,6 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
       fKcosT[i][j] = 0;
     }
   }
-
-  fPrem.LoadModel("");
 
   fLayer = fPrem.GetPremLayers().size() - 1;
 
