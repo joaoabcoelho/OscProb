@@ -74,22 +74,19 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
 
   fdl = -1;
 
-  fDetRadius = 6371; // fPremLayers[fLayer].radius;
+  fDetRadius = fPrem.GetDetRadius();
 }
 
 //.............................................................................
 ///
-/// Copy the earth model used 
+/// Copy the earth model used
 ///
-/// This is done to get access to the PremLayer list to be used in the 
-/// LnDerivative() function. 
+/// This is done to get access to the PremLayer list to be used in the
+/// LnDerivative() function.
 ///
 /// @param prem - The earth model used
 ///
-void PMNS_TaylorExp::SetPremModel(OscProb::PremModel& prem)
-{
-  fPrem = prem;
-}
+void PMNS_TaylorExp::SetPremModel(OscProb::PremModel& prem) { fPrem = prem; }
 
 //.............................................................................
 ///
@@ -207,7 +204,6 @@ double PMNS_TaylorExp::LnDerivative()
 
   double L2 = -fminRsq;
   if (fLayer > 0) L2 += pow(fPrem.GetPremLayers()[fLayer - 1].radius, 2);
-
 
   bool ismin = (L2 <= 0 && fcosT < 0);
 
@@ -608,7 +604,7 @@ double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double LoE, double dLoE,
 /// Compute the average probability of flvi going to flvf over
 /// a bin of angle cost with width dcosT with a Taylor expansion.
 ///
-/// IMPORTANT: The PremModel object used must be copied by this 
+/// IMPORTANT: The PremModel object used must be copied by this
 /// class using the function SetPremModel.
 ///
 /// Flavours are:
@@ -630,7 +626,7 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double cosT,
 {
   if (cosT > 0) return 0;
 
-  //if (fNuPaths.empty()) return 0; //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  // if (fNuPaths.empty()) return 0; //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
   // Don't average zero width
   if (dcosT == 0) return Prob(flvi, flvf, E);
@@ -742,7 +738,7 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double dE,
 /// weight to low energies. Better approximations would be
 /// achieved if we used an interpolated event density.
 ///
-/// IMPORTANT: The PremModel object used must be copied by this 
+/// IMPORTANT: The PremModel object used must be copied by this
 /// class using the function SetPremModel.
 ///
 /// Flavours are:
@@ -766,7 +762,7 @@ double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE,
   if (LoE <= 0) return 0;
   if (cosT > 0) return 0;
 
-  //if (fNuPaths.empty()) return 0;
+  // if (fNuPaths.empty()) return 0;
 
   // Don't average zero width
   if (dLoE <= 0 && dcosT == 0) return Prob(flvi, flvf, fPath.length / LoE);
@@ -984,7 +980,7 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
   // This needs to be studied better
   int n_div = ceil(35 * pow(E, -0.4) * pow(abs(dcosT / cosT), 0.8) /
                    sqrt(fAvgProbPrec / 1e-4));
-  
+
   // A vector to store sample points
   vectorD Samples;
 
@@ -1187,7 +1183,7 @@ double PMNS_TaylorExp::ExtrapolationProbLoE(int flvi, int flvf, double LoE,
 /// Compute the propability for flvi going to flvf for an angle cosT+dcosT
 /// using a first order Taylor expansion from a reference angle cosT.
 ///
-/// IMPORTANT: The PremModel object used must be copied by this 
+/// IMPORTANT: The PremModel object used must be copied by this
 /// class using the function SetPremModel.
 ///
 /// Flavours are:

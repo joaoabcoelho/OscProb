@@ -10,7 +10,7 @@
 /// The model assumes a first order expansion over neutrino energy and angle
 /// for both dynamical variables at the same time or for only one.
 ///
-/// This is the first version of this class. A second version will be release 
+/// This is the first version of this class. A second version will be release
 /// with a better implementation with the other classes.
 ///
 /// Reference: https://doi.org/10.48550/arXiv.2308.00037
@@ -25,7 +25,6 @@
 
 #include "PMNS_Fast.h"
 #include "PremModel.h"
-
 
 namespace OscProb {
 
@@ -201,9 +200,8 @@ namespace OscProb {
       double fDetRadius;
       double fminRsq;
 
-      // Copy of the earth model used 
-      OscProb::PremModel fPrem;    
-
+      // Copy of the earth model used
+      OscProb::PremModel fPrem;
   };
 
 } // namespace OscProb

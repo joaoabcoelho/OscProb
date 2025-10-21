@@ -421,3 +421,9 @@ int PremModel::FillPath(double cosT, double phi)
   // Return the number of path segments
   return fNuPath.size();
 }
+
+//.............................................................................
+///
+/// Get the radius where the detector sits (in km)
+///
+double PremModel::GetDetRadius() { return fDetRadius; }
