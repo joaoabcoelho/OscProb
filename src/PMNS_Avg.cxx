@@ -7,7 +7,7 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "PMNS_TaylorExp.h"
+#include "PMNS_Avg.h"
 #include "MatrixDecomp/zheevh3.h"
 #include "PremModel.h"
 #include <algorithm>
@@ -23,7 +23,7 @@ using namespace std;
 ///
 /// This class is restricted to 3 neutrino flavours.
 ///
-PMNS_TaylorExp::PMNS_TaylorExp() : PMNS_Fast()
+PMNS_Avg::PMNS_Avg() : PMNS_Fast()
 {
   fPrem.LoadModel("");
 
@@ -38,14 +38,14 @@ PMNS_TaylorExp::PMNS_TaylorExp() : PMNS_Fast()
 ///
 /// Nothing to clean.
 ///
-PMNS_TaylorExp::~PMNS_TaylorExp() {}
+PMNS_Avg::~PMNS_Avg() {}
 
 //.............................................................................
 ///
 /// Set vector sizes and initialize elements to zero.
 /// Initialize diagonal elements of S to one
 ///
-void PMNS_TaylorExp::InitializeTaylorsVectors()
+void PMNS_Avg::InitializeTaylorsVectors()
 {
   fdensityMatrix = matrixC(fNumNus, vectorC(fNumNus, 0));
 
@@ -86,7 +86,7 @@ void PMNS_TaylorExp::InitializeTaylorsVectors()
 ///
 /// @param prem - The earth model used
 ///
-void PMNS_TaylorExp::SetPremModel(OscProb::PremModel& prem) { fPrem = prem; }
+void PMNS_Avg::SetPremModel(OscProb::PremModel& prem) { fPrem = prem; }
 
 //.............................................................................
 ///
@@ -94,7 +94,7 @@ void PMNS_TaylorExp::SetPremModel(OscProb::PremModel& prem) { fPrem = prem; }
 ///
 /// @param cosT - The cosine of the neutrino angle
 ///
-void PMNS_TaylorExp::SetCosT(double cosT) { fcosT = cosT; }
+void PMNS_Avg::SetCosT(double cosT) { fcosT = cosT; }
 
 //.............................................................................
 ///
@@ -103,7 +103,7 @@ void PMNS_TaylorExp::SetCosT(double cosT) { fcosT = cosT; }
 /// @param dE - The width of the bin for energy in GeV
 /// @param dcosT - The width of the bin for angle
 ///
-void PMNS_TaylorExp::SetwidthBin(double dE, double dcosT)
+void PMNS_Avg::SetwidthBin(double dE, double dcosT)
 {
   fdInvE = dE;
   fdcosT = dcosT;
@@ -119,7 +119,7 @@ void PMNS_TaylorExp::SetwidthBin(double dE, double dcosT)
 ///
 /// @param L - The length of the layer in km
 ///
-void PMNS_TaylorExp::BuildKE(double L)
+void PMNS_Avg::BuildKE(double L)
 {
   double lenghtEV = L * kKm2eV;     // L in eV-1
   double bufK     = lenghtEV * 0.5; // L/2 in eV-1
@@ -177,7 +177,7 @@ void PMNS_TaylorExp::BuildKE(double L)
 ///
 /// @param L - The length of the layer in km
 ///
-void PMNS_TaylorExp::BuildKcosT(double L)
+void PMNS_Avg::BuildKcosT(double L)
 {
   UpdateHam();
 
@@ -196,7 +196,7 @@ void PMNS_TaylorExp::BuildKcosT(double L)
 ///
 /// Compute the derivation of one layer's length depending on the angle
 ///
-double PMNS_TaylorExp::LnDerivative()
+double PMNS_Avg::LnDerivative()
 {
   double dL = 0;
 
@@ -223,7 +223,7 @@ double PMNS_TaylorExp::LnDerivative()
 ///
 /// Rotate the S matrix for the current layer from mass to flavor basis
 ///
-void PMNS_TaylorExp::rotateS()
+void PMNS_Avg::rotateS()
 {
   complexD buffer[3];
 
@@ -245,7 +245,7 @@ void PMNS_TaylorExp::rotateS()
 ///
 /// Rotate the K matrix from mass to flavor basis
 ///
-void PMNS_TaylorExp::rotateK()
+void PMNS_Avg::rotateK()
 {
   complexD buffer[3];
 
@@ -282,7 +282,7 @@ void PMNS_TaylorExp::rotateK()
 /// after every layer with this function. The matrix fSflavor represent the
 /// propagation between the beginning and the end of the layer.
 ///
-void PMNS_TaylorExp::MultiplicationRuleS()
+void PMNS_Avg::MultiplicationRuleS()
 {
   complexD save[3];
 
@@ -313,7 +313,7 @@ void PMNS_TaylorExp::MultiplicationRuleS()
 /// beginning
 ///            of the path and the beginning of the current layer
 ///
-void PMNS_TaylorExp::MultiplicationRuleK(complexD K[3][3])
+void PMNS_Avg::MultiplicationRuleK(complexD K[3][3])
 {
   for (int i = 0; i < fNumNus; i++) {
     complexD buffer[3];
@@ -338,7 +338,7 @@ void PMNS_TaylorExp::MultiplicationRuleK(complexD K[3][3])
 ///
 /// Propagate neutrino state through full path
 ///
-void PMNS_TaylorExp::PropagateTaylor()
+void PMNS_Avg::PropagateTaylor()
 {
   for (int i = 0; i < int(fNuPaths.size()); i++) {
     PropagatePathTaylor(fNuPaths[i]);
@@ -350,7 +350,7 @@ void PMNS_TaylorExp::PropagateTaylor()
 /// Propagate the current neutrino state through a given path
 /// @param p - A neutrino path segment
 ///
-void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
+void PMNS_Avg::PropagatePathTaylor(NuPath p)
 {
   // Set the neutrino path
   SetCurPath(p);
@@ -405,7 +405,7 @@ void PMNS_TaylorExp::PropagatePathTaylor(NuPath p)
 /// @param lambda - The eigenvalues of K
 /// @param V - The eigenvectors of K
 ///
-void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
+void PMNS_Avg::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
 {
   double   fEvalGLoBES[3];
   complexD fEvecGLoBES[3][3];
@@ -439,8 +439,8 @@ void PMNS_TaylorExp::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_TaylorExp::AvgFormula(int flvi, int flvf, double dbin,
-                                  vectorD lambda, matrixC V)
+double PMNS_Avg::AvgFormula(int flvi, int flvf, double dbin, vectorD lambda,
+                            matrixC V)
 {
   vectorC SV = vectorC(fNumNus, 0);
 
@@ -498,7 +498,7 @@ double PMNS_TaylorExp::AvgFormula(int flvi, int flvf, double dbin,
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double dE)
+double PMNS_Avg::AvgProb(int flvi, int flvf, double E, double dE)
 {
   if (E <= 0) return 0;
 
@@ -536,7 +536,7 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double dE)
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
+double PMNS_Avg::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
 {
   if (LoE <= 0) return 0;
 
@@ -577,8 +577,7 @@ double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double LoE, double dLoE,
-                               double L)
+double PMNS_Avg::AvgAlgo(int flvi, int flvf, double LoE, double dLoE, double L)
 {
   // Set width bin as 1/E
   double d1oE = dLoE / L;
@@ -621,8 +620,8 @@ double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double LoE, double dLoE,
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double cosT,
-                               double dcosT)
+double PMNS_Avg::AvgProb(int flvi, int flvf, double E, double cosT,
+                         double dcosT)
 {
   if (cosT > 0) return 0;
 
@@ -656,8 +655,8 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double cosT,
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_TaylorExp::AvgAlgoCosT(int flvi, int flvf, double E, double cosT,
-                                   double dcosT)
+double PMNS_Avg::AvgAlgoCosT(int flvi, int flvf, double E, double cosT,
+                             double dcosT)
 {
   // reset K et S et Ve et lambdaE
   InitializeTaylorsVectors();
@@ -709,8 +708,8 @@ double PMNS_TaylorExp::AvgAlgoCosT(int flvi, int flvf, double E, double cosT,
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double dE,
-                               double cosT, double dcosT)
+double PMNS_Avg::AvgProb(int flvi, int flvf, double E, double dE, double cosT,
+                         double dcosT)
 {
   if (E <= 0) return 0;
   if (cosT > 0) return 0;
@@ -756,8 +755,8 @@ double PMNS_TaylorExp::AvgProb(int flvi, int flvf, double E, double dE,
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE,
-                                  double cosT, double dcosT)
+double PMNS_Avg::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE,
+                            double cosT, double dcosT)
 {
   if (LoE <= 0) return 0;
   if (cosT > 0) return 0;
@@ -811,8 +810,8 @@ double PMNS_TaylorExp::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE,
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double InvE, double dInvE,
-                               double cosT, double dcosT)
+double PMNS_Avg::AvgAlgo(int flvi, int flvf, double InvE, double dInvE,
+                         double cosT, double dcosT)
 {
   fPrem.FillPath(cosT);
   SetPath(fPrem.GetNuPath());
@@ -845,7 +844,7 @@ double PMNS_TaylorExp::AvgAlgo(int flvi, int flvf, double InvE, double dInvE,
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_TaylorExp::AlgorithmDensityMatrix(int flvi, int flvf)
+double PMNS_Avg::AlgorithmDensityMatrix(int flvi, int flvf)
 {
   fdensityMatrix[flvi][flvi] = 1;
 
@@ -870,7 +869,7 @@ double PMNS_TaylorExp::AlgorithmDensityMatrix(int flvi, int flvf)
 /// @param to_basis - Rotation from (false) or to (true)
 /// @param V - The matrix used for the denisty matrix rotation.
 ///
-void PMNS_TaylorExp::RotateDensityM(bool to_basis, matrixC V)
+void PMNS_Avg::RotateDensityM(bool to_basis, matrixC V)
 {
   matrixC Buffer = matrixC(fNumNus, vectorC(fNumNus, 0));
 
@@ -906,7 +905,7 @@ void PMNS_TaylorExp::RotateDensityM(bool to_basis, matrixC V)
 /// @param lambda - Eigenvalues of the K matrix
 /// @param dbin - Width of the bin
 ///
-void PMNS_TaylorExp::HadamardProduct(vectorD lambda, double dbin)
+void PMNS_Avg::HadamardProduct(vectorD lambda, double dbin)
 {
   matrixC sinc = matrixC(fNumNus, vectorC(fNumNus, 0));
   for (int j = 0; j < fNumNus; j++) {
@@ -937,7 +936,7 @@ void PMNS_TaylorExp::HadamardProduct(vectorD lambda, double dbin)
 /// @param LoE  - The neutrino  L/E value in the bin center in km/GeV
 /// @param dLoE   - The L/E bin width in km/GeV
 ///
-vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE)
+vectorD PMNS_Avg::GetSamplePoints(double LoE, double dLoE)
 {
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
@@ -974,7 +973,7 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double LoE, double dLoE)
 /// @param cosT   - The neutrino  cosT value in the bin center
 /// @param dcosT   - The cosT bin width
 ///
-vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
+vectorD PMNS_Avg::GetSamplePoints(double E, double cosT, double dcosT)
 {
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
@@ -1013,8 +1012,8 @@ vectorD PMNS_TaylorExp::GetSamplePoints(double E, double cosT, double dcosT)
 /// @param cosT   - The neutrino  cosT value in the bin center
 /// @param dcosT   - The cosT bin width
 ///
-matrixC PMNS_TaylorExp::GetSamplePoints(double InvE, double dInvE, double cosT,
-                                        double dcosT)
+matrixC PMNS_Avg::GetSamplePoints(double InvE, double dInvE, double cosT,
+                                  double dcosT)
 {
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
@@ -1066,8 +1065,8 @@ matrixC PMNS_TaylorExp::GetSamplePoints(double InvE, double dInvE, double cosT,
 ///
 /// @return Neutrino oscillation probability
 ///
-double PMNS_TaylorExp::AvgFormulaExtrapolation(int flvi, int flvf, double dbin,
-                                               vectorD lambda, matrixC V)
+double PMNS_Avg::AvgFormulaExtrapolation(int flvi, int flvf, double dbin,
+                                         vectorD lambda, matrixC V)
 {
   vectorC SV = vectorC(fNumNus, 0);
 
@@ -1119,8 +1118,7 @@ double PMNS_TaylorExp::AvgFormulaExtrapolation(int flvi, int flvf, double dbin,
 ///
 /// @return Neutrino oscillation probability
 ///
-double PMNS_TaylorExp::ExtrapolationProb(int flvi, int flvf, double E,
-                                         double dE)
+double PMNS_Avg::ExtrapolationProb(int flvi, int flvf, double E, double dE)
 {
   // reset K et S et Ve et lambdaE
   InitializeTaylorsVectors();
@@ -1156,8 +1154,8 @@ double PMNS_TaylorExp::ExtrapolationProb(int flvi, int flvf, double E,
 ///
 /// @return Neutrino oscillation probability
 ///
-double PMNS_TaylorExp::ExtrapolationProbLoE(int flvi, int flvf, double LoE,
-                                            double dLoE)
+double PMNS_Avg::ExtrapolationProbLoE(int flvi, int flvf, double LoE,
+                                      double dLoE)
 {
   // reset K et S et Ve et lambdaE
   InitializeTaylorsVectors();
@@ -1199,8 +1197,8 @@ double PMNS_TaylorExp::ExtrapolationProbLoE(int flvi, int flvf, double LoE,
 ///
 /// @return Neutrino oscillation probability
 ///
-double PMNS_TaylorExp::ExtrapolationProbCosT(int flvi, int flvf, double cosT,
-                                             double dcosT)
+double PMNS_Avg::ExtrapolationProbCosT(int flvi, int flvf, double cosT,
+                                       double dcosT)
 {
   fPrem.FillPath(cosT);
   SetPath(fPrem.GetNuPath());

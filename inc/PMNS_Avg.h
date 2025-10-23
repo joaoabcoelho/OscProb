@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-/// \class OscProb::PMNS_TaylorExp
+/// \class OscProb::PMNS_Avg
 ///
 /// \brief Implementation of oscillations of neutrinos in matter in a
 ///        three-neutrino framework with a first order Taylor expansion.
@@ -20,18 +20,18 @@
 /// \author jcoelho\@apc.in2p3.fr
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef PMNS_TaylorExp_H
-#define PMNS_TaylorExp_H
+#ifndef PMNS_Avg_H
+#define PMNS_Avg_H
 
 #include "PMNS_Fast.h"
 #include "PremModel.h"
 
 namespace OscProb {
 
-  class PMNS_TaylorExp : public PMNS_Fast {
+  class PMNS_Avg : public PMNS_Fast {
     public:
-      PMNS_TaylorExp();          ///< Constructor
-      virtual ~PMNS_TaylorExp(); ///< Destructor
+      PMNS_Avg();          ///< Constructor
+      virtual ~PMNS_Avg(); ///< Destructor
 
       virtual void SetPremModel(OscProb::PremModel& prem);
 
