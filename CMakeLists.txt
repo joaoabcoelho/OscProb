@@ -84,6 +84,7 @@ target_sources(
           src/PMNS_OQS.cxx
           src/PMNS_SNSI.cxx
           src/PMNS_Sterile.cxx
+          src/PMNS_Avg.cxx
           src/PremModel.cxx
           src/complexsolver.cxx)
 target_include_directories(
@@ -110,6 +111,7 @@ list(
   inc/PMNS_OQS.h
   inc/PMNS_SNSI.h
   inc/PMNS_Sterile.h
+  inc/PMNS_Avg.h
   inc/PremModel.h
   inc/Definitions.h
   ${PROJECT_BINARY_DIR}/prem_default.hpp)
