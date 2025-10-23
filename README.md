@@ -12,10 +12,12 @@ Available classes are:
 - **PremModel:** Used for determining neutrino paths through the earth
 - **PMNS_Fast:** Standard 3-flavour oscillations
 - **PMNS_Iter:** Standard 3-flavour oscillations (iterative approximation)
+- **PMNS_Avg:** Standard 3-flavour oscillations (Faster averaging)
 - **PMNS_Sterile:** Oscillations with any number of neutrinos
 - **PMNS_NSI:** Oscillations with 3 flavours including vector Non-Standard Interactions
 - **PMNS_SNSI:** Oscillations with 3 flavours including scalar Non-Standard Interactions
 - **PMNS_Deco:** Oscillations with 3 flavours including a simple decoherence model
+- **PMNS_OQS:** Oscillations with 3 flavours including decoherence from Open Quantum Systems
 - **PMNS_LIV:** Oscillations with 3 flavours including Lorentz Invariance Violations
 - **PMNS_Decay:** Oscillations with 3 flavours including neutrino decays
 - **PMNS_NUNM:** Oscillations with 3 flavours including non-unitary neutrino mixing
