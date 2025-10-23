@@ -9,5 +9,7 @@ var searchData=
   ['maxsinsqlat_6',['maxSinSqLat',['../structOscProb_1_1TrajConstants.html#a9d3d75a4790e16793f5ad6213ae556f5',1,'OscProb::TrajConstants']]],
   ['mergepaths_7',['MergePaths',['../namespaceOscProb.html#a21f576551c47cf787c2df50a4f4b5c83',1,'OscProb']]],
   ['min_8',['min',['../structOscProb_1_1EarthModelBinned_1_1LonBinInfo.html#a789e8183825c615b134dad0aa697a7cc',1,'OscProb::EarthModelBinned::LonBinInfo']]],
-  ['modifier_9',['Modifier',['../namespaceColor.html#a12f045e740501bc0b6015e6417b214b4',1,'Color']]]
+  ['modifier_9',['Modifier',['../namespaceColor.html#a12f045e740501bc0b6015e6417b214b4',1,'Color']]],
+  ['multiplicationrulek_10',['MultiplicationRuleK',['../classOscProb_1_1PMNS__Avg.html#a8d32aa83390f10dd774f9cc5767c445c',1,'OscProb::PMNS_Avg']]],
+  ['multiplicationrules_11',['MultiplicationRuleS',['../classOscProb_1_1PMNS__Avg.html#a99be3c05de1230fbd4cc6d7122ff492e',1,'OscProb::PMNS_Avg']]]
 ];

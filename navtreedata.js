@@ -60,20 +60,21 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "Absorption_8cxx.html",
-"classOscProb_1_1PMNS__Base.html#a0b4c41a27de281472453a1912cbc1e64",
-"classOscProb_1_1PMNS__Decay.html#a2d0f021378d6c782a88298ae2f734f4c",
-"classOscProb_1_1PMNS__Deco.html#a35e79054682aa88c55f4350c29336014",
-"classOscProb_1_1PMNS__DensityMatrix.html#a375596aa6efe69f148f49289c3a449e7",
-"classOscProb_1_1PMNS__Fast.html#a4a3fcca124362cdedaf53cd4ac40f8e7",
-"classOscProb_1_1PMNS__Iter.html#a62af840aa5b50fbe18bf90b3233a3ede",
-"classOscProb_1_1PMNS__LIV.html#a6afb2a19f590e4c5c745902510a4f919",
-"classOscProb_1_1PMNS__NSI.html#a4de96ac9b6d1e9b029ab877e57d211ad",
-"classOscProb_1_1PMNS__NUNM.html#a314360bbb52eca3130b90aa319aab70e",
-"classOscProb_1_1PMNS__OQS.html#a24bb74bed63569dfe88b18fa6a08060e",
-"classOscProb_1_1PMNS__OQS.html#afbc89736c8630887f75db228217dd391",
-"classOscProb_1_1PMNS__SNSI.html#adbee38997ab80f8d1a9750d3eae0afea",
-"classOscProb_1_1PremModel.html",
-"structOscProb_1_1EigenPoint.html#a5f71d78d02e8169307d069e7516c94e9"
+"classOscProb_1_1PMNS__Avg.html",
+"classOscProb_1_1PMNS__Avg.html#ac8b2d41b0f315f00de139a11034e9439",
+"classOscProb_1_1PMNS__Base.html#ace7875cf6d3bec161a2b7ed2690aec34",
+"classOscProb_1_1PMNS__Decay.html#adb8dbc91d4286d2e7c8f768c59476241",
+"classOscProb_1_1PMNS__Deco.html#add6533a9fc9acdfc7ae258b62570d78d",
+"classOscProb_1_1PMNS__DensityMatrix.html#ae90665cc8b440572a2f7723ea128548e",
+"classOscProb_1_1PMNS__Iter.html",
+"classOscProb_1_1PMNS__LIV.html#a083dc35476bf5b9376e0ae86c9f10433",
+"classOscProb_1_1PMNS__LIV.html#af1fb40562abbdb8d193249ae628a630d",
+"classOscProb_1_1PMNS__NSI.html#adbee38997ab80f8d1a9750d3eae0afea",
+"classOscProb_1_1PMNS__NUNM.html#ad0faf5eae755afb1baa1fcd5ffebad41",
+"classOscProb_1_1PMNS__OQS.html#abbebecafb541351d1ab464a65f3877be",
+"classOscProb_1_1PMNS__SNSI.html#a9ac3cadeac8db1b90f3152f476244780",
+"classOscProb_1_1PMNS__Sterile.html#ab2cd5258b9436909108e19f9c1318891",
+"namespaceOscProb.html#a8414445995fd13f07a3c2c2b168dcb1f"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

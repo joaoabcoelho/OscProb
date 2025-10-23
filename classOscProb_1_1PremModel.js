@@ -12,6 +12,7 @@ var classOscProb_1_1PremModel =
     [ "ClearModel", "classOscProb_1_1PremModel.html#aaead53a9385bda9b0219fd051d0cdd11", null ],
     [ "FillPath", "classOscProb_1_1PremModel.html#a802363021cc9d46506314f961e0e769f", null ],
     [ "GetCosT", "classOscProb_1_1PremModel.html#a7e7fd7dc94d2749ddc1af8db11bda962", null ],
+    [ "GetDetRadius", "classOscProb_1_1PremModel.html#a2c650737a04b87ebc1d9284eee86d92e", null ],
     [ "GetLayerZoA", "classOscProb_1_1PremModel.html#af1b8392d1b00560c6322bf8707c304f6", null ],
     [ "GetMergedPaths", "classOscProb_1_1PremModel.html#a78f0fafc9dbdd01fb9fc6dbadf69fb4e", null ],
     [ "GetNuPath", "classOscProb_1_1PremModel.html#aad8f4560e43656b5ea964151b864c99f", null ],

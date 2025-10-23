@@ -8,6 +8,7 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "EigenPoint.cxx", "EigenPoint_8cxx.html", null ],
     [ "exceptions.h", "exceptions_8h.html", "exceptions_8h" ],
     [ "NuPath.cxx", "NuPath_8cxx.html", null ],
+    [ "PMNS_Avg.cxx", "PMNS__Avg_8cxx.html", null ],
     [ "PMNS_Base.cxx", "PMNS__Base_8cxx.html", null ],
     [ "PMNS_Decay.cxx", "PMNS__Decay_8cxx.html", null ],
     [ "PMNS_Deco.cxx", "PMNS__Deco_8cxx.html", "PMNS__Deco_8cxx" ],

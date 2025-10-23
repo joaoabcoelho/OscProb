@@ -7,6 +7,7 @@ var namespaceOscProb =
     [ "EigenPoint", "structOscProb_1_1EigenPoint.html", "structOscProb_1_1EigenPoint" ],
     [ "IdxCompare", "structOscProb_1_1IdxCompare.html", "structOscProb_1_1IdxCompare" ],
     [ "NuPath", "structOscProb_1_1NuPath.html", "structOscProb_1_1NuPath" ],
+    [ "PMNS_Avg", "classOscProb_1_1PMNS__Avg.html", "classOscProb_1_1PMNS__Avg" ],
     [ "PMNS_Base", "classOscProb_1_1PMNS__Base.html", "classOscProb_1_1PMNS__Base" ],
     [ "PMNS_Decay", "classOscProb_1_1PMNS__Decay.html", "classOscProb_1_1PMNS__Decay" ],
     [ "PMNS_Deco", "classOscProb_1_1PMNS__Deco.html", "classOscProb_1_1PMNS__Deco" ],

@@ -6,6 +6,7 @@ var dir_bfccd401955b95cf8c75461437045ac0 =
     [ "EarthModelBinned.h", "EarthModelBinned_8h.html", "EarthModelBinned_8h" ],
     [ "EigenPoint.h", "EigenPoint_8h.html", "EigenPoint_8h" ],
     [ "NuPath.h", "NuPath_8h.html", "NuPath_8h" ],
+    [ "PMNS_Avg.h", "PMNS__Avg_8h.html", "PMNS__Avg_8h" ],
     [ "PMNS_Base.h", "PMNS__Base_8h.html", "PMNS__Base_8h" ],
     [ "PMNS_Decay.h", "PMNS__Decay_8h.html", "PMNS__Decay_8h" ],
     [ "PMNS_Deco.h", "PMNS__Deco_8h.html", "PMNS__Deco_8h" ],

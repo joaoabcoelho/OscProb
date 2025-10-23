@@ -12,6 +12,7 @@ var hierarchy =
     [ "OscProb::PMNS_Base", "classOscProb_1_1PMNS__Base.html", [
       [ "OscProb::PMNS_Decay", "classOscProb_1_1PMNS__Decay.html", null ],
       [ "OscProb::PMNS_Fast", "classOscProb_1_1PMNS__Fast.html", [
+        [ "OscProb::PMNS_Avg", "classOscProb_1_1PMNS__Avg.html", null ],
         [ "OscProb::PMNS_DensityMatrix", "classOscProb_1_1PMNS__DensityMatrix.html", [
           [ "OscProb::PMNS_Deco", "classOscProb_1_1PMNS__Deco.html", null ],
           [ "OscProb::PMNS_OQS", "classOscProb_1_1PMNS__OQS.html", null ]

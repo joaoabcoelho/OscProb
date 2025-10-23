@@ -139,6 +139,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a095bd601f6cd91926de9928e96ea7751"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#a095bd601f6cd91926de9928e96ea7751">SetTopLayerSize</a> (double thick)</td></tr>
 <tr class="memdesc:a095bd601f6cd91926de9928e96ea7751"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the outermost layer thickness in km.  <a href="classOscProb_1_1PremModel.html#a095bd601f6cd91926de9928e96ea7751">More...</a><br /></td></tr>
 <tr class="separator:a095bd601f6cd91926de9928e96ea7751"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c650737a04b87ebc1d9284eee86d92e"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1PremModel.html#a2c650737a04b87ebc1d9284eee86d92e">GetDetRadius</a> ()</td></tr>
+<tr class="separator:a2c650737a04b87ebc1d9284eee86d92e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad8f4560e43656b5ea964151b864c99f"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">NuPath</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#aad8f4560e43656b5ea964151b864c99f">GetNuPath</a> ()</td></tr>
 <tr class="separator:aad8f4560e43656b5ea964151b864c99f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78f0fafc9dbdd01fb9fc6dbadf69fb4e"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="structOscProb_1_1NuPath.html">NuPath</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOscProb_1_1EarthModelBase.html#a78f0fafc9dbdd01fb9fc6dbadf69fb4e">GetMergedPaths</a> (double prec=0.25)</td></tr>
@@ -259,7 +261,7 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   39</span>  <a class="code hl_function" href="classOscProb_1_1PremModel.html#a6363a5e711dd8b0d2e684677e585b293">LoadModel</a>(filename);</div>
 <div class="line"><span class="lineno">   40</span>}</div>
 <div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_abc6399e4d3ec17a360f2fe3f7d39576c"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#abc6399e4d3ec17a360f2fe3f7d39576c">OscProb::EarthModelBase::SetRemoveSmallPaths</a></div><div class="ttdeci">virtual void SetRemoveSmallPaths(bool rp=true)</div><div class="ttdoc">Set tag to remove small paths.</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8cxx_source.html#l00188">EarthModelBase.cxx:188</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_a4fb68506493666349f418b893a996185"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">OscProb::PremModel::fDetLayer</a></div><div class="ttdeci">int fDetLayer</div><div class="ttdoc">The layer index of the detector.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00073">PremModel.h:73</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PremModel_html_a4fb68506493666349f418b893a996185"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a4fb68506493666349f418b893a996185">OscProb::PremModel::fDetLayer</a></div><div class="ttdeci">int fDetLayer</div><div class="ttdoc">The layer index of the detector.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00076">PremModel.h:76</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_a6363a5e711dd8b0d2e684677e585b293"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a6363a5e711dd8b0d2e684677e585b293">OscProb::PremModel::LoadModel</a></div><div class="ttdeci">virtual void LoadModel(std::string filename)</div><div class="ttdoc">Load an earth model from a file.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00181">PremModel.cxx:181</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_a6ac188948d15a5ce6df7926ef9d46c0a"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a6ac188948d15a5ce6df7926ef9d46c0a">OscProb::PremModel::SetDetPos</a></div><div class="ttdeci">void SetDetPos(double rad, double lat=0, double lon=0)</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00131">PremModel.cxx:131</a></div></div>
 </div><!-- fragment -->
@@ -364,12 +366,12 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  113</span>}</div>
 <div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_af11bb0a5e0d6348513e46ede9ff16cda"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">OscProb::EarthModelBase::fDetRadius</a></div><div class="ttdeci">double fDetRadius</div><div class="ttdoc">The radius where the detector sits (in km)</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8h_source.html#l00077">EarthModelBase.h:77</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_a1f21b99398bd0d0c89998a040398c810"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a1f21b99398bd0d0c89998a040398c810">OscProb::PremModel::CleanIdentical</a></div><div class="ttdeci">virtual void CleanIdentical()</div><div class="ttdoc">Clear identical consecutive layers.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00054">PremModel.cxx:54</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_a8ad1335ebe80ee1cd1cdf59d774ab34b"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a8ad1335ebe80ee1cd1cdf59d774ab34b">OscProb::PremModel::DET_TOL</a></div><div class="ttdeci">static const double DET_TOL</div><div class="ttdoc">The detector position tolerance near boundaries.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00078">PremModel.h:78</a></div></div>
-<div class="ttc" id="aclassOscProb_1_1PremModel_html_aa84534556fd6e35ed67bd899883249fb"><div class="ttname"><a href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">OscProb::PremModel::fPremLayers</a></div><div class="ttdeci">std::vector&lt; PremLayer &gt; fPremLayers</div><div class="ttdoc">The layers in the earth model.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00071">PremModel.h:71</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PremModel_html_a8ad1335ebe80ee1cd1cdf59d774ab34b"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a8ad1335ebe80ee1cd1cdf59d774ab34b">OscProb::PremModel::DET_TOL</a></div><div class="ttdeci">static const double DET_TOL</div><div class="ttdoc">The detector position tolerance near boundaries.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00081">PremModel.h:81</a></div></div>
+<div class="ttc" id="aclassOscProb_1_1PremModel_html_aa84534556fd6e35ed67bd899883249fb"><div class="ttname"><a href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">OscProb::PremModel::fPremLayers</a></div><div class="ttdeci">std::vector&lt; PremLayer &gt; fPremLayers</div><div class="ttdoc">The layers in the earth model.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8h_source.html#l00074">PremModel.h:74</a></div></div>
 <div class="ttc" id="astructOscProb_1_1PremLayer_html"><div class="ttname"><a href="structOscProb_1_1PremLayer.html">OscProb::PremLayer</a></div><div class="ttdoc">A struct representing a spherical shell of matter for earth models.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00084">NuPath.h:84</a></div></div>
 <div class="ttc" id="astructOscProb_1_1PremLayer_html_a39b409c20fd96a7a0bd421567c00ffed"><div class="ttname"><a href="structOscProb_1_1PremLayer.html#a39b409c20fd96a7a0bd421567c00ffed">OscProb::PremLayer::radius</a></div><div class="ttdeci">double radius</div><div class="ttdoc">The outer radius of the layer in km.</div><div class="ttdef"><b>Definition:</b> <a href="NuPath_8h_source.html#l00128">NuPath.h:128</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8cxx_source.html#l00054">CleanIdentical()</a>, <a class="el" href="PremModel_8h_source.html#l00078">DET_TOL</a>, <a class="el" href="PremModel_8h_source.html#l00073">fDetLayer</a>, <a class="el" href="EarthModelBase_8h_source.html#l00077">OscProb::EarthModelBase::fDetRadius</a>, <a class="el" href="PremModel_8h_source.html#l00071">fPremLayers</a>, and <a class="el" href="NuPath_8h_source.html#l00128">OscProb::PremLayer::radius</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8cxx_source.html#l00054">CleanIdentical()</a>, <a class="el" href="PremModel_8h_source.html#l00081">DET_TOL</a>, <a class="el" href="PremModel_8h_source.html#l00076">fDetLayer</a>, <a class="el" href="EarthModelBase_8h_source.html#l00077">OscProb::EarthModelBase::fDetRadius</a>, <a class="el" href="PremModel_8h_source.html#l00074">fPremLayers</a>, and <a class="el" href="NuPath_8h_source.html#l00128">OscProb::PremLayer::radius</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00181">LoadModel()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00131">SetDetPos()</a>.</p>
 
@@ -436,7 +438,7 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  170</span>  <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.push_back(<a class="code hl_struct" href="structOscProb_1_1PremLayer.html">PremLayer</a>(radius, density, zoa, layer));</div>
 <div class="line"><span class="lineno">  171</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00071">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00074">fPremLayers</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00181">LoadModel()</a>.</p>
 
@@ -680,7 +682,7 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">   65</span>  }</div>
 <div class="line"><span class="lineno">   66</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00071">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00074">fPremLayers</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00073">AddDetLayer()</a>.</p>
 
@@ -716,7 +718,7 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  154</span>  <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.clear();</div>
 <div class="line"><span class="lineno">  155</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00073">fDetLayer</a>, and <a class="el" href="PremModel_8h_source.html#l00071">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00076">fDetLayer</a>, and <a class="el" href="PremModel_8h_source.html#l00074">fPremLayers</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00181">LoadModel()</a>.</p>
 
@@ -848,7 +850,9 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  423</span>}</div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_aca013f7ac5494282834048786a0e07a6"><div class="ttname"><a href="classOscProb_1_1PremModel.html#aca013f7ac5494282834048786a0e07a6">OscProb::PremModel::AddPath</a></div><div class="ttdeci">virtual void AddPath(double length, PremLayer pl)</div><div class="ttdoc">Add a path segment to the sequence.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00325">PremModel.cxx:325</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8cxx_source.html#l00325">AddPath()</a>, <a class="el" href="PremModel_8h_source.html#l00073">fDetLayer</a>, <a class="el" href="EarthModelBase_8h_source.html#l00077">OscProb::EarthModelBase::fDetRadius</a>, <a class="el" href="EarthModelBase_8h_source.html#l00074">OscProb::EarthModelBase::fNuPath</a>, and <a class="el" href="PremModel_8h_source.html#l00071">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8cxx_source.html#l00325">AddPath()</a>, <a class="el" href="PremModel_8h_source.html#l00076">fDetLayer</a>, <a class="el" href="EarthModelBase_8h_source.html#l00077">OscProb::EarthModelBase::fDetRadius</a>, <a class="el" href="EarthModelBase_8h_source.html#l00074">OscProb::EarthModelBase::fNuPath</a>, and <a class="el" href="PremModel_8h_source.html#l00074">fPremLayers</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="PMNS__Avg_8cxx_source.html#l00813">OscProb::PMNS_Avg::AvgAlgo()</a>, <a class="el" href="PMNS__Avg_8cxx_source.html#l00658">OscProb::PMNS_Avg::AvgAlgoCosT()</a>, and <a class="el" href="PMNS__Avg_8cxx_source.html#l01200">OscProb::PMNS_Avg::ExtrapolationProbCosT()</a>.</p>
 
 </div>
 </div>
@@ -896,6 +900,39 @@ Static Protected Attributes</h2></td></tr>
 <div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_a3cbe53a328039a65b25736151dc6d586"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">OscProb::EarthModelBase::fRadiusMax</a></div><div class="ttdeci">double fRadiusMax</div><div class="ttdoc">Maximum radius in Earth model (in km)</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8h_source.html#l00076">EarthModelBase.h:76</a></div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="EarthModelBase_8h_source.html#l00077">OscProb::EarthModelBase::fDetRadius</a>, and <a class="el" href="EarthModelBase_8h_source.html#l00076">OscProb::EarthModelBase::fRadiusMax</a>.</p>
+
+</div>
+</div>
+<a id="a2c650737a04b87ebc1d9284eee86d92e" name="a2c650737a04b87ebc1d9284eee86d92e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c650737a04b87ebc1d9284eee86d92e">&#9670;&nbsp;</a></span>GetDetRadius()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PremModel::GetDetRadius </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Get the radius where the detector sits (in km) </p>
+
+<p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00429">429</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  429</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#af11bb0a5e0d6348513e46ede9ff16cda">fDetRadius</a>; }</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="EarthModelBase_8h_source.html#l00077">OscProb::EarthModelBase::fDetRadius</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="PMNS__Avg_8cxx_source.html#l00048">OscProb::PMNS_Avg::InitializeTaylorsVectors()</a>.</p>
 
 </div>
 </div>
@@ -954,7 +991,7 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  276</span>  <span class="keywordflow">return</span> 0;</div>
 <div class="line"><span class="lineno">  277</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00071">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00074">fPremLayers</a>.</p>
 
 </div>
 </div>
@@ -1092,6 +1129,8 @@ Static Protected Attributes</h2></td></tr>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="EarthModelBase_8h_source.html#l00074">OscProb::EarthModelBase::fNuPath</a>.</p>
 
+<p class="reference">Referenced by <a class="el" href="PMNS__Avg_8cxx_source.html#l00813">OscProb::PMNS_Avg::AvgAlgo()</a>, <a class="el" href="PMNS__Avg_8cxx_source.html#l00658">OscProb::PMNS_Avg::AvgAlgoCosT()</a>, and <a class="el" href="PMNS__Avg_8cxx_source.html#l01200">OscProb::PMNS_Avg::ExtrapolationProbCosT()</a>.</p>
+
 </div>
 </div>
 <a id="ae4feeccc7027253f5c2e2493098145ca" name="ae4feeccc7027253f5c2e2493098145ca"></a>
@@ -1123,7 +1162,9 @@ Static Protected Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="PremModel_8cxx_source.html#l00145">145</a> of file <a class="el" href="PremModel_8cxx_source.html">PremModel.cxx</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  145</span>{ <span class="keywordflow">return</span> <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>; }</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00071">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00074">fPremLayers</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="PMNS__Avg_8cxx_source.html#l00048">OscProb::PMNS_Avg::InitializeTaylorsVectors()</a>, and <a class="el" href="PMNS__Avg_8cxx_source.html#l00199">OscProb::PMNS_Avg::LnDerivative()</a>.</p>
 
 </div>
 </div>
@@ -1251,9 +1292,9 @@ Static Protected Attributes</h2></td></tr>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_a52e58a747587bdec80e9c9ac7215d2df"><div class="ttname"><a href="classOscProb_1_1PremModel.html#a52e58a747587bdec80e9c9ac7215d2df">OscProb::PremModel::AddDetLayer</a></div><div class="ttdeci">virtual void AddDetLayer()</div><div class="ttdoc">Add the detector layer.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00073">PremModel.cxx:73</a></div></div>
 <div class="ttc" id="aclassOscProb_1_1PremModel_html_aaead53a9385bda9b0219fd051d0cdd11"><div class="ttname"><a href="classOscProb_1_1PremModel.html#aaead53a9385bda9b0219fd051d0cdd11">OscProb::PremModel::ClearModel</a></div><div class="ttdeci">virtual void ClearModel()</div><div class="ttdoc">Clear the earth model information.</div><div class="ttdef"><b>Definition:</b> <a href="PremModel_8cxx_source.html#l00151">PremModel.cxx:151</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8cxx_source.html#l00073">AddDetLayer()</a>, <a class="el" href="PremModel_8cxx_source.html#l00167">AddLayer()</a>, <a class="el" href="PremModel_8cxx_source.html#l00151">ClearModel()</a>, <a class="el" href="PremModel_8h_source.html#l00071">fPremLayers</a>, and <a class="el" href="EarthModelBase_8h_source.html#l00076">OscProb::EarthModelBase::fRadiusMax</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8cxx_source.html#l00073">AddDetLayer()</a>, <a class="el" href="PremModel_8cxx_source.html#l00167">AddLayer()</a>, <a class="el" href="PremModel_8cxx_source.html#l00151">ClearModel()</a>, <a class="el" href="PremModel_8h_source.html#l00074">fPremLayers</a>, and <a class="el" href="EarthModelBase_8h_source.html#l00076">OscProb::EarthModelBase::fRadiusMax</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00035">PremModel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PMNS__Avg_8cxx_source.html#l00026">OscProb::PMNS_Avg::PMNS_Avg()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00035">PremModel()</a>.</p>
 
 </div>
 </div>
@@ -1396,7 +1437,7 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  136</span>}</div>
 <div class="ttc" id="aclassOscProb_1_1EarthModelBase_html_af7f17dd5f4b429897b5f3d027bdb37fe"><div class="ttname"><a href="classOscProb_1_1EarthModelBase.html#af7f17dd5f4b429897b5f3d027bdb37fe">OscProb::EarthModelBase::SetDetectorCoordinates</a></div><div class="ttdeci">virtual void SetDetectorCoordinates(double rad, double lat, double lon)</div><div class="ttdef"><b>Definition:</b> <a href="EarthModelBase_8cxx_source.html#l00025">EarthModelBase.cxx:25</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8cxx_source.html#l00073">AddDetLayer()</a>, <a class="el" href="PremModel_8h_source.html#l00071">fPremLayers</a>, and <a class="el" href="EarthModelBase_8cxx_source.html#l00025">OscProb::EarthModelBase::SetDetectorCoordinates()</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8cxx_source.html#l00073">AddDetLayer()</a>, <a class="el" href="PremModel_8h_source.html#l00074">fPremLayers</a>, and <a class="el" href="EarthModelBase_8cxx_source.html#l00025">OscProb::EarthModelBase::SetDetectorCoordinates()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00035">PremModel()</a>.</p>
 
@@ -1458,7 +1499,7 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  245</span>  }</div>
 <div class="line"><span class="lineno">  246</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00071">fPremLayers</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00074">fPremLayers</a>.</p>
 
 </div>
 </div>
@@ -1562,7 +1603,7 @@ Static Protected Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  313</span>  <a class="code hl_variable" href="classOscProb_1_1EarthModelBase.html#a3cbe53a328039a65b25736151dc6d586">fRadiusMax</a> = <a class="code hl_variable" href="classOscProb_1_1PremModel.html#aa84534556fd6e35ed67bd899883249fb">fPremLayers</a>.back().radius;</div>
 <div class="line"><span class="lineno">  314</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00071">fPremLayers</a>, and <a class="el" href="EarthModelBase_8h_source.html#l00076">OscProb::EarthModelBase::fRadiusMax</a>.</p>
+<p class="reference">References <a class="el" href="PremModel_8h_source.html#l00074">fPremLayers</a>, and <a class="el" href="EarthModelBase_8h_source.html#l00076">OscProb::EarthModelBase::fRadiusMax</a>.</p>
 
 </div>
 </div>
@@ -1588,7 +1629,7 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p >Define the tolerance of the detector around a boundary when considering whether to add a new layer for the detector position. </p>
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00078">78</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00081">81</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00073">AddDetLayer()</a>.</p>
 
@@ -1640,7 +1681,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00073">73</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00076">76</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00073">AddDetLayer()</a>, <a class="el" href="PremModel_8cxx_source.html#l00151">ClearModel()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00347">FillPath()</a>.</p>
 
@@ -1694,7 +1735,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="EarthModelBase_8h_source.html#l00077">77</a> of file <a class="el" href="EarthModelBase_8h_source.html">EarthModelBase.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00073">AddDetLayer()</a>, <a class="el" href="EarthModelBinned_8cxx_source.html#l00691">OscProb::EarthModelBinned::FillPath()</a>, <a class="el" href="PremModel_8cxx_source.html#l00347">FillPath()</a>, <a class="el" href="EarthModelBase_8cxx_source.html#l00099">OscProb::EarthModelBase::GetCosT()</a>, <a class="el" href="EarthModelBase_8cxx_source.html#l00077">OscProb::EarthModelBase::GetTotalL()</a>, <a class="el" href="EarthModelBase_8cxx_source.html#l00025">OscProb::EarthModelBase::SetDetectorCoordinates()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00169">OscProb::EarthModelBinned::SetDetPos()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00073">AddDetLayer()</a>, <a class="el" href="EarthModelBinned_8cxx_source.html#l00691">OscProb::EarthModelBinned::FillPath()</a>, <a class="el" href="PremModel_8cxx_source.html#l00347">FillPath()</a>, <a class="el" href="EarthModelBase_8cxx_source.html#l00099">OscProb::EarthModelBase::GetCosT()</a>, <a class="el" href="PremModel_8cxx_source.html#l00429">GetDetRadius()</a>, <a class="el" href="EarthModelBase_8cxx_source.html#l00077">OscProb::EarthModelBase::GetTotalL()</a>, <a class="el" href="EarthModelBase_8cxx_source.html#l00025">OscProb::EarthModelBase::SetDetectorCoordinates()</a>, and <a class="el" href="EarthModelBinned_8cxx_source.html#l00169">OscProb::EarthModelBinned::SetDetPos()</a>.</p>
 
 </div>
 </div>
@@ -1718,7 +1759,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00075">75</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00078">78</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
 
 </div>
 </div>
@@ -1768,7 +1809,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00071">71</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PremModel_8h_source.html#l00074">74</a> of file <a class="el" href="PremModel_8h_source.html">PremModel.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="PremModel_8cxx_source.html#l00073">AddDetLayer()</a>, <a class="el" href="PremModel_8cxx_source.html#l00167">AddLayer()</a>, <a class="el" href="PremModel_8cxx_source.html#l00054">CleanIdentical()</a>, <a class="el" href="PremModel_8cxx_source.html#l00151">ClearModel()</a>, <a class="el" href="PremModel_8cxx_source.html#l00347">FillPath()</a>, <a class="el" href="PremModel_8cxx_source.html#l00256">GetLayerZoA()</a>, <a class="el" href="PremModel_8cxx_source.html#l00145">GetPremLayers()</a>, <a class="el" href="PremModel_8cxx_source.html#l00181">LoadModel()</a>, <a class="el" href="PremModel_8cxx_source.html#l00131">SetDetPos()</a>, <a class="el" href="PremModel_8cxx_source.html#l00235">SetLayerZoA()</a>, and <a class="el" href="PremModel_8cxx_source.html#l00288">SetTopLayerSize()</a>.</p>
 
