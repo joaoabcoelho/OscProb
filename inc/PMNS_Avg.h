@@ -19,7 +19,7 @@
 ///
 /// \author jcoelho\@apc.in2p3.fr
 ///////////////////////////////////////////////////////////////////////////////
-/// just a test
+
 #ifndef PMNS_Avg_H
 #define PMNS_Avg_H
 
@@ -62,6 +62,10 @@ namespace OscProb {
           double dcosT); ///< Compute the average probability over a
                          ///< bin of cosTheta and LoE with a Taylor
                          ///< expansion
+
+      virtual matrixD AvgProbMatrix(int nflvi, int nflvf, double E, double dE);
+
+      virtual matrixD AvgProbMatrixLoE(int nflvi, int nflvf, double LoE, double dLoE);
 
       // Get probability
       virtual double ExtrapolationProb(

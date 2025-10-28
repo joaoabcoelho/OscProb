@@ -500,6 +500,7 @@ double PMNS_Avg::AvgFormula(int flvi, int flvf, double dbin, vectorD lambda,
 ///
 double PMNS_Avg::AvgProb(int flvi, int flvf, double E, double dE)
 {
+  // Do nothing if energy is not positive
   if (E <= 0) return 0;
 
   if (fNuPaths.empty()) return 0;
@@ -507,10 +508,10 @@ double PMNS_Avg::AvgProb(int flvi, int flvf, double E, double dE)
   // Don't average zero width
   if (dE <= 0) return Prob(flvi, flvf, E);
 
-  vectorD Ebin = ConvertEtoLoE(E, dE);
+  vectorD LoEbin = ConvertEtoLoE(E, dE);
 
-  // return fct avr proba
-  return AvgProbLoE(flvi, flvf, Ebin[0], Ebin[1]);
+  // Compute average in LoE
+  return AvgProbLoE(flvi, flvf, LoEbin[0], LoEbin[1]);
 }
 
 //.............................................................................
@@ -554,14 +555,16 @@ double PMNS_Avg::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
 
   // Loop over all sample points
   for (int j = 1; j < int(samples.size()); j++) {
+    // Set (L/E)^-2 weights
     double w = 1. / pow(samples[j], 2);
 
     avgprob += w * AvgAlgo(flvi, flvf, samples[j], samples[0], L);
 
+    // Increment sum of weights
     sumw += w;
   }
 
-  // Return average of probabilities
+  // Return weighted average of probabilities
   return avgprob / sumw;
 }
 
@@ -594,8 +597,80 @@ double PMNS_Avg::AvgAlgo(int flvi, int flvf, double LoE, double dLoE, double L)
   // DiagolK -> get VE and lambdaE
   SolveK(fKInvE, flambdaInvE, fVInvE);
 
-  // return fct avr proba
+  // Compute average 
   return AvgFormula(flvi, flvf, d1oE / kGeV2eV, flambdaInvE, fVInvE);
+}
+
+//.............................................................................
+///
+///
+///
+matrixD PMNS_Avg::AvgProbMatrix(int nflvi, int nflvf, double E, double dE)
+{
+  matrixD probs(nflvi, vectorD(nflvf, 0));
+
+  // Do nothing if energy is not positive
+  if (E <= 0) return probs;
+
+  if (fNuPaths.empty()) return probs;
+
+  // Don't average zero width
+  if (dE <= 0) return ProbMatrix(nflvi, nflvf, E);
+
+  vectorD LoEbin = ConvertEtoLoE(E, dE);
+
+  // Compute average in LoE
+  return AvgProbMatrixLoE(nflvi, nflvf, LoEbin[0], LoEbin[1]);
+}
+
+//.............................................................................
+///
+///
+///
+matrixD PMNS_Avg::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE, double dLoE)
+{
+  matrixD probs(nflvi, vectorD(nflvf, 0));
+
+  if (LoE <= 0) return probs;
+
+  if (fNuPaths.empty()) return probs;
+
+  double L = fPath.length;
+
+  // Don't average zero width
+  if (dLoE <= 0) return ProbMatrix(nflvi, nflvf, L / LoE); 
+
+  // Get sample points for this bin
+  vectorD samples = GetSamplePoints(LoE, dLoE);
+
+  double avgprob = 0;
+  double sumw    = 0;
+
+  // Loop over all sample points
+  for (int j = 1; j < int(samples.size()); j++) {
+    // Set (L/E)^-2 weights
+    double w = 1. / pow(samples[j], 2);
+
+    for (int flvi = 0; flvi < nflvi; flvi++) {
+      for (int flvf = 0; flvf < nflvf; flvf++) {
+        // Add weighted probability
+        probs[flvi][flvf] += w * AvgAlgo(flvi, flvf, samples[j], samples[0], L);
+      }
+    }
+
+    // Increment sum of weights
+    sumw += w;
+  }
+
+  for (int flvi = 0; flvi < nflvi; flvi++) {
+    for (int flvf = 0; flvf < nflvf; flvf++) {
+      // Divide by total sampling weight
+      probs[flvi][flvf] /= sumw;
+    }
+  }
+
+  // Return weighted average of probabilities
+  return probs;
 }
 
 //.............................................................................
@@ -639,7 +714,7 @@ double PMNS_Avg::AvgProb(int flvi, int flvf, double E, double cosT,
     avgprob += AvgAlgoCosT(flvi, flvf, E, samples[j], samples[0]);
   }
 
-  // Return average of probabilities
+  // Compute average 
   return avgprob / (samples.size() - 1);
 }
 
@@ -676,7 +751,7 @@ double PMNS_Avg::AvgAlgoCosT(int flvi, int flvf, double E, double cosT,
   // DiagolK -> get VE and lambdaE
   SolveK(fKcosT, flambdaCosT, fVcosT);
 
-  // return fct avr proba
+  // Compute average 
   return AvgFormula(flvi, flvf, fdcosT, flambdaCosT, fVcosT);
 }
 
@@ -723,6 +798,7 @@ double PMNS_Avg::AvgProb(int flvi, int flvf, double E, double dE, double cosT,
 
   vectorD Ebin = ConvertEtoLoE(E, dE);
 
+  // Compute average in LoE
   return AvgProbLoE(flvi, flvf, Ebin[0], Ebin[1], cosT, dcosT);
 }
 
@@ -782,12 +858,14 @@ double PMNS_Avg::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE,
   // Loop over all sample points
   for (int k = 1; k < int(rows); k++) {
     for (int l = 1; l < int(cols); l++) {
+      // Set (L/E)^-2 weights
       double w = 1. / pow(real(samples[k][l]), 2);
 
       avgprob +=
           w * AvgAlgo(flvi, flvf, real(samples[k][l]), real(samples[0][0]),
                       imag(samples[k][l]), imag(samples[0][0]));
 
+      // Increment sum of weights
       sumw += w;
     }
   }
