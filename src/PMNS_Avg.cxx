@@ -605,6 +605,75 @@ double PMNS_Avg::AvgAlgo(int flvi, int flvf, double LoE, double dLoE, double L)
 ///
 ///
 ///
+vectorD PMNS_Avg::AvgProbVector(int flvi, double E, double dE)
+{
+  vectorD probs(fNumNus, 0);
+
+  // Do nothing if energy is not positive
+  if (E <= 0) return probs;
+
+  if (fNuPaths.empty()) return probs;
+
+  // Don't average zero width
+  if (dE <= 0) return ProbVector(flvi, E); 
+
+  vectorD LoEbin = ConvertEtoLoE(E, dE);
+
+  // Compute average in LoE
+  return AvgProbVectorLoE(flvi, LoEbin[0], LoEbin[1]);
+}
+
+//.............................................................................
+///
+///
+///
+vectorD PMNS_Avg::AvgProbVectorLoE(int flvi, double LoE, double dLoE)
+{
+  vectorD probs(fNumNus, 0);
+
+  if (LoE <= 0) return probs;
+
+  if (fNuPaths.empty()) return probs;
+
+  double L = fPath.length;
+
+  // Don't average zero width
+  if (dLoE <= 0) return ProbVector(flvi, L / LoE); 
+
+  // Get sample points for this bin
+  vectorD samples = GetSamplePoints(LoE, dLoE);
+
+  double sumw = 0;
+
+  // Loop over all sample points
+  for (int j = 1; j < int(samples.size()); j++) {
+    // Set (L/E)^-2 weights
+    double w = 1. / pow(samples[j], 2);
+
+    for (int flvf = 0; flvf < fNumNus; flvf++) {
+      // Add weighted probability
+      probs[flvf] += w * AvgAlgo(flvi, flvf, samples[j], samples[0], L);
+    }
+
+    // Increment sum of weights
+    sumw += w;
+  }
+
+  for (int flvf = 0; flvf < fNumNus; flvf++) {
+    // Divide by total sampling weight
+    probs[flvf] /= sumw;
+  }
+
+  // Return weighted average of probabilities
+  return probs;
+}
+
+
+
+//.............................................................................
+///
+///
+///
 matrixD PMNS_Avg::AvgProbMatrix(int nflvi, int nflvf, double E, double dE)
 {
   matrixD probs(nflvi, vectorD(nflvf, 0));
@@ -643,7 +712,6 @@ matrixD PMNS_Avg::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE, double dLoE
   // Get sample points for this bin
   vectorD samples = GetSamplePoints(LoE, dLoE);
 
-  double avgprob = 0;
   double sumw    = 0;
 
   // Loop over all sample points
