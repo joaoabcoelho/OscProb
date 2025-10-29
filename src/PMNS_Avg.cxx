@@ -423,7 +423,7 @@ void PMNS_Avg::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
 //.............................................................................
 ///
 /// Formula for the average probability of flvi going to flvf over
-/// a bin of width dbin with a Taylor expansion.
+/// a bin of width dbin, using a Taylor expansion.
 ///
 /// Flavours are:
 /// <pre>
@@ -480,7 +480,7 @@ double PMNS_Avg::AvgFormula(int flvi, int flvf, double dbin, vectorD lambda,
 //.............................................................................
 ///
 /// Compute the average probability of flvi going to flvf over
-/// a bin of energy E with width dE with a Taylor expansion.
+/// a bin of energy E with width dE, using a Taylor expansion.
 ///
 /// This gets transformed into L/E, since the oscillation terms
 /// have arguments linear in 1/E and not E.
@@ -517,7 +517,7 @@ double PMNS_Avg::AvgProb(int flvi, int flvf, double E, double dE)
 //.............................................................................
 ///
 /// Compute the average probability of flvi going to flvf over
-/// a bin of energy L/E with width dLoE with a Taylor expansion.
+/// a bin of energy L/E with width dLoE, using a Taylor expansion.
 ///
 /// The probabilities are weighted by (L/E)^-2 so that event
 /// density is flat in energy. This avoids giving too much
@@ -597,13 +597,23 @@ double PMNS_Avg::AvgAlgo(int flvi, int flvf, double LoE, double dLoE, double L)
   // DiagolK -> get VE and lambdaE
   SolveK(fKInvE, flambdaInvE, fVInvE);
 
-  // Compute average 
+  // Compute average
   return AvgFormula(flvi, flvf, d1oE / kGeV2eV, flambdaInvE, fVInvE);
 }
 
 //.............................................................................
 ///
+/// Compute the average probability of flvi going to all flavours
+/// over a bin of energy E with width dE, using a Taylor expansion.
 ///
+/// This gets transformed into L/E, since the oscillation terms
+/// have arguments linear in L/E and not E.
+///
+/// @param flvi  - The neutrino starting flavour.
+/// @param E     - The neutrino energy in the bin center in GeV
+/// @param dE    - The energy bin width in GeV
+///
+/// @return Average neutrino oscillation probabilities
 ///
 vectorD PMNS_Avg::AvgProbVector(int flvi, double E, double dE)
 {
@@ -615,7 +625,7 @@ vectorD PMNS_Avg::AvgProbVector(int flvi, double E, double dE)
   if (fNuPaths.empty()) return probs;
 
   // Don't average zero width
-  if (dE <= 0) return ProbVector(flvi, E); 
+  if (dE <= 0) return ProbVector(flvi, E);
 
   vectorD LoEbin = ConvertEtoLoE(E, dE);
 
@@ -625,7 +635,26 @@ vectorD PMNS_Avg::AvgProbVector(int flvi, double E, double dE)
 
 //.............................................................................
 ///
+/// Compute the average probability of flvi going to all flavours over
+/// a bin of energy L/E with width dLoE, using a Taylor expansion.
 ///
+/// The probabilities are weighted by (L/E)^-2 so that event
+/// density is flat in energy. This avoids giving too much
+/// weight to low energies. Better approximations would be
+/// achieved if we used an interpolated event density.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param LoE - The neutrino  L/E value in the bin center in km/GeV
+/// @param dLoE - The L/E bin width in km/GeV
+///
+/// @return Average neutrino oscillation probability
 ///
 vectorD PMNS_Avg::AvgProbVectorLoE(int flvi, double LoE, double dLoE)
 {
@@ -638,7 +667,7 @@ vectorD PMNS_Avg::AvgProbVectorLoE(int flvi, double LoE, double dLoE)
   double L = fPath.length;
 
   // Don't average zero width
-  if (dLoE <= 0) return ProbVector(flvi, L / LoE); 
+  if (dLoE <= 0) return ProbVector(flvi, L / LoE);
 
   // Get sample points for this bin
   vectorD samples = GetSamplePoints(LoE, dLoE);
@@ -668,11 +697,20 @@ vectorD PMNS_Avg::AvgProbVectorLoE(int flvi, double LoE, double dLoE)
   return probs;
 }
 
-
-
 //.............................................................................
 ///
+/// Compute the average probability matrix for nflvi and nflvf
+/// over a bin of energy E with width dE, using a Taylor expansion.
 ///
+/// This gets transformed into L/E, since the oscillation terms
+/// have arguments linear in L/E and not E.
+///
+/// @param nflvi - The number of initial flavours in the matrix.
+/// @param nflvf - The number of final flavours in the matrix.
+/// @param E     - The neutrino energy in the bin center in GeV
+/// @param dE    - The energy bin width in GeV
+///
+/// @return Average neutrino oscillation probabilities
 ///
 matrixD PMNS_Avg::AvgProbMatrix(int nflvi, int nflvf, double E, double dE)
 {
@@ -694,9 +732,23 @@ matrixD PMNS_Avg::AvgProbMatrix(int nflvi, int nflvf, double E, double dE)
 
 //.............................................................................
 ///
+/// Compute the average probability matrix for nflvi and nflvf
+/// over a bin of L/E with width dLoE, using a Taylor expansion.
 ///
+/// The probabilities are weighted by (L/E)^-2 so that event
+/// density is flat in energy. This avoids giving too much
+/// weight to low energies. Better approximations would be
+/// achieved if we used an interpolated event density.
 ///
-matrixD PMNS_Avg::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE, double dLoE)
+/// @param nflvi - The number of initial flavours in the matrix.
+/// @param nflvf - The number of final flavours in the matrix.
+/// @param LoE   - The neutrino  L/E value in the bin center in km/GeV
+/// @param dLoE  - The L/E bin width in km/GeV
+///
+/// @return Average neutrino oscillation probabilities
+///
+matrixD PMNS_Avg::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE,
+                                   double dLoE)
 {
   matrixD probs(nflvi, vectorD(nflvf, 0));
 
@@ -707,12 +759,12 @@ matrixD PMNS_Avg::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE, double dLoE
   double L = fPath.length;
 
   // Don't average zero width
-  if (dLoE <= 0) return ProbMatrix(nflvi, nflvf, L / LoE); 
+  if (dLoE <= 0) return ProbMatrix(nflvi, nflvf, L / LoE);
 
   // Get sample points for this bin
   vectorD samples = GetSamplePoints(LoE, dLoE);
 
-  double sumw    = 0;
+  double sumw = 0;
 
   // Loop over all sample points
   for (int j = 1; j < int(samples.size()); j++) {
@@ -744,7 +796,7 @@ matrixD PMNS_Avg::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE, double dLoE
 //.............................................................................
 ///
 /// Compute the average probability of flvi going to flvf over
-/// a bin of angle cost with width dcosT with a Taylor expansion.
+/// a bin of angle cost with width dcosT using a Taylor expansion.
 ///
 /// IMPORTANT: The PremModel object used must be copied by this
 /// class using the function SetPremModel.
@@ -782,7 +834,7 @@ double PMNS_Avg::AvgProb(int flvi, int flvf, double E, double cosT,
     avgprob += AvgAlgoCosT(flvi, flvf, E, samples[j], samples[0]);
   }
 
-  // Compute average 
+  // Compute average
   return avgprob / (samples.size() - 1);
 }
 
@@ -819,15 +871,15 @@ double PMNS_Avg::AvgAlgoCosT(int flvi, int flvf, double E, double cosT,
   // DiagolK -> get VE and lambdaE
   SolveK(fKcosT, flambdaCosT, fVcosT);
 
-  // Compute average 
+  // Compute average
   return AvgFormula(flvi, flvf, fdcosT, flambdaCosT, fVcosT);
 }
 
 //.............................................................................
 ///
 /// Compute the average probability of flvi going to flvf over
-/// a bin of energy E and angle cosT with width dE and dcosT
-/// with a Taylor expansion.
+/// a bin of energy E and angle cosT with width dE and dcosT,
+/// using a Taylor expansion.
 ///
 /// This gets transformed into L/E, since the oscillation terms
 /// have arguments linear in 1/E and not E.
@@ -873,8 +925,8 @@ double PMNS_Avg::AvgProb(int flvi, int flvf, double E, double dE, double cosT,
 //.............................................................................
 ///
 /// Compute the average probability of flvi going to flvf over
-/// a bin of energy L/E and cosT with width dLoE and dcosT
-/// with a Taylor expansion.
+/// a bin of energy L/E and cosT with width dLoE and dcosT,
+/// using a Taylor expansion.
 ///
 /// The probabilities are weighted by (L/E)^-2 so that event
 /// density is flat in energy. This avoids giving too much
@@ -1077,7 +1129,7 @@ void PMNS_Avg::HadamardProduct(vectorD lambda, double dbin)
 /// Compute the sample points for a bin of L/E with width dLoE
 ///
 /// This is used to increase the average probability over a bin of L/E,
-/// calculated with a Taylor expansion
+/// calculated using a Taylor expansion
 ///
 /// @param LoE  - The neutrino  L/E value in the bin center in km/GeV
 /// @param dLoE   - The L/E bin width in km/GeV
@@ -1113,7 +1165,7 @@ vectorD PMNS_Avg::GetSamplePoints(double LoE, double dLoE)
 /// Compute the sample points for a bin of cosTheta with width dcosTheta
 ///
 /// This is used to increase the average probability over a bin of cosT,
-/// calculated with a Taylor expansion
+/// calculated using a Taylor expansion
 ///
 /// @param E  - The neutrino  Energy value GeV
 /// @param cosT   - The neutrino  cosT value in the bin center
@@ -1151,7 +1203,7 @@ vectorD PMNS_Avg::GetSamplePoints(double E, double cosT, double dcosT)
 /// with width d1oE and dcosTheta
 ///
 /// This is used to increase the average probability over a bin of L/E
-/// and cosT, calculated with a Taylor expansion
+/// and cosT, calculated using a Taylor expansion
 ///
 /// @param InvE  - The neutrino  1/E value in the bin center in GeV-1
 /// @param dInvE   - The 1/E bin width in GeV-1
