@@ -615,7 +615,7 @@ vectorD PMNS_Avg::AvgProbVector(int flvi, double E, double dE)
   if (fNuPaths.empty()) return probs;
 
   // Don't average zero width
-  if (dE <= 0) return ProbVector(flvi, E); 
+  if (dE <= 0) return ProbVector(flvi, E);
 
   vectorD LoEbin = ConvertEtoLoE(E, dE);
 
@@ -638,7 +638,7 @@ vectorD PMNS_Avg::AvgProbVectorLoE(int flvi, double LoE, double dLoE)
   double L = fPath.length;
 
   // Don't average zero width
-  if (dLoE <= 0) return ProbVector(flvi, L / LoE); 
+  if (dLoE <= 0) return ProbVector(flvi, L / LoE);
 
   // Get sample points for this bin
   vectorD samples = GetSamplePoints(LoE, dLoE);
@@ -668,8 +668,6 @@ vectorD PMNS_Avg::AvgProbVectorLoE(int flvi, double LoE, double dLoE)
   return probs;
 }
 
-
-
 //.............................................................................
 ///
 ///
@@ -696,7 +694,8 @@ matrixD PMNS_Avg::AvgProbMatrix(int nflvi, int nflvf, double E, double dE)
 ///
 ///
 ///
-matrixD PMNS_Avg::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE, double dLoE)
+matrixD PMNS_Avg::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE,
+                                   double dLoE)
 {
   matrixD probs(nflvi, vectorD(nflvf, 0));
 
@@ -707,12 +706,12 @@ matrixD PMNS_Avg::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE, double dLoE
   double L = fPath.length;
 
   // Don't average zero width
-  if (dLoE <= 0) return ProbMatrix(nflvi, nflvf, L / LoE); 
+  if (dLoE <= 0) return ProbMatrix(nflvi, nflvf, L / LoE);
 
   // Get sample points for this bin
   vectorD samples = GetSamplePoints(LoE, dLoE);
 
-  double sumw    = 0;
+  double sumw = 0;
 
   // Loop over all sample points
   for (int j = 1; j < int(samples.size()); j++) {
@@ -782,7 +781,7 @@ double PMNS_Avg::AvgProb(int flvi, int flvf, double E, double cosT,
     avgprob += AvgAlgoCosT(flvi, flvf, E, samples[j], samples[0]);
   }
 
-  // Compute average 
+  // Compute average
   return avgprob / (samples.size() - 1);
 }
 
@@ -819,7 +818,7 @@ double PMNS_Avg::AvgAlgoCosT(int flvi, int flvf, double E, double cosT,
   // DiagolK -> get VE and lambdaE
   SolveK(fKcosT, flambdaCosT, fVcosT);
 
-  // Compute average 
+  // Compute average
   return AvgFormula(flvi, flvf, fdcosT, flambdaCosT, fVcosT);
 }
 

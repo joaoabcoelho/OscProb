@@ -63,19 +63,20 @@ namespace OscProb {
                          ///< bin of cosTheta and LoE with a Taylor
                          ///< expansion
 
-            // Get probability vector averaged over a bin
+      // Get probability vector averaged over a bin
       virtual vectorD AvgProbVector(
           int flvi, double E,
           double dE = 0); ///< Compute the average probability vector over a bin
                           ///< of energy using a Taylor expansion
       virtual vectorD AvgProbVectorLoE(
           int flvi, double LoE,
-          double dLoE =
-              0); ///< Compute the average probability vector over a bin of L/E using a Taylor expansion
+          double dLoE = 0); ///< Compute the average probability vector over a
+                            ///< bin of L/E using a Taylor expansion
 
       virtual matrixD AvgProbMatrix(int nflvi, int nflvf, double E, double dE);
 
-      virtual matrixD AvgProbMatrixLoE(int nflvi, int nflvf, double LoE, double dLoE);
+      virtual matrixD AvgProbMatrixLoE(int nflvi, int nflvf, double LoE,
+                                       double dLoE);
 
       // Get probability
       virtual double ExtrapolationProb(
