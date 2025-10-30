@@ -39,49 +39,43 @@ namespace OscProb {
       virtual double AvgProb(
           int flvi, int flvf, double E,
           double dE); ///< Compute the average probability over
-                      ///< a bin of energy using a Taylor expansion
+                      ///< a bin of energy with a Taylor expansion
 
       virtual double AvgProbLoE(
           int flvi, int flvf, double LoE,
           double dLoE); ///< Compute the average probability over
-                        ///< a bin of LoE using a Taylor expansion
+                        ///< a bin of LoE with a Taylor expansion
 
       virtual double AvgProb(
           int flvi, int flvf, double E, double cosT,
           double dcosT); ///< Compute the average probability over a
-                         ///< bin of cosTheta using a Taylor expansion
+                         ///< bin of cosTheta with a Taylor expansion
 
       virtual double AvgProb(int flvi, int flvf, double E, double dE,
                              double cosT,
                              double dcosT); ///< Compute the average probability
                                             ///< over a bin of cosTheta and
-                                            ///< energy using a Taylor expansion
+                                            ///< energy with a Taylor expansion
 
       virtual double AvgProbLoE(
           int flvi, int flvf, double LoE, double dLoE, double cosT,
           double dcosT); ///< Compute the average probability over a
-                         ///< bin of cosTheta and LoE using a Taylor
+                         ///< bin of cosTheta and LoE with a Taylor
                          ///< expansion
 
-      // Get probability vector averaged over a bin
+            // Get probability vector averaged over a bin
       virtual vectorD AvgProbVector(
           int flvi, double E,
           double dE = 0); ///< Compute the average probability vector over a bin
                           ///< of energy using a Taylor expansion
       virtual vectorD AvgProbVectorLoE(
           int flvi, double LoE,
-          double dLoE = 0); ///< Compute the average probability vector over a
-                            ///< bin of L/E using a Taylor expansion
+          double dLoE =
+              0); ///< Compute the average probability vector over a bin of L/E using a Taylor expansion
 
-      virtual matrixD AvgProbMatrix(
-          int nflvi, int nflvf, double E,
-          double dE); ///< Compute the average probability matrix over a bin
-                      ///< of energy using a Taylor expansion
+      virtual matrixD AvgProbMatrix(int nflvi, int nflvf, double E, double dE);
 
-      virtual matrixD AvgProbMatrixLoE(
-          int nflvi, int nflvf, double LoE,
-          double dLoE); ///< Compute the average probability matrix over a bin
-                        ///< of L/E using a Taylor expansion
+      virtual matrixD AvgProbMatrixLoE(int nflvi, int nflvf, double LoE, double dLoE);
 
       // Get probability
       virtual double ExtrapolationProb(
