@@ -510,11 +510,6 @@ double PMNS_Avg::AvgProb(int flvi, int flvf, double E, double dE)
 
   vectorD LoEbin = ConvertEtoLoE(E, dE);
 
-  ResetToFlavour(flvi);
-  double test = AvgProb(fNuState, flvf, E, dE);
-  cout << test << endl;
-  vectorD test2 = ProbVector(1);
-
   // Compute average in LoE
   return AvgProbLoE(flvi, flvf, LoEbin[0], LoEbin[1]);
 }
