@@ -23,6 +23,7 @@
 #ifndef PMNS_Avg_H
 #define PMNS_Avg_H
 
+#include "PMNS_Base.h"
 #include "PMNS_Fast.h"
 #include "PremModel.h"
 
@@ -34,6 +35,12 @@ namespace OscProb {
       virtual ~PMNS_Avg(); ///< Destructor
 
       virtual void SetPremModel(OscProb::PremModel& prem);
+
+      // Get probability averaged over a bin
+      using PMNS_Base::AvgProb;
+      using PMNS_Base::AvgProbLoE;
+      using PMNS_Base::AvgProbVector;
+      using PMNS_Base::AvgProbVectorLoE;
 
       // Get probability averaged over a bin
       virtual double AvgProb(
@@ -66,12 +73,12 @@ namespace OscProb {
       // Get probability vector averaged over a bin
       virtual vectorD AvgProbVector(
           int flvi, double E,
-          double dE = 0); ///< Compute the average probability vector over a bin
-                          ///< of energy using a Taylor expansion
+          double dE); ///< Compute the average probability vector over a bin
+                      ///< of energy using a Taylor expansion
       virtual vectorD AvgProbVectorLoE(
           int flvi, double LoE,
-          double dLoE = 0); ///< Compute the average probability vector over a
-                            ///< bin of L/E using a Taylor expansion
+          double dLoE); ///< Compute the average probability vector over a
+                        ///< bin of L/E using a Taylor expansion
 
       virtual matrixD AvgProbMatrix(int nflvi, int nflvf, double E, double dE);
 
@@ -104,21 +111,22 @@ namespace OscProb {
 
       virtual void SetCosT(double cosT); ///< Set neutrino angle.
 
-      virtual vectorD GetSamplePoints(
+      virtual vectorD GetSamplePointsAvgClass(
           double LoE,
           double dLoE); ///< Compute the sample points for
                         ///< a bin of L/E with width dLoE
 
-      virtual vectorD GetSamplePoints(
+      virtual vectorD GetSamplePointsAvgClass(
           double E, double cosT,
           double dcosT); ///< Compute the sample points for
                          ///< a bin of cosT with width dcosT
 
-      virtual matrixC GetSamplePoints(double InvE, double dInvE, double cosT,
-                                      double dcosT); ///< Compute the sample
-                                                     ///< points for a bin
-                                                     ///< of E and cosT with
-                                                     ///< width dE and dcosT
+      virtual matrixC GetSamplePointsAvgClass(
+          double InvE, double dInvE, double cosT,
+          double dcosT); ///< Compute the sample
+                         ///< points for a bin
+                         ///< of E and cosT with
+                         ///< width dE and dcosT
 
       // Construction of the K matrices
       virtual void BuildKE(

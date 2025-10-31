@@ -510,6 +510,11 @@ double PMNS_Avg::AvgProb(int flvi, int flvf, double E, double dE)
 
   vectorD LoEbin = ConvertEtoLoE(E, dE);
 
+  ResetToFlavour(flvi);
+  double test = AvgProb(fNuState, flvf, E, dE);
+  cout << test << endl;
+  vectorD test2 = ProbVector(1);
+
   // Compute average in LoE
   return AvgProbLoE(flvi, flvf, LoEbin[0], LoEbin[1]);
 }
@@ -547,7 +552,7 @@ double PMNS_Avg::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
   if (dLoE <= 0) return Prob(flvi, flvf, fPath.length / LoE);
 
   // Get sample points for this bin
-  vectorD samples = GetSamplePoints(LoE, dLoE);
+  vectorD samples = GetSamplePointsAvgClass(LoE, dLoE);
 
   double avgprob = 0;
   double L       = fPath.length;
@@ -641,7 +646,7 @@ vectorD PMNS_Avg::AvgProbVectorLoE(int flvi, double LoE, double dLoE)
   if (dLoE <= 0) return ProbVector(flvi, L / LoE);
 
   // Get sample points for this bin
-  vectorD samples = GetSamplePoints(LoE, dLoE);
+  vectorD samples = GetSamplePointsAvgClass(LoE, dLoE);
 
   double sumw = 0;
 
@@ -709,7 +714,7 @@ matrixD PMNS_Avg::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE,
   if (dLoE <= 0) return ProbMatrix(nflvi, nflvf, L / LoE);
 
   // Get sample points for this bin
-  vectorD samples = GetSamplePoints(LoE, dLoE);
+  vectorD samples = GetSamplePointsAvgClass(LoE, dLoE);
 
   double sumw = 0;
 
@@ -772,7 +777,7 @@ double PMNS_Avg::AvgProb(int flvi, int flvf, double E, double cosT,
   // Don't average zero width
   if (dcosT == 0) return Prob(flvi, flvf, E);
 
-  vectorD samples = GetSamplePoints(E, cosT, dcosT);
+  vectorD samples = GetSamplePointsAvgClass(E, cosT, dcosT);
 
   double avgprob = 0;
 
@@ -913,8 +918,8 @@ double PMNS_Avg::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE,
   if (dcosT == 0) return AvgProbLoE(flvi, flvf, LoE, dLoE);
 
   // Make sample with 1oE and not LoE
-  matrixC samples =
-      GetSamplePoints(LoE / fPath.length, dLoE / fPath.length, cosT, dcosT);
+  matrixC samples = GetSamplePointsAvgClass(LoE / fPath.length,
+                                            dLoE / fPath.length, cosT, dcosT);
 
   int rows = samples.size();
   int cols = samples[0].size();
@@ -1081,7 +1086,7 @@ void PMNS_Avg::HadamardProduct(vectorD lambda, double dbin)
 /// @param LoE  - The neutrino  L/E value in the bin center in km/GeV
 /// @param dLoE   - The L/E bin width in km/GeV
 ///
-vectorD PMNS_Avg::GetSamplePoints(double LoE, double dLoE)
+vectorD PMNS_Avg::GetSamplePointsAvgClass(double LoE, double dLoE)
 {
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
@@ -1118,7 +1123,7 @@ vectorD PMNS_Avg::GetSamplePoints(double LoE, double dLoE)
 /// @param cosT   - The neutrino  cosT value in the bin center
 /// @param dcosT   - The cosT bin width
 ///
-vectorD PMNS_Avg::GetSamplePoints(double E, double cosT, double dcosT)
+vectorD PMNS_Avg::GetSamplePointsAvgClass(double E, double cosT, double dcosT)
 {
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
@@ -1157,8 +1162,8 @@ vectorD PMNS_Avg::GetSamplePoints(double E, double cosT, double dcosT)
 /// @param cosT   - The neutrino  cosT value in the bin center
 /// @param dcosT   - The cosT bin width
 ///
-matrixC PMNS_Avg::GetSamplePoints(double InvE, double dInvE, double cosT,
-                                  double dcosT)
+matrixC PMNS_Avg::GetSamplePointsAvgClass(double InvE, double dInvE,
+                                          double cosT, double dcosT)
 {
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
