@@ -111,6 +111,24 @@ void PMNS_Avg::SetwidthBin(double dE, double dcosT)
 
 //.............................................................................
 ///
+///
+///
+bool PMNS_Avg::TryCacheK()
+{
+  return false;
+}
+
+//.............................................................................
+///
+///
+///
+void PMNS_Avg::FillCacheK()
+{
+  cout<<"in FillCacheK"<<endl;
+}
+
+//.............................................................................
+///
 /// Build K matrix for the inverse of energy in mass basis.
 ///
 /// The variable for which a Taylor expansion is done here is not directly the
@@ -591,11 +609,19 @@ double PMNS_Avg::AvgAlgo(int flvi, int flvf, double LoE, double dLoE, double L)
   SetEnergy(L / LoE);
   SetwidthBin(d1oE, 0);
 
-  // Propagate -> get S and K matrix (on the whole path)
-  PropagateTaylor();
+  // Try caching if activated
+  if (!TryCacheK()) {
 
-  // DiagolK -> get VE and lambdaE
-  SolveK(fKInvE, flambdaInvE, fVInvE);
+    // Propagate -> get S and K matrix (on the whole path)
+    PropagateTaylor();
+
+    // DiagolK -> get VE and lambdaE
+    SolveK(fKInvE, flambdaInvE, fVInvE);
+
+    // Fill cache if activated
+    FillCacheK();
+
+  }
 
   // return fct avr proba
   return AvgFormula(flvi, flvf, d1oE / kGeV2eV, flambdaInvE, fVInvE);

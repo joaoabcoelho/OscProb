@@ -23,7 +23,6 @@
 #ifndef PMNS_Avg_H
 #define PMNS_Avg_H
 
-#include "PMNS_Base.h"
 #include "PMNS_Fast.h"
 #include "PremModel.h"
 
@@ -110,6 +109,10 @@ namespace OscProb {
                                               ///< energy and angle
 
       virtual void SetCosT(double cosT); ///< Set neutrino angle.
+
+      // Internal caching functions
+      virtual bool TryCacheK();  ///< Try to find a cached eigensystem for K matrix 
+      virtual void FillCacheK(); ///< Cache the current eigensystem for K matrix
 
       virtual vectorD GetSamplePointsAvgClass(
           double LoE,
@@ -225,6 +228,13 @@ namespace OscProb {
 
       // Copy of the earth model used
       OscProb::PremModel fPrem;
+
+      bool   fUseCacheK;  ///< Flag for whether to use caching
+      double fCachePrecK; ///< Precision of cache matching
+      int    fMaxCacheK;  ///< Maximum cache size
+
+      std::unordered_set<EigenPoint> fMixCacheK; ///< Caching set of eigensystems
+      EigenPoint                     fProbeK;    ///< EigenpPoint to try
   };
 
 } // namespace OscProb
