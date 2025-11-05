@@ -652,11 +652,10 @@ vectorD PMNS_Avg::AvgProbVectorLoE(int flvi, double LoE, double dLoE)
 
     for (int flvf = 0; flvf < fNumNus; flvf++) {
       if (flvf == 0)
-          probs[flvf] +=
-              w * AvgAlgo(flvi, flvf, samples[j], samples[0], L);
-        else
-          probs[flvf] +=
-              w * AvgFormula(flvi, flvf, fdInvE / kGeV2eV, flambdaInvE, fVInvE);
+        probs[flvf] += w * AvgAlgo(flvi, flvf, samples[j], samples[0], L);
+      else
+        probs[flvf] +=
+            w * AvgFormula(flvi, flvf, fdInvE / kGeV2eV, flambdaInvE, fVInvE);
     }
 
     // Increment sum of weights
