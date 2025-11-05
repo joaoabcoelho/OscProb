@@ -111,24 +111,6 @@ void PMNS_Avg::SetwidthBin(double dE, double dcosT)
 
 //.............................................................................
 ///
-///
-///
-bool PMNS_Avg::TryCacheK()
-{
-  return false;
-}
-
-//.............................................................................
-///
-///
-///
-void PMNS_Avg::FillCacheK()
-{
-  cout<<"in FillCacheK"<<endl;
-}
-
-//.............................................................................
-///
 /// Build K matrix for the inverse of energy in mass basis.
 ///
 /// The variable for which a Taylor expansion is done here is not directly the
@@ -609,19 +591,11 @@ double PMNS_Avg::AvgAlgo(int flvi, int flvf, double LoE, double dLoE, double L)
   SetEnergy(L / LoE);
   SetwidthBin(d1oE, 0);
 
-  // Try caching if activated
-  if (!TryCacheK()) {
+  // Propagate -> get S and K matrix (on the whole path)
+  PropagateTaylor();
 
-    // Propagate -> get S and K matrix (on the whole path)
-    PropagateTaylor();
-
-    // DiagolK -> get VE and lambdaE
-    SolveK(fKInvE, flambdaInvE, fVInvE);
-
-    // Fill cache if activated
-    FillCacheK();
-
-  }
+  // DiagolK -> get VE and lambdaE
+  SolveK(fKInvE, flambdaInvE, fVInvE);
 
   // return fct avr proba
   return AvgFormula(flvi, flvf, d1oE / kGeV2eV, flambdaInvE, fVInvE);
@@ -677,8 +651,12 @@ vectorD PMNS_Avg::AvgProbVectorLoE(int flvi, double LoE, double dLoE)
     double w = 1. / pow(samples[j], 2);
 
     for (int flvf = 0; flvf < fNumNus; flvf++) {
-      // Add weighted probability
-      probs[flvf] += w * AvgAlgo(flvi, flvf, samples[j], samples[0], L);
+      if (flvf == 0)
+          probs[flvf] +=
+              w * AvgAlgo(flvi, flvf, samples[j], samples[0], L);
+        else
+          probs[flvf] +=
+              w * AvgFormula(flvi, flvf, fdInvE / kGeV2eV, flambdaInvE, fVInvE);
     }
 
     // Increment sum of weights
@@ -746,8 +724,13 @@ matrixD PMNS_Avg::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE,
 
     for (int flvi = 0; flvi < nflvi; flvi++) {
       for (int flvf = 0; flvf < nflvf; flvf++) {
-        // Add weighted probability
-        probs[flvi][flvf] += w * AvgAlgo(flvi, flvf, samples[j], samples[0], L);
+        // if (!TryCacheK())
+        if (flvi == 0 && flvf == 0)
+          probs[flvi][flvf] +=
+              w * AvgAlgo(flvi, flvf, samples[j], samples[0], L);
+        else
+          probs[flvi][flvf] +=
+              w * AvgFormula(flvi, flvf, fdInvE / kGeV2eV, flambdaInvE, fVInvE);
       }
     }
 
