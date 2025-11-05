@@ -25,7 +25,6 @@
 
 #include "PMNS_Fast.h"
 #include "PremModel.h"
-#include "SKMatricesPoint.h"
 
 namespace OscProb {
 
