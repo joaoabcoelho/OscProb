@@ -61,20 +61,20 @@ var NAVTREEINDEX =
 [
 "Absorption_8cxx.html",
 "classOscProb_1_1PMNS__Avg.html",
-"classOscProb_1_1PMNS__Avg.html#ac8b2d41b0f315f00de139a11034e9439",
-"classOscProb_1_1PMNS__Base.html#ace7875cf6d3bec161a2b7ed2690aec34",
-"classOscProb_1_1PMNS__Decay.html#adb8dbc91d4286d2e7c8f768c59476241",
-"classOscProb_1_1PMNS__Deco.html#add6533a9fc9acdfc7ae258b62570d78d",
-"classOscProb_1_1PMNS__DensityMatrix.html#ae90665cc8b440572a2f7723ea128548e",
-"classOscProb_1_1PMNS__Iter.html",
-"classOscProb_1_1PMNS__LIV.html#a083dc35476bf5b9376e0ae86c9f10433",
-"classOscProb_1_1PMNS__LIV.html#af1fb40562abbdb8d193249ae628a630d",
-"classOscProb_1_1PMNS__NSI.html#adbee38997ab80f8d1a9750d3eae0afea",
-"classOscProb_1_1PMNS__NUNM.html#ad0faf5eae755afb1baa1fcd5ffebad41",
-"classOscProb_1_1PMNS__OQS.html#abbebecafb541351d1ab464a65f3877be",
-"classOscProb_1_1PMNS__SNSI.html#a9ac3cadeac8db1b90f3152f476244780",
-"classOscProb_1_1PMNS__Sterile.html#ab2cd5258b9436909108e19f9c1318891",
-"namespaceOscProb.html#a8414445995fd13f07a3c2c2b168dcb1f"
+"classOscProb_1_1PMNS__Avg.html#ac446fbb333d0dca16bd8c79a5ea68205",
+"classOscProb_1_1PMNS__Base.html#ac74206f349687da141392c81e2ba6b0d",
+"classOscProb_1_1PMNS__Decay.html#acffe65c2a0ba3a5aad79a97c31dfd6b5",
+"classOscProb_1_1PMNS__Deco.html#ad26815ac5f4805d1259817e4936e5f8f",
+"classOscProb_1_1PMNS__DensityMatrix.html#add6533a9fc9acdfc7ae258b62570d78d",
+"classOscProb_1_1PMNS__Fast.html#af1fb40562abbdb8d193249ae628a630d",
+"classOscProb_1_1PMNS__Iter.html#afd9de7e51d927b41c1129fad1648fe96",
+"classOscProb_1_1PMNS__LIV.html#aed4cfc40058c6a3cb9b23d887bb042c9",
+"classOscProb_1_1PMNS__NSI.html#ad28c12ef897b5555eda509ea55c99107",
+"classOscProb_1_1PMNS__NUNM.html#acc0d46cc4b8f911b40b807225003bbed",
+"classOscProb_1_1PMNS__OQS.html#ab4b978fb895abd3cfad07440bae1d34b",
+"classOscProb_1_1PMNS__SNSI.html#a91f81e5f12d3a5dff74686d4cbc1292c",
+"classOscProb_1_1PMNS__Sterile.html#aa3cee10639d5c0879ccb9e78d62128d3",
+"namespaceColor.html#a20a7b04657c1d83fae5d54514d3f1622a8a2002a109cc5d185745a3371776eabb"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

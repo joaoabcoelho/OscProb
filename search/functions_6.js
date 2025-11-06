@@ -46,11 +46,12 @@ var searchData=
   ['getpremlayers_43',['GetPremLayers',['../classOscProb_1_1PremModel.html#ae4feeccc7027253f5c2e2493098145ca',1,'OscProb::PremModel']]],
   ['getprobvector_44',['GetProbVector',['../classOscProb_1_1PMNS__Base.html#afc8c5d0779b2cd8415c6a58416ed197e',1,'OscProb::PMNS_Base']]],
   ['getregionzoa_45',['GetRegionZoA',['../classOscProb_1_1EarthModelBinned.html#a019bd087769bbd2958cf8bd6ef5b2092',1,'OscProb::EarthModelBinned']]],
-  ['getsamplepoints_46',['GetSamplePoints',['../classOscProb_1_1PMNS__Base.html#aeb64c66a5fee1b84376568896f4d2a57',1,'OscProb::PMNS_Base::GetSamplePoints()'],['../classOscProb_1_1PMNS__Avg.html#a01c2aeea95fdb582adaf0889f441730a',1,'OscProb::PMNS_Avg::GetSamplePoints(double InvE, double dInvE, double cosT, double dcosT)'],['../classOscProb_1_1PMNS__Avg.html#ae038fe4112157c65d4b3b6b03027fc58',1,'OscProb::PMNS_Avg::GetSamplePoints(double E, double cosT, double dcosT)'],['../classOscProb_1_1PMNS__Avg.html#aa1a58d4eb10f0dc574a3e46f97cf25fa',1,'OscProb::PMNS_Avg::GetSamplePoints(double LoE, double dLoE)']]],
-  ['getsnsi_47',['GetSNSI',['../Utils_8h.html#ab2c8b7b18746f234083fa3b370242650',1,'Utils.h']]],
-  ['getsortedindices_48',['GetSortedIndices',['../classOscProb_1_1PMNS__Base.html#af1fb40562abbdb8d193249ae628a630d',1,'OscProb::PMNS_Base']]],
-  ['getsterile_49',['GetSterile',['../Utils_8h.html#a3ca82e4ad574189d41bdd72ad54bb82c',1,'Utils.h']]],
-  ['gettotall_50',['GetTotalL',['../classOscProb_1_1EarthModelBase.html#a3a83f69ca6cb7438917d16afaa376c97',1,'OscProb::EarthModelBase']]],
-  ['getupcoup_51',['GetUpCoup',['../classOscProb_1_1PMNS__NSI.html#a5fbeeb25bd00fbda7c484dbdb6748a58',1,'OscProb::PMNS_NSI']]],
-  ['getzoacoup_52',['GetZoACoup',['../classOscProb_1_1PMNS__NSI.html#a42b2db6f2f42dbca7545a10d101a7950',1,'OscProb::PMNS_NSI']]]
+  ['getsamplepoints_46',['GetSamplePoints',['../classOscProb_1_1PMNS__Base.html#aeb64c66a5fee1b84376568896f4d2a57',1,'OscProb::PMNS_Base']]],
+  ['getsamplepointsavgclass_47',['GetSamplePointsAvgClass',['../classOscProb_1_1PMNS__Avg.html#a7bd392c6f4752a4f90c564fd702ca044',1,'OscProb::PMNS_Avg::GetSamplePointsAvgClass(double InvE, double dInvE, double cosT, double dcosT)'],['../classOscProb_1_1PMNS__Avg.html#a8ae13d58f212ab57d6648fce1e51870f',1,'OscProb::PMNS_Avg::GetSamplePointsAvgClass(double E, double cosT, double dcosT)'],['../classOscProb_1_1PMNS__Avg.html#aa1987b947441b217fcec90bbbe961fd8',1,'OscProb::PMNS_Avg::GetSamplePointsAvgClass(double LoE, double dLoE)']]],
+  ['getsnsi_48',['GetSNSI',['../Utils_8h.html#ab2c8b7b18746f234083fa3b370242650',1,'Utils.h']]],
+  ['getsortedindices_49',['GetSortedIndices',['../classOscProb_1_1PMNS__Base.html#af1fb40562abbdb8d193249ae628a630d',1,'OscProb::PMNS_Base']]],
+  ['getsterile_50',['GetSterile',['../Utils_8h.html#a3ca82e4ad574189d41bdd72ad54bb82c',1,'Utils.h']]],
+  ['gettotall_51',['GetTotalL',['../classOscProb_1_1EarthModelBase.html#a3a83f69ca6cb7438917d16afaa376c97',1,'OscProb::EarthModelBase']]],
+  ['getupcoup_52',['GetUpCoup',['../classOscProb_1_1PMNS__NSI.html#a5fbeeb25bd00fbda7c484dbdb6748a58',1,'OscProb::PMNS_NSI']]],
+  ['getzoacoup_53',['GetZoACoup',['../classOscProb_1_1PMNS__NSI.html#a42b2db6f2f42dbca7545a10d101a7950',1,'OscProb::PMNS_NSI']]]
 ];
