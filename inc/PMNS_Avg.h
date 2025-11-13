@@ -23,12 +23,12 @@
 #ifndef PMNS_Avg_H
 #define PMNS_Avg_H
 
-#include "PMNS_Fast.h"
+#include "PMNS_Sterile.h"
 #include "PremModel.h"
 
 namespace OscProb {
 
-  class PMNS_Avg : public PMNS_Fast {
+  class PMNS_Avg : public PMNS_Sterile {
     public:
       PMNS_Avg();          ///< Constructor
       virtual ~PMNS_Avg(); ///< Destructor

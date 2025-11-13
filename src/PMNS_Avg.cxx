@@ -23,7 +23,7 @@ using namespace std;
 ///
 /// This class is restricted to 3 neutrino flavours.
 ///
-PMNS_Avg::PMNS_Avg() : PMNS_Fast()
+PMNS_Avg::PMNS_Avg() : PMNS_Sterile()
 {
   fPrem.LoadModel("");
 
@@ -124,7 +124,7 @@ void PMNS_Avg::BuildKE(double L)
   double lenghtEV = L * kKm2eV;     // L in eV-1
   double bufK     = lenghtEV * 0.5; // L/2 in eV-1
 
-  complexD buffer[3];
+  complexD buffer[fNumNus];
 
   for (int i = 0; i < fNumNus; i++) {
     complexD Hms_kl;
@@ -225,7 +225,7 @@ double PMNS_Avg::LnDerivative()
 ///
 void PMNS_Avg::rotateS()
 {
-  complexD buffer[3];
+  complexD buffer[fNumNus];
 
   for (int j = 0; j < fNumNus; j++) {
     for (int k = 0; k < fNumNus; k++) {
@@ -247,7 +247,7 @@ void PMNS_Avg::rotateS()
 ///
 void PMNS_Avg::rotateK()
 {
-  complexD buffer[3];
+  complexD buffer[fNumNus];
 
   for (int j = 0; j < fNumNus; j++) {
     for (int k = 0; k < fNumNus; k++) {
@@ -284,7 +284,7 @@ void PMNS_Avg::rotateK()
 ///
 void PMNS_Avg::MultiplicationRuleS()
 {
-  complexD save[3];
+  complexD save[fNumNus];
 
   for (int j = 0; j < fNumNus; j++) {
     for (int n = 0; n < fNumNus; n++) { save[n] = fevolutionMatrixS[n][j]; }
@@ -313,10 +313,10 @@ void PMNS_Avg::MultiplicationRuleS()
 /// beginning
 ///            of the path and the beginning of the current layer
 ///
-void PMNS_Avg::MultiplicationRuleK(complexD K[3][3])
+void PMNS_Avg::MultiplicationRuleK(complexD K[fNumNus][fNumNus])
 {
   for (int i = 0; i < fNumNus; i++) {
-    complexD buffer[3];
+    complexD buffer[fNumNus];
 
     for (int l = 0; l < fNumNus; l++) {
       for (int k = 0; k < fNumNus; k++) {
@@ -405,10 +405,10 @@ void PMNS_Avg::PropagatePathTaylor(NuPath p)
 /// @param lambda - The eigenvalues of K
 /// @param V - The eigenvectors of K
 ///
-void PMNS_Avg::SolveK(complexD K[3][3], vectorD& lambda, matrixC& V)
+void PMNS_Avg::SolveK(complexD K[fNumNus][fNumNus], vectorD& lambda, matrixC& V)
 {
-  double   fEvalGLoBES[3];
-  complexD fEvecGLoBES[3][3];
+  double   fEvalGLoBES[fNumNus];
+  complexD fEvecGLoBES[fNUmNus][fNumNus];
 
   // Solve K for eigensystem using the GLoBES method
   zheevh3(K, fEvecGLoBES, fEvalGLoBES);
@@ -450,7 +450,7 @@ double PMNS_Avg::AvgFormula(int flvi, int flvf, double dbin, vectorD lambda,
     }
   }
 
-  complexD buffer[3];
+  complexD buffer[fNumNus];
 
   for (int n = 0; n < fNumNus; n++) { buffer[n] = SV[n] * conj(V[flvi][n]); }
 
@@ -1229,7 +1229,7 @@ double PMNS_Avg::AvgFormulaExtrapolation(int flvi, int flvf, double dbin,
     }
   }
 
-  complexD buffer[3];
+  complexD buffer[fNumNus];
 
   for (int n = 0; n < fNumNus; n++) { buffer[n] = SV[n] * conj(V[flvi][n]); }
 
