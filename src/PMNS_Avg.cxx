@@ -8,8 +8,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "PMNS_Avg.h"
-#include "MatrixDecomp/zheevh3.h"
 #include "PremModel.h"
+#include <Eigen/Eigenvalues>
 #include <algorithm>
 #include <iostream>
 
@@ -23,7 +23,7 @@ using namespace std;
 ///
 /// This class is restricted to 3 neutrino flavours.
 ///
-PMNS_Avg::PMNS_Avg() : PMNS_Sterile()
+PMNS_Avg::PMNS_Avg(int numNus) : PMNS_Sterile(numNus)
 {
   fPrem.LoadModel("");
 
@@ -51,9 +51,11 @@ void PMNS_Avg::InitializeTaylorsVectors()
 
   flambdaInvE = vectorD(fNumNus, 0);
   fVInvE      = matrixC(fNumNus, vectorC(fNumNus, 0));
+  fKInvE      = Eigen::MatrixXcd::Zero(fNumNus, fNumNus);
 
   flambdaCosT = vectorD(fNumNus, 0);
   fVcosT      = matrixC(fNumNus, vectorC(fNumNus, 0));
+  fKcosT      = Eigen::MatrixXcd::Zero(fNumNus, fNumNus);
 
   fevolutionMatrixS = matrixC(fNumNus, vectorC(fNumNus, 0));
 
@@ -61,14 +63,7 @@ void PMNS_Avg::InitializeTaylorsVectors()
   fKmass   = matrixC(fNumNus, vectorC(fNumNus, 0));
   fKflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
 
-  for (int i = 0; i < fNumNus; i++) {
-    fevolutionMatrixS[i][i] = 1;
-
-    for (int j = 0; j < fNumNus; j++) {
-      fKInvE[i][j] = 0;
-      fKcosT[i][j] = 0;
-    }
-  }
+  for (int i = 0; i < fNumNus; i++) { fevolutionMatrixS[i][i] = 1; }
 
   fLayer = fPrem.GetPremLayers().size() - 1;
 
@@ -185,7 +180,7 @@ void PMNS_Avg::BuildKcosT(double L)
 
   for (int j = 0; j < fNumNus; j++) {
     for (int i = 0; i <= j; i++) {
-      fKflavor[i][j] = dL * fHam[i][j];
+      fKflavor[i][j] = dL * fHam(i, j);
 
       if (i != j) { fKflavor[j][i] = conj(fKflavor[i][j]); }
     }
@@ -313,7 +308,7 @@ void PMNS_Avg::MultiplicationRuleS()
 /// beginning
 ///            of the path and the beginning of the current layer
 ///
-void PMNS_Avg::MultiplicationRuleK(complexD K[fNumNus][fNumNus])
+void PMNS_Avg::MultiplicationRuleK(Eigen::MatrixXcd& K)
 {
   for (int i = 0; i < fNumNus; i++) {
     complexD buffer[fNumNus];
@@ -326,10 +321,10 @@ void PMNS_Avg::MultiplicationRuleK(complexD K[fNumNus][fNumNus])
 
     for (int j = 0; j <= i; j++) {
       for (int l = 0; l < fNumNus; l++) {
-        K[i][j] += buffer[l] * fevolutionMatrixS[l][j];
+        K(i, j) += buffer[l] * fevolutionMatrixS[l][j];
       }
 
-      if (i != j) { K[j][i] = conj(K[i][j]); }
+      if (i != j) { K(j, i) = conj(K(i, j)); }
     }
   }
 }
@@ -405,18 +400,29 @@ void PMNS_Avg::PropagatePathTaylor(NuPath p)
 /// @param lambda - The eigenvalues of K
 /// @param V - The eigenvectors of K
 ///
-void PMNS_Avg::SolveK(complexD K[fNumNus][fNumNus], vectorD& lambda, matrixC& V)
+void PMNS_Avg::SolveK(Eigen::MatrixXcd& K, vectorD& lambda, matrixC& V)
 {
-  double   fEvalGLoBES[fNumNus];
-  complexD fEvecGLoBES[fNUmNus][fNumNus];
+  if (fNumNus == 4) TemplateSolver<Eigen::Matrix4cd>(K, lambda, V);
+  if (fNumNus == 3) TemplateSolver<Eigen::Matrix3cd>(K, lambda, V);
+  if (fNumNus == 2)
+    TemplateSolver<Eigen::Matrix2cd>(K, lambda, V);
+  else
+    TemplateSolver<Eigen::MatrixXcd>(K, lambda, V);
+}
 
-  // Solve K for eigensystem using the GLoBES method
-  zheevh3(K, fEvecGLoBES, fEvalGLoBES);
+template <typename T>
+void PMNS_Avg::TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda, matrixC& V)
+{
+  Eigen::Ref<T> R(K);
+
+  Eigen::SelfAdjointEigenSolver<T> eigensolver(R);
 
   // Fill flambdaInvE and fVInvE vectors from GLoBES arrays
   for (int i = 0; i < fNumNus; i++) {
-    lambda[i] = fEvalGLoBES[i];
-    for (int j = 0; j < fNumNus; j++) { V[i][j] = fEvecGLoBES[i][j]; }
+    lambda[i] = eigensolver.eigenvalues()(i);
+    for (int j = 0; j < fNumNus; j++) {
+      V[i][j] = eigensolver.eigenvectors()(i, j);
+    }
   }
 }
 

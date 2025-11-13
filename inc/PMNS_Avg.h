@@ -30,8 +30,8 @@ namespace OscProb {
 
   class PMNS_Avg : public PMNS_Sterile {
     public:
-      PMNS_Avg();          ///< Constructor
-      virtual ~PMNS_Avg(); ///< Destructor
+      PMNS_Avg(int numNus); ///< Constructor
+      virtual ~PMNS_Avg();  ///< Destructor
 
       virtual void SetPremModel(OscProb::PremModel& prem);
 
@@ -143,13 +143,14 @@ namespace OscProb {
       // Multiplication rule between two pairs of (S,K)
       virtual void MultiplicationRuleS(); ///< Product between two S matrices
       virtual void MultiplicationRuleK(
-          complexD K[3][3]); ///< Product between two K matrices
+          Eigen::MatrixXcd& K); ///< Product between two K matrices
 
       /// Solve the K matrix
-      virtual void SolveK(complexD K[3][3], vectorD& lambda,
-                          matrixC& V); ///< Solve the K matrix for
-                                       ///< eigenvectors and eigenvalues
-
+      void SolveK(Eigen::MatrixXcd& K, vectorD& lambda,
+                  matrixC& V); ///< Solve the K matrix for
+                               ///< eigenvectors and eigenvalues
+      template <typename T>
+      void TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda, matrixC& V);
       // Propagating
       virtual void PropagatePathTaylor(
           NuPath p); ///< Propagate neutrino through a single path
@@ -201,16 +202,16 @@ namespace OscProb {
 
       double fdInvE; ///< Bin's width for the inverse of energy in GeV-1
 
-      complexD fKInvE[3][3]; ///< K matrix for the inverse of energy in GeV for
-                             ///< the entire path
-      vectorD flambdaInvE;   ///< Eigenvectors of K_invE
-      matrixC fVInvE;        ///< Eigenvalues of K_invE
+      Eigen::MatrixXcd fKInvE; ///< K matrix for the inverse of energy in GeV
+                               ///< for the entire path
+      vectorD flambdaInvE;     ///< Eigenvectors of K_invE
+      matrixC fVInvE;          ///< Eigenvalues of K_invE
 
       double fcosT;  ///<  Cosine of neutrino angle
       double fdcosT; ///< Bin's width for angle
 
-      complexD fKcosT[3]
-                     [3];  ///< K matrix for neutrino angle for the entire path
+      Eigen::MatrixXcd
+              fKcosT;      ///< K matrix for neutrino angle for the entire path
       vectorD flambdaCosT; ///< Eigenvectors of K_cosTheta
       matrixC fVcosT;      ///< Eigenvalues of K_cosTheta
 
