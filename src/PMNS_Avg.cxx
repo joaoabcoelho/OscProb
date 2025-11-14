@@ -9,9 +9,9 @@
 
 #include "PMNS_Avg.h"
 #include "PremModel.h"
-#include <Eigen/Eigenvalues>
 #include <algorithm>
 #include <iostream>
+#include <Eigen/Eigenvalues>
 
 using namespace OscProb;
 
@@ -21,8 +21,9 @@ using namespace std;
 ///
 /// Constructor. \sa PMNS_Base::PMNS_Base
 ///
-/// This class is restricted to 3 neutrino flavours.
 ///
+///
+/// This bit would copy over to PMNS_MyClass, as the myOsc = ROOT.OscProb.PMNS_MyClass(4)
 PMNS_Avg::PMNS_Avg(int numNus) : PMNS_Sterile(numNus)
 {
   fPrem.LoadModel("");
@@ -39,42 +40,9 @@ PMNS_Avg::PMNS_Avg(int numNus) : PMNS_Sterile(numNus)
 /// Nothing to clean.
 ///
 PMNS_Avg::~PMNS_Avg() {}
-
 //.............................................................................
 ///
-/// Set vector sizes and initialize elements to zero.
-/// Initialize diagonal elements of S to one
-///
-void PMNS_Avg::InitializeTaylorsVectors()
-{
-  fdensityMatrix = matrixC(fNumNus, vectorC(fNumNus, 0));
-
-  flambdaInvE = vectorD(fNumNus, 0);
-  fVInvE      = matrixC(fNumNus, vectorC(fNumNus, 0));
-  fKInvE      = Eigen::MatrixXcd::Zero(fNumNus, fNumNus);
-
-  flambdaCosT = vectorD(fNumNus, 0);
-  fVcosT      = matrixC(fNumNus, vectorC(fNumNus, 0));
-  fKcosT      = Eigen::MatrixXcd::Zero(fNumNus, fNumNus);
-
-  fevolutionMatrixS = matrixC(fNumNus, vectorC(fNumNus, 0));
-
-  fSflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
-  fKmass   = matrixC(fNumNus, vectorC(fNumNus, 0));
-  fKflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
-
-  for (int i = 0; i < fNumNus; i++) { fevolutionMatrixS[i][i] = 1; }
-
-  fLayer = fPrem.GetPremLayers().size() - 1;
-
-  fdl = -1;
-
-  fDetRadius = fPrem.GetDetRadius();
-}
-
-//.............................................................................
-///
-/// Copy the earth model used
+/// Copy the earth model used   
 ///
 /// This is done to get access to the PremLayer list to be used in the
 /// LnDerivative() function.

@@ -24,7 +24,6 @@
 #define PMNS_Avg_H
 
 #include "PMNS_Sterile.h"
-#include "PremModel.h"
 
 namespace OscProb {
 
@@ -32,9 +31,7 @@ namespace OscProb {
     public:
       PMNS_Avg(int numNus); ///< Constructor
       virtual ~PMNS_Avg();  ///< Destructor
-
       virtual void SetPremModel(OscProb::PremModel& prem);
-
       // Get probability averaged over a bin
       using PMNS_Base::AvgProb;
       using PMNS_Base::AvgProbLoE;
@@ -101,9 +98,6 @@ namespace OscProb {
                          ///< flvf for an angle cosT+dcosT
 
     protected:
-      virtual void InitializeTaylorsVectors(); ///< Initialize all member
-                                               ///< vectors with zeros
-
       virtual void SetwidthBin(double dE,
                                double dcosT); ///< Set bin's widths for
                                               ///< energy and angle
@@ -193,38 +187,21 @@ namespace OscProb {
 
       // Attributes
 
-      matrixC fevolutionMatrixS; ///< Evolution matrix S for reference energy
                                  ///< and angle for the entire path
 
-      matrixC fSflavor; ///< S matrix for one layer
-      matrixC fKmass;   ///< K matrix in mass basis for one layer
-      matrixC fKflavor; ///< K matrix in flavor basis for one layer
 
       double fdInvE; ///< Bin's width for the inverse of energy in GeV-1
 
-      Eigen::MatrixXcd fKInvE; ///< K matrix for the inverse of energy in GeV
-                               ///< for the entire path
-      vectorD flambdaInvE;     ///< Eigenvectors of K_invE
-      matrixC fVInvE;          ///< Eigenvalues of K_invE
 
       double fcosT;  ///<  Cosine of neutrino angle
       double fdcosT; ///< Bin's width for angle
 
-      Eigen::MatrixXcd
-              fKcosT;      ///< K matrix for neutrino angle for the entire path
-      vectorD flambdaCosT; ///< Eigenvectors of K_cosTheta
-      matrixC fVcosT;      ///< Eigenvalues of K_cosTheta
-
-      matrixC fdensityMatrix; ///< The neutrino density matrix state
-
-      // Variables for the compute of the derivation of one layer's length
-      int    fLayer;
-      int    fdl;
-      double fDetRadius;
-      double fminRsq;
-
       // Copy of the earth model used
       OscProb::PremModel fPrem;
+
+      // Variables for the compute of the derivation of one layer's length
+      double fminRsq;
+
   };
 
 } // namespace OscProb

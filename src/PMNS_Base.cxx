@@ -13,6 +13,8 @@
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <Eigen/Eigenvalues>
+#include "PremModel.h"
 
 using namespace std;
 
@@ -54,7 +56,7 @@ PMNS_Base::PMNS_Base(int numNus)
   SetStdPath();      // Set some default path
   SetEnergy(2);      // Set default energy to 2 GeV
   SetIsNuBar(false); // Neutrino by default
-
+  
   InitializeVectors(); // Initialize all vectors
 
   SetStdPars(); // Set PDG parameters
@@ -62,6 +64,9 @@ PMNS_Base::PMNS_Base(int numNus)
   ResetToFlavour(1); // Numu by default
 
   ClearCache(); // Clear cache to initialize it
+
+  fPrem.LoadModel("");
+  InitializeTaylorsVectors();
 
   SetAvgProbPrec(1e-4); // Set default AvgProb precision
 }
@@ -2070,6 +2075,38 @@ vectorD PMNS_Base::GetSamplePoints(double LoE, double dLoE)
 
   // Return all sample points
   return allSamples;
+}
+
+//.............................................................................
+///
+/// Set vector sizes and initialize elements to zero.
+/// Initialize diagonal elements of S to one
+///
+void PMNS_Base::InitializeTaylorsVectors()
+{
+  fdensityMatrix = matrixC(fNumNus, vectorC(fNumNus, 0));
+
+  flambdaInvE = vectorD(fNumNus, 0);
+  fVInvE      = matrixC(fNumNus, vectorC(fNumNus, 0));
+  fKInvE      = Eigen::MatrixXcd::Zero(fNumNus, fNumNus);
+
+  flambdaCosT = vectorD(fNumNus, 0);
+  fVcosT      = matrixC(fNumNus, vectorC(fNumNus, 0));
+  fKcosT      = Eigen::MatrixXcd::Zero(fNumNus, fNumNus);
+
+  fevolutionMatrixS = matrixC(fNumNus, vectorC(fNumNus, 0));
+
+  fSflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
+  fKmass   = matrixC(fNumNus, vectorC(fNumNus, 0));
+  fKflavor = matrixC(fNumNus, vectorC(fNumNus, 0));
+
+  for (int i = 0; i < fNumNus; i++) { fevolutionMatrixS[i][i] = 1; }
+
+  fLayer = fPrem.GetPremLayers().size() - 1;
+
+  fdl = -1;
+
+  fDetRadius = fPrem.GetDetRadius();
 }
 
 ////////////////////////////////////////////////////////////////////////
