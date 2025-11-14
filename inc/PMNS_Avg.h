@@ -37,23 +37,13 @@ namespace OscProb {
       using PMNS_Base::AvgProbVector;
       using PMNS_Base::AvgProbVectorLoE;
 
-      // Get probability averaged over a bin
-      virtual double AvgProb(
-          int flvi, int flvf, double E,
-          double dE); ///< Compute the average probability over
-                      ///< a bin of energy with a Taylor expansion
-
-      virtual double AvgProbLoE(
-          int flvi, int flvf, double LoE,
-          double dLoE); ///< Compute the average probability over
-                        ///< a bin of LoE with a Taylor expansion
-
       virtual double AvgProb(
           int flvi, int flvf, double E, double cosT,
           double dcosT); ///< Compute the average probability over a
                          ///< bin of cosTheta with a Taylor expansion
 
-      virtual double AvgProb(int flvi, int flvf, double E, double dE,
+      virtual double AvgProb(
+          int flvi, int flvf, double E, double dE,
                              double cosT,
                              double dcosT); ///< Compute the average probability
                                             ///< over a bin of cosTheta and
@@ -64,21 +54,6 @@ namespace OscProb {
           double dcosT); ///< Compute the average probability over a
                          ///< bin of cosTheta and LoE with a Taylor
                          ///< expansion
-
-      // Get probability vector averaged over a bin
-      virtual vectorD AvgProbVector(
-          int flvi, double E,
-          double dE); ///< Compute the average probability vector over a bin
-                      ///< of energy using a Taylor expansion
-      virtual vectorD AvgProbVectorLoE(
-          int flvi, double LoE,
-          double dLoE); ///< Compute the average probability vector over a
-                        ///< bin of L/E using a Taylor expansion
-
-      virtual matrixD AvgProbMatrix(int nflvi, int nflvf, double E, double dE);
-
-      virtual matrixD AvgProbMatrixLoE(int nflvi, int nflvf, double LoE,
-                                       double dLoE);
 
       // Get probability
       virtual double ExtrapolationProb(
@@ -97,10 +72,6 @@ namespace OscProb {
                          ///< flvf for an angle cosT+dcosT
 
     protected:
-      virtual vectorD GetSamplePointsAvgClass(
-          double LoE,
-          double dLoE); ///< Compute the sample points for
-                        ///< a bin of L/E with width dLoE
 
       virtual vectorD GetSamplePointsAvgClass(
           double E, double cosT,
@@ -114,31 +85,27 @@ namespace OscProb {
                          ///< of E and cosT with
                          ///< width dE and dcosT
 
-
-      // Propagating
-      virtual void PropagatePathTaylor(
-          NuPath p); ///< Propagate neutrino through a single path
-      virtual void PropagateTaylor(); ///< Propagate neutrino through full path
-
       //virtual double AvgFormula(
       //    int flvi, int flvf, double dbin, vectorD flambda,
        //   matrixC fV); ///< Formula for the average probability over a bin
        //                ///< of width dbin
 
+     // virtual double AvgAlgo(
+     //     int flvi, int flvf, double LoE, double dLoE,
+     //     double L); ///< Algorithm for the compute of the average
+     //               ///< probability over a bin of LoE
+
       virtual double AvgAlgo(
-          int flvi, int flvf, double LoE, double dLoE,
-          double L); ///< Algorithm for the compute of the average
-                     ///< probability over a bin of LoE
+          int flvi, int flvf, double InvE, double dInvE, double cosT,
+          double dcosT); ///< Algorithm for the compute of the average
+                         ///< probability over a bin of 1oE and cosT
+
 
       virtual double AvgAlgoCosT(
           int flvi, int flvf, double E, double cosT,
           double dcosT); ///< Algorithm for the compute of the average
                          ///< probability over a bin of cosT
 
-      virtual double AvgAlgo(
-          int flvi, int flvf, double InvE, double dInvE, double cosT,
-          double dcosT); ///< Algorithm for the compute of the average
-                         ///< probability over a bin of 1oE and cosT
 
       virtual double AlgorithmDensityMatrix(
           int flvi, int flvf); ///< Algorithm for the transformations on the

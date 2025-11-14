@@ -10,7 +10,43 @@ namespace OscProb {
     public:
       PMNS_BaseAvg(int numNus); ///< Constructor
       virtual void SetPremModel(OscProb::PremModel& prem);
+
+      // Get probability averaged over a bin
+      using PMNS_Base::AvgProb;
+      using PMNS_Base::AvgProbLoE;
+      // Get probability averaged over a bin
+      virtual double AvgProb(
+          int flvi, int flvf, double E,
+          double dE); ///< Compute the average probability over
+                      ///< a bin of energy with a Taylor expansion
+
+      virtual double AvgProbLoE(
+          int flvi, int flvf, double LoE,
+          double dLoE); ///< Compute the average probability over
+                        ///< a bin of LoE with a Taylor expansion
+
+      // Get probability vector averaged over a bin
+      virtual vectorD AvgProbVector(
+          int flvi, double E,
+          double dE); ///< Compute the average probability vector over a bin
+                      ///< of energy using a Taylor expansion
+      virtual vectorD AvgProbVectorLoE(
+          int flvi, double LoE,
+          double dLoE); ///< Compute the average probability vector over a
+                        ///< bin of L/E using a Taylor expansion
+       
+      virtual matrixD AvgProbMatrix(int nflvi, int nflvf, double E, double dE);
+      virtual matrixD AvgProbMatrixLoE(int nflvi, int nflvf, double LoE,
+                                       double dLoE);
+
+
+
     protected:
+      virtual vectorD GetSamplePointsAvgClass(
+          double LoE,
+          double dLoE); ///< Compute the sample points for
+                        ///< a bin of L/E with width dLoE
+
       /// Build the full Hamiltonian
       virtual void UpdateHam() = 0;
 
@@ -34,6 +70,11 @@ namespace OscProb {
       virtual double LnDerivative(); ///< Compute the derivation of one layer's
                                      ///< length
 
+      // Propagating
+      virtual void PropagatePathTaylor(
+          NuPath p); ///< Propagate neutrino through a single path
+      virtual void PropagateTaylor(); ///< Propagate neutrino through full path
+
       // Rotation from mass to flavor basis
       virtual void rotateS(); ///< Rotate the S matrix
       virtual void rotateK(); ///< Rotate one K matrix
@@ -55,6 +96,11 @@ namespace OscProb {
           int flvi, int flvf, double dbin, vectorD flambda,
           matrixC fV); ///< Formula for the average probability over a bin
                        ///< of width dbin
+
+      virtual double AvgAlgo(
+          int flvi, int flvf, double LoE, double dLoE,
+          double L); ///< Algorithm for the compute of the average
+                     ///< probability over a bin of LoE
 
 
      //////////
