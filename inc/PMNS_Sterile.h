@@ -25,13 +25,13 @@
 #ifndef PMNS_STERILE_H
 #define PMNS_STERILE_H
 
-#include <Eigen/Core>
-
 #include "PMNS_Base.h"
+#include "PMNS_BaseAvg.h"
+#include <Eigen/Core>
 
 namespace OscProb {
 
-  class PMNS_Sterile : public PMNS_Base {
+  class PMNS_Sterile : public PMNS_BaseAvg {
     public:
       PMNS_Sterile(int numNus); ///< Constructor
 
