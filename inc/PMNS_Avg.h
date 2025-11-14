@@ -124,10 +124,10 @@ namespace OscProb {
           NuPath p); ///< Propagate neutrino through a single path
       virtual void PropagateTaylor(); ///< Propagate neutrino through full path
 
-      virtual double AvgFormula(
-          int flvi, int flvf, double dbin, vectorD flambda,
-          matrixC fV); ///< Formula for the average probability over a bin
-                       ///< of width dbin
+      //virtual double AvgFormula(
+      //    int flvi, int flvf, double dbin, vectorD flambda,
+       //   matrixC fV); ///< Formula for the average probability over a bin
+       //                ///< of width dbin
 
       virtual double AvgAlgo(
           int flvi, int flvf, double LoE, double dLoE,

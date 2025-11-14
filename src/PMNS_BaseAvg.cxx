@@ -341,4 +341,58 @@ void PMNS_BaseAvg::TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda, matrixC&
     }
   }
 }
+//.............................................................................
+///
+/// Formula for the average probability of flvi going to flvf over
+/// a bin of width dbin with a Taylor expansion.
+///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param flvf - The neutrino final flavour.
+/// @param dbin - The width of the bin
+/// @param lambda - The eigenvalues of K
+/// @param V - The eigenvectors of K
+///
+/// @return Average neutrino oscillation probability
+///
+double PMNS_BaseAvg::AvgFormula(int flvi, int flvf, double dbin, vectorD lambda,
+                            matrixC V)
+{
+  vectorC SV = vectorC(fNumNus, 0);
+
+  for (int i = 0; i < fNumNus; i++) {
+    for (int k = 0; k < fNumNus; k++) {
+      SV[i] += fevolutionMatrixS[flvf][k] * V[k][i];
+    }
+  }
+
+  complexD buffer[fNumNus];
+
+  for (int n = 0; n < fNumNus; n++) { buffer[n] = SV[n] * conj(V[flvi][n]); }
+
+  complexD sinc[fNumNus][fNumNus];
+  for (int j = 0; j < fNumNus; j++) {
+    sinc[j][j] = 1;
+    for (int i = 0; i < j; i++) {
+      double arg = (lambda[i] - lambda[j]) * dbin / 2;
+      sinc[i][j] = sin(arg) / arg;
+      sinc[j][i] = sinc[i][j];
+    }
+  }
+
+  complexD P = 0;
+
+  for (int j = 0; j < fNumNus; j++) {
+    for (int i = 0; i < fNumNus; i++) {
+      P += buffer[i] * conj(buffer[j]) * sinc[j][i];
+    }
+  }
+
+  return real(P);
+}
 

@@ -45,7 +45,14 @@ namespace OscProb {
                                ///< eigenvectors and eigenvalues
       template <typename T>
       void TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda, matrixC& V);
-       
+
+    // Propagating
+          virtual double AvgFormula(
+          int flvi, int flvf, double dbin, vectorD flambda,
+          matrixC fV); ///< Formula for the average probability over a bin
+                       ///< of width dbin
+
+
      //////////
       ///
       ///
