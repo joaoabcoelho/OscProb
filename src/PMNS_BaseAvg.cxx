@@ -96,6 +96,29 @@ void PMNS_BaseAvg::SetwidthBin(double dE, double dcosT)
   fdcosT = dcosT;
 }
 
+//.............................................................................
+///
+/// Build K matrix for angle in flavor basis
+///
+/// The variable for which a Taylor expansion is done here is not directly the
+/// angle but the cosine of the angle
+///
+/// @param L - The length of the layer in km
+///
+void PMNS_BaseAvg::BuildKcosT(double L)
+{
+  UpdateHam();
+
+  double dL = LnDerivative() * kKm2eV;
+
+  for (int j = 0; j < fNumNus; j++) {
+    for (int i = 0; i <= j; i++) {
+      fKflavor[i][j] = dL * fHam(i, j);
+
+      if (i != j) { fKflavor[j][i] = conj(fKflavor[i][j]); }
+    }
+  }
+}
 
 //.............................................................................
 ///

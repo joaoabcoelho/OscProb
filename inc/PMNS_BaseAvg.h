@@ -11,6 +11,10 @@ namespace OscProb {
       PMNS_BaseAvg(int numNus); ///< Constructor
       virtual void SetPremModel(OscProb::PremModel& prem);
     protected:
+      /// Build the full Hamiltonian
+      virtual void UpdateHam() = 0;
+
+
       virtual void InitializeTaylorsVectors(); ///< Initialize all member
                                                ///< vectors with zeros
 
@@ -24,9 +28,9 @@ namespace OscProb {
       virtual void BuildKE(
           double L); ///< build K matrix for the inverse of energy in mass basis
 
-      /// Currently missing BuildKCosT due to that Updating the Ham, which is made 
-      /// a level up
-          
+      virtual void BuildKcosT(
+          double L); ///< build K matrix for angle in flavor basis
+ 
       virtual double LnDerivative(); ///< Compute the derivation of one layer's
                                      ///< length
 
@@ -87,7 +91,8 @@ namespace OscProb {
 
       // Variables for the compute of the derivation of one layer's length
       double fminRsq;
-
+      
+      Eigen::MatrixXcd fHam; ///< The full Hamiltonian
 
   };
 

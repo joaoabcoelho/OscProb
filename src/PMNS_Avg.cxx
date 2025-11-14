@@ -38,30 +38,6 @@ PMNS_Avg::~PMNS_Avg() {}
 
 //.............................................................................
 ///
-/// Build K matrix for angle in flavor basis
-///
-/// The variable for which a Taylor expansion is done here is not directly the
-/// angle but the cosine of the angle
-///
-/// @param L - The length of the layer in km
-///
-void PMNS_Avg::BuildKcosT(double L)
-{
-  UpdateHam();
-
-  double dL = LnDerivative() * kKm2eV;
-
-  for (int j = 0; j < fNumNus; j++) {
-    for (int i = 0; i <= j; i++) {
-      fKflavor[i][j] = dL * fHam(i, j);
-
-      if (i != j) { fKflavor[j][i] = conj(fKflavor[i][j]); }
-    }
-  }
-}
-
-//.............................................................................
-///
 /// Compute the derivation of one layer's length depending on the angle
 
 

@@ -114,10 +114,6 @@ namespace OscProb {
                          ///< of E and cosT with
                          ///< width dE and dcosT
 
-      // Construction of the K matrices
-      virtual void BuildKcosT(
-          double L); ///< build K matrix for angle in flavor basis
-
 
       // Propagating
       virtual void PropagatePathTaylor(
