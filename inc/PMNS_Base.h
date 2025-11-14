@@ -29,7 +29,7 @@ namespace OscProb {
       PMNS_Base(int numNus = 3); ///< Constructor
       virtual ~PMNS_Base();      ///< Destructor
 
-
+      virtual void SetPremModel(OscProb::PremModel& prem);
       // Get the oscillation probability
       virtual double Prob(
           vectorC nu_in,
@@ -212,6 +212,18 @@ namespace OscProb {
       virtual void InitializeTaylorsVectors(); ///< Initialize all member
                                                ///< vectors with zeros
 
+      virtual void SetwidthBin(double dE,
+                               double dcosT); ///< Set bin's widths for
+                                              ///< energy and angle
+
+      virtual void SetCosT(double cosT); ///< Set neutrino angle.
+
+     // Construction of the K matrices
+      virtual void BuildKE(
+          double L); ///< build K matrix for the inverse of energy in mass basis
+
+
+
       matrixC fdensityMatrix; ///< The neutrino density matrix state
       // Some useful complex numbers
       static const complexD zero; ///< zero in complex
@@ -310,6 +322,11 @@ namespace OscProb {
 
       double fAvgProbPrec; ///< AvgProb precision
 
+      double fcosT;  ///<  Cosine of neutrino angle
+
+      double fdInvE; ///< Bin's width for the inverse of energy in GeV-1
+      double fdcosT; ///< Bin's width for angle
+
       vectorD flambdaInvE;     ///< Eigenvectors of K_invE
       vectorD flambdaCosT; ///< Eigenvectors of K_cosTheta
       matrixC fVInvE;          ///< Eigenvalues of K_invE
@@ -349,6 +366,7 @@ namespace OscProb {
       /// Attribute to store the target vector
       const vectorD target;
   };
+
 
 } // namespace OscProb
 

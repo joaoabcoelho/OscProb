@@ -31,7 +31,6 @@ namespace OscProb {
     public:
       PMNS_Avg(int numNus); ///< Constructor
       virtual ~PMNS_Avg();  ///< Destructor
-      virtual void SetPremModel(OscProb::PremModel& prem);
       // Get probability averaged over a bin
       using PMNS_Base::AvgProb;
       using PMNS_Base::AvgProbLoE;
@@ -98,12 +97,6 @@ namespace OscProb {
                          ///< flvf for an angle cosT+dcosT
 
     protected:
-      virtual void SetwidthBin(double dE,
-                               double dcosT); ///< Set bin's widths for
-                                              ///< energy and angle
-
-      virtual void SetCosT(double cosT); ///< Set neutrino angle.
-
       virtual vectorD GetSamplePointsAvgClass(
           double LoE,
           double dLoE); ///< Compute the sample points for
@@ -189,15 +182,6 @@ namespace OscProb {
 
                                  ///< and angle for the entire path
 
-
-      double fdInvE; ///< Bin's width for the inverse of energy in GeV-1
-
-
-      double fcosT;  ///<  Cosine of neutrino angle
-      double fdcosT; ///< Bin's width for angle
-
-      // Copy of the earth model used
-      OscProb::PremModel fPrem;
 
       // Variables for the compute of the derivation of one layer's length
       double fminRsq;
