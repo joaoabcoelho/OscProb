@@ -37,54 +37,8 @@ namespace OscProb {
       using PMNS_Base::AvgProbVector;
       using PMNS_Base::AvgProbVectorLoE;
 
-      virtual double AvgProb(
-          int flvi, int flvf, double E, double cosT,
-          double dcosT); ///< Compute the average probability over a
-                         ///< bin of cosTheta with a Taylor expansion
-
-      virtual double AvgProb(
-          int flvi, int flvf, double E, double dE,
-                             double cosT,
-                             double dcosT); ///< Compute the average probability
-                                            ///< over a bin of cosTheta and
-                                            ///< energy with a Taylor expansion
-
-      virtual double AvgProbLoE(
-          int flvi, int flvf, double LoE, double dLoE, double cosT,
-          double dcosT); ///< Compute the average probability over a
-                         ///< bin of cosTheta and LoE with a Taylor
-                         ///< expansion
-
       // Get probability
-      virtual double ExtrapolationProb(
-          int flvi, int flvf, double E,
-          double dE); ///< Compute the probability of flvi going to
-                      ///< flvf for an energy E+dE
-
-      virtual double ExtrapolationProbLoE(
-          int flvi, int flvf, double LoE,
-          double dLoE); ///< Compute the probability of flvi going to
-                        ///< flvf at LoE+dLoE
-
-      virtual double ExtrapolationProbCosT(
-          int flvi, int flvf, double cosT,
-          double dcosT); ///< Compute the probability of flvi going to
-                         ///< flvf for an angle cosT+dcosT
-
     protected:
-
-      virtual vectorD GetSamplePointsAvgClass(
-          double E, double cosT,
-          double dcosT); ///< Compute the sample points for
-                         ///< a bin of cosT with width dcosT
-
-      virtual matrixC GetSamplePointsAvgClass(
-          double InvE, double dInvE, double cosT,
-          double dcosT); ///< Compute the sample
-                         ///< points for a bin
-                         ///< of E and cosT with
-                         ///< width dE and dcosT
-
       //virtual double AvgFormula(
       //    int flvi, int flvf, double dbin, vectorD flambda,
        //   matrixC fV); ///< Formula for the average probability over a bin
@@ -95,32 +49,7 @@ namespace OscProb {
      //     double L); ///< Algorithm for the compute of the average
      //               ///< probability over a bin of LoE
 
-      virtual double AvgAlgo(
-          int flvi, int flvf, double InvE, double dInvE, double cosT,
-          double dcosT); ///< Algorithm for the compute of the average
-                         ///< probability over a bin of 1oE and cosT
 
-
-      virtual double AvgAlgoCosT(
-          int flvi, int flvf, double E, double cosT,
-          double dcosT); ///< Algorithm for the compute of the average
-                         ///< probability over a bin of cosT
-
-
-      virtual double AlgorithmDensityMatrix(
-          int flvi, int flvf); ///< Algorithm for the transformations on the
-                               ///< density matrix
-
-      virtual void RotateDensityM(
-          bool to_basis, matrixC V); ///< Apply rotation to the density matrix
-
-      virtual void HadamardProduct(vectorD lambda,
-                                   double  dbin); ///< Apply an Hadamard Product
-                                                 ///< to the density matrix
-
-      virtual double AvgFormulaExtrapolation(
-          int flvi, int flvf, double dbin, vectorD flambda,
-          matrixC fV); ///< Formula for the extrapolation of probability
 
       // Attributes
 

@@ -20,87 +20,161 @@ namespace OscProb {
           double dE); ///< Compute the average probability over
                       ///< a bin of energy with a Taylor expansion
 
-      virtual double AvgProbLoE(
-          int flvi, int flvf, double LoE,
-          double dLoE); ///< Compute the average probability over
-                        ///< a bin of LoE with a Taylor expansion
+     virtual double AvgProb(
+          int flvi, int flvf, double E, double cosT,
+          double dcosT); ///< Compute the average probability over a
+                         ///< bin of cosTheta with a Taylor expansion
+			 ///
+      virtual double AvgProb(
+          int flvi, int flvf, double E, double dE,
+                             double cosT,
+                             double dcosT); ///< Compute the average probability
+                                            ///< over a bin of cosTheta and
+                                            ///< energy with a Taylor expansion
 
-      // Get probability vector averaged over a bin
+      virtual double AvgProbLoE(
+              int flvi, int flvf, double LoE,
+              double dLoE); ///< Compute the average probability over
+                        ///< a bin of LoE with a Taylor expansion
+     virtual double AvgProbLoE(
+		  int flvi, int flvf, double LoE, double dLoE, double cosT,
+		  double dcosT); ///< Compute the average probability over a
+				 ///< bin of cosTheta and LoE with a Taylor
+				 ///< expansion
+
+
+	      // Get probability vector averaged over a bin
       virtual vectorD AvgProbVector(
-          int flvi, double E,
-          double dE); ///< Compute the average probability vector over a bin
-                      ///< of energy using a Taylor expansion
+		  int flvi, double E,
+		  double dE); ///< Compute the average probability vector over a bin
+			      ///< of energy using a Taylor expansion
       virtual vectorD AvgProbVectorLoE(
-          int flvi, double LoE,
-          double dLoE); ///< Compute the average probability vector over a
-                        ///< bin of L/E using a Taylor expansion
-       
+		  int flvi, double LoE,
+		  double dLoE); ///< Compute the average probability vector over a
+				///< bin of L/E using a Taylor expansion
+	       
       virtual matrixD AvgProbMatrix(int nflvi, int nflvf, double E, double dE);
       virtual matrixD AvgProbMatrixLoE(int nflvi, int nflvf, double LoE,
-                                       double dLoE);
+					       double dLoE);
+
+      virtual double ExtrapolationProb(
+             int flvi, int flvf, double E,
+               double dE); ///< Compute the probability of flvi going to
+                      ///< flvf for an energy E+dE
+
+      virtual double ExtrapolationProbLoE(
+               int flvi, int flvf, double LoE,
+               double dLoE); ///< Compute the probability of flvi going to
+                        ///< flvf at LoE+dLoE
+
+      virtual double ExtrapolationProbCosT(
+              int flvi, int flvf, double cosT,
+              double dcosT); ///< Compute the probability of flvi going to
+                         ///< flvf for an angle cosT+dcosT
 
 
+	    protected:
+	      virtual vectorD GetSamplePointsAvgClass(
+		  double LoE,
+		  double dLoE); ///< Compute the sample points for
+				///< a bin of L/E with width dLoE
+	
+          virtual vectorD GetSamplePointsAvgClass(
+                double E, double cosT,
+                double dcosT); ///< Compute the sample points for
+                         ///< a bin of cosT with width dcosT
 
-    protected:
-      virtual vectorD GetSamplePointsAvgClass(
-          double LoE,
-          double dLoE); ///< Compute the sample points for
-                        ///< a bin of L/E with width dLoE
 
-      /// Build the full Hamiltonian
-      virtual void UpdateHam() = 0;
+              virtual matrixC GetSamplePointsAvgClass(
+                  double InvE, double dInvE, double cosT,
+                  double dcosT); ///< Compute the sample
+                         ///< points for a bin
+                         ///< of E and cosT with
+                         ///< width dE and dcosT
 
 
-      virtual void InitializeTaylorsVectors(); ///< Initialize all member
-                                               ///< vectors with zeros
+	      /// Build the full Hamiltonian
+	      virtual void UpdateHam() = 0;
 
-      virtual void SetwidthBin(double dE,
-                               double dcosT); ///< Set bin's widths for
-                                              ///< energy and angle
-      
-      virtual void SetCosT(double cosT); ///< Set neutrino angle.
 
-     // Construction of the K matrices
-      virtual void BuildKE(
-          double L); ///< build K matrix for the inverse of energy in mass basis
+	      virtual void InitializeTaylorsVectors(); ///< Initialize all member
+						       ///< vectors with zeros
 
-      virtual void BuildKcosT(
-          double L); ///< build K matrix for angle in flavor basis
- 
-      virtual double LnDerivative(); ///< Compute the derivation of one layer's
-                                     ///< length
+	      virtual void SetwidthBin(double dE,
+				       double dcosT); ///< Set bin's widths for
+						      ///< energy and angle
+	      
+	      virtual void SetCosT(double cosT); ///< Set neutrino angle.
 
-      // Propagating
-      virtual void PropagatePathTaylor(
-          NuPath p); ///< Propagate neutrino through a single path
-      virtual void PropagateTaylor(); ///< Propagate neutrino through full path
+	     // Construction of the K matrices
+	      virtual void BuildKE(
+		  double L); ///< build K matrix for the inverse of energy in mass basis
 
-      // Rotation from mass to flavor basis
-      virtual void rotateS(); ///< Rotate the S matrix
-      virtual void rotateK(); ///< Rotate one K matrix
+	      virtual void BuildKcosT(
+		  double L); ///< build K matrix for angle in flavor basis
+	 
+	      virtual double LnDerivative(); ///< Compute the derivation of one layer's
+					     ///< length
 
-      // Multiplication rule between two pairs of (S,K)
-      virtual void MultiplicationRuleS(); ///< Product between two S matrices
-      virtual void MultiplicationRuleK(          
-          Eigen::MatrixXcd& K); ///< Product between two K matrices
+	      // Propagating
+	      virtual void PropagatePathTaylor(
+		  NuPath p); ///< Propagate neutrino through a single path
+	      virtual void PropagateTaylor(); ///< Propagate neutrino through full path
 
-      /// Solve the K matrix
-      void SolveK(Eigen::MatrixXcd& K, vectorD& lambda,
-                  matrixC& V); ///< Solve the K matrix for
-                               ///< eigenvectors and eigenvalues
-      template <typename T>
-      void TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda, matrixC& V);
+	      // Rotation from mass to flavor basis
+	      virtual void rotateS(); ///< Rotate the S matrix
+	      virtual void rotateK(); ///< Rotate one K matrix
 
-    // Propagating
-          virtual double AvgFormula(
-          int flvi, int flvf, double dbin, vectorD flambda,
-          matrixC fV); ///< Formula for the average probability over a bin
-                       ///< of width dbin
+	      // Multiplication rule between two pairs of (S,K)
+	      virtual void MultiplicationRuleS(); ///< Product between two S matrices
+	      virtual void MultiplicationRuleK(          
+		  Eigen::MatrixXcd& K); ///< Product between two K matrices
 
-      virtual double AvgAlgo(
-          int flvi, int flvf, double LoE, double dLoE,
-          double L); ///< Algorithm for the compute of the average
-                     ///< probability over a bin of LoE
+	      /// Solve the K matrix
+	      void SolveK(Eigen::MatrixXcd& K, vectorD& lambda,
+			  matrixC& V); ///< Solve the K matrix for
+				       ///< eigenvectors and eigenvalues
+	      template <typename T>
+	      void TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda, matrixC& V);
+
+	    // Propagating
+		  virtual double AvgFormula(
+		  int flvi, int flvf, double dbin, vectorD flambda,
+		  matrixC fV); ///< Formula for the average probability over a bin
+			       ///< of width dbin
+
+               virtual double AvgFormulaExtrapolation(
+                   int flvi, int flvf, double dbin, vectorD flambda,
+                   matrixC fV); ///< Formula for the extrapolation of probability
+
+
+	      virtual double AvgAlgo(
+		  int flvi, int flvf, double LoE, double dLoE,
+		  double L); ///< Algorithm for the compute of the average
+			     ///< probability over a bin of LoE
+
+               virtual double AvgAlgo(
+                int flvi, int flvf, double InvE, double dInvE, double cosT,
+                  double dcosT); ///< Algorithm for the compute of the average
+                         ///< probability over a bin of 1oE and cosT
+
+
+	      virtual double AvgAlgoCosT(
+          int flvi, int flvf, double E, double cosT,
+          double dcosT); ///< Algorithm for the compute of the average
+                         ///< probability over a bin of cosT
+
+
+           virtual double AlgorithmDensityMatrix(
+          int flvi, int flvf); ///< Algorithm for the transformations on the
+                               ///< density matrix
+
+      virtual void RotateDensityM(
+          bool to_basis, matrixC V); ///< Apply rotation to the density matrix
+
+      virtual void HadamardProduct(vectorD lambda,
+                                   double  dbin); ///< Apply an Hadamard Product
+                                                 ///< to the density matrix
 
 
      //////////

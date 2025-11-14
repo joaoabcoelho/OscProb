@@ -34,10 +34,10 @@
 #define PMNS_Fast_H
 
 #include "PMNS_Base.h"
-
+#include "PMNS_BaseAvg.h"
 namespace OscProb {
 
-  class PMNS_Fast : public PMNS_Base {
+  class PMNS_Fast : public PMNS_BaseAvg {
     public:
       PMNS_Fast();          ///< Constructor
       virtual ~PMNS_Fast(); ///< Destructor
