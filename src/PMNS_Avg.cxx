@@ -25,10 +25,6 @@ using namespace std;
 /// This bit would copy over to PMNS_MyClass, as the myOsc = ROOT.OscProb.PMNS_MyClass(4)
 PMNS_Avg::PMNS_Avg(int numNus) : PMNS_Sterile(numNus)
 {
-  fPrem.LoadModel("");
-
-  InitializeTaylorsVectors();
-
   SetwidthBin(0, 0);
 
   SetAvgProbPrec(1e-4);
@@ -67,29 +63,6 @@ void PMNS_Avg::BuildKcosT(double L)
 //.............................................................................
 ///
 /// Compute the derivation of one layer's length depending on the angle
-///
-double PMNS_Avg::LnDerivative()
-{
-  double dL = 0;
-
-  double L1 = pow(fPrem.GetPremLayers()[fLayer].radius, 2) - fminRsq;
-
-  double L2 = -fminRsq;
-  if (fLayer > 0) L2 += pow(fPrem.GetPremLayers()[fLayer - 1].radius, 2);
-
-  bool ismin = (L2 <= 0 && fcosT < 0);
-
-  if (ismin)
-    dL = 2 * pow(fDetRadius, 2) * fcosT * pow(L1, -0.5);
-  else
-    dL = pow(fDetRadius, 2) * fcosT * (pow(L1, -0.5) - pow(L2, -0.5));
-
-  if (ismin) fdl = 1;
-
-  fLayer += fdl;
-
-  return dL;
-}
 
 //.............................................................................
 ///

@@ -115,13 +115,9 @@ namespace OscProb {
                          ///< width dE and dcosT
 
       // Construction of the K matrices
-      virtual void BuildKE(
-          double L); ///< build K matrix for the inverse of energy in mass basis
       virtual void BuildKcosT(
           double L); ///< build K matrix for angle in flavor basis
 
-      virtual double LnDerivative(); ///< Compute the derivation of one layer's
-                                     ///< length
 
       // Rotation from mass to flavor basis
       virtual void rotateS(); ///< Rotate the S matrix
@@ -183,8 +179,6 @@ namespace OscProb {
                                  ///< and angle for the entire path
 
 
-      // Variables for the compute of the derivation of one layer's length
-      double fminRsq;
 
   };
 
