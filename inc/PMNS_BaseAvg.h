@@ -38,6 +38,13 @@ namespace OscProb {
       virtual void MultiplicationRuleS(); ///< Product between two S matrices
       virtual void MultiplicationRuleK(          
           Eigen::MatrixXcd& K); ///< Product between two K matrices
+
+      /// Solve the K matrix
+      void SolveK(Eigen::MatrixXcd& K, vectorD& lambda,
+                  matrixC& V); ///< Solve the K matrix for
+                               ///< eigenvectors and eigenvalues
+      template <typename T>
+      void TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda, matrixC& V);
        
      //////////
       ///

@@ -304,3 +304,41 @@ void PMNS_BaseAvg::MultiplicationRuleK(Eigen::MatrixXcd& K)
   }
 }
 
+//.............................................................................
+///
+/// Solve one K matrix for eigenvectors and eigenvalues.
+///
+/// This is using a method from the GLoBES software available at
+/// http://www.mpi-hd.mpg.de/personalhomes/globes/3x3/ \n
+/// We should cite them accordingly
+///
+/// @param K - The K matrix
+/// @param lambda - The eigenvalues of K
+/// @param V - The eigenvectors of K
+///
+void PMNS_BaseAvg::SolveK(Eigen::MatrixXcd& K, vectorD& lambda, matrixC& V)
+{
+  if (fNumNus == 4) TemplateSolver<Eigen::Matrix4cd>(K, lambda, V);
+  if (fNumNus == 3) TemplateSolver<Eigen::Matrix3cd>(K, lambda, V);
+  if (fNumNus == 2)
+    TemplateSolver<Eigen::Matrix2cd>(K, lambda, V);
+  else
+    TemplateSolver<Eigen::MatrixXcd>(K, lambda, V);
+}
+
+template <typename T>
+void PMNS_BaseAvg::TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda, matrixC& V)
+{
+  Eigen::Ref<T> R(K);
+
+  Eigen::SelfAdjointEigenSolver<T> eigensolver(R);
+
+  // Fill flambdaInvE and fVInvE vectors from GLoBES arrays
+  for (int i = 0; i < fNumNus; i++) {
+    lambda[i] = eigensolver.eigenvalues()(i);
+    for (int j = 0; j < fNumNus; j++) {
+      V[i][j] = eigensolver.eigenvectors()(i, j);
+    }
+  }
+}
+

@@ -119,12 +119,6 @@ namespace OscProb {
           double L); ///< build K matrix for angle in flavor basis
 
 
-      /// Solve the K matrix
-      void SolveK(Eigen::MatrixXcd& K, vectorD& lambda,
-                  matrixC& V); ///< Solve the K matrix for
-                               ///< eigenvectors and eigenvalues
-      template <typename T>
-      void TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda, matrixC& V);
       // Propagating
       virtual void PropagatePathTaylor(
           NuPath p); ///< Propagate neutrino through a single path
