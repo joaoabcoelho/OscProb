@@ -184,3 +184,123 @@ double PMNS_BaseAvg::LnDerivative()
   return dL;
 }
 
+
+//.............................................................................
+///
+/// Compute the derivation of one layer's length depending on the angle
+
+//.............................................................................
+///
+/// Rotate the S matrix for the current layer from mass to flavor basis
+///
+void PMNS_BaseAvg::rotateS()
+{
+  complexD buffer[fNumNus];
+
+  for (int j = 0; j < fNumNus; j++) {
+    for (int k = 0; k < fNumNus; k++) {
+      buffer[k] = fPhases[k] * conj(fEvec[j][k]);
+    }
+
+    for (int i = 0; i < fNumNus; i++) {
+      fSflavor[i][j] = 0;
+      for (int k = 0; k < fNumNus; k++) {
+        fSflavor[i][j] += fEvec[i][k] * buffer[k];
+      }
+    }
+  }
+}
+
+//.............................................................................
+///
+/// Rotate the K matrix from mass to flavor basis
+///
+void PMNS_BaseAvg::rotateK()
+{
+  complexD buffer[fNumNus];
+
+  for (int j = 0; j < fNumNus; j++) {
+    for (int k = 0; k < fNumNus; k++) {
+      buffer[k] = 0;
+
+      for (int l = 0; l < fNumNus; l++) {
+        buffer[k] += fKmass[k][l] * conj(fEvec[j][l]);
+      }
+    }
+
+    for (int i = 0; i <= j; i++) {
+      fKflavor[i][j] = 0;
+
+      for (int k = 0; k < fNumNus; k++) {
+        fKflavor[i][j] += fEvec[i][k] * buffer[k];
+      }
+
+      if (i != j) { fKflavor[j][i] = conj(fKflavor[i][j]); }
+    }
+  }
+}
+
+//.............................................................................
+///
+/// Product between two S matrices.
+///
+/// This is used to calculate the matrix S corresponding to the propagation
+/// between the beginning of the path and the end of the current layer.
+///
+/// The matrix fevolutionMatrixS represent the propagation between the beginning
+/// of the path and the beginning of the current layer. This matrix is updated
+/// after every layer with this function. The matrix fSflavor represent the
+/// propagation between the beginning and the end of the layer.
+///
+void PMNS_BaseAvg::MultiplicationRuleS()
+{
+  complexD save[fNumNus];
+
+  for (int j = 0; j < fNumNus; j++) {
+    for (int n = 0; n < fNumNus; n++) { save[n] = fevolutionMatrixS[n][j]; }
+
+    for (int i = 0; i < fNumNus; i++) {
+      fevolutionMatrixS[i][j] = 0;
+
+      for (int k = 0; k < fNumNus; k++) {
+        fevolutionMatrixS[i][j] += fSflavor[i][k] * save[k];
+      }
+    }
+  }
+}
+
+//.............................................................................
+///
+/// Product between two K matrices.
+///
+/// This is used to calculate the matrix K corresponding to the propagation
+/// between the beginning of the path and the end of the current layer.
+///
+/// The matrix fKflavor correspond to the propagation between the beginning and
+/// the end of the layer.
+///
+/// @param K - The K matrix corresponding to the propagation between the
+/// beginning
+///            of the path and the beginning of the current layer
+///
+void PMNS_BaseAvg::MultiplicationRuleK(Eigen::MatrixXcd& K)
+{
+  for (int i = 0; i < fNumNus; i++) {
+    complexD buffer[fNumNus];
+
+    for (int l = 0; l < fNumNus; l++) {
+      for (int k = 0; k < fNumNus; k++) {
+        buffer[l] += conj(fevolutionMatrixS[k][i]) * fKflavor[k][l];
+      }
+    }
+
+    for (int j = 0; j <= i; j++) {
+      for (int l = 0; l < fNumNus; l++) {
+        K(i, j) += buffer[l] * fevolutionMatrixS[l][j];
+      }
+
+      if (i != j) { K(j, i) = conj(K(i, j)); }
+    }
+  }
+}
+

@@ -29,7 +29,17 @@ namespace OscProb {
           
       virtual double LnDerivative(); ///< Compute the derivation of one layer's
                                      ///< length
-      //////////
+
+      // Rotation from mass to flavor basis
+      virtual void rotateS(); ///< Rotate the S matrix
+      virtual void rotateK(); ///< Rotate one K matrix
+
+      // Multiplication rule between two pairs of (S,K)
+      virtual void MultiplicationRuleS(); ///< Product between two S matrices
+      virtual void MultiplicationRuleK(          
+          Eigen::MatrixXcd& K); ///< Product between two K matrices
+       
+     //////////
       ///
       ///
 

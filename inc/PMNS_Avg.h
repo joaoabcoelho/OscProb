@@ -119,15 +119,6 @@ namespace OscProb {
           double L); ///< build K matrix for angle in flavor basis
 
 
-      // Rotation from mass to flavor basis
-      virtual void rotateS(); ///< Rotate the S matrix
-      virtual void rotateK(); ///< Rotate one K matrix
-
-      // Multiplication rule between two pairs of (S,K)
-      virtual void MultiplicationRuleS(); ///< Product between two S matrices
-      virtual void MultiplicationRuleK(
-          Eigen::MatrixXcd& K); ///< Product between two K matrices
-
       /// Solve the K matrix
       void SolveK(Eigen::MatrixXcd& K, vectorD& lambda,
                   matrixC& V); ///< Solve the K matrix for
