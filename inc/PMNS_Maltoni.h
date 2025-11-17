@@ -6,9 +6,9 @@
 
 namespace OscProb {
 
-  class PMNS_BaseAvg : public PMNS_Base {
+  class PMNS_Maltoni : public PMNS_Base {
     public:
-      PMNS_BaseAvg(int numNus); ///< Constructor
+      PMNS_Maltoni(int numNus); ///< Constructor
       virtual void SetPremModel(OscProb::PremModel& prem);
 
       // Get probability averaged over a bin
@@ -72,9 +72,12 @@ namespace OscProb {
               double dcosT); ///< Compute the probability of flvi going to
                          ///< flvf for an angle cosT+dcosT
 
+      virtual void UseOscProbAverage(bool AverageFlag); // Set flag for which averaging to use
+
 
 	    protected:
-	      virtual vectorD GetSamplePointsAvgClass(
+
+          virtual vectorD GetSamplePointsAvgClass(
 		  double LoE,
 		  double dLoE); ///< Compute the sample points for
 				///< a bin of L/E with width dLoE
@@ -213,6 +216,8 @@ namespace OscProb {
       double fminRsq;
       
       Eigen::MatrixXcd fHam; ///< The full Hamiltonian
+			     ///
+      bool gAverageFlag;   /// Flag to call OscProb default or Maltoni average
 
   };
 
