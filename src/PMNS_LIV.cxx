@@ -31,7 +31,7 @@ using namespace std;
 ///
 PMNS_LIV::PMNS_LIV() : PMNS_Fast()
 {
-  UseOscProbAverage(false);
+  UseOscProbAverage(true);
   SetStdPath();
 
   for (int dim = 3; dim < 8; dim += 2) {

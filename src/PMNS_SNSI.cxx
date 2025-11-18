@@ -17,7 +17,7 @@ using namespace OscProb;
 /// This class is restricted to 3 neutrino flavours.
 ///
 PMNS_SNSI::PMNS_SNSI() : PMNS_NSI() { 
-  UseOscProbAverage(false);
+  UseOscProbAverage(true);
   SetLowestMass(0);
 }
 
