@@ -17,9 +17,9 @@
 #ifndef PMNS_BASE_H
 #define PMNS_BASE_H
 
-#include "EigenPoint.h"
-#include "PremModel.h"
 #include <unordered_set>
+
+#include "EigenPoint.h"
 
 namespace OscProb {
 
@@ -207,7 +207,6 @@ namespace OscProb {
       virtual void SetAvgProbPrec(double prec);
 
     protected:
-      matrixC fdensityMatrix; ///< The neutrino density matrix state
       // Some useful complex numbers
       static const complexD zero; ///< zero in complex
       static const complexD one;  ///< one in complex

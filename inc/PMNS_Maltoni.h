@@ -4,6 +4,8 @@
 #ifndef PMNS_BASEAVG_H
 #define PMNS_BASEAVG_H
 
+#include "PremModel.h"
+
 namespace OscProb {
 
   class PMNS_Maltoni : public PMNS_Base {
@@ -194,6 +196,8 @@ namespace OscProb {
       matrixC fSflavor;          ///< S matrix for one layer
       matrixC fKmass;            ///< K matrix in mass basis for one layer
       matrixC fKflavor;          ///< K matrix in flavor basis for one layer
+
+      matrixC fdensityMatrix; ///< The neutrino density matrix state
 
       // Variables for the compute of the derivation of one layer's length
       int    fLayer;

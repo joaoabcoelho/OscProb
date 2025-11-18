@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+
 using namespace std;
 
 using namespace OscProb;
@@ -2070,3 +2071,5 @@ vectorD PMNS_Base::GetSamplePoints(double LoE, double dLoE)
   // Return all sample points
   return allSamples;
 }
+
+////////////////////////////////////////////////////////////////////////
