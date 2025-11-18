@@ -35,6 +35,7 @@
 
 #include "PMNS_Base.h"
 #include "PMNS_Maltoni.h"
+
 namespace OscProb {
 
   class PMNS_Fast : public PMNS_Maltoni {

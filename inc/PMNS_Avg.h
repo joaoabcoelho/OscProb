@@ -39,24 +39,19 @@ namespace OscProb {
 
       // Get probability
     protected:
-      //virtual double AvgFormula(
-      //    int flvi, int flvf, double dbin, vectorD flambda,
-       //   matrixC fV); ///< Formula for the average probability over a bin
-       //                ///< of width dbin
+      // virtual double AvgFormula(
+      //     int flvi, int flvf, double dbin, vectorD flambda,
+      //    matrixC fV); ///< Formula for the average probability over a bin
+      //                 ///< of width dbin
 
-     // virtual double AvgAlgo(
-     //     int flvi, int flvf, double LoE, double dLoE,
-     //     double L); ///< Algorithm for the compute of the average
-     //               ///< probability over a bin of LoE
-
-
+      // virtual double AvgAlgo(
+      //     int flvi, int flvf, double LoE, double dLoE,
+      //     double L); ///< Algorithm for the compute of the average
+      //               ///< probability over a bin of LoE
 
       // Attributes
 
-                                 ///< and angle for the entire path
-
-
-
+      ///< and angle for the entire path
   };
 
 } // namespace OscProb

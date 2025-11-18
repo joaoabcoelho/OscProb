@@ -6,17 +6,16 @@
 //.............................................................................
 //
 // jcoelho\@apc.in2p3.fr
-//  
+//
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "PMNS_Maltoni.h"
-#include <Eigen/Eigenvalues>
 #include "PremModel.h"
+#include <Eigen/Eigenvalues>
 
 using namespace std;
 
 using namespace OscProb;
-
 
 //.............................................................................
 ///
@@ -29,7 +28,6 @@ PMNS_Maltoni::PMNS_Maltoni(int numNus) : PMNS_Base(numNus)
   SetwidthBin(0, 0);
   SetAvgProbPrec(1e-4);
   UseOscProbAverage(false);
-
 }
 
 //.............................................................................
@@ -69,7 +67,11 @@ void PMNS_Maltoni::InitializeTaylorsVectors()
 
 //////////////////////////////////////////////////////////////////////
 // Set flag for averaging
-void PMNS_Maltoni::UseOscProbAverage(bool AverageFlag) { gAverageFlag = AverageFlag; }
+void PMNS_Maltoni::UseOscProbAverage(bool AverageFlag)
+{
+  gAverageFlag = AverageFlag;
+}
+
 // ....................................................................
 
 ////////////////////////////////////////////////////////////////////////
@@ -187,7 +189,6 @@ void PMNS_Maltoni::BuildKE(double L)
   }
 }
 
-
 //.............................................................................
 ///
 /// Compute the derivation of one layer's length depending on the angle
@@ -214,7 +215,6 @@ double PMNS_Maltoni::LnDerivative()
 
   return dL;
 }
-
 
 //.............................................................................
 ///
@@ -416,7 +416,8 @@ void PMNS_Maltoni::SolveK(Eigen::MatrixXcd& K, vectorD& lambda, matrixC& V)
 }
 
 template <typename T>
-void PMNS_Maltoni::TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda, matrixC& V)
+void PMNS_Maltoni::TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda,
+                                  matrixC& V)
 {
   Eigen::Ref<T> R(K);
 
@@ -430,6 +431,7 @@ void PMNS_Maltoni::TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda, matrixC&
     }
   }
 }
+
 //.............................................................................
 ///
 /// Formula for the average probability of flvi going to flvf over
@@ -450,7 +452,7 @@ void PMNS_Maltoni::TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda, matrixC&
 /// @return Average neutrino oscillation probability
 ///
 double PMNS_Maltoni::AvgFormula(int flvi, int flvf, double dbin, vectorD lambda,
-                            matrixC V)
+                                matrixC V)
 {
   vectorC SV = vectorC(fNumNus, 0);
 
@@ -507,21 +509,23 @@ double PMNS_Maltoni::AvgFormula(int flvi, int flvf, double dbin, vectorD lambda,
 /// @return Average neutrino oscillation probability
 ///
 double PMNS_Maltoni::AvgProb(int flvi, int flvf, double E, double dE)
-  {if (gAverageFlag == true) return PMNS_Base::AvgProb(flvi, flvf, E, dE);
-  else; 
-    //Do nothing if energy not positive
-    if (E <= 0) return 0;
+{
+  if (gAverageFlag == true)
+    return PMNS_Base::AvgProb(flvi, flvf, E, dE);
+  else
+    ;
+  // Do nothing if energy not positive
+  if (E <= 0) return 0;
 
-    if (fNuPaths.empty()) return 0;
+  if (fNuPaths.empty()) return 0;
 
-    // Don't average zero width
-    if (dE <= 0) return Prob(flvi, flvf, E);
+  // Don't average zero width
+  if (dE <= 0) return Prob(flvi, flvf, E);
 
-    vectorD LoEbin = ConvertEtoLoE(E, dE);
+  vectorD LoEbin = ConvertEtoLoE(E, dE);
 
-    // Compute average in LoE
-    return AvgProbLoE(flvi, flvf, LoEbin[0], LoEbin[1]);
-  
+  // Compute average in LoE
+  return AvgProbLoE(flvi, flvf, LoEbin[0], LoEbin[1]);
 }
 
 //.............................................................................
@@ -548,8 +552,11 @@ double PMNS_Maltoni::AvgProb(int flvi, int flvf, double E, double dE)
 /// @return Average neutrino oscillation probability
 ///
 double PMNS_Maltoni::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
-  {if (gAverageFlag == true) return PMNS_Base::AvgProbLoE(flvi, flvf, LoE, dLoE);
-  else;
+{
+  if (gAverageFlag == true)
+    return PMNS_Base::AvgProbLoE(flvi, flvf, LoE, dLoE);
+  else
+    ;
   if (LoE <= 0) return 0;
 
   if (fNuPaths.empty()) return 0;
@@ -591,7 +598,8 @@ double PMNS_Maltoni::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_Maltoni::AvgAlgo(int flvi, int flvf, double LoE, double dLoE, double L)
+double PMNS_Maltoni::AvgAlgo(int flvi, int flvf, double LoE, double dLoE,
+                             double L)
 {
   // Set width bin as 1/E
   double d1oE = dLoE / L;
@@ -653,8 +661,11 @@ vectorD PMNS_Maltoni::GetSamplePointsAvgClass(double LoE, double dLoE)
 ///
 ///
 vectorD PMNS_Maltoni::AvgProbVector(int flvi, double E, double dE)
-  {if (gAverageFlag == true) return PMNS_Base::AvgProbVector(flvi, E, dE);
-  else;
+{
+  if (gAverageFlag == true)
+    return PMNS_Base::AvgProbVector(flvi, E, dE);
+  else
+    ;
   vectorD probs(fNumNus, 0);
 
   // Do nothing if energy is not positive
@@ -676,8 +687,11 @@ vectorD PMNS_Maltoni::AvgProbVector(int flvi, double E, double dE)
 ///
 ///
 vectorD PMNS_Maltoni::AvgProbVectorLoE(int flvi, double LoE, double dLoE)
-  {if (gAverageFlag == true) return PMNS_Base::AvgProbVectorLoE(flvi, LoE, dLoE);
-  else;
+{
+  if (gAverageFlag == true)
+    return PMNS_Base::AvgProbVectorLoE(flvi, LoE, dLoE);
+  else
+    ;
   vectorD probs(fNumNus, 0);
 
   if (LoE <= 0) return probs;
@@ -725,8 +739,11 @@ vectorD PMNS_Maltoni::AvgProbVectorLoE(int flvi, double LoE, double dLoE)
 ///
 ///
 matrixD PMNS_Maltoni::AvgProbMatrix(int nflvi, int nflvf, double E, double dE)
-  {if (gAverageFlag == true) return PMNS_Base::AvgProbMatrix(nflvi, nflvf, E, dE);
-  else;
+{
+  if (gAverageFlag == true)
+    return PMNS_Base::AvgProbMatrix(nflvi, nflvf, E, dE);
+  else
+    ;
   matrixD probs(nflvi, vectorD(nflvf, 0));
 
   // Do nothing if energy is not positive
@@ -748,9 +765,12 @@ matrixD PMNS_Maltoni::AvgProbMatrix(int nflvi, int nflvf, double E, double dE)
 ///
 ///
 matrixD PMNS_Maltoni::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE,
-                                   double dLoE)
-  {if (gAverageFlag == true) return PMNS_Base::AvgProbMatrixLoE(nflvi, nflvf, LoE, dLoE);
-  else;
+                                       double dLoE)
+{
+  if (gAverageFlag == true)
+    return PMNS_Base::AvgProbMatrixLoE(nflvi, nflvf, LoE, dLoE);
+  else
+    ;
   matrixD probs(nflvi, vectorD(nflvf, 0));
 
   if (LoE <= 0) return probs;
@@ -822,7 +842,7 @@ matrixD PMNS_Maltoni::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE,
 /// @return Average neutrino oscillation probability
 ///
 double PMNS_Maltoni::AvgProb(int flvi, int flvf, double E, double cosT,
-                         double dcosT)
+                             double dcosT)
 {
   // reset K et S et Ve et lambdaE
   InitializeTaylorsVectors();
@@ -859,7 +879,7 @@ double PMNS_Maltoni::AvgProb(int flvi, int flvf, double E, double cosT,
 /// @return Average neutrino oscillation probability
 ///
 double PMNS_Maltoni::AvgAlgoCosT(int flvi, int flvf, double E, double cosT,
-                             double dcosT)
+                                 double dcosT)
 {
   // reset K et S et Ve et lambdaE
   InitializeTaylorsVectors();
@@ -909,9 +929,10 @@ double PMNS_Maltoni::AvgAlgoCosT(int flvi, int flvf, double E, double cosT,
 ///
 /// @return Average neutrino oscillation probability
 ///
-double PMNS_Maltoni::AvgProb(int flvi, int flvf, double E, double dE, double cosT,
-                         double dcosT)
-{  if (E <= 0) return 0;
+double PMNS_Maltoni::AvgProb(int flvi, int flvf, double E, double dE,
+                             double cosT, double dcosT)
+{
+  if (E <= 0) return 0;
   if (cosT > 0) return 0;
 
   if (fNuPaths.empty()) return 0;
@@ -954,7 +975,7 @@ double PMNS_Maltoni::AvgProb(int flvi, int flvf, double E, double dE, double cos
 /// @return Average neutrino oscillation probability
 ///
 double PMNS_Maltoni::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE,
-                            double cosT, double dcosT)
+                                double cosT, double dcosT)
 {
   if (LoE <= 0) return 0;
   if (cosT > 0) return 0;
@@ -1011,7 +1032,7 @@ double PMNS_Maltoni::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE,
 /// @return Average neutrino oscillation probability
 ///
 double PMNS_Maltoni::AvgAlgo(int flvi, int flvf, double InvE, double dInvE,
-                         double cosT, double dcosT)
+                             double cosT, double dcosT)
 {
   fPrem.FillPath(cosT);
   SetPath(fPrem.GetNuPath());
@@ -1076,7 +1097,7 @@ double PMNS_Maltoni::AlgorithmDensityMatrix(int flvi, int flvf)
 ///
 
 matrixC PMNS_Maltoni::GetSamplePointsAvgClass(double InvE, double dInvE,
-                                          double cosT, double dcosT)
+                                              double cosT, double dcosT)
 {
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
@@ -1185,7 +1206,8 @@ void PMNS_Maltoni::HadamardProduct(vectorD lambda, double dbin)
 /// @param cosT   - The neutrino  cosT value in the bin center
 /// @param dcosT   - The cosT bin width
 ///
-vectorD PMNS_Maltoni::GetSamplePointsAvgClass(double E, double cosT, double dcosT)
+vectorD PMNS_Maltoni::GetSamplePointsAvgClass(double E, double cosT,
+                                              double dcosT)
 {
   // Set a number of sub-divisions to achieve "good" accuracy
   // This needs to be studied better
@@ -1231,7 +1253,7 @@ vectorD PMNS_Maltoni::GetSamplePointsAvgClass(double E, double cosT, double dcos
 /// @return Neutrino oscillation probability
 ///
 double PMNS_Maltoni::AvgFormulaExtrapolation(int flvi, int flvf, double dbin,
-                                         vectorD lambda, matrixC V)
+                                             vectorD lambda, matrixC V)
 {
   vectorC SV = vectorC(fNumNus, 0);
 
@@ -1263,7 +1285,6 @@ double PMNS_Maltoni::AvgFormulaExtrapolation(int flvi, int flvf, double dbin,
 
   return real(P);
 }
-
 
 //.............................................................................
 ///
@@ -1318,7 +1339,7 @@ double PMNS_Maltoni::ExtrapolationProb(int flvi, int flvf, double E, double dE)
 /// @return Neutrino oscillation probability
 ///
 double PMNS_Maltoni::ExtrapolationProbLoE(int flvi, int flvf, double LoE,
-                                      double dLoE)
+                                          double dLoE)
 {
   // reset K et S et Ve et lambdaE
   InitializeTaylorsVectors();
@@ -1359,7 +1380,7 @@ double PMNS_Maltoni::ExtrapolationProbLoE(int flvi, int flvf, double LoE,
 /// @return Neutrino oscillation probability
 ///
 double PMNS_Maltoni::ExtrapolationProbCosT(int flvi, int flvf, double cosT,
-                                       double dcosT)
+                                           double dcosT)
 {
   fPrem.FillPath(cosT);
   SetPath(fPrem.GetNuPath());
@@ -1381,4 +1402,3 @@ double PMNS_Maltoni::ExtrapolationProbCosT(int flvi, int flvf, double cosT,
 
   return AvgFormulaExtrapolation(flvi, flvf, fdcosT, flambdaCosT, fVcosT);
 }
-

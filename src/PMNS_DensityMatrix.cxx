@@ -26,7 +26,8 @@ using namespace std;
 ///
 PMNS_DensityMatrix::PMNS_DensityMatrix()
     : PMNS_Fast(), fRho(3, vectorC(3, 0)), fMBuffer(3, vectorC(3, 0))
-{UseOscProbAverage(true);
+{
+  UseOscProbAverage(true);
 }
 
 //.............................................................................

@@ -17,9 +17,9 @@
 #ifndef PMNS_BASE_H
 #define PMNS_BASE_H
 
-#include <unordered_set>
-#include "PremModel.h"
 #include "EigenPoint.h"
+#include "PremModel.h"
+#include <unordered_set>
 
 namespace OscProb {
 
@@ -321,7 +321,6 @@ namespace OscProb {
       /// Attribute to store the target vector
       const vectorD target;
   };
-
 
 } // namespace OscProb
 

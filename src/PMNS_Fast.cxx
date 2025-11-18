@@ -18,8 +18,9 @@ using namespace OscProb;
 ///
 /// This class is restricted to 3 neutrino flavours.
 ///
-//PMNS_Fast::PMNS_Fast() : PMNS_Base(), fHam() {}
+// PMNS_Fast::PMNS_Fast() : PMNS_Base(), fHam() {}
 PMNS_Fast::PMNS_Fast() : PMNS_Maltoni(3), fHam() {}
+
 //.............................................................................
 ///
 /// Nothing to clean.

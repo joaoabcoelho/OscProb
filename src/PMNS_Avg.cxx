@@ -8,9 +8,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "PMNS_Avg.h"
+#include <Eigen/Eigenvalues>
 #include <algorithm>
 #include <iostream>
-#include <Eigen/Eigenvalues>
 
 using namespace OscProb;
 
@@ -22,13 +22,12 @@ using namespace std;
 ///
 ///
 ///
-/// This bit would copy over to PMNS_MyClass, as the myOsc = ROOT.OscProb.PMNS_MyClass(4)
-PMNS_Avg::PMNS_Avg(int numNus) : PMNS_Sterile(numNus)
-{}
+/// This bit would copy over to PMNS_MyClass, as the myOsc =
+/// ROOT.OscProb.PMNS_MyClass(4)
+PMNS_Avg::PMNS_Avg(int numNus) : PMNS_Sterile(numNus) {}
+
 //.............................................................................
 ///
 /// Nothing to clean.
 ///
 PMNS_Avg::~PMNS_Avg() {}
-
-

@@ -53,7 +53,7 @@ PMNS_Base::PMNS_Base(int numNus)
   SetStdPath();      // Set some default path
   SetEnergy(2);      // Set default energy to 2 GeV
   SetIsNuBar(false); // Neutrino by default
-  
+
   InitializeVectors(); // Initialize all vectors
 
   SetStdPars(); // Set PDG parameters
@@ -2070,4 +2070,3 @@ vectorD PMNS_Base::GetSamplePoints(double LoE, double dLoE)
   // Return all sample points
   return allSamples;
 }
-
