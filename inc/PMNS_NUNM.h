@@ -58,6 +58,11 @@ namespace OscProb {
       virtual void    SetFracVnc(double f);
       virtual matrixD ProbMatrix(int nflvi, int nflvf);
 
+      virtual void UseOscProbAverage(bool AverageFlag)
+      {
+        gAverageFlag = true;
+      } ///< Deactivate Maltoni
+
     protected:
       virtual void UpdateHam();
       virtual void Propagate();

@@ -46,6 +46,11 @@ namespace OscProb {
       virtual complexD GetaT(int flvi, int flvj, int dim = 3);
       virtual complexD GetcT(int flvi, int flvj, int dim = 4);
 
+      virtual void UseOscProbAverage(bool AverageFlag)
+      {
+        gAverageFlag = true;
+      } ///< Deactivate Maltoni
+
     protected:
       /// Build the full Hamiltonian
       virtual void UpdateHam();

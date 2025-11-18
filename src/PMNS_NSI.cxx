@@ -24,7 +24,6 @@ using namespace std;
 ///
 PMNS_NSI::PMNS_NSI() : PMNS_Fast(), fEps()
 {
-  UseOscProbAverage(false);
   SetStdPath();
   SetNSI(0., 0., 0., 0., 0., 0., 0., 0., 0.);
   SetFermCoup(1, 0, 0);
