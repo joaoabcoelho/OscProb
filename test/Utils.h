@@ -186,14 +186,8 @@ OscProb::PMNS_NUNM* GetNUNM(bool is_nominal){
 //.............................................................................
 OscProb::PMNS_Avg* GetAvg(bool is_nominal){
 
-  OscProb::PMNS_Avg* p = new OscProb::PMNS_Avg(4);
+  OscProb::PMNS_Avg* p = new OscProb::PMNS_Avg();
   SetNominalPars(p);
-  if(!is_nominal){
-    p->SetDm(4, 0.1);
-    p->SetAngle(1,4, 0.1);
-    p->SetAngle(2,4, 0.1);
-    p->SetAngle(3,4, 0.1);
-  }
   return p;
 
 }

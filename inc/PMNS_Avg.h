@@ -23,36 +23,11 @@
 #ifndef PMNS_Avg_H
 #define PMNS_Avg_H
 
-#include "PMNS_Sterile.h"
+#include "PMNS_Fast.h"
 
 namespace OscProb {
 
-  class PMNS_Avg : public PMNS_Sterile {
-    public:
-      PMNS_Avg(int numNus); ///< Constructor
-      virtual ~PMNS_Avg();  ///< Destructor
-      // Get probability averaged over a bin
-      using PMNS_Base::AvgProb;
-      using PMNS_Base::AvgProbLoE;
-      using PMNS_Base::AvgProbVector;
-      using PMNS_Base::AvgProbVectorLoE;
-
-      // Get probability
-    protected:
-      // virtual double AvgFormula(
-      //     int flvi, int flvf, double dbin, vectorD flambda,
-      //    matrixC fV); ///< Formula for the average probability over a bin
-      //                 ///< of width dbin
-
-      // virtual double AvgAlgo(
-      //     int flvi, int flvf, double LoE, double dLoE,
-      //     double L); ///< Algorithm for the compute of the average
-      //               ///< probability over a bin of LoE
-
-      // Attributes
-
-      ///< and angle for the entire path
-  };
+  class PMNS_Avg : public PMNS_Fast {};
 
 } // namespace OscProb
 

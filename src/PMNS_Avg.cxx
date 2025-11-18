@@ -8,26 +8,3 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "PMNS_Avg.h"
-#include <Eigen/Eigenvalues>
-#include <algorithm>
-#include <iostream>
-
-using namespace OscProb;
-
-using namespace std;
-
-//.............................................................................
-///
-/// Constructor. \sa PMNS_Base::PMNS_Base
-///
-///
-///
-/// This bit would copy over to PMNS_MyClass, as the myOsc =
-/// ROOT.OscProb.PMNS_MyClass(4)
-PMNS_Avg::PMNS_Avg(int numNus) : PMNS_Sterile(numNus) {}
-
-//.............................................................................
-///
-/// Nothing to clean.
-///
-PMNS_Avg::~PMNS_Avg() {}
