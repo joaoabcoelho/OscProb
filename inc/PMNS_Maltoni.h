@@ -217,7 +217,7 @@ namespace OscProb {
       
       Eigen::MatrixXcd fHam; ///< The full Hamiltonian
 			     ///
-      bool gAverageFlag = false;   /// Flag to call OscProb default or Maltoni average
+      bool gAverageFlag;   /// Flag to call OscProb default or Maltoni average
 
   };
 

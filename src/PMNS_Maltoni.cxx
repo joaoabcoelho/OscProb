@@ -28,6 +28,7 @@ PMNS_Maltoni::PMNS_Maltoni(int numNus) : PMNS_Base(numNus)
   InitializeTaylorsVectors();
   SetwidthBin(0, 0);
   SetAvgProbPrec(1e-4);
+  UseOscProbAverage(false);
 
 }
 
