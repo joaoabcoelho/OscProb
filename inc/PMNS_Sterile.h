@@ -25,9 +25,9 @@
 #ifndef PMNS_STERILE_H
 #define PMNS_STERILE_H
 
-#include "PMNS_Base.h"
-#include "PMNS_Maltoni.h"
 #include <Eigen/Core>
+
+#include "PMNS_Maltoni.h"
 
 namespace OscProb {
 
