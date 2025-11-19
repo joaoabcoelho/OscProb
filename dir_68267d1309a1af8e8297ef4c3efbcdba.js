@@ -16,6 +16,7 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "PMNS_Fast.cxx", "PMNS__Fast_8cxx.html", null ],
     [ "PMNS_Iter.cxx", "PMNS__Iter_8cxx.html", null ],
     [ "PMNS_LIV.cxx", "PMNS__LIV_8cxx.html", null ],
+    [ "PMNS_Maltoni.cxx", "PMNS__Maltoni_8cxx.html", null ],
     [ "PMNS_NSI.cxx", "PMNS__NSI_8cxx.html", null ],
     [ "PMNS_NUNM.cxx", "PMNS__NUNM_8cxx.html", null ],
     [ "PMNS_OQS.cxx", "PMNS__OQS_8cxx.html", "PMNS__OQS_8cxx" ],

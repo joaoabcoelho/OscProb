@@ -60,21 +60,27 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "Absorption_8cxx.html",
-"classOscProb_1_1PMNS__Avg.html",
-"classOscProb_1_1PMNS__Avg.html#ac446fbb333d0dca16bd8c79a5ea68205",
-"classOscProb_1_1PMNS__Base.html#ac74206f349687da141392c81e2ba6b0d",
-"classOscProb_1_1PMNS__Decay.html#acffe65c2a0ba3a5aad79a97c31dfd6b5",
-"classOscProb_1_1PMNS__Deco.html#ad26815ac5f4805d1259817e4936e5f8f",
-"classOscProb_1_1PMNS__DensityMatrix.html#add6533a9fc9acdfc7ae258b62570d78d",
-"classOscProb_1_1PMNS__Fast.html#af1fb40562abbdb8d193249ae628a630d",
-"classOscProb_1_1PMNS__Iter.html#afd9de7e51d927b41c1129fad1648fe96",
-"classOscProb_1_1PMNS__LIV.html#aed4cfc40058c6a3cb9b23d887bb042c9",
-"classOscProb_1_1PMNS__NSI.html#ad28c12ef897b5555eda509ea55c99107",
-"classOscProb_1_1PMNS__NUNM.html#acc0d46cc4b8f911b40b807225003bbed",
-"classOscProb_1_1PMNS__OQS.html#ab4b978fb895abd3cfad07440bae1d34b",
-"classOscProb_1_1PMNS__SNSI.html#a91f81e5f12d3a5dff74686d4cbc1292c",
-"classOscProb_1_1PMNS__Sterile.html#aa3cee10639d5c0879ccb9e78d62128d3",
-"namespaceColor.html#a20a7b04657c1d83fae5d54514d3f1622a8a2002a109cc5d185745a3371776eabb"
+"classOscProb_1_1EarthModelBinned.html#af11bb0a5e0d6348513e46ede9ff16cda",
+"classOscProb_1_1PMNS__Avg.html#ac012ec8262b1ef6f53641e99f9c33b2e",
+"classOscProb_1_1PMNS__Base.html#ac531dca2f45c3c8f19d22e5b73f9f3ee",
+"classOscProb_1_1PMNS__Decay.html#acee137091304c919642293ddf015bbc8",
+"classOscProb_1_1PMNS__Deco.html#a9ac3cadeac8db1b90f3152f476244780",
+"classOscProb_1_1PMNS__DensityMatrix.html#a4bef78cfcfc4e70b4ce79cdb8862c0a3",
+"classOscProb_1_1PMNS__DensityMatrix.html#afc8c5d0779b2cd8415c6a58416ed197e",
+"classOscProb_1_1PMNS__Fast.html#abfad08a56acd70db59c64f4cffcc8410",
+"classOscProb_1_1PMNS__Iter.html#a76dd5a761df8689c502b28ad0391f9e2",
+"classOscProb_1_1PMNS__LIV.html#a2800af6d436972f3e900867790c046b0",
+"classOscProb_1_1PMNS__LIV.html#acd2657fb51b83f3504064b8965cfc807",
+"classOscProb_1_1PMNS__Maltoni.html#a9064716011491ee487a3bf16e287039e",
+"classOscProb_1_1PMNS__NSI.html#a4a3fcca124362cdedaf53cd4ac40f8e7",
+"classOscProb_1_1PMNS__NSI.html#ae23bd892c022c5d938cef1ec5077358a",
+"classOscProb_1_1PMNS__NUNM.html#aa27f0d153891840814e3ee2a71eaef5c",
+"classOscProb_1_1PMNS__OQS.html#a42bbcd28514c37abce7c59c5f5612494",
+"classOscProb_1_1PMNS__OQS.html#ad71447a8df427f1cf18534ee1086a8ad",
+"classOscProb_1_1PMNS__SNSI.html#a84fca03b7b66c73bf993c6df3958127b",
+"classOscProb_1_1PMNS__Sterile.html#a2d0f021378d6c782a88298ae2f734f4c",
+"classOscProb_1_1PMNS__Sterile.html#aeb64c66a5fee1b84376568896f4d2a57",
+"structOscProb_1_1EarthModelBinned_1_1LonBinInfo.html#a89ff7f364089bb4b60a4eb1c166c8764"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -16,6 +16,7 @@ var annotated_dup =
       [ "PMNS_Fast", "classOscProb_1_1PMNS__Fast.html", "classOscProb_1_1PMNS__Fast" ],
       [ "PMNS_Iter", "classOscProb_1_1PMNS__Iter.html", "classOscProb_1_1PMNS__Iter" ],
       [ "PMNS_LIV", "classOscProb_1_1PMNS__LIV.html", "classOscProb_1_1PMNS__LIV" ],
+      [ "PMNS_Maltoni", "classOscProb_1_1PMNS__Maltoni.html", "classOscProb_1_1PMNS__Maltoni" ],
       [ "PMNS_NSI", "classOscProb_1_1PMNS__NSI.html", "classOscProb_1_1PMNS__NSI" ],
       [ "PMNS_NUNM", "classOscProb_1_1PMNS__NUNM.html", "classOscProb_1_1PMNS__NUNM" ],
       [ "PMNS_OQS", "classOscProb_1_1PMNS__OQS.html", "classOscProb_1_1PMNS__OQS" ],

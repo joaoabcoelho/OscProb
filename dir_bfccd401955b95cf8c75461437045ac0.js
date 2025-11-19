@@ -14,6 +14,7 @@ var dir_bfccd401955b95cf8c75461437045ac0 =
     [ "PMNS_Fast.h", "PMNS__Fast_8h.html", "PMNS__Fast_8h" ],
     [ "PMNS_Iter.h", "PMNS__Iter_8h.html", "PMNS__Iter_8h" ],
     [ "PMNS_LIV.h", "PMNS__LIV_8h.html", "PMNS__LIV_8h" ],
+    [ "PMNS_Maltoni.h", "PMNS__Maltoni_8h.html", "PMNS__Maltoni_8h" ],
     [ "PMNS_NSI.h", "PMNS__NSI_8h.html", "PMNS__NSI_8h" ],
     [ "PMNS_NUNM.h", "PMNS__NUNM_8h.html", "PMNS__NUNM_8h" ],
     [ "PMNS_OQS.h", "PMNS__OQS_8h.html", "PMNS__OQS_8h" ],

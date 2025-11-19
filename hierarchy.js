@@ -11,20 +11,22 @@ var hierarchy =
     [ "OscProb::NuPath", "structOscProb_1_1NuPath.html", null ],
     [ "OscProb::PMNS_Base", "classOscProb_1_1PMNS__Base.html", [
       [ "OscProb::PMNS_Decay", "classOscProb_1_1PMNS__Decay.html", null ],
-      [ "OscProb::PMNS_Fast", "classOscProb_1_1PMNS__Fast.html", [
-        [ "OscProb::PMNS_Avg", "classOscProb_1_1PMNS__Avg.html", null ],
-        [ "OscProb::PMNS_DensityMatrix", "classOscProb_1_1PMNS__DensityMatrix.html", [
-          [ "OscProb::PMNS_Deco", "classOscProb_1_1PMNS__Deco.html", null ],
-          [ "OscProb::PMNS_OQS", "classOscProb_1_1PMNS__OQS.html", null ]
+      [ "OscProb::PMNS_Maltoni", "classOscProb_1_1PMNS__Maltoni.html", [
+        [ "OscProb::PMNS_Fast", "classOscProb_1_1PMNS__Fast.html", [
+          [ "OscProb::PMNS_Avg", "classOscProb_1_1PMNS__Avg.html", null ],
+          [ "OscProb::PMNS_DensityMatrix", "classOscProb_1_1PMNS__DensityMatrix.html", [
+            [ "OscProb::PMNS_Deco", "classOscProb_1_1PMNS__Deco.html", null ],
+            [ "OscProb::PMNS_OQS", "classOscProb_1_1PMNS__OQS.html", null ]
+          ] ],
+          [ "OscProb::PMNS_Iter", "classOscProb_1_1PMNS__Iter.html", null ],
+          [ "OscProb::PMNS_LIV", "classOscProb_1_1PMNS__LIV.html", null ],
+          [ "OscProb::PMNS_NSI", "classOscProb_1_1PMNS__NSI.html", [
+            [ "OscProb::PMNS_SNSI", "classOscProb_1_1PMNS__SNSI.html", null ]
+          ] ],
+          [ "OscProb::PMNS_NUNM", "classOscProb_1_1PMNS__NUNM.html", null ]
         ] ],
-        [ "OscProb::PMNS_Iter", "classOscProb_1_1PMNS__Iter.html", null ],
-        [ "OscProb::PMNS_LIV", "classOscProb_1_1PMNS__LIV.html", null ],
-        [ "OscProb::PMNS_NSI", "classOscProb_1_1PMNS__NSI.html", [
-          [ "OscProb::PMNS_SNSI", "classOscProb_1_1PMNS__SNSI.html", null ]
-        ] ],
-        [ "OscProb::PMNS_NUNM", "classOscProb_1_1PMNS__NUNM.html", null ]
-      ] ],
-      [ "OscProb::PMNS_Sterile", "classOscProb_1_1PMNS__Sterile.html", null ]
+        [ "OscProb::PMNS_Sterile", "classOscProb_1_1PMNS__Sterile.html", null ]
+      ] ]
     ] ],
     [ "OscProb::PremLayer", "structOscProb_1_1PremLayer.html", null ],
     [ "TObject", null, [
