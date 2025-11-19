@@ -28,7 +28,7 @@ using namespace std;
 ///
 PMNS_NUNM::PMNS_NUNM(int scale) : PMNS_Fast()
 {
-  UseOscProbAverage(true);
+  SetIsOscProbAvg(true);
   fscale = scale;
   SetStdPath();
   SetNUNM(0., 0., 0., 0., 0., 0.);

@@ -18,7 +18,7 @@ using namespace OscProb;
 ///
 PMNS_SNSI::PMNS_SNSI() : PMNS_NSI()
 {
-  UseOscProbAverage(true);
+  SetIsOscProbAvg(true);
   SetLowestMass(0);
 }
 

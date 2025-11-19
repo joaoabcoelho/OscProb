@@ -31,9 +31,9 @@ namespace OscProb {
       virtual void   SetLowestMass(double m); ///< Set lightest neutrino mass
       virtual double GetLowestMass();         ///< Get lightest neutrino mass
 
-      virtual void UseOscProbAverage(bool AverageFlag)
+      virtual void SetIsOscProbAvg(bool isOscProbAvg)
       {
-        gAverageFlag = true;
+        fIsOscProbAvg = true;
       } ///< Deactivate Maltoni
 
     protected:

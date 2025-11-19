@@ -5,12 +5,11 @@
 //
 //.............................................................................
 //
-// jcoelho\@apc.in2p3.fr
+// mloup@apc.in2p3.fr rogan.clark@uclouvain.be
 //
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "PMNS_Maltoni.h"
-#include "PremModel.h"
 #include <Eigen/Eigenvalues>
 
 using namespace std;
@@ -27,13 +26,10 @@ PMNS_Maltoni::PMNS_Maltoni(int numNus) : PMNS_Base(numNus)
   InitializeTaylorsVectors();
   SetwidthBin(0, 0);
   SetAvgProbPrec(1e-4);
-  UseOscProbAverage(false);
+  SetIsOscProbAvg(false);
 }
 
 //.............................................................................
-/// Functions for averaging over oscillations
-/// Introduces speed up to code
-///
 ///
 /// Set vector sizes and initialize elements to zero.
 /// Initialize diagonal elements of S to one
@@ -65,18 +61,20 @@ void PMNS_Maltoni::InitializeTaylorsVectors()
   fDetRadius = fPrem.GetDetRadius();
 }
 
-//////////////////////////////////////////////////////////////////////
-// Set flag for averaging
-void PMNS_Maltoni::UseOscProbAverage(bool AverageFlag)
+//.............................................................................
+///
+/// Set method used for averaging.
+///
+/// @param isOscProbAvg - OscProb (true) or Maltoni (false)
+///
+void PMNS_Maltoni::SetIsOscProbAvg(bool isOscProbAvg)
 {
-  gAverageFlag = AverageFlag;
+  fIsOscProbAvg = isOscProbAvg;
 }
 
-// ....................................................................
-
-////////////////////////////////////////////////////////////////////////
+//.............................................................................
 ///
-/// Copy the earth model used
+/// Set the earth model to be used.
 ///
 /// This is done to get access to the PremLayer list to be used in the
 /// LnDerivative() function.
@@ -86,19 +84,19 @@ void PMNS_Maltoni::UseOscProbAverage(bool AverageFlag)
 void PMNS_Maltoni::SetPremModel(OscProb::PremModel& prem) { fPrem = prem; }
 
 //.............................................................................
-//.............................................................................
 ///
-/// Set neutrino angle.
+/// Set neutrino zenith angle.
 ///
-/// @param cosT - The cosine of the neutrino angle
+/// @param cosT - The cosine of the zenith angle
 ///
 void PMNS_Maltoni::SetCosT(double cosT) { fcosT = cosT; }
 
+//.............................................................................
 ///
-/// Set bin's widths.
+/// Set bin widths.
 ///
-/// @param dE - The width of the bin for energy in GeV
-/// @param dcosT - The width of the bin for angle
+/// @param dE    - The width of the energy bin in GeV
+/// @param dcosT - The width of the cos(theta_z) bin
 ///
 void PMNS_Maltoni::SetwidthBin(double dE, double dcosT)
 {
@@ -108,14 +106,9 @@ void PMNS_Maltoni::SetwidthBin(double dE, double dcosT)
 
 //.............................................................................
 ///
-/// Build K matrix for angle in flavor basis
+/// Build K matrix for the zenith angle in flavor basis.
 ///
-/// The variable for which a Taylor expansion is done here is not directly the
-/// angle but the cosine of the angle
-///
-/// @param L - The length of the layer in km
-///
-void PMNS_Maltoni::BuildKcosT(double L)
+void PMNS_Maltoni::BuildKcosT()
 {
   UpdateHam();
 
@@ -191,7 +184,7 @@ void PMNS_Maltoni::BuildKE(double L)
 
 //.............................................................................
 ///
-/// Compute the derivation of one layer's length depending on the angle
+/// Compute the derivative of one layer's length depending on the angle
 ///
 double PMNS_Maltoni::LnDerivative()
 {
@@ -215,10 +208,6 @@ double PMNS_Maltoni::LnDerivative()
 
   return dL;
 }
-
-//.............................................................................
-///
-/// Compute the derivation of one layer's length depending on the angle
 
 //.............................................................................
 ///
@@ -278,10 +267,11 @@ void PMNS_Maltoni::rotateK()
 /// This is used to calculate the matrix S corresponding to the propagation
 /// between the beginning of the path and the end of the current layer.
 ///
-/// The matrix fevolutionMatrixS represent the propagation between the beginning
-/// of the path and the beginning of the current layer. This matrix is updated
-/// after every layer with this function. The matrix fSflavor represent the
-/// propagation between the beginning and the end of the layer.
+/// The matrix fevolutionMatrixS represent the propagation between
+/// the beginning of the path and the beginning of the current layer.
+/// This matrix is updated after every layer with this function.
+/// The matrix fSflavor represent the propagation between the beginning
+/// and the end of the layer.
 ///
 void PMNS_Maltoni::MultiplicationRuleS()
 {
@@ -307,12 +297,10 @@ void PMNS_Maltoni::MultiplicationRuleS()
 /// This is used to calculate the matrix K corresponding to the propagation
 /// between the beginning of the path and the end of the current layer.
 ///
-/// The matrix fKflavor correspond to the propagation between the beginning and
-/// the end of the layer.
+/// The matrix fKflavor correspond to the propagation between the beginning
+/// and the end of the layer.
 ///
-/// @param K - The K matrix corresponding to the propagation between the
-/// beginning
-///            of the path and the beginning of the current layer
+/// @param K - The current K matrix
 ///
 void PMNS_Maltoni::MultiplicationRuleK(Eigen::MatrixXcd& K)
 {
@@ -349,6 +337,7 @@ void PMNS_Maltoni::PropagateTaylor()
 //.............................................................................
 ///
 /// Propagate the current neutrino state through a given path
+///
 /// @param p - A neutrino path segment
 ///
 void PMNS_Maltoni::PropagatePathTaylor(NuPath p)
@@ -383,7 +372,7 @@ void PMNS_Maltoni::PropagatePathTaylor(NuPath p)
   // if avg on cosT
   if (fdcosT != 0) {
     // Build KcosT in mass basis
-    BuildKcosT(p.length);
+    BuildKcosT();
 
     // Multiply this layer K's with the previous path K's
     MultiplicationRuleK(fKcosT);
@@ -397,13 +386,11 @@ void PMNS_Maltoni::PropagatePathTaylor(NuPath p)
 ///
 /// Solve one K matrix for eigenvectors and eigenvalues.
 ///
-/// This is using a method from the GLoBES software available at
-/// http://www.mpi-hd.mpg.de/personalhomes/globes/3x3/ \n
-/// We should cite them accordingly
+/// This is using the Eigen methods appropriate for each matrix size.
 ///
-/// @param K - The K matrix
+/// @param K      - The K matrix
 /// @param lambda - The eigenvalues of K
-/// @param V - The eigenvectors of K
+/// @param V      - The eigenvectors of K
 ///
 void PMNS_Maltoni::SolveK(Eigen::MatrixXcd& K, vectorD& lambda, matrixC& V)
 {
@@ -415,6 +402,15 @@ void PMNS_Maltoni::SolveK(Eigen::MatrixXcd& K, vectorD& lambda, matrixC& V)
     TemplateSolver<Eigen::MatrixXcd>(K, lambda, V);
 }
 
+//.............................................................................
+///
+/// Auxiliary function to convert a generic Xcd matrix into a specific size
+/// so Eigen can optimize the eigensolver method used.
+///
+/// @param K      - The K matrix
+/// @param lambda - The eigenvalues of K
+/// @param V      - The eigenvectors of K
+///
 template <typename T>
 void PMNS_Maltoni::TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda,
                                   matrixC& V)
@@ -435,7 +431,7 @@ void PMNS_Maltoni::TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda,
 //.............................................................................
 ///
 /// Formula for the average probability of flvi going to flvf over
-/// a bin of width dbin with a Taylor expansion.
+/// a bin of width dbin using the Maltoni method.
 ///
 /// Flavours are:
 /// <pre>
@@ -443,11 +439,11 @@ void PMNS_Maltoni::TemplateSolver(Eigen::MatrixXcd& K, vectorD& lambda,
 ///   3 = sterile_1, 4 = sterile_2, etc.
 /// </pre>
 ///
-/// @param flvi - The neutrino starting flavour.
-/// @param flvf - The neutrino final flavour.
-/// @param dbin - The width of the bin
+/// @param flvi   - The neutrino starting flavour.
+/// @param flvf   - The neutrino final flavour.
+/// @param dbin   - The width of the bin
 /// @param lambda - The eigenvalues of K
-/// @param V - The eigenvectors of K
+/// @param V      - The eigenvectors of K
 ///
 /// @return Average neutrino oscillation probability
 ///
@@ -490,7 +486,7 @@ double PMNS_Maltoni::AvgFormula(int flvi, int flvf, double dbin, vectorD lambda,
 //.............................................................................
 ///
 /// Compute the average probability of flvi going to flvf over
-/// a bin of energy E with width dE with a Taylor expansion.
+/// a bin of energy E with width dE using the Maltoni method.
 ///
 /// This gets transformed into L/E, since the oscillation terms
 /// have arguments linear in 1/E and not E.
@@ -503,14 +499,14 @@ double PMNS_Maltoni::AvgFormula(int flvi, int flvf, double dbin, vectorD lambda,
 ///
 /// @param flvi - The neutrino starting flavour.
 /// @param flvf - The neutrino final flavour.
-/// @param E - The neutrino energy in GeV
-/// @param dE - The energy bin width in GeV
+/// @param E    - The neutrino energy in GeV
+/// @param dE   - The energy bin width in GeV
 ///
 /// @return Average neutrino oscillation probability
 ///
 double PMNS_Maltoni::AvgProb(int flvi, int flvf, double E, double dE)
 {
-  if (gAverageFlag == true)
+  if (fIsOscProbAvg == true)
     return PMNS_Base::AvgProb(flvi, flvf, E, dE);
   else
     ;
@@ -531,7 +527,7 @@ double PMNS_Maltoni::AvgProb(int flvi, int flvf, double E, double dE)
 //.............................................................................
 ///
 /// Compute the average probability of flvi going to flvf over
-/// a bin of energy L/E with width dLoE with a Taylor expansion.
+/// a bin of energy L/E with width dLoE using the Maltoni method.
 ///
 /// The probabilities are weighted by (L/E)^-2 so that event
 /// density is flat in energy. This avoids giving too much
@@ -546,14 +542,14 @@ double PMNS_Maltoni::AvgProb(int flvi, int flvf, double E, double dE)
 ///
 /// @param flvi - The neutrino starting flavour.
 /// @param flvf - The neutrino final flavour.
-/// @param LoE - The neutrino  L/E value in the bin center in km/GeV
+/// @param LoE  - The neutrino  L/E value in the bin center in km/GeV
 /// @param dLoE - The L/E bin width in km/GeV
 ///
 /// @return Average neutrino oscillation probability
 ///
 double PMNS_Maltoni::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
 {
-  if (gAverageFlag == true)
+  if (fIsOscProbAvg == true)
     return PMNS_Base::AvgProbLoE(flvi, flvf, LoE, dLoE);
   else
     ;
@@ -592,9 +588,9 @@ double PMNS_Maltoni::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
 ///
 /// @param flvi - The neutrino starting flavour.
 /// @param flvf - The neutrino final flavour.
-/// @param LoE - The neutrino  L/E value in the bin center in km/GeV
+/// @param LoE  - The neutrino  L/E value in the bin center in km/GeV
 /// @param dLoE - The L/E bin width in km/GeV
-/// @param L - The length of the path in km
+/// @param L    - The length of the path in km
 ///
 /// @return Average neutrino oscillation probability
 ///
@@ -622,13 +618,15 @@ double PMNS_Maltoni::AvgAlgo(int flvi, int flvf, double LoE, double dLoE,
 
 //.............................................................................
 ///
-/// Compute the sample points for a bin of L/E with width dLoE
+/// Compute the sample points for a bin of L/E with width dLoE.
 ///
-/// This is used to increase the average probability over a bin of L/E,
-/// calculated with a Taylor expansion
+/// This is used to increase the precision of the average probability
+/// over a bin of L/E, calculated using the Maltoni method.
 ///
 /// @param LoE  - The neutrino  L/E value in the bin center in km/GeV
-/// @param dLoE   - The L/E bin width in km/GeV
+/// @param dLoE - The L/E bin width in km/GeV
+///
+/// @return Vector of sample L/E points
 ///
 vectorD PMNS_Maltoni::GetSamplePointsAvgClass(double LoE, double dLoE)
 {
@@ -658,11 +656,24 @@ vectorD PMNS_Maltoni::GetSamplePointsAvgClass(double LoE, double dLoE)
 
 //.............................................................................
 ///
+/// Compute the average probability of flvi going to any flavour over
+/// a bin of energy E with width dE using the Maltoni method.
 ///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param E    - The neutrino energy in GeV
+/// @param dE   - The energy bin width in GeV
+///
+/// @return Average probability for all outgoing flavours
 ///
 vectorD PMNS_Maltoni::AvgProbVector(int flvi, double E, double dE)
 {
-  if (gAverageFlag == true)
+  if (fIsOscProbAvg == true)
     return PMNS_Base::AvgProbVector(flvi, E, dE);
   else
     ;
@@ -684,11 +695,24 @@ vectorD PMNS_Maltoni::AvgProbVector(int flvi, double E, double dE)
 
 //.............................................................................
 ///
+/// Compute the average probability of flvi going to any flavour over
+/// a bin of L/E with width dLoE using the Maltoni method.
 ///
+/// Flavours are:
+/// <pre>
+///   0 = nue, 1 = numu, 2 = nutau
+///   3 = sterile_1, 4 = sterile_2, etc.
+/// </pre>
+///
+/// @param flvi - The neutrino starting flavour.
+/// @param LoE  - The neutrino L/E value in the bin center in km/GeV
+/// @param dLoE - The L/E bin width in km/GeV
+///
+/// @return Average probability for all outgoing flavours
 ///
 vectorD PMNS_Maltoni::AvgProbVectorLoE(int flvi, double LoE, double dLoE)
 {
-  if (gAverageFlag == true)
+  if (fIsOscProbAvg == true)
     return PMNS_Base::AvgProbVectorLoE(flvi, LoE, dLoE);
   else
     ;
@@ -736,11 +760,19 @@ vectorD PMNS_Maltoni::AvgProbVectorLoE(int flvi, double LoE, double dLoE)
 
 //.............................................................................
 ///
+/// Compute the average probability matrix for nflvi and nflvf
+/// over a bin of energy E with width dE using the Maltoni method.
 ///
+/// @param nflvi - The number of initial flavours in the matrix.
+/// @param nflvf - The number of final flavours in the matrix.
+/// @param E     - The neutrino energy in the bin center in GeV
+/// @param dE    - The energy bin width in GeV
+///
+/// @return Average neutrino oscillation probabilities
 ///
 matrixD PMNS_Maltoni::AvgProbMatrix(int nflvi, int nflvf, double E, double dE)
 {
-  if (gAverageFlag == true)
+  if (fIsOscProbAvg == true)
     return PMNS_Base::AvgProbMatrix(nflvi, nflvf, E, dE);
   else
     ;
@@ -762,12 +794,20 @@ matrixD PMNS_Maltoni::AvgProbMatrix(int nflvi, int nflvf, double E, double dE)
 
 //.............................................................................
 ///
+/// Compute the average probability matrix for nflvi and nflvf
+/// over a bin of L/E with width dLoE using the Maltoni method.
 ///
+/// @param nflvi - The number of initial flavours in the matrix.
+/// @param nflvf - The number of final flavours in the matrix.
+/// @param LoE   - The neutrino  L/E value in the bin center in km/GeV
+/// @param dLoE  - The L/E bin width in km/GeV
+///
+/// @return Average neutrino oscillation probabilities
 ///
 matrixD PMNS_Maltoni::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE,
                                        double dLoE)
 {
-  if (gAverageFlag == true)
+  if (fIsOscProbAvg == true)
     return PMNS_Base::AvgProbMatrixLoE(nflvi, nflvf, LoE, dLoE);
   else
     ;
@@ -822,9 +862,9 @@ matrixD PMNS_Maltoni::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE,
 //.............................................................................
 ///
 /// Compute the average probability of flvi going to flvf over
-/// a bin of angle cost with width dcosT with a Taylor expansion.
+/// a bin of angle cost with width dcosT using the Maltoni method.
 ///
-/// IMPORTANT: The PremModel object used must be copied by this
+/// IMPORTANT: The PremModel object used must be set by this
 /// class using the function SetPremModel.
 ///
 /// Flavours are:
@@ -833,10 +873,10 @@ matrixD PMNS_Maltoni::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE,
 ///   3 = sterile_1, 4 = sterile_2, etc.
 /// </pre>
 ///
-/// @param flvi - The neutrino starting flavour.
-/// @param flvf - The neutrino final flavour.
-/// @param E - The neutrino energy in GeV
-/// @param cosT - The cosine of the neutrino angle
+/// @param flvi  - The neutrino starting flavour.
+/// @param flvf  - The neutrino final flavour.
+/// @param E     - The neutrino energy in GeV
+/// @param cosT  - The cosine of the neutrino angle
 /// @param dcosT - The cosT bin width
 ///
 /// @return Average neutrino oscillation probability
@@ -870,10 +910,10 @@ double PMNS_Maltoni::AvgProb(int flvi, int flvf, double E, double cosT,
 ///
 /// Algorithm for the compute of the average probability over a bin of cosT
 ///
-/// @param flvi - The neutrino starting flavour.
-/// @param flvf - The neutrino final flavour.
-/// @param E - The neutrino energy in GeV
-/// @param cosT - The cosine of the neutrino angle
+/// @param flvi  - The neutrino starting flavour.
+/// @param flvf  - The neutrino final flavour.
+/// @param E     - The neutrino energy in GeV
+/// @param cosT  - The cosine of the neutrino angle
 /// @param dcosT - The cosT bin width
 ///
 /// @return Average neutrino oscillation probability
@@ -902,17 +942,14 @@ double PMNS_Maltoni::AvgAlgoCosT(int flvi, int flvf, double E, double cosT,
   return AvgFormula(flvi, flvf, fdcosT, flambdaCosT, fVcosT);
 }
 
+//.............................................................................
 ///
 /// Compute the average probability of flvi going to flvf over
 /// a bin of energy E and angle cosT with width dE and dcosT
-/// with a Taylor expansion.
+/// using the Maltoni method.
 ///
-/// This gets transformed into L/E, since the oscillation terms
-/// have arguments linear in 1/E and not E.
-///
-/// IMPORTANT: The function SetPremLayers must be used in the
-/// macro file to make this function work. The argument for
-/// SetPremLayers must be premModel.GetPremLayers().
+/// IMPORTANT: The PremModel object used must be set by this
+/// class using the function SetPremModel.
 ///
 /// Flavours are:
 /// <pre>
@@ -920,11 +957,11 @@ double PMNS_Maltoni::AvgAlgoCosT(int flvi, int flvf, double E, double cosT,
 ///   3 = sterile_1, 4 = sterile_2, etc.
 /// </pre>
 ///
-/// @param flvi - The neutrino starting flavour.
-/// @param flvf - The neutrino final flavour.
-/// @param E - The neutrino energy in GeV
-/// @param dE - The energy bin width in GeV
-/// @param cosT - The cosine of the neutrino angle
+/// @param flvi  - The neutrino starting flavour.
+/// @param flvf  - The neutrino final flavour.
+/// @param E     - The neutrino energy in GeV
+/// @param dE    - The energy bin width in GeV
+/// @param cosT  - The cosine of the neutrino angle
 /// @param dcosT - The cosT bin width
 ///
 /// @return Average neutrino oscillation probability
@@ -947,16 +984,18 @@ double PMNS_Maltoni::AvgProb(int flvi, int flvf, double E, double dE,
   return AvgProbLoE(flvi, flvf, Ebin[0], Ebin[1], cosT, dcosT);
 }
 
+//.............................................................................
+///
 /// Compute the average probability of flvi going to flvf over
 /// a bin of energy L/E and cosT with width dLoE and dcosT
-/// with a Taylor expansion.
+/// using the Maltoni method.
 ///
 /// The probabilities are weighted by (L/E)^-2 so that event
 /// density is flat in energy. This avoids giving too much
 /// weight to low energies. Better approximations would be
 /// achieved if we used an interpolated event density.
 ///
-/// IMPORTANT: The PremModel object used must be copied by this
+/// IMPORTANT: The PremModel object used must be set by this
 /// class using the function SetPremModel.
 ///
 /// Flavours are:
@@ -965,11 +1004,11 @@ double PMNS_Maltoni::AvgProb(int flvi, int flvf, double E, double dE,
 ///   3 = sterile_1, 4 = sterile_2, etc.
 /// </pre>
 ///
-/// @param flvi - The neutrino starting flavour.
-/// @param flvf - The neutrino final flavour.
-/// @param LoE - The neutrino  L/E value in the bin center in km/GeV
-/// @param dLoE - The L/E bin width in km/GeV
-/// @param cosT - The cosine of the neutrino angle
+/// @param flvi  - The neutrino starting flavour.
+/// @param flvf  - The neutrino final flavour.
+/// @param LoE   - The neutrino  L/E value in the bin center in km/GeV
+/// @param dLoE  - The L/E bin width in km/GeV
+/// @param cosT  - The cosine of the neutrino angle
 /// @param dcosT - The cosT bin width
 ///
 /// @return Average neutrino oscillation probability
@@ -1019,14 +1058,14 @@ double PMNS_Maltoni::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE,
 
 //.............................................................................
 ///
-/// Algorithm for the compute of the average probability
+/// Algorithm for computing the average probability
 /// over a bin of 1oE and cosT
 ///
-/// @param flvi - The neutrino starting flavour.
-/// @param flvf - The neutrino final flavour.
-/// @param InvE - The neutrino  1/E value in the bin center in GeV-1
+/// @param flvi  - The neutrino starting flavour.
+/// @param flvf  - The neutrino final flavour.
+/// @param InvE  - The neutrino  1/E value in the bin center in GeV-1
 /// @param dInvE - The 1/E bin width in GeV-1
-/// @param cosT - The cosine of the neutrino angle
+/// @param cosT  - The cosine of the neutrino angle
 /// @param dcosT - The cosT bin width
 ///
 /// @return Average neutrino oscillation probability
@@ -1087,15 +1126,16 @@ double PMNS_Maltoni::AlgorithmDensityMatrix(int flvi, int flvf)
 /// Compute the sample points for a bin of 1oE and cosTheta
 /// with width d1oE and dcosTheta
 ///
-/// This is used to increase the average probability over a bin of L/E
-/// and cosT, calculated with a Taylor expansion
+/// This is used to increase the precision of the average probability
+/// over a bin of L/E and cosT, calculated using the Maltoni method.
 ///
 /// @param InvE  - The neutrino  1/E value in the bin center in GeV-1
-/// @param dInvE   - The 1/E bin width in GeV-1
-/// @param cosT   - The neutrino  cosT value in the bin center
-/// @param dcosT   - The cosT bin width
+/// @param dInvE - The 1/E bin width in GeV-1
+/// @param cosT  - The neutrino  cosT value in the bin center
+/// @param dcosT - The cosT bin width
 ///
-
+/// @return Matrix of sample InvE and cosT points
+///
 matrixC PMNS_Maltoni::GetSamplePointsAvgClass(double InvE, double dInvE,
                                               double cosT, double dcosT)
 {
@@ -1136,7 +1176,7 @@ matrixC PMNS_Maltoni::GetSamplePointsAvgClass(double InvE, double dInvE,
 /// where V is diagonal
 ///
 /// @param to_basis - Rotation from (false) or to (true)
-/// @param V - The matrix used for the denisty matrix rotation.
+/// @param V        - The matrix used for the denisty matrix rotation.
 ///
 void PMNS_Maltoni::RotateDensityM(bool to_basis, matrixC V)
 {
@@ -1172,7 +1212,7 @@ void PMNS_Maltoni::RotateDensityM(bool to_basis, matrixC V)
 /// Apply an Hadamard Product to the density matrix
 ///
 /// @param lambda - Eigenvalues of the K matrix
-/// @param dbin - Width of the bin
+/// @param dbin   - Width of the bin
 ///
 void PMNS_Maltoni::HadamardProduct(vectorD lambda, double dbin)
 {
@@ -1199,12 +1239,14 @@ void PMNS_Maltoni::HadamardProduct(vectorD lambda, double dbin)
 ///
 /// Compute the sample points for a bin of cosTheta with width dcosTheta
 ///
-/// This is used to increase the average probability over a bin of cosT,
-/// calculated with a Taylor expansion
+/// This is used to increase the precision of the average probability
+/// over a bin of cosT, calculated using the Maltoni method.
 ///
-/// @param E  - The neutrino  Energy value GeV
-/// @param cosT   - The neutrino  cosT value in the bin center
-/// @param dcosT   - The cosT bin width
+/// @param E     - The neutrino  Energy value GeV
+/// @param cosT  - The neutrino  cosT value in the bin center
+/// @param dcosT - The cosT bin width
+///
+/// @return Vector of sample cosT points
 ///
 vectorD PMNS_Maltoni::GetSamplePointsAvgClass(double E, double cosT,
                                               double dcosT)
@@ -1236,7 +1278,7 @@ vectorD PMNS_Maltoni::GetSamplePointsAvgClass(double E, double cosT,
 //.............................................................................
 ///
 /// Fomula for the propability for flvi going to flvf for an energy E+dE
-/// using a first order Taylor expansion from a reference energy E.
+/// using the Maltoni method from a reference energy E.
 ///
 /// Flavours are:
 /// <pre>
@@ -1244,11 +1286,11 @@ vectorD PMNS_Maltoni::GetSamplePointsAvgClass(double E, double cosT,
 ///   3 = sterile_1, 4 = sterile_2, etc.
 /// </pre>
 ///
-/// @param flvi - The neutrino starting flavour.
-/// @param flvf - The neutrino final flavour.
-/// @param dE - The energy variation in GeV
+/// @param flvi   - The neutrino starting flavour.
+/// @param flvf   - The neutrino final flavour.
+/// @param dE     - The energy variation in GeV
 /// @param lambda - The eigenvalues of K
-/// @param V - The eigenvectors of K
+/// @param V      - The eigenvectors of K
 ///
 /// @return Neutrino oscillation probability
 ///
@@ -1289,7 +1331,7 @@ double PMNS_Maltoni::AvgFormulaExtrapolation(int flvi, int flvf, double dbin,
 //.............................................................................
 ///
 /// Compute the propability for flvi going to flvf for an energy E+dE
-/// using a first order Taylor expansion from a reference energy E.
+/// using the Maltoni method from a reference energy E.
 ///
 /// Flavours are:
 /// <pre>
@@ -1299,8 +1341,8 @@ double PMNS_Maltoni::AvgFormulaExtrapolation(int flvi, int flvf, double dbin,
 ///
 /// @param flvi - The neutrino starting flavour.
 /// @param flvf - The neutrino final flavour.
-/// @param E - The reference energy in GeV
-/// @param dE - The energy variation in GeV
+/// @param E    - The reference energy in GeV
+/// @param dE   - The energy variation in GeV
 ///
 /// @return Neutrino oscillation probability
 ///
@@ -1322,8 +1364,10 @@ double PMNS_Maltoni::ExtrapolationProb(int flvi, int flvf, double E, double dE)
                                  fVInvE);
 }
 
+//.............................................................................
+///
 /// Compute the propability for flvi going to flvf for an energy LoE+dLoE
-/// using a first order Taylor expansion from a reference value LoE.
+/// using the Maltoni method from a reference value LoE.
 ///
 /// Flavours are:
 /// <pre>
@@ -1333,7 +1377,7 @@ double PMNS_Maltoni::ExtrapolationProb(int flvi, int flvf, double E, double dE)
 ///
 /// @param flvi - The neutrino starting flavour.
 /// @param flvf - The neutrino final flavour.
-/// @param LoE - The reference energy in GeV
+/// @param LoE  - The reference energy in GeV
 /// @param dLoE - The energy variation in GeV
 ///
 /// @return Neutrino oscillation probability
@@ -1360,10 +1404,12 @@ double PMNS_Maltoni::ExtrapolationProbLoE(int flvi, int flvf, double LoE,
                                  fVInvE);
 }
 
-/// Compute the propability for flvi going to flvf for an angle cosT+dcosT
-/// using a first order Taylor expansion from a reference angle cosT.
+//.............................................................................
 ///
-/// IMPORTANT: The PremModel object used must be copied by this
+/// Compute the propability for flvi going to flvf for an angle cosT+dcosT
+/// using the Maltoni method from a reference angle cosT.
+///
+/// IMPORTANT: The PremModel object used must be set by this
 /// class using the function SetPremModel.
 ///
 /// Flavours are:
@@ -1372,9 +1418,9 @@ double PMNS_Maltoni::ExtrapolationProbLoE(int flvi, int flvf, double LoE,
 ///   3 = sterile_1, 4 = sterile_2, etc.
 /// </pre>
 ///
-/// @param flvi - The neutrino starting flavour.
-/// @param flvf - The neutrino final flavour.
-/// @param cosT - The reference angle
+/// @param flvi  - The neutrino starting flavour.
+/// @param flvf  - The neutrino final flavour.
+/// @param cosT  - The reference angle
 /// @param dcosT - The angle variation
 ///
 /// @return Neutrino oscillation probability

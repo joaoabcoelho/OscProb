@@ -26,9 +26,9 @@ namespace OscProb {
       using PMNS_Base::ProbMatrix;
       virtual matrixD ProbMatrix(int nflvi, int nflvf);
 
-      virtual void UseOscProbAverage(bool AverageFlag)
+      virtual void SetIsOscProbAvg(bool isOscProbAvg)
       {
-        gAverageFlag = true;
+        fIsOscProbAvg = true;
       } ///< Deactivate Maltoni
 
     protected:

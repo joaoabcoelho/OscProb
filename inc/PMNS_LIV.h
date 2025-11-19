@@ -46,9 +46,9 @@ namespace OscProb {
       virtual complexD GetaT(int flvi, int flvj, int dim = 3);
       virtual complexD GetcT(int flvi, int flvj, int dim = 4);
 
-      virtual void UseOscProbAverage(bool AverageFlag)
+      virtual void SetIsOscProbAvg(bool isOscProbAvg)
       {
-        gAverageFlag = true;
+        fIsOscProbAvg = true;
       } ///< Deactivate Maltoni
 
     protected:
