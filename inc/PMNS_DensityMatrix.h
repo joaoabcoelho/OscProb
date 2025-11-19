@@ -26,6 +26,11 @@ namespace OscProb {
       using PMNS_Base::ProbMatrix;
       virtual matrixD ProbMatrix(int nflvi, int nflvf);
 
+      virtual void SetIsOscProbAvg(bool isOscProbAvg)
+      {
+        fIsOscProbAvg = true;
+      } ///< Deactivate Maltoni
+
     protected:
       // Resetting and propagating
       /// Reset neutrino state to pure flavour flv

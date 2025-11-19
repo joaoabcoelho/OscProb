@@ -31,6 +31,11 @@ namespace OscProb {
       virtual void   SetLowestMass(double m); ///< Set lightest neutrino mass
       virtual double GetLowestMass();         ///< Get lightest neutrino mass
 
+      virtual void SetIsOscProbAvg(bool isOscProbAvg)
+      {
+        fIsOscProbAvg = true;
+      } ///< Deactivate Maltoni
+
     protected:
       /// Build the full Hamiltonian
       virtual void UpdateHam();

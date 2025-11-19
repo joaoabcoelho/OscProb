@@ -33,11 +33,11 @@
 #ifndef PMNS_Fast_H
 #define PMNS_Fast_H
 
-#include "PMNS_Base.h"
+#include "PMNS_Maltoni.h"
 
 namespace OscProb {
 
-  class PMNS_Fast : public PMNS_Base {
+  class PMNS_Fast : public PMNS_Maltoni {
     public:
       PMNS_Fast();          ///< Constructor
       virtual ~PMNS_Fast(); ///< Destructor

@@ -14,11 +14,11 @@ using namespace OscProb;
 
 //.............................................................................
 ///
-/// Constructor. \sa PMNS_Base::PMNS_Base
+/// Constructor. \sa PMNS_Maltoni::PMNS_Maltoni
 ///
 /// This class is restricted to 3 neutrino flavours.
 ///
-PMNS_Fast::PMNS_Fast() : PMNS_Base(), fHam() {}
+PMNS_Fast::PMNS_Fast() : PMNS_Maltoni(3), fHam() {}
 
 //.............................................................................
 ///

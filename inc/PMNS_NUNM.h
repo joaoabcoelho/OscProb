@@ -58,6 +58,11 @@ namespace OscProb {
       virtual void    SetFracVnc(double f);
       virtual matrixD ProbMatrix(int nflvi, int nflvf);
 
+      virtual void SetIsOscProbAvg(bool isOscProbAvg)
+      {
+        fIsOscProbAvg = true;
+      } ///< Deactivate Maltoni
+
     protected:
       virtual void UpdateHam();
       virtual void Propagate();

@@ -27,11 +27,11 @@
 
 #include <Eigen/Core>
 
-#include "PMNS_Base.h"
+#include "PMNS_Maltoni.h"
 
 namespace OscProb {
 
-  class PMNS_Sterile : public PMNS_Base {
+  class PMNS_Sterile : public PMNS_Maltoni {
     public:
       PMNS_Sterile(int numNus); ///< Constructor
 

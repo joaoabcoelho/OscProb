@@ -73,6 +73,7 @@ target_sources(
           src/EigenPoint.cxx
           src/NuPath.cxx
           src/PMNS_Base.cxx
+          src/PMNS_Maltoni.cxx
           src/PMNS_Decay.cxx
           src/PMNS_Deco.cxx
           src/PMNS_DensityMatrix.cxx
@@ -100,6 +101,7 @@ list(
   inc/EigenPoint.h
   inc/NuPath.h
   inc/PMNS_Base.h
+  inc/PMNS_Maltoni.h
   inc/PMNS_Decay.h
   inc/PMNS_Deco.h
   inc/PMNS_DensityMatrix.h
