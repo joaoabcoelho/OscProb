@@ -506,10 +506,8 @@ double PMNS_Maltoni::AvgFormula(int flvi, int flvf, double dbin, vectorD lambda,
 ///
 double PMNS_Maltoni::AvgProb(int flvi, int flvf, double E, double dE)
 {
-  if (fIsOscProbAvg == true)
-    return PMNS_Base::AvgProb(flvi, flvf, E, dE);
-  else
-    ;
+  if (fIsOscProbAvg == true) return PMNS_Base::AvgProb(flvi, flvf, E, dE);
+
   // Do nothing if energy not positive
   if (E <= 0) return 0;
 
@@ -551,8 +549,7 @@ double PMNS_Maltoni::AvgProbLoE(int flvi, int flvf, double LoE, double dLoE)
 {
   if (fIsOscProbAvg == true)
     return PMNS_Base::AvgProbLoE(flvi, flvf, LoE, dLoE);
-  else
-    ;
+
   if (LoE <= 0) return 0;
 
   if (fNuPaths.empty()) return 0;
@@ -673,10 +670,8 @@ vectorD PMNS_Maltoni::GetSamplePointsAvgClass(double LoE, double dLoE)
 ///
 vectorD PMNS_Maltoni::AvgProbVector(int flvi, double E, double dE)
 {
-  if (fIsOscProbAvg == true)
-    return PMNS_Base::AvgProbVector(flvi, E, dE);
-  else
-    ;
+  if (fIsOscProbAvg == true) return PMNS_Base::AvgProbVector(flvi, E, dE);
+
   vectorD probs(fNumNus, 0);
 
   // Do nothing if energy is not positive
@@ -714,8 +709,7 @@ vectorD PMNS_Maltoni::AvgProbVectorLoE(int flvi, double LoE, double dLoE)
 {
   if (fIsOscProbAvg == true)
     return PMNS_Base::AvgProbVectorLoE(flvi, LoE, dLoE);
-  else
-    ;
+
   vectorD probs(fNumNus, 0);
 
   if (LoE <= 0) return probs;
@@ -774,8 +768,7 @@ matrixD PMNS_Maltoni::AvgProbMatrix(int nflvi, int nflvf, double E, double dE)
 {
   if (fIsOscProbAvg == true)
     return PMNS_Base::AvgProbMatrix(nflvi, nflvf, E, dE);
-  else
-    ;
+
   matrixD probs(nflvi, vectorD(nflvf, 0));
 
   // Do nothing if energy is not positive
@@ -809,8 +802,7 @@ matrixD PMNS_Maltoni::AvgProbMatrixLoE(int nflvi, int nflvf, double LoE,
 {
   if (fIsOscProbAvg == true)
     return PMNS_Base::AvgProbMatrixLoE(nflvi, nflvf, LoE, dLoE);
-  else
-    ;
+
   matrixD probs(nflvi, vectorD(nflvf, 0));
 
   if (LoE <= 0) return probs;
