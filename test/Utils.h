@@ -14,7 +14,6 @@
 #include "PMNS_SNSI.h"
 #include "PMNS_Decay.h"
 #include "PMNS_Sterile.h"
-#include "PMNS_Avg.h"
 
 //.............................................................................
 void SetNominalPars(OscProb::PMNS_Base* p){
@@ -184,15 +183,6 @@ OscProb::PMNS_NUNM* GetNUNM(bool is_nominal){
 }
 
 //.............................................................................
-OscProb::PMNS_Avg* GetAvg(bool is_nominal){
-
-  OscProb::PMNS_Avg* p = new OscProb::PMNS_Avg();
-  SetNominalPars(p);
-  return p;
-
-}
-
-//.............................................................................
 OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
 
   if(model == "Iter")    return GetIter(is_nominal);
@@ -204,7 +194,6 @@ OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
   if(model == "SNSI")    return GetSNSI(is_nominal);
   if(model == "NUNM")    return GetNUNM(is_nominal);
   if(model == "OQS")     return GetOQS(is_nominal);
-  if(model == "Avg")     return GetAvg(is_nominal);
 
   return GetFast(is_nominal);
 
@@ -215,7 +204,7 @@ vector<string> GetListOfModels(){
 
   return {"Fast", "Iter", "Sterile", "NSI",
           "Deco", "Decay", "LIV", "SNSI",
-          "NUNM", "OQS", "Avg"};
+          "NUNM", "OQS"};
 
 }
 
