@@ -154,7 +154,7 @@ namespace OscProb {
                                 vectorD flambda, matrixC fV);
 
       /// Formula for the extrapolation of probability
-      virtual double AvgFormulaExtrapolation(int flvi, int flvf, double dbin,
+      virtual double AvgFormulaExtrapolation(int flvi, int flvf, double dE,
                                              vectorD flambda, matrixC fV);
 
       /// Algorithm for the compute of the average

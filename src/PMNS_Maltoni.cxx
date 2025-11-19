@@ -1294,7 +1294,7 @@ vectorD PMNS_Maltoni::GetSamplePointsAvgClass(double E, double cosT,
 ///
 /// @return Neutrino oscillation probability
 ///
-double PMNS_Maltoni::AvgFormulaExtrapolation(int flvi, int flvf, double dbin,
+double PMNS_Maltoni::AvgFormulaExtrapolation(int flvi, int flvf, double dE,
                                              vectorD lambda, matrixC V)
 {
   vectorC SV = vectorC(fNumNus, 0);
@@ -1312,7 +1312,7 @@ double PMNS_Maltoni::AvgFormulaExtrapolation(int flvi, int flvf, double dbin,
 
   for (int j = 0; j < fNumNus; j++) {
     for (int i = 0; i < fNumNus; i++) {
-      double arg = (lambda[j] - lambda[i]) * dbin;
+      double arg = (lambda[j] - lambda[i]) * dE;
       expo[j][i] = exp(complexD(0.0, arg));
     }
   }
