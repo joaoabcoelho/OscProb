@@ -1,7 +1,6 @@
 var Utils_8h =
 [
     [ "CheckProb", "Utils_8h.html#acbcd71299f08b59f8029ffab1bb24466", null ],
-    [ "GetAvg", "Utils_8h.html#ad9abcdd2bc45c20bf0d686ea9d1a3bc1", null ],
     [ "GetDecay", "Utils_8h.html#a9f3c2f157fe0bf8fce2ad5b51210d52b", null ],
     [ "GetDeco", "Utils_8h.html#a35c17b847feff2e59ecf7b9c4c164eb1", null ],
     [ "GetFast", "Utils_8h.html#a1a865612535a7b341612439800cadab1", null ],
