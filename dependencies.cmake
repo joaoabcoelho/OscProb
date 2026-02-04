@@ -26,8 +26,7 @@ if(NOT TARGET Eigen3::Eigen)
   set(EIGEN_BUILD_DOC OFF)
   FetchContent_Declare(
     Eigen3
-    URL https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
-        EXCLUDE_FROM_ALL)
+    URL https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz)
   FetchContent_MakeAvailable(Eigen3)
   if(OLD_BUILD_TESTING)
     set(BUILD_TESTING ${OLD_BUILD_TESTING})
