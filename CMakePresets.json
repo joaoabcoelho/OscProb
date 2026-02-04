@@ -1,0 +1,114 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 27,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "release",
+            "displayName": "Release config",
+            "description": "Release build",
+            "binaryDir": "${sourceDir}/build-release",
+            "installDir": "${sourceDir}/install-release",
+            "cacheVariables": {
+                "BUILD_SHARED_LIBS": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "CMAKE_BUILD_TYPE": {
+                    "type": "string",
+                    "value": "Release"
+                },
+                "OSCPROB_ENABLE_TESTING": {
+                    "type": "BOOL",
+                    "value": "OFF"
+                }
+            }
+        },
+        {
+            "name": "dev",
+            "displayName": "Development config",
+            "description": "Development build",
+            "binaryDir": "${sourceDir}/build-dev",
+            "installDir": "${sourceDir}/install-dev",
+            "cacheVariables": {
+                "BUILD_SHARED_LIBS": {
+                    "type": "BOOL",
+                    "value": "ON"
+                },
+                "CMAKE_BUILD_TYPE": {
+                    "type": "string",
+                    "value": "dev"
+                },
+                "OSCPROB_ENABLE_TESTING": {
+                    "type": "BOOL",
+                    "value": "ON"
+                }
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "release",
+            "configurePreset": "release",
+            "targets": [
+                "install"
+            ]
+        },
+        {
+            "name": "dev",
+            "configurePreset": "dev",
+            "targets": [
+                "install"
+            ]
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "dev",
+            "configurePreset": "dev",
+            "output": {
+                "outputOnFailure": true
+            },
+            "execution": {
+                "noTestsAction": "error",
+                "stopOnFailure": false,
+                "scheduleRandom": true
+            }
+        }
+    ],
+    "workflowPresets": [
+        {
+            "name": "release",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "release"
+                },
+                {
+                    "type": "build",
+                    "name": "release"
+                }
+            ]
+        },
+        {
+            "name": "dev",
+            "steps": [
+                {
+                    "type": "configure",
+                    "name": "dev"
+                },
+                {
+                    "type": "build",
+                    "name": "dev"
+                },
+                {
+                    "type": "test",
+                    "name": "dev"
+                }
+            ]
+        }
+    ]
+}
