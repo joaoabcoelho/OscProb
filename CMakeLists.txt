@@ -51,13 +51,15 @@ endif()
 set(CMAKE_INSTALL_RPATH ${basePoint} ${basePoint}/${relDir}
                         ${basePoint}/../../lib)
 
-# include(CTest)
-
 include(dependencies.cmake)
 
 # useful functions to ease declaration of libraries and executables for this
 # project
 include(cmake/functions/CMakeLists.txt)
+
+if(OSCPROB_ENABLE_TESTING)
+  include(CTest)
+endif()
 
 # Add library
 add_library(OscProb)
