@@ -124,7 +124,7 @@ set_target_properties(OscProb PROPERTIES PUBLIC_HEADER "${PUB_HDRS}" OUTPUT_NAME
 target_link_libraries(
   OscProb
   PRIVATE MatrixDecomp
-  PUBLIC ROOT::RIO Eigen3::Eigen)
+  PUBLIC ROOT::Core Eigen3::Eigen)
 
 add_root_dictionary(OscProb HEADERS ${PUB_HDRS} LINKDEF inc/LinkDef.h)
 
