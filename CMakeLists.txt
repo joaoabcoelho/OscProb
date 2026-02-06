@@ -149,6 +149,19 @@ install(
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
+if(NOT EXISTS "${CMAKE_INSTALL_INCLUDEDIR}/Eigen/Core")
+  # The Eigen version 3.4.0 has some issues with CMake. This ensures that the
+  # headers are installed where expected
+  if(eigen3_POPULATED)
+    set(eigen_inc ${eigen3_SOURCE_DIR})
+  else()
+    get_target_property(eigen_inc Eigen3::Eigen INTERFACE_INCLUDE_DIRECTORIES)
+  endif()
+  message(STATUS "Explicitly installing Eigen/Core")
+  install(DIRECTORY "${eigen_inc}/Eigen"
+          DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+endif()
+
 include(cmake/packaging/CMakeLists.txt)
 
 if(NOT PROJECT_IS_TOP_LEVEL)
