@@ -94,33 +94,38 @@ target_include_directories(
   OscProb
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/inc>
          $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}> $<INSTALL_INTERFACE:include>)
-list(
-  APPEND
-  PUB_HDRS
-  inc/Absorption.h
-  inc/EarthModelBase.h
-  inc/EarthModelBinned.h
-  inc/EigenPoint.h
-  inc/NuPath.h
-  inc/PMNS_Base.h
-  inc/PMNS_Maltoni.h
-  inc/PMNS_Decay.h
-  inc/PMNS_Deco.h
-  inc/PMNS_DensityMatrix.h
-  inc/PMNS_Fast.h
-  inc/PMNS_Iter.h
-  inc/PMNS_LIV.h
-  inc/PMNS_NSI.h
-  inc/PMNS_NUNM.h
-  inc/PMNS_OQS.h
-  inc/PMNS_SNSI.h
-  inc/PMNS_Sterile.h
-  inc/PMNS_Avg.h
-  inc/PremModel.h
-  inc/Definitions.h
-  ${PROJECT_BINARY_DIR}/prem_default.hpp)
-set_target_properties(OscProb PROPERTIES PUBLIC_HEADER "${PUB_HDRS}" OUTPUT_NAME
-                                                                     OscProb)
+
+set(hdrs
+    Absorption.h
+    EarthModelBase.h
+    EarthModelBinned.h
+    EigenPoint.h
+    NuPath.h
+    PMNS_Base.h
+    PMNS_Maltoni.h
+    PMNS_Decay.h
+    PMNS_Deco.h
+    PMNS_DensityMatrix.h
+    PMNS_Fast.h
+    PMNS_Iter.h
+    PMNS_LIV.h
+    PMNS_NSI.h
+    PMNS_NUNM.h
+    PMNS_OQS.h
+    PMNS_SNSI.h
+    PMNS_Sterile.h
+    PMNS_Avg.h
+    PremModel.h
+    Definitions.h)
+
+set(hdrs_full_path ${hdrs})
+list(TRANSFORM hdrs_full_path PREPEND "${PROJECT_SOURCE_DIR}/inc/")
+
+list(APPEND hrds prem_default.hpp)
+list(APPEND hdrs_full_path ${PROJECT_BINARY_DIR}/prem_default.hpp)
+
+set_target_properties(OscProb PROPERTIES PUBLIC_HEADER "${hdrs_full_path}"
+                                         OUTPUT_NAME OscProb)
 
 # Link libraries
 target_link_libraries(
@@ -128,7 +133,7 @@ target_link_libraries(
   PRIVATE MatrixDecomp
   PUBLIC ROOT::Core Eigen3::Eigen)
 
-add_root_dictionary(OscProb HEADERS ${PUB_HDRS} LINKDEF inc/LinkDef.h)
+add_root_dictionary(OscProb HEADERS ${hdrs} LINKDEF inc/LinkDef.h)
 
 add_subdirectory(MatrixDecomp)
 
