@@ -61,6 +61,12 @@ This should take a few seconds and you are all set.
   To quickly install it use:
 
   ```shell
+  cmake --workflow --preset release
+  ```
+
+  If your CMake is too old and does not support the worflow oprion, you can install it with:
+
+  ```shell
   build_dir=$PWD/build # Change with the build dir you want
   install_dir=$PWD/install # Change with the install dir you want
   cmake -B $build_dir --install-prefix $install_dir -DCMAKE_BUILD_TYPE=Release -DOSCPROB_ENABLE_TESTING=ON

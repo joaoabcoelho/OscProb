@@ -51,13 +51,15 @@ endif()
 set(CMAKE_INSTALL_RPATH ${basePoint} ${basePoint}/${relDir}
                         ${basePoint}/../../lib)
 
-# include(CTest)
-
 include(dependencies.cmake)
 
 # useful functions to ease declaration of libraries and executables for this
 # project
 include(cmake/functions/CMakeLists.txt)
+
+if(OSCPROB_ENABLE_TESTING)
+  include(CTest)
+endif()
 
 # Add library
 add_library(OscProb)
@@ -92,41 +94,46 @@ target_include_directories(
   OscProb
   PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/inc>
          $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}> $<INSTALL_INTERFACE:include>)
-list(
-  APPEND
-  PUB_HDRS
-  inc/Absorption.h
-  inc/EarthModelBase.h
-  inc/EarthModelBinned.h
-  inc/EigenPoint.h
-  inc/NuPath.h
-  inc/PMNS_Base.h
-  inc/PMNS_Maltoni.h
-  inc/PMNS_Decay.h
-  inc/PMNS_Deco.h
-  inc/PMNS_DensityMatrix.h
-  inc/PMNS_Fast.h
-  inc/PMNS_Iter.h
-  inc/PMNS_LIV.h
-  inc/PMNS_NSI.h
-  inc/PMNS_NUNM.h
-  inc/PMNS_OQS.h
-  inc/PMNS_SNSI.h
-  inc/PMNS_Sterile.h
-  inc/PMNS_Avg.h
-  inc/PremModel.h
-  inc/Definitions.h
-  ${PROJECT_BINARY_DIR}/prem_default.hpp)
-set_target_properties(OscProb PROPERTIES PUBLIC_HEADER "${PUB_HDRS}" OUTPUT_NAME
-                                                                     OscProb)
+
+set(hdrs
+    Absorption.h
+    EarthModelBase.h
+    EarthModelBinned.h
+    EigenPoint.h
+    NuPath.h
+    PMNS_Base.h
+    PMNS_Maltoni.h
+    PMNS_Decay.h
+    PMNS_Deco.h
+    PMNS_DensityMatrix.h
+    PMNS_Fast.h
+    PMNS_Iter.h
+    PMNS_LIV.h
+    PMNS_NSI.h
+    PMNS_NUNM.h
+    PMNS_OQS.h
+    PMNS_SNSI.h
+    PMNS_Sterile.h
+    PMNS_Avg.h
+    PremModel.h
+    Definitions.h)
+
+set(hdrs_full_path ${hdrs})
+list(TRANSFORM hdrs_full_path PREPEND "${PROJECT_SOURCE_DIR}/inc/")
+
+list(APPEND hrds prem_default.hpp)
+list(APPEND hdrs_full_path ${PROJECT_BINARY_DIR}/prem_default.hpp)
+
+set_target_properties(OscProb PROPERTIES PUBLIC_HEADER "${hdrs_full_path}"
+                                         OUTPUT_NAME OscProb)
 
 # Link libraries
 target_link_libraries(
   OscProb
   PRIVATE MatrixDecomp
-  PUBLIC ROOT::RIO Eigen3::Eigen)
+  PUBLIC ROOT::Core Eigen3::Eigen)
 
-add_root_dictionary(OscProb HEADERS ${PUB_HDRS} LINKDEF inc/LinkDef.h)
+add_root_dictionary(OscProb HEADERS ${hdrs} LINKDEF inc/LinkDef.h)
 
 add_subdirectory(MatrixDecomp)
 
@@ -146,6 +153,19 @@ install(
   EXPORT oscprob
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+if(NOT EXISTS "${CMAKE_INSTALL_INCLUDEDIR}/Eigen/Core")
+  # The Eigen version 3.4.0 has some issues with CMake. This ensures that the
+  # headers are installed where expected
+  if(eigen3_POPULATED)
+    set(eigen_inc ${eigen3_SOURCE_DIR})
+  else()
+    get_target_property(eigen_inc Eigen3::Eigen INTERFACE_INCLUDE_DIRECTORIES)
+  endif()
+  message(STATUS "Explicitly installing Eigen/Core")
+  install(DIRECTORY "${eigen_inc}/Eigen"
+          DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+endif()
 
 include(cmake/packaging/CMakeLists.txt)
 

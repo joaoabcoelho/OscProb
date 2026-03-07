@@ -14,6 +14,9 @@ find_package(ROOT REQUIRED COMPONENTS Core RIO)
 find_package(Eigen3 QUIET)
 if(NOT TARGET Eigen3::Eigen)
   set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
+  if(POLICY CMP0135)
+    cmake_policy(SET CMP0135 NEW)
+  endif()
   # The CMakeLists of eigen3 version 3.4.0 is not well optimized and attempts in
   # compiling lots of targets that we do not use. This code allows at least to
   # disable the testing, while still being able to compile our tests if
@@ -26,12 +29,14 @@ if(NOT TARGET Eigen3::Eigen)
   set(EIGEN_BUILD_DOC OFF)
   FetchContent_Declare(
     Eigen3
-    URL https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
-        EXCLUDE_FROM_ALL)
+    URL https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz)
   FetchContent_MakeAvailable(Eigen3)
   if(OLD_BUILD_TESTING)
     set(BUILD_TESTING ${OLD_BUILD_TESTING})
   else()
     unset(BUILD_TESTING)
+    message(STATUS "Eigen will be fetched")
   endif()
+else()
+  message(STATUS "Eigen found")
 endif()
