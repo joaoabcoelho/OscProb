@@ -25,6 +25,7 @@
 #pragma link C++ class OscProb::PMNS_Deco+;
 #pragma link C++ class OscProb::PMNS_Decay+;
 #pragma link C++ class OscProb::PMNS_LIV+;
+#pragma link C++ class OscProb::PMNS_SiderealLIV+;
 #pragma link C++ class OscProb::PMNS_SNSI+;
 #pragma link C++ class OscProb::PMNS_OQS+;
 #pragma link C++ class OscProb::PMNS_Avg+;
