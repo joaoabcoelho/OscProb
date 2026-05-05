@@ -15,6 +15,7 @@
 #include <Eigen/Dense>
 #include <Eigen/Eigenvalues>
 #include <iostream>
+#include <cassert>
 
 using namespace OscProb;
 using namespace std;
