@@ -189,9 +189,15 @@ double PMNS_SiderealLIV::GetC(int flvi, int flvj, int coord1, int coord2)
 void PMNS_SiderealLIV::SetNeutrinoDirection(double zenith, double azimuth)
 {
   double chi = fChi * M_PI / 180.0;
-  fN[0] =  cos(chi) * sin(zenith) * cos(azimuth) + sin(chi) * cos(zenith);
-  fN[1] =  sin(zenith) * sin(azimuth);
-  fN[2] = -sin(chi) * sin(zenith) * cos(azimuth) + cos(chi) * cos(zenith);
+  double N0  =  cos(chi) * sin(zenith) * cos(azimuth) + sin(chi) * cos(zenith);
+  double N1  =  sin(zenith) * sin(azimuth);
+  double N2  = -sin(chi) * sin(zenith) * cos(azimuth) + cos(chi) * cos(zenith);
+
+  fGotES *= (fN[0] == N0 && fN[1] == N1 && fN[2] == N2);
+
+  fN[0] = N0;
+  fN[1] = N1;
+  fN[2] = N2;
 }
 
 
@@ -203,6 +209,7 @@ void PMNS_SiderealLIV::SetNeutrinoDirection(double zenith, double azimuth)
 ///
 void PMNS_SiderealLIV::SetTimeHours(double hours)
 {
+  fGotES *= (fTime == hours);
   fTime = hours;
 }
 
@@ -243,27 +250,6 @@ void PMNS_SiderealLIV::SetColatitude(double deg, double min, double sec)
 double PMNS_SiderealLIV::GetColatitude() const
 {
   return fChi;
-}
-
-
-void PMNS_SiderealLIV::SolveHam()
-{
-  // Build Hamiltonian
-  BuildHms();
-
-  UpdateHam();
-
-  double   fEvalGLoBES[3];
-  complexD fEvecGLoBES[3][3];
-
-  // Solve Hamiltonian for eigensystem using the GLoBES method
-  zheevh3(fHam, fEvecGLoBES, fEvalGLoBES);
-
-  // Fill fEval and fEvec vectors from GLoBES arrays
-  for (int i = 0; i < fNumNus; i++) {
-    fEval[i] = fEvalGLoBES[i];
-    for (int j = 0; j < fNumNus; j++) { fEvec[i][j] = fEvecGLoBES[i][j]; }
-  }
 }
 
 

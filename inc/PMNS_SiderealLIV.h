@@ -69,7 +69,6 @@ namespace OscProb {
   protected:
     /// Build the full Hamiltonian
     virtual void UpdateHam();
-    virtual void SolveHam();
     virtual void FillCache() {} ///< Deactivate cache
 
     /// Validate and reorder a flavour pair so that flvi <= flvj.
