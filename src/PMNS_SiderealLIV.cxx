@@ -186,15 +186,17 @@ double PMNS_SiderealLIV::GetC(int flvi, int flvj, int coord1, int coord2)
 ///
 /// Set the neutrino direction using the stored colatitude (fChi).
 ///
-/// @param zenith  - zenith angle in radians
-/// @param azimuth - azimuth angle in radians
+/// @param zenith  - zenith angle in degrees
+/// @param azimuth - azimuth angle in degrees
 ///
 void PMNS_SiderealLIV::SetNeutrinoDirection(double zenith, double azimuth)
 {
-  double chi = fChi * M_PI / 180.0;
-  double N0  =  cos(chi) * sin(zenith) * cos(azimuth) + sin(chi) * cos(zenith);
-  double N1  =  sin(zenith) * sin(azimuth);
-  double N2  = -sin(chi) * sin(zenith) * cos(azimuth) + cos(chi) * cos(zenith);
+  double chi = fChi   * M_PI / 180.0;
+  double zen = zenith * M_PI / 180.0;
+  double azi = azimuth * M_PI / 180.0;
+  double N0  =  cos(chi) * sin(zen) * cos(azi) + sin(chi) * cos(zen);
+  double N1  =  sin(zen) * sin(azi);
+  double N2  = -sin(chi) * sin(zen) * cos(azi) + cos(chi) * cos(zen);
 
   fGotES *= (fN[0] == N0 && fN[1] == N1 && fN[2] == N2);
 

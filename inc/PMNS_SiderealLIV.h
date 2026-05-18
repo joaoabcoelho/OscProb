@@ -36,7 +36,7 @@ namespace OscProb {
     virtual void SetA(int flvi, int flvj, int coord, double val);
     virtual void SetC(int flvi, int flvj, int coord1, int coord2, double val);
 
-    /// Set the neutrino arrival direction (zenith and azimuth in radians).
+    /// Set the neutrino arrival direction (zenith and azimuth in degrees).
     /// Uses the stored colatitude set via SetColatitude().
     virtual void SetNeutrinoDirection(double zenith, double azimuth);
 

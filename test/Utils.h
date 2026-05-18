@@ -184,7 +184,7 @@ OscProb::PMNS_SiderealLIV* GetSiderealLIV(bool is_nominal){
     p->SetC(1,2, 1,2, 0.5e-22);
     p->SetC(2,2, 0,2, 0.6e-22);
     p->SetColatitude(-89, -59, -24); // IceCube (South Pole)
-    p->SetNeutrinoDirection(1.0, 0.5);
+    p->SetNeutrinoDirection(57.3, 28.6); // ~1.0 rad, ~0.5 rad
     p->SetTimeHours(6.0);
   }
 
