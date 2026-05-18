@@ -95,6 +95,7 @@ COMMA_SEPARATED_METHODS := $(subst $(space),$(comma),$(QUOTED_METHODS))
 ROOT_FUNCTION_ARG := {$(COMMA_SEPARATED_METHODS)}
 
 test: $(TARGET_LIB)
+	@cd test && root -l -b -q ../tutorial/LoadOscProb.C 'MakeTestSamples.C()'
 	@cd test && root -l -b -q ../tutorial/LoadOscProb.C 'TestMethods.C($(ROOT_FUNCTION_ARG))'
 	@cd test && root -l -b -q ../tutorial/LoadOscProb.C 'StressTest.C($(ROOT_FUNCTION_ARG))'
 
