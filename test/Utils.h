@@ -14,6 +14,7 @@
 #include "PMNS_SNSI.h"
 #include "PMNS_Decay.h"
 #include "PMNS_Sterile.h"
+#include "PMNS_SiderealLIV.h"
 
 //.............................................................................
 void SetNominalPars(OscProb::PMNS_Base* p){
@@ -165,6 +166,33 @@ OscProb::PMNS_LIV* GetLIV(bool is_nominal){
 }
 
 //.............................................................................
+OscProb::PMNS_SiderealLIV* GetSiderealLIV(bool is_nominal){
+
+  OscProb::PMNS_SiderealLIV* p = new OscProb::PMNS_SiderealLIV();
+  SetNominalPars(p);
+  if(!is_nominal){
+    p->SetA(0,0, 0, 0.1e-22);
+    p->SetA(0,1, 1, 0.2e-22);
+    p->SetA(0,2, 2, 0.3e-22);
+    p->SetA(1,1, 0, 0.4e-22);
+    p->SetA(1,2, 1, 0.5e-22);
+    p->SetA(2,2, 2, 0.6e-22);
+    p->SetC(0,0, 0,0, 0.1e-22);
+    p->SetC(0,1, 1,1, 0.2e-22);
+    p->SetC(0,2, 2,2, 0.3e-22);
+    p->SetC(1,1, 0,1, 0.4e-22);
+    p->SetC(1,2, 1,2, 0.5e-22);
+    p->SetC(2,2, 0,2, 0.6e-22);
+    p->SetColatitude(-89, -59, -24); // IceCube (South Pole)
+    p->SetNeutrinoDirection(1.0, 0.5);
+    p->SetTimeHours(6.0);
+  }
+
+  return p;
+
+}
+
+//.............................................................................
 OscProb::PMNS_NUNM* GetNUNM(bool is_nominal){
 
   OscProb::PMNS_NUNM* p = new OscProb::PMNS_NUNM(0);
@@ -193,7 +221,8 @@ OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
   if(model == "LIV")     return GetLIV(is_nominal);
   if(model == "SNSI")    return GetSNSI(is_nominal);
   if(model == "NUNM")    return GetNUNM(is_nominal);
-  if(model == "OQS")     return GetOQS(is_nominal);
+  if(model == "OQS")          return GetOQS(is_nominal);
+  if(model == "SiderealLIV") return GetSiderealLIV(is_nominal);
 
   return GetFast(is_nominal);
 
@@ -204,7 +233,7 @@ vector<string> GetListOfModels(){
 
   return {"Fast", "Iter", "Sterile", "NSI",
           "Deco", "Decay", "LIV", "SNSI",
-          "NUNM", "OQS"};
+          "NUNM", "OQS", "SiderealLIV"};
 
 }
 
