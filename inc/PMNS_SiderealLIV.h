@@ -49,6 +49,13 @@ namespace OscProb {
     /// @param chi - Colatitude of the detector (90 - latitude), in degrees.
     virtual void SetColatitude(double chi);
 
+    /// Set the detector colatitude from geographic coordinates.
+    /// All three arguments carry the sign: negative for South, positive for North.
+    /// @param deg - Degrees of latitude
+    /// @param min - Arcminutes of latitude
+    /// @param sec - Arcseconds of latitude (default 0)
+    virtual void SetColatitude(double deg, double min, double sec = 0.0);
+
     /// Get the detector colatitude (chi), in degrees.
     virtual double GetColatitude() const;
 

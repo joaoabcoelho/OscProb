@@ -220,6 +220,22 @@ void PMNS_SiderealLIV::SetColatitude(double chi)
 
 //.............................................................................
 ///
+/// Set the detector colatitude from geographic coordinates.
+/// All three arguments carry the sign: negative for South, positive for North.
+/// chi = 90 - latitude.
+///
+/// @param deg - Degrees of latitude
+/// @param min - Arcminutes of latitude
+/// @param sec - Arcseconds of latitude (default 0)
+///
+void PMNS_SiderealLIV::SetColatitude(double deg, double min, double sec)
+{
+  double latitude = deg + min / 60.0 + sec / 3600.0;
+  fChi            = 90.0 - latitude;
+}
+
+//.............................................................................
+///
 /// Get the detector colatitude (chi), in degrees.
 ///
 /// @return - The colatitude of the detector, in degrees.
