@@ -37,14 +37,20 @@ namespace OscProb {
     virtual void SetA(int flvi, int flvj, int coord, double val);
     virtual void SetC(int flvi, int flvj, int coord1, int coord2, double val);
 
-    /// Set the neutrino arrival direction and detector colatitude.
-    /// All angles are in radians.
-    virtual void SetNeutrinoDirection(double zenith, double azimuth,
-                                      double colatitude);
+    /// Set the neutrino arrival direction (zenith and azimuth in radians).
+    /// Uses the stored colatitude set via SetColatitude().
+    virtual void SetNeutrinoDirection(double zenith, double azimuth);
 
     /// Set the local sidereal time at which the probability is evaluated.
     /// @param hours - Local sidereal time, in hours.
     virtual void SetTimeHours(double hours);
+
+    /// Set the detector colatitude (chi), in degrees.
+    /// @param chi - Colatitude of the detector (90 - latitude), in degrees.
+    virtual void SetColatitude(double chi);
+
+    /// Get the detector colatitude (chi), in degrees.
+    virtual double GetColatitude() const;
 
     /// Get any given LIVS parameter of a chosen dimension.
     /// The flavour convention is:
@@ -96,6 +102,9 @@ namespace OscProb {
     // ------------------------------------------------------------------------
     double fN[3];   ///< Neutrino directional factors (NX, NY, NZ)
     double fTime;   ///< Local sidereal time, in hours
+
+  private:
+    double fChi; ///< Colatitude of the detector (chi = 90 - latitude), in degrees
   };
 
 } // namespace OscProb

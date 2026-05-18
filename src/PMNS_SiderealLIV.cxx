@@ -34,7 +34,8 @@ PMNS_SiderealLIV::PMNS_SiderealLIV()
       fa{},
       fc{},
       fN{0.0, 0.0, 0.0},
-      fTime(0.0)
+      fTime(0.0),
+      fChi(0.0)
 {
   SetStdPath();
 }
@@ -180,20 +181,17 @@ double PMNS_SiderealLIV::GetC(int flvi, int flvj, int coord1, int coord2)
 
 //.............................................................................
 ///
-/// Set the neutrino direction.
+/// Set the neutrino direction using the stored colatitude (fChi).
 ///
-/// @param zenith     - zenith angle in (rad)
-/// @param azimuth    - azimuth angle in (rad)
-/// @param colatitude - colatitude of the detector in (rad)
+/// @param zenith  - zenith angle in radians
+/// @param azimuth - azimuth angle in radians
 ///
-void PMNS_SiderealLIV::SetNeutrinoDirection(double zenith, double azimuth,
-                                     double colatitude)
+void PMNS_SiderealLIV::SetNeutrinoDirection(double zenith, double azimuth)
 {
-  fN[0] =  cos(colatitude) * sin(zenith) * cos(azimuth)
-         + sin(colatitude) * cos(zenith);
+  double chi = fChi * M_PI / 180.0;
+  fN[0] =  cos(chi) * sin(zenith) * cos(azimuth) + sin(chi) * cos(zenith);
   fN[1] =  sin(zenith) * sin(azimuth);
-  fN[2] = -sin(colatitude) * sin(zenith) * cos(azimuth)
-         + cos(colatitude) * cos(zenith);
+  fN[2] = -sin(chi) * sin(zenith) * cos(azimuth) + cos(chi) * cos(zenith);
 }
 
 
@@ -206,6 +204,29 @@ void PMNS_SiderealLIV::SetNeutrinoDirection(double zenith, double azimuth,
 void PMNS_SiderealLIV::SetTimeHours(double hours)
 {
   fTime = hours;
+}
+
+
+//.............................................................................
+///
+/// Set the detector colatitude (chi = 90 - latitude), in degrees.
+///
+/// @param chi - Colatitude of the detector, in degrees.
+///
+void PMNS_SiderealLIV::SetColatitude(double chi)
+{
+  fChi = chi;
+}
+
+//.............................................................................
+///
+/// Get the detector colatitude (chi), in degrees.
+///
+/// @return - The colatitude of the detector, in degrees.
+///
+double PMNS_SiderealLIV::GetColatitude() const
+{
+  return fChi;
 }
 
 
