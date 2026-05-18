@@ -38,6 +38,9 @@ PMNS_SiderealLIV::PMNS_SiderealLIV()
       fChi(0.0)
 {
   SetStdPath();
+  // The Maltoni averaging method assumes H ∝ 1/E, which is not valid here
+  // because the LIV terms scale as E^0 (aT) and E^1 (cT).
+  SetIsOscProbAvg(true);
 }
 
 //.............................................................................
