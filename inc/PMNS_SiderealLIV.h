@@ -20,7 +20,6 @@
 #define PMNS_SiderealLIV_H
 
 #include "PMNS_Fast.h"
-#include "PMNS_Base.h"
 
 namespace OscProb {
 
