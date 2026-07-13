@@ -30,12 +30,7 @@ using namespace std;
 /// By default, all Sidereal LIV coefficients are set to zero.
 ///
 PMNS_SiderealLIV::PMNS_SiderealLIV()
-    : PMNS_Fast(),
-      fa{},
-      fc{},
-      fN{0.0, 0.0, 0.0},
-      fTime(0.0),
-      fChi(0.0)
+    : PMNS_Fast(), fa{}, fc{}, fN{0.0, 0.0, 0.0}, fTime(0.0), fChi(0.0)
 {
   SetStdPath();
   // The Maltoni averaging method assumes H ∝ 1/E, which is not valid here
@@ -74,12 +69,12 @@ bool PMNS_SiderealLIV::ValidateAndOrder(int& flvi, int& flvj, const char* name)
 /// Validate that a Lorentz spatial index is in [0, 2].
 ///
 bool PMNS_SiderealLIV::ValidateCoord(int coord, const char* coordName,
-                              const char* paramName)
+                                     const char* paramName)
 {
   if (coord < 0 || coord > 2) {
     cerr << "WARNING: " << coordName << " = " << coord
-         << " out of range [0,2] for " << paramName
-         << ". Doing nothing." << endl;
+         << " out of range [0,2] for " << paramName << ". Doing nothing."
+         << endl;
     return false;
   }
   return true;
@@ -122,7 +117,8 @@ void PMNS_SiderealLIV::SetA(int flvi, int flvj, int coord, double val)
 /// @param coord2 - Space coordinate: 0=X, 1=Y, 2=Z
 /// @param val    - Absolute value of the parameter
 ///
-void PMNS_SiderealLIV::SetC(int flvi, int flvj, int coord1, int coord2, double val)
+void PMNS_SiderealLIV::SetC(int flvi, int flvj, int coord1, int coord2,
+                            double val)
 {
   if (!ValidateAndOrder(flvi, flvj, "cT")) return;
   if (!ValidateCoord(coord1, "coord1", "cT")) return;
@@ -181,7 +177,6 @@ double PMNS_SiderealLIV::GetC(int flvi, int flvj, int coord1, int coord2)
   return fc[flvi][flvj][coord1][coord2];
 }
 
-
 //.............................................................................
 ///
 /// Set the neutrino direction using the stored colatitude (fChi).
@@ -191,11 +186,11 @@ double PMNS_SiderealLIV::GetC(int flvi, int flvj, int coord1, int coord2)
 ///
 void PMNS_SiderealLIV::SetNeutrinoDirection(double zenith, double azimuth)
 {
-  double chi = fChi   * M_PI / 180.0;
+  double chi = fChi * M_PI / 180.0;
   double zen = zenith * M_PI / 180.0;
   double azi = azimuth * M_PI / 180.0;
-  double N0  =  cos(chi) * sin(zen) * cos(azi) + sin(chi) * cos(zen);
-  double N1  =  sin(zen) * sin(azi);
+  double N0  = cos(chi) * sin(zen) * cos(azi) + sin(chi) * cos(zen);
+  double N1  = sin(zen) * sin(azi);
   double N2  = -sin(chi) * sin(zen) * cos(azi) + cos(chi) * cos(zen);
 
   fGotES *= (fN[0] == N0 && fN[1] == N1 && fN[2] == N2);
@@ -204,7 +199,6 @@ void PMNS_SiderealLIV::SetNeutrinoDirection(double zenith, double azimuth)
   fN[1] = N1;
   fN[2] = N2;
 }
-
 
 //.............................................................................
 ///
@@ -218,17 +212,13 @@ void PMNS_SiderealLIV::SetTimeHours(double hours)
   fTime = hours;
 }
 
-
 //.............................................................................
 ///
 /// Set the detector colatitude (chi = 90 - latitude), in degrees.
 ///
 /// @param chi - Colatitude of the detector, in degrees.
 ///
-void PMNS_SiderealLIV::SetColatitude(double chi)
-{
-  fChi = chi;
-}
+void PMNS_SiderealLIV::SetColatitude(double chi) { fChi = chi; }
 
 //.............................................................................
 ///
@@ -252,11 +242,7 @@ void PMNS_SiderealLIV::SetColatitude(double deg, double min, double sec)
 ///
 /// @return - The colatitude of the detector, in degrees.
 ///
-double PMNS_SiderealLIV::GetColatitude() const
-{
-  return fChi;
-}
-
+double PMNS_SiderealLIV::GetColatitude() const { return fChi; }
 
 //.............................................................................
 ///
@@ -280,37 +266,36 @@ void PMNS_SiderealLIV::UpdateHam()
 
   for (int i = 0; i < fNumNus; i++) {
     for (int j = i; j < fNumNus; j++) {
-
       double sign = fIsNuBar ? -kGeV2eV : kGeV2eV;
 
-      double C0  = -sign * fa[i][j][2] * fN[2];
+      double C0 = -sign * fa[i][j][2] * fN[2];
 
-      double As0 =  sign * (fa[i][j][0]*fN[1] - fa[i][j][1]*fN[0]);
-      double Ac0 = -sign * (fa[i][j][0]*fN[0] + fa[i][j][1]*fN[1]);
+      double As0 = sign * (fa[i][j][0] * fN[1] - fa[i][j][1] * fN[0]);
+      double Ac0 = -sign * (fa[i][j][0] * fN[0] + fa[i][j][1] * fN[1]);
 
-      double As1 =  2*fN[1]*fN[2]*fc[i][j][0][2]
-                  - 2*fN[0]*fN[2]*fc[i][j][1][2];
-      double Ac1 = -2*fN[0]*fN[2]*fc[i][j][0][2]
-                  - 2*fN[1]*fN[2]*fc[i][j][1][2];
+      double As1 = 2 * fN[1] * fN[2] * fc[i][j][0][2] -
+                   2 * fN[0] * fN[2] * fc[i][j][1][2];
+      double Ac1 = -2 * fN[0] * fN[2] * fc[i][j][0][2] -
+                   2 * fN[1] * fN[2] * fc[i][j][1][2];
 
-      double Bs1 =  fN[0]*fN[1]*(fc[i][j][0][0] - fc[i][j][1][1])
-                  - (fN[0]*fN[0] - fN[1]*fN[1])*fc[i][j][0][1];
-      double Bs  = fEnergy * Bs1;
+      double Bs1 = fN[0] * fN[1] * (fc[i][j][0][0] - fc[i][j][1][1]) -
+                   (fN[0] * fN[0] - fN[1] * fN[1]) * fc[i][j][0][1];
+      double Bs = fEnergy * Bs1;
 
-      double Bc1 = -0.5*(fN[0]*fN[0] - fN[1]*fN[1])
-                       *(fc[i][j][0][0] - fc[i][j][1][1])
-                  - 2.0*fN[0]*fN[1]*fc[i][j][0][1];
-      double Bc  = fEnergy * Bc1;
+      double Bc1 = -0.5 * (fN[0] * fN[0] - fN[1] * fN[1]) *
+                       (fc[i][j][0][0] - fc[i][j][1][1]) -
+                   2.0 * fN[0] * fN[1] * fc[i][j][0][1];
+      double Bc = fEnergy * Bc1;
 
-      double As = As0 + fEnergy*As1;
-      double Ac = Ac0 + fEnergy*Ac1;
+      double As = As0 + fEnergy * As1;
+      double Ac = Ac0 + fEnergy * Ac1;
 
-      double liv_term = C0
-                      + As * sin(kOmegaSidereal*fTime)
-                      + Ac * cos(kOmegaSidereal*fTime)
-                      + Bs * 2*sin(kOmegaSidereal*fTime)*cos(kOmegaSidereal*fTime)
-                      + Bc * (cos(kOmegaSidereal*fTime)*cos(kOmegaSidereal*fTime)
-                            - sin(kOmegaSidereal*fTime)*sin(kOmegaSidereal*fTime));
+      double liv_term =
+          C0 + As * sin(kOmegaSidereal * fTime) +
+          Ac * cos(kOmegaSidereal * fTime) +
+          Bs * 2 * sin(kOmegaSidereal * fTime) * cos(kOmegaSidereal * fTime) +
+          Bc * (cos(kOmegaSidereal * fTime) * cos(kOmegaSidereal * fTime) -
+                sin(kOmegaSidereal * fTime) * sin(kOmegaSidereal * fTime));
 
       fHam[i][j] += liv_term;
     }
