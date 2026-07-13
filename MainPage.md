@@ -15,6 +15,7 @@ Available classes are:
 - **[PMNS_Deco](@ref OscProb::PMNS_Deco):** Oscillations with 3 flavours including a simple decoherence model
 - **[PMNS_OQS](@ref OscProb::PMNS_OQS):** Oscillations with 3 flavours including decoherence from Open Quantum Systems
 - **[PMNS_LIV](@ref OscProb::PMNS_LIV):** Oscillations with 3 flavours including Lorentz Invariance Violations
+- **[PMNS_SiderealLIV](@ref OscProb::PMNS_SiderealLIV):** Oscillations with 3 flavours including Sidereal Lorentz Invariance Violations
 - **[PMNS_Decay](@ref OscProb::PMNS_Decay):** Oscillations with 3 flavours including neutrino decays
 - **[PMNS_NUNM](@ref OscProb::PMNS_NUNM):** Oscillations with 3 flavours including non-unitary neutrino mixing
 - **[Absorption](@ref OscProb::Absorption):** Computes absorption probabilities for high-energy neutrinos
