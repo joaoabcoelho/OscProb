@@ -30,5 +30,6 @@
 
 #pragma link C++ class OscProb::PremModel+;
 #pragma link C++ class OscProb::EarthModelBinned+;
+#pragma link C++ class OscProb::EarthModelBase+;
 
 #endif
