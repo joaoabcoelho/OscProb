@@ -5,5 +5,7 @@ var searchData=
   ['kk2_2',['kK2',['../classOscProb_1_1PMNS__Base.html#a326fc5016d7dd7ce05682c06cdcb6d94',1,'OscProb::PMNS_Base']]],
   ['kkm2ev_3',['kKm2eV',['../classOscProb_1_1PMNS__Base.html#a382ddd7b76ca89b43f22614a2ea7327b',1,'OscProb::PMNS_Base']]],
   ['kna_4',['kNA',['../classOscProb_1_1PMNS__Base.html#a69355e770b89e99437c2b8a66e48eeb9',1,'OscProb::PMNS_Base']]],
-  ['ku_5',['kU',['../classOscProb_1_1Absorption.html#ab33e87a30b5761dbf7fca55ee9cb58a7',1,'OscProb::Absorption']]]
+  ['komegasidereal_5',['kOmegaSidereal',['../classOscProb_1_1PMNS__SiderealLIV.html#ad0756d3e6d6ef322898bfc5552575e1b',1,'OscProb::PMNS_SiderealLIV']]],
+  ['ksiderealdayhours_6',['kSiderealDayHours',['../classOscProb_1_1PMNS__SiderealLIV.html#ab333d6e3ef426c28f079d4ee43264b78',1,'OscProb::PMNS_SiderealLIV']]],
+  ['ku_7',['kU',['../classOscProb_1_1Absorption.html#ab33e87a30b5761dbf7fca55ee9cb58a7',1,'OscProb::Absorption']]]
 ];

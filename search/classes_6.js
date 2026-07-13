@@ -12,8 +12,9 @@ var searchData=
   ['pmns_5fnsi_9',['PMNS_NSI',['../classOscProb_1_1PMNS__NSI.html',1,'OscProb']]],
   ['pmns_5fnunm_10',['PMNS_NUNM',['../classOscProb_1_1PMNS__NUNM.html',1,'OscProb']]],
   ['pmns_5foqs_11',['PMNS_OQS',['../classOscProb_1_1PMNS__OQS.html',1,'OscProb']]],
-  ['pmns_5fsnsi_12',['PMNS_SNSI',['../classOscProb_1_1PMNS__SNSI.html',1,'OscProb']]],
-  ['pmns_5fsterile_13',['PMNS_Sterile',['../classOscProb_1_1PMNS__Sterile.html',1,'OscProb']]],
-  ['premlayer_14',['PremLayer',['../structOscProb_1_1PremLayer.html',1,'OscProb']]],
-  ['premmodel_15',['PremModel',['../classOscProb_1_1PremModel.html',1,'OscProb']]]
+  ['pmns_5fsiderealliv_12',['PMNS_SiderealLIV',['../classOscProb_1_1PMNS__SiderealLIV.html',1,'OscProb']]],
+  ['pmns_5fsnsi_13',['PMNS_SNSI',['../classOscProb_1_1PMNS__SNSI.html',1,'OscProb']]],
+  ['pmns_5fsterile_14',['PMNS_Sterile',['../classOscProb_1_1PMNS__Sterile.html',1,'OscProb']]],
+  ['premlayer_15',['PremLayer',['../structOscProb_1_1PremLayer.html',1,'OscProb']]],
+  ['premmodel_16',['PremModel',['../classOscProb_1_1PremModel.html',1,'OscProb']]]
 ];

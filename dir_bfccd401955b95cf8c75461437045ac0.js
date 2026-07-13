@@ -18,6 +18,7 @@ var dir_bfccd401955b95cf8c75461437045ac0 =
     [ "PMNS_NSI.h", "PMNS__NSI_8h.html", "PMNS__NSI_8h" ],
     [ "PMNS_NUNM.h", "PMNS__NUNM_8h.html", "PMNS__NUNM_8h" ],
     [ "PMNS_OQS.h", "PMNS__OQS_8h.html", "PMNS__OQS_8h" ],
+    [ "PMNS_SiderealLIV.h", "PMNS__SiderealLIV_8h.html", "PMNS__SiderealLIV_8h" ],
     [ "PMNS_SNSI.h", "PMNS__SNSI_8h.html", "PMNS__SNSI_8h" ],
     [ "PMNS_Sterile.h", "PMNS__Sterile_8h.html", "PMNS__Sterile_8h" ],
     [ "PremModel.h", "PremModel_8h.html", "PremModel_8h" ]

@@ -24,10 +24,12 @@ var searchData=
   ['pmns_5fnunm_2eh_21',['PMNS_NUNM.h',['../PMNS__NUNM_8h.html',1,'']]],
   ['pmns_5foqs_2ecxx_22',['PMNS_OQS.cxx',['../PMNS__OQS_8cxx.html',1,'']]],
   ['pmns_5foqs_2eh_23',['PMNS_OQS.h',['../PMNS__OQS_8h.html',1,'']]],
-  ['pmns_5fsnsi_2ecxx_24',['PMNS_SNSI.cxx',['../PMNS__SNSI_8cxx.html',1,'']]],
-  ['pmns_5fsnsi_2eh_25',['PMNS_SNSI.h',['../PMNS__SNSI_8h.html',1,'']]],
-  ['pmns_5fsterile_2ecxx_26',['PMNS_Sterile.cxx',['../PMNS__Sterile_8cxx.html',1,'']]],
-  ['pmns_5fsterile_2eh_27',['PMNS_Sterile.h',['../PMNS__Sterile_8h.html',1,'']]],
-  ['premmodel_2ecxx_28',['PremModel.cxx',['../PremModel_8cxx.html',1,'']]],
-  ['premmodel_2eh_29',['PremModel.h',['../PremModel_8h.html',1,'']]]
+  ['pmns_5fsiderealliv_2ecxx_24',['PMNS_SiderealLIV.cxx',['../PMNS__SiderealLIV_8cxx.html',1,'']]],
+  ['pmns_5fsiderealliv_2eh_25',['PMNS_SiderealLIV.h',['../PMNS__SiderealLIV_8h.html',1,'']]],
+  ['pmns_5fsnsi_2ecxx_26',['PMNS_SNSI.cxx',['../PMNS__SNSI_8cxx.html',1,'']]],
+  ['pmns_5fsnsi_2eh_27',['PMNS_SNSI.h',['../PMNS__SNSI_8h.html',1,'']]],
+  ['pmns_5fsterile_2ecxx_28',['PMNS_Sterile.cxx',['../PMNS__Sterile_8cxx.html',1,'']]],
+  ['pmns_5fsterile_2eh_29',['PMNS_Sterile.h',['../PMNS__Sterile_8h.html',1,'']]],
+  ['premmodel_2ecxx_30',['PremModel.cxx',['../PremModel_8cxx.html',1,'']]],
+  ['premmodel_2eh_31',['PremModel.h',['../PremModel_8h.html',1,'']]]
 ];

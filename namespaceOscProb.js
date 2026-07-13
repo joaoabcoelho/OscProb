@@ -19,6 +19,7 @@ var namespaceOscProb =
     [ "PMNS_NSI", "classOscProb_1_1PMNS__NSI.html", "classOscProb_1_1PMNS__NSI" ],
     [ "PMNS_NUNM", "classOscProb_1_1PMNS__NUNM.html", "classOscProb_1_1PMNS__NUNM" ],
     [ "PMNS_OQS", "classOscProb_1_1PMNS__OQS.html", "classOscProb_1_1PMNS__OQS" ],
+    [ "PMNS_SiderealLIV", "classOscProb_1_1PMNS__SiderealLIV.html", "classOscProb_1_1PMNS__SiderealLIV" ],
     [ "PMNS_SNSI", "classOscProb_1_1PMNS__SNSI.html", "classOscProb_1_1PMNS__SNSI" ],
     [ "PMNS_Sterile", "classOscProb_1_1PMNS__Sterile.html", "classOscProb_1_1PMNS__Sterile" ],
     [ "PremLayer", "structOscProb_1_1PremLayer.html", "structOscProb_1_1PremLayer" ],

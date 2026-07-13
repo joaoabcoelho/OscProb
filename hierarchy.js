@@ -23,7 +23,8 @@ var hierarchy =
           [ "OscProb::PMNS_NSI", "classOscProb_1_1PMNS__NSI.html", [
             [ "OscProb::PMNS_SNSI", "classOscProb_1_1PMNS__SNSI.html", null ]
           ] ],
-          [ "OscProb::PMNS_NUNM", "classOscProb_1_1PMNS__NUNM.html", null ]
+          [ "OscProb::PMNS_NUNM", "classOscProb_1_1PMNS__NUNM.html", null ],
+          [ "OscProb::PMNS_SiderealLIV", "classOscProb_1_1PMNS__SiderealLIV.html", null ]
         ] ],
         [ "OscProb::PMNS_Sterile", "classOscProb_1_1PMNS__Sterile.html", null ]
       ] ]
