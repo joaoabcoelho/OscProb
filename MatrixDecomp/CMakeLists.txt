@@ -12,8 +12,6 @@ set_target_properties(MatrixDecomp PROPERTIES PUBLIC_HEADER "${PUB_HDRS_MD}"
                                               OUTPUT_NAME MatrixDecomp)
 target_link_libraries(MatrixDecomp PUBLIC ROOT::Core)
 
-add_root_dictionary(MatrixDecomp HEADERS ${PUB_HDRS_MD} LINKDEF LinkDef.h)
-
 install(
   TARGETS MatrixDecomp
   EXPORT oscprob
