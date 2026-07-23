@@ -63,6 +63,13 @@
             "targets": [
                 "install"
             ]
+        },
+        {
+            "name": "test-installed-release",
+            "configurePreset": "release",
+            "targets": [
+                "test-installed"
+            ]
         }
     ],
     "testPresets": [

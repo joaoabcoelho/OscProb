@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-src_dir=$(dirname "$(readlink -f "$0")")
+src_dir=$(dirname "$(dirname "$(readlink -f "$0")")")
 
 function check() {
     dir="$src_dir/$1"
