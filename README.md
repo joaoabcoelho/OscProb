@@ -65,7 +65,13 @@ This should take a few seconds and you are all set.
   cmake --workflow --preset release
   ```
 
-  If your CMake is too old and does not support the worflow oprion, you can install it with:
+  And you can test it with:
+
+  ```shell
+  cmake --build --preset test-installed-release
+  ```
+
+  If your CMake is too old and does not support the workflow option, you can install it with:
 
   ```shell
   build_dir=$PWD/build # Change with the build dir you want
@@ -74,12 +80,12 @@ This should take a few seconds and you are all set.
   cmake --build $build_dir --target install
   ```
 
-  To test the installation you can do:
+  And you can test it with:
   
   ```shell
-  cd $install_dir/test
-  root -b -q ../tutorial/LoadOscProb.C TestMethods.C
-  root -b -q ../tutorial/LoadOscProb.C StressTest.C
+  cd test
+  root -b -q $install_dir/tutorial/LoadOscProb.C TestMethods.C
+  root -b -q $install_dir/tutorial/LoadOscProb.C StressTest.C
   ```
 
 </details>

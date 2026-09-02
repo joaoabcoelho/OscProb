@@ -3,15 +3,15 @@
 *.so
 *.hpp
 *.pcm
-*_C.d
-*_C.so
+*.d
+*.so
 *_C_ACLiC_dict*.h
 
-build
+build*
 install
+install-*
 
 # Ignore compiled macros
-*.d
 AutoDict*
 
 tmp/
@@ -24,3 +24,6 @@ test/profile/bin
 
 # Ignore IDE files
 .vscode
+
+# Ignore other files
+.DS_Store

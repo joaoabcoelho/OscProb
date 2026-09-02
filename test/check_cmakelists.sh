@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-src_dir=$(dirname "$(readlink -f "$0")")
+src_dir=$(dirname "$(dirname "$(readlink -f "$0")")")
 
 function check() {
     dir="$src_dir/$1"
@@ -15,6 +15,9 @@ function check() {
     is_bad=0
     for filename in "${files[@]}"; do
         base_filename=$(basename "$filename")
+        if [[ "$base_filename" =~ G__.*_dict\.cxx ]]; then
+            continue
+        fi
         [[ $in_cmakelists == *"${base_filename}"* ]] || {
             echo "File $filename not found in any CMakeLists.txt"
             is_bad=1

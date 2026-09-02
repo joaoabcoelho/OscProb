@@ -1,19 +1,23 @@
 include_guard()
 
-set(PREMDIR ${CMAKE_INSTALL_PREFIX}/PremTables)
-set(MODEL3DDIR ${CMAKE_INSTALL_PREFIX}/EarthTables)
-set(PREMFILE ${PREMDIR}/prem_default.txt)
-set(PREM3DFILE ${MODEL3DDIR}/earth_binned_default.txt)
+install(
+  TARGETS OscProb
+  EXPORT oscprob
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-configure_file(
-  ${CMAKE_CURRENT_LIST_DIR}/prem_default.hpp.in
-  ${PROJECT_BINARY_DIR}/prem_default.hpp @ONLY USE_SOURCE_PERMISSIONS)
-
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/PremTables
-        DESTINATION ${CMAKE_INSTALL_PREFIX})
-
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/EarthTables
-        DESTINATION ${CMAKE_INSTALL_PREFIX})
+if(NOT EXISTS "${CMAKE_INSTALL_INCLUDEDIR}/Eigen/Core")
+  # The Eigen version 3.4.0 has some issues with CMake. This ensures that the
+  # headers are installed where expected
+  if(eigen3_POPULATED)
+    set(eigen_inc ${eigen3_SOURCE_DIR})
+  else()
+    get_target_property(eigen_inc Eigen3::Eigen INTERFACE_INCLUDE_DIRECTORIES)
+  endif()
+  message(STATUS "Explicitly installing Eigen/Core")
+  install(DIRECTORY "${eigen_inc}/Eigen"
+          DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}")
+endif()
 
 install(
   EXPORT oscprob
