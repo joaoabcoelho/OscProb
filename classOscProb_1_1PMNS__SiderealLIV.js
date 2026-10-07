@@ -121,7 +121,7 @@ var classOscProb_1_1PMNS__SiderealLIV =
     [ "SetwidthBin", "classOscProb_1_1PMNS__SiderealLIV.html#aa49bcf549563204f61952b4802325869", null ],
     [ "SetZoA", "classOscProb_1_1PMNS__SiderealLIV.html#a1bf3ea8fd2507fd2fd82d7410ff8f578", null ],
     [ "SetZoA", "classOscProb_1_1PMNS__SiderealLIV.html#a9324540d24fb809fbd1f59ee80093268", null ],
-    [ "SolveHam", "classOscProb_1_1PMNS__SiderealLIV.html#a8a0828401591e88c60e0051fbfe02d5e", null ],
+    [ "SolveHam", "classOscProb_1_1PMNS__SiderealLIV.html#a429f0898fe7eb669380190715d97675b", null ],
     [ "SolveHamMatter", "classOscProb_1_1PMNS__SiderealLIV.html#a72150a1ccb27f0395a5d14a66dc8f858", null ],
     [ "SolveK", "classOscProb_1_1PMNS__SiderealLIV.html#ace3c83d539e3f1f149534f6a125c1c15", null ],
     [ "TemplateSolver", "classOscProb_1_1PMNS__SiderealLIV.html#a1f670a39032c1c393f737396e9717e98", null ],
