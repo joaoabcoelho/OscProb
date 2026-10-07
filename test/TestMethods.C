@@ -45,17 +45,22 @@ bool TestAvgProb(OscProb::PMNS_Base* p, double energy, double &max_diff){
 //.............................................................................
 bool TestParallel(OscProb::PMNS_Base* p, double energy){
 
-  p->SetEnergy(energy);
+  double dE = 0.1 * energy;
+  double prec = 1e-4;
+  p->SetAvgProbPrec(prec);
 
-  OscProb::matrixD pmatrix = p->ProbMatrix(3,3);
+  OscProb::matrixD pmatrix = p->ProbMatrix(3,3, energy);
+  OscProb::matrixD amatrix = p->AvgProbMatrix(3,3, energy, dE);
 
   for(int flvi=0; flvi<3; flvi++){
 
-    OscProb::vectorD pvector = p->ProbVector(flvi);
+    OscProb::vectorD pvector = p->ProbVector(flvi, energy);
+    OscProb::vectorD avector = p->AvgProbVector(flvi, energy, dE);
 
     for(int flvf=0; flvf<3; flvf++){
 
-      double prob = p->Prob(flvi, flvf);
+      double avg  = p->AvgProb(flvi, flvf, energy, dE);
+      double prob = p->Prob(flvi, flvf, energy);
 
       if(abs(prob - pmatrix[flvi][flvf]) > 1e-12){
         cerr << "Found mismatch in ProbMatrix("
@@ -77,6 +82,28 @@ bool TestParallel(OscProb::PMNS_Base* p, double energy){
              << "Difference is "
              << "abs(" << prob << " - " << pvector[flvf] << ")"
              << " = " << abs(prob - pvector[flvf])
+             << endl;
+        return false;
+      }
+
+      if(abs(avg - amatrix[flvi][flvf]) > 1e-12){
+        cerr << "Found mismatch in AvgProbMatrix("
+             << flvi << ", " << flvf << ", " << energy << ", " << dE << ") "
+             << " with IsNuBar = " << p->GetIsNuBar() << endl
+             << "Difference is "
+             << "abs(" << avg << " - " << amatrix[flvi][flvf] << ")"
+             << " = " << abs(avg - amatrix[flvi][flvf])
+             << endl;
+        return false;
+      }
+
+      if(abs(avg - avector[flvf]) > 1e-12){
+        cerr << "Found mismatch in AvgProbVector("
+             << flvi << ", " << flvf << ", " << energy << ", " << dE << "): "
+             << " with IsNuBar = " << p->GetIsNuBar() << endl
+             << "Difference is "
+             << "abs(" << avg << " - " << avector[flvf] << ")"
+             << " = " << abs(avg - avector[flvf])
              << endl;
         return false;
       }

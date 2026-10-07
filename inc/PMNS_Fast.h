@@ -33,11 +33,11 @@
 #ifndef PMNS_Fast_H
 #define PMNS_Fast_H
 
-#include "PMNS_Base.h"
+#include "PMNS_Maltoni.h"
 
 namespace OscProb {
 
-  class PMNS_Fast : public PMNS_Base {
+  class PMNS_Fast : public PMNS_Maltoni {
     public:
       PMNS_Fast();          ///< Constructor
       virtual ~PMNS_Fast(); ///< Destructor
@@ -55,6 +55,8 @@ namespace OscProb {
 
       /// Solve the full Hamiltonian for eigenvectors and eigenvalues
       virtual void SolveHam();
+      /// Solve the full Hamiltonian in matter
+      virtual void SolveHamMatter();
 
       /// Set the eigensystem to the analytic solution of the vacuum Hamiltonian
       virtual void SetVacuumEigensystem();

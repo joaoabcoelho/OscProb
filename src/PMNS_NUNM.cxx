@@ -15,6 +15,7 @@
 #include <Eigen/Dense>
 #include <Eigen/Eigenvalues>
 #include <iostream>
+#include <cassert>
 
 using namespace OscProb;
 using namespace std;
@@ -28,6 +29,7 @@ using namespace std;
 ///
 PMNS_NUNM::PMNS_NUNM(int scale) : PMNS_Fast()
 {
+  SetIsOscProbAvg(true);
   fscale = scale;
   SetStdPath();
   SetNUNM(0., 0., 0., 0., 0., 0.);

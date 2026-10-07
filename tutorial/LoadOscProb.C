@@ -11,14 +11,21 @@ void LoadOscProb(TString logLevel = "info") {
   // running it in your rootlogon.C file to be loaded
   // by default when you start ROOT.
 
+  TString currentDir = gSystem->DirName(gInterpreter->GetCurrentMacroName());
+
   bool verbose = logLevel.Contains("v");
   bool quiet   = logLevel.Contains("q") && !verbose;
 
   // The library name
-  TString s("libOscProb.so");
+  TString s("libOscProb");
 
   // Search for the library here or in your library paths
-  gSystem->FindFile(TString::Format("./lib:../lib:%s", gSystem->GetDynamicPath()), s);
+  gSystem->AddDynamicPath(currentDir+"/lib");
+  gSystem->AddDynamicPath(currentDir+"/../lib");
+  gSystem->AddDynamicPath(currentDir+"/lib64");
+  gSystem->AddDynamicPath(currentDir+"/../lib64");
+  // gSystem->FindFile(TString::Format("./lib:../lib:%s", gSystem->GetDynamicPath()), s);
+  s = gSystem->FindDynamicLibrary(s);
 
   // Check if library file was found
   if(s.Length() == 0){

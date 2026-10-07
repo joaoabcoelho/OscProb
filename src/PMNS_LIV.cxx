@@ -31,6 +31,7 @@ using namespace std;
 ///
 PMNS_LIV::PMNS_LIV() : PMNS_Fast()
 {
+  SetIsOscProbAvg(true);
   SetStdPath();
 
   for (int dim = 3; dim < 8; dim += 2) {
@@ -238,6 +239,14 @@ complex<double> PMNS_LIV::GetcT(int flvi, int flvj, int dim)
 
   return fcT[flvi][flvj][pos];
 }
+
+//.............................................................................
+///
+/// Solve LIV Hamiltonian in matter.
+///
+/// Reimplemented to avoid using the standard oscillations in vacuum.
+///
+void PMNS_LIV::SolveHam() { PMNS_Fast::SolveHamMatter(); }
 
 //.............................................................................
 ///

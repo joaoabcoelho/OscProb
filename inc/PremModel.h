@@ -56,6 +56,9 @@ namespace OscProb {
       virtual void SetTopLayerSize(
           double thick); ///< Set the outermost layer thickness in km
 
+      virtual double GetDetRadius(); ///< Get the radius where the detector sits
+                                     ///< (in km)
+
     protected:
       virtual void ClearModel(); ///< Clear the earth model information
 

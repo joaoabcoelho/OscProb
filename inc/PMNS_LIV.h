@@ -46,9 +46,16 @@ namespace OscProb {
       virtual complexD GetaT(int flvi, int flvj, int dim = 3);
       virtual complexD GetcT(int flvi, int flvj, int dim = 4);
 
+      virtual void SetIsOscProbAvg(bool isOscProbAvg)
+      {
+        fIsOscProbAvg = true;
+      } ///< Deactivate Maltoni
+
     protected:
       /// Build the full Hamiltonian
       virtual void UpdateHam();
+      /// Solve the full Hamiltonian
+      virtual void SolveHam();
 
       virtual void FillCache() {} ///< Deactivate cache
 

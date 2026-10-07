@@ -94,11 +94,7 @@ namespace OscProb {
       /// the detector (in km)
       ///
       TrajConstants(double cosT = 0, double phi = 0, double DetLat = 0,
-                    double DetLon = 0, double rDet = 6368)
-      {
-        UpdateNuAngles(cosT, phi);
-        UpdateDetPos(DetLat, DetLon, rDet);
-      }
+                    double DetLon = 0, double rDet = 6368);
 
       void UpdateNuAngles(
           double cosTheta,
@@ -171,10 +167,7 @@ namespace OscProb {
       /// @param n - Region index
       ///
       EarthBin(double r_out = 0, double r_in = 0, double lat = 0,
-               double lon = 0, double den = 0, double z = 0.5, int n = 0)
-      {
-        SetBin(r_out, r_in, lat, lon, den, z, n);
-      }
+               double lon = 0, double den = 0, double z = 0.5, int n = 0);
 
       ///
       /// \brief Set the properties of the bin.
@@ -194,16 +187,7 @@ namespace OscProb {
       /// @param n - Region index
       ///
       void SetBin(double r_out = 0, double r_in = 0, double lat = 0,
-                  double lon = 0, double den = 0, double z = 0.5, int n = 0)
-      {
-        radius_out = r_out;
-        radius_in  = r_in;
-        latitude   = lat * M_PI / 180.0; // convert to radians
-        longitude  = lon * M_PI / 180.0; // convert to radians
-        density    = den;
-        zoa        = z;
-        index      = n;
-      }
+                  double lon = 0, double den = 0, double z = 0.5, int n = 0);
 
       double radius_out; ///< The outer radius of the bin in km
       double radius_in;  ///< The inner radius of the bin in km

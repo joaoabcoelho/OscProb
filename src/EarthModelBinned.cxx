@@ -16,6 +16,13 @@ using namespace std;
 
 using namespace OscProb;
 
+TrajConstants::TrajConstants(double cosT, double phi, double DetLat,
+                             double DetLon, double rDet)
+{
+  UpdateNuAngles(cosT, phi);
+  UpdateDetPos(DetLat, DetLon, rDet);
+}
+
 //.............................................................................
 ///
 /// Update values of zenith angle and azimuthal angle for neutrino
@@ -80,6 +87,24 @@ void TrajConstants::Recalculate()
   else {
     xlatextreme = cosA * rDetCosDetLat / beta;
   }
+}
+
+EarthBin::EarthBin(double r_out, double r_in, double lat, double lon,
+                   double den, double z, int n)
+{
+  SetBin(r_out, r_in, lat, lon, den, z, n);
+}
+
+void EarthBin::SetBin(double r_out, double r_in, double lat, double lon,
+                      double den, double z, int n)
+{
+  radius_out = r_out;
+  radius_in  = r_in;
+  latitude   = lat * M_PI / 180.0; // convert to radians
+  longitude  = lon * M_PI / 180.0; // convert to radians
+  density    = den;
+  zoa        = z;
+  index      = n;
 }
 
 //.............................................................................

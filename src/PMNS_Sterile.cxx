@@ -31,7 +31,8 @@ using namespace OscProb;
 ///
 /// @param numNus - the number of neutrino flavours
 ///
-PMNS_Sterile::PMNS_Sterile(int numNus) : PMNS_Base(numNus), fHam(numNus, numNus)
+PMNS_Sterile::PMNS_Sterile(int numNus)
+    : PMNS_Maltoni(numNus), fHam(numNus, numNus)
 {
 }
 

@@ -80,7 +80,7 @@ double TimeTest(OscProb::PMNS_Base* p, string model, int max_length, double ref_
       for(int i=0; i<nbins; i++){
         double energy = 0.5*(xbins[i] + xbins[i+1]);
         double dE = xbins[i+1] - xbins[i];
-        p->AvgProb(1,0, energy, dE);
+        p->AvgProbMatrix(2,3, energy, dE);
         time.count++;
       }
     }
