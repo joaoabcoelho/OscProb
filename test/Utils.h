@@ -221,7 +221,7 @@ OscProb::PMNS_Base* GetModel(string model, bool is_nominal = false){
   if(model == "LIV")     return GetLIV(is_nominal);
   if(model == "SNSI")    return GetSNSI(is_nominal);
   if(model == "NUNM")    return GetNUNM(is_nominal);
-  if(model == "OQS")          return GetOQS(is_nominal);
+  if(model == "OQS")     return GetOQS(is_nominal);
   if(model == "SiderealLIV") return GetSiderealLIV(is_nominal);
 
   return GetFast(is_nominal);

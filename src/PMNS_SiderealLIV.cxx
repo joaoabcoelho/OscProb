@@ -246,6 +246,15 @@ double PMNS_SiderealLIV::GetColatitude() const { return fChi; }
 
 //.............................................................................
 ///
+/// Solve the sidereal LIV Hamiltonian.
+///
+/// Reimplemented to avoid using the standard oscillations in vacuum, since
+/// the sidereal LIV terms must be applied even when fPath.density is zero.
+///
+void PMNS_SiderealLIV::SolveHam() { PMNS_Fast::SolveHamMatter(); }
+
+//.............................................................................
+///
 /// Build the full LIVS Hamiltonian in matter
 ///
 void PMNS_SiderealLIV::UpdateHam()
@@ -273,18 +282,19 @@ void PMNS_SiderealLIV::UpdateHam()
       double As0 = sign * (fa[i][j][0] * fN[1] - fa[i][j][1] * fN[0]);
       double Ac0 = -sign * (fa[i][j][0] * fN[0] + fa[i][j][1] * fN[1]);
 
-      double As1 = 2 * fN[1] * fN[2] * fc[i][j][0][2] -
-                   2 * fN[0] * fN[2] * fc[i][j][1][2];
-      double Ac1 = -2 * fN[0] * fN[2] * fc[i][j][0][2] -
-                   2 * fN[1] * fN[2] * fc[i][j][1][2];
+      double As1 = kGeV2eV * (2 * fN[1] * fN[2] * fc[i][j][0][2] -
+                               2 * fN[0] * fN[2] * fc[i][j][1][2]);
+      double Ac1 = kGeV2eV * (-2 * fN[0] * fN[2] * fc[i][j][0][2] -
+                               2 * fN[1] * fN[2] * fc[i][j][1][2]);
 
-      double Bs1 = fN[0] * fN[1] * (fc[i][j][0][0] - fc[i][j][1][1]) -
-                   (fN[0] * fN[0] - fN[1] * fN[1]) * fc[i][j][0][1];
+      double Bs1 =
+          kGeV2eV * (fN[0] * fN[1] * (fc[i][j][0][0] - fc[i][j][1][1]) -
+                     (fN[0] * fN[0] - fN[1] * fN[1]) * fc[i][j][0][1]);
       double Bs = fEnergy * Bs1;
 
-      double Bc1 = -0.5 * (fN[0] * fN[0] - fN[1] * fN[1]) *
-                       (fc[i][j][0][0] - fc[i][j][1][1]) -
-                   2.0 * fN[0] * fN[1] * fc[i][j][0][1];
+      double Bc1 = kGeV2eV * (-0.5 * (fN[0] * fN[0] - fN[1] * fN[1]) *
+                                   (fc[i][j][0][0] - fc[i][j][1][1]) -
+                               2.0 * fN[0] * fN[1] * fc[i][j][0][1]);
       double Bc = fEnergy * Bc1;
 
       double As = As0 + fEnergy * As1;
