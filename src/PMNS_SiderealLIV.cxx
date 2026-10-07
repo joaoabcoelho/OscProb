@@ -246,6 +246,15 @@ double PMNS_SiderealLIV::GetColatitude() const { return fChi; }
 
 //.............................................................................
 ///
+/// Solve the sidereal LIV Hamiltonian.
+///
+/// Reimplemented to avoid using the standard oscillations in vacuum, since
+/// the sidereal LIV terms must be applied even when fPath.density is zero.
+///
+void PMNS_SiderealLIV::SolveHam() { PMNS_Fast::SolveHamMatter(); }
+
+//.............................................................................
+///
 /// Build the full LIVS Hamiltonian in matter
 ///
 void PMNS_SiderealLIV::UpdateHam()
